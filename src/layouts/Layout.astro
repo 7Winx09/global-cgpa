@@ -1,4 +1,4 @@
-D---
+---
 interface Props {
   title?: string;
   description?: string;
@@ -14,6 +14,19 @@ const {
 } = Astro.props;
 
 import '../styles/global.css';
+
+const structuredData = JSON.stringify({
+  "@context": "https://schema.org",
+  "@type": "WebApplication",
+  "name": "GlobalCGPA — CGPA to Percentage Calculator",
+  "url": "https://globalcgpa.in",
+  "description": "Free online CGPA to percentage calculator supporting SPPU, VTU, Mumbai University, Anna University and more.",
+  "applicationCategory": "EducationalApplication",
+  "operatingSystem": "Any",
+  "offers": { "@type": "Offer", "price": "0", "priceCurrency": "INR" },
+  "inLanguage": "en-IN",
+  "isAccessibleForFree": true
+});
 ---
 
 <!doctype html>
@@ -59,21 +72,8 @@ import '../styles/global.css';
       rel="stylesheet"
     />
 
-    <!-- Structured Data -->
-    <script type="application/ld+json">
-      {JSON.stringify({
-        "@context": "https://schema.org",
-        "@type": "WebApplication",
-        "name": "GlobalCGPA — CGPA to Percentage Calculator",
-        "url": "https://globalcgpa.in",
-        "description": "Free online CGPA to percentage calculator supporting SPPU, VTU, Mumbai University, Anna University and more.",
-        "applicationCategory": "EducationalApplication",
-        "operatingSystem": "Any",
-        "offers": { "@type": "Offer", "price": "0", "priceCurrency": "INR" },
-        "inLanguage": "en-IN",
-        "isAccessibleForFree": true
-      })}
-    </script>
+    <!-- Structured Data (JSON-LD) -->
+    <script type="application/ld+json" set:html={structuredData} />
 
     <!-- Google Analytics -->
     <script async src="https://www.googletagmanager.com/gtag/js?id=G-5TB706E56P"></script>
@@ -83,7 +83,9 @@ import '../styles/global.css';
       gtag('js', new Date());
       gtag('config', 'G-5TB706E56P');
     </script>
-<script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-1016421061571791" crossorigin="anonymous"></script>
+
+    <!-- AdSense -->
+    <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-1016421061571791" crossorigin="anonymous"></script>
   </head>
   <body>
     <slot />
