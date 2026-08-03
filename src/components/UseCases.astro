@@ -1,0 +1,161 @@
+---
+// UseCases.astro
+const useCases = [
+  {
+    icon: `<svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="2" y="7" width="20" height="14" rx="2"/><path d="M16 7V5a2 2 0 0 0-2-2h-4a2 2 0 0 0-2 2v2"/><line x1="12" y1="12" x2="12" y2="16"/><line x1="10" y1="14" x2="14" y2="14"/></svg>`,
+    title: 'Campus Placements',
+    body: 'Major employers and ATS systems filter resumes using a strict percentage cutoff (60–70%). Convert your CGPA to know exactly where you stand before applying.',
+  },
+  {
+    icon: `<svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M22 10v6M2 10l10-5 10 5-10 5z"/><path d="M6 12v5c3 3 9 3 12 0v-5"/></svg>`,
+    title: 'MBA & PG Admissions',
+    body: 'National portals like CAT, GATE, and IIM applications require your exact aggregate percentage. Our calculator shows the formula used — which you can cite.',
+  },
+  {
+    icon: `<svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"/><line x1="2" y1="12" x2="22" y2="12"/><path d="M12 2a15.3 15.3 0 0 1 4 10 15.3 15.3 0 0 1-4 10 15.3 15.3 0 0 1-4-10 15.3 15.3 0 0 1 4-10z"/></svg>`,
+    title: 'Study Abroad (MS/PhD)',
+    body: 'International universities and visa forms often require an equivalent percentage. Convert using your university\'s official formula for WES, IELTS, GRE applications.',
+  },
+  {
+    icon: `<svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="3" width="18" height="18" rx="2"/><path d="M3 9h18M9 21V9"/></svg>`,
+    title: 'Government & PSU Jobs',
+    body: 'UPSC, banking, and PSU recruitment use legally bound percentage thresholds. Government forms mandate an exact percentage — not just your CGPA.',
+  },
+  {
+    icon: `<svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="8" r="6"/><path d="M15.477 12.89 17 22l-5-3-5 3 1.523-9.11"/></svg>`,
+    title: 'Merit Scholarships',
+    body: 'Scholarship boards use flat percentage thresholds to distribute funds fairly. Know your exact converted percentage to verify eligibility before applying.',
+  },
+  {
+    icon: `<svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M9 11l3 3L22 4"/><path d="M21 12v7a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h11"/></svg>`,
+    title: 'Background Verification',
+    body: 'Once hired, HR BGV agencies cross-check the percentage you mentioned on your resume against your official transcripts. Our formula display gives you the citation.',
+  },
+];
+---
+
+<section class="usecases-section" id="use-cases">
+  <div class="usecases-inner">
+    <div class="usecases-header">
+      <div class="section-eyebrow">Why Convert</div>
+      <h2 class="section-title">When you'll need this calculator.</h2>
+      <p class="section-sub">Modern universities award CGPA, but the rest of the world still runs on percentages. Here's every situation where the conversion matters.</p>
+    </div>
+
+    <div class="usecases-grid">
+      {useCases.map((u) => (
+        <div class="usecase-card">
+          <div class="usecase-icon" set:html={u.icon} aria-hidden="true" />
+          <h3 class="usecase-title">{u.title}</h3>
+          <p class="usecase-body">{u.body}</p>
+        </div>
+      ))}
+    </div>
+  </div>
+</section>
+
+<style>
+  .usecases-section {
+    padding: 80px 24px;
+    background: var(--bg-card);
+    border-top: 1px solid var(--border);
+    border-bottom: 1px solid var(--border);
+  }
+
+  .usecases-inner {
+    max-width: 1080px;
+    margin: 0 auto;
+    display: flex;
+    flex-direction: column;
+    gap: 48px;
+  }
+
+  .usecases-header {
+    text-align: center;
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+  }
+
+  .section-eyebrow {
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 11px;
+    color: var(--text-mute);
+    letter-spacing: 0.04em;
+    text-transform: uppercase;
+  }
+
+  .section-title {
+    font-size: clamp(24px, 3vw, 32px);
+    font-weight: 600;
+    letter-spacing: -0.03em;
+    color: var(--text-ink);
+    margin: 0;
+  }
+
+  .section-sub {
+    font-size: 15px;
+    color: var(--text-body);
+    max-width: 540px;
+    margin: 0 auto;
+    line-height: 1.6;
+  }
+
+  .usecases-grid {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 16px;
+  }
+
+  .usecase-card {
+    background: var(--bg-soft);
+    border: 1px solid var(--border);
+    border-radius: 10px;
+    padding: 24px;
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+    transition: box-shadow 0.2s, border-color 0.2s, transform 0.15s;
+  }
+
+  .usecase-card:hover {
+    box-shadow: var(--shadow-md);
+    border-color: var(--border-strong);
+    transform: translateY(-2px);
+  }
+
+  .usecase-icon {
+    width: 38px;
+    height: 38px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background: var(--bg-card);
+    border: 1px solid var(--border);
+    border-radius: 8px;
+    color: var(--text-ink);
+  }
+
+  .usecase-title {
+    font-size: 14px;
+    font-weight: 600;
+    color: var(--text-ink);
+    letter-spacing: -0.02em;
+    margin: 0;
+  }
+
+  .usecase-body {
+    font-size: 13px;
+    color: var(--text-body);
+    line-height: 1.6;
+    margin: 0;
+  }
+
+  @media (max-width: 900px) {
+    .usecases-grid { grid-template-columns: repeat(2, 1fr); }
+  }
+
+  @media (max-width: 560px) {
+    .usecases-grid { grid-template-columns: 1fr; }
+  }
+</style>

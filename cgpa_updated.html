@@ -1,0 +1,1088 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<!-- Google tag (gtag.js) -->
+<script async src="https://www.googletagmanager.com/gtag/js?id=G-ZFQ7T7QK8C"></script>
+<script>
+  window.dataLayer = window.dataLayer || [];
+  function gtag(){dataLayer.push(arguments);}
+  gtag("js", new Date());
+  gtag("config", "G-ZFQ7T7QK8C");
+</script>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>CGPA to Percentage Calculator | GPA &amp; SGPA Converter</title>
+<meta name="description" content="Free online global CGPA to percentage calculator. Convert CGPA, SGPA, GPA, and grades instantly using an ultra-clean, minimalist interface.">
+<meta name="keywords" content="cgpa to percentage, gpa calculator, sgpa to cgpa, percentage converter">
+<meta name="robots" content="index, follow">
+<link rel="sitemap" type="application/xml" href="/sitemap.xml">
+<link rel="icon" type="image/svg+xml" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 64 64'><rect width='64' height='64' rx='14' fill='%230f172a'/><text x='32' y='50' text-anchor='middle' font-family='system-ui,sans-serif' font-size='52' font-weight='800' fill='%2300d285'>%25</text></svg>">
+<style>
+:root {
+  --bg: #ffffff;
+  --card: #ffffff;
+  --text: #0f172a;
+  --muted: #64748b;
+  --primary: #00d285;
+  --primary-dark: #00b572;
+  --border: #f1f5f9;
+  --shadow: rgba(0, 0, 0, 0.04);
+  --result-bg: #f8fafc;
+}
+
+[data-theme="dark"] {
+  --bg: #09090b;
+  --card: #141416;
+  --text: #f4f4f5;
+  --muted: #a1a1aa;
+  --primary: #00d285;
+  --border: #27272a;
+  --shadow: rgba(0, 0, 0, 0.2);
+  --result-bg: #18181b;
+}
+
+* { box-sizing: border-box; margin: 0; padding: 0; }
+body {
+  font-family: system-ui, -apple-system, sans-serif;
+  background: var(--bg);
+  color: var(--text);
+  line-height: 1.5;
+  min-height: 100vh;
+  display: flex;
+  flex-direction: column;
+}
+
+header {
+  padding: 20px 40px;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  border-bottom: 1px solid var(--border);
+}
+.logo { font-weight: 700; font-size: 1.1rem; letter-spacing: -0.5px; }
+.theme-btn {
+  background: transparent; border: 1px solid var(--border);
+  padding: 6px 12px; border-radius: 20px; cursor: pointer;
+  color: var(--text); font-size: 0.9rem;
+}
+
+.hero-main {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  padding: 40px 20px;
+  text-align: center;
+  max-width: 800px;
+  margin: 0 auto;
+  width: 100%;
+}
+
+.hero-tag {
+  text-transform: uppercase;
+  font-size: 0.75rem;
+  font-weight: 700;
+  letter-spacing: 1.5px;
+  color: var(--muted);
+  margin-bottom: 12px;
+}
+
+h1 {
+  font-size: 2.5rem;
+  font-weight: 800;
+  letter-spacing: -1px;
+  line-height: 1.2;
+  margin-bottom: 8px;
+}
+
+.subtitle {
+  color: var(--muted);
+  font-size: 1.05rem;
+  max-width: 500px;
+  margin-bottom: 32px;
+}
+
+.main-calc-card {
+  background: var(--card);
+  border: 1px solid var(--border);
+  box-shadow: 0 20px 40px var(--shadow), 0 1px 3px rgba(0,0,0,0.02);
+  border-radius: 24px;
+  padding: 32px;
+  width: 100%;
+  max-width: 480px;
+  text-align: left;
+}
+
+label {
+  display: block; font-size: 0.8rem; font-weight: 700;
+  text-transform: uppercase; letter-spacing: 0.5px;
+  margin-bottom: 6px; color: var(--muted);
+}
+
+select, input[type="number"] {
+  width: 100%; padding: 14px 16px;
+  border: 1px solid var(--border); background: var(--result-bg);
+  color: var(--text); font-size: 1rem; font-weight: 500;
+  border-radius: 14px; margin-bottom: 20px; transition: border-color 0.2s;
+  appearance: none;
+}
+select:focus, input[type="number"]:focus {
+  outline: none; border-color: var(--primary);
+}
+
+.dynamic-row { display: flex; gap: 12px; }
+.dynamic-row > div { flex: 1; }
+
+/* Result display */
+.output-display {
+  background: var(--result-bg);
+  border-radius: 16px;
+  padding: 20px 20px 16px;
+  text-align: center;
+  margin-top: 8px;
+  border: 1px solid var(--border);
+  position: relative;
+}
+.out-val {
+  font-size: 2.5rem; font-weight: 800; color: var(--text);
+  line-height: 1.1; margin-bottom: 4px;
+}
+.out-lbl {
+  font-size: 0.75rem; color: var(--muted); text-transform: uppercase;
+  font-weight: 700; letter-spacing: 1px;
+}
+/* Minimal copy button — sits top-right corner of result box */
+.copy-btn {
+  position: absolute; top: 10px; right: 12px;
+  background: none; border: none; cursor: pointer;
+  font-size: 0.85rem; color: var(--muted); padding: 4px;
+  border-radius: 6px; transition: color 0.2s;
+  line-height: 1;
+}
+.copy-btn:hover { color: var(--primary); }
+
+.bottom-belt-section {
+  width: 100%;
+  border-top: 1px solid var(--border);
+  padding: 30px 20px;
+  background: var(--card);
+  margin-top: auto;
+}
+.belt-title {
+  text-align: center; font-size: 0.75rem; font-weight: 700;
+  text-transform: uppercase; letter-spacing: 1px;
+  color: var(--muted); margin-bottom: 20px;
+}
+.belt-grid {
+  max-width: 1000px; margin: 0 auto;
+  display: grid; grid-template-columns: repeat(auto-fit, minmax(180px, 1fr));
+  gap: 16px;
+}
+.belt-card {
+  background: var(--bg); border: 1px solid var(--border);
+  padding: 16px; border-radius: 14px; text-align: center;
+  cursor: pointer; font-size: 0.85rem; font-weight: 600; transition: all 0.2s;
+  user-select: none;
+}
+.belt-card:hover { border-color: var(--primary); transform: translateY(-2px); }
+
+/* Modal */
+.modal-overlay {
+  position: fixed; top:0; left:0; right:0; bottom:0;
+  background: rgba(15, 23, 42, 0.3); backdrop-filter: blur(4px);
+  display: none; justify-content: center; align-items: center;
+  padding: 20px; z-index: 1000;
+}
+.modal-content {
+  background: var(--card); border: 1px solid var(--border);
+  border-radius: 24px; padding: 32px; max-width: 550px; width: 100%;
+  max-height: 90vh; overflow-y: auto;
+  box-shadow: 0 20px 25px -5px rgba(0,0,0,0.1);
+}
+.modal-header {
+  display: flex; justify-content: space-between; align-items: center;
+  margin-bottom: 20px;
+}
+.modal-header h3 { font-size: 1rem; font-weight: 700; }
+.close-btn {
+  cursor: pointer; background: none; border: none;
+  font-size: 1.3rem; color: var(--muted); line-height: 1;
+  padding: 2px 6px; border-radius: 6px; transition: color 0.2s;
+}
+.close-btn:hover { color: var(--text); }
+
+.subject-row { display: flex; gap: 8px; margin-bottom: 8px; }
+.subject-row input { margin-bottom: 0; }
+
+/* Chart table */
+.chart-table { width: 100%; border-collapse: collapse; font-size: 0.85rem; text-align: center; }
+.chart-table th { padding: 10px; border: 1px solid var(--border); background: var(--result-bg); font-weight: 700; font-size: 0.75rem; text-transform: uppercase; letter-spacing: 0.5px; color: var(--muted); }
+.chart-table td { padding: 9px 10px; border: 1px solid var(--border); }
+.chart-table td:first-child { font-weight: 700; color: var(--primary); }
+
+@media (max-width: 600px) {
+  h1 { font-size: 1.85rem; }
+  .main-calc-card { padding: 20px; }
+  header { padding: 15px 20px; }
+}
+</style>
+</head>
+<body>
+
+<header>
+  <div class="logo">
+    <svg width="28" height="28" viewBox="0 0 64 64" style="display:inline-block;vertical-align:middle;margin-right:8px;border-radius:8px;" xmlns="http://www.w3.org/2000/svg">
+      <rect width="64" height="64" rx="14" fill="#0f172a"/>
+      <text x="32" y="50" text-anchor="middle" font-family="system-ui,sans-serif" font-size="52" font-weight="800" fill="#00d285">%</text>
+    </svg><span style="color:var(--primary);letter-spacing:-0.5px;">Global GPA</span>
+  </div>
+  <button class="theme-btn" id="themeBtn" onclick="toggleTheme()">🌙 Dark</button>
+</header>
+
+<main class="hero-main">
+  <div class="hero-tag">Instant Grade Conversion</div>
+  <h1>Convert Grades and CGPA Instantly</h1>
+  <p class="subtitle">Enter your academic score to convert between CGPA, percentage, and GPA scales in one click.</p>
+
+  <div class="main-calc-card">
+    <label for="calc_type">Select Operation</label>
+    <select id="calc_type" onchange="switchOperation()">
+      <option value="cgpa2pct">CGPA to Percentage</option>
+      <option value="pct2cgpa">Percentage to CGPA</option>
+      <option value="cgpa2gpa">CGPA to GPA (4.0 Scale)</option>
+      <option value="gpa2cgpa">GPA to CGPA</option>
+    </select>
+
+    <div class="dynamic-row">
+      <div>
+        <label id="input_label" for="main_input">Enter CGPA</label>
+        <input type="number" id="main_input" step="0.01" min="0" placeholder="e.g. 8.50" oninput="runCoreCalculation()">
+      </div>
+      <div id="scale_wrapper">
+        <label for="main_scale">Base Scale</label>
+        <select id="main_scale" onchange="runCoreCalculation()">
+          <option value="10">10-point scale</option>
+          <option value="5">5-point scale</option>
+          <option value="4">4-point scale</option>
+        </select>
+      </div>
+    </div>
+
+    <div class="output-display">
+      <button class="copy-btn" onclick="copyOutput()" title="Copy result">⎘</button>
+      <div class="out-val" id="output_val">—</div>
+      <div class="out-lbl" id="output_label">Percentage</div>
+    </div>
+  </div>
+</main>
+
+<section class="bottom-belt-section">
+  <div class="belt-title">Advanced Academic Converters</div>
+  <div class="belt-grid">
+    <div class="belt-card" onclick="openModal('modal-marks')">🗂️ Marks to CGPA</div>
+    <div class="belt-card" onclick="openModal('modal-sgpa')">📈 SGPA to CGPA</div>
+    <div class="belt-card" onclick="openModal('modal-chart')">📊 Conversion Chart</div>
+  </div>
+</section>
+
+<!-- MODALS -->
+<div class="modal-overlay" id="modal-container" onclick="closeModalOnBg(event)">
+
+  <div class="modal-content panel-modal" id="modal-marks" style="display:none">
+    <div class="modal-header">
+      <h3>Marks to CGPA / SGPA</h3>
+      <button class="close-btn" onclick="hideModals()">&times;</button>
+    </div>
+    <div id="marks_rows_box"></div>
+    <div class="output-display">
+      <button class="copy-btn" onclick="copyEl('m_res_val')" title="Copy result">⎘</button>
+      <div class="out-val" id="m_res_val">—</div>
+      <div class="out-lbl">CGPA / SGPA</div>
+    </div>
+  </div>
+
+  <div class="modal-content panel-modal" id="modal-sgpa" style="display:none">
+    <div class="modal-header">
+      <h3>SGPA to Cumulative CGPA</h3>
+      <button class="close-btn" onclick="hideModals()">&times;</button>
+    </div>
+    <div id="sgpa_rows_box"></div>
+    <div class="output-display">
+      <button class="copy-btn" onclick="copyEl('s_res_val')" title="Copy result">⎘</button>
+      <div class="out-val" id="s_res_val">—</div>
+      <div class="out-lbl">Weighted CGPA</div>
+    </div>
+  </div>
+
+  <div class="modal-content panel-modal" id="modal-chart" style="display:none">
+    <div class="modal-header">
+      <h3>CGPA Conversion Chart</h3>
+      <button class="close-btn" onclick="hideModals()">&times;</button>
+    </div>
+    <p style="font-size:0.82rem; color:var(--muted); margin-bottom:16px;">Based on the standard CBSE formula (CGPA × 9.5). Actual percentages vary by university.</p>
+    <div style="overflow-x:auto;">
+      <table class="chart-table">
+        <thead>
+          <tr><th>CGPA</th><th>Percentage</th><th>GPA (4.0)</th><th>Grade</th></tr>
+        </thead>
+        <tbody>
+          <tr><td>10.0</td><td>95.0%</td><td>4.00</td><td>O</td></tr>
+          <tr><td>9.5</td><td>90.25%</td><td>3.80</td><td>A+</td></tr>
+          <tr><td>9.0</td><td>85.5%</td><td>3.60</td><td>A+</td></tr>
+          <tr><td>8.5</td><td>80.75%</td><td>3.40</td><td>A</td></tr>
+          <tr><td>8.0</td><td>76.0%</td><td>3.20</td><td>A</td></tr>
+          <tr><td>7.5</td><td>71.25%</td><td>3.00</td><td>B+</td></tr>
+          <tr><td>7.0</td><td>66.5%</td><td>2.80</td><td>B+</td></tr>
+          <tr><td>6.5</td><td>61.75%</td><td>2.60</td><td>B</td></tr>
+          <tr><td>6.0</td><td>57.0%</td><td>2.40</td><td>B</td></tr>
+          <tr><td>5.0</td><td>47.5%</td><td>2.00</td><td>C</td></tr>
+        </tbody>
+      </table>
+    </div>
+  </div>
+
+</div>
+
+<script>
+// ── Theme ──────────────────────────────────────────────
+(function() {
+  const saved = localStorage.getItem('gpa-theme');
+  if (saved) document.documentElement.setAttribute('data-theme', saved);
+  updateThemeBtn();
+})();
+
+function toggleTheme() {
+  const d = document.documentElement;
+  const isDark = d.getAttribute('data-theme') === 'dark';
+  const next = isDark ? 'light' : 'dark';
+  d.setAttribute('data-theme', next);
+  localStorage.setItem('gpa-theme', next);
+  updateThemeBtn();
+}
+function updateThemeBtn() {
+  const isDark = document.documentElement.getAttribute('data-theme') === 'dark';
+  const btn = document.getElementById('themeBtn');
+  if (btn) btn.textContent = isDark ? '☀️ Light' : '🌙 Dark';
+}
+
+// ── Core Calculator ────────────────────────────────────
+const opConfig = {
+  cgpa2pct: { label: 'Enter CGPA',          outLabel: 'Percentage',        scale: true,  max: null },
+  pct2cgpa: { label: 'Enter Percentage (%)', outLabel: 'CGPA',              scale: true,  max: 100  },
+  cgpa2gpa: { label: 'Enter CGPA',          outLabel: 'GPA (4.0 Scale)',    scale: true,  max: null },
+  gpa2cgpa: { label: 'Enter GPA (max 4.0)', outLabel: 'CGPA (10.0 Scale)', scale: false, max: 4    },
+};
+
+function switchOperation() {
+  const type = document.getElementById('calc_type').value;
+  const cfg = opConfig[type];
+  document.getElementById('input_label').textContent = cfg.label;
+  document.getElementById('scale_wrapper').style.display = cfg.scale ? 'block' : 'none';
+  document.getElementById('output_label').textContent = cfg.outLabel;
+  const inp = document.getElementById('main_input');
+  inp.value = '';
+  inp.max = cfg.max || '';
+  inp.placeholder = type === 'gpa2cgpa' ? 'e.g. 3.50' : 'e.g. 8.50';
+  document.getElementById('output_val').textContent = '—';
+}
+
+function runCoreCalculation() {
+  const type = document.getElementById('calc_type').value;
+  const val  = parseFloat(document.getElementById('main_input').value);
+  const scale = parseFloat(document.getElementById('main_scale').value);
+  const outVal = document.getElementById('output_val');
+
+  if (isNaN(val) || val < 0) { outVal.textContent = '—'; return; }
+
+  let result;
+  if (type === 'cgpa2pct') {
+    result = ((val / scale) * (scale === 10 ? 95 : 100)).toFixed(2) + '%';
+    // Standard CBSE: ×9.5 when scale=10. For scale 10 specifically use ×9.5
+    const pct = scale === 10 ? val * 9.5 : (val / scale) * 100;
+    result = Math.min(pct, 100).toFixed(2) + '%';
+  } else if (type === 'pct2cgpa') {
+    const cgpa = scale === 10 ? val / 9.5 : (val / 100) * scale;
+    result = Math.min(cgpa, scale).toFixed(2);
+  } else if (type === 'cgpa2gpa') {
+    result = Math.min((val / scale) * 4, 4).toFixed(2);
+  } else if (type === 'gpa2cgpa') {
+    result = Math.min((val / 4) * 10, 10).toFixed(2);
+  }
+  outVal.textContent = result;
+}
+
+// ── Copy ───────────────────────────────────────────────
+function copyOutput() { copyEl('output_val'); }
+function copyEl(id) {
+  const txt = document.getElementById(id).textContent;
+  if (txt === '—') return;
+  navigator.clipboard.writeText(txt).catch(() => {
+    const ta = document.createElement('textarea');
+    ta.value = txt; document.body.appendChild(ta);
+    ta.select(); document.execCommand('copy');
+    document.body.removeChild(ta);
+  });
+  const btn = event.currentTarget;
+  const orig = btn.textContent;
+  btn.textContent = '✓'; btn.style.color = 'var(--primary)';
+  setTimeout(() => { btn.textContent = orig; btn.style.color = ''; }, 1500);
+}
+
+// ── Modals ─────────────────────────────────────────────
+function openModal(id) {
+  document.getElementById('modal-container').style.display = 'flex';
+  document.querySelectorAll('.panel-modal').forEach(m => m.style.display = 'none');
+  document.getElementById(id).style.display = 'block';
+}
+function hideModals() {
+  document.getElementById('modal-container').style.display = 'none';
+}
+function closeModalOnBg(e) {
+  if (e.target.id === 'modal-container') hideModals();
+}
+
+// ── Sub-calculators ────────────────────────────────────
+function setupCalculators() {
+  const mBox = document.getElementById('marks_rows_box');
+  for (let i = 1; i <= 5; i++) {
+    const row = document.createElement('div');
+    row.className = 'subject-row';
+    row.innerHTML = `
+      <input type="number" placeholder="Sub ${i} marks" id="mk${i}" min="0" oninput="calcMarks()">
+      <input type="number" placeholder="Out of" id="mt${i}" min="1" oninput="calcMarks()">
+    `;
+    mBox.appendChild(row);
+  }
+
+  const sBox = document.getElementById('sgpa_rows_box');
+  for (let i = 1; i <= 4; i++) {
+    const row = document.createElement('div');
+    row.className = 'subject-row';
+    row.innerHTML = `
+      <input type="number" placeholder="Sem ${i} SGPA" id="sg${i}" min="0" max="10" step="0.01" oninput="calcSgpa()">
+      <input type="number" placeholder="Credits" id="sc${i}" min="1" oninput="calcSgpa()">
+    `;
+    sBox.appendChild(row);
+  }
+}
+
+function calcMarks() {
+  let obt = 0, tot = 0;
+  for (let i = 1; i <= 5; i++) {
+    const o = parseFloat(document.getElementById(`mk${i}`).value);
+    const t = parseFloat(document.getElementById(`mt${i}`).value);
+    if (!isNaN(o) && !isNaN(t) && t > 0) { obt += o; tot += t; }
+  }
+  document.getElementById('m_res_val').textContent =
+    tot > 0 ? ((obt / tot) * 10).toFixed(2) : '—';
+}
+
+function calcSgpa() {
+  let num = 0, den = 0;
+  for (let i = 1; i <= 4; i++) {
+    const s = parseFloat(document.getElementById(`sg${i}`).value);
+    const c = parseFloat(document.getElementById(`sc${i}`).value);
+    if (!isNaN(s) && !isNaN(c) && c > 0) { num += s * c; den += c; }
+  }
+  document.getElementById('s_res_val').textContent =
+    den > 0 ? (num / den).toFixed(2) : '—';
+}
+
+setupCalculators();
+</script>
+
+<!-- ═══════════════════════════════════════════
+     SEO CONTENT ARTICLE
+════════════════════════════════════════════ -->
+<style>
+.seo-article {
+  max-width: 780px;
+  margin: 0 auto;
+  padding: 60px 24px 80px;
+  color: var(--text);
+}
+.seo-article h2 {
+  font-size: 1.55rem;
+  font-weight: 800;
+  letter-spacing: -0.5px;
+  margin: 2.5rem 0 0.75rem;
+  color: var(--text);
+  line-height: 1.25;
+}
+.seo-article h3 {
+  font-size: 1.1rem;
+  font-weight: 700;
+  margin: 1.8rem 0 0.5rem;
+  color: var(--text);
+}
+.seo-article p {
+  font-size: 0.97rem;
+  line-height: 1.8;
+  color: var(--muted);
+  margin-bottom: 1rem;
+}
+.seo-article ul {
+  list-style: none;
+  padding: 0;
+  margin: 0.5rem 0 1.2rem;
+}
+.seo-article ul li {
+  font-size: 0.95rem;
+  color: var(--muted);
+  line-height: 1.75;
+  padding: 0.3rem 0 0.3rem 1.4rem;
+  position: relative;
+  border-bottom: 1px solid var(--border);
+}
+.seo-article ul li:last-child { border-bottom: none; }
+.seo-article ul li::before {
+  content: "→";
+  position: absolute;
+  left: 0;
+  color: var(--primary);
+  font-weight: 700;
+}
+.seo-formula-block {
+  background: var(--result-bg);
+  border: 1px solid var(--border);
+  border-left: 3px solid var(--primary);
+  border-radius: 12px;
+  padding: 18px 22px;
+  margin: 1.2rem 0;
+}
+.seo-formula-block .formula-label {
+  font-size: 0.72rem;
+  font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: 1px;
+  color: var(--primary);
+  margin-bottom: 6px;
+}
+.seo-formula-block .formula-text {
+  font-family: 'Courier New', monospace;
+  font-size: 1.05rem;
+  font-weight: 700;
+  color: var(--text);
+}
+.seo-formula-block .formula-example {
+  font-size: 0.82rem;
+  color: var(--muted);
+  margin-top: 6px;
+}
+.seo-divider {
+  border: none;
+  border-top: 1px solid var(--border);
+  margin: 2.5rem 0 0;
+}
+.seo-table-wrap { overflow-x: auto; margin: 1rem 0 1.5rem; border-radius: 12px; border: 1px solid var(--border); }
+.seo-table {
+  width: 100%;
+  border-collapse: collapse;
+  font-size: 0.88rem;
+}
+.seo-table thead th {
+  background: var(--result-bg);
+  padding: 10px 14px;
+  text-align: left;
+  font-size: 0.75rem;
+  font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: 0.5px;
+  color: var(--muted);
+  border-bottom: 1px solid var(--border);
+}
+.seo-table tbody td {
+  padding: 10px 14px;
+  border-bottom: 1px solid var(--border);
+  color: var(--muted);
+}
+.seo-table tbody tr:last-child td { border-bottom: none; }
+.seo-table tbody td:first-child { font-weight: 700; color: var(--primary); }
+</style>
+
+<article class="seo-article" itemscope itemtype="https://schema.org/Article">
+  <hr class="seo-divider">
+
+  <h2 itemprop="headline">CGPA to Percentage – The Complete Guide for Indian Students</h2>
+  <p>Whether you are filling out a job application, applying for higher studies, or simply trying to understand where you stand academically, knowing how to <strong>convert CGPA to percentage</strong> is an essential skill for every Indian university student. With the shift from traditional marking systems to credit-based grading, most universities now award a Cumulative Grade Point Average (CGPA) instead of a raw percentage — yet most recruiters, government forms, and international universities still ask for a percentage equivalent. This guide explains the formulas, walks you through the calculations step by step, and clarifies the specific rules used by major Indian universities including SPPU.</p>
+
+  <h2>What is CGPA and Why Does It Need Conversion?</h2>
+  <p>CGPA stands for <strong>Cumulative Grade Point Average</strong>. It is a standardised measure of a student's overall academic performance across all semesters, calculated on a scale that most Indian universities define as 0 to 10. Each subject is assigned grade points based on the marks obtained, and these grade points are averaged — weighted by credit hours — to produce a single cumulative figure.</p>
+  <p>The need for <strong>CGPA to percentage conversion</strong> arises because India's employment and education ecosystem has not fully transitioned to GPA-based evaluation. Central and state government jobs, public sector undertakings (PSUs), competitive examinations like GATE, and many multinational companies still define eligibility using a percentage threshold. A student with 8.5 CGPA, for instance, cannot immediately determine whether they meet a "70% minimum" requirement without performing a conversion.</p>
+
+  <h2>How to Convert CGPA to Percentage — The Standard Formula</h2>
+  <p>The most widely accepted formula for <strong>how to convert CGPA to percentage</strong> in India is the one prescribed by the Central Board of Secondary Education (CBSE) and adopted by a large number of autonomous institutions and universities:</p>
+
+  <div class="seo-formula-block">
+    <div class="formula-label">Standard CBSE Formula</div>
+    <div class="formula-text">Percentage = CGPA × 9.5</div>
+    <div class="formula-example">Example: 8.4 CGPA × 9.5 = <strong>79.8%</strong></div>
+  </div>
+
+  <p>This multiplier of 9.5 is derived from the historical observation that the average student scoring a grade point of 10 typically obtains around 95 marks out of 100. The formula offers a reliable approximation for most national-level evaluations. When you use a <strong>CGPA to percentage calculator</strong> online, it almost always defaults to this multiplier unless you specify otherwise.</p>
+
+  <h3>How to Calculate CGPA to Percentage — Step by Step</h3>
+  <ul>
+    <li>Locate your CGPA on your grade card or marksheet. It is usually printed as a decimal number between 0.00 and 10.00.</li>
+    <li>Multiply your CGPA by 9.5 using the standard formula.</li>
+    <li>The result is your approximate equivalent percentage.</li>
+    <li>If your university uses a different multiplier (see below), apply that formula instead.</li>
+    <li>For official documents, always obtain a percentage equivalence certificate from your university registrar.</li>
+  </ul>
+
+  <h2>CGPA to Percentage Conversion for SPPU (Savitribai Phule Pune University)</h2>
+  <p>Students affiliated with <strong>Savitribai Phule Pune University (SPPU)</strong> — one of the largest universities in Asia by enrolled students — follow a distinct grading ordinance that does not use the standard 9.5 multiplier. The official <strong>SPPU CGPA to percentage</strong> formula prescribed in their academic regulations is:</p>
+
+  <div class="seo-formula-block">
+    <div class="formula-label">SPPU Formula (Engineering – 10-point scale)</div>
+    <div class="formula-text">Percentage = (CGPA × 10) − 7.5</div>
+    <div class="formula-example">Example: 8.5 CGPA → (8.5 × 10) − 7.5 = <strong>77.5%</strong></div>
+  </div>
+
+  <p>This formula applies specifically to engineering programmes under SPPU operating on a 10-point grading scale. It produces a slightly lower percentage than the VTU formula (which simply multiplies by 10) and is marginally different from the generic CBSE formula. For <strong>CGPA to percentage SPPU</strong> conversions, always verify whether your programme falls under the pre-2019 or post-2019 pattern, as older programmes may follow a different internal ordinance.</p>
+
+  <h3>When Does the SPPU Formula Apply?</h3>
+  <ul>
+    <li>B.E. / B.Tech programmes under SPPU on the credit-based grading system (CBGS).</li>
+    <li>Postgraduate engineering programmes (M.E. / M.Tech) affiliated to SPPU.</li>
+    <li>Any course where your grade card explicitly states a 10-point grading scale under SPPU affiliation.</li>
+    <li>For non-engineering faculties (Arts, Commerce, Science), consult your department — SPPU may apply a separate conversion.</li>
+  </ul>
+
+  <h2>University-Wise CGPA to Percentage Formulas at a Glance</h2>
+  <p>India's decentralised university system means that each institution can define its own grading norms. The table below summarises the most commonly used <strong>CGPA to percentage conversion</strong> formulas across major affiliating universities:</p>
+
+  <div class="seo-table-wrap">
+    <table class="seo-table">
+      <thead>
+        <tr>
+          <th>University</th>
+          <th>Formula</th>
+          <th>Example (8.0 CGPA)</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr><td>CBSE / Generic</td><td>CGPA × 9.5</td><td>76.0%</td></tr>
+        <tr><td>SPPU (Pune University)</td><td>(CGPA × 10) − 7.5</td><td>72.5%</td></tr>
+        <tr><td>VTU (Bangalore)</td><td>CGPA × 10</td><td>80.0%</td></tr>
+        <tr><td>Anna University</td><td>(CGPA × 10) − 7.5</td><td>72.5%</td></tr>
+        <tr><td>Mumbai University</td><td>(7.1 × CGPA) + 11</td><td>67.8%</td></tr>
+        <tr><td>AKTU / UPTU</td><td>CGPA × 9.5</td><td>76.0%</td></tr>
+        <tr><td>GTU (Gujarat)</td><td>(CGPA × 10) − 7.5</td><td>72.5%</td></tr>
+        <tr><td>KTU (Kerala)</td><td>CGPA × 10</td><td>80.0%</td></tr>
+      </tbody>
+    </table>
+  </div>
+
+  <h2>Using a CGPA to Percentage Converter — What to Look For</h2>
+  <p>A reliable <strong>CGPA to percentage converter</strong> should do more than blindly multiply by 9.5. Here is what differentiates a trustworthy tool from a generic one:</p>
+  <ul>
+    <li>It offers a university selector so you can apply the correct formula for your institution.</li>
+    <li>It handles edge cases — a CGPA above 10 or a negative result should flag an error, not silently output a wrong number.</li>
+    <li>It is transparent about which formula it is using, displaying it alongside the result.</li>
+    <li>It works offline and does not require you to create an account or submit your data to a server.</li>
+    <li>It provides a reverse converter (percentage to CGPA) for situations where you need to verify eligibility.</li>
+  </ul>
+  <p>The <strong>CGPA to percentage calculator</strong> on this page satisfies all of the above. It runs entirely in your browser with zero data collection and supports multiple grading scales.</p>
+
+</article>
+
+<!-- ═══════════════════════════════════════════
+     FAQ SECTION
+════════════════════════════════════════════ -->
+<style>
+.faq-section {
+  max-width: 780px;
+  margin: 0 auto;
+  padding: 0 24px 80px;
+}
+.faq-section-title {
+  font-size: 1.55rem;
+  font-weight: 800;
+  letter-spacing: -0.5px;
+  color: var(--text);
+  margin-bottom: 6px;
+}
+.faq-section-sub {
+  font-size: 0.9rem;
+  color: var(--muted);
+  margin-bottom: 2rem;
+}
+.faq-group-label {
+  font-size: 0.7rem;
+  font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: 1.2px;
+  color: var(--primary);
+  margin: 2rem 0 0.6rem;
+  padding-left: 2px;
+}
+.faq-item {
+  border-bottom: 1px solid var(--border);
+}
+.faq-item:first-of-type { border-top: 1px solid var(--border); }
+.faq-q {
+  width: 100%;
+  background: none;
+  border: none;
+  text-align: left;
+  padding: 16px 4px;
+  font-size: 0.95rem;
+  font-weight: 600;
+  color: var(--text);
+  cursor: pointer;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  gap: 12px;
+  line-height: 1.4;
+}
+.faq-q:hover { color: var(--primary); }
+.faq-icon {
+  flex-shrink: 0;
+  width: 22px; height: 22px;
+  border-radius: 50%;
+  border: 1.5px solid var(--border);
+  display: flex; align-items: center; justify-content: center;
+  font-size: 0.9rem;
+  color: var(--muted);
+  transition: all 0.2s;
+}
+.faq-item.open .faq-icon {
+  background: var(--primary);
+  border-color: var(--primary);
+  color: #fff;
+  transform: rotate(45deg);
+}
+.faq-a {
+  display: none;
+  padding: 0 4px 16px;
+  font-size: 0.88rem;
+  line-height: 1.75;
+  color: var(--muted);
+}
+.faq-item.open .faq-a { display: block; }
+.faq-a strong { color: var(--text); }
+</style>
+
+<section class="faq-section" itemscope itemtype="https://schema.org/FAQPage">
+  <hr class="seo-divider" style="margin-bottom:2rem;">
+  <h2 class="faq-section-title">Frequently Asked Questions</h2>
+  <p class="faq-section-sub">Everything students ask about CGPA, percentage, GPA conversion and grading.</p>
+
+  <!-- GROUP 1: HOW TO CONVERT -->
+  <div class="faq-group-label">How to Convert</div>
+
+  <div class="faq-item" itemscope itemprop="mainEntity" itemtype="https://schema.org/Question">
+    <button class="faq-q" onclick="toggleFaq(this)" itemprop="name">How to convert CGPA to percentage?<span class="faq-icon">+</span></button>
+    <div class="faq-a" itemscope itemprop="acceptedAnswer" itemtype="https://schema.org/Answer"><div itemprop="text">Multiply your CGPA by 9.5 using the standard CBSE formula: <strong>Percentage = CGPA × 9.5</strong>. For example, 8.0 CGPA × 9.5 = 76%. If your university uses a different formula (SPPU uses CGPA × 10 − 7.5, VTU uses CGPA × 10), apply the institution-specific multiplier instead.</div></div>
+  </div>
+
+  <div class="faq-item" itemscope itemprop="mainEntity" itemtype="https://schema.org/Question">
+    <button class="faq-q" onclick="toggleFaq(this)" itemprop="name">How to calculate percentage from CGPA?<span class="faq-icon">+</span></button>
+    <div class="faq-a" itemscope itemprop="acceptedAnswer" itemtype="https://schema.org/Answer"><div itemprop="text">Step 1: Find your CGPA on your grade card. Step 2: Identify your university's formula (CBSE: ×9.5 | SPPU: ×10−7.5 | VTU: ×10). Step 3: Apply the formula. Step 4: The result is your approximate equivalent percentage. For official use, always collect a percentage equivalence certificate from your university registrar.</div></div>
+  </div>
+
+  <div class="faq-item" itemscope itemprop="mainEntity" itemtype="https://schema.org/Question">
+    <button class="faq-q" onclick="toggleFaq(this)" itemprop="name">How to calculate CGPA from percentage?<span class="faq-icon">+</span></button>
+    <div class="faq-a" itemscope itemprop="acceptedAnswer" itemtype="https://schema.org/Answer"><div itemprop="text">Reverse the standard formula: <strong>CGPA = Percentage ÷ 9.5</strong>. So 76% ÷ 9.5 = 8.0 CGPA. For SPPU: CGPA = (Percentage + 7.5) ÷ 10. For VTU: CGPA = Percentage ÷ 10. Use the "% → CGPA" tab in the calculator above and select your university.</div></div>
+  </div>
+
+  <div class="faq-item" itemscope itemprop="mainEntity" itemtype="https://schema.org/Question">
+    <button class="faq-q" onclick="toggleFaq(this)" itemprop="name">How to convert percentage to CGPA?<span class="faq-icon">+</span></button>
+    <div class="faq-a" itemscope itemprop="acceptedAnswer" itemtype="https://schema.org/Answer"><div itemprop="text">Divide your percentage by 9.5 to get your CGPA on a 10-point scale (CBSE standard). Example: 85% ÷ 9.5 = 8.95 CGPA. For a 4-point GPA scale, divide your percentage by 25: 85% ÷ 25 = 3.4 GPA. The calculator on this page handles all conversions automatically.</div></div>
+  </div>
+
+  <div class="faq-item" itemscope itemprop="mainEntity" itemtype="https://schema.org/Question">
+    <button class="faq-q" onclick="toggleFaq(this)" itemprop="name">How to convert CGPA to percentage out of 4?<span class="faq-icon">+</span></button>
+    <div class="faq-a" itemscope itemprop="acceptedAnswer" itemtype="https://schema.org/Answer"><div itemprop="text">If your CGPA is on a 4.0 scale (US system), convert to percentage using: <strong>Percentage = (CGPA ÷ 4) × 100</strong>. So 3.5 out of 4.0 = 87.5%. To go the other direction (percentage → GPA out of 4), use: GPA = (Percentage ÷ 100) × 4.</div></div>
+  </div>
+
+  <!-- GROUP 2: SPECIFIC VALUES -->
+  <div class="faq-group-label">Specific CGPA Values</div>
+
+  <div class="faq-item" itemscope itemprop="mainEntity" itemtype="https://schema.org/Question">
+    <button class="faq-q" onclick="toggleFaq(this)" itemprop="name">What is 7.6 CGPA in percentage?<span class="faq-icon">+</span></button>
+    <div class="faq-a" itemscope itemprop="acceptedAnswer" itemtype="https://schema.org/Answer"><div itemprop="text">7.6 CGPA equals <strong>72.2%</strong> using the CBSE formula (×9.5), <strong>68.5%</strong> under SPPU (×10−7.5), and <strong>76%</strong> under VTU (×10). The result varies by university, so always apply your institution's prescribed formula.</div></div>
+  </div>
+
+  <div class="faq-item" itemscope itemprop="mainEntity" itemtype="https://schema.org/Question">
+    <button class="faq-q" onclick="toggleFaq(this)" itemprop="name">What is 60% in CGPA?<span class="faq-icon">+</span></button>
+    <div class="faq-a" itemscope itemprop="acceptedAnswer" itemtype="https://schema.org/Answer"><div itemprop="text">60% corresponds to <strong>6.32 CGPA</strong> using CBSE (60÷9.5), <strong>6.75 CGPA</strong> under SPPU ((60+7.5)÷10), and <strong>6.0 CGPA</strong> under VTU (60÷10). At most Indian universities, 60% or 6.0 CGPA marks the First Class threshold.</div></div>
+  </div>
+
+  <div class="faq-item" itemscope itemprop="mainEntity" itemtype="https://schema.org/Question">
+    <button class="faq-q" onclick="toggleFaq(this)" itemprop="name">Does 8 CGPA mean 80 percentage?<span class="faq-icon">+</span></button>
+    <div class="faq-a" itemscope itemprop="acceptedAnswer" itemtype="https://schema.org/Answer"><div itemprop="text">Not always. Under VTU and KTU (which use CGPA × 10), 8 CGPA does equal exactly 80%. However, under the standard CBSE formula it equals <strong>76%</strong> (8 × 9.5), and under SPPU it equals <strong>72.5%</strong> (8 × 10 − 7.5). The "8 CGPA = 80%" assumption only holds for universities using a direct ×10 multiplier.</div></div>
+  </div>
+
+  <div class="faq-item" itemscope itemprop="mainEntity" itemtype="https://schema.org/Question">
+    <button class="faq-q" onclick="toggleFaq(this)" itemprop="name">What is a 2.5 CGPA in percentage?<span class="faq-icon">+</span></button>
+    <div class="faq-a" itemscope itemprop="acceptedAnswer" itemtype="https://schema.org/Answer"><div itemprop="text">2.5 CGPA (on a 10-point scale) equals <strong>23.75%</strong> using CBSE (×9.5) and <strong>17.5%</strong> under SPPU (×10−7.5). If it is 2.5 on a 4.0 GPA scale, it is approximately 62.5% (÷4×100), which represents passing performance in the US system.</div></div>
+  </div>
+
+  <div class="faq-item" itemscope itemprop="mainEntity" itemtype="https://schema.org/Question">
+    <button class="faq-q" onclick="toggleFaq(this)" itemprop="name">Is 95% equal to 10 CGPA?<span class="faq-icon">+</span></button>
+    <div class="faq-a" itemscope itemprop="acceptedAnswer" itemtype="https://schema.org/Answer"><div itemprop="text">Under the CBSE formula, 10 CGPA × 9.5 = <strong>95%</strong>, so yes — 95% is the equivalent of a perfect 10.0 CGPA on the CBSE scale. However under VTU, 10 CGPA = 100%, and under SPPU, 10 CGPA = 92.5%. The 95% figure is specific to the CBSE/generic system.</div></div>
+  </div>
+
+  <div class="faq-item" itemscope itemprop="mainEntity" itemtype="https://schema.org/Question">
+    <button class="faq-q" onclick="toggleFaq(this)" itemprop="name">Is a 10 CGPA equal to 100%?<span class="faq-icon">+</span></button>
+    <div class="faq-a" itemscope itemprop="acceptedAnswer" itemtype="https://schema.org/Answer"><div itemprop="text">Only under universities that use a direct ×10 multiplier (e.g. VTU, KTU) does 10 CGPA translate to 100%. Under CBSE, 10 CGPA = 95%. Under SPPU, 10 CGPA = 92.5%. A 10-point scale does not automatically mean a 1:10 mapping to percentage.</div></div>
+  </div>
+
+  <div class="faq-item" itemscope itemprop="mainEntity" itemtype="https://schema.org/Question">
+    <button class="faq-q" onclick="toggleFaq(this)" itemprop="name">Which CGPA is equivalent to 60%?<span class="faq-icon">+</span></button>
+    <div class="faq-a" itemscope itemprop="acceptedAnswer" itemtype="https://schema.org/Answer"><div itemprop="text">60% corresponds to approximately 6.0 CGPA under VTU (÷10), 6.32 CGPA under CBSE (÷9.5), and 6.75 CGPA under SPPU ((60+7.5)÷10). Since 60% is the First Class cut-off at most universities, these CGPA values are important eligibility thresholds.</div></div>
+  </div>
+
+  <div class="faq-item" itemscope itemprop="mainEntity" itemtype="https://schema.org/Question">
+    <button class="faq-q" onclick="toggleFaq(this)" itemprop="name">What is 75% in CGPA out of 4?<span class="faq-icon">+</span></button>
+    <div class="faq-a" itemscope itemprop="acceptedAnswer" itemtype="https://schema.org/Answer"><div itemprop="text">75% on a 4.0 GPA scale = (75 ÷ 100) × 4 = <strong>3.0 GPA</strong>. On an Indian 10-point scale, 75% ÷ 9.5 = <strong>7.89 CGPA</strong> (CBSE), or (75+7.5) ÷ 10 = <strong>8.25 CGPA</strong> (SPPU). A 3.0 GPA is generally the minimum for graduate admissions at many US universities.</div></div>
+  </div>
+
+  <div class="faq-item" itemscope itemprop="mainEntity" itemtype="https://schema.org/Question">
+    <button class="faq-q" onclick="toggleFaq(this)" itemprop="name">How much is 97% in CGPA?<span class="faq-icon">+</span></button>
+    <div class="faq-a" itemscope itemprop="acceptedAnswer" itemtype="https://schema.org/Answer"><div itemprop="text">97% converts to <strong>10.21 CGPA</strong> under CBSE (97÷9.5) — which exceeds the maximum scale, so it would be capped at 10.0. Under VTU, 97% = 9.7 CGPA. Under SPPU, (97+7.5)÷10 = 10.45, again capped at 10.0. In practice, scoring above 95% typically means a perfect or near-perfect CGPA on most scales.</div></div>
+  </div>
+
+  <div class="faq-item" itemscope itemprop="mainEntity" itemtype="https://schema.org/Question">
+    <button class="faq-q" onclick="toggleFaq(this)" itemprop="name">What does an 8.2 CGPA mean?<span class="faq-icon">+</span></button>
+    <div class="faq-a" itemscope itemprop="acceptedAnswer" itemtype="https://schema.org/Answer"><div itemprop="text">8.2 CGPA is a strong academic performance, equivalent to <strong>77.9%</strong> (CBSE), <strong>74.5%</strong> (SPPU), or <strong>82%</strong> (VTU). It falls in the Excellent range, typically qualifying as First Class with Distinction at most universities. For placement purposes, 8.2 CGPA comfortably clears the cut-offs of most top IT and engineering companies.</div></div>
+  </div>
+
+  <!-- GROUP 3: IS IT GOOD / BAD -->
+  <div class="faq-group-label">Is My CGPA Good?</div>
+
+  <div class="faq-item" itemscope itemprop="mainEntity" itemtype="https://schema.org/Question">
+    <button class="faq-q" onclick="toggleFaq(this)" itemprop="name">Is a 7.2 CGPA good?<span class="faq-icon">+</span></button>
+    <div class="faq-a" itemscope itemprop="acceptedAnswer" itemtype="https://schema.org/Answer"><div itemprop="text">Yes, 7.2 CGPA is generally considered good. It translates to about 68.4% (CBSE) or 64.5% (SPPU) — solidly in First Class territory. Most IT companies (TCS, Infosys, Wipro) require a minimum of 6.0–6.5 CGPA, so 7.2 clears those bars comfortably. For product-based or core engineering roles, a 7.5+ is often preferred.</div></div>
+  </div>
+
+  <div class="faq-item" itemscope itemprop="mainEntity" itemtype="https://schema.org/Question">
+    <button class="faq-q" onclick="toggleFaq(this)" itemprop="name">Is 8 CGPA good or bad?<span class="faq-icon">+</span></button>
+    <div class="faq-a" itemscope itemprop="acceptedAnswer" itemtype="https://schema.org/Answer"><div itemprop="text">8.0 CGPA is very good. It corresponds to 76% (CBSE) or 72.5% (SPPU), placing you in the First Class with Distinction bracket at most universities. It is above the cut-off for the vast majority of campus placements in India and is a competitive score for graduate admissions abroad (roughly 3.2 on a 4.0 GPA scale).</div></div>
+  </div>
+
+  <div class="faq-item" itemscope itemprop="mainEntity" itemtype="https://schema.org/Question">
+    <button class="faq-q" onclick="toggleFaq(this)" itemprop="name">Is 7.5 CGPA low?<span class="faq-icon">+</span></button>
+    <div class="faq-a" itemscope itemprop="acceptedAnswer" itemtype="https://schema.org/Answer"><div itemprop="text">No, 7.5 CGPA is not low — it is above average and clears the eligibility bar for most campus placements. It equals about 71.25% (CBSE) or 67.5% (SPPU). Many students consider 7.5 the "safe" minimum for placement eligibility at reputed companies. It only appears low when competing for highly selective roles that prefer 8.0+ CGPA.</div></div>
+  </div>
+
+  <div class="faq-item" itemscope itemprop="mainEntity" itemtype="https://schema.org/Question">
+    <button class="faq-q" onclick="toggleFaq(this)" itemprop="name">Is a 3.5 CGPA good (out of 4)?<span class="faq-icon">+</span></button>
+    <div class="faq-a" itemscope itemprop="acceptedAnswer" itemtype="https://schema.org/Answer"><div itemprop="text">Yes, 3.5 out of 4.0 is excellent. It is equivalent to roughly 87.5% and maps to approximately 8.75 on a 10-point Indian scale. In the US system, 3.5 GPA typically earns you Latin honours (magna cum laude) and makes you a competitive candidate for top graduate programmes.</div></div>
+  </div>
+
+  <div class="faq-item" itemscope itemprop="mainEntity" itemtype="https://schema.org/Question">
+    <button class="faq-q" onclick="toggleFaq(this)" itemprop="name">Is 6.5 a bad CGPA?<span class="faq-icon">+</span></button>
+    <div class="faq-a" itemscope itemprop="acceptedAnswer" itemtype="https://schema.org/Answer"><div itemprop="text">6.5 CGPA is not bad — it equals roughly 61.75% (CBSE) or 57.5% (SPPU), which qualifies as First Class at most universities. It clears the 60% threshold for many government jobs and basic IT company requirements. However, for premium placements or postgraduate admissions with scholarships, a higher CGPA (7.5+) is typically expected.</div></div>
+  </div>
+
+  <div class="faq-item" itemscope itemprop="mainEntity" itemtype="https://schema.org/Question">
+    <button class="faq-q" onclick="toggleFaq(this)" itemprop="name">Is 3.4 a bad CGPA (out of 4)?<span class="faq-icon">+</span></button>
+    <div class="faq-a" itemscope itemprop="acceptedAnswer" itemtype="https://schema.org/Answer"><div itemprop="text">No, 3.4 out of 4.0 is a strong GPA. It is equivalent to around 85% and approximately 8.5 CGPA on the Indian 10-point scale. Most US graduate programmes consider 3.0+ as "good" and 3.5+ as "excellent," so 3.4 is competitive for a wide range of universities and companies.</div></div>
+  </div>
+
+  <div class="faq-item" itemscope itemprop="mainEntity" itemtype="https://schema.org/Question">
+    <button class="faq-q" onclick="toggleFaq(this)" itemprop="name">Is 8.7 CGPA good in engineering?<span class="faq-icon">+</span></button>
+    <div class="faq-a" itemscope itemprop="acceptedAnswer" itemtype="https://schema.org/Answer"><div itemprop="text">Yes, 8.7 CGPA is excellent in engineering. It equals roughly 82.65% (CBSE) or 79.5% (SPPU), placing you well above the First Class with Distinction threshold. It is competitive for GATE, top PSU placements, and international MS admissions. In campus placement terms, 8.7 CGPA makes you eligible for virtually every company including product-based firms with high cut-offs.</div></div>
+  </div>
+
+  <div class="faq-item" itemscope itemprop="mainEntity" itemtype="https://schema.org/Question">
+    <button class="faq-q" onclick="toggleFaq(this)" itemprop="name">What is considered a low CGPA?<span class="faq-icon">+</span></button>
+    <div class="faq-a" itemscope itemprop="acceptedAnswer" itemtype="https://schema.org/Answer"><div itemprop="text">In the Indian context, a CGPA below 6.0 (roughly below 57%) is generally considered low and may limit your options for campus placements and government job applications. Between 6.0 and 6.5 is borderline — sufficient for basic eligibility but not competitive. A CGPA below 5.0 (below 47.5%) raises concerns about eligibility for further studies and most formal employment requiring a degree cut-off.</div></div>
+  </div>
+
+  <div class="faq-item" itemscope itemprop="mainEntity" itemtype="https://schema.org/Question">
+    <button class="faq-q" onclick="toggleFaq(this)" itemprop="name">Is 2.5 out of 4 a good GPA?<span class="faq-icon">+</span></button>
+    <div class="faq-a" itemscope itemprop="acceptedAnswer" itemtype="https://schema.org/Answer"><div itemprop="text">2.5 out of 4.0 is a below-average GPA in the US system, roughly equivalent to 62.5% or a C+ grade. It is a passing score but is below the 3.0 minimum required by most graduate programmes and many employers. On the Indian 10-point scale, it is equivalent to about 6.25 CGPA. If you are targeting US graduate admissions, a 2.5 GPA would require strong compensating factors (GRE score, research experience, etc.).</div></div>
+  </div>
+
+  <!-- GROUP 4: CLASS & GRADES -->
+  <div class="faq-group-label">Class, Grades &amp; Pass/Fail</div>
+
+  <div class="faq-item" itemscope itemprop="mainEntity" itemtype="https://schema.org/Question">
+    <button class="faq-q" onclick="toggleFaq(this)" itemprop="name">Is a 6.0 CGPA first class?<span class="faq-icon">+</span></button>
+    <div class="faq-a" itemscope itemprop="acceptedAnswer" itemtype="https://schema.org/Answer"><div itemprop="text">Yes, at most Indian universities a 6.0 CGPA qualifies as First Class. Under VTU (×10), 6.0 CGPA = 60%, which is the typical First Class boundary. Under SPPU (×10−7.5), 6.0 CGPA = 52.5%, which falls in the Second Class range — so it depends on your university. Always verify the class definitions in your university's ordinance.</div></div>
+  </div>
+
+  <div class="faq-item" itemscope itemprop="mainEntity" itemtype="https://schema.org/Question">
+    <button class="faq-q" onclick="toggleFaq(this)" itemprop="name">Is 7.0 CGPA first class?<span class="faq-icon">+</span></button>
+    <div class="faq-a" itemscope itemprop="acceptedAnswer" itemtype="https://schema.org/Answer"><div itemprop="text">Yes. 7.0 CGPA equals 66.5% (CBSE), 62.5% (SPPU), or 70% (VTU) — all above the 60% First Class threshold. At SPPU specifically, some programmes define First Class with Distinction at 70%+ equivalent, which means 7.0 CGPA (62.5% equivalent) would be First Class but not Distinction under that system.</div></div>
+  </div>
+
+  <div class="faq-item" itemscope itemprop="mainEntity" itemtype="https://schema.org/Question">
+    <button class="faq-q" onclick="toggleFaq(this)" itemprop="name">What is a 7.6 CGPA in class?<span class="faq-icon">+</span></button>
+    <div class="faq-a" itemscope itemprop="acceptedAnswer" itemtype="https://schema.org/Answer"><div itemprop="text">7.6 CGPA corresponds to 72.2% (CBSE) or 68.5% (SPPU). Both fall in the <strong>First Class</strong> range. At universities where First Class with Distinction starts at 75%, a 7.6 CGPA under CBSE would be just below Distinction — whereas under VTU (76%), it would qualify. The class awarded depends on your university's specific percentage-to-class mapping.</div></div>
+  </div>
+
+  <div class="faq-item" itemscope itemprop="mainEntity" itemtype="https://schema.org/Question">
+    <button class="faq-q" onclick="toggleFaq(this)" itemprop="name">Which CGPA is second class lower?<span class="faq-icon">+</span></button>
+    <div class="faq-a" itemscope itemprop="acceptedAnswer" itemtype="https://schema.org/Answer"><div itemprop="text">Second Class Lower (also called Second Division or Pass Class depending on the university) typically covers the 45%–50% range. Under the CBSE formula, this corresponds to approximately 4.7–5.3 CGPA. Under SPPU, it corresponds to roughly 5.25–5.75 CGPA. The exact boundaries vary — refer to your university's grading ordinance for the precise cut-offs.</div></div>
+  </div>
+
+  <div class="faq-item" itemscope itemprop="mainEntity" itemtype="https://schema.org/Question">
+    <button class="faq-q" onclick="toggleFaq(this)" itemprop="name">Is 4 CGPA pass or fail?<span class="faq-icon">+</span></button>
+    <div class="faq-a" itemscope itemprop="acceptedAnswer" itemtype="https://schema.org/Answer"><div itemprop="text">On a 10-point Indian scale, 4.0 CGPA equals about 38% (CBSE) or 32.5% (SPPU) — which is typically a <strong>fail</strong>, as most universities require a minimum of 40–45% to pass. On a 4.0 GPA scale however, 4.0 is a perfect score. Context — which scale your 4 is on — is critical here.</div></div>
+  </div>
+
+  <!-- GROUP 5: JOBS & CAREER -->
+  <div class="faq-group-label">Jobs &amp; Career</div>
+
+  <div class="faq-item" itemscope itemprop="mainEntity" itemtype="https://schema.org/Question">
+    <button class="faq-q" onclick="toggleFaq(this)" itemprop="name">Can I get a job with 7 CGPA?<span class="faq-icon">+</span></button>
+    <div class="faq-a" itemscope itemprop="acceptedAnswer" itemtype="https://schema.org/Answer"><div itemprop="text">Yes, absolutely. A 7.0 CGPA clears the eligibility bar for most major IT companies including TCS, Infosys, Wipro, Cognizant, and Capgemini. Many service-based and mid-tier product companies set their cut-off at 6.0–6.5 CGPA. For top-tier product companies (Google, Microsoft, Amazon), CGPA is less critical than problem-solving skills, but a 7.0 CGPA will not disqualify you from applying.</div></div>
+  </div>
+
+  <!-- GROUP 6: GPA 4.0 SCALE -->
+  <div class="faq-group-label">GPA on 4.0 Scale</div>
+
+  <div class="faq-item" itemscope itemprop="mainEntity" itemtype="https://schema.org/Question">
+    <button class="faq-q" onclick="toggleFaq(this)" itemprop="name">Is a 6.0 GPA possible?<span class="faq-icon">+</span></button>
+    <div class="faq-a" itemscope itemprop="acceptedAnswer" itemtype="https://schema.org/Answer"><div itemprop="text">On the standard 4.0 scale used in the US, a 6.0 GPA is not possible — the maximum is 4.0. However, some high schools use a weighted GPA scale (up to 5.0 or even 6.0) that awards extra points for AP or honours courses. On the Indian 10-point CGPA scale, 6.0 is a valid and common score corresponding to roughly 57–60%.</div></div>
+  </div>
+
+  <div class="faq-item" itemscope itemprop="mainEntity" itemtype="https://schema.org/Question">
+    <button class="faq-q" onclick="toggleFaq(this)" itemprop="name">Is a 5.0 GPA impressive?<span class="faq-icon">+</span></button>
+    <div class="faq-a" itemscope itemprop="acceptedAnswer" itemtype="https://schema.org/Answer"><div itemprop="text">On a weighted 5.0 scale (used in some US high schools for AP/honours courses), a 5.0 GPA is a perfect score and highly impressive. On the standard unweighted 4.0 scale, a 5.0 is not achievable. If someone mentions a 5.0 GPA in an Indian context, they likely mean a 5.0 on a 10-point CGPA scale, which is average (around 47.5% under CBSE).</div></div>
+  </div>
+
+  <div class="faq-item" itemscope itemprop="mainEntity" itemtype="https://schema.org/Question">
+    <button class="faq-q" onclick="toggleFaq(this)" itemprop="name">What is a 7.2 GPA on a 4.0 scale?<span class="faq-icon">+</span></button>
+    <div class="faq-a" itemscope itemprop="acceptedAnswer" itemtype="https://schema.org/Answer"><div itemprop="text">A 7.2 on a 4.0 scale is not possible — you likely mean 7.2 CGPA on a 10-point Indian scale. Converted to a 4.0 GPA: (7.2 ÷ 10) × 4 = <strong>2.88 GPA</strong>. This is slightly below the 3.0 benchmark preferred by US graduate programmes, though many universities still consider applications from students with 2.7–3.0 GPA if other credentials are strong.</div></div>
+  </div>
+
+</section>
+
+<script>
+function toggleFaq(btn) {
+  const item = btn.closest('.faq-item');
+  const isOpen = item.classList.contains('open');
+  document.querySelectorAll('.faq-item.open').forEach(i => i.classList.remove('open'));
+  if (!isOpen) item.classList.add('open');
+}
+</script>
+
+<!-- ═══════════════════════════════════════════
+     SITE FOOTER
+════════════════════════════════════════════ -->
+<style>
+.site-footer {
+  border-top: 1px solid var(--border);
+  background: var(--card);
+  padding: 48px 24px 28px;
+  margin-top: 20px;
+}
+.footer-inner {
+  max-width: 900px;
+  margin: 0 auto;
+  display: grid;
+  grid-template-columns: 2fr 1fr 1fr 1fr;
+  gap: 32px;
+}
+@media (max-width: 680px) {
+  .footer-inner { grid-template-columns: 1fr 1fr; gap: 24px; }
+  .footer-brand-col { grid-column: 1 / -1; }
+}
+@media (max-width: 380px) {
+  .footer-inner { grid-template-columns: 1fr; }
+}
+.footer-logo {
+  display: flex; align-items: center; gap: 8px;
+  font-weight: 700; font-size: 1rem;
+  color: var(--primary); margin-bottom: 10px;
+  text-decoration: none;
+}
+.footer-tagline {
+  font-size: 0.82rem; color: var(--muted); line-height: 1.65;
+  max-width: 240px;
+}
+.footer-col-title {
+  font-size: 0.72rem; font-weight: 700; text-transform: uppercase;
+  letter-spacing: 1px; color: var(--muted); margin-bottom: 12px;
+}
+.footer-links { list-style: none; }
+.footer-links li { margin-bottom: 8px; }
+.footer-links a {
+  font-size: 0.85rem; color: var(--muted); text-decoration: none;
+  transition: color 0.15s;
+}
+.footer-links a:hover { color: var(--primary); }
+.footer-bottom {
+  max-width: 900px; margin: 32px auto 0;
+  padding-top: 20px; border-top: 1px solid var(--border);
+  display: flex; justify-content: space-between; align-items: center;
+  flex-wrap: wrap; gap: 10px;
+}
+.footer-copy { font-size: 0.78rem; color: var(--muted); }
+.footer-bottom-links { display: flex; gap: 16px; }
+.footer-bottom-links a {
+  font-size: 0.78rem; color: var(--muted); text-decoration: none;
+}
+.footer-bottom-links a:hover { color: var(--primary); }
+</style>
+
+<footer class="site-footer">
+  <div class="footer-inner">
+    <!-- Brand -->
+    <div class="footer-brand-col">
+      <a href="index.html" class="footer-logo">
+        <svg width="24" height="24" viewBox="0 0 64 64" style="border-radius:6px;" xmlns="http://www.w3.org/2000/svg">
+          <rect width="64" height="64" rx="14" fill="#0f172a"/>
+          <text x="32" y="50" text-anchor="middle" font-family="system-ui,sans-serif" font-size="52" font-weight="800" fill="#00d285">%</text>
+        </svg>
+        Global GPA
+      </a>
+      <p class="footer-tagline">Free CGPA to percentage calculator for Indian university students. Supports SPPU, VTU, Mumbai University, Anna University and more.</p>
+    </div>
+
+    <!-- Calculators -->
+    <div>
+      <div class="footer-col-title">Calculators</div>
+      <ul class="footer-links">
+        <li><a href="index.html">CGPA to Percentage</a></li>
+        <li><a href="index.html">Percentage to CGPA</a></li>
+        <li><a href="index.html">CGPA to GPA (4.0)</a></li>
+        <li><a href="index.html">SGPA to CGPA</a></li>
+        <li><a href="index.html">Marks to CGPA</a></li>
+      </ul>
+    </div>
+
+    <!-- Company -->
+    <div>
+      <div class="footer-col-title">Company</div>
+      <ul class="footer-links">
+        <li><a href="about.html">About Us</a></li>
+        <li><a href="contact.html">Contact Us</a></li>
+        <li><a href="privacy-policy.html">Privacy Policy</a></li>
+        <li><a href="terms.html">Terms &amp; Conditions</a></li>
+      </ul>
+    </div>
+
+    <!-- Universities -->
+    <div>
+      <div class="footer-col-title">Universities</div>
+      <ul class="footer-links">
+        <li><a href="index.html">SPPU Calculator</a></li>
+        <li><a href="index.html">VTU Calculator</a></li>
+        <li><a href="index.html">Mumbai University</a></li>
+        <li><a href="index.html">Anna University</a></li>
+        <li><a href="index.html">AKTU / UPTU</a></li>
+      </ul>
+    </div>
+  </div>
+
+  <div class="footer-bottom">
+    <span class="footer-copy">© 2025 Global GPA. All rights reserved. Results are approximate — verify with your university.</span>
+    <div class="footer-bottom-links">
+      <a href="privacy-policy.html">Privacy</a>
+      <a href="terms.html">Terms</a>
+      <a href="contact.html">Contact</a>
+    </div>
+  </div>
+</footer>
+
+</body>
+</html>

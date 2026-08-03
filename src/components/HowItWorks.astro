@@ -1,0 +1,168 @@
+---
+// HowItWorks.astro
+const steps = [
+  {
+    num: '01',
+    title: 'Enter your CGPA',
+    body: 'Type your CGPA from your marksheet or grade card — it\'s usually a decimal between 0 and 10. You can also enter a percentage or GPA.',
+    icon: `<svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M11 4H4a2 2 0 0 0-2 2v14a2 2 0 0 0 2 2h14a2 2 0 0 0 2-2v-7"/><path d="M18.5 2.5a2.121 2.121 0 0 1 3 3L12 15l-4 1 1-4 9.5-9.5z"/></svg>`,
+  },
+  {
+    num: '02',
+    title: 'Select your university',
+    body: 'Pick your university or grading scale from the dropdown. Each university uses a different formula — SPPU, VTU, Mumbai University, and more are supported.',
+    icon: `<svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M3 9l9-7 9 7v11a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2z"/><polyline points="9,22 9,12 15,12 15,22"/></svg>`,
+  },
+  {
+    num: '03',
+    title: 'Get instant results',
+    body: 'Your percentage appears immediately along with the formula used, your grade class (Distinction, First Class, etc.), and a one-click copy button.',
+    icon: `<svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="20,6 9,17 4,12"/></svg>`,
+  },
+];
+---
+
+<section class="hiw-section" id="how-it-works">
+  <div class="hiw-inner">
+    <div class="hiw-header">
+      <div class="section-eyebrow">How It Works</div>
+      <h2 class="section-title">Three steps. Zero confusion.</h2>
+    </div>
+
+    <div class="hiw-grid">
+      {steps.map((step, i) => (
+        <div class="hiw-card">
+          <div class="hiw-num">{step.num}</div>
+          <div class="hiw-icon" aria-hidden="true" set:html={step.icon} />
+          <h3 class="hiw-title">{step.title}</h3>
+          <p class="hiw-body">{step.body}</p>
+          {i < steps.length - 1 && (
+            <div class="hiw-connector" aria-hidden="true">
+              <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><path d="M5 12h14M12 5l7 7-7 7"/></svg>
+            </div>
+          )}
+        </div>
+      ))}
+    </div>
+  </div>
+</section>
+
+<style>
+  .hiw-section {
+    padding: 80px 24px;
+    background: var(--bg-card);
+    border-top: 1px solid var(--border);
+    border-bottom: 1px solid var(--border);
+  }
+
+  .hiw-inner {
+    max-width: 900px;
+    margin: 0 auto;
+    display: flex;
+    flex-direction: column;
+    gap: 48px;
+  }
+
+  .hiw-header {
+    text-align: center;
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+  }
+
+  .section-eyebrow {
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 11px;
+    color: var(--text-mute);
+    letter-spacing: 0.04em;
+    text-transform: uppercase;
+  }
+
+  .section-title {
+    font-size: clamp(24px, 3vw, 32px);
+    font-weight: 600;
+    letter-spacing: -0.03em;
+    color: var(--text-ink);
+    margin: 0;
+  }
+
+  .hiw-grid {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 16px;
+    position: relative;
+  }
+
+  .hiw-card {
+    background: var(--bg-soft);
+    border: 1px solid var(--border);
+    border-radius: 12px;
+    padding: 28px 24px;
+    display: flex;
+    flex-direction: column;
+    gap: 12px;
+    position: relative;
+    transition: box-shadow 0.2s, border-color 0.2s;
+  }
+
+  .hiw-card:hover {
+    box-shadow: var(--shadow-md);
+    border-color: var(--border-strong);
+  }
+
+  .hiw-num {
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 11px;
+    color: var(--text-mute);
+    font-weight: 400;
+  }
+
+  .hiw-icon {
+    width: 40px;
+    height: 40px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background: var(--bg-card);
+    border: 1px solid var(--border);
+    border-radius: 10px;
+    color: var(--text-ink);
+  }
+
+  .hiw-title {
+    font-size: 15px;
+    font-weight: 600;
+    color: var(--text-ink);
+    letter-spacing: -0.02em;
+    margin: 0;
+  }
+
+  .hiw-body {
+    font-size: 13px;
+    color: var(--text-body);
+    line-height: 1.6;
+    margin: 0;
+  }
+
+  .hiw-connector {
+    position: absolute;
+    right: -24px;
+    top: 50%;
+    transform: translateY(-50%);
+    z-index: 1;
+    color: var(--border-strong);
+    background: var(--bg-card);
+    border-radius: 50%;
+    width: 28px;
+    height: 28px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    border: 1px solid var(--border);
+  }
+
+  @media (max-width: 720px) {
+    .hiw-grid { grid-template-columns: 1fr; }
+    .hiw-connector { display: none; }
+  }
+</style>

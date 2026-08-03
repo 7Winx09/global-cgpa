@@ -1,0 +1,1056 @@
+---
+// Calculator.astro — Main calculator with all conversion modes + sub-calculators
+---
+
+<section class="calc-section" id="calculator">
+  <div class="calc-wrapper">
+
+    <!-- Section header -->
+    <div class="calc-header">
+      <div class="section-eyebrow">CGPA Calculator</div>
+      <h2 class="section-title">Convert any grade, instantly.</h2>
+      <p class="section-sub">Select your conversion type and university, enter your score — get results with the formula shown.</p>
+    </div>
+
+    <!-- Main calculator card -->
+    <div class="calc-card" role="main" aria-label="CGPA Calculator">
+
+      <!-- Mode tabs -->
+      <div class="mode-tabs" role="tablist" aria-label="Conversion mode">
+        <button class="mode-tab active" role="tab" aria-selected="true" data-mode="cgpa2pct" id="tab-cgpa2pct">CGPA → %</button>
+        <button class="mode-tab" role="tab" aria-selected="false" data-mode="pct2cgpa" id="tab-pct2cgpa">% → CGPA</button>
+        <button class="mode-tab" role="tab" aria-selected="false" data-mode="cgpa2gpa" id="tab-cgpa2gpa">CGPA → GPA</button>
+        <button class="mode-tab" role="tab" aria-selected="false" data-mode="gpa2cgpa" id="tab-gpa2cgpa">GPA → CGPA</button>
+      </div>
+
+      <!-- Input area -->
+      <div class="calc-inputs">
+        <div class="input-row">
+          <div class="input-group" id="main-input-group">
+            <label class="input-label" for="main-input" id="main-input-label">Enter CGPA</label>
+            <input
+              type="number"
+              id="main-input"
+              class="calc-input"
+              placeholder="e.g. 8.50"
+              min="0"
+              step="0.01"
+              autocomplete="off"
+              aria-describedby="input-hint"
+            />
+            <span class="input-hint" id="input-hint">Range: 0 – 10</span>
+          </div>
+
+          <div class="input-group" id="university-group">
+            <label class="input-label" for="university-select">University / Scale</label>
+            <select id="university-select" class="calc-select">
+              <option value="cbse">CBSE / Generic (×9.5)</option>
+              <option value="sppu">SPPU – Pune Univ. (×10 − 7.5)</option>
+              <option value="vtu">VTU – Bangalore (×10)</option>
+              <option value="mumbai">Mumbai University (7.1×CGPA + 11)</option>
+              <option value="anna">Anna University (×10 − 7.5)</option>
+              <option value="aktu">AKTU / UPTU (×9.5)</option>
+              <option value="gtu">GTU – Gujarat (×10 − 7.5)</option>
+              <option value="ktu">KTU – Kerala (×10)</option>
+              <option value="scale5">5-Point Scale (÷5 ×100)</option>
+              <option value="scale4">4-Point Scale (÷4 ×100)</option>
+            </select>
+          </div>
+        </div>
+
+        <!-- Result display -->
+        <div class="result-box" id="result-box" aria-live="polite" aria-atomic="true">
+          <div class="result-top">
+            <div>
+              <div class="result-value" id="result-value">—</div>
+              <div class="result-label" id="result-label">Percentage</div>
+            </div>
+            <div class="result-actions">
+              <span class="grade-badge" id="grade-badge" style="display:none"></span>
+              <button class="copy-btn" id="copy-btn" title="Copy result" aria-label="Copy result">
+                <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round">
+                  <rect x="9" y="9" width="13" height="13" rx="2"/>
+                  <path d="M5 15H4a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h9a2 2 0 0 1 2 2v1"/>
+                </svg>
+                <span>Copy</span>
+              </button>
+            </div>
+          </div>
+          <!-- Formula shown below result -->
+          <div class="result-formula" id="result-formula"></div>
+        </div>
+      </div>
+    </div>
+
+    <!-- Sub-calculator cards -->
+    <div class="sub-calc-grid">
+      <button class="sub-calc-card" id="btn-marks" aria-haspopup="dialog">
+        <div class="sub-calc-icon">📋</div>
+        <div>
+          <div class="sub-calc-title">Marks → CGPA</div>
+          <div class="sub-calc-desc">Enter subject marks & max marks</div>
+        </div>
+        <svg class="sub-calc-arrow" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round">
+          <path d="M5 12h14M12 5l7 7-7 7"/>
+        </svg>
+      </button>
+
+      <button class="sub-calc-card" id="btn-sgpa" aria-haspopup="dialog">
+        <div class="sub-calc-icon">📈</div>
+        <div>
+          <div class="sub-calc-title">SGPA → CGPA</div>
+          <div class="sub-calc-desc">Weighted average across semesters</div>
+        </div>
+        <svg class="sub-calc-arrow" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round">
+          <path d="M5 12h14M12 5l7 7-7 7"/>
+        </svg>
+      </button>
+
+      <button class="sub-calc-card" id="btn-chart" aria-haspopup="dialog">
+        <div class="sub-calc-icon">📊</div>
+        <div>
+          <div class="sub-calc-title">Conversion Chart</div>
+          <div class="sub-calc-desc">Full CGPA→% table for all universities</div>
+        </div>
+        <svg class="sub-calc-arrow" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round">
+          <path d="M5 12h14M12 5l7 7-7 7"/>
+        </svg>
+      </button>
+    </div>
+  </div>
+</section>
+
+<!-- ── Modal: Marks to CGPA ──────────────────────────── -->
+<div class="modal-overlay" id="modal-marks" role="dialog" aria-modal="true" aria-labelledby="modal-marks-title" style="display:none">
+  <div class="modal-card">
+    <div class="modal-header">
+      <h3 id="modal-marks-title">Marks → CGPA / SGPA</h3>
+      <button class="modal-close" data-close-modal="modal-marks" aria-label="Close">
+        <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round"><line x1="18" y1="6" x2="6" y2="18"/><line x1="6" y1="6" x2="18" y2="18"/></svg>
+      </button>
+    </div>
+    <p class="modal-desc">Enter marks obtained and maximum marks per subject. We'll calculate your CGPA on a 10-point scale.</p>
+    <div id="marks-rows">
+      <!-- Rows generated by JS -->
+    </div>
+    <button class="add-row-btn" id="add-marks-row">+ Add subject</button>
+    <div class="modal-result" id="marks-result">
+      <span class="modal-result-val" id="marks-result-val">—</span>
+      <span class="modal-result-lbl">CGPA / SGPA</span>
+    </div>
+  </div>
+</div>
+
+<!-- ── Modal: SGPA to CGPA ──────────────────────────── -->
+<div class="modal-overlay" id="modal-sgpa" role="dialog" aria-modal="true" aria-labelledby="modal-sgpa-title" style="display:none">
+  <div class="modal-card">
+    <div class="modal-header">
+      <h3 id="modal-sgpa-title">SGPA → Cumulative CGPA</h3>
+      <button class="modal-close" data-close-modal="modal-sgpa" aria-label="Close">
+        <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round"><line x1="18" y1="6" x2="6" y2="18"/><line x1="6" y1="6" x2="18" y2="18"/></svg>
+      </button>
+    </div>
+    <p class="modal-desc">Enter SGPA and credit count for each semester. Credits weight each semester's contribution to your overall CGPA.</p>
+    <div id="sgpa-rows">
+      <!-- Rows generated by JS -->
+    </div>
+    <button class="add-row-btn" id="add-sgpa-row">+ Add semester</button>
+    <div class="modal-result" id="sgpa-result">
+      <span class="modal-result-val" id="sgpa-result-val">—</span>
+      <span class="modal-result-lbl">Cumulative CGPA</span>
+    </div>
+  </div>
+</div>
+
+<!-- ── Modal: Conversion Chart ──────────────────────── -->
+<div class="modal-overlay" id="modal-chart" role="dialog" aria-modal="true" aria-labelledby="modal-chart-title" style="display:none">
+  <div class="modal-card modal-card-wide">
+    <div class="modal-header">
+      <h3 id="modal-chart-title">CGPA to Percentage Chart</h3>
+      <button class="modal-close" data-close-modal="modal-chart" aria-label="Close">
+        <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round"><line x1="18" y1="6" x2="6" y2="18"/><line x1="6" y1="6" x2="18" y2="18"/></svg>
+      </button>
+    </div>
+    <div class="chart-table-wrap">
+      <table class="chart-table data-table" id="chart-table">
+        <thead>
+          <tr>
+            <th>CGPA</th>
+            <th>CBSE (×9.5)</th>
+            <th>SPPU (×10−7.5)</th>
+            <th>VTU (×10)</th>
+            <th>Grade</th>
+          </tr>
+        </thead>
+        <tbody id="chart-tbody"></tbody>
+      </table>
+    </div>
+  </div>
+</div>
+
+<style>
+  .calc-section {
+    padding: 80px 24px;
+    background: var(--bg);
+  }
+
+  .calc-wrapper {
+    max-width: 760px;
+    margin: 0 auto;
+    display: flex;
+    flex-direction: column;
+    gap: 32px;
+  }
+
+  .calc-header {
+    text-align: center;
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+  }
+
+  .section-eyebrow {
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 11px;
+    color: var(--text-mute);
+    letter-spacing: 0.04em;
+    text-transform: uppercase;
+  }
+
+  .section-title {
+    font-size: clamp(24px, 3vw, 32px);
+    font-weight: 600;
+    letter-spacing: -0.03em;
+    color: var(--text-ink);
+    margin: 0;
+  }
+
+  .section-sub {
+    font-size: 15px;
+    color: var(--text-body);
+    max-width: 520px;
+    margin: 0 auto;
+    line-height: 1.6;
+  }
+
+  /* Calc Card */
+  .calc-card {
+    background: var(--bg-card);
+    border: 1px solid var(--border);
+    border-radius: 12px;
+    box-shadow: var(--shadow-lg);
+    overflow: hidden;
+  }
+
+  /* Mode tabs */
+  .mode-tabs {
+    display: flex;
+    border-bottom: 1px solid var(--border);
+    background: var(--bg-soft);
+    padding: 4px;
+    gap: 2px;
+  }
+
+  .mode-tab {
+    flex: 1;
+    background: none;
+    border: none;
+    border-radius: 6px;
+    padding: 8px 12px;
+    font-family: inherit;
+    font-size: 13px;
+    font-weight: 500;
+    color: var(--text-mute);
+    cursor: pointer;
+    transition: all 0.15s;
+    white-space: nowrap;
+  }
+
+  .mode-tab:hover {
+    color: var(--text-ink);
+    background: var(--bg-card);
+  }
+
+  .mode-tab.active {
+    background: var(--bg-card);
+    color: var(--text-ink);
+    box-shadow: var(--shadow-sm);
+  }
+
+  /* Inputs */
+  .calc-inputs {
+    padding: 24px;
+    display: flex;
+    flex-direction: column;
+    gap: 16px;
+  }
+
+  .input-row {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 12px;
+  }
+
+  .input-group {
+    display: flex;
+    flex-direction: column;
+    gap: 6px;
+  }
+
+  .input-label {
+    font-size: 11px;
+    font-weight: 600;
+    color: var(--text-mute);
+    text-transform: uppercase;
+    letter-spacing: 0.06em;
+    font-family: 'JetBrains Mono', monospace;
+  }
+
+  .calc-input {
+    width: 100%;
+    background: var(--bg-soft);
+    color: var(--text-ink);
+    border: 1px solid var(--border);
+    border-radius: 6px;
+    font-family: inherit;
+    font-size: 15px;
+    font-weight: 500;
+    padding: 0 12px;
+    height: 44px;
+    transition: border-color 0.15s, box-shadow 0.15s;
+    appearance: none;
+    outline: none;
+  }
+
+  .calc-input:focus {
+    border-color: var(--text-ink);
+    background: var(--bg-card);
+    box-shadow: 0 0 0 3px rgba(23,23,23,0.08);
+  }
+
+  [data-theme="dark"] .calc-input:focus {
+    box-shadow: 0 0 0 3px rgba(237,237,237,0.08);
+  }
+
+  .calc-select {
+    width: 100%;
+    background: var(--bg-soft);
+    color: var(--text-ink);
+    border: 1px solid var(--border);
+    border-radius: 6px;
+    font-family: inherit;
+    font-size: 13px;
+    font-weight: 400;
+    padding: 0 32px 0 12px;
+    height: 44px;
+    appearance: none;
+    outline: none;
+    cursor: pointer;
+    transition: border-color 0.15s;
+    background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='12' height='8' viewBox='0 0 12 8'%3E%3Cpath d='M1 1l5 5 5-5' stroke='%23888' stroke-width='1.5' fill='none' stroke-linecap='round' stroke-linejoin='round'/%3E%3C/svg%3E");
+    background-repeat: no-repeat;
+    background-position: right 12px center;
+  }
+
+  .calc-select:focus {
+    border-color: var(--text-ink);
+    background-color: var(--bg-card);
+  }
+
+  .input-hint {
+    font-size: 11px;
+    color: var(--text-mute);
+    font-family: 'JetBrains Mono', monospace;
+  }
+
+  /* Result box */
+  .result-box {
+    background: var(--bg-soft);
+    border: 1px solid var(--border);
+    border-radius: 8px;
+    padding: 20px;
+    display: flex;
+    flex-direction: column;
+    gap: 12px;
+    transition: background 0.2s;
+  }
+
+  .result-box.has-result {
+    border-color: var(--border-strong);
+  }
+
+  .result-top {
+    display: flex;
+    align-items: flex-start;
+    justify-content: space-between;
+    gap: 12px;
+  }
+
+  .result-value {
+    font-size: 40px;
+    font-weight: 600;
+    color: var(--text-ink);
+    line-height: 1;
+    letter-spacing: -0.04em;
+    transition: transform 0.2s;
+  }
+
+  .result-value.updated {
+    animation: resultPop 0.25s ease;
+  }
+
+  @keyframes resultPop {
+    0% { transform: scale(0.95); opacity: 0.7; }
+    100% { transform: scale(1); opacity: 1; }
+  }
+
+  .result-label {
+    font-size: 11px;
+    color: var(--text-mute);
+    font-family: 'JetBrains Mono', monospace;
+    margin-top: 4px;
+    text-transform: uppercase;
+    letter-spacing: 0.05em;
+  }
+
+  .result-actions {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    flex-shrink: 0;
+  }
+
+  .grade-badge {
+    font-size: 11px;
+    font-weight: 600;
+    padding: 3px 10px;
+    border-radius: 9999px;
+    background: var(--bg-card);
+    border: 1px solid var(--border);
+    color: var(--text-body);
+    white-space: nowrap;
+  }
+
+  .copy-btn {
+    display: inline-flex;
+    align-items: center;
+    gap: 5px;
+    background: var(--bg-card);
+    border: 1px solid var(--border);
+    border-radius: 6px;
+    padding: 6px 12px;
+    font-size: 12px;
+    font-weight: 500;
+    color: var(--text-mute);
+    cursor: pointer;
+    transition: all 0.15s;
+    font-family: inherit;
+  }
+
+  .copy-btn:hover {
+    color: var(--text-ink);
+    border-color: var(--border-strong);
+    background: var(--bg-soft);
+  }
+
+  .copy-btn.copied {
+    color: #00c853;
+    border-color: #00c853;
+  }
+
+  .result-formula {
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 12px;
+    color: var(--text-mute);
+    line-height: 1.5;
+    padding-top: 8px;
+    border-top: 1px solid var(--border);
+    display: none;
+  }
+
+  .result-formula.visible {
+    display: block;
+  }
+
+  /* Sub-calc grid */
+  .sub-calc-grid {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 12px;
+  }
+
+  .sub-calc-card {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    background: var(--bg-card);
+    border: 1px solid var(--border);
+    border-radius: 10px;
+    padding: 16px;
+    cursor: pointer;
+    text-align: left;
+    transition: all 0.15s;
+    box-shadow: var(--shadow-sm);
+  }
+
+  .sub-calc-card:hover {
+    border-color: var(--border-strong);
+    box-shadow: var(--shadow-md);
+    transform: translateY(-1px);
+  }
+
+  .sub-calc-icon {
+    font-size: 20px;
+    flex-shrink: 0;
+  }
+
+  .sub-calc-title {
+    font-size: 13px;
+    font-weight: 600;
+    color: var(--text-ink);
+    margin-bottom: 2px;
+  }
+
+  .sub-calc-desc {
+    font-size: 11px;
+    color: var(--text-mute);
+    line-height: 1.4;
+  }
+
+  .sub-calc-arrow {
+    margin-left: auto;
+    color: var(--text-mute);
+    flex-shrink: 0;
+    transition: transform 0.15s;
+  }
+
+  .sub-calc-card:hover .sub-calc-arrow {
+    transform: translateX(3px);
+    color: var(--text-ink);
+  }
+
+  /* ── Modals ─── */
+  .modal-overlay {
+    position: fixed;
+    inset: 0;
+    background: rgba(0,0,0,0.4);
+    backdrop-filter: blur(4px);
+    -webkit-backdrop-filter: blur(4px);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding: 24px;
+    z-index: 200;
+    animation: fadeIn 0.15s ease;
+  }
+
+  @keyframes fadeIn {
+    from { opacity: 0; }
+    to { opacity: 1; }
+  }
+
+  .modal-card {
+    background: var(--bg-card);
+    border: 1px solid var(--border);
+    border-radius: 12px;
+    padding: 28px;
+    width: 100%;
+    max-width: 500px;
+    max-height: 90vh;
+    overflow-y: auto;
+    box-shadow: 0 0 0 1px rgba(0,0,0,0.06), 0 8px 16px rgba(0,0,0,0.12), 0 24px 32px rgba(0,0,0,0.08);
+    animation: slideUp 0.2s ease;
+  }
+
+  .modal-card-wide {
+    max-width: 700px;
+  }
+
+  @keyframes slideUp {
+    from { opacity: 0; transform: translateY(12px); }
+    to { opacity: 1; transform: translateY(0); }
+  }
+
+  .modal-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 8px;
+  }
+
+  .modal-header h3 {
+    font-size: 15px;
+    font-weight: 600;
+    color: var(--text-ink);
+    letter-spacing: -0.02em;
+  }
+
+  .modal-close {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 28px;
+    height: 28px;
+    background: none;
+    border: 1px solid var(--border);
+    border-radius: 9999px;
+    color: var(--text-mute);
+    cursor: pointer;
+    transition: all 0.15s;
+  }
+
+  .modal-close:hover {
+    color: var(--text-ink);
+    border-color: var(--border-strong);
+    background: var(--bg-soft);
+  }
+
+  .modal-desc {
+    font-size: 13px;
+    color: var(--text-mute);
+    margin-bottom: 20px;
+    line-height: 1.55;
+  }
+
+  /* Marks/SGPA row inputs */
+  .dynamic-row {
+    display: grid;
+    grid-template-columns: 1fr 1fr auto;
+    gap: 8px;
+    margin-bottom: 8px;
+    align-items: end;
+  }
+
+  .dynamic-row input {
+    height: 38px;
+    background: var(--bg-soft);
+    color: var(--text-ink);
+    border: 1px solid var(--border);
+    border-radius: 6px;
+    font-family: inherit;
+    font-size: 13px;
+    padding: 0 10px;
+    outline: none;
+    transition: border-color 0.15s;
+    width: 100%;
+  }
+
+  .dynamic-row input:focus {
+    border-color: var(--text-ink);
+  }
+
+  .row-label {
+    font-size: 10px;
+    font-weight: 600;
+    color: var(--text-mute);
+    text-transform: uppercase;
+    letter-spacing: 0.06em;
+    font-family: 'JetBrains Mono', monospace;
+    margin-bottom: 4px;
+  }
+
+  .remove-row-btn {
+    width: 28px;
+    height: 38px;
+    background: none;
+    border: 1px solid var(--border);
+    border-radius: 6px;
+    color: var(--text-mute);
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 14px;
+    transition: all 0.15s;
+    flex-shrink: 0;
+    align-self: end;
+  }
+
+  .remove-row-btn:hover {
+    background: #fee2e2;
+    border-color: #fca5a5;
+    color: #dc2626;
+  }
+
+  .add-row-btn {
+    background: none;
+    border: 1px dashed var(--border-strong);
+    border-radius: 6px;
+    padding: 8px 14px;
+    font-family: inherit;
+    font-size: 13px;
+    color: var(--text-mute);
+    cursor: pointer;
+    width: 100%;
+    transition: all 0.15s;
+    margin-top: 4px;
+    margin-bottom: 16px;
+  }
+
+  .add-row-btn:hover {
+    color: var(--text-ink);
+    border-color: var(--border-strong);
+    background: var(--bg-soft);
+  }
+
+  .modal-result {
+    background: var(--bg-soft);
+    border: 1px solid var(--border);
+    border-radius: 8px;
+    padding: 16px 20px;
+    display: flex;
+    align-items: baseline;
+    gap: 10px;
+  }
+
+  .modal-result-val {
+    font-size: 32px;
+    font-weight: 600;
+    color: var(--text-ink);
+    letter-spacing: -0.04em;
+  }
+
+  .modal-result-lbl {
+    font-size: 11px;
+    color: var(--text-mute);
+    font-family: 'JetBrains Mono', monospace;
+    text-transform: uppercase;
+    letter-spacing: 0.05em;
+  }
+
+  /* Chart table */
+  .chart-table-wrap {
+    overflow-x: auto;
+    border-radius: 8px;
+    border: 1px solid var(--border);
+    margin-top: 16px;
+  }
+
+  .chart-table th, .chart-table td {
+    white-space: nowrap;
+  }
+
+  @media (max-width: 640px) {
+    .input-row { grid-template-columns: 1fr; }
+    .sub-calc-grid { grid-template-columns: 1fr; }
+    .mode-tabs { flex-wrap: wrap; }
+    .mode-tab { flex: none; font-size: 11px; padding: 6px 8px; }
+    .result-value { font-size: 32px; }
+  }
+</style>
+
+<script>
+// ═══════════════════════════════════════════════════════
+// University formulas
+// ═══════════════════════════════════════════════════════
+const UNIS = {
+  cbse:   { label: 'CBSE', fn: (c) => c * 9.5,            inv: (p) => p / 9.5,          formula: (c) => `${c} × 9.5` },
+  sppu:   { label: 'SPPU', fn: (c) => c * 10 - 7.5,       inv: (p) => (p + 7.5) / 10,   formula: (c) => `(${c} × 10) − 7.5` },
+  vtu:    { label: 'VTU',  fn: (c) => c * 10,              inv: (p) => p / 10,            formula: (c) => `${c} × 10` },
+  mumbai: { label: 'Mumbai', fn: (c) => 7.1 * c + 11,     inv: (p) => (p - 11) / 7.1,   formula: (c) => `(7.1 × ${c}) + 11` },
+  anna:   { label: 'Anna', fn: (c) => c * 10 - 7.5,       inv: (p) => (p + 7.5) / 10,   formula: (c) => `(${c} × 10) − 7.5` },
+  aktu:   { label: 'AKTU', fn: (c) => c * 9.5,            inv: (p) => p / 9.5,           formula: (c) => `${c} × 9.5` },
+  gtu:    { label: 'GTU',  fn: (c) => c * 10 - 7.5,       inv: (p) => (p + 7.5) / 10,   formula: (c) => `(${c} × 10) − 7.5` },
+  ktu:    { label: 'KTU',  fn: (c) => c * 10,              inv: (p) => p / 10,            formula: (c) => `${c} × 10` },
+  scale5: { label: '5-pt', fn: (c) => (c / 5) * 100,      inv: (p) => (p / 100) * 5,    formula: (c) => `(${c} ÷ 5) × 100` },
+  scale4: { label: '4-pt', fn: (c) => (c / 4) * 100,      inv: (p) => (p / 100) * 4,    formula: (c) => `(${c} ÷ 4) × 100` },
+};
+
+const MODE_CONFIG = {
+  'cgpa2pct': { inputLabel: 'Enter CGPA', resultLabel: 'Percentage', hint: 'Range: 0 – 10', placeholder: 'e.g. 8.50', showUni: true, max: 10 },
+  'pct2cgpa': { inputLabel: 'Enter Percentage (%)', resultLabel: 'CGPA', hint: 'Range: 0 – 100', placeholder: 'e.g. 76.00', showUni: true, max: 100 },
+  'cgpa2gpa': { inputLabel: 'Enter CGPA (10-pt)', resultLabel: 'GPA (4.0 Scale)', hint: 'Range: 0 – 10', placeholder: 'e.g. 8.50', showUni: false, max: 10 },
+  'gpa2cgpa': { inputLabel: 'Enter GPA (4.0 scale)', resultLabel: 'CGPA (10-pt)', hint: 'Range: 0 – 4', placeholder: 'e.g. 3.50', showUni: false, max: 4 },
+};
+
+function getGrade(pct) {
+  if (pct >= 90) return { label: 'Outstanding', color: '#6366f1' };
+  if (pct >= 75) return { label: 'Distinction', color: '#0070f3' };
+  if (pct >= 60) return { label: 'First Class', color: '#00a86b' };
+  if (pct >= 50) return { label: 'Second Class', color: '#f5a623' };
+  if (pct >= 40) return { label: 'Pass Class', color: '#888888' };
+  return { label: 'Fail', color: '#ee0000' };
+}
+
+let currentMode = 'cgpa2pct';
+
+// DOM refs
+const mainInput    = document.getElementById('main-input');
+const uniSelect    = document.getElementById('university-select');
+const resultVal    = document.getElementById('result-value');
+const resultLabel  = document.getElementById('result-label');
+const resultFormula = document.getElementById('result-formula');
+const gradeBadge   = document.getElementById('grade-badge');
+const resultBox    = document.getElementById('result-box');
+const inputLabel   = document.getElementById('main-input-label');
+const inputHint    = document.getElementById('input-hint');
+const copyBtn      = document.getElementById('copy-btn');
+const uniGroup     = document.getElementById('university-group');
+
+// Mode tabs
+document.querySelectorAll('.mode-tab').forEach(tab => {
+  tab.addEventListener('click', () => {
+    currentMode = tab.dataset.mode;
+    document.querySelectorAll('.mode-tab').forEach(t => {
+      t.classList.toggle('active', t === tab);
+      t.setAttribute('aria-selected', t === tab ? 'true' : 'false');
+    });
+    applyModeConfig();
+    compute();
+  });
+});
+
+function applyModeConfig() {
+  const cfg = MODE_CONFIG[currentMode];
+  inputLabel.textContent = cfg.inputLabel;
+  inputHint.textContent = cfg.hint;
+  mainInput.placeholder = cfg.placeholder;
+  mainInput.max = String(cfg.max);
+  mainInput.value = '';
+  resultLabel.textContent = cfg.resultLabel;
+  resultVal.textContent = '—';
+  resultFormula.classList.remove('visible');
+  resultFormula.textContent = '';
+  gradeBadge.style.display = 'none';
+  resultBox.classList.remove('has-result');
+  uniGroup.style.display = cfg.showUni ? '' : 'none';
+}
+
+function compute() {
+  const raw = parseFloat(mainInput.value);
+  const uniKey = uniSelect.value;
+  const uni = UNIS[uniKey];
+
+  if (isNaN(raw) || raw < 0) {
+    resultVal.textContent = '—';
+    resultFormula.classList.remove('visible');
+    gradeBadge.style.display = 'none';
+    resultBox.classList.remove('has-result');
+    return;
+  }
+
+  let output = '';
+  let formulaStr = '';
+  let percentForGrade = null;
+
+  if (currentMode === 'cgpa2pct') {
+    const pct = Math.min(uni.fn(raw), 100);
+    output = pct.toFixed(2) + '%';
+    formulaStr = `Formula: ${uni.formula(raw)} = ${output} (${uni.label})`;
+    percentForGrade = pct;
+  } else if (currentMode === 'pct2cgpa') {
+    const cgpa = Math.min(uni.inv(raw), 10);
+    output = cgpa.toFixed(2);
+    formulaStr = `Formula: ${raw}% → ${uni.label} CGPA = ${output}`;
+    percentForGrade = raw;
+  } else if (currentMode === 'cgpa2gpa') {
+    const gpa = Math.min((raw / 10) * 4, 4);
+    output = gpa.toFixed(2);
+    formulaStr = `Formula: (${raw} ÷ 10) × 4 = ${output} GPA`;
+    percentForGrade = (raw / 10) * 100;
+  } else if (currentMode === 'gpa2cgpa') {
+    const cgpa = Math.min((raw / 4) * 10, 10);
+    output = cgpa.toFixed(2);
+    formulaStr = `Formula: (${raw} ÷ 4) × 10 = ${output} CGPA`;
+    percentForGrade = (raw / 4) * 100;
+  }
+
+  // Animate result
+  resultVal.classList.remove('updated');
+  void resultVal.offsetWidth;
+  resultVal.classList.add('updated');
+  resultVal.textContent = output;
+
+  resultFormula.textContent = formulaStr;
+  resultFormula.classList.add('visible');
+  resultBox.classList.add('has-result');
+
+  // Grade badge
+  if (percentForGrade !== null && percentForGrade > 0) {
+    const grade = getGrade(percentForGrade);
+    gradeBadge.textContent = grade.label;
+    gradeBadge.style.display = 'inline-flex';
+    gradeBadge.style.color = grade.color;
+    gradeBadge.style.borderColor = grade.color + '44';
+    gradeBadge.style.background = grade.color + '12';
+  }
+}
+
+mainInput.addEventListener('input', compute);
+uniSelect.addEventListener('change', compute);
+
+// Copy button
+copyBtn?.addEventListener('click', () => {
+  const txt = resultVal.textContent;
+  if (txt === '—') return;
+  navigator.clipboard.writeText(txt).catch(() => {
+    const ta = document.createElement('textarea');
+    ta.value = txt; document.body.appendChild(ta);
+    ta.select(); document.execCommand('copy');
+    document.body.removeChild(ta);
+  });
+  copyBtn.classList.add('copied');
+  const span = copyBtn.querySelector('span');
+  if (span) { const orig = span.textContent; span.textContent = 'Copied!'; setTimeout(() => { span.textContent = orig; copyBtn.classList.remove('copied'); }, 1500); }
+});
+
+// ═══════════════════════════════════════════════════════
+// Modals
+// ═══════════════════════════════════════════════════════
+function openModal(id) {
+  const el = document.getElementById(id);
+  if (el) { el.style.display = 'flex'; document.body.style.overflow = 'hidden'; }
+}
+function closeModal(id) {
+  const el = document.getElementById(id);
+  if (el) { el.style.display = 'none'; document.body.style.overflow = ''; }
+}
+
+document.getElementById('btn-marks')?.addEventListener('click', () => openModal('modal-marks'));
+document.getElementById('btn-sgpa')?.addEventListener('click', () => openModal('modal-sgpa'));
+document.getElementById('btn-chart')?.addEventListener('click', () => { openModal('modal-chart'); buildChart(); });
+
+document.querySelectorAll('[data-close-modal]').forEach(btn => {
+  btn.addEventListener('click', () => closeModal(btn.getAttribute('data-close-modal')));
+});
+
+document.querySelectorAll('.modal-overlay').forEach(overlay => {
+  overlay.addEventListener('click', (e) => { if (e.target === overlay) closeModal(overlay.id); });
+});
+
+document.addEventListener('keydown', (e) => {
+  if (e.key === 'Escape') document.querySelectorAll('.modal-overlay').forEach(o => { if (o.style.display !== 'none') closeModal(o.id); });
+});
+
+// ═══════════════════════════════════════════════════════
+// Marks → CGPA
+// ═══════════════════════════════════════════════════════
+const marksContainer = document.getElementById('marks-rows');
+let marksCount = 0;
+
+function addMarksRow(idx) {
+  const div = document.createElement('div');
+  div.className = 'dynamic-row';
+  div.dataset.idx = idx;
+  div.innerHTML = `
+    <div>
+      <div class="row-label">Sub ${idx} Marks</div>
+      <input type="number" placeholder="e.g. 82" min="0" class="marks-obt" oninput="calcMarks()">
+    </div>
+    <div>
+      <div class="row-label">Out of</div>
+      <input type="number" placeholder="e.g. 100" min="1" class="marks-max" oninput="calcMarks()">
+    </div>
+    <button class="remove-row-btn" onclick="removeRow(this, 'marks')" title="Remove" aria-label="Remove subject">×</button>
+  `;
+  marksContainer?.appendChild(div);
+  marksCount++;
+}
+
+// Init 5 rows
+for (let i = 1; i <= 5; i++) addMarksRow(i);
+
+document.getElementById('add-marks-row')?.addEventListener('click', () => {
+  marksCount++;
+  addMarksRow(marksCount);
+  calcMarks();
+});
+
+function calcMarks() {
+  let obt = 0, tot = 0;
+  document.querySelectorAll('#marks-rows .dynamic-row').forEach(row => {
+    const o = parseFloat(row.querySelector('.marks-obt')?.value || '');
+    const t = parseFloat(row.querySelector('.marks-max')?.value || '');
+    if (!isNaN(o) && !isNaN(t) && t > 0) { obt += o; tot += t; }
+  });
+  const el = document.getElementById('marks-result-val');
+  if (el) el.textContent = tot > 0 ? ((obt / tot) * 10).toFixed(2) : '—';
+}
+window.calcMarks = calcMarks;
+
+// ═══════════════════════════════════════════════════════
+// SGPA → CGPA
+// ═══════════════════════════════════════════════════════
+const sgpaContainer = document.getElementById('sgpa-rows');
+let semCount = 0;
+
+function addSgpaRow(idx) {
+  const div = document.createElement('div');
+  div.className = 'dynamic-row';
+  div.innerHTML = `
+    <div>
+      <div class="row-label">Sem ${idx} SGPA</div>
+      <input type="number" placeholder="e.g. 8.50" min="0" max="10" step="0.01" class="sgpa-val" oninput="calcSgpa()">
+    </div>
+    <div>
+      <div class="row-label">Credits</div>
+      <input type="number" placeholder="e.g. 24" min="1" class="sgpa-cred" oninput="calcSgpa()">
+    </div>
+    <button class="remove-row-btn" onclick="removeRow(this, 'sgpa')" title="Remove" aria-label="Remove semester">×</button>
+  `;
+  sgpaContainer?.appendChild(div);
+  semCount++;
+}
+
+for (let i = 1; i <= 4; i++) addSgpaRow(i);
+
+document.getElementById('add-sgpa-row')?.addEventListener('click', () => {
+  semCount++;
+  addSgpaRow(semCount);
+  calcSgpa();
+});
+
+function calcSgpa() {
+  let num = 0, den = 0;
+  document.querySelectorAll('#sgpa-rows .dynamic-row').forEach(row => {
+    const s = parseFloat(row.querySelector('.sgpa-val')?.value || '');
+    const c = parseFloat(row.querySelector('.sgpa-cred')?.value || '');
+    if (!isNaN(s) && !isNaN(c) && c > 0) { num += s * c; den += c; }
+  });
+  const el = document.getElementById('sgpa-result-val');
+  if (el) el.textContent = den > 0 ? (num / den).toFixed(2) : '—';
+}
+window.calcSgpa = calcSgpa;
+
+function removeRow(btn, type) {
+  btn.closest('.dynamic-row')?.remove();
+  if (type === 'marks') calcMarks();
+  if (type === 'sgpa') calcSgpa();
+}
+window.removeRow = removeRow;
+
+// ═══════════════════════════════════════════════════════
+// Conversion Chart
+// ═══════════════════════════════════════════════════════
+const GRADE_LABELS = [
+  [90, 'O (Outstanding)'],
+  [80, 'A+ (Excellent)'],
+  [70, 'A (Very Good)'],
+  [60, 'B+ (Good)'],
+  [50, 'B (Above Average)'],
+  [40, 'C (Average)'],
+  [0,  'F (Fail)'],
+];
+
+function getGradeLabel(pct) {
+  for (const [thresh, label] of GRADE_LABELS) {
+    if (pct >= thresh) return label;
+  }
+  return 'F (Fail)';
+}
+
+function buildChart() {
+  const tbody = document.getElementById('chart-tbody');
+  if (!tbody || tbody.children.length > 0) return;
+  const cgpaValues = [10.0, 9.5, 9.0, 8.5, 8.0, 7.5, 7.0, 6.5, 6.0, 5.5, 5.0, 4.5, 4.0];
+  cgpaValues.forEach(c => {
+    const cbse = Math.min(UNIS.cbse.fn(c), 100).toFixed(1) + '%';
+    const sppu = Math.min(UNIS.sppu.fn(c), 100).toFixed(1) + '%';
+    const vtu  = Math.min(UNIS.vtu.fn(c), 100).toFixed(1) + '%';
+    const grade = getGradeLabel(UNIS.cbse.fn(c));
+    const tr = document.createElement('tr');
+    tr.innerHTML = `<td>${c.toFixed(1)}</td><td>${cbse}</td><td>${sppu}</td><td>${vtu}</td><td>${grade}</td>`;
+    tbody.appendChild(tr);
+  });
+}
+</script>

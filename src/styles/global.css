@@ -1,0 +1,44 @@
+@import "tailwindcss";
+
+/* ─── CSS Variables (Fixed Dark Theme) ─── */
+:root {
+  --bg: #111827;
+  --bg-card: #1F2937;
+  --bg-soft: #1F2937;
+  --text-ink: #F3F4F6;
+  --text-body: #9CA3AF;
+  --text-mute: #9CA3AF;
+  --border: #374151;
+  --primary: #10B981;
+  --primary-dark: #059669;
+}
+
+/* ─── Base ─── */
+*, *::before, *::after {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+}
+
+html {
+  scroll-behavior: smooth;
+  -webkit-font-smoothing: antialiased;
+}
+
+body {
+  font-family: 'Inter', system-ui, -apple-system, sans-serif;
+  background: var(--bg);
+  color: var(--text-ink);
+  min-height: 100dvh;
+  line-height: 1.5;
+  transition: background 0.2s, color 0.2s;
+}
+
+::selection {
+  background: #0f172a;
+  color: #f2f2f2;
+}
+
+::-webkit-scrollbar { width: 6px; }
+::-webkit-scrollbar-track { background: transparent; }
+::-webkit-scrollbar-thumb { background: var(--border); border-radius: 3px; }

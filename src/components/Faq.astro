@@ -1,0 +1,257 @@
+---
+// Faq.astro — FAQ accordion with Schema.org FAQPage markup
+const faqGroups = [
+  {
+    label: 'How to Convert',
+    items: [
+      { q: 'How to convert CGPA to percentage?', a: 'Multiply your CGPA by 9.5 using the standard CBSE formula: <strong>Percentage = CGPA × 9.5</strong>. For example, 8.0 CGPA × 9.5 = 76%. If your university uses a different formula (SPPU uses CGPA × 10 − 7.5, VTU uses CGPA × 10), apply the institution-specific multiplier instead. Use our calculator above and select your university for the exact result.' },
+      { q: 'How to calculate percentage from CGPA step by step?', a: 'Step 1: Find your CGPA on your grade card. Step 2: Identify your university\'s formula — CBSE: ×9.5 | SPPU: ×10−7.5 | VTU: ×10. Step 3: Apply the formula. Step 4: The result is your approximate equivalent percentage. For official use, obtain a percentage equivalence certificate from your university registrar.' },
+      { q: 'How to calculate CGPA from percentage?', a: 'Reverse the standard formula: <strong>CGPA = Percentage ÷ 9.5</strong>. So 76% ÷ 9.5 = 8.0 CGPA. For SPPU: CGPA = (Percentage + 7.5) ÷ 10. For VTU: CGPA = Percentage ÷ 10. Use the "% → CGPA" tab in the calculator above.' },
+      { q: 'How to convert percentage to CGPA?', a: 'Divide your percentage by 9.5 to get your CGPA on a 10-point scale (CBSE standard). Example: 85% ÷ 9.5 = 8.95 CGPA. For a 4-point GPA scale, divide your percentage by 25: 85% ÷ 25 = 3.4 GPA. The calculator on this page handles all conversions automatically.' },
+      { q: 'How to convert CGPA to percentage out of 4?', a: 'If your CGPA is on a 4.0 scale (US system), convert to percentage using: <strong>Percentage = (CGPA ÷ 4) × 100</strong>. So 3.5 out of 4.0 = 87.5%. To go the other direction (percentage → GPA out of 4), use: GPA = (Percentage ÷ 100) × 4.' },
+    ],
+  },
+  {
+    label: 'University-Specific',
+    items: [
+      { q: 'What is the SPPU CGPA to percentage formula?', a: 'SPPU (Savitribai Phule Pune University) uses the formula: <strong>Percentage = (CGPA × 10) − 7.5</strong>. For example, 8.5 CGPA → (8.5 × 10) − 7.5 = 77.5%. This applies to B.E./B.Tech and M.E./M.Tech programmes under SPPU on a 10-point grading scale.' },
+      { q: 'What is the VTU CGPA to percentage formula?', a: 'VTU (Visvesvaraya Technological University) uses a direct multiplication: <strong>Percentage = CGPA × 10</strong>. So 8.0 CGPA = 80.0%. This makes VTU conversions straightforward compared to CBSE or SPPU formulas.' },
+      { q: 'What formula does Mumbai University use?', a: 'Mumbai University uses a linear regression formula: <strong>Percentage = (7.1 × CGPA) + 11</strong>. For 8.0 CGPA: (7.1 × 8) + 11 = 67.8%. This is the most unique formula among major Indian universities.' },
+      { q: 'Does 8 CGPA mean 80 percentage?', a: 'Not always. Under VTU and KTU (which use CGPA × 10), 8 CGPA does equal exactly 80%. However, under the standard CBSE formula it equals <strong>76%</strong> (8 × 9.5), and under SPPU it equals <strong>72.5%</strong> (8 × 10 − 7.5). The "8 CGPA = 80%" assumption only holds for universities using a direct ×10 multiplier.' },
+    ],
+  },
+  {
+    label: 'Specific CGPA Values',
+    items: [
+      { q: 'What is 7.6 CGPA in percentage?', a: '7.6 CGPA equals <strong>72.2%</strong> using the CBSE formula (×9.5), <strong>68.5%</strong> under SPPU (×10−7.5), and <strong>76%</strong> under VTU (×10). The result varies by university, so always apply your institution\'s prescribed formula.' },
+      { q: 'What is 60% in CGPA?', a: '60% corresponds to <strong>6.32 CGPA</strong> using CBSE (60÷9.5), <strong>6.75 CGPA</strong> under SPPU ((60+7.5)÷10), and <strong>6.0 CGPA</strong> under VTU (60÷10). At most Indian universities, 60% or 6.0 CGPA marks the First Class threshold.' },
+      { q: 'Is 95% equal to 10 CGPA?', a: 'Under the CBSE formula, 10 CGPA × 9.5 = <strong>95%</strong>, so yes — 95% is the equivalent of a perfect 10.0 CGPA on the CBSE scale. However under VTU, 10 CGPA = 100%, and under SPPU, 10 CGPA = 92.5%. The 95% figure is specific to the CBSE/generic system.' },
+      { q: 'What is an 8.2 CGPA in percentage?', a: '8.2 CGPA is a strong academic performance, equivalent to <strong>77.9%</strong> (CBSE), <strong>74.5%</strong> (SPPU), or <strong>82%</strong> (VTU). It falls in the Excellent/Distinction range, typically qualifying as First Class with Distinction at most universities.' },
+      { q: 'What is 75% in CGPA out of 4?', a: '75% on a 4.0 GPA scale = (75 ÷ 100) × 4 = <strong>3.0 GPA</strong>. On an Indian 10-point scale, 75% ÷ 9.5 = <strong>7.89 CGPA</strong> (CBSE), or (75+7.5) ÷ 10 = <strong>8.25 CGPA</strong> (SPPU). A 3.0 GPA is generally the minimum for graduate admissions at many US universities.' },
+    ],
+  },
+  {
+    label: 'Is My CGPA Good?',
+    items: [
+      { q: 'Is a 7.2 CGPA good?', a: 'Yes, 7.2 CGPA is generally considered good. It translates to about 68.4% (CBSE) or 64.5% (SPPU) — solidly in First Class territory. Most IT companies (TCS, Infosys, Wipro) require a minimum of 6.0–6.5 CGPA, so 7.2 clears those bars comfortably. For product-based or core engineering roles, a 7.5+ is often preferred.' },
+      { q: 'Is 8 CGPA good or bad?', a: '8.0 CGPA is very good. It corresponds to 76% (CBSE) or 72.5% (SPPU), placing you in the First Class with Distinction bracket at most universities. It is above the cut-off for the vast majority of campus placements in India and is a competitive score for graduate admissions abroad (roughly 3.2 on a 4.0 GPA scale).' },
+      { q: 'Is 7.5 CGPA low?', a: 'No, 7.5 CGPA is not low — it is above average and clears the eligibility bar for most campus placements. It equals about 71.25% (CBSE) or 67.5% (SPPU). Many students consider 7.5 the "safe" minimum for placement eligibility at reputed companies.' },
+      { q: 'Is a 3.5 CGPA good (out of 4)?', a: 'Yes, 3.5 out of 4.0 is excellent. It is equivalent to roughly 87.5% and maps to approximately 8.75 on a 10-point Indian scale. In the US system, 3.5 GPA typically earns you Latin honours (magna cum laude) and makes you a competitive candidate for top graduate programmes.' },
+      { q: 'What is considered a low CGPA?', a: 'In the Indian context, a CGPA below 6.0 (roughly below 57%) is generally considered low and may limit your options for campus placements and government job applications. Between 6.0 and 6.5 is borderline — sufficient for basic eligibility but not competitive. A CGPA below 5.0 raises concerns about eligibility for further studies.' },
+    ],
+  },
+  {
+    label: 'Study Abroad & International',
+    items: [
+      { q: 'Do international universities accept CGPA, or do I have to convert it?', a: 'Most international universities will look at the official CGPA or GPA on your transcript, but their initial application portals and visa forms often ask for an equivalent percentage to standardize your score. Converting your CGPA helps admissions officers quickly understand your academic standing.' },
+      { q: 'What is a WES evaluation, and how does it affect my CGPA conversion?', a: 'World Education Services (WES) is a non-profit organization that evaluates international credentials for the US and Canada. WES does not use a simple percentage multiplier. Instead, they look at your individual subject credits and grades to convert your scale into a standard US 4.0 GPA. Our calculator gives you an instant estimate, but official applications may require a formal WES report.' },
+      { q: 'What is considered a "good" percentage or CGPA for studying abroad?', a: 'Generally, top-tier global universities look for an aggregate percentage of 70% or above (roughly a 7.5+ CGPA on a 10-point scale, or a 3.0+ GPA on a 4.0 scale). Competitive programmes — especially Ivy League or Russell Group — frequently demand 80–85% for direct admission.' },
+      { q: 'How do I convert my Indian 10-point CGPA to the US 4.0 GPA scale?', a: 'A strict mathematical conversion (dividing by 10 and multiplying by 4) is inaccurate because a 3.0 GPA in the US signifies a "B" average, which traditionally equates to roughly 80-85% in India, not 75%. While our calculator provides a standard linear translation for quick reference, US admission committees evaluate your specific university\'s rigor during the review process.' },
+    ],
+  },
+  {
+    label: 'Jobs & Career',
+    items: [
+      { q: 'Can I get a job with 7 CGPA?', a: 'Yes, absolutely. A 7.0 CGPA clears the eligibility bar for most major IT companies including TCS, Infosys, Wipro, Cognizant, and Capgemini. Many service-based and mid-tier product companies set their cut-off at 6.0–6.5 CGPA. For top-tier product companies (Google, Microsoft, Amazon), CGPA is less critical than problem-solving skills.' },
+      { q: 'Is a 6.0 CGPA first class?', a: 'Yes, at most Indian universities a 6.0 CGPA qualifies as First Class. Under VTU (×10), 6.0 CGPA = 60%, which is the typical First Class boundary. Under SPPU (×10−7.5), 6.0 CGPA = 52.5%, which falls in the Second Class range — so it depends on your university. Always verify the class definitions in your university\'s ordinance.' },
+      { q: 'Is 4 CGPA pass or fail on a 10-point scale?', a: 'On a 10-point Indian scale, 4.0 CGPA equals about 38% (CBSE) or 32.5% (SPPU) — which is typically a <strong>fail</strong>, as most universities require a minimum of 40–45% to pass. On a 4.0 GPA scale however, 4.0 is a perfect score. Context — which scale your 4 is on — is critical.' },
+    ],
+  },
+];
+---
+
+<section class="faq-section" id="faq" itemscope itemtype="https://schema.org/FAQPage">
+  <div class="faq-inner">
+    <div class="faq-header">
+      <div class="section-eyebrow">FAQ</div>
+      <h2 class="section-title">Frequently asked questions.</h2>
+      <p class="section-sub">Everything students ask about CGPA, percentage, GPA conversion and grading across Indian universities.</p>
+    </div>
+
+    <div class="faq-content">
+      {faqGroups.map((group) => (
+        <div class="faq-group">
+          <div class="faq-group-label">{group.label}</div>
+          {group.items.map((item) => (
+            <div class="faq-item" itemscope itemprop="mainEntity" itemtype="https://schema.org/Question">
+              <button class="faq-q" itemprop="name">
+                <span>{item.q}</span>
+                <span class="faq-icon" aria-hidden="true">
+                  <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round">
+                    <polyline points="6 9 12 15 18 9"/>
+                  </svg>
+                </span>
+              </button>
+              <div class="faq-a" itemscope itemprop="acceptedAnswer" itemtype="https://schema.org/Answer">
+                <div itemprop="text" set:html={item.a} />
+              </div>
+            </div>
+          ))}
+        </div>
+      ))}
+    </div>
+  </div>
+</section>
+
+<style>
+  .faq-section {
+    padding: 80px 24px;
+    background: var(--bg);
+    border-top: 1px solid var(--border);
+  }
+
+  .faq-inner {
+    max-width: 760px;
+    margin: 0 auto;
+    display: flex;
+    flex-direction: column;
+    gap: 48px;
+  }
+
+  .faq-header {
+    text-align: center;
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+  }
+
+  .section-eyebrow {
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 11px;
+    color: var(--text-mute);
+    letter-spacing: 0.04em;
+    text-transform: uppercase;
+  }
+
+  .section-title {
+    font-size: clamp(24px, 3vw, 32px);
+    font-weight: 600;
+    letter-spacing: -0.03em;
+    color: var(--text-ink);
+    margin: 0;
+  }
+
+  .section-sub {
+    font-size: 15px;
+    color: var(--text-body);
+    max-width: 500px;
+    margin: 0 auto;
+    line-height: 1.6;
+  }
+
+  .faq-content {
+    display: flex;
+    flex-direction: column;
+    gap: 32px;
+  }
+
+  .faq-group {
+    display: flex;
+    flex-direction: column;
+    gap: 0;
+  }
+
+  .faq-group-label {
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 10px;
+    font-weight: 400;
+    color: var(--text-mute);
+    text-transform: uppercase;
+    letter-spacing: 0.08em;
+    padding: 0 0 12px;
+    border-bottom: 1px solid var(--border);
+    margin-bottom: 0;
+  }
+
+  .faq-item {
+    border-bottom: 1px solid var(--border);
+  }
+
+  .faq-q {
+    width: 100%;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    gap: 16px;
+    padding: 18px 0;
+    background: none;
+    border: none;
+    text-align: left;
+    font-family: inherit;
+    font-size: 14px;
+    font-weight: 500;
+    color: var(--text-ink);
+    cursor: pointer;
+    transition: color 0.15s;
+    letter-spacing: -0.01em;
+    line-height: 1.45;
+  }
+
+  .faq-q:hover {
+    color: var(--text-body);
+  }
+
+  .faq-icon {
+    flex-shrink: 0;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 24px;
+    height: 24px;
+    border: 1px solid var(--border);
+    border-radius: 9999px;
+    color: var(--text-mute);
+    transition: all 0.2s;
+  }
+
+  .faq-icon svg {
+    transition: transform 0.2s;
+  }
+
+  .faq-item.open .faq-icon {
+    background: var(--text-ink);
+    border-color: var(--text-ink);
+    color: var(--bg-card);
+  }
+
+  .faq-item.open .faq-icon svg {
+    transform: rotate(180deg);
+  }
+
+  .faq-a {
+    display: none;
+    padding: 0 0 18px;
+    font-size: 13px;
+    line-height: 1.7;
+    color: var(--text-body);
+    max-width: 680px;
+  }
+
+  .faq-a strong {
+    color: var(--text-ink);
+    font-weight: 600;
+  }
+
+  .faq-item.open .faq-a {
+    display: block;
+    animation: fadeInUp 0.2s ease;
+  }
+
+  @keyframes fadeInUp {
+    from { opacity: 0; transform: translateY(-6px); }
+    to { opacity: 1; transform: translateY(0); }
+  }
+</style>
+
+<script>
+  document.querySelectorAll('.faq-q').forEach(btn => {
+    btn.addEventListener('click', () => {
+      const item = btn.closest('.faq-item');
+      const isOpen = item?.classList.contains('open');
+      // Close all
+      document.querySelectorAll('.faq-item.open').forEach(i => i.classList.remove('open'));
+      // Open clicked (if was closed)
+      if (!isOpen) item?.classList.add('open');
+    });
+  });
+</script>

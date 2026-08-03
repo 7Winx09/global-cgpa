@@ -1,0 +1,251 @@
+---
+// Nav.astro — Sticky navigation bar, Vercel-inspired
+---
+
+<header id="site-nav">
+  <div class="nav-inner">
+    <!-- Logo -->
+    <a href="/" class="nav-logo" aria-label="GlobalCGPA Home">
+      <svg width="26" height="26" viewBox="0 0 64 64" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
+        <rect width="64" height="64" rx="12" fill="#171717"/>
+        <text x="32" y="46" text-anchor="middle" font-family="system-ui,sans-serif" font-size="44" font-weight="700" fill="#ffffff">%</text>
+      </svg>
+      <span class="nav-brand">GlobalCGPA</span>
+    </a>
+
+    <!-- Desktop nav links -->
+    <nav class="nav-links" aria-label="Main navigation">
+      <a href="/#calculator" class="nav-link">Calculator</a>
+      <a href="/#universities" class="nav-link">Universities</a>
+      <a href="/#faq" class="nav-link">FAQ</a>
+      <a href="/about" class="nav-link">About</a>
+    </nav>
+
+    <!-- Right cluster -->
+    <div class="nav-right">
+      <button id="theme-toggle" class="nav-icon-btn" aria-label="Toggle dark mode" title="Toggle dark mode">
+        <svg class="icon-sun" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+          <circle cx="12" cy="12" r="5"/>
+          <line x1="12" y1="1" x2="12" y2="3"/><line x1="12" y1="21" x2="12" y2="23"/>
+          <line x1="4.22" y1="4.22" x2="5.64" y2="5.64"/><line x1="18.36" y1="18.36" x2="19.78" y2="19.78"/>
+          <line x1="1" y1="12" x2="3" y2="12"/><line x1="21" y1="12" x2="23" y2="12"/>
+          <line x1="4.22" y1="19.78" x2="5.64" y2="18.36"/><line x1="18.36" y1="5.64" x2="19.78" y2="4.22"/>
+        </svg>
+        <svg class="icon-moon" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+          <path d="M21 12.79A9 9 0 1 1 11.21 3 7 7 0 0 0 21 12.79z"/>
+        </svg>
+      </button>
+      <!-- Mobile hamburger -->
+      <button id="nav-hamburger" class="nav-icon-btn nav-hamburger" aria-label="Open menu" aria-expanded="false">
+        <svg class="ham-open" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round">
+          <line x1="3" y1="6" x2="21" y2="6"/><line x1="3" y1="12" x2="21" y2="12"/><line x1="3" y1="18" x2="21" y2="18"/>
+        </svg>
+        <svg class="ham-close" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round">
+          <line x1="18" y1="6" x2="6" y2="18"/><line x1="6" y1="6" x2="18" y2="18"/>
+        </svg>
+      </button>
+    </div>
+  </div>
+
+  <!-- Mobile menu overlay -->
+  <div id="mobile-menu" class="mobile-menu" aria-hidden="true">
+    <nav class="mobile-nav-links" aria-label="Mobile navigation">
+      <a href="/#calculator" class="mobile-nav-link">Calculator</a>
+      <a href="/#universities" class="mobile-nav-link">Universities</a>
+      <a href="/#faq" class="mobile-nav-link">FAQ</a>
+      <a href="/about" class="mobile-nav-link">About</a>
+      <a href="/contact" class="mobile-nav-link">Contact</a>
+    </nav>
+  </div>
+</header>
+
+<style>
+  #site-nav {
+    position: sticky;
+    top: 0;
+    z-index: 100;
+    background: var(--bg-card);
+    border-bottom: 1px solid var(--border);
+    backdrop-filter: blur(12px);
+    -webkit-backdrop-filter: blur(12px);
+    height: 64px;
+    transition: background 0.2s, border-color 0.2s;
+  }
+
+  .nav-inner {
+    max-width: 1200px;
+    margin: 0 auto;
+    padding: 0 24px;
+    height: 64px;
+    display: flex;
+    align-items: center;
+    gap: 24px;
+  }
+
+  .nav-logo {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    text-decoration: none;
+    flex-shrink: 0;
+  }
+
+  .nav-brand {
+    font-size: 15px;
+    font-weight: 600;
+    color: var(--text-ink);
+    letter-spacing: -0.02em;
+  }
+
+  .nav-links {
+    display: flex;
+    align-items: center;
+    gap: 4px;
+    flex: 1;
+  }
+
+  .nav-link {
+    font-size: 14px;
+    font-weight: 400;
+    color: var(--text-body);
+    text-decoration: none;
+    padding: 6px 10px;
+    border-radius: 9999px;
+    transition: color 0.15s, background 0.15s;
+    letter-spacing: -0.01em;
+  }
+
+  .nav-link:hover {
+    color: var(--text-ink);
+    background: var(--bg-soft);
+  }
+
+  .nav-right {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    margin-left: auto;
+  }
+
+  .nav-icon-btn {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 32px;
+    height: 32px;
+    background: none;
+    border: 1px solid var(--border);
+    border-radius: 9999px;
+    color: var(--text-body);
+    cursor: pointer;
+    transition: color 0.15s, border-color 0.15s, background 0.15s;
+  }
+
+  .nav-icon-btn:hover {
+    color: var(--text-ink);
+    border-color: var(--border-strong);
+    background: var(--bg-soft);
+  }
+
+  /* Theme icon logic */
+  .icon-moon { display: none; }
+  [data-theme="dark"] .icon-sun { display: none; }
+  [data-theme="dark"] .icon-moon { display: block; }
+
+  /* Hamburger icon logic */
+  .ham-close { display: none; }
+  #site-nav.menu-open .ham-open { display: none; }
+  #site-nav.menu-open .ham-close { display: block; }
+
+  .nav-hamburger { display: none; }
+
+  /* Mobile menu */
+  .mobile-menu {
+    display: none;
+    position: fixed;
+    top: 64px;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background: var(--bg-card);
+    z-index: 99;
+    padding: 24px;
+    border-top: 1px solid var(--border);
+    animation: slideDown 0.2s ease;
+  }
+
+  @keyframes slideDown {
+    from { opacity: 0; transform: translateY(-8px); }
+    to   { opacity: 1; transform: translateY(0); }
+  }
+
+  .mobile-menu.open {
+    display: block;
+  }
+
+  .mobile-nav-links {
+    display: flex;
+    flex-direction: column;
+    gap: 4px;
+  }
+
+  .mobile-nav-link {
+    font-size: 16px;
+    font-weight: 500;
+    color: var(--text-body);
+    text-decoration: none;
+    padding: 14px 12px;
+    border-radius: 8px;
+    transition: color 0.15s, background 0.15s;
+    border-bottom: 1px solid var(--border);
+  }
+
+  .mobile-nav-link:hover {
+    color: var(--text-ink);
+    background: var(--bg-soft);
+  }
+
+  @media (max-width: 768px) {
+    .nav-links { display: none; }
+    .nav-hamburger { display: flex; }
+  }
+</style>
+
+<script>
+  // Dark mode toggle
+  const themeBtn = document.getElementById('theme-toggle');
+  themeBtn?.addEventListener('click', () => {
+    const isDark = document.documentElement.classList.contains('dark');
+    const next = isDark ? 'light' : 'dark';
+    if (next === 'dark') {
+      document.documentElement.classList.add('dark');
+      document.documentElement.setAttribute('data-theme', 'dark');
+    } else {
+      document.documentElement.classList.remove('dark');
+      document.documentElement.setAttribute('data-theme', 'light');
+    }
+    localStorage.setItem('gcgpa-theme', next);
+  });
+
+  // Mobile menu
+  const hamburger = document.getElementById('nav-hamburger');
+  const mobileMenu = document.getElementById('mobile-menu');
+  const nav = document.getElementById('site-nav');
+
+  hamburger?.addEventListener('click', () => {
+    const isOpen = mobileMenu?.classList.contains('open');
+    mobileMenu?.classList.toggle('open', !isOpen);
+    nav?.classList.toggle('menu-open', !isOpen);
+    hamburger.setAttribute('aria-expanded', String(!isOpen));
+    mobileMenu?.setAttribute('aria-hidden', String(isOpen));
+  });
+
+  // Close mobile menu on link click
+  mobileMenu?.querySelectorAll('a').forEach(link => {
+    link.addEventListener('click', () => {
+      mobileMenu.classList.remove('open');
+      nav?.classList.remove('menu-open');
+      hamburger?.setAttribute('aria-expanded', 'false');
+    });
+  });
+</script>

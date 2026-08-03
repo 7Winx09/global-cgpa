@@ -1,0 +1,199 @@
+---
+// Footer.astro
+---
+
+<footer class="site-footer">
+  <div class="footer-inner">
+    <!-- Brand column -->
+    <div class="footer-brand">
+      <a href="/" class="footer-logo" aria-label="GlobalCGPA Home">
+        <svg width="24" height="24" viewBox="0 0 64 64" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
+          <rect width="64" height="64" rx="12" fill="#171717"/>
+          <text x="32" y="46" text-anchor="middle" font-family="system-ui,sans-serif" font-size="44" font-weight="700" fill="#ffffff">%</text>
+        </svg>
+        <span>GlobalCGPA</span>
+      </a>
+      <p class="footer-tagline">Free CGPA to percentage calculator for Indian university students. Supports SPPU, VTU, Mumbai University, Anna University, AKTU and more.</p>
+      <p class="footer-domain">globalcgpa.in</p>
+    </div>
+
+    <!-- Calculators -->
+    <div class="footer-col">
+      <div class="footer-col-title">Calculators</div>
+      <ul class="footer-links">
+        <li><a href="/#calculator">CGPA to Percentage</a></li>
+        <li><a href="/#calculator">Percentage to CGPA</a></li>
+        <li><a href="/#calculator">CGPA to GPA (4.0)</a></li>
+        <li><a href="/#calculator">SGPA to CGPA</a></li>
+        <li><a href="/#calculator">Marks to CGPA</a></li>
+      </ul>
+    </div>
+
+    <!-- Universities -->
+    <div class="footer-col">
+      <div class="footer-col-title">Universities</div>
+      <ul class="footer-links">
+        <li><a href="/#universities">SPPU Calculator</a></li>
+        <li><a href="/#universities">VTU Calculator</a></li>
+        <li><a href="/#universities">Mumbai University</a></li>
+        <li><a href="/#universities">Anna University</a></li>
+        <li><a href="/#universities">AKTU / UPTU</a></li>
+      </ul>
+    </div>
+
+    <!-- Company -->
+    <div class="footer-col">
+      <div class="footer-col-title">Company</div>
+      <ul class="footer-links">
+        <li><a href="/about">About Us</a></li>
+        <li><a href="/contact">Contact Us</a></li>
+        <li><a href="/privacy-policy">Privacy Policy</a></li>
+        <li><a href="/terms">Terms &amp; Conditions</a></li>
+      </ul>
+    </div>
+  </div>
+
+  <!-- Bottom bar -->
+  <div class="footer-bottom">
+    <span class="footer-copy">© {new Date().getFullYear()} GlobalCGPA. All rights reserved. Results are approximate — verify with your university.</span>
+    <div class="footer-bottom-links">
+      <a href="/privacy-policy">Privacy</a>
+      <a href="/terms">Terms</a>
+      <a href="/contact">Contact</a>
+    </div>
+  </div>
+</footer>
+
+<style>
+  .site-footer {
+    background: var(--bg-card);
+    border-top: 1px solid var(--border);
+    padding: 64px 24px 0;
+  }
+
+  .footer-inner {
+    max-width: 1100px;
+    margin: 0 auto;
+    display: grid;
+    grid-template-columns: 2fr 1fr 1fr 1fr;
+    gap: 40px;
+    padding-bottom: 48px;
+    border-bottom: 1px solid var(--border);
+  }
+
+  .footer-brand {
+    display: flex;
+    flex-direction: column;
+    gap: 12px;
+  }
+
+  .footer-logo {
+    display: inline-flex;
+    align-items: center;
+    gap: 8px;
+    text-decoration: none;
+    color: var(--text-ink);
+    font-size: 15px;
+    font-weight: 600;
+    letter-spacing: -0.02em;
+  }
+
+  .footer-tagline {
+    font-size: 13px;
+    color: var(--text-mute);
+    line-height: 1.65;
+    max-width: 280px;
+    margin: 0;
+  }
+
+  .footer-domain {
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 11px;
+    color: var(--text-mute);
+    margin: 0;
+  }
+
+  .footer-col-title {
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 10px;
+    font-weight: 400;
+    text-transform: uppercase;
+    letter-spacing: 0.08em;
+    color: var(--text-mute);
+    margin-bottom: 16px;
+  }
+
+  .footer-links {
+    list-style: none;
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+  }
+
+  .footer-links a {
+    font-size: 13px;
+    color: var(--text-body);
+    text-decoration: none;
+    transition: color 0.15s;
+    letter-spacing: -0.01em;
+  }
+
+  .footer-links a:hover {
+    color: var(--text-ink);
+  }
+
+  .footer-bottom {
+    max-width: 1100px;
+    margin: 0 auto;
+    padding: 20px 0 24px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    flex-wrap: wrap;
+    gap: 12px;
+  }
+
+  .footer-copy {
+    font-size: 12px;
+    color: var(--text-mute);
+  }
+
+  .footer-bottom-links {
+    display: flex;
+    gap: 20px;
+  }
+
+  .footer-bottom-links a {
+    font-size: 12px;
+    color: var(--text-mute);
+    text-decoration: none;
+    transition: color 0.15s;
+  }
+
+  .footer-bottom-links a:hover {
+    color: var(--text-ink);
+  }
+
+  @media (max-width: 900px) {
+    .footer-inner {
+      grid-template-columns: 1fr 1fr;
+    }
+    .footer-brand {
+      grid-column: 1 / -1;
+    }
+  }
+
+  @media (max-width: 560px) {
+    .footer-inner {
+      grid-template-columns: 1fr;
+      gap: 32px;
+    }
+    .footer-brand {
+      grid-column: unset;
+    }
+    .footer-bottom {
+      flex-direction: column;
+      align-items: flex-start;
+    }
+  }
+</style>
