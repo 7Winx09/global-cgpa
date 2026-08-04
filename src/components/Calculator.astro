@@ -4,30 +4,57 @@
 
 <section class="calc-section" id="calculator">
   <div class="calc-wrapper">
-
     <!-- Section header -->
     <div class="calc-header">
       <div class="section-eyebrow">CGPA Calculator</div>
       <h2 class="section-title">Convert any grade, instantly.</h2>
-      <p class="section-sub">Select your conversion type and university, enter your score — get results with the formula shown.</p>
+      <p class="section-sub">
+        Select your conversion type and university, enter your score — get
+        results with the formula shown.
+      </p>
     </div>
 
     <!-- Main calculator card -->
     <div class="calc-card" role="main" aria-label="CGPA Calculator">
-
       <!-- Mode tabs -->
       <div class="mode-tabs" role="tablist" aria-label="Conversion mode">
-        <button class="mode-tab active" role="tab" aria-selected="true" data-mode="cgpa2pct" id="tab-cgpa2pct">CGPA → %</button>
-        <button class="mode-tab" role="tab" aria-selected="false" data-mode="pct2cgpa" id="tab-pct2cgpa">% → CGPA</button>
-        <button class="mode-tab" role="tab" aria-selected="false" data-mode="cgpa2gpa" id="tab-cgpa2gpa">CGPA → GPA</button>
-        <button class="mode-tab" role="tab" aria-selected="false" data-mode="gpa2cgpa" id="tab-gpa2cgpa">GPA → CGPA</button>
+        <button
+          class="mode-tab active"
+          role="tab"
+          aria-selected="true"
+          data-mode="cgpa2pct"
+          id="tab-cgpa2pct">CGPA → %</button
+        >
+        <button
+          class="mode-tab"
+          role="tab"
+          aria-selected="false"
+          data-mode="pct2cgpa"
+          id="tab-pct2cgpa">% → CGPA</button
+        >
+        <button
+          class="mode-tab"
+          role="tab"
+          aria-selected="false"
+          data-mode="cgpa2gpa"
+          id="tab-cgpa2gpa">CGPA → GPA</button
+        >
+        <button
+          class="mode-tab"
+          role="tab"
+          aria-selected="false"
+          data-mode="gpa2cgpa"
+          id="tab-gpa2cgpa">GPA → CGPA</button
+        >
       </div>
 
       <!-- Input area -->
       <div class="calc-inputs">
         <div class="input-row">
           <div class="input-group" id="main-input-group">
-            <label class="input-label" for="main-input" id="main-input-label">Enter CGPA</label>
+            <label class="input-label" for="main-input" id="main-input-label"
+              >Enter CGPA</label
+            >
             <input
               type="number"
               id="main-input"
@@ -42,7 +69,9 @@
           </div>
 
           <div class="input-group" id="university-group">
-            <label class="input-label" for="university-select">University / Scale</label>
+            <label class="input-label" for="university-select"
+              >University / Scale</label
+            >
             <select id="university-select" class="calc-select">
               <option value="cbse">CBSE / Generic (×9.5)</option>
               <option value="sppu">SPPU – Pune Univ. (×10 − 7.5)</option>
@@ -59,18 +88,39 @@
         </div>
 
         <!-- Result display -->
-        <div class="result-box" id="result-box" aria-live="polite" aria-atomic="true">
+        <div
+          class="result-box"
+          id="result-box"
+          aria-live="polite"
+          aria-atomic="true"
+        >
           <div class="result-top">
             <div>
               <div class="result-value" id="result-value">—</div>
               <div class="result-label" id="result-label">Percentage</div>
             </div>
             <div class="result-actions">
-              <span class="grade-badge" id="grade-badge" style="display:none"></span>
-              <button class="copy-btn" id="copy-btn" title="Copy result" aria-label="Copy result">
-                <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round">
-                  <rect x="9" y="9" width="13" height="13" rx="2"/>
-                  <path d="M5 15H4a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h9a2 2 0 0 1 2 2v1"/>
+              <span class="grade-badge" id="grade-badge" style="display:none"
+              ></span>
+              <button
+                class="copy-btn"
+                id="copy-btn"
+                title="Copy result"
+                aria-label="Copy result"
+              >
+                <svg
+                  width="14"
+                  height="14"
+                  viewBox="0 0 24 24"
+                  fill="none"
+                  stroke="currentColor"
+                  stroke-width="2"
+                  stroke-linecap="round"
+                >
+                  <rect x="9" y="9" width="13" height="13" rx="2"></rect>
+                  <path
+                    d="M5 15H4a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h9a2 2 0 0 1 2 2v1"
+                  ></path>
                 </svg>
                 <span>Copy</span>
               </button>
@@ -88,10 +138,21 @@
         <div class="sub-calc-icon">📋</div>
         <div class="sub-calc-text">
           <div class="sub-calc-title">Marks → CGPA</div>
-          <div class="sub-calc-desc">Enter subject marks &amp; max marks to get your semester CGPA</div>
+          <div class="sub-calc-desc">
+            Enter subject marks &amp; max marks to get your semester CGPA
+          </div>
         </div>
-        <svg class="sub-calc-arrow" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round">
-          <path d="M5 12h14M12 5l7 7-7 7"/>
+        <svg
+          class="sub-calc-arrow"
+          width="14"
+          height="14"
+          viewBox="0 0 24 24"
+          fill="none"
+          stroke="currentColor"
+          stroke-width="2"
+          stroke-linecap="round"
+        >
+          <path d="M5 12h14M12 5l7 7-7 7"></path>
         </svg>
       </button>
 
@@ -99,10 +160,21 @@
         <div class="sub-calc-icon">📈</div>
         <div class="sub-calc-text">
           <div class="sub-calc-title">SGPA → CGPA</div>
-          <div class="sub-calc-desc">All 8 semesters · Weighted average across your full degree</div>
+          <div class="sub-calc-desc">
+            All 8 semesters · Weighted average across your full degree
+          </div>
         </div>
-        <svg class="sub-calc-arrow" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round">
-          <path d="M5 12h14M12 5l7 7-7 7"/>
+        <svg
+          class="sub-calc-arrow"
+          width="14"
+          height="14"
+          viewBox="0 0 24 24"
+          fill="none"
+          stroke="currentColor"
+          stroke-width="2"
+          stroke-linecap="round"
+        >
+          <path d="M5 12h14M12 5l7 7-7 7"></path>
         </svg>
       </button>
 
@@ -110,10 +182,21 @@
         <div class="sub-calc-icon">📊</div>
         <div class="sub-calc-text">
           <div class="sub-calc-title">Conversion Chart</div>
-          <div class="sub-calc-desc">Full CGPA → % reference table for all major universities</div>
+          <div class="sub-calc-desc">
+            Full CGPA → % reference table for all major universities
+          </div>
         </div>
-        <svg class="sub-calc-arrow" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round">
-          <path d="M5 12h14M12 5l7 7-7 7"/>
+        <svg
+          class="sub-calc-arrow"
+          width="14"
+          height="14"
+          viewBox="0 0 24 24"
+          fill="none"
+          stroke="currentColor"
+          stroke-width="2"
+          stroke-linecap="round"
+        >
+          <path d="M5 12h14M12 5l7 7-7 7"></path>
         </svg>
       </button>
     </div>
@@ -121,15 +204,42 @@
 </section>
 
 <!-- ── Modal: Marks to CGPA ──────────────────────────── -->
-<div class="modal-overlay" id="modal-marks" role="dialog" aria-modal="true" aria-labelledby="modal-marks-title" style="display:none">
+<div
+  class="modal-overlay"
+  id="modal-marks"
+  role="dialog"
+  aria-modal="true"
+  aria-labelledby="modal-marks-title"
+  style="display:none"
+>
   <div class="modal-card">
     <div class="modal-header">
       <h3 id="modal-marks-title">Marks → CGPA / SGPA</h3>
-      <button class="modal-close" data-close-modal="modal-marks" aria-label="Close">
-        <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round"><line x1="18" y1="6" x2="6" y2="18"/><line x1="6" y1="6" x2="18" y2="18"/></svg>
+      <button
+        class="modal-close"
+        data-close-modal="modal-marks"
+        aria-label="Close"
+      >
+        <svg
+          width="16"
+          height="16"
+          viewBox="0 0 24 24"
+          fill="none"
+          stroke="currentColor"
+          stroke-width="2.5"
+          stroke-linecap="round"
+          ><line x1="18" y1="6" x2="6" y2="18"></line><line
+            x1="6"
+            y1="6"
+            x2="18"
+            y2="18"></line></svg
+        >
       </button>
     </div>
-    <p class="modal-desc">Enter marks obtained and maximum marks per subject. We'll calculate your CGPA on a 10-point scale.</p>
+    <p class="modal-desc">
+      Enter marks obtained and maximum marks per subject. We'll calculate your
+      CGPA on a 10-point scale.
+    </p>
     <div id="marks-rows">
       <!-- Rows generated by JS -->
     </div>
@@ -142,15 +252,43 @@
 </div>
 
 <!-- ── Modal: SGPA to CGPA ──────────────────────────── -->
-<div class="modal-overlay" id="modal-sgpa" role="dialog" aria-modal="true" aria-labelledby="modal-sgpa-title" style="display:none">
+<div
+  class="modal-overlay"
+  id="modal-sgpa"
+  role="dialog"
+  aria-modal="true"
+  aria-labelledby="modal-sgpa-title"
+  style="display:none"
+>
   <div class="modal-card modal-card-sgpa">
     <div class="modal-header">
       <h3 id="modal-sgpa-title">SGPA → Cumulative CGPA</h3>
-      <button class="modal-close" data-close-modal="modal-sgpa" aria-label="Close">
-        <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round"><line x1="18" y1="6" x2="6" y2="18"/><line x1="6" y1="6" x2="18" y2="18"/></svg>
+      <button
+        class="modal-close"
+        data-close-modal="modal-sgpa"
+        aria-label="Close"
+      >
+        <svg
+          width="16"
+          height="16"
+          viewBox="0 0 24 24"
+          fill="none"
+          stroke="currentColor"
+          stroke-width="2.5"
+          stroke-linecap="round"
+          ><line x1="18" y1="6" x2="6" y2="18"></line><line
+            x1="6"
+            y1="6"
+            x2="18"
+            y2="18"></line></svg
+        >
       </button>
     </div>
-    <p class="modal-desc">Enter your SGPA and total credits for each semester. All 8 semesters are pre-loaded for a standard 4-year degree — leave unused ones blank or remove them.</p>
+    <p class="modal-desc">
+      Enter your SGPA and total credits for each semester. All 8 semesters are
+      pre-loaded for a standard 4-year degree — leave unused ones blank or
+      remove them.
+    </p>
 
     <div class="sgpa-grid-header">
       <span>Semester</span>
@@ -167,7 +305,10 @@
     <div class="sgpa-breakdown" id="sgpa-breakdown" style="display:none">
       <div class="breakdown-title">Semester Breakdown</div>
       <table class="breakdown-table">
-        <thead><tr><th>Sem</th><th>SGPA</th><th>Credits</th><th>Weighted</th></tr></thead>
+        <thead
+          ><tr><th>Sem</th><th>SGPA</th><th>Credits</th><th>Weighted</th></tr
+          ></thead
+        >
         <tbody id="sgpa-breakdown-body"></tbody>
       </table>
     </div>
@@ -178,7 +319,9 @@
         <span class="modal-result-lbl">Cumulative CGPA</span>
       </div>
       <div class="result-stack" id="sgpa-pct-stack" style="display:none">
-        <span class="modal-result-val modal-result-val-sm" id="sgpa-pct-val">—</span>
+        <span class="modal-result-val modal-result-val-sm" id="sgpa-pct-val"
+          >—</span
+        >
         <span class="modal-result-lbl">≈ Percentage (CBSE)</span>
       </div>
     </div>
@@ -186,12 +329,36 @@
 </div>
 
 <!-- ── Modal: Conversion Chart ──────────────────────── -->
-<div class="modal-overlay" id="modal-chart" role="dialog" aria-modal="true" aria-labelledby="modal-chart-title" style="display:none">
+<div
+  class="modal-overlay"
+  id="modal-chart"
+  role="dialog"
+  aria-modal="true"
+  aria-labelledby="modal-chart-title"
+  style="display:none"
+>
   <div class="modal-card modal-card-wide">
     <div class="modal-header">
       <h3 id="modal-chart-title">CGPA to Percentage Chart</h3>
-      <button class="modal-close" data-close-modal="modal-chart" aria-label="Close">
-        <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round"><line x1="18" y1="6" x2="6" y2="18"/><line x1="6" y1="6" x2="18" y2="18"/></svg>
+      <button
+        class="modal-close"
+        data-close-modal="modal-chart"
+        aria-label="Close"
+      >
+        <svg
+          width="16"
+          height="16"
+          viewBox="0 0 24 24"
+          fill="none"
+          stroke="currentColor"
+          stroke-width="2.5"
+          stroke-linecap="round"
+          ><line x1="18" y1="6" x2="6" y2="18"></line><line
+            x1="6"
+            y1="6"
+            x2="18"
+            y2="18"></line></svg
+        >
       </button>
     </div>
     <div class="chart-table-wrap">
@@ -233,7 +400,7 @@
   }
 
   .section-eyebrow {
-    font-family: 'JetBrains Mono', monospace;
+    font-family: "JetBrains Mono", monospace;
     font-size: 11px;
     color: var(--text-mute);
     letter-spacing: 0.04em;
@@ -326,7 +493,7 @@
     color: var(--text-mute);
     text-transform: uppercase;
     letter-spacing: 0.06em;
-    font-family: 'JetBrains Mono', monospace;
+    font-family: "JetBrains Mono", monospace;
   }
 
   .calc-input {
@@ -340,7 +507,9 @@
     font-weight: 500;
     padding: 0 12px;
     height: 44px;
-    transition: border-color 0.15s, box-shadow 0.15s;
+    transition:
+      border-color 0.15s,
+      box-shadow 0.15s;
     appearance: none;
     outline: none;
   }
@@ -348,11 +517,11 @@
   .calc-input:focus {
     border-color: var(--text-ink);
     background: var(--bg-card);
-    box-shadow: 0 0 0 3px rgba(23,23,23,0.08);
+    box-shadow: 0 0 0 3px rgba(23, 23, 23, 0.08);
   }
 
   [data-theme="dark"] .calc-input:focus {
-    box-shadow: 0 0 0 3px rgba(237,237,237,0.08);
+    box-shadow: 0 0 0 3px rgba(237, 237, 237, 0.08);
   }
 
   .calc-select {
@@ -383,7 +552,7 @@
   .input-hint {
     font-size: 11px;
     color: var(--text-mute);
-    font-family: 'JetBrains Mono', monospace;
+    font-family: "JetBrains Mono", monospace;
   }
 
   /* Result box */
@@ -423,14 +592,20 @@
   }
 
   @keyframes resultPop {
-    0% { transform: scale(0.95); opacity: 0.7; }
-    100% { transform: scale(1); opacity: 1; }
+    0% {
+      transform: scale(0.95);
+      opacity: 0.7;
+    }
+    100% {
+      transform: scale(1);
+      opacity: 1;
+    }
   }
 
   .result-label {
     font-size: 11px;
     color: var(--text-mute);
-    font-family: 'JetBrains Mono', monospace;
+    font-family: "JetBrains Mono", monospace;
     margin-top: 4px;
     text-transform: uppercase;
     letter-spacing: 0.05em;
@@ -482,7 +657,7 @@
   }
 
   .result-formula {
-    font-family: 'JetBrains Mono', monospace;
+    font-family: "JetBrains Mono", monospace;
     font-size: 12px;
     color: var(--text-mute);
     line-height: 1.5;
@@ -564,7 +739,7 @@
   .modal-overlay {
     position: fixed;
     inset: 0;
-    background: rgba(0,0,0,0.4);
+    background: rgba(0, 0, 0, 0.4);
     backdrop-filter: blur(4px);
     -webkit-backdrop-filter: blur(4px);
     display: flex;
@@ -576,8 +751,12 @@
   }
 
   @keyframes fadeIn {
-    from { opacity: 0; }
-    to { opacity: 1; }
+    from {
+      opacity: 0;
+    }
+    to {
+      opacity: 1;
+    }
   }
 
   .modal-card {
@@ -589,7 +768,10 @@
     max-width: 500px;
     max-height: 90vh;
     overflow-y: auto;
-    box-shadow: 0 0 0 1px rgba(0,0,0,0.06), 0 8px 16px rgba(0,0,0,0.12), 0 24px 32px rgba(0,0,0,0.08);
+    box-shadow:
+      0 0 0 1px rgba(0, 0, 0, 0.06),
+      0 8px 16px rgba(0, 0, 0, 0.12),
+      0 24px 32px rgba(0, 0, 0, 0.08);
     animation: slideUp 0.2s ease;
   }
 
@@ -598,8 +780,14 @@
   }
 
   @keyframes slideUp {
-    from { opacity: 0; transform: translateY(12px); }
-    to { opacity: 1; transform: translateY(0); }
+    from {
+      opacity: 0;
+      transform: translateY(12px);
+    }
+    to {
+      opacity: 1;
+      transform: translateY(0);
+    }
   }
 
   .modal-header {
@@ -668,7 +856,7 @@
     font-size: 11px;
     font-weight: 700;
     color: var(--text-mute);
-    font-family: 'JetBrains Mono', monospace;
+    font-family: "JetBrains Mono", monospace;
     letter-spacing: 0.03em;
     flex-shrink: 0;
   }
@@ -698,7 +886,7 @@
     color: var(--text-mute);
     text-transform: uppercase;
     letter-spacing: 0.06em;
-    font-family: 'JetBrains Mono', monospace;
+    font-family: "JetBrains Mono", monospace;
     margin-bottom: 5px;
   }
 
@@ -778,7 +966,7 @@
   .modal-result-lbl {
     font-size: 10px;
     color: var(--text-mute);
-    font-family: 'JetBrains Mono', monospace;
+    font-family: "JetBrains Mono", monospace;
     text-transform: uppercase;
     letter-spacing: 0.06em;
   }
@@ -798,7 +986,7 @@
     color: var(--text-mute);
     text-transform: uppercase;
     letter-spacing: 0.06em;
-    font-family: 'JetBrains Mono', monospace;
+    font-family: "JetBrains Mono", monospace;
   }
 
   /* SGPA modal wider */
@@ -820,7 +1008,7 @@
     color: var(--text-mute);
     text-transform: uppercase;
     letter-spacing: 0.06em;
-    font-family: 'JetBrains Mono', monospace;
+    font-family: "JetBrains Mono", monospace;
     padding: 10px 12px 6px;
     border-bottom: 1px solid var(--border);
     background: var(--bg-soft);
@@ -838,7 +1026,7 @@
     font-weight: 600;
     text-align: left;
     padding: 7px 12px;
-    font-family: 'JetBrains Mono', monospace;
+    font-family: "JetBrains Mono", monospace;
     font-size: 10px;
     letter-spacing: 0.04em;
     text-transform: uppercase;
@@ -848,7 +1036,7 @@
     padding: 7px 12px;
     color: var(--text-body);
     border-top: 1px solid var(--border);
-    font-family: 'JetBrains Mono', monospace;
+    font-family: "JetBrains Mono", monospace;
   }
 
   .breakdown-table tr:last-child td {
@@ -861,7 +1049,7 @@
     font-weight: 400;
     font-size: 9px;
     color: var(--text-mute);
-    font-family: 'JetBrains Mono', monospace;
+    font-family: "JetBrains Mono", monospace;
   }
 
   /* Chart table */
@@ -872,216 +1060,343 @@
     margin-top: 16px;
   }
 
-  .chart-table th, .chart-table td {
+  .chart-table th,
+  .chart-table td {
     white-space: nowrap;
   }
 
   @media (max-width: 640px) {
-    .input-row { grid-template-columns: 1fr; }
-    .sub-calc-grid { grid-template-columns: 1fr; }
-    .mode-tabs { flex-wrap: wrap; }
-    .mode-tab { flex: none; font-size: 11px; padding: 6px 8px; }
-    .result-value { font-size: 32px; }
-    .dynamic-row.sgpa-row { grid-template-columns: 44px 1fr 1fr auto; }
-    .sgpa-grid-header { grid-template-columns: 44px 1fr 1fr 32px; }
-    .modal-result { flex-direction: column; gap: 16px; }
+    .input-row {
+      grid-template-columns: 1fr;
+    }
+    .sub-calc-grid {
+      grid-template-columns: 1fr;
+    }
+    .mode-tabs {
+      flex-wrap: wrap;
+    }
+    .mode-tab {
+      flex: none;
+      font-size: 11px;
+      padding: 6px 8px;
+    }
+    .result-value {
+      font-size: 32px;
+    }
+    .dynamic-row.sgpa-row {
+      grid-template-columns: 44px 1fr 1fr auto;
+    }
+    .sgpa-grid-header {
+      grid-template-columns: 44px 1fr 1fr 32px;
+    }
+    .modal-result {
+      flex-direction: column;
+      gap: 16px;
+    }
   }
 </style>
 
 <script>
-// ═══════════════════════════════════════════════════════
-// University formulas
-// ═══════════════════════════════════════════════════════
-const UNIS = {
-  cbse:   { label: 'CBSE', fn: (c) => c * 9.5,            inv: (p) => p / 9.5,          formula: (c) => `${c} × 9.5` },
-  sppu:   { label: 'SPPU', fn: (c) => c * 10 - 7.5,       inv: (p) => (p + 7.5) / 10,   formula: (c) => `(${c} × 10) − 7.5` },
-  vtu:    { label: 'VTU',  fn: (c) => c * 10,              inv: (p) => p / 10,            formula: (c) => `${c} × 10` },
-  mumbai: { label: 'Mumbai', fn: (c) => 7.1 * c + 11,     inv: (p) => (p - 11) / 7.1,   formula: (c) => `(7.1 × ${c}) + 11` },
-  anna:   { label: 'Anna', fn: (c) => c * 10 - 7.5,       inv: (p) => (p + 7.5) / 10,   formula: (c) => `(${c} × 10) − 7.5` },
-  aktu:   { label: 'AKTU', fn: (c) => c * 9.5,            inv: (p) => p / 9.5,           formula: (c) => `${c} × 9.5` },
-  gtu:    { label: 'GTU',  fn: (c) => c * 10 - 7.5,       inv: (p) => (p + 7.5) / 10,   formula: (c) => `(${c} × 10) − 7.5` },
-  ktu:    { label: 'KTU',  fn: (c) => c * 10,              inv: (p) => p / 10,            formula: (c) => `${c} × 10` },
-  scale5: { label: '5-pt', fn: (c) => (c / 5) * 100,      inv: (p) => (p / 100) * 5,    formula: (c) => `(${c} ÷ 5) × 100` },
-  scale4: { label: '4-pt', fn: (c) => (c / 4) * 100,      inv: (p) => (p / 100) * 4,    formula: (c) => `(${c} ÷ 4) × 100` },
-};
+  // ═══════════════════════════════════════════════════════
+  // University formulas
+  // ═══════════════════════════════════════════════════════
+  const UNIS = {
+    cbse: {
+      label: "CBSE",
+      fn: (c) => c * 9.5,
+      inv: (p) => p / 9.5,
+      formula: (c) => `${c} × 9.5`,
+    },
+    sppu: {
+      label: "SPPU",
+      fn: (c) => c * 10 - 7.5,
+      inv: (p) => (p + 7.5) / 10,
+      formula: (c) => `(${c} × 10) − 7.5`,
+    },
+    vtu: {
+      label: "VTU",
+      fn: (c) => c * 10,
+      inv: (p) => p / 10,
+      formula: (c) => `${c} × 10`,
+    },
+    mumbai: {
+      label: "Mumbai",
+      fn: (c) => 7.1 * c + 11,
+      inv: (p) => (p - 11) / 7.1,
+      formula: (c) => `(7.1 × ${c}) + 11`,
+    },
+    anna: {
+      label: "Anna",
+      fn: (c) => c * 10 - 7.5,
+      inv: (p) => (p + 7.5) / 10,
+      formula: (c) => `(${c} × 10) − 7.5`,
+    },
+    aktu: {
+      label: "AKTU",
+      fn: (c) => c * 9.5,
+      inv: (p) => p / 9.5,
+      formula: (c) => `${c} × 9.5`,
+    },
+    gtu: {
+      label: "GTU",
+      fn: (c) => c * 10 - 7.5,
+      inv: (p) => (p + 7.5) / 10,
+      formula: (c) => `(${c} × 10) − 7.5`,
+    },
+    ktu: {
+      label: "KTU",
+      fn: (c) => c * 10,
+      inv: (p) => p / 10,
+      formula: (c) => `${c} × 10`,
+    },
+    scale5: {
+      label: "5-pt",
+      fn: (c) => (c / 5) * 100,
+      inv: (p) => (p / 100) * 5,
+      formula: (c) => `(${c} ÷ 5) × 100`,
+    },
+    scale4: {
+      label: "4-pt",
+      fn: (c) => (c / 4) * 100,
+      inv: (p) => (p / 100) * 4,
+      formula: (c) => `(${c} ÷ 4) × 100`,
+    },
+  };
 
-const MODE_CONFIG = {
-  'cgpa2pct': { inputLabel: 'Enter CGPA', resultLabel: 'Percentage', hint: 'Range: 0 – 10', placeholder: 'e.g. 8.50', showUni: true, max: 10 },
-  'pct2cgpa': { inputLabel: 'Enter Percentage (%)', resultLabel: 'CGPA', hint: 'Range: 0 – 100', placeholder: 'e.g. 76.00', showUni: true, max: 100 },
-  'cgpa2gpa': { inputLabel: 'Enter CGPA (10-pt)', resultLabel: 'GPA (4.0 Scale)', hint: 'Range: 0 – 10', placeholder: 'e.g. 8.50', showUni: false, max: 10 },
-  'gpa2cgpa': { inputLabel: 'Enter GPA (4.0 scale)', resultLabel: 'CGPA (10-pt)', hint: 'Range: 0 – 4', placeholder: 'e.g. 3.50', showUni: false, max: 4 },
-};
+  const MODE_CONFIG = {
+    cgpa2pct: {
+      inputLabel: "Enter CGPA",
+      resultLabel: "Percentage",
+      hint: "Range: 0 – 10",
+      placeholder: "e.g. 8.50",
+      showUni: true,
+      max: 10,
+    },
+    pct2cgpa: {
+      inputLabel: "Enter Percentage (%)",
+      resultLabel: "CGPA",
+      hint: "Range: 0 – 100",
+      placeholder: "e.g. 76.00",
+      showUni: true,
+      max: 100,
+    },
+    cgpa2gpa: {
+      inputLabel: "Enter CGPA (10-pt)",
+      resultLabel: "GPA (4.0 Scale)",
+      hint: "Range: 0 – 10",
+      placeholder: "e.g. 8.50",
+      showUni: false,
+      max: 10,
+    },
+    gpa2cgpa: {
+      inputLabel: "Enter GPA (4.0 scale)",
+      resultLabel: "CGPA (10-pt)",
+      hint: "Range: 0 – 4",
+      placeholder: "e.g. 3.50",
+      showUni: false,
+      max: 4,
+    },
+  };
 
-function getGrade(pct) {
-  if (pct >= 90) return { label: 'Outstanding', color: '#6366f1' };
-  if (pct >= 75) return { label: 'Distinction', color: '#0070f3' };
-  if (pct >= 60) return { label: 'First Class', color: '#00a86b' };
-  if (pct >= 50) return { label: 'Second Class', color: '#f5a623' };
-  if (pct >= 40) return { label: 'Pass Class', color: '#888888' };
-  return { label: 'Fail', color: '#ee0000' };
-}
+  function getGrade(pct) {
+    if (pct >= 90) return { label: "Outstanding", color: "#6366f1" };
+    if (pct >= 75) return { label: "Distinction", color: "#0070f3" };
+    if (pct >= 60) return { label: "First Class", color: "#00a86b" };
+    if (pct >= 50) return { label: "Second Class", color: "#f5a623" };
+    if (pct >= 40) return { label: "Pass Class", color: "#888888" };
+    return { label: "Fail", color: "#ee0000" };
+  }
 
-let currentMode = 'cgpa2pct';
+  let currentMode = "cgpa2pct";
 
-// DOM refs
-const mainInput    = document.getElementById('main-input');
-const uniSelect    = document.getElementById('university-select');
-const resultVal    = document.getElementById('result-value');
-const resultLabel  = document.getElementById('result-label');
-const resultFormula = document.getElementById('result-formula');
-const gradeBadge   = document.getElementById('grade-badge');
-const resultBox    = document.getElementById('result-box');
-const inputLabel   = document.getElementById('main-input-label');
-const inputHint    = document.getElementById('input-hint');
-const copyBtn      = document.getElementById('copy-btn');
-const uniGroup     = document.getElementById('university-group');
+  // DOM refs
+  const mainInput = document.getElementById("main-input");
+  const uniSelect = document.getElementById("university-select");
+  const resultVal = document.getElementById("result-value");
+  const resultLabel = document.getElementById("result-label");
+  const resultFormula = document.getElementById("result-formula");
+  const gradeBadge = document.getElementById("grade-badge");
+  const resultBox = document.getElementById("result-box");
+  const inputLabel = document.getElementById("main-input-label");
+  const inputHint = document.getElementById("input-hint");
+  const copyBtn = document.getElementById("copy-btn");
+  const uniGroup = document.getElementById("university-group");
 
-// Mode tabs
-document.querySelectorAll('.mode-tab').forEach(tab => {
-  tab.addEventListener('click', () => {
-    currentMode = tab.dataset.mode;
-    document.querySelectorAll('.mode-tab').forEach(t => {
-      t.classList.toggle('active', t === tab);
-      t.setAttribute('aria-selected', t === tab ? 'true' : 'false');
+  // Mode tabs
+  document.querySelectorAll(".mode-tab").forEach((tab) => {
+    tab.addEventListener("click", () => {
+      currentMode = tab.dataset.mode;
+      document.querySelectorAll(".mode-tab").forEach((t) => {
+        t.classList.toggle("active", t === tab);
+        t.setAttribute("aria-selected", t === tab ? "true" : "false");
+      });
+      applyModeConfig();
+      compute();
     });
-    applyModeConfig();
-    compute();
   });
-});
 
-function applyModeConfig() {
-  const cfg = MODE_CONFIG[currentMode];
-  inputLabel.textContent = cfg.inputLabel;
-  inputHint.textContent = cfg.hint;
-  mainInput.placeholder = cfg.placeholder;
-  mainInput.max = String(cfg.max);
-  mainInput.value = '';
-  resultLabel.textContent = cfg.resultLabel;
-  resultVal.textContent = '—';
-  resultFormula.classList.remove('visible');
-  resultFormula.textContent = '';
-  gradeBadge.style.display = 'none';
-  resultBox.classList.remove('has-result');
-  uniGroup.style.display = cfg.showUni ? '' : 'none';
-}
-
-function compute() {
-  const raw = parseFloat(mainInput.value);
-  const uniKey = uniSelect.value;
-  const uni = UNIS[uniKey];
-
-  if (isNaN(raw) || raw < 0) {
-    resultVal.textContent = '—';
-    resultFormula.classList.remove('visible');
-    gradeBadge.style.display = 'none';
-    resultBox.classList.remove('has-result');
-    return;
+  function applyModeConfig() {
+    const cfg = MODE_CONFIG[currentMode];
+    inputLabel.textContent = cfg.inputLabel;
+    inputHint.textContent = cfg.hint;
+    mainInput.placeholder = cfg.placeholder;
+    mainInput.max = String(cfg.max);
+    mainInput.value = "";
+    resultLabel.textContent = cfg.resultLabel;
+    resultVal.textContent = "—";
+    resultFormula.classList.remove("visible");
+    resultFormula.textContent = "";
+    gradeBadge.style.display = "none";
+    resultBox.classList.remove("has-result");
+    uniGroup.style.display = cfg.showUni ? "" : "none";
   }
 
-  let output = '';
-  let formulaStr = '';
-  let percentForGrade = null;
+  function compute() {
+    const raw = parseFloat(mainInput.value);
+    const uniKey = uniSelect.value;
+    const uni = UNIS[uniKey];
 
-  if (currentMode === 'cgpa2pct') {
-    const pct = Math.min(uni.fn(raw), 100);
-    output = pct.toFixed(2) + '%';
-    formulaStr = `Formula: ${uni.formula(raw)} = ${output} (${uni.label})`;
-    percentForGrade = pct;
-  } else if (currentMode === 'pct2cgpa') {
-    const cgpa = Math.min(uni.inv(raw), 10);
-    output = cgpa.toFixed(2);
-    formulaStr = `Formula: ${raw}% → ${uni.label} CGPA = ${output}`;
-    percentForGrade = raw;
-  } else if (currentMode === 'cgpa2gpa') {
-    const gpa = Math.min((raw / 10) * 4, 4);
-    output = gpa.toFixed(2);
-    formulaStr = `Formula: (${raw} ÷ 10) × 4 = ${output} GPA`;
-    percentForGrade = (raw / 10) * 100;
-  } else if (currentMode === 'gpa2cgpa') {
-    const cgpa = Math.min((raw / 4) * 10, 10);
-    output = cgpa.toFixed(2);
-    formulaStr = `Formula: (${raw} ÷ 4) × 10 = ${output} CGPA`;
-    percentForGrade = (raw / 4) * 100;
+    if (isNaN(raw) || raw < 0) {
+      resultVal.textContent = "—";
+      resultFormula.classList.remove("visible");
+      gradeBadge.style.display = "none";
+      resultBox.classList.remove("has-result");
+      return;
+    }
+
+    let output = "";
+    let formulaStr = "";
+    let percentForGrade = null;
+
+    if (currentMode === "cgpa2pct") {
+      const pct = Math.min(uni.fn(raw), 100);
+      output = pct.toFixed(2) + "%";
+      formulaStr = `Formula: ${uni.formula(raw)} = ${output} (${uni.label})`;
+      percentForGrade = pct;
+    } else if (currentMode === "pct2cgpa") {
+      const cgpa = Math.min(uni.inv(raw), 10);
+      output = cgpa.toFixed(2);
+      formulaStr = `Formula: ${raw}% → ${uni.label} CGPA = ${output}`;
+      percentForGrade = raw;
+    } else if (currentMode === "cgpa2gpa") {
+      const gpa = Math.min((raw / 10) * 4, 4);
+      output = gpa.toFixed(2);
+      formulaStr = `Formula: (${raw} ÷ 10) × 4 = ${output} GPA`;
+      percentForGrade = (raw / 10) * 100;
+    } else if (currentMode === "gpa2cgpa") {
+      const cgpa = Math.min((raw / 4) * 10, 10);
+      output = cgpa.toFixed(2);
+      formulaStr = `Formula: (${raw} ÷ 4) × 10 = ${output} CGPA`;
+      percentForGrade = (raw / 4) * 100;
+    }
+
+    // Animate result
+    resultVal.classList.remove("updated");
+    void resultVal.offsetWidth;
+    resultVal.classList.add("updated");
+    resultVal.textContent = output;
+
+    resultFormula.textContent = formulaStr;
+    resultFormula.classList.add("visible");
+    resultBox.classList.add("has-result");
+
+    // Grade badge
+    if (percentForGrade !== null && percentForGrade > 0) {
+      const grade = getGrade(percentForGrade);
+      gradeBadge.textContent = grade.label;
+      gradeBadge.style.display = "inline-flex";
+      gradeBadge.style.color = grade.color;
+      gradeBadge.style.borderColor = grade.color + "44";
+      gradeBadge.style.background = grade.color + "12";
+    }
   }
 
-  // Animate result
-  resultVal.classList.remove('updated');
-  void resultVal.offsetWidth;
-  resultVal.classList.add('updated');
-  resultVal.textContent = output;
+  mainInput.addEventListener("input", compute);
+  uniSelect.addEventListener("change", compute);
 
-  resultFormula.textContent = formulaStr;
-  resultFormula.classList.add('visible');
-  resultBox.classList.add('has-result');
-
-  // Grade badge
-  if (percentForGrade !== null && percentForGrade > 0) {
-    const grade = getGrade(percentForGrade);
-    gradeBadge.textContent = grade.label;
-    gradeBadge.style.display = 'inline-flex';
-    gradeBadge.style.color = grade.color;
-    gradeBadge.style.borderColor = grade.color + '44';
-    gradeBadge.style.background = grade.color + '12';
-  }
-}
-
-mainInput.addEventListener('input', compute);
-uniSelect.addEventListener('change', compute);
-
-// Copy button
-copyBtn?.addEventListener('click', () => {
-  const txt = resultVal.textContent;
-  if (txt === '—') return;
-  navigator.clipboard.writeText(txt).catch(() => {
-    const ta = document.createElement('textarea');
-    ta.value = txt; document.body.appendChild(ta);
-    ta.select(); document.execCommand('copy');
-    document.body.removeChild(ta);
+  // Copy button
+  copyBtn?.addEventListener("click", () => {
+    const txt = resultVal.textContent;
+    if (txt === "—") return;
+    navigator.clipboard.writeText(txt).catch(() => {
+      const ta = document.createElement("textarea");
+      ta.value = txt;
+      document.body.appendChild(ta);
+      ta.select();
+      document.execCommand("copy");
+      document.body.removeChild(ta);
+    });
+    copyBtn.classList.add("copied");
+    const span = copyBtn.querySelector("span");
+    if (span) {
+      const orig = span.textContent;
+      span.textContent = "Copied!";
+      setTimeout(() => {
+        span.textContent = orig;
+        copyBtn.classList.remove("copied");
+      }, 1500);
+    }
   });
-  copyBtn.classList.add('copied');
-  const span = copyBtn.querySelector('span');
-  if (span) { const orig = span.textContent; span.textContent = 'Copied!'; setTimeout(() => { span.textContent = orig; copyBtn.classList.remove('copied'); }, 1500); }
-});
 
-// ═══════════════════════════════════════════════════════
-// Modals
-// ═══════════════════════════════════════════════════════
-function openModal(id) {
-  const el = document.getElementById(id);
-  if (el) { el.style.display = 'flex'; document.body.style.overflow = 'hidden'; }
-}
-function closeModal(id) {
-  const el = document.getElementById(id);
-  if (el) { el.style.display = 'none'; document.body.style.overflow = ''; }
-}
+  // ═══════════════════════════════════════════════════════
+  // Modals
+  // ═══════════════════════════════════════════════════════
+  function openModal(id) {
+    const el = document.getElementById(id);
+    if (el) {
+      el.style.display = "flex";
+      document.body.style.overflow = "hidden";
+    }
+  }
+  function closeModal(id) {
+    const el = document.getElementById(id);
+    if (el) {
+      el.style.display = "none";
+      document.body.style.overflow = "";
+    }
+  }
 
-document.getElementById('btn-marks')?.addEventListener('click', () => openModal('modal-marks'));
-document.getElementById('btn-sgpa')?.addEventListener('click', () => openModal('modal-sgpa'));
-document.getElementById('btn-chart')?.addEventListener('click', () => { openModal('modal-chart'); buildChart(); });
+  document
+    .getElementById("btn-marks")
+    ?.addEventListener("click", () => openModal("modal-marks"));
+  document
+    .getElementById("btn-sgpa")
+    ?.addEventListener("click", () => openModal("modal-sgpa"));
+  document.getElementById("btn-chart")?.addEventListener("click", () => {
+    openModal("modal-chart");
+    buildChart();
+  });
 
-document.querySelectorAll('[data-close-modal]').forEach(btn => {
-  btn.addEventListener('click', () => closeModal(btn.getAttribute('data-close-modal')));
-});
+  document.querySelectorAll("[data-close-modal]").forEach((btn) => {
+    btn.addEventListener("click", () =>
+      closeModal(btn.getAttribute("data-close-modal")),
+    );
+  });
 
-document.querySelectorAll('.modal-overlay').forEach(overlay => {
-  overlay.addEventListener('click', (e) => { if (e.target === overlay) closeModal(overlay.id); });
-});
+  document.querySelectorAll(".modal-overlay").forEach((overlay) => {
+    overlay.addEventListener("click", (e) => {
+      if (e.target === overlay) closeModal(overlay.id);
+    });
+  });
 
-document.addEventListener('keydown', (e) => {
-  if (e.key === 'Escape') document.querySelectorAll('.modal-overlay').forEach(o => { if (o.style.display !== 'none') closeModal(o.id); });
-});
+  document.addEventListener("keydown", (e) => {
+    if (e.key === "Escape")
+      document.querySelectorAll(".modal-overlay").forEach((o) => {
+        if (o.style.display !== "none") closeModal(o.id);
+      });
+  });
 
-// ═══════════════════════════════════════════════════════
-// Marks → CGPA
-// ═══════════════════════════════════════════════════════
-const marksContainer = document.getElementById('marks-rows');
-let marksCount = 0;
+  // ═══════════════════════════════════════════════════════
+  // Marks → CGPA
+  // ═══════════════════════════════════════════════════════
+  const marksContainer = document.getElementById("marks-rows");
+  let marksCount = 0;
 
-function addMarksRow(idx) {
-  const div = document.createElement('div');
-  div.className = 'dynamic-row';
-  div.dataset.idx = idx;
-  div.innerHTML = `
+  function addMarksRow(idx) {
+    const div = document.createElement("div");
+    div.className = "dynamic-row";
+    div.dataset.idx = idx;
+    div.innerHTML = `
     <div>
       <div class="row-label">Sub ${idx} Marks</div>
       <input type="number" placeholder="e.g. 82" min="0" class="marks-obt" oninput="calcMarks()">
@@ -1092,45 +1407,49 @@ function addMarksRow(idx) {
     </div>
     <button class="remove-row-btn" onclick="removeRow(this, 'marks')" title="Remove" aria-label="Remove subject">×</button>
   `;
-  marksContainer?.appendChild(div);
-  marksCount++;
-}
+    marksContainer?.appendChild(div);
+    marksCount++;
+  }
 
-// Init 5 rows
-for (let i = 1; i <= 5; i++) addMarksRow(i);
+  // Init 5 rows
+  for (let i = 1; i <= 5; i++) addMarksRow(i);
 
-document.getElementById('add-marks-row')?.addEventListener('click', () => {
-  marksCount++;
-  addMarksRow(marksCount);
-  calcMarks();
-});
-
-function calcMarks() {
-  let obt = 0, tot = 0;
-  document.querySelectorAll('#marks-rows .dynamic-row').forEach(row => {
-    const o = parseFloat(row.querySelector('.marks-obt')?.value || '');
-    const t = parseFloat(row.querySelector('.marks-max')?.value || '');
-    if (!isNaN(o) && !isNaN(t) && t > 0) { obt += o; tot += t; }
+  document.getElementById("add-marks-row")?.addEventListener("click", () => {
+    marksCount++;
+    addMarksRow(marksCount);
+    calcMarks();
   });
-  const el = document.getElementById('marks-result-val');
-  if (el) el.textContent = tot > 0 ? ((obt / tot) * 10).toFixed(2) : '—';
-}
-window.calcMarks = calcMarks;
 
-// ═══════════════════════════════════════════════════════
-// SGPA → CGPA  (8 semesters for a 4-year degree)
-// ═══════════════════════════════════════════════════════
-const sgpaContainer = document.getElementById('sgpa-rows');
-let semCount = 0;
+  function calcMarks() {
+    let obt = 0,
+      tot = 0;
+    document.querySelectorAll("#marks-rows .dynamic-row").forEach((row) => {
+      const o = parseFloat(row.querySelector(".marks-obt")?.value || "");
+      const t = parseFloat(row.querySelector(".marks-max")?.value || "");
+      if (!isNaN(o) && !isNaN(t) && t > 0) {
+        obt += o;
+        tot += t;
+      }
+    });
+    const el = document.getElementById("marks-result-val");
+    if (el) el.textContent = tot > 0 ? ((obt / tot) * 10).toFixed(2) : "—";
+  }
+  window.calcMarks = calcMarks;
 
-// Default credit hints per semester (adjust as needed)
-const DEFAULT_CREDITS = [22, 22, 24, 24, 24, 24, 22, 22];
+  // ═══════════════════════════════════════════════════════
+  // SGPA → CGPA  (8 semesters for a 4-year degree)
+  // ═══════════════════════════════════════════════════════
+  const sgpaContainer = document.getElementById("sgpa-rows");
+  let semCount = 0;
 
-function addSgpaRow(idx, credits) {
-  const div = document.createElement('div');
-  div.className = 'dynamic-row sgpa-row';
-  div.dataset.semIdx = idx;
-  div.innerHTML = `
+  // Default credit hints per semester (adjust as needed)
+  const DEFAULT_CREDITS = [22, 22, 24, 24, 24, 24, 22, 22];
+
+  function addSgpaRow(idx, credits) {
+    const div = document.createElement("div");
+    div.className = "dynamic-row sgpa-row";
+    div.dataset.semIdx = idx;
+    div.innerHTML = `
     <div class="sem-badge">S${idx}</div>
     <div>
       <input type="number" placeholder="e.g. 8.50" min="0" max="10" step="0.01" class="sgpa-val" oninput="calcSgpa()" aria-label="Semester ${idx} SGPA">
@@ -1140,104 +1459,111 @@ function addSgpaRow(idx, credits) {
     </div>
     <button class="remove-row-btn" onclick="removeRow(this, 'sgpa')" title="Remove semester ${idx}" aria-label="Remove semester ${idx}">×</button>
   `;
-  sgpaContainer?.appendChild(div);
-  semCount++;
-}
+    sgpaContainer?.appendChild(div);
+    semCount++;
+  }
 
-// Pre-load all 8 semesters
-for (let i = 1; i <= 8; i++) addSgpaRow(i, DEFAULT_CREDITS[i - 1]);
+  // Pre-load all 8 semesters
+  for (let i = 1; i <= 8; i++) addSgpaRow(i, DEFAULT_CREDITS[i - 1]);
 
-document.getElementById('add-sgpa-row')?.addEventListener('click', () => {
-  semCount++;
-  addSgpaRow(semCount, 24);
-  calcSgpa();
-});
-
-function calcSgpa() {
-  let num = 0, den = 0;
-  const breakdown = [];
-
-  document.querySelectorAll('#sgpa-rows .dynamic-row').forEach((row, idx) => {
-    const s = parseFloat(row.querySelector('.sgpa-val')?.value || '');
-    const c = parseFloat(row.querySelector('.sgpa-cred')?.value || '');
-    const semIdx = row.dataset.semIdx || (idx + 1);
-    if (!isNaN(s) && !isNaN(c) && c > 0) {
-      num += s * c;
-      den += c;
-      breakdown.push({ sem: semIdx, sgpa: s, credits: c, weighted: (s * c) });
-    }
+  document.getElementById("add-sgpa-row")?.addEventListener("click", () => {
+    semCount++;
+    addSgpaRow(semCount, 24);
+    calcSgpa();
   });
 
-  const cgpa = den > 0 ? num / den : null;
-  const el = document.getElementById('sgpa-result-val');
-  if (el) el.textContent = cgpa !== null ? cgpa.toFixed(2) : '—';
+  function calcSgpa() {
+    let num = 0,
+      den = 0;
+    const breakdown = [];
 
-  // Show percentage estimate
-  const pctStack = document.getElementById('sgpa-pct-stack');
-  const pctVal = document.getElementById('sgpa-pct-val');
-  if (cgpa !== null && pctStack && pctVal) {
-    pctVal.textContent = Math.min(cgpa * 9.5, 100).toFixed(1) + '%';
-    pctStack.style.display = '';
-  } else if (pctStack) {
-    pctStack.style.display = 'none';
-  }
+    document.querySelectorAll("#sgpa-rows .dynamic-row").forEach((row, idx) => {
+      const s = parseFloat(row.querySelector(".sgpa-val")?.value || "");
+      const c = parseFloat(row.querySelector(".sgpa-cred")?.value || "");
+      const semIdx = row.dataset.semIdx || idx + 1;
+      if (!isNaN(s) && !isNaN(c) && c > 0) {
+        num += s * c;
+        den += c;
+        breakdown.push({ sem: semIdx, sgpa: s, credits: c, weighted: s * c });
+      }
+    });
 
-  // Build breakdown table
-  const breakdownEl = document.getElementById('sgpa-breakdown');
-  const tbody = document.getElementById('sgpa-breakdown-body');
-  if (tbody && breakdownEl) {
-    if (breakdown.length > 0) {
-      tbody.innerHTML = breakdown.map(r =>
-        `<tr><td>S${r.sem}</td><td>${r.sgpa.toFixed(2)}</td><td>${r.credits}</td><td>${r.weighted.toFixed(2)}</td></tr>`
-      ).join('') +
-      `<tr><td colspan="2">Total</td><td>${den}</td><td>${(cgpa || 0).toFixed(2)} CGPA</td></tr>`;
-      breakdownEl.style.display = '';
-    } else {
-      breakdownEl.style.display = 'none';
+    const cgpa = den > 0 ? num / den : null;
+    const el = document.getElementById("sgpa-result-val");
+    if (el) el.textContent = cgpa !== null ? cgpa.toFixed(2) : "—";
+
+    // Show percentage estimate
+    const pctStack = document.getElementById("sgpa-pct-stack");
+    const pctVal = document.getElementById("sgpa-pct-val");
+    if (cgpa !== null && pctStack && pctVal) {
+      pctVal.textContent = Math.min(cgpa * 9.5, 100).toFixed(1) + "%";
+      pctStack.style.display = "";
+    } else if (pctStack) {
+      pctStack.style.display = "none";
+    }
+
+    // Build breakdown table
+    const breakdownEl = document.getElementById("sgpa-breakdown");
+    const tbody = document.getElementById("sgpa-breakdown-body");
+    if (tbody && breakdownEl) {
+      if (breakdown.length > 0) {
+        tbody.innerHTML =
+          breakdown
+            .map(
+              (r) =>
+                `<tr><td>S${r.sem}</td><td>${r.sgpa.toFixed(2)}</td><td>${r.credits}</td><td>${r.weighted.toFixed(2)}</td></tr>`,
+            )
+            .join("") +
+          `<tr><td colspan="2">Total</td><td>${den}</td><td>${(cgpa || 0).toFixed(2)} CGPA</td></tr>`;
+        breakdownEl.style.display = "";
+      } else {
+        breakdownEl.style.display = "none";
+      }
     }
   }
-}
-window.calcSgpa = calcSgpa;
+  window.calcSgpa = calcSgpa;
 
-function removeRow(btn, type) {
-  btn.closest('.dynamic-row')?.remove();
-  if (type === 'marks') calcMarks();
-  if (type === 'sgpa') calcSgpa();
-}
-window.removeRow = removeRow;
-
-// ═══════════════════════════════════════════════════════
-// Conversion Chart
-// ═══════════════════════════════════════════════════════
-const GRADE_LABELS = [
-  [90, 'O (Outstanding)'],
-  [80, 'A+ (Excellent)'],
-  [70, 'A (Very Good)'],
-  [60, 'B+ (Good)'],
-  [50, 'B (Above Average)'],
-  [40, 'C (Average)'],
-  [0,  'F (Fail)'],
-];
-
-function getGradeLabel(pct) {
-  for (const [thresh, label] of GRADE_LABELS) {
-    if (pct >= thresh) return label;
+  function removeRow(btn, type) {
+    btn.closest(".dynamic-row")?.remove();
+    if (type === "marks") calcMarks();
+    if (type === "sgpa") calcSgpa();
   }
-  return 'F (Fail)';
-}
+  window.removeRow = removeRow;
 
-function buildChart() {
-  const tbody = document.getElementById('chart-tbody');
-  if (!tbody || tbody.children.length > 0) return;
-  const cgpaValues = [10.0, 9.5, 9.0, 8.5, 8.0, 7.5, 7.0, 6.5, 6.0, 5.5, 5.0, 4.5, 4.0];
-  cgpaValues.forEach(c => {
-    const cbse = Math.min(UNIS.cbse.fn(c), 100).toFixed(1) + '%';
-    const sppu = Math.min(UNIS.sppu.fn(c), 100).toFixed(1) + '%';
-    const vtu  = Math.min(UNIS.vtu.fn(c), 100).toFixed(1) + '%';
-    const grade = getGradeLabel(UNIS.cbse.fn(c));
-    const tr = document.createElement('tr');
-    tr.innerHTML = `<td>${c.toFixed(1)}</td><td>${cbse}</td><td>${sppu}</td><td>${vtu}</td><td>${grade}</td>`;
-    tbody.appendChild(tr);
-  });
-}
+  // ═══════════════════════════════════════════════════════
+  // Conversion Chart
+  // ═══════════════════════════════════════════════════════
+  const GRADE_LABELS = [
+    [90, "O (Outstanding)"],
+    [80, "A+ (Excellent)"],
+    [70, "A (Very Good)"],
+    [60, "B+ (Good)"],
+    [50, "B (Above Average)"],
+    [40, "C (Average)"],
+    [0, "F (Fail)"],
+  ];
+
+  function getGradeLabel(pct) {
+    for (const [thresh, label] of GRADE_LABELS) {
+      if (pct >= thresh) return label;
+    }
+    return "F (Fail)";
+  }
+
+  function buildChart() {
+    const tbody = document.getElementById("chart-tbody");
+    if (!tbody || tbody.children.length > 0) return;
+    const cgpaValues = [
+      10.0, 9.5, 9.0, 8.5, 8.0, 7.5, 7.0, 6.5, 6.0, 5.5, 5.0, 4.5, 4.0,
+    ];
+    cgpaValues.forEach((c) => {
+      const cbse = Math.min(UNIS.cbse.fn(c), 100).toFixed(1) + "%";
+      const sppu = Math.min(UNIS.sppu.fn(c), 100).toFixed(1) + "%";
+      const vtu = Math.min(UNIS.vtu.fn(c), 100).toFixed(1) + "%";
+      const grade = getGradeLabel(UNIS.cbse.fn(c));
+      const tr = document.createElement("tr");
+      tr.innerHTML = `<td>${c.toFixed(1)}</td><td>${cbse}</td><td>${sppu}</td><td>${vtu}</td><td>${grade}</td>`;
+      tbody.appendChild(tr);
+    });
+  }
 </script>
