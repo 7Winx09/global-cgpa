@@ -215,17 +215,21 @@
   // Dark mode toggle
   const themeBtn = document.getElementById('theme-toggle');
   themeBtn?.addEventListener('click', () => {
-    const isDark = document.documentElement.classList.contains('dark');
-    const next = isDark ? 'light' : 'dark';
+    const isLight = document.documentElement.classList.contains('light-theme');
+    const next = isLight ? 'dark' : 'light';
     if (next === 'dark') {
       document.documentElement.classList.add('dark');
+      document.documentElement.classList.remove('light-theme');
       document.documentElement.setAttribute('data-theme', 'dark');
     } else {
       document.documentElement.classList.remove('dark');
+      document.documentElement.classList.add('light-theme');
       document.documentElement.setAttribute('data-theme', 'light');
     }
     localStorage.setItem('gcgpa-theme', next);
+    localStorage.setItem('theme', next);
   });
+
 
   // Mobile menu
   const hamburger = document.getElementById('nav-hamburger');

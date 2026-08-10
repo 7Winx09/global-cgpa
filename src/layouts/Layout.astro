@@ -36,6 +36,23 @@ const structuredData = JSON.stringify({
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <meta name="robots" content="index, follow" />
 
+    <!-- Theme Initialization (Anti-FOUC) -->
+    <script is:inline>
+      (function() {
+        const saved = localStorage.getItem('gcgpa-theme') || localStorage.getItem('theme');
+        const theme = saved || 'dark';
+        if (theme === 'light') {
+          document.documentElement.classList.add('light-theme');
+          document.documentElement.classList.remove('dark');
+          document.documentElement.setAttribute('data-theme', 'light');
+        } else {
+          document.documentElement.classList.remove('light-theme');
+          document.documentElement.classList.add('dark');
+          document.documentElement.setAttribute('data-theme', 'dark');
+        }
+      })();
+    </script>
+
     <!-- Primary Meta -->
     <title>{title}</title>
     <meta name="description" content={description} />

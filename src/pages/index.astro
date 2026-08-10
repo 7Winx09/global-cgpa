@@ -20,25 +20,57 @@ import Layout from '../layouts/Layout.astro';
   --shadow: rgba(0,0,0,0.4);
   --result-bg: #111827;
 }
+
+html.light-theme, [data-theme="light"] {
+  --bg: #F8FAFC;
+  --card: #FFFFFF;
+  --text: #0F172A;
+  --muted: #64748B;
+  --primary: #059669;
+  --primary-dark: #047857;
+  --border: #E2E8F0;
+  --shadow: rgba(15, 23, 42, 0.08);
+  --result-bg: #F1F5F9;
+}
+
 * { box-sizing: border-box; margin: 0; padding: 0; }
 body {
   font-family: 'Inter', system-ui, -apple-system, sans-serif;
   background: var(--bg); color: var(--text); line-height: 1.5;
   min-height: 100vh; display: flex; flex-direction: column;
+  transition: background 0.25s ease, color 0.25s ease;
 }
 /* Header */
 header {
-  padding: 20px 40px; display: flex; justify-content: space-between;
+  padding: 16px 40px; display: flex; justify-content: space-between;
   align-items: center; border-bottom: 1px solid var(--border);
   background: var(--card); position: sticky; top: 0; z-index: 50;
+  transition: background 0.25s ease, border-color 0.25s ease;
 }
 .logo { font-weight: 700; font-size: 1.1rem; letter-spacing: -0.5px; display: flex; align-items: center; gap: 8px; text-decoration: none; color: var(--text); }
 .logo-accent { color: var(--primary); }
-.theme-btn {
-  background: transparent; border: 1px solid var(--border);
-  padding: 6px 12px; border-radius: 20px; cursor: pointer;
-  color: var(--text); font-size: 0.9rem; font-family: inherit;
+.theme-toggle-btn {
+  background: var(--result-bg);
+  border: 1px solid var(--border);
+  color: var(--text);
+  padding: 6px 14px;
+  border-radius: 999px;
+  cursor: pointer;
+  font-size: 0.85rem;
+  font-weight: 600;
+  font-family: inherit;
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  transition: all 0.2s ease;
+  user-select: none;
 }
+.theme-toggle-btn:hover {
+  border-color: var(--primary);
+  color: var(--primary);
+  transform: translateY(-1px);
+}
+
 /* Hero */
 .hero-main {
   display: flex; flex-direction: column; justify-content: center;
@@ -269,11 +301,16 @@ select:focus, input[type="number"]:focus { outline: none; border-color: var(--pr
 <header>
   <a href="/" class="logo">
     <svg width="28" height="28" viewBox="0 0 64 64" style="display:inline-block;border-radius:8px;" xmlns="http://www.w3.org/2000/svg">
-      <rect width="64" height="64" rx="14" fill="#1F2937"/>
-      <text x="32" y="50" text-anchor="middle" font-family="system-ui,sans-serif" font-size="52" font-weight="800" fill="#10B981">%</text>
+      <rect width="64" height="64" rx="14" fill="#10B981"/>
+      <text x="32" y="50" text-anchor="middle" font-family="system-ui,sans-serif" font-size="52" font-weight="800" fill="#FFFFFF">%</text>
     </svg>
     Global <span class="logo-accent">CGPA</span>
   </a>
+
+  <button class="theme-toggle-btn" id="themeToggleBtn" onclick="toggleTheme()" aria-label="Toggle light or dark theme">
+    <span class="theme-icon" id="themeIcon">☀️</span>
+    <span class="theme-label" id="themeLabel">Light</span>
+  </button>
 </header>
 
 <!-- Hero + Calculator -->
@@ -969,5 +1006,39 @@ function toggleFaq(btn) {
   document.querySelectorAll('.faq-item.open').forEach(i => i.classList.remove('open'));
   if (!isOpen) item.classList.add('open');
 }
+
+// ── Theme Toggle ──────────────────────────────────────
+function toggleTheme() {
+  const isLight = document.documentElement.classList.toggle('light-theme');
+  const theme = isLight ? 'light' : 'dark';
+  if (isLight) {
+    document.documentElement.classList.remove('dark');
+    document.documentElement.setAttribute('data-theme', 'light');
+  } else {
+    document.documentElement.classList.add('dark');
+    document.documentElement.setAttribute('data-theme', 'dark');
+  }
+  localStorage.setItem('gcgpa-theme', theme);
+  localStorage.setItem('theme', theme);
+  syncThemeBtn(theme);
+}
+
+function syncThemeBtn(theme) {
+  const icon = document.getElementById('themeIcon');
+  const label = document.getElementById('themeLabel');
+  if (!icon || !label) return;
+  if (theme === 'light') {
+    icon.textContent = '🌙';
+    label.textContent = 'Dark';
+  } else {
+    icon.textContent = '☀️';
+    label.textContent = 'Light';
+  }
+}
+
+(function() {
+  const currentTheme = document.documentElement.classList.contains('light-theme') ? 'light' : 'dark';
+  syncThemeBtn(currentTheme);
+})();
 </script>
 </Layout>

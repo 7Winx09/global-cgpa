@@ -1,6 +1,6 @@
 @import "tailwindcss";
 
-/* ─── CSS Variables (Fixed Dark Theme) ─── */
+/* ─── CSS Variables ─── */
 :root {
   --bg: #111827;
   --bg-card: #1F2937;
@@ -11,6 +11,18 @@
   --border: #374151;
   --primary: #10B981;
   --primary-dark: #059669;
+}
+
+html.light-theme, [data-theme="light"] {
+  --bg: #F8FAFC;
+  --bg-card: #FFFFFF;
+  --bg-soft: #F1F5F9;
+  --text-ink: #0F172A;
+  --text-body: #475569;
+  --text-mute: #64748B;
+  --border: #E2E8F0;
+  --primary: #059669;
+  --primary-dark: #047857;
 }
 
 /* ─── Base ─── */
