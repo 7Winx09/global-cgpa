@@ -74,12 +74,12 @@
             >
             <select id="university-select" class="calc-select">
               <option value="cbse">CBSE / Generic (×9.5)</option>
-              <option value="sppu">SPPU – Pune Univ. (×10 − 7.5)</option>
-              <option value="vtu">VTU – Bangalore (×10)</option>
+              <option value="vtu">VTU – 2015/17/18 Schemes ((CGPA−0.75)×10)</option>
+              <option value="anna">Anna University R-2015/R-2019 (×10)</option>
               <option value="mumbai">Mumbai University (7.1×CGPA + 11)</option>
-              <option value="anna">Anna University (×10 − 7.5)</option>
+              <option value="gtu">GTU – Gujarat ((CGPA−0.5)×10)</option>
+              <option value="sppu">SPPU / Pune ≈ (×10, approx)</option>
               <option value="aktu">AKTU / UPTU (×9.5)</option>
-              <option value="gtu">GTU – Gujarat (×10 − 7.5)</option>
               <option value="ktu">KTU – Kerala (×10)</option>
               <option value="scale5">5-Point Scale (÷5 ×100)</option>
               <option value="scale4">4-Point Scale (÷4 ×100)</option>
@@ -367,8 +367,10 @@
           <tr>
             <th>CGPA</th>
             <th>CBSE (×9.5)</th>
-            <th>SPPU (×10−7.5)</th>
-            <th>VTU (×10)</th>
+            <th>VTU (−0.75×10)</th>
+            <th>Anna (×10)</th>
+            <th>GTU (−0.5×10)</th>
+            <th>Mumbai (7.1c+11)</th>
             <th>Grade</th>
           </tr>
         </thead>
@@ -1103,63 +1105,79 @@
   const UNIS = {
     cbse: {
       label: "CBSE",
-      fn: (c) => c * 9.5,
+      fn: (c) => Math.min(c * 9.5, 100),
       inv: (p) => p / 9.5,
       formula: (c) => `${c} × 9.5`,
-    },
-    sppu: {
-      label: "SPPU",
-      fn: (c) => c * 10 - 7.5,
-      inv: (p) => (p + 7.5) / 10,
-      formula: (c) => `(${c} × 10) − 7.5`,
+      note: "CBSE / Generic 10-pt scale",
     },
     vtu: {
+      // VTU official formula for 2015, 2017 & 2018 schemes
       label: "VTU",
-      fn: (c) => c * 10,
-      inv: (p) => p / 10,
-      formula: (c) => `${c} × 10`,
-    },
-    mumbai: {
-      label: "Mumbai",
-      fn: (c) => 7.1 * c + 11,
-      inv: (p) => (p - 11) / 7.1,
-      formula: (c) => `(7.1 × ${c}) + 11`,
+      fn: (c) => Math.min((c - 0.75) * 10, 100),
+      inv: (p) => p / 10 + 0.75,
+      formula: (c) => `(${c} − 0.75) × 10`,
+      note: "VTU 2015 / 2017 / 2018 schemes (official)",
     },
     anna: {
+      // Anna University official formula for R-2015, R-2017, R-2019
       label: "Anna",
-      fn: (c) => c * 10 - 7.5,
-      inv: (p) => (p + 7.5) / 10,
-      formula: (c) => `(${c} × 10) − 7.5`,
+      fn: (c) => Math.min(c * 10, 100),
+      inv: (p) => p / 10,
+      formula: (c) => `${c} × 10`,
+      note: "Anna Univ R-2015 / R-2017 / R-2019 (official)",
+    },
+    mumbai: {
+      // Mumbai University 2019 circular for 10-pt CBCS system
+      label: "Mumbai",
+      fn: (c) => Math.min(7.1 * c + 11, 100),
+      inv: (p) => (p - 11) / 7.1,
+      formula: (c) => `(7.1 × ${c}) + 11`,
+      note: "Mumbai Univ 2019 circular — 10-pt CBCS system",
+    },
+    gtu: {
+      // GTU official notification
+      label: "GTU",
+      fn: (c) => Math.min((c - 0.5) * 10, 100),
+      inv: (p) => p / 10 + 0.5,
+      formula: (c) => `(${c} − 0.5) × 10`,
+      note: "GTU official notification",
+    },
+    sppu: {
+      // SPPU uses a grade-range system; no single official linear formula.
+      // Best linear approximation: CGPA × 10
+      label: "SPPU",
+      fn: (c) => Math.min(c * 10, 100),
+      inv: (p) => p / 10,
+      formula: (c) => `${c} × 10`,
+      note: "SPPU ≈ approx — SPPU uses grade ranges, not a single formula",
     },
     aktu: {
       label: "AKTU",
-      fn: (c) => c * 9.5,
+      fn: (c) => Math.min(c * 9.5, 100),
       inv: (p) => p / 9.5,
       formula: (c) => `${c} × 9.5`,
-    },
-    gtu: {
-      label: "GTU",
-      fn: (c) => c * 10 - 7.5,
-      inv: (p) => (p + 7.5) / 10,
-      formula: (c) => `(${c} × 10) − 7.5`,
+      note: "AKTU / UPTU guidelines",
     },
     ktu: {
       label: "KTU",
-      fn: (c) => c * 10,
+      fn: (c) => Math.min(c * 10, 100),
       inv: (p) => p / 10,
       formula: (c) => `${c} × 10`,
+      note: "KTU Kerala regulations",
     },
     scale5: {
       label: "5-pt",
-      fn: (c) => (c / 5) * 100,
+      fn: (c) => Math.min((c / 5) * 100, 100),
       inv: (p) => (p / 100) * 5,
       formula: (c) => `(${c} ÷ 5) × 100`,
+      note: "Generic 5-point scale",
     },
     scale4: {
       label: "4-pt",
-      fn: (c) => (c / 4) * 100,
+      fn: (c) => Math.min((c / 4) * 100, 100),
       inv: (p) => (p / 100) * 4,
       formula: (c) => `(${c} ÷ 4) × 100`,
+      note: "Generic 4-point scale",
     },
   };
 
@@ -1271,12 +1289,14 @@
     if (currentMode === "cgpa2pct") {
       const pct = Math.min(uni.fn(raw), 100);
       output = pct.toFixed(2) + "%";
-      formulaStr = `Formula: ${uni.formula(raw)} = ${output} (${uni.label})`;
+      formulaStr = `Formula: ${uni.formula(raw)} = ${output}`
+        + (uni.note ? ` — ${uni.note}` : "");
       percentForGrade = pct;
     } else if (currentMode === "pct2cgpa") {
       const cgpa = Math.min(uni.inv(raw), 10);
       output = cgpa.toFixed(2);
-      formulaStr = `Formula: ${raw}% → ${uni.label} CGPA = ${output}`;
+      formulaStr = `${raw}% → ${uni.label} CGPA = ${output}`
+        + (uni.note ? ` — ${uni.note}` : "");
       percentForGrade = raw;
     } else if (currentMode === "cgpa2gpa") {
       const gpa = Math.min((raw / 10) * 4, 4);
@@ -1557,12 +1577,14 @@
       10.0, 9.5, 9.0, 8.5, 8.0, 7.5, 7.0, 6.5, 6.0, 5.5, 5.0, 4.5, 4.0,
     ];
     cgpaValues.forEach((c) => {
-      const cbse = Math.min(UNIS.cbse.fn(c), 100).toFixed(1) + "%";
-      const sppu = Math.min(UNIS.sppu.fn(c), 100).toFixed(1) + "%";
-      const vtu = Math.min(UNIS.vtu.fn(c), 100).toFixed(1) + "%";
-      const grade = getGradeLabel(UNIS.cbse.fn(c));
+      const cbse    = UNIS.cbse.fn(c).toFixed(1) + "%";
+      const vtu     = UNIS.vtu.fn(c).toFixed(1) + "%";
+      const anna    = UNIS.anna.fn(c).toFixed(1) + "%";
+      const gtu     = UNIS.gtu.fn(c).toFixed(1) + "%";
+      const mumbai  = UNIS.mumbai.fn(c).toFixed(1) + "%";
+      const grade   = getGradeLabel(UNIS.cbse.fn(c));
       const tr = document.createElement("tr");
-      tr.innerHTML = `<td>${c.toFixed(1)}</td><td>${cbse}</td><td>${sppu}</td><td>${vtu}</td><td>${grade}</td>`;
+      tr.innerHTML = `<td>${c.toFixed(1)}</td><td>${cbse}</td><td>${vtu}</td><td>${anna}</td><td>${gtu}</td><td>${mumbai}</td><td>${grade}</td>`;
       tbody.appendChild(tr);
     });
   }
