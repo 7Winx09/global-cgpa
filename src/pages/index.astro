@@ -102,26 +102,110 @@ select:focus, input[type="number"]:focus { outline: none; border-color: var(--pr
 /* Modals */
 .modal-overlay {
   position: fixed; top:0; left:0; right:0; bottom:0;
-  background: rgba(15,23,42,0.3); backdrop-filter: blur(4px);
+  background: rgba(15,23,42,0.75); backdrop-filter: blur(6px);
   display: none; justify-content: center; align-items: center;
   padding: 20px; z-index: 1000;
 }
 .modal-content {
   background: var(--card); border: 1px solid var(--border);
-  border-radius: 24px; padding: 32px; max-width: 550px; width: 100%;
-  max-height: 90vh; overflow-y: auto;
-  box-shadow: 0 20px 25px -5px rgba(0,0,0,0.1);
+  border-radius: 24px; padding: 32px; max-width: 620px; width: 100%;
+  max-height: 88vh; overflow-y: auto;
+  box-shadow: 0 25px 50px -12px rgba(0,0,0,0.5);
 }
-.modal-header { display: flex; justify-content: space-between; align-items: center; margin-bottom: 20px; }
-.modal-header h3 { font-size: 1rem; font-weight: 700; }
-.close-btn { cursor: pointer; background: none; border: none; font-size: 1.3rem; color: var(--muted); line-height: 1; padding: 2px 6px; border-radius: 6px; transition: color 0.2s; }
-.close-btn:hover { color: var(--text); }
-.subject-row { display: flex; gap: 8px; margin-bottom: 8px; }
-.subject-row input { margin-bottom: 0; }
+.modal-header { display: flex; justify-content: space-between; align-items: center; margin-bottom: 8px; }
+.modal-header h3 { font-size: 1.15rem; font-weight: 800; color: var(--text); }
+.modal-desc { font-size: 0.85rem; color: var(--muted); margin-bottom: 20px; line-height: 1.5; }
+
+.close-btn { cursor: pointer; background: var(--result-bg); border: 1px solid var(--border); font-size: 1.2rem; color: var(--muted); width: 32px; height: 32px; border-radius: 50%; display: flex; align-items: center; justify-content: center; transition: all 0.2s; }
+.close-btn:hover { color: var(--text); border-color: var(--primary); background: var(--card); }
+
+/* Grid Headers & Rows for Sub-calculators */
+.calc-grid-header {
+  display: grid; grid-template-columns: 80px 1fr 1fr 36px; gap: 12px;
+  padding: 0 4px 8px; font-size: 0.72rem; font-weight: 700;
+  text-transform: uppercase; letter-spacing: 0.8px; color: var(--muted);
+  border-bottom: 1px solid var(--border); margin-bottom: 14px;
+}
+.marks-grid-header { grid-template-columns: 75px 1fr 1fr 36px; }
+
+.sgpa-calc-row {
+  display: grid; grid-template-columns: 80px 1fr 1fr 36px; gap: 12px;
+  align-items: center; margin-bottom: 10px;
+}
+.marks-calc-row {
+  display: grid; grid-template-columns: 75px 1fr 1fr 36px; gap: 12px;
+  align-items: center; margin-bottom: 10px;
+}
+
+.sem-badge, .sub-badge {
+  background: var(--result-bg); border: 1px solid var(--border);
+  padding: 10px 8px; border-radius: 10px; font-size: 0.8rem; font-weight: 700;
+  color: var(--primary); text-align: center; white-space: nowrap; font-family: inherit;
+}
+
+.sgpa-calc-row input, .marks-calc-row input {
+  width: 100%; padding: 11px 14px; border: 1px solid var(--border);
+  background: var(--result-bg); color: var(--text); font-size: 0.95rem;
+  font-weight: 500; border-radius: 10px; margin-bottom: 0;
+  transition: border-color 0.2s; font-family: inherit;
+}
+.sgpa-calc-row input:focus, .marks-calc-row input:focus {
+  outline: none; border-color: var(--primary);
+}
+
+.remove-row-btn {
+  background: none; border: 1px solid var(--border); color: var(--muted);
+  width: 36px; height: 40px; border-radius: 10px; cursor: pointer;
+  font-size: 1.2rem; display: flex; align-items: center; justify-content: center;
+  transition: all 0.2s; margin-bottom: 0;
+}
+.remove-row-btn:hover {
+  background: rgba(239, 68, 68, 0.15); border-color: #ef4444; color: #ef4444;
+}
+
+.add-btn {
+  width: 100%; padding: 11px; background: transparent;
+  border: 1px dashed var(--border); border-radius: 12px; color: var(--muted);
+  font-size: 0.85rem; font-weight: 600; cursor: pointer; transition: all 0.2s;
+  margin-top: 6px; margin-bottom: 20px; font-family: inherit;
+}
+.add-btn:hover {
+  border-color: var(--primary); color: var(--primary); background: rgba(16, 185, 129, 0.05);
+}
+
+/* Modal Output & Summary Table */
+.modal-output-display { margin-top: 20px; position: relative; }
+.result-values-group { display: flex; justify-content: center; gap: 36px; align-items: center; flex-wrap: wrap; }
+.out-val-sm { font-size: 1.6rem; color: var(--text); }
+
+.sgpa-summary-box {
+  margin: 20px 0 16px; border: 1px solid var(--border); border-radius: 14px;
+  overflow: hidden; background: var(--result-bg);
+}
+.summary-title {
+  padding: 10px 16px; font-size: 0.72rem; font-weight: 700; text-transform: uppercase;
+  letter-spacing: 0.8px; color: var(--muted); border-bottom: 1px solid var(--border);
+}
+.summary-table { width: 100%; border-collapse: collapse; font-size: 0.85rem; text-align: left; }
+.summary-table th { padding: 9px 16px; color: var(--muted); border-bottom: 1px solid var(--border); font-weight: 600; font-size: 0.75rem; text-transform: uppercase; }
+.summary-table td { padding: 9px 16px; border-bottom: 1px solid var(--border); color: var(--text); }
+.summary-total-row td { background: rgba(16, 185, 129, 0.08); border-bottom: none; color: var(--primary); }
+
 .chart-table { width: 100%; border-collapse: collapse; font-size: 0.85rem; text-align: center; }
-.chart-table th { padding: 10px; border: 1px solid var(--border); background: var(--result-bg); font-weight: 700; font-size: 0.75rem; text-transform: uppercase; letter-spacing: 0.5px; color: var(--muted); }
-.chart-table td { padding: 9px 10px; border: 1px solid var(--border); }
+.chart-table th { padding: 12px 10px; border: 1px solid var(--border); background: var(--result-bg); font-weight: 700; font-size: 0.75rem; text-transform: uppercase; letter-spacing: 0.5px; color: var(--muted); }
+.chart-table td { padding: 10px; border: 1px solid var(--border); }
 .chart-table td:first-child { font-weight: 700; color: var(--primary); }
+.grade-pill { display: inline-block; padding: 2px 10px; border-radius: 999px; background: rgba(16, 185, 129, 0.1); color: var(--primary); font-weight: 700; font-size: 0.78rem; }
+
+@media (max-width: 540px) {
+  .calc-grid-header { display: none; }
+  .sgpa-calc-row, .marks-calc-row {
+    grid-template-columns: 1fr 1fr auto; gap: 8px; margin-bottom: 14px;
+  }
+  .sem-badge, .sub-badge { grid-column: 1 / -1; text-align: left; }
+  .result-values-group { gap: 16px; }
+}
+
 /* SEO Article */
 .seo-article { max-width: 780px; margin: 0 auto; padding: 60px 24px 80px; color: var(--text); }
 .seo-article h2 { font-size: 1.55rem; font-weight: 800; letter-spacing: -0.5px; margin: 2.5rem 0 0.75rem; color: var(--text); line-height: 1.25; }
@@ -243,53 +327,93 @@ select:focus, input[type="number"]:focus { outline: none; border-color: var(--pr
 <!-- MODALS -->
 <div class="modal-overlay" id="modal-container" onclick="closeModalOnBg(event)">
 
+  <!-- Modal: Marks to CGPA -->
   <div class="modal-content panel-modal" id="modal-marks" style="display:none">
     <div class="modal-header">
       <h3>Marks to CGPA / SGPA</h3>
       <button class="close-btn" onclick="hideModals()">&times;</button>
     </div>
+    <p class="modal-desc">Enter marks obtained and maximum marks per subject to calculate your overall CGPA on a 10-point scale.</p>
+    
+    <div class="calc-grid-header marks-grid-header">
+      <span>Subject</span>
+      <span>Marks Obtained</span>
+      <span>Max Marks</span>
+      <span></span>
+    </div>
     <div id="marks_rows_box"></div>
-    <div class="output-display">
+    <button class="add-btn" type="button" onclick="addMarksRowAuto()">+ Add Subject</button>
+
+    <div class="output-display modal-output-display">
       <button class="copy-btn" onclick="copyEl('m_res_val')" title="Copy result">⎘</button>
       <div class="out-val" id="m_res_val">—</div>
-      <div class="out-lbl">CGPA / SGPA</div>
+      <div class="out-lbl">Calculated CGPA / SGPA</div>
     </div>
   </div>
 
+  <!-- Modal: SGPA to CGPA -->
   <div class="modal-content panel-modal" id="modal-sgpa" style="display:none">
     <div class="modal-header">
       <h3>SGPA to Cumulative CGPA</h3>
       <button class="close-btn" onclick="hideModals()">&times;</button>
     </div>
+    <p class="modal-desc">Enter your SGPA and credit count for each semester. All 8 semesters are pre-loaded for a standard 4-year degree — leave unused ones blank or remove them.</p>
+
+    <div class="calc-grid-header">
+      <span>Semester</span>
+      <span>SGPA (0–10)</span>
+      <span>Credits</span>
+      <span></span>
+    </div>
     <div id="sgpa_rows_box"></div>
-    <div class="output-display">
+    <button class="add-btn" type="button" onclick="addSgpaRowAuto()">+ Add Semester</button>
+
+    <!-- Semester Breakdown Table -->
+    <div class="sgpa-summary-box" id="sgpa_summary_box" style="display:none">
+      <div class="summary-title">Semester Breakdown</div>
+      <table class="summary-table">
+        <thead>
+          <tr><th>Semester</th><th>SGPA</th><th>Credits</th><th>Weighted Points</th></tr>
+        </thead>
+        <tbody id="sgpa_summary_body"></tbody>
+      </table>
+    </div>
+
+    <div class="output-display modal-output-display">
       <button class="copy-btn" onclick="copyEl('s_res_val')" title="Copy result">⎘</button>
-      <div class="out-val" id="s_res_val">—</div>
-      <div class="out-lbl">Weighted CGPA</div>
+      <div class="result-values-group">
+        <div>
+          <div class="out-val" id="s_res_val">—</div>
+          <div class="out-lbl">Cumulative CGPA</div>
+        </div>
+        <div id="s_pct_box" style="display:none">
+          <div class="out-val out-val-sm" id="s_pct_val">—</div>
+          <div class="out-lbl">≈ Percentage (CBSE)</div>
+        </div>
+      </div>
     </div>
   </div>
 
+  <!-- Modal: Conversion Chart -->
   <div class="modal-content panel-modal" id="modal-chart" style="display:none">
     <div class="modal-header">
-      <h3>CGPA Conversion Chart</h3>
+      <h3>CGPA to Percentage Conversion Chart</h3>
       <button class="close-btn" onclick="hideModals()">&times;</button>
     </div>
-    <p style="font-size:0.82rem; color:var(--muted); margin-bottom:16px;">Based on the standard CBSE formula (CGPA × 9.5). Actual percentages vary by university.</p>
+    <p class="modal-desc">Comprehensive reference table for converting CGPA across major Indian universities and 4.0 GPA scale.</p>
     <div style="overflow-x:auto;">
       <table class="chart-table">
-        <thead><tr><th>CGPA</th><th>Percentage</th><th>GPA (4.0)</th><th>Grade</th></tr></thead>
-        <tbody>
-          <tr><td>10.0</td><td>95.0%</td><td>4.00</td><td>O</td></tr>
-          <tr><td>9.5</td><td>90.25%</td><td>3.80</td><td>A+</td></tr>
-          <tr><td>9.0</td><td>85.5%</td><td>3.60</td><td>A+</td></tr>
-          <tr><td>8.5</td><td>80.75%</td><td>3.40</td><td>A</td></tr>
-          <tr><td>8.0</td><td>76.0%</td><td>3.20</td><td>A</td></tr>
-          <tr><td>7.5</td><td>71.25%</td><td>3.00</td><td>B+</td></tr>
-          <tr><td>7.0</td><td>66.5%</td><td>2.80</td><td>B+</td></tr>
-          <tr><td>6.5</td><td>61.75%</td><td>2.60</td><td>B</td></tr>
-          <tr><td>6.0</td><td>57.0%</td><td>2.40</td><td>B</td></tr>
-          <tr><td>5.0</td><td>47.5%</td><td>2.00</td><td>C</td></tr>
-        </tbody>
+        <thead>
+          <tr>
+            <th>CGPA</th>
+            <th>CBSE (×9.5)</th>
+            <th>SPPU (×10−7.5)</th>
+            <th>VTU (×10)</th>
+            <th>Mumbai Univ</th>
+            <th>Grade</th>
+          </tr>
+        </thead>
+        <tbody id="chart-tbody"></tbody>
       </table>
     </div>
   </div>
@@ -607,11 +731,16 @@ function copyEl(id) {
   setTimeout(() => { btn.textContent = orig; btn.style.color = ''; }, 1500);
 }
 
-// ── Modals ─────────────────────────────────────────────
+// ── Modals & Sub-calculators ─────────────────────────────
 function openModal(id) {
   document.getElementById('modal-container').style.display = 'flex';
   document.querySelectorAll('.panel-modal').forEach(m => m.style.display = 'none');
-  document.getElementById(id).style.display = 'block';
+  const target = document.getElementById(id);
+  if (target) target.style.display = 'block';
+
+  if (id === 'modal-sgpa') initSgpaRows();
+  if (id === 'modal-marks') initMarksRows();
+  if (id === 'modal-chart') buildConversionChart();
 }
 function hideModals() {
   document.getElementById('modal-container').style.display = 'none';
@@ -619,53 +748,226 @@ function hideModals() {
 function closeModalOnBg(e) {
   if (e.target.id === 'modal-container') hideModals();
 }
+document.addEventListener('keydown', (e) => {
+  if (e.key === 'Escape') hideModals();
+});
 
-// ── Sub-calculators ────────────────────────────────────
-function setupCalculators() {
-  const mBox = document.getElementById('marks_rows_box');
-  for (let i = 1; i <= 5; i++) {
-    const row = document.createElement('div');
-    row.className = 'subject-row';
-    row.innerHTML = `<input type="number" placeholder="Sub ${i} marks" id="mk${i}" min="0" oninput="calcMarks()"><input type="number" placeholder="Out of" id="mt${i}" min="1" oninput="calcMarks()">`;
-    mBox.appendChild(row);
-  }
-  const sBox = document.getElementById('sgpa_rows_box');
-  for (let i = 1; i <= 4; i++) {
-    const row = document.createElement('div');
-    row.className = 'subject-row';
-    row.innerHTML = `<input type="number" placeholder="Sem ${i} SGPA" id="sg${i}" min="0" max="10" step="0.01" oninput="calcSgpa()"><input type="number" placeholder="Credits" id="sc${i}" min="1" oninput="calcSgpa()">`;
-    sBox.appendChild(row);
+// ── SGPA to CGPA (8 Semesters + Add/Remove) ──────────────
+let sgpaCount = 0;
+const defaultCredits = [22, 22, 24, 24, 24, 24, 22, 22];
+
+function initSgpaRows() {
+  const box = document.getElementById('sgpa_rows_box');
+  if (!box || box.children.length > 0) return;
+  for (let i = 1; i <= 8; i++) {
+    createSgpaRow(i, defaultCredits[i - 1] || 24);
   }
 }
 
-function calcMarks() {
-  let obt = 0, tot = 0;
-  for (let i = 1; i <= 5; i++) {
-    const o = parseFloat(document.getElementById(`mk${i}`).value);
-    const t = parseFloat(document.getElementById(`mt${i}`).value);
-    if (!isNaN(o) && !isNaN(t) && t > 0) { obt += o; tot += t; }
-  }
-  document.getElementById('m_res_val').textContent = tot > 0 ? ((obt / tot) * 10).toFixed(2) : '—';
+function createSgpaRow(semNum, defaultCred) {
+  const box = document.getElementById('sgpa_rows_box');
+  sgpaCount++;
+  const num = semNum || sgpaCount;
+  const row = document.createElement('div');
+  row.className = 'sgpa-calc-row';
+  row.innerHTML = `
+    <span class="sem-badge">Sem ${num}</span>
+    <input type="number" class="sgpa-val" placeholder="e.g. 8.50" min="0" max="10" step="0.01" oninput="calcSgpa()">
+    <input type="number" class="sgpa-cred" placeholder="${defaultCred}" min="1" step="1" oninput="calcSgpa()">
+    <button type="button" class="remove-row-btn" onclick="removeSgpaRow(this)" title="Remove semester">&times;</button>
+  `;
+  box.appendChild(row);
+  reindexSgpaBadges();
+}
+
+function addSgpaRowAuto() {
+  const currentRows = document.querySelectorAll('#sgpa_rows_box .sgpa-calc-row').length;
+  createSgpaRow(currentRows + 1, 24);
+  calcSgpa();
+}
+
+function removeSgpaRow(btn) {
+  btn.closest('.sgpa-calc-row').remove();
+  reindexSgpaBadges();
+  calcSgpa();
+}
+
+function reindexSgpaBadges() {
+  const rows = document.querySelectorAll('#sgpa_rows_box .sgpa-calc-row');
+  rows.forEach((row, idx) => {
+    const badge = row.querySelector('.sem-badge');
+    if (badge) badge.textContent = `Sem ${idx + 1}`;
+  });
 }
 
 function calcSgpa() {
-  let num = 0, den = 0;
-  for (let i = 1; i <= 4; i++) {
-    const s = parseFloat(document.getElementById(`sg${i}`).value);
-    const c = parseFloat(document.getElementById(`sc${i}`).value);
-    if (!isNaN(s) && !isNaN(c) && c > 0) { num += s * c; den += c; }
+  const rows = document.querySelectorAll('#sgpa_rows_box .sgpa-calc-row');
+  let totalWeighted = 0;
+  let totalCredits = 0;
+  const breakdown = [];
+
+  rows.forEach((row, idx) => {
+    const sVal = parseFloat(row.querySelector('.sgpa-val').value);
+    const cInput = row.querySelector('.sgpa-cred');
+    const cVal = parseFloat(cInput.value || cInput.placeholder);
+    const sgpaInput = row.querySelector('.sgpa-val').value;
+    
+    if (sgpaInput !== '' && !isNaN(sVal) && sVal >= 0 && sVal <= 10) {
+      const cred = (!isNaN(cVal) && cVal > 0) ? cVal : 24;
+      const pts = sVal * cred;
+      totalWeighted += pts;
+      totalCredits += cred;
+      breakdown.push({ sem: `Sem ${idx + 1}`, sgpa: sVal, credits: cred, weighted: pts });
+    }
+  });
+
+  const resVal = document.getElementById('s_res_val');
+  const pctVal = document.getElementById('s_pct_val');
+  const pctBox = document.getElementById('s_pct_box');
+  const summaryBox = document.getElementById('sgpa_summary_box');
+  const summaryBody = document.getElementById('sgpa_summary_body');
+
+  if (totalCredits > 0) {
+    const cgpa = totalWeighted / totalCredits;
+    const cgpaFormatted = cgpa.toFixed(2);
+    resVal.textContent = cgpaFormatted;
+    
+    const pctApprox = Math.min(cgpa * 9.5, 100).toFixed(1) + '%';
+    if (pctVal) pctVal.textContent = pctApprox;
+    if (pctBox) pctBox.style.display = 'block';
+
+    if (summaryBody && summaryBox) {
+      summaryBody.innerHTML = breakdown.map(item => `
+        <tr>
+          <td>${item.sem}</td>
+          <td>${item.sgpa.toFixed(2)}</td>
+          <td>${item.credits}</td>
+          <td>${item.weighted.toFixed(2)}</td>
+        </tr>
+      `).join('') + `
+        <tr class="summary-total-row">
+          <td><strong>Total / CGPA</strong></td>
+          <td><strong>—</strong></td>
+          <td><strong>${totalCredits}</strong></td>
+          <td><strong>${cgpaFormatted} CGPA</strong></td>
+        </tr>
+      `;
+      summaryBox.style.display = 'block';
+    }
+  } else {
+    resVal.textContent = '—';
+    if (pctBox) pctBox.style.display = 'none';
+    if (summaryBox) summaryBox.style.display = 'none';
   }
-  document.getElementById('s_res_val').textContent = den > 0 ? (num / den).toFixed(2) : '—';
 }
 
-// ── FAQ ─────────────────────────────────────────────────
+// ── Marks to CGPA ────────────────────────────────────
+let marksCount = 0;
+
+function initMarksRows() {
+  const box = document.getElementById('marks_rows_box');
+  if (!box || box.children.length > 0) return;
+  for (let i = 1; i <= 5; i++) {
+    createMarksRow(i);
+  }
+}
+
+function createMarksRow(subNum) {
+  const box = document.getElementById('marks_rows_box');
+  marksCount++;
+  const num = subNum || marksCount;
+  const row = document.createElement('div');
+  row.className = 'marks-calc-row';
+  row.innerHTML = `
+    <span class="sub-badge">Sub ${num}</span>
+    <input type="number" class="marks-obt" placeholder="e.g. 85" min="0" oninput="calcMarks()">
+    <input type="number" class="marks-max" placeholder="100" min="1" value="100" oninput="calcMarks()">
+    <button type="button" class="remove-row-btn" onclick="removeMarksRow(this)" title="Remove subject">&times;</button>
+  `;
+  box.appendChild(row);
+  reindexMarksBadges();
+}
+
+function addMarksRowAuto() {
+  const currentRows = document.querySelectorAll('#marks_rows_box .marks-calc-row').length;
+  createMarksRow(currentRows + 1);
+  calcMarks();
+}
+
+function removeMarksRow(btn) {
+  btn.closest('.marks-calc-row').remove();
+  reindexMarksBadges();
+  calcMarks();
+}
+
+function reindexMarksBadges() {
+  const rows = document.querySelectorAll('#marks_rows_box .marks-calc-row');
+  rows.forEach((row, idx) => {
+    const badge = row.querySelector('.sub-badge');
+    if (badge) badge.textContent = `Sub ${idx + 1}`;
+  });
+}
+
+function calcMarks() {
+  const rows = document.querySelectorAll('#marks_rows_box .marks-calc-row');
+  let totalObtained = 0;
+  let totalMax = 0;
+
+  rows.forEach(row => {
+    const o = parseFloat(row.querySelector('.marks-obt').value);
+    const m = parseFloat(row.querySelector('.marks-max').value || 100);
+    if (!isNaN(o) && o >= 0 && !isNaN(m) && m > 0) {
+      totalObtained += o;
+      totalMax += m;
+    }
+  });
+
+  const resVal = document.getElementById('m_res_val');
+  if (totalMax > 0) {
+    const cgpa = (totalObtained / totalMax) * 10;
+    resVal.textContent = cgpa.toFixed(2);
+  } else {
+    resVal.textContent = '—';
+  }
+}
+
+// ── Conversion Chart ─────────────────────────────────
+function buildConversionChart() {
+  const tbody = document.getElementById('chart-tbody');
+  if (!tbody || tbody.children.length > 0) return;
+  const values = [10.0, 9.5, 9.0, 8.5, 8.0, 7.5, 7.0, 6.5, 6.0, 5.5, 5.0, 4.5, 4.0];
+  tbody.innerHTML = values.map(c => {
+    const cbse = (c * 9.5).toFixed(1) + '%';
+    const sppu = Math.max(0, (c * 10) - 7.5).toFixed(1) + '%';
+    const vtu = (c * 10).toFixed(1) + '%';
+    const mumbai = ((7.1 * c) + 11).toFixed(1) + '%';
+    let grade = 'F';
+    if (c >= 9.0) grade = 'O (Outstanding)';
+    else if (c >= 8.0) grade = 'A+ (Excellent)';
+    else if (c >= 7.0) grade = 'A (Very Good)';
+    else if (c >= 6.0) grade = 'B+ (Good)';
+    else if (c >= 5.0) grade = 'B (Average)';
+    else if (c >= 4.0) grade = 'C (Pass)';
+
+    return `
+      <tr>
+        <td><strong>${c.toFixed(1)}</strong></td>
+        <td>${cbse}</td>
+        <td>${sppu}</td>
+        <td>${vtu}</td>
+        <td>${mumbai}</td>
+        <td><span class="grade-pill">${grade}</span></td>
+      </tr>
+    `;
+  }).join('');
+}
+
+// ── FAQ ───────────────────────────────────────────────
 function toggleFaq(btn) {
   const item = btn.closest('.faq-item');
   const isOpen = item.classList.contains('open');
   document.querySelectorAll('.faq-item.open').forEach(i => i.classList.remove('open'));
   if (!isOpen) item.classList.add('open');
 }
-
-setupCalculators();
 </script>
 </Layout>
