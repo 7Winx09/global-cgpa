@@ -245,10 +245,10 @@
     <table class="subcalc-table">
       <thead>
         <tr>
-          <th style="width: 85px; text-align: center;">Subject</th>
+          <th style="width: 72px; text-align: center;">Subject</th>
           <th style="text-align: left;">Marks Obtained</th>
-          <th style="text-align: left;">Max Marks</th>
-          <th style="width: 48px; text-align: center;"></th>
+          <th style="width: 95px; text-align: left;">Max Marks</th>
+          <th style="width: 38px; text-align: center;"></th>
         </tr>
       </thead>
       <tbody id="marks-rows"></tbody>
@@ -301,11 +301,11 @@
     <table class="subcalc-table">
       <thead>
         <tr>
-          <th style="width: 80px; text-align: center;">Semester</th>
+          <th style="width: 72px; text-align: center;">Semester</th>
           <th style="text-align: left;">Score / Marks</th>
-          <th style="width: 105px; text-align: left;">Out of (0–10)</th>
-          <th style="width: 85px; text-align: left;">Credits</th>
-          <th style="width: 44px; text-align: center;"></th>
+          <th style="width: 80px; text-align: left;">Out of</th>
+          <th style="width: 76px; text-align: left;">Credits</th>
+          <th style="width: 38px; text-align: center;"></th>
         </tr>
       </thead>
       <tbody id="sgpa-rows"></tbody>
@@ -848,22 +848,23 @@
   .subcalc-table {
     width: 100%;
     border-collapse: separate;
-    border-spacing: 0 10px;
+    border-spacing: 0 8px;
     table-layout: fixed;
     margin-bottom: 8px;
   }
   .subcalc-table th {
-    padding: 0 8px 8px;
+    padding: 0 6px 8px;
     font-size: 11px;
     font-weight: 700;
     text-transform: uppercase;
-    letter-spacing: 0.06em;
+    letter-spacing: 0.05em;
     color: var(--text-mute);
     border-bottom: 1px solid var(--border);
     font-family: "JetBrains Mono", monospace;
+    white-space: nowrap;
   }
   .subcalc-table td {
-    padding: 0 6px;
+    padding: 0 4px;
     vertical-align: middle;
   }
   .subcalc-table td:first-child {
@@ -873,39 +874,39 @@
     padding-right: 0;
   }
 
-  .subcalc-table input {
-    height: 40px;
-    background: var(--bg-soft);
-    color: var(--text-ink);
-    border: 1px solid var(--border);
-    border-radius: 6px;
-    font-family: inherit;
-    font-size: 13px;
-    padding: 0 10px;
-    outline: none;
-    transition: border-color 0.15s;
-    width: 100%;
-    box-sizing: border-box;
-    display: block;
+  .subcalc-table :global(input) {
+    height: 38px !important;
+    background: var(--bg-soft) !important;
+    color: var(--text-ink) !important;
+    border: 1px solid var(--border) !important;
+    border-radius: 6px !important;
+    font-family: inherit !important;
+    font-size: 13px !important;
+    padding: 0 10px !important;
+    outline: none !important;
+    transition: border-color 0.15s !important;
+    width: 100% !important;
+    box-sizing: border-box !important;
+    display: block !important;
   }
 
-  .subcalc-table input:focus {
-    border-color: var(--text-ink);
-    background: var(--bg-card);
+  .subcalc-table :global(input:focus) {
+    border-color: var(--text-ink) !important;
+    background: var(--bg-card) !important;
   }
 
   /* Hide number input spinners for clean tabular look */
-  .subcalc-table input[type="number"]::-webkit-outer-spin-button,
-  .subcalc-table input[type="number"]::-webkit-inner-spin-button {
+  .subcalc-table :global(input[type="number"]::-webkit-outer-spin-button),
+  .subcalc-table :global(input[type="number"]::-webkit-inner-spin-button) {
     -webkit-appearance: none;
     margin: 0;
   }
-  .subcalc-table input[type="number"] {
+  .subcalc-table :global(input[type="number"]) {
     -moz-appearance: textfield;
   }
 
-  .sem-badge {
-    height: 40px;
+  .subcalc-table :global(.sem-badge) {
+    height: 38px;
     display: flex;
     align-items: center;
     justify-content: center;
@@ -920,9 +921,9 @@
     box-sizing: border-box;
   }
 
-  .remove-row-btn {
-    width: 40px;
-    height: 40px;
+  .subcalc-table :global(.remove-row-btn) {
+    width: 38px;
+    height: 38px;
     background: none;
     border: 1px solid var(--border);
     border-radius: 6px;
@@ -937,7 +938,7 @@
     box-sizing: border-box;
   }
 
-  .remove-row-btn:hover {
+  .subcalc-table :global(.remove-row-btn:hover) {
     background: #fee2e2;
     border-color: #fca5a5;
     color: #dc2626;

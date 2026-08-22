@@ -140,8 +140,8 @@ select:focus, input[type="number"]:focus { outline: none; border-color: var(--pr
 }
 .modal-content {
   background: var(--card); border: 1px solid var(--border);
-  border-radius: 24px; padding: 32px; max-width: 620px; width: 100%;
-  max-height: 88vh; overflow-y: auto;
+  border-radius: 24px; padding: 28px 24px; max-width: 580px; width: 100%;
+  max-height: 88vh; overflow-y: auto; overflow-x: hidden;
   box-shadow: 0 25px 50px -12px rgba(0,0,0,0.5);
 }
 .modal-header { display: flex; justify-content: space-between; align-items: center; margin-bottom: 8px; }
@@ -155,21 +155,22 @@ select:focus, input[type="number"]:focus { outline: none; border-color: var(--pr
 .subcalc-table {
   width: 100%;
   border-collapse: separate;
-  border-spacing: 0 10px;
+  border-spacing: 0 8px;
   table-layout: fixed;
   margin-bottom: 8px;
 }
 .subcalc-table th {
-  padding: 0 8px 8px;
-  font-size: 0.75rem;
+  padding: 0 6px 8px;
+  font-size: 0.72rem;
   font-weight: 700;
   text-transform: uppercase;
-  letter-spacing: 0.8px;
+  letter-spacing: 0.5px;
   color: var(--muted);
   border-bottom: 1px solid var(--border);
+  white-space: nowrap;
 }
 .subcalc-table td {
-  padding: 0 6px;
+  padding: 0 4px;
   vertical-align: middle;
 }
 .subcalc-table td:first-child {
@@ -179,37 +180,39 @@ select:focus, input[type="number"]:focus { outline: none; border-color: var(--pr
   padding-right: 0;
 }
 
-.subcalc-table input {
-  width: 100%;
-  height: 44px;
-  padding: 0 14px;
-  border: 1px solid var(--border);
-  background: var(--result-bg);
-  color: var(--text);
-  font-size: 0.95rem;
-  font-weight: 500;
-  border-radius: 10px;
-  margin: 0;
-  box-sizing: border-box;
-  transition: border-color 0.2s, background 0.2s;
-  font-family: inherit;
-  display: block;
+.subcalc-table :global(input) {
+  width: 100% !important;
+  height: 38px !important;
+  padding: 0 10px !important;
+  border: 1px solid var(--border) !important;
+  background: var(--result-bg) !important;
+  color: var(--text) !important;
+  font-size: 0.88rem !important;
+  font-weight: 500 !important;
+  border-radius: 8px !important;
+  margin: 0 !important;
+  box-sizing: border-box !important;
+  transition: border-color 0.2s, background 0.2s !important;
+  font-family: inherit !important;
+  display: block !important;
 }
-.subcalc-table input:focus {
-  outline: none;
-  border-color: var(--primary);
-  background: var(--card);
+.subcalc-table :global(input:focus) {
+  outline: none !important;
+  border-color: var(--primary) !important;
+  background: var(--card) !important;
+  box-shadow: 0 0 0 2px rgba(16, 185, 129, 0.2) !important;
 }
 
-.sem-badge, .sub-badge {
+.subcalc-table :global(.sem-badge), 
+.subcalc-table :global(.sub-badge) {
   background: var(--result-bg);
   border: 1px solid var(--border);
-  height: 44px;
+  height: 38px;
   display: flex;
   align-items: center;
   justify-content: center;
-  border-radius: 10px;
-  font-size: 0.82rem;
+  border-radius: 8px;
+  font-size: 0.8rem;
   font-weight: 700;
   color: var(--primary);
   text-align: center;
@@ -219,25 +222,15 @@ select:focus, input[type="number"]:focus { outline: none; border-color: var(--pr
   margin: 0;
 }
 
-/* Hide number input spinners for clean tabular look */
-input[type="number"]::-webkit-outer-spin-button,
-input[type="number"]::-webkit-inner-spin-button {
-  -webkit-appearance: none;
-  margin: 0;
-}
-input[type="number"] {
-  -moz-appearance: textfield;
-}
-
-.remove-row-btn {
+.subcalc-table :global(.remove-row-btn) {
   background: var(--result-bg);
   border: 1px solid var(--border);
   color: var(--muted);
-  width: 44px;
-  height: 44px;
-  border-radius: 10px;
+  width: 38px;
+  height: 38px;
+  border-radius: 8px;
   cursor: pointer;
-  font-size: 1.25rem;
+  font-size: 1.1rem;
   display: flex;
   align-items: center;
   justify-content: center;
@@ -246,7 +239,7 @@ input[type="number"] {
   box-sizing: border-box;
   line-height: 1;
 }
-.remove-row-btn:hover {
+.subcalc-table :global(.remove-row-btn:hover) {
   background: rgba(239, 68, 68, 0.15);
   border-color: #ef4444;
   color: #ef4444;
@@ -432,10 +425,10 @@ input[type="number"] {
     <table class="subcalc-table">
       <thead>
         <tr>
-          <th style="width: 85px; text-align: center;">Subject</th>
+          <th style="width: 72px; text-align: center;">Subject</th>
           <th style="text-align: left;">Marks Obtained</th>
-          <th style="text-align: left;">Max Marks</th>
-          <th style="width: 48px; text-align: center;"></th>
+          <th style="width: 95px; text-align: left;">Max Marks</th>
+          <th style="width: 38px; text-align: center;"></th>
         </tr>
       </thead>
       <tbody id="marks_rows_box"></tbody>
@@ -460,11 +453,11 @@ input[type="number"] {
     <table class="subcalc-table">
       <thead>
         <tr>
-          <th style="width: 80px; text-align: center;">Semester</th>
+          <th style="width: 72px; text-align: center;">Semester</th>
           <th style="text-align: left;">Score / Marks</th>
-          <th style="width: 105px; text-align: left;">Out of (0–10)</th>
-          <th style="width: 85px; text-align: left;">Credits</th>
-          <th style="width: 44px; text-align: center;"></th>
+          <th style="width: 80px; text-align: left;">Out of</th>
+          <th style="width: 76px; text-align: left;">Credits</th>
+          <th style="width: 38px; text-align: center;"></th>
         </tr>
       </thead>
       <tbody id="sgpa_rows_box"></tbody>

@@ -46,6 +46,16 @@ body {
   transition: background 0.2s, color 0.2s;
 }
 
+/* Hide number input spinners globally */
+input[type="number"]::-webkit-outer-spin-button,
+input[type="number"]::-webkit-inner-spin-button {
+  -webkit-appearance: none;
+  margin: 0;
+}
+input[type="number"] {
+  -moz-appearance: textfield;
+}
+
 ::selection {
   background: #0f172a;
   color: #f2f2f2;
