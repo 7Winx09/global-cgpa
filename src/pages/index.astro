@@ -151,48 +151,105 @@ select:focus, input[type="number"]:focus { outline: none; border-color: var(--pr
 .close-btn { cursor: pointer; background: var(--result-bg); border: 1px solid var(--border); font-size: 1.2rem; color: var(--muted); width: 32px; height: 32px; border-radius: 50%; display: flex; align-items: center; justify-content: center; transition: all 0.2s; }
 .close-btn:hover { color: var(--text); border-color: var(--primary); background: var(--card); }
 
-/* Grid Headers & Rows for Sub-calculators */
-.calc-grid-header {
-  display: grid; grid-template-columns: 80px 1fr 1fr 36px; gap: 12px;
-  padding: 0 4px 8px; font-size: 0.72rem; font-weight: 700;
-  text-transform: uppercase; letter-spacing: 0.8px; color: var(--muted);
-  border-bottom: 1px solid var(--border); margin-bottom: 14px;
+/* Tabular Sub-calculators without outer borders */
+.subcalc-table {
+  width: 100%;
+  border-collapse: separate;
+  border-spacing: 0 10px;
+  table-layout: fixed;
+  margin-bottom: 8px;
 }
-.marks-grid-header { grid-template-columns: 75px 1fr 1fr 36px; }
+.subcalc-table th {
+  padding: 0 8px 8px;
+  font-size: 0.75rem;
+  font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: 0.8px;
+  color: var(--muted);
+  border-bottom: 1px solid var(--border);
+}
+.subcalc-table td {
+  padding: 0 6px;
+  vertical-align: middle;
+}
+.subcalc-table td:first-child {
+  padding-left: 0;
+}
+.subcalc-table td:last-child {
+  padding-right: 0;
+}
 
-.sgpa-calc-row {
-  display: grid; grid-template-columns: 80px 1fr 1fr 36px; gap: 12px;
-  align-items: center; margin-bottom: 10px;
+.subcalc-table input {
+  width: 100%;
+  height: 44px;
+  padding: 0 14px;
+  border: 1px solid var(--border);
+  background: var(--result-bg);
+  color: var(--text);
+  font-size: 0.95rem;
+  font-weight: 500;
+  border-radius: 10px;
+  margin: 0;
+  box-sizing: border-box;
+  transition: border-color 0.2s, background 0.2s;
+  font-family: inherit;
+  display: block;
 }
-.marks-calc-row {
-  display: grid; grid-template-columns: 75px 1fr 1fr 36px; gap: 12px;
-  align-items: center; margin-bottom: 10px;
+.subcalc-table input:focus {
+  outline: none;
+  border-color: var(--primary);
+  background: var(--card);
 }
 
 .sem-badge, .sub-badge {
-  background: var(--result-bg); border: 1px solid var(--border);
-  padding: 10px 8px; border-radius: 10px; font-size: 0.8rem; font-weight: 700;
-  color: var(--primary); text-align: center; white-space: nowrap; font-family: inherit;
+  background: var(--result-bg);
+  border: 1px solid var(--border);
+  height: 44px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  border-radius: 10px;
+  font-size: 0.82rem;
+  font-weight: 700;
+  color: var(--primary);
+  text-align: center;
+  white-space: nowrap;
+  font-family: inherit;
+  box-sizing: border-box;
+  margin: 0;
 }
 
-.sgpa-calc-row input, .marks-calc-row input {
-  width: 100%; padding: 11px 14px; border: 1px solid var(--border);
-  background: var(--result-bg); color: var(--text); font-size: 0.95rem;
-  font-weight: 500; border-radius: 10px; margin-bottom: 0;
-  transition: border-color 0.2s; font-family: inherit;
+/* Hide number input spinners for clean tabular look */
+input[type="number"]::-webkit-outer-spin-button,
+input[type="number"]::-webkit-inner-spin-button {
+  -webkit-appearance: none;
+  margin: 0;
 }
-.sgpa-calc-row input:focus, .marks-calc-row input:focus {
-  outline: none; border-color: var(--primary);
+input[type="number"] {
+  -moz-appearance: textfield;
 }
 
 .remove-row-btn {
-  background: none; border: 1px solid var(--border); color: var(--muted);
-  width: 36px; height: 40px; border-radius: 10px; cursor: pointer;
-  font-size: 1.2rem; display: flex; align-items: center; justify-content: center;
-  transition: all 0.2s; margin-bottom: 0;
+  background: var(--result-bg);
+  border: 1px solid var(--border);
+  color: var(--muted);
+  width: 44px;
+  height: 44px;
+  border-radius: 10px;
+  cursor: pointer;
+  font-size: 1.25rem;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  transition: all 0.2s;
+  margin: 0 auto;
+  box-sizing: border-box;
+  line-height: 1;
 }
 .remove-row-btn:hover {
-  background: rgba(239, 68, 68, 0.15); border-color: #ef4444; color: #ef4444;
+  background: rgba(239, 68, 68, 0.15);
+  border-color: #ef4444;
+  color: #ef4444;
 }
 
 .add-btn {
@@ -370,15 +427,19 @@ select:focus, input[type="number"]:focus { outline: none; border-color: var(--pr
       <h3>Marks to CGPA / SGPA</h3>
       <button class="close-btn" onclick="hideModals()">&times;</button>
     </div>
-    <p class="modal-desc">Enter marks obtained and maximum marks per subject to calculate your overall CGPA on a 10-point scale.</p>
+    <p class="modal-desc">Enter marks obtained and maximum marks per subject to calculate your overall CGPA on a 10-point scale. Add more subjects with the + button below.</p>
     
-    <div class="calc-grid-header marks-grid-header">
-      <span>Subject</span>
-      <span>Marks Obtained</span>
-      <span>Max Marks</span>
-      <span></span>
-    </div>
-    <div id="marks_rows_box"></div>
+    <table class="subcalc-table">
+      <thead>
+        <tr>
+          <th style="width: 85px; text-align: center;">Subject</th>
+          <th style="text-align: left;">Marks Obtained</th>
+          <th style="text-align: left;">Max Marks</th>
+          <th style="width: 48px; text-align: center;"></th>
+        </tr>
+      </thead>
+      <tbody id="marks_rows_box"></tbody>
+    </table>
     <button class="add-btn" type="button" onclick="addMarksRowAuto()">+ Add Subject</button>
 
     <div class="output-display modal-output-display">
@@ -394,15 +455,20 @@ select:focus, input[type="number"]:focus { outline: none; border-color: var(--pr
       <h3>SGPA to Cumulative CGPA</h3>
       <button class="close-btn" onclick="hideModals()">&times;</button>
     </div>
-    <p class="modal-desc">Enter your SGPA and credit count for each semester. All 8 semesters are pre-loaded for a standard 4-year degree — leave unused ones blank or remove them.</p>
+    <p class="modal-desc">Enter your SGPA and credit count for each semester. Add more semesters with the + button below.</p>
 
-    <div class="calc-grid-header">
-      <span>Semester</span>
-      <span>SGPA (0–10)</span>
-      <span>Credits</span>
-      <span></span>
-    </div>
-    <div id="sgpa_rows_box"></div>
+    <table class="subcalc-table">
+      <thead>
+        <tr>
+          <th style="width: 80px; text-align: center;">Semester</th>
+          <th style="text-align: left;">Score / Marks</th>
+          <th style="width: 105px; text-align: left;">Out of (0–10)</th>
+          <th style="width: 85px; text-align: left;">Credits</th>
+          <th style="width: 44px; text-align: center;"></th>
+        </tr>
+      </thead>
+      <tbody id="sgpa_rows_box"></tbody>
+    </table>
     <button class="add-btn" type="button" onclick="addSgpaRowAuto()">+ Add Semester</button>
 
     <!-- Semester Breakdown Table -->
@@ -796,41 +862,41 @@ const defaultCredits = [22, 22, 24, 24, 24, 24, 22, 22];
 function initSgpaRows() {
   const box = document.getElementById('sgpa_rows_box');
   if (!box || box.children.length > 0) return;
-  for (let i = 1; i <= 8; i++) {
-    createSgpaRow(i, defaultCredits[i - 1] || 24);
-  }
+  // Start with 1 empty row — user adds more via + button
+  createSgpaRow(1, defaultCredits[0] || 22);
 }
 
 function createSgpaRow(semNum, defaultCred) {
   const box = document.getElementById('sgpa_rows_box');
   sgpaCount++;
   const num = semNum || sgpaCount;
-  const row = document.createElement('div');
+  const row = document.createElement('tr');
   row.className = 'sgpa-calc-row';
   row.innerHTML = `
-    <span class="sem-badge">Sem ${num}</span>
-    <input type="number" class="sgpa-val" placeholder="e.g. 8.50" min="0" max="10" step="0.01" oninput="calcSgpa()">
-    <input type="number" class="sgpa-cred" placeholder="${defaultCred}" min="1" step="1" oninput="calcSgpa()">
-    <button type="button" class="remove-row-btn" onclick="removeSgpaRow(this)" title="Remove semester">&times;</button>
+    <td style="text-align: center;"><span class="sem-badge">Sem ${num}</span></td>
+    <td><input type="number" class="sgpa-val" placeholder="e.g. 8.35" min="0" step="0.01" oninput="calcSgpa()"></td>
+    <td><input type="number" class="sgpa-scale" value="10" placeholder="10" min="1" step="0.1" oninput="calcSgpa()"></td>
+    <td><input type="number" class="sgpa-cred" value="${defaultCred || 22}" placeholder="22" min="1" step="1" oninput="calcSgpa()"></td>
+    <td style="text-align: center;"><button type="button" class="remove-row-btn" onclick="removeSgpaRow(this)" title="Remove semester">&times;</button></td>
   `;
   box.appendChild(row);
   reindexSgpaBadges();
 }
 
 function addSgpaRowAuto() {
-  const currentRows = document.querySelectorAll('#sgpa_rows_box .sgpa-calc-row').length;
-  createSgpaRow(currentRows + 1, 24);
+  const currentRows = document.querySelectorAll('#sgpa_rows_box tr').length;
+  createSgpaRow(currentRows + 1, 22);
   calcSgpa();
 }
 
 function removeSgpaRow(btn) {
-  btn.closest('.sgpa-calc-row').remove();
+  btn.closest('tr').remove();
   reindexSgpaBadges();
   calcSgpa();
 }
 
 function reindexSgpaBadges() {
-  const rows = document.querySelectorAll('#sgpa_rows_box .sgpa-calc-row');
+  const rows = document.querySelectorAll('#sgpa_rows_box tr');
   rows.forEach((row, idx) => {
     const badge = row.querySelector('.sem-badge');
     if (badge) badge.textContent = `Sem ${idx + 1}`;
@@ -838,23 +904,32 @@ function reindexSgpaBadges() {
 }
 
 function calcSgpa() {
-  const rows = document.querySelectorAll('#sgpa_rows_box .sgpa-calc-row');
+  const rows = document.querySelectorAll('#sgpa_rows_box tr');
   let totalWeighted = 0;
   let totalCredits = 0;
   const breakdown = [];
 
   rows.forEach((row, idx) => {
-    const sVal = parseFloat(row.querySelector('.sgpa-val').value);
+    const sInput = row.querySelector('.sgpa-val');
+    const scaleInput = row.querySelector('.sgpa-scale');
     const cInput = row.querySelector('.sgpa-cred');
-    const cVal = parseFloat(cInput.value || cInput.placeholder);
-    const sgpaInput = row.querySelector('.sgpa-val').value;
+
+    const sVal = parseFloat(sInput?.value);
+    const scaleVal = parseFloat(scaleInput?.value || scaleInput?.placeholder || '10');
+    const cVal = parseFloat(cInput?.value || cInput?.placeholder || '22');
     
-    if (sgpaInput !== '' && !isNaN(sVal) && sVal >= 0 && sVal <= 10) {
-      const cred = (!isNaN(cVal) && cVal > 0) ? cVal : 24;
-      const pts = sVal * cred;
+    if (sInput?.value !== '' && !isNaN(sVal) && sVal >= 0 && !isNaN(scaleVal) && scaleVal > 0) {
+      const cred = (!isNaN(cVal) && cVal > 0) ? cVal : 22;
+      const normalizedSgpa = (sVal / scaleVal) * 10;
+      const pts = normalizedSgpa * cred;
       totalWeighted += pts;
       totalCredits += cred;
-      breakdown.push({ sem: `Sem ${idx + 1}`, sgpa: sVal, credits: cred, weighted: pts });
+      breakdown.push({ 
+        sem: `Sem ${idx + 1}`, 
+        sgpa: normalizedSgpa, 
+        credits: cred, 
+        weighted: pts 
+      });
     }
   });
 
@@ -867,7 +942,7 @@ function calcSgpa() {
   if (totalCredits > 0) {
     const cgpa = totalWeighted / totalCredits;
     const cgpaFormatted = cgpa.toFixed(2);
-    resVal.textContent = cgpaFormatted;
+    if (resVal) resVal.textContent = cgpaFormatted;
     
     const pctApprox = Math.min(cgpa * 9.5, 100).toFixed(1) + '%';
     if (pctVal) pctVal.textContent = pctApprox;
@@ -892,11 +967,12 @@ function calcSgpa() {
       summaryBox.style.display = 'block';
     }
   } else {
-    resVal.textContent = '—';
+    if (resVal) resVal.textContent = '—';
     if (pctBox) pctBox.style.display = 'none';
     if (summaryBox) summaryBox.style.display = 'none';
   }
 }
+window.calcSgpa = calcSgpa;
 
 // ── Marks to CGPA ────────────────────────────────────
 let marksCount = 0;
@@ -904,41 +980,40 @@ let marksCount = 0;
 function initMarksRows() {
   const box = document.getElementById('marks_rows_box');
   if (!box || box.children.length > 0) return;
-  for (let i = 1; i <= 5; i++) {
-    createMarksRow(i);
-  }
+  // Start with 1 empty row — user adds more via + button
+  createMarksRow(1);
 }
 
 function createMarksRow(subNum) {
   const box = document.getElementById('marks_rows_box');
   marksCount++;
   const num = subNum || marksCount;
-  const row = document.createElement('div');
+  const row = document.createElement('tr');
   row.className = 'marks-calc-row';
   row.innerHTML = `
-    <span class="sub-badge">Sub ${num}</span>
-    <input type="number" class="marks-obt" placeholder="e.g. 85" min="0" oninput="calcMarks()">
-    <input type="number" class="marks-max" placeholder="100" min="1" value="100" oninput="calcMarks()">
-    <button type="button" class="remove-row-btn" onclick="removeMarksRow(this)" title="Remove subject">&times;</button>
+    <td style="text-align: center;"><span class="sub-badge">Sub ${num}</span></td>
+    <td><input type="number" class="marks-obt" placeholder="e.g. 85" min="0" oninput="calcMarks()"></td>
+    <td><input type="number" class="marks-max" placeholder="100" min="1" value="100" oninput="calcMarks()"></td>
+    <td style="text-align: center;"><button type="button" class="remove-row-btn" onclick="removeMarksRow(this)" title="Remove subject">&times;</button></td>
   `;
   box.appendChild(row);
   reindexMarksBadges();
 }
 
 function addMarksRowAuto() {
-  const currentRows = document.querySelectorAll('#marks_rows_box .marks-calc-row').length;
+  const currentRows = document.querySelectorAll('#marks_rows_box tr').length;
   createMarksRow(currentRows + 1);
   calcMarks();
 }
 
 function removeMarksRow(btn) {
-  btn.closest('.marks-calc-row').remove();
+  btn.closest('tr').remove();
   reindexMarksBadges();
   calcMarks();
 }
 
 function reindexMarksBadges() {
-  const rows = document.querySelectorAll('#marks_rows_box .marks-calc-row');
+  const rows = document.querySelectorAll('#marks_rows_box tr');
   rows.forEach((row, idx) => {
     const badge = row.querySelector('.sub-badge');
     if (badge) badge.textContent = `Sub ${idx + 1}`;
@@ -946,13 +1021,13 @@ function reindexMarksBadges() {
 }
 
 function calcMarks() {
-  const rows = document.querySelectorAll('#marks_rows_box .marks-calc-row');
+  const rows = document.querySelectorAll('#marks_rows_box tr');
   let totalObtained = 0;
   let totalMax = 0;
 
   rows.forEach(row => {
-    const o = parseFloat(row.querySelector('.marks-obt').value);
-    const m = parseFloat(row.querySelector('.marks-max').value || 100);
+    const o = parseFloat(row.querySelector('.marks-obt')?.value);
+    const m = parseFloat(row.querySelector('.marks-max')?.value || 100);
     if (!isNaN(o) && o >= 0 && !isNaN(m) && m > 0) {
       totalObtained += o;
       totalMax += m;
@@ -960,13 +1035,14 @@ function calcMarks() {
   });
 
   const resVal = document.getElementById('m_res_val');
-  if (totalMax > 0) {
+  if (totalMax > 0 && totalObtained > 0) {
     const cgpa = (totalObtained / totalMax) * 10;
-    resVal.textContent = cgpa.toFixed(2);
+    if (resVal) resVal.textContent = cgpa.toFixed(2);
   } else {
-    resVal.textContent = '—';
+    if (resVal) resVal.textContent = '—';
   }
 }
+window.calcMarks = calcMarks;
 
 // ── Conversion Chart ─────────────────────────────────
 function buildConversionChart() {
