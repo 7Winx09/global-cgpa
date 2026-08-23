@@ -1,37 +1,68 @@
 ---
 import Layout from '../layouts/Layout.astro';
+import SiteHeader from '../components/Nav.astro';
+import SiteFooter from '../components/Footer.astro';
 ---
 
-<Layout 
+<Layout
   title="Terms & Conditions | Global CGPA"
-  description="Terms and Conditions of use for Global CGPA website."
+  description="Terms and Conditions for using Global CGPA: acceptable use, accuracy disclaimer, limitation of liability and intellectual property."
   canonical="https://globalcgpa.in/terms"
 >
-  <main class="max-w-[780px] mx-auto px-6 py-14">
+  <SiteHeader />
+
+  <main class="max-w-[780px] mx-auto px-6 py-14" style="flex:1;">
     <div class="text-xs font-bold uppercase tracking-wider text-emerald-500 mb-2">Legal</div>
-    <h1 class="text-3xl sm:text-4xl font-extrabold tracking-tight mb-3">Terms & Conditions</h1>
-    <p class="text-slate-500 dark:text-zinc-400 text-sm mb-8">Last updated: January 2025</p>
+    <h1 class="text-3xl sm:text-4xl font-extrabold tracking-tight mb-3">Terms &amp; Conditions</h1>
+    <p class="text-slate-500 dark:text-zinc-400 text-sm mb-8">Last updated: August 2026</p>
 
     <div class="space-y-6 text-slate-600 dark:text-zinc-300 leading-relaxed text-sm">
       <h2 class="text-lg font-bold text-slate-900 dark:text-white mt-6">1. Acceptance of Terms</h2>
       <p>
-        By accessing and using Global CGPA, you agree to comply with and be bound by these Terms & Conditions.
+        By accessing and using Global CGPA, you agree to comply with and be bound by these Terms &amp; Conditions. If you do not agree, please discontinue use of the site.
       </p>
 
-      <h2 class="text-lg font-bold text-slate-900 dark:text-white mt-6">2. Accuracy Disclaimer</h2>
+      <h2 class="text-lg font-bold text-slate-900 dark:text-white mt-6">2. Purpose of the Service</h2>
       <p>
-        While we strive to maintain accurate university conversion formulas, all calculation results are provided for informational and estimation purposes only. Official grade transcripts and percentage certificates issued by your university registrar remain the sole authoritative reference.
+        Global CGPA provides free, browser-based calculators and reference guides for converting between CGPA, SGPA, percentage and GPA scales. The tools are provided for informational and estimation purposes.
       </p>
 
-      <h2 class="text-lg font-bold text-slate-900 dark:text-white mt-6">3. Limitation of Liability</h2>
+      <h2 class="text-lg font-bold text-slate-900 dark:text-white mt-6">3. Accuracy Disclaimer</h2>
       <p>
-        Global CGPA shall not be held liable for any discrepancies, errors, or consequences resulting from reliance on the calculation outputs for official applications.
+        While we source every conversion formula from the university's own ordinances and circulars, universities occasionally revise their regulations, and edge cases (older batches, autonomous programmes, specific faculties) may follow different rules. All calculation results are therefore estimates. Official grade transcripts, percentage certificates and equivalence documents issued by your university registrar remain the sole authoritative reference.
       </p>
 
-      <h2 class="text-lg font-bold text-slate-900 dark:text-white mt-6">4. Intellectual Property</h2>
+      <h2 class="text-lg font-bold text-slate-900 dark:text-white mt-6">4. Limitation of Liability</h2>
       <p>
-        All site design, text, graphics, and underlying source code belong to Global CGPA unless otherwise specified.
+        Global CGPA shall not be held liable for any discrepancies, errors, or consequences resulting from reliance on the calculation outputs for official applications. You are responsible for verifying figures with your institution before submitting them on official forms.
+      </p>
+
+      <h2 class="text-lg font-bold text-slate-900 dark:text-white mt-6">5. Acceptable Use</h2>
+      <p>
+        You agree not to misuse the site — including attempting to disrupt its availability, scrape it at abusive rates, or misrepresent its outputs as official university documents.
+      </p>
+
+      <h2 class="text-lg font-bold text-slate-900 dark:text-white mt-6">6. Advertising</h2>
+      <p>
+        The site displays advertising through Google AdSense to cover operating costs. Ads are clearly distinguishable from content and are governed by Google's policies. We do not endorse the products or services advertised.
+      </p>
+
+      <h2 class="text-lg font-bold text-slate-900 dark:text-white mt-6">7. Intellectual Property</h2>
+      <p>
+        All site design, original text, graphics, and underlying source code belong to Global CGPA unless otherwise specified. University names, ordinances and formulas referenced on this site remain the property of their respective institutions and are cited for informational purposes.
+      </p>
+
+      <h2 class="text-lg font-bold text-slate-900 dark:text-white mt-6">8. Changes to These Terms</h2>
+      <p>
+        We may update these terms from time to time. The "Last updated" date above reflects the current version. Continued use of the site constitutes acceptance of any changes.
+      </p>
+
+      <h2 class="text-lg font-bold text-slate-900 dark:text-white mt-6">9. Contact</h2>
+      <p>
+        Questions about these terms can be sent via our <a href="/contact" class="text-emerald-500 underline">contact page</a> or to support@globalcgpa.in.
       </p>
     </div>
   </main>
+
+  <SiteFooter />
 </Layout>

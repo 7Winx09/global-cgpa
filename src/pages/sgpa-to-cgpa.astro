@@ -1,0 +1,293 @@
+---
+import Layout from '../layouts/Layout.astro';
+import SiteHeader from '../components/Nav.astro';
+import SiteFooter from '../components/Footer.astro';
+import Breadcrumbs from '../components/Breadcrumbs.astro';
+import FaqAccordion from '../components/FaqAccordion.astro';
+
+const faqs = [
+  { q: 'How is CGPA calculated from SGPA?', a: 'CGPA is the credit-weighted average of your semester SGPAs: multiply each semester\'s SGPA by its credits, add them all up, and divide by total credits. Equal-credit semesters simplify to a plain average of your SGPAs.' },
+  { q: 'Is SGPA to CGPA the same as a simple average?', a: 'Only if every semester has the same number of credits. Since later semesters often carry more credits (projects, electives), a credit-weighted calculation — like the one this calculator uses — can differ from a plain average by several tenths.' },
+  { q: 'What is a good CGPA after combining SGPAs?', a: 'Above 7.5 is considered strong for placements at most Indian universities, 8.5+ is competitive for product companies and distinction, and anything above 9.0 puts you in the top band for most batches.' },
+  { q: 'My SGPA is on a different scale — does this work?', a: 'Yes. Enter each semester\'s scale in the "Out of" column and the calculator normalises every SGPA to the 10-point scale before weighting, so you can mix 10-point and 4-point semesters safely.' },
+  { q: 'Can I convert the final CGPA to a percentage?', a: 'Yes — the calculator shows a CBSE-style approximation (×9.5) next to your CGPA. For your university\'s exact formula, use our <a href="/cgpa-to-percentage-chart">conversion chart</a> or the university-specific calculators.' },
+];
+---
+
+<Layout
+  title="SGPA to CGPA Calculator — Credit-Weighted Semester Converter | GlobalCGPA"
+  description="Free SGPA to CGPA calculator. Enter each semester's SGPA and credits to get your cumulative CGPA instantly with a semester-wise breakdown. Supports different scales per semester."
+  canonical="https://globalcgpa.in/sgpa-to-cgpa"
+  schema={{
+    '@context': 'https://schema.org',
+    '@type': 'WebApplication',
+    'name': 'SGPA to CGPA Calculator',
+    'url': 'https://globalcgpa.in/sgpa-to-cgpa',
+    'description': 'Combine semester SGPAs into a cumulative CGPA using credit-weighted averaging.',
+    'applicationCategory': 'EducationalApplication',
+    'operatingSystem': 'Any',
+    'offers': { '@type': 'Offer', 'price': '0', 'priceCurrency': 'INR' },
+    'isAccessibleForFree': true,
+  }}
+>
+  <SiteHeader />
+
+  <main style="flex:1;">
+    <section class="tool-hero">
+      <div class="tool-hero-inner">
+        <Breadcrumbs items={[{ label: 'SGPA to CGPA' }]} />
+        <div class="tool-tag">Semester Roll-Up</div>
+        <h1 class="tool-h1">SGPA to CGPA Calculator</h1>
+        <p class="tool-sub">Enter each semester's SGPA and credit count. Your cumulative CGPA updates live, with a full credit-weighted breakdown.</p>
+
+        <div class="calc-shell">
+          <div class="sgpa-table-wrap">
+            <table class="sgpa-table">
+              <thead>
+                <tr>
+                  <th class="col-sem">Semester</th>
+                  <th>SGPA</th>
+                  <th class="col-scale">Out of</th>
+                  <th class="col-cred">Credits</th>
+                  <th class="col-remove"></th>
+                </tr>
+              </thead>
+              <tbody id="sgpa-rows"></tbody>
+            </table>
+          </div>
+          <button type="button" class="add-row-btn" id="add-sem">+ Add Semester</button>
+
+          <div class="sgpa-breakdown" id="sgpa-breakdown" style="display:none;">
+            <div class="breakdown-title">Semester Breakdown</div>
+            <table class="breakdown-table">
+              <thead><tr><th>Semester</th><th>SGPA</th><th>Credits</th><th>Weighted</th></tr></thead>
+              <tbody id="breakdown-body"></tbody>
+            </table>
+          </div>
+
+          <div class="calc-output" style="margin-top:16px;">
+            <button type="button" class="calc-copy" id="copy-sgpa" title="Copy result" aria-label="Copy result">⎘</button>
+            <div class="marks-result-group">
+              <div>
+                <div class="calc-out-val" id="sgpa-cgpa-out">—</div>
+                <div class="calc-out-lbl">Cumulative CGPA</div>
+              </div>
+              <div>
+                <div class="calc-out-val marks-out-sm" id="sgpa-pct-out">—</div>
+                <div class="calc-out-lbl">≈ Percentage</div>
+              </div>
+            </div>
+            <div class="marks-totals" id="sgpa-totals"></div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <section class="prose tool-article">
+      <h2>How SGPA Converts to CGPA</h2>
+      <p>Your SGPA (Semester Grade Point Average) measures one semester. CGPA (Cumulative Grade Point Average) aggregates all semesters, weighted by how many credits each semester carried:</p>
+      <div class="formula-block">
+        <div class="f-label">Credit-weighted formula</div>
+        <div class="f-text">CGPA = Σ(SGPA × Semester Credits) ÷ Σ(Total Credits)</div>
+        <div class="f-example">Example: (8.5×22 + 8.0×24) ÷ (22+24) = 8.24 CGPA</div>
+      </div>
+      <p>This is exactly how Indian universities compute the cumulative figure on your transcript. The calculator above also normalises scale: if a semester's SGPA is on a 4.0 scale instead of 10, enter 4 in the "Out of" column and it is converted automatically.</p>
+
+      <h2>Worked Example: Four Semesters</h2>
+      <div class="table-scroll">
+        <table>
+          <thead><tr><th>Semester</th><th>SGPA</th><th>Credits</th><th>Weighted Points</th></tr></thead>
+          <tbody>
+            <tr><td>Sem 1</td><td>7.8</td><td>22</td><td>171.6</td></tr>
+            <tr><td>Sem 2</td><td>8.4</td><td>22</td><td>184.8</td></tr>
+            <tr><td>Sem 3</td><td>8.9</td><td>24</td><td>213.6</td></tr>
+            <tr><td>Sem 4</td><td>8.2</td><td>24</td><td>196.8</td></tr>
+          </tbody>
+        </table>
+      </div>
+      <p>Total weighted points = 766.8 across 92 credits, so CGPA = 766.8 ÷ 92 = <strong>8.34</strong>. Notice the third semester (highest SGPA, most credits) pulls the average up more than the first semester pulls it down — that is credit weighting in action.</p>
+
+      <h2>Why Credits Matter More Than You Think</h2>
+      <ul>
+        <li><strong>Project semesters carry heavy credits.</strong> Final-year project semesters often have 24+ credits, so your last-year performance moves your CGPA more than first-year did.</li>
+        <li><strong>A strong final year can still lift your CGPA significantly.</strong> Because completed credits anchor the average, two excellent final semesters typically raise a 7.0 CGPA by 0.3–0.5 points.</li>
+        <li><strong>Elective choices change the weighting.</strong> Picking high-credit electives you score well in has an outsized effect on cumulative CGPA.</li>
+      </ul>
+      <p>Once you have your cumulative CGPA, convert it to the percentage your target form asks for: start with the <a href="/">CGPA to percentage calculator</a> or jump straight to your university's page — <a href="/sppu-cgpa-to-percentage">SPPU</a>, <a href="/vtu-cgpa-to-percentage">VTU</a>, <a href="/anna-university-cgpa-to-percentage">Anna University</a>, <a href="/aktu-cgpa-to-percentage">AKTU</a> and more all have dedicated converters.</p>
+    </section>
+
+    <section class="prose tool-faq">
+      <h2>Frequently Asked Questions</h2>
+      <FaqAccordion faqs={faqs} />
+    </section>
+  </main>
+
+  <SiteFooter />
+
+  <style>
+    .tool-hero { padding: 20px 20px 8px; }
+    .tool-hero-inner { max-width: 680px; margin: 0 auto; }
+    .tool-tag {
+      font-size: 0.72rem; font-weight: 700; text-transform: uppercase;
+      letter-spacing: 1.2px; color: var(--primary); margin-bottom: 8px;
+    }
+    .tool-h1 {
+      font-size: clamp(1.8rem, 5vw, 2.5rem); font-weight: 900;
+      letter-spacing: -0.8px; line-height: 1.18; color: var(--text-ink); margin-bottom: 10px;
+    }
+    .tool-sub {
+      font-size: 0.95rem; color: var(--text-body); line-height: 1.7;
+      margin-bottom: 26px; max-width: 560px;
+    }
+    .tool-article, .tool-faq { padding: 0 20px; margin-top: 44px; }
+
+    .sgpa-table-wrap { overflow-x: auto; }
+    .sgpa-table { width: 100%; border-collapse: separate; border-spacing: 0 8px; }
+    .sgpa-table th {
+      padding: 0 6px 6px; font-size: 0.7rem; font-weight: 700; text-transform: uppercase;
+      letter-spacing: 0.5px; color: var(--text-mute); text-align: left; border-bottom: 1px solid var(--border);
+    }
+    .sgpa-table td { padding: 0 4px; }
+    .sgpa-table td:first-child { padding-left: 0; }
+    .sgpa-table input {
+      width: 100%; height: 40px; padding: 0 10px;
+      border: 1px solid var(--border); background: var(--bg-soft); color: var(--text-ink);
+      font-size: 0.9rem; font-weight: 500; border-radius: 8px; font-family: inherit;
+      transition: border-color 0.2s;
+    }
+    .sgpa-table input:focus { outline: none; border-color: var(--primary); }
+    .sem-badge {
+      background: var(--bg-soft); border: 1px solid var(--border); height: 40px;
+      display: flex; align-items: center; justify-content: center; border-radius: 8px;
+      font-size: 0.78rem; font-weight: 700; color: var(--primary); white-space: nowrap;
+    }
+    .remove-btn {
+      background: var(--bg-soft); border: 1px solid var(--border); color: var(--text-mute);
+      width: 40px; height: 40px; border-radius: 8px; cursor: pointer; font-size: 1.05rem;
+      display: flex; align-items: center; justify-content: center; transition: all 0.2s;
+    }
+    .remove-btn:hover { border-color: #ef4444; color: #ef4444; background: rgba(239,68,68,0.12); }
+    .add-row-btn {
+      width: 100%; padding: 11px; margin-top: 8px; background: transparent;
+      border: 1px dashed var(--border); border-radius: 12px; color: var(--text-mute);
+      font-size: 0.85rem; font-weight: 600; cursor: pointer; font-family: inherit; transition: all 0.2s;
+    }
+    .add-row-btn:hover { border-color: var(--primary); color: var(--primary); }
+    .marks-result-group {
+      display: flex; justify-content: center; gap: 40px; align-items: center; flex-wrap: wrap;
+    }
+    .marks-out-sm { font-size: 1.5rem; color: var(--text-ink); }
+    .marks-totals {
+      margin-top: 12px; font-size: 0.78rem; color: var(--text-mute); text-align: center; min-height: 1em;
+    }
+    .sgpa-breakdown {
+      margin-top: 16px; border: 1px solid var(--border); border-radius: 12px; overflow: hidden; background: var(--bg-soft);
+    }
+    .breakdown-title {
+      padding: 9px 14px; font-size: 0.7rem; font-weight: 700; text-transform: uppercase;
+      letter-spacing: 0.8px; color: var(--text-mute); border-bottom: 1px solid var(--border);
+    }
+    .breakdown-table { width: 100%; border-collapse: collapse; font-size: 0.84rem; }
+    .breakdown-table th {
+      padding: 8px 14px; text-align: left; color: var(--text-mute); font-weight: 600;
+      font-size: 0.72rem; text-transform: uppercase; border-bottom: 1px solid var(--border);
+    }
+    .breakdown-table td { padding: 8px 14px; border-bottom: 1px solid var(--border); color: var(--text-body); }
+    .breakdown-table tr:last-child td { border-bottom: none; }
+    .breakdown-total td { background: rgba(16,185,129,0.08); color: var(--primary); font-weight: 700; }
+    @media (max-width: 520px) {
+      .col-sem, .col-remove, .col-scale { display: none; }
+      .marks-result-group { gap: 20px; }
+    }
+  </style>
+
+  <script>
+    const box = document.getElementById('sgpa-rows') as HTMLTableSectionElement;
+    const addBtn = document.getElementById('add-sem') as HTMLButtonElement;
+    const cgpaOut = document.getElementById('sgpa-cgpa-out')!;
+    const pctOut = document.getElementById('sgpa-pct-out')!;
+    const totalsOut = document.getElementById('sgpa-totals')!;
+    const breakdown = document.getElementById('sgpa-breakdown')!;
+    const breakdownBody = document.getElementById('breakdown-body')!;
+    const defaultCredits = [22, 22, 24, 24, 24, 24, 22, 22];
+
+    function addRow(credits?: number) {
+      const n = box.querySelectorAll('tr').length + 1;
+      const tr = document.createElement('tr');
+      tr.innerHTML = `
+        <td style="text-align:center;"><span class="sem-badge">Sem ${n}</span></td>
+        <td><input type="number" class="s-val" min="0" step="0.01" placeholder="e.g. 8.35" inputmode="decimal" /></td>
+        <td class="col-scale"><input type="number" class="s-scale" min="1" step="0.1" value="10" inputmode="decimal" /></td>
+        <td class="col-cred"><input type="number" class="s-cred" min="1" step="1" value="${credits ?? 22}" inputmode="decimal" /></td>
+        <td><button type="button" class="remove-btn" title="Remove semester" aria-label="Remove semester">×</button></td>
+      `;
+      tr.querySelector('.remove-btn')?.addEventListener('click', () => {
+        tr.remove();
+        reindex();
+        calc();
+      });
+      tr.querySelectorAll('input').forEach((inp) => inp.addEventListener('input', calc));
+      box.appendChild(tr);
+    }
+
+    function reindex() {
+      box.querySelectorAll('tr').forEach((row, i) => {
+        const badge = row.querySelector('.sem-badge');
+        if (badge) badge.textContent = `Sem ${i + 1}`;
+      });
+    }
+
+    function calc() {
+      let totalWeighted = 0;
+      let totalCredits = 0;
+      const rows: { sem: string; sgpa: number; credits: number; weighted: number }[] = [];
+
+      box.querySelectorAll('tr').forEach((row, idx) => {
+        const s = parseFloat((row.querySelector('.s-val') as HTMLInputElement)?.value || '');
+        const scale = parseFloat((row.querySelector('.s-scale') as HTMLInputElement)?.value || '10');
+        const c = parseFloat((row.querySelector('.s-cred') as HTMLInputElement)?.value || '22');
+        if (!isNaN(s) && s >= 0 && !isNaN(scale) && scale > 0) {
+          const credits = !isNaN(c) && c > 0 ? c : 22;
+          const norm = (s / scale) * 10;
+          const weighted = norm * credits;
+          totalWeighted += weighted;
+          totalCredits += credits;
+          rows.push({ sem: `Sem ${idx + 1}`, sgpa: norm, credits, weighted });
+        }
+      });
+
+      if (totalCredits > 0) {
+        const cgpa = totalWeighted / totalCredits;
+        cgpaOut.textContent = cgpa.toFixed(2);
+        pctOut.textContent = Math.min(100, cgpa * 9.5).toFixed(1) + '%';
+        totalsOut.textContent = `${totalCredits} total credits across ${rows.length} semester${rows.length > 1 ? 's' : ''}`;
+        breakdownBody.innerHTML = rows.map((r) => `
+          <tr><td>${r.sem}</td><td>${r.sgpa.toFixed(2)}</td><td>${r.credits}</td><td>${r.weighted.toFixed(2)}</td></tr>
+        `).join('') + `<tr class="breakdown-total"><td>Total</td><td>—</td><td>${totalCredits}</td><td>${cgpa.toFixed(2)} CGPA</td></tr>`;
+        breakdown.style.display = 'block';
+      } else {
+        cgpaOut.textContent = '—';
+        pctOut.textContent = '—';
+        totalsOut.textContent = '';
+        breakdown.style.display = 'none';
+      }
+    }
+
+    addBtn.addEventListener('click', () => {
+      const n = box.querySelectorAll('tr').length;
+      addRow(defaultCredits[n] ?? 22);
+      calc();
+    });
+    addRow(defaultCredits[0]);
+    calc();
+
+    document.getElementById('copy-sgpa')?.addEventListener('click', function (this: HTMLElement) {
+      const txt = cgpaOut.textContent || '';
+      if (!txt || txt === '—') return;
+      navigator.clipboard.writeText(txt).catch(() => {});
+      const orig = this.textContent;
+      this.textContent = '✓';
+      setTimeout(() => { this.textContent = orig; }, 1400);
+    });
+  </script>
+</Layout>

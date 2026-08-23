@@ -1,0 +1,46 @@
+---
+import UniPage from '../components/UniPage.astro';
+import { getUniversity } from '../data/universities';
+
+const uni = getUniversity('anna')!;
+---
+
+<UniPage
+  uni={uni}
+  title="Anna University CGPA to Percentage Calculator (Official ×10 Formula) | GlobalCGPA"
+  description="Convert Anna University CGPA to percentage using the official formula CGPA × 10 from the R2017/R2021 regulations. Free calculator with reverse conversion, conversion table, First Class thresholds and FAQ."
+  intro="Enter your Anna University CGPA to get your percentage using the official ×10 formula from the university regulations — plus reverse conversion, a reference table and class thresholds for R2013, R2017 and R2021 students."
+>
+  <h2>How the Anna University CGPA to Percentage Conversion Works</h2>
+  <p>Anna University, Chennai regulates engineering colleges across Tamil Nadu and prescribes one of the simplest conversion rules in its academic regulations: the equivalent percentage of marks is your CGPA multiplied by 10. The rule holds across the R2013, R2017 and R2021 regulations, so nearly every current student and recent graduate uses the same multiplication.</p>
+  <div class="formula-block">
+    <div class="f-label">Anna University formula</div>
+    <div class="f-text">Percentage = CGPA × 10</div>
+  </div>
+  <p>Anna University's grading scale anchors a perfect 10-point O grade at 91–100 raw marks, which is why the ×10 multiplier is the university's official choice rather than the CBSE-style ×9.5.</p>
+
+  <h3>Worked examples</h3>
+  <div class="table-scroll">
+    <table>
+      <thead><tr><th>CGPA</th><th>Calculation</th><th>Anna University Percentage</th></tr></thead>
+      <tbody>
+        <tr><td>9.3</td><td>9.3 × 10</td><td>93%</td></tr>
+        <tr><td>8.5</td><td>8.5 × 10</td><td>85%</td></tr>
+        <tr><td>8.2</td><td>8.2 × 10</td><td>82%</td></tr>
+        <tr><td>7.5</td><td>7.5 × 10</td><td>75%</td></tr>
+        <tr><td>6.5</td><td>6.5 × 10</td><td>65%</td></tr>
+      </tbody>
+    </table>
+  </div>
+
+  <h2>A Warning About the (CGPA × 10) − 7.5 Formula</h2>
+  <p>Search for an Anna University conversion and you will find many websites applying <em>(CGPA × 10) − 7.5</em>. That formula belongs to other universities — it is not what Anna University's regulations state. Under the official rule, an 8.0 CGPA is 80%; under the copied formula it would incorrectly show as 72.5%.</p>
+  <p>The difference is large enough to fail eligibility checks: if a company filters at 75% and your certificate says 80% while your application form says 72.5%, you can be screened out despite being eligible. Always use ×10 for Anna University marksheets, and point recruiters to your regulation document if questioned. A few autonomous affiliated colleges publish their own conversion rules in their handbooks — if your college is autonomous, check your handbook first.</p>
+
+  <h2>Class and Distinction at Anna University</h2>
+  <p>Under the regulations, <strong>First Class</strong> requires a CGPA of about 6.5 (65%) with subjects cleared per the regulation conditions, and <strong>First Class with Distinction</strong> typically requires 8.5 CGPA (85%) or above with no arrears in any semester. Second Class begins around 5.0 CGPA. Because the ×10 formula maps CGPA directly to percentage, these boundaries are easy to track yourself throughout the degree.</p>
+  <p>Placement eligibility is where this matters most. Service companies commonly filter at 6.0–6.5 CGPA (60–65%) and product companies at 7.5+ (75%). Since Anna University's semester GPAs are credit-weighted, use our <a href="/sgpa-to-cgpa">SGPA to CGPA calculator</a> to project your cumulative figure from individual semesters before results are consolidated.</p>
+
+  <h2>Getting an Official Percentage Certificate</h2>
+  <p>For PSU applications, visas and some foreign admissions you may need an official document rather than a self-calculated figure. Your college's exam cell or Anna University's Controller of Examinations office can issue a conversion certificate stating your CGPA and its percentage equivalent — which will match the ×10 figure from this calculator. Your consolidated mark statement from the <a href="https://coe1.annauniv.edu" rel="noopener" target="_blank">Anna University COE portal</a> is the primary document to keep handy for any such application.</p>
+</UniPage>

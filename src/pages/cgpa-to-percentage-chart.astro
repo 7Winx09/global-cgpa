@@ -1,0 +1,129 @@
+---
+import Layout from '../layouts/Layout.astro';
+import SiteHeader from '../components/Nav.astro';
+import SiteFooter from '../components/Footer.astro';
+import Breadcrumbs from '../components/Breadcrumbs.astro';
+import FaqAccordion from '../components/FaqAccordion.astro';
+import { universities } from '../data/universities';
+
+const cgpaValues = [10, 9.5, 9, 8.5, 8, 7.5, 7, 6.9, 6.5, 6, 5.5, 5, 4.5, 4];
+const pct = (fn: (c: number) => number, c: number) => Math.min(100, Math.max(0, fn(c))).toFixed(1) + '%';
+
+const faqs = [
+  { q: 'Which conversion formula should I use?', a: 'The one your own university prescribes. CBSE\'s ×9.5 is the generic default, but SPPU, Mumbai University, AKTU and GTU publish different official formulas. Using the wrong one creates a mismatch with your documents — the table above shows every major formula side by side so you can pick correctly.' },
+  { q: 'Why is 8 CGPA not always 80%?', a: 'It is 80% only under the ×10 formulas (VTU, KTU, Anna University). Under CBSE it is 76%, under SPPU 72.5%, under Mumbai University 67.8%, under AKTU 72.5% and under GTU 75%. Each university anchors grade points to different raw-mark bands.' },
+  { q: 'What percentage is First Class?', a: 'First Class generally begins at 60% at most Indian universities, with First Class with Distinction at 70–75% depending on the institution. Because formulas differ, the CGPA that hits 60% also differs — 6.0 at VTU but about 6.9 at Mumbai University.' },
+  { q: 'Is 9.5 the right multiplier for CBSE?', a: 'Yes — CBSE itself defines Percentage = CGPA × 9.5, derived from the average marks (95) of students who scored a perfect 10 grade point. It remains the standard default for boards and UGC-institutions without their own formula.' },
+  { q: 'Can I use this chart for official documents?', a: 'The chart matches the official formulas exactly, but for anything legally binding — visa, PSU verification, court work — request a conversion certificate from your university so the figure comes on official letterhead.' },
+];
+---
+
+<Layout
+  title="CGPA to Percentage Conversion Chart — All University Formulas | GlobalCGPA"
+  description="Complete CGPA to percentage conversion chart comparing CBSE ×9.5, SPPU, VTU, Mumbai University, Anna University, AKTU, GTU and KTU formulas side by side, from 4.0 to 10.0 CGPA."
+  canonical="https://globalcgpa.in/cgpa-to-percentage-chart"
+>
+  <SiteHeader />
+
+  <main style="flex:1;">
+    <section class="tool-hero">
+      <div class="tool-hero-inner">
+        <Breadcrumbs items={[{ label: 'Conversion Chart' }]} />
+        <div class="tool-tag">Reference Tables</div>
+        <h1 class="tool-h1">CGPA to Percentage Conversion Chart</h1>
+        <p class="tool-sub">Every major Indian university formula side by side, pre-calculated from 4.0 to 10.0 CGPA. No calculator needed — just find your row.</p>
+      </div>
+    </section>
+
+    <section class="prose tool-article">
+      <h2>Master Conversion Chart (All Formulas)</h2>
+      <div class="table-scroll">
+        <table class="chart-table">
+          <thead>
+            <tr>
+              <th>CGPA</th>
+              <th>CBSE ×9.5</th>
+              <th>SPPU ×10−7.5</th>
+              <th>VTU ×10</th>
+              <th>Mumbai 7.1x+11</th>
+              <th>Anna ×10</th>
+              <th>AKTU −0.75</th>
+              <th>GTU −0.5</th>
+              <th>KTU ×10</th>
+            </tr>
+          </thead>
+          <tbody>
+            {cgpaValues.map((c) => (
+              <tr>
+                <td>{c.toFixed(1)}</td>
+                <td>{pct((x) => x * 9.5, c)}</td>
+                <td>{pct((x) => x * 10 - 7.5, c)}</td>
+                <td>{pct((x) => x * 10, c)}</td>
+                <td>{pct((x) => 7.1 * x + 11, c)}</td>
+                <td>{pct((x) => x * 10, c)}</td>
+                <td>{pct((x) => (x - 0.75) * 10, c)}</td>
+                <td>{pct((x) => (x - 0.5) * 10, c)}</td>
+                <td>{pct((x) => x * 10, c)}</td>
+              </tr>
+            ))}
+          </tbody>
+        </table>
+      </div>
+
+      <h2>Which Column Applies to You?</h2>
+      <ul>
+        <li><strong>CBSE ×9.5</strong> — CBSE board students and any UGC institution without its own published formula. This is the default most generic calculators use.</li>
+        <li><strong>SPPU (×10 − 7.5)</strong> — Savitribai Phule Pune University engineering programmes on the CBCGS pattern.</li>
+        <li><strong>VTU / Anna / KTU (×10)</strong> — direct multiplication, per each university's own regulations.</li>
+        <li><strong>Mumbai University (7.1×CGPA + 11)</strong> — the compressed scale used by MU's credit-based grading systems.</li>
+        <li><strong>AKTU (−0.75 then ×10)</strong> — the ordinance formula for AKTU/UPTU batches from 2019-20 onwards.</li>
+        <li><strong>GTU (−0.5 then ×10)</strong> — per GTU's Notification 1/2012, applying to SPI, CPI and CGPA alike.</li>
+      </ul>
+      <p>Need the reverse direction, or an exact figure for a CGPA not listed here? Use the <a href="/">CGPA to percentage calculator</a> for instant results, or the <a href="/percentage-to-cgpa">percentage to CGPA converter</a> to work backwards. University-specific pages — <a href="/sppu-cgpa-to-percentage">SPPU</a>, <a href="/vtu-cgpa-to-percentage">VTU</a>, <a href="/mumbai-university-cgpa-to-percentage">Mumbai</a>, <a href="/anna-university-cgpa-to-percentage">Anna</a>, <a href="/aktu-cgpa-to-percentage">AKTU</a>, <a href="/gtu-cgpa-to-percentage">GTU</a> and <a href="/ktu-cgpa-to-percentage">KTU</a> — include worked examples, class thresholds and certificate guidance.</p>
+
+      <h2>Grade Bands Behind the Numbers</h2>
+      <p>The 10-point scale used by most Indian technical universities maps letter grades to grade points in bands. While exact mark ranges vary by university, the pattern below is the most common:</p>
+      <div class="table-scroll">
+        <table>
+          <thead><tr><th>Grade</th><th>Grade Point</th><th>Typical Marks Band</th><th>Meaning</th></tr></thead>
+          <tbody>
+            <tr><td>O</td><td>10</td><td>90–100%</td><td>Outstanding</td></tr>
+            <tr><td>A+</td><td>9</td><td>80–89%</td><td>Excellent</td></tr>
+            <tr><td>A</td><td>8</td><td>70–79%</td><td>Very Good</td></tr>
+            <tr><td>B+</td><td>7</td><td>60–69%</td><td>Good</td></tr>
+            <tr><td>B</td><td>6</td><td>50–59%</td><td>Average</td></tr>
+            <tr><td>C</td><td>5</td><td>45–49%</td><td>Pass</td></tr>
+            <tr><td>F / U</td><td>0</td><td>Below pass</td><td>Fail / Reappear</td></tr>
+          </tbody>
+        </table>
+      </div>
+      <p>Your CGPA is the credit-weighted average of these grade points across all subjects and semesters — which is why two students with the same percentage of total marks can show different CGPAs if their credit distributions differ.</p>
+    </section>
+
+    <section class="prose tool-faq">
+      <h2>Frequently Asked Questions</h2>
+      <FaqAccordion faqs={faqs} />
+    </section>
+  </main>
+
+  <SiteFooter />
+
+  <style>
+    .tool-hero { padding: 20px 20px 8px; }
+    .tool-hero-inner { max-width: 900px; margin: 0 auto; }
+    .tool-tag {
+      font-size: 0.72rem; font-weight: 700; text-transform: uppercase;
+      letter-spacing: 1.2px; color: var(--primary); margin-bottom: 8px;
+    }
+    .tool-h1 {
+      font-size: clamp(1.8rem, 5vw, 2.5rem); font-weight: 900;
+      letter-spacing: -0.8px; line-height: 1.18; color: var(--text-ink); margin-bottom: 10px;
+    }
+    .tool-sub {
+      font-size: 0.95rem; color: var(--text-body); line-height: 1.7;
+      margin-bottom: 26px; max-width: 620px;
+    }
+    .tool-article, .tool-faq { padding: 0 20px; margin-top: 44px; }
+    .tool-article { max-width: 900px; }
+  </style>
+</Layout>

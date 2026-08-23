@@ -1,0 +1,110 @@
+---
+import { getCollection } from 'astro:content';
+import Layout from '../../layouts/Layout.astro';
+import SiteHeader from '../../components/Nav.astro';
+import SiteFooter from '../../components/Footer.astro';
+import Breadcrumbs from '../../components/Breadcrumbs.astro';
+
+const guides = (await getCollection('guides')).sort(
+  (a, b) => b.data.pubDate.valueOf() - a.data.pubDate.valueOf()
+);
+
+const fmt = (d: Date) => d.toLocaleDateString('en-IN', { day: 'numeric', month: 'short', year: 'numeric' });
+
+const groups = [
+  { name: 'Understanding Grades', match: ['Basics'] },
+  { name: 'Placements & Career', match: ['Career'] },
+  { name: 'Higher Studies & Abroad', match: ['Abroad'] },
+  { name: 'Rules, Documents & Tips', match: ['Documents', 'Tips'] },
+];
+---
+
+<Layout
+  title="Guides — CGPA, Percentage, GPA & Grading Explained | GlobalCGPA"
+  description="Practical guides for Indian students: CGPA vs SGPA vs GPA, placement cut-offs, converting grades for MS abroad, government job percentage rules, improving your CGPA and more."
+  canonical="https://globalcgpa.in/guides"
+>
+  <SiteHeader />
+
+  <main style="flex:1;">
+    <section class="tool-hero">
+      <div class="tool-hero-inner">
+        <Breadcrumbs items={[{ label: 'Guides' }]} />
+        <div class="tool-tag">Knowledge Base</div>
+        <h1 class="tool-h1">Guides for Indian Students</h1>
+        <p class="tool-sub">Everything behind the numbers: how grading works, what recruiters actually check, and how to convert your scores for jobs, higher studies and abroad applications.</p>
+      </div>
+    </section>
+
+    <section class="guides-body">
+      {groups.map((group) => {
+        const items = guides.filter((g) => group.match.includes(g.data.tag));
+        if (items.length === 0) return null;
+        return (
+          <div class="guide-group">
+            <h2 class="guide-group-title">{group.name}</h2>
+            <div class="guide-grid">
+              {items.map((g) => (
+                <a href={`/guides/${g.id}`} class="guide-card">
+                  <span class="guide-card-tag">{g.data.tag}</span>
+                  <span class="guide-card-title">{g.data.title}</span>
+                  <span class="guide-card-desc">{g.data.description}</span>
+                  <span class="guide-card-date">{fmt(g.data.pubDate)}</span>
+                </a>
+              ))}
+            </div>
+          </div>
+        );
+      })}
+    </section>
+  </main>
+
+  <SiteFooter />
+
+  <style>
+    .tool-hero { padding: 20px 20px 8px; }
+    .tool-hero-inner { max-width: 900px; margin: 0 auto; }
+    .tool-tag {
+      font-size: 0.72rem; font-weight: 700; text-transform: uppercase;
+      letter-spacing: 1.2px; color: var(--primary); margin-bottom: 8px;
+    }
+    .tool-h1 {
+      font-size: clamp(1.8rem, 5vw, 2.5rem); font-weight: 900;
+      letter-spacing: -0.8px; line-height: 1.18; color: var(--text-ink); margin-bottom: 10px;
+    }
+    .tool-sub {
+      font-size: 0.95rem; color: var(--text-body); line-height: 1.7;
+      margin-bottom: 26px; max-width: 620px;
+    }
+    .guides-body {
+      max-width: 900px; margin: 0 auto; padding: 0 20px 40px;
+    }
+    .guide-group { margin-top: 28px; }
+    .guide-group-title {
+      font-size: 1.15rem; font-weight: 800; color: var(--text-ink);
+      letter-spacing: -0.3px; margin-bottom: 14px;
+    }
+    .guide-grid {
+      display: grid; grid-template-columns: repeat(auto-fill, minmax(260px, 1fr)); gap: 14px;
+    }
+    .guide-card {
+      background: var(--bg-card); border: 1px solid var(--border); border-radius: 14px;
+      padding: 18px; text-decoration: none; display: flex; flex-direction: column; gap: 7px;
+      transition: border-color 0.2s, transform 0.2s;
+    }
+    .guide-card:hover { border-color: var(--primary); transform: translateY(-2px); }
+    .guide-card-tag {
+      font-size: 0.64rem; font-weight: 700; text-transform: uppercase; letter-spacing: 1.1px;
+      color: var(--primary); background: color-mix(in srgb, var(--primary) 12%, transparent);
+      padding: 2px 8px; border-radius: 999px; align-self: flex-start;
+    }
+    .guide-card-title {
+      font-weight: 700; font-size: 0.95rem; color: var(--text-ink); line-height: 1.4;
+    }
+    .guide-card-desc {
+      font-size: 0.8rem; color: var(--text-mute); line-height: 1.55;
+      display: -webkit-box; -webkit-line-clamp: 2; -webkit-box-orient: vertical; overflow: hidden;
+    }
+    .guide-card-date { font-size: 0.72rem; color: var(--text-mute); margin-top: auto; }
+  </style>
+</Layout>

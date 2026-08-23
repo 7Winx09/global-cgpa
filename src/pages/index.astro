@@ -1,5 +1,8 @@
 ---
 import Layout from '../layouts/Layout.astro';
+import SiteHeader from '../components/Nav.astro';
+import SiteFooter from '../components/Footer.astro';
+import { universities } from '../data/universities';
 ---
 
 <Layout
@@ -128,157 +131,14 @@ select:focus, input[type="number"]:focus { outline: none; border-color: var(--pr
 .belt-card {
   background: var(--bg); border: 1px solid var(--border); padding: 16px;
   border-radius: 14px; text-align: center; cursor: pointer; font-size: 0.85rem;
-  font-weight: 600; transition: all 0.2s; user-select: none;
+  font-weight: 600; transition: all 0.2s; user-select: none; text-decoration: none; color: var(--text);
+  display: flex; align-items: center; justify-content: center; gap: 6px;
 }
 .belt-card:hover { border-color: var(--primary); transform: translateY(-2px); }
-/* Modals */
-.modal-overlay {
-  position: fixed; top:0; left:0; right:0; bottom:0;
-  background: rgba(15,23,42,0.75); backdrop-filter: blur(6px);
-  display: none; justify-content: center; align-items: center;
-  padding: 20px; z-index: 1000;
-}
-.modal-content {
-  background: var(--card); border: 1px solid var(--border);
-  border-radius: 24px; padding: 28px 24px; max-width: 580px; width: 100%;
-  max-height: 88vh; overflow-y: auto; overflow-x: hidden;
-  box-shadow: 0 25px 50px -12px rgba(0,0,0,0.5);
-}
-.modal-header { display: flex; justify-content: space-between; align-items: center; margin-bottom: 8px; }
-.modal-header h3 { font-size: 1.15rem; font-weight: 800; color: var(--text); }
-.modal-desc { font-size: 0.85rem; color: var(--muted); margin-bottom: 20px; line-height: 1.5; }
-
-.close-btn { cursor: pointer; background: var(--result-bg); border: 1px solid var(--border); font-size: 1.2rem; color: var(--muted); width: 32px; height: 32px; border-radius: 50%; display: flex; align-items: center; justify-content: center; transition: all 0.2s; }
-.close-btn:hover { color: var(--text); border-color: var(--primary); background: var(--card); }
-
-/* Tabular Sub-calculators without outer borders */
-.subcalc-table {
-  width: 100%;
-  border-collapse: separate;
-  border-spacing: 0 8px;
-  table-layout: fixed;
-  margin-bottom: 8px;
-}
-.subcalc-table th {
-  padding: 0 6px 8px;
-  font-size: 0.72rem;
-  font-weight: 700;
-  text-transform: uppercase;
-  letter-spacing: 0.5px;
-  color: var(--muted);
-  border-bottom: 1px solid var(--border);
-  white-space: nowrap;
-}
-.subcalc-table td {
-  padding: 0 4px;
-  vertical-align: middle;
-}
-.subcalc-table td:first-child {
-  padding-left: 0;
-}
-.subcalc-table td:last-child {
-  padding-right: 0;
-}
-
-.subcalc-table :global(input) {
-  width: 100% !important;
-  height: 38px !important;
-  padding: 0 10px !important;
-  border: 1px solid var(--border) !important;
-  background: var(--result-bg) !important;
-  color: var(--text) !important;
-  font-size: 0.88rem !important;
-  font-weight: 500 !important;
-  border-radius: 8px !important;
-  margin: 0 !important;
-  box-sizing: border-box !important;
-  transition: border-color 0.2s, background 0.2s !important;
-  font-family: inherit !important;
-  display: block !important;
-}
-.subcalc-table :global(input:focus) {
-  outline: none !important;
-  border-color: var(--primary) !important;
-  background: var(--card) !important;
-  box-shadow: 0 0 0 2px rgba(16, 185, 129, 0.2) !important;
-}
-
-.subcalc-table :global(.sem-badge), 
-.subcalc-table :global(.sub-badge) {
-  background: var(--result-bg);
-  border: 1px solid var(--border);
-  height: 38px;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  border-radius: 8px;
-  font-size: 0.8rem;
-  font-weight: 700;
-  color: var(--primary);
-  text-align: center;
-  white-space: nowrap;
-  font-family: inherit;
-  box-sizing: border-box;
-  margin: 0;
-}
-
-.subcalc-table :global(.remove-row-btn) {
-  background: var(--result-bg);
-  border: 1px solid var(--border);
-  color: var(--muted);
-  width: 38px;
-  height: 38px;
-  border-radius: 8px;
-  cursor: pointer;
-  font-size: 1.1rem;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  transition: all 0.2s;
-  margin: 0 auto;
-  box-sizing: border-box;
-  line-height: 1;
-}
-.subcalc-table :global(.remove-row-btn:hover) {
-  background: rgba(239, 68, 68, 0.15);
-  border-color: #ef4444;
-  color: #ef4444;
-}
-
-.add-btn {
-  width: 100%; padding: 11px; background: transparent;
-  border: 1px dashed var(--border); border-radius: 12px; color: var(--muted);
-  font-size: 0.85rem; font-weight: 600; cursor: pointer; transition: all 0.2s;
-  margin-top: 6px; margin-bottom: 20px; font-family: inherit;
-}
-.add-btn:hover {
-  border-color: var(--primary); color: var(--primary); background: rgba(16, 185, 129, 0.05);
-}
-
-/* Modal Output & Summary Table */
-.modal-output-display { margin-top: 20px; position: relative; }
-.result-values-group { display: flex; justify-content: center; gap: 36px; align-items: center; flex-wrap: wrap; }
-.out-val-sm { font-size: 1.6rem; color: var(--text); }
-
-.sgpa-summary-box {
-  margin: 20px 0 16px; border: 1px solid var(--border); border-radius: 14px;
-  overflow: hidden; background: var(--result-bg);
-}
-.summary-title {
-  padding: 10px 16px; font-size: 0.72rem; font-weight: 700; text-transform: uppercase;
-  letter-spacing: 0.8px; color: var(--muted); border-bottom: 1px solid var(--border);
-}
-.summary-table { width: 100%; border-collapse: collapse; font-size: 0.85rem; text-align: left; }
-.summary-table th { padding: 9px 16px; color: var(--muted); border-bottom: 1px solid var(--border); font-weight: 600; font-size: 0.75rem; text-transform: uppercase; }
-.summary-table td { padding: 9px 16px; border-bottom: 1px solid var(--border); color: var(--text); }
-.summary-total-row td { background: rgba(16, 185, 129, 0.08); border-bottom: none; color: var(--primary); }
-
-.chart-table { width: 100%; border-collapse: collapse; font-size: 0.85rem; text-align: center; }
-.chart-table th { padding: 12px 10px; border: 1px solid var(--border); background: var(--result-bg); font-weight: 700; font-size: 0.75rem; text-transform: uppercase; letter-spacing: 0.5px; color: var(--muted); }
-.chart-table td { padding: 10px; border: 1px solid var(--border); }
-.chart-table td:first-child { font-weight: 700; color: var(--primary); }
-.grade-pill { display: inline-block; padding: 2px 10px; border-radius: 999px; background: rgba(16, 185, 129, 0.1); color: var(--primary); font-weight: 700; font-size: 0.78rem; }
-
+.uni-belt { grid-template-columns: repeat(auto-fit, minmax(150px, 1fr)); }
+.uni-card { flex-direction: column; gap: 4px; padding: 14px 10px; }
+.uni-card-name { font-weight: 800; color: var(--primary); font-size: 0.9rem; }
+.uni-card-formula { font-size: 0.68rem; color: var(--muted); font-family: 'Courier New', monospace; }
 @media (max-width: 540px) {
   .calc-grid-header { display: none; }
   .sgpa-calc-row, .marks-calc-row {
@@ -348,20 +208,7 @@ select:focus, input[type="number"]:focus { outline: none; border-color: var(--pr
 </style>
 
 <!-- Header -->
-<header>
-  <a href="/" class="logo">
-    <svg width="28" height="28" viewBox="0 0 64 64" style="display:inline-block;border-radius:8px;" xmlns="http://www.w3.org/2000/svg">
-      <rect width="64" height="64" rx="14" fill="#10B981"/>
-      <text x="32" y="50" text-anchor="middle" font-family="system-ui,sans-serif" font-size="52" font-weight="800" fill="#FFFFFF">%</text>
-    </svg>
-    Global <span class="logo-accent">CGPA</span>
-  </a>
-
-  <button class="theme-toggle-btn" id="themeToggleBtn" onclick="toggleTheme()" aria-label="Toggle light or dark theme">
-    <span class="theme-icon" id="themeIcon">☀️</span>
-    <span class="theme-label" id="themeLabel">Light</span>
-  </button>
-</header>
+<SiteHeader />
 
 <!-- Hero + Calculator -->
 <main class="hero-main">
@@ -405,116 +252,27 @@ select:focus, input[type="number"]:focus { outline: none; border-color: var(--pr
 <section class="bottom-belt-section">
   <div class="belt-title">Advanced Academic Converters</div>
   <div class="belt-grid">
-    <div class="belt-card" onclick="openModal('modal-marks')">🗂️ Marks to CGPA</div>
-    <div class="belt-card" onclick="openModal('modal-sgpa')">📈 SGPA to CGPA</div>
-    <div class="belt-card" onclick="openModal('modal-chart')">📊 Conversion Chart</div>
+    <a class="belt-card" href="/marks-to-cgpa">🗂️ Marks to CGPA</a>
+    <a class="belt-card" href="/sgpa-to-cgpa">📈 SGPA to CGPA</a>
+    <a class="belt-card" href="/cgpa-to-percentage-chart">📊 Conversion Chart</a>
+    <a class="belt-card" href="/percentage-to-cgpa">🔁 Percentage to CGPA</a>
+    <a class="belt-card" href="/cgpa-to-gpa">🌍 CGPA to GPA (4.0)</a>
+    <a class="belt-card" href="/guides">📚 Student Guides</a>
   </div>
 </section>
 
-<!-- MODALS -->
-<div class="modal-overlay" id="modal-container" onclick="closeModalOnBg(event)">
-
-  <!-- Modal: Marks to CGPA -->
-  <div class="modal-content panel-modal" id="modal-marks" style="display:none">
-    <div class="modal-header">
-      <h3>Marks to CGPA / SGPA</h3>
-      <button class="close-btn" onclick="hideModals()">&times;</button>
-    </div>
-    <p class="modal-desc">Enter marks obtained and maximum marks per subject to calculate your overall CGPA on a 10-point scale. Add more subjects with the + button below.</p>
-    
-    <table class="subcalc-table">
-      <thead>
-        <tr>
-          <th style="width: 72px; text-align: center;">Subject</th>
-          <th style="text-align: left;">Marks Obtained</th>
-          <th style="width: 95px; text-align: left;">Max Marks</th>
-          <th style="width: 38px; text-align: center;"></th>
-        </tr>
-      </thead>
-      <tbody id="marks_rows_box"></tbody>
-    </table>
-    <button class="add-btn" type="button" onclick="addMarksRowAuto()">+ Add Subject</button>
-
-    <div class="output-display modal-output-display">
-      <button class="copy-btn" onclick="copyEl('m_res_val')" title="Copy result">⎘</button>
-      <div class="out-val" id="m_res_val">—</div>
-      <div class="out-lbl">Calculated CGPA / SGPA</div>
-    </div>
+<!-- University Converters -->
+<section class="bottom-belt-section" id="universities" style="border-top:none; padding-top:0;">
+  <div class="belt-title">University-Specific Calculators</div>
+  <div class="belt-grid uni-belt">
+    {universities.map((u) => (
+      <a class="belt-card uni-card" href={`/${u.slug}`}>
+        <span class="uni-card-name">{u.short}</span>
+        <span class="uni-card-formula">{u.formulaLabel}</span>
+      </a>
+    ))}
   </div>
-
-  <!-- Modal: SGPA to CGPA -->
-  <div class="modal-content panel-modal" id="modal-sgpa" style="display:none">
-    <div class="modal-header">
-      <h3>SGPA to Cumulative CGPA</h3>
-      <button class="close-btn" onclick="hideModals()">&times;</button>
-    </div>
-    <p class="modal-desc">Enter your SGPA and credit count for each semester. Add more semesters with the + button below.</p>
-
-    <table class="subcalc-table">
-      <thead>
-        <tr>
-          <th style="width: 72px; text-align: center;">Semester</th>
-          <th style="text-align: left;">Score / Marks</th>
-          <th style="width: 80px; text-align: left;">Out of</th>
-          <th style="width: 76px; text-align: left;">Credits</th>
-          <th style="width: 38px; text-align: center;"></th>
-        </tr>
-      </thead>
-      <tbody id="sgpa_rows_box"></tbody>
-    </table>
-    <button class="add-btn" type="button" onclick="addSgpaRowAuto()">+ Add Semester</button>
-
-    <!-- Semester Breakdown Table -->
-    <div class="sgpa-summary-box" id="sgpa_summary_box" style="display:none">
-      <div class="summary-title">Semester Breakdown</div>
-      <table class="summary-table">
-        <thead>
-          <tr><th>Semester</th><th>SGPA</th><th>Credits</th><th>Weighted Points</th></tr>
-        </thead>
-        <tbody id="sgpa_summary_body"></tbody>
-      </table>
-    </div>
-
-    <div class="output-display modal-output-display">
-      <button class="copy-btn" onclick="copyEl('s_res_val')" title="Copy result">⎘</button>
-      <div class="result-values-group">
-        <div>
-          <div class="out-val" id="s_res_val">—</div>
-          <div class="out-lbl">Cumulative CGPA</div>
-        </div>
-        <div id="s_pct_box" style="display:none">
-          <div class="out-val out-val-sm" id="s_pct_val">—</div>
-          <div class="out-lbl">≈ Percentage (CBSE)</div>
-        </div>
-      </div>
-    </div>
-  </div>
-
-  <!-- Modal: Conversion Chart -->
-  <div class="modal-content panel-modal" id="modal-chart" style="display:none">
-    <div class="modal-header">
-      <h3>CGPA to Percentage Conversion Chart</h3>
-      <button class="close-btn" onclick="hideModals()">&times;</button>
-    </div>
-    <p class="modal-desc">Comprehensive reference table for converting CGPA across major Indian universities and 4.0 GPA scale.</p>
-    <div style="overflow-x:auto;">
-      <table class="chart-table">
-        <thead>
-          <tr>
-            <th>CGPA</th>
-            <th>CBSE (×9.5)</th>
-            <th>SPPU (×10−7.5)</th>
-            <th>VTU (×10)</th>
-            <th>Mumbai Univ</th>
-            <th>Grade</th>
-          </tr>
-        </thead>
-        <tbody id="chart-tbody"></tbody>
-      </table>
-    </div>
-  </div>
-
-</div>
+</section>
 
 <!-- ═══ SEO ARTICLE ═══ -->
 <article class="seo-article" itemscope itemtype="https://schema.org/Article">
@@ -567,7 +325,7 @@ select:focus, input[type="number"]:focus { outline: none; border-color: var(--pr
   </ul>
 
   <h2>University-Wise CGPA to Percentage Formulas at a Glance</h2>
-  <p>India's decentralised university system means that each institution can define its own grading norms. The table below summarises the most commonly used <strong>CGPA to percentage conversion</strong> formulas across major affiliating universities:</p>
+  <p>India's decentralised university system means that each institution can define its own grading norms. The table below lists the official conversion formulas for major affiliating universities — each links to a dedicated calculator with worked examples and class thresholds:</p>
 
   <div class="seo-table-wrap">
     <table class="seo-table">
@@ -575,17 +333,18 @@ select:focus, input[type="number"]:focus { outline: none; border-color: var(--pr
         <tr><th>University</th><th>Formula</th><th>Example (8.0 CGPA)</th></tr>
       </thead>
       <tbody>
-        <tr><td>CBSE / Generic</td><td>CGPA × 9.5</td><td>76.0%</td></tr>
-        <tr><td>SPPU (Pune University)</td><td>(CGPA × 10) − 7.5</td><td>72.5%</td></tr>
-        <tr><td>VTU (Bangalore)</td><td>CGPA × 10</td><td>80.0%</td></tr>
-        <tr><td>Anna University</td><td>(CGPA × 10) − 7.5</td><td>72.5%</td></tr>
-        <tr><td>Mumbai University</td><td>(7.1 × CGPA) + 11</td><td>67.8%</td></tr>
-        <tr><td>AKTU / UPTU</td><td>CGPA × 9.5</td><td>76.0%</td></tr>
-        <tr><td>GTU (Gujarat)</td><td>(CGPA × 10) − 7.5</td><td>72.5%</td></tr>
-        <tr><td>KTU (Kerala)</td><td>CGPA × 10</td><td>80.0%</td></tr>
+        <tr><td>CBSE / UGC Generic</td><td>CGPA × 9.5</td><td>76.0%</td></tr>
+        <tr><td><a href="/sppu-cgpa-to-percentage">SPPU (Pune University)</a></td><td>(CGPA × 10) − 7.5</td><td>72.5%</td></tr>
+        <tr><td><a href="/vtu-cgpa-to-percentage">VTU (Bangalore)</a></td><td>CGPA × 10</td><td>80.0%</td></tr>
+        <tr><td><a href="/anna-university-cgpa-to-percentage">Anna University</a></td><td>CGPA × 10</td><td>80.0%</td></tr>
+        <tr><td><a href="/mumbai-university-cgpa-to-percentage">Mumbai University</a></td><td>(7.1 × CGPA) + 11</td><td>67.8%</td></tr>
+        <tr><td><a href="/aktu-cgpa-to-percentage">AKTU / UPTU</a></td><td>(CGPA − 0.75) × 10</td><td>72.5%</td></tr>
+        <tr><td><a href="/gtu-cgpa-to-percentage">GTU (Gujarat)</a></td><td>(CGPA − 0.5) × 10</td><td>75.0%</td></tr>
+        <tr><td><a href="/ktu-cgpa-to-percentage">KTU (Kerala)</a></td><td>CGPA × 10</td><td>80.0%</td></tr>
       </tbody>
     </table>
   </div>
+  <p>Formulas are sourced from each university's own ordinances and circulars — the university pages cover regulation notes, reverse conversions and class thresholds. For a side-by-side reference of every value, see the <a href="/cgpa-to-percentage-chart">complete conversion chart</a>.</p>
 
   <h2>Using a CGPA to Percentage Converter — What to Look For</h2>
   <p>A reliable <strong>CGPA to percentage converter</strong> should do more than blindly multiply by 9.5. Here is what differentiates a trustworthy tool from a generic one:</p>
@@ -715,57 +474,7 @@ select:focus, input[type="number"]:focus { outline: none; border-color: var(--pr
 </section>
 
 <!-- ═══ FOOTER ═══ -->
-<footer class="site-footer">
-  <div class="footer-inner">
-    <div class="footer-brand-col">
-      <a href="/" class="footer-logo">
-        <svg width="24" height="24" viewBox="0 0 64 64" style="border-radius:6px;" xmlns="http://www.w3.org/2000/svg">
-          <rect width="64" height="64" rx="14" fill="#0f172a"/>
-          <text x="32" y="50" text-anchor="middle" font-family="system-ui,sans-serif" font-size="52" font-weight="800" fill="#00d285">%</text>
-        </svg>
-        Global CGPA
-      </a>
-      <p class="footer-tagline">Free CGPA to percentage calculator for Indian university students. Supports SPPU, VTU, Mumbai University, Anna University and more.</p>
-    </div>
-    <div>
-      <div class="footer-col-title">Calculators</div>
-      <ul class="footer-links">
-        <li><a href="/">CGPA to Percentage</a></li>
-        <li><a href="/">Percentage to CGPA</a></li>
-        <li><a href="/">CGPA to GPA (4.0)</a></li>
-        <li><a href="/">SGPA to CGPA</a></li>
-        <li><a href="/">Marks to CGPA</a></li>
-      </ul>
-    </div>
-    <div>
-      <div class="footer-col-title">Company</div>
-      <ul class="footer-links">
-        <li><a href="/about">About Us</a></li>
-        <li><a href="/contact">Contact Us</a></li>
-        <li><a href="/privacy-policy">Privacy Policy</a></li>
-        <li><a href="/terms">Terms &amp; Conditions</a></li>
-      </ul>
-    </div>
-    <div>
-      <div class="footer-col-title">Universities</div>
-      <ul class="footer-links">
-        <li><a href="/">SPPU Calculator</a></li>
-        <li><a href="/">VTU Calculator</a></li>
-        <li><a href="/">Mumbai University</a></li>
-        <li><a href="/">Anna University</a></li>
-        <li><a href="/">AKTU / UPTU</a></li>
-      </ul>
-    </div>
-  </div>
-  <div class="footer-bottom">
-    <span class="footer-copy">© 2026 Global CGPA. All rights reserved. Results are approximate — verify with your university.</span>
-    <div class="footer-bottom-links">
-      <a href="/privacy-policy">Privacy</a>
-      <a href="/terms">Terms</a>
-      <a href="/contact">Contact</a>
-    </div>
-  </div>
-</footer>
+<SiteFooter />
 
 <script is:inline>
 // ── Core Calculator ────────────────────────────────────
@@ -828,247 +537,6 @@ function copyEl(id) {
 }
 
 // ── Modals & Sub-calculators ─────────────────────────────
-function openModal(id) {
-  document.getElementById('modal-container').style.display = 'flex';
-  document.querySelectorAll('.panel-modal').forEach(m => m.style.display = 'none');
-  const target = document.getElementById(id);
-  if (target) target.style.display = 'block';
-
-  if (id === 'modal-sgpa') initSgpaRows();
-  if (id === 'modal-marks') initMarksRows();
-  if (id === 'modal-chart') buildConversionChart();
-}
-function hideModals() {
-  document.getElementById('modal-container').style.display = 'none';
-}
-function closeModalOnBg(e) {
-  if (e.target.id === 'modal-container') hideModals();
-}
-document.addEventListener('keydown', (e) => {
-  if (e.key === 'Escape') hideModals();
-});
-
-// ── SGPA to CGPA (8 Semesters + Add/Remove) ──────────────
-let sgpaCount = 0;
-const defaultCredits = [22, 22, 24, 24, 24, 24, 22, 22];
-
-function initSgpaRows() {
-  const box = document.getElementById('sgpa_rows_box');
-  if (!box || box.children.length > 0) return;
-  // Start with 1 empty row — user adds more via + button
-  createSgpaRow(1, defaultCredits[0] || 22);
-}
-
-function createSgpaRow(semNum, defaultCred) {
-  const box = document.getElementById('sgpa_rows_box');
-  sgpaCount++;
-  const num = semNum || sgpaCount;
-  const row = document.createElement('tr');
-  row.className = 'sgpa-calc-row';
-  row.innerHTML = `
-    <td style="text-align: center;"><span class="sem-badge">Sem ${num}</span></td>
-    <td><input type="number" class="sgpa-val" placeholder="e.g. 8.35" min="0" step="0.01" oninput="calcSgpa()"></td>
-    <td><input type="number" class="sgpa-scale" value="10" placeholder="10" min="1" step="0.1" oninput="calcSgpa()"></td>
-    <td><input type="number" class="sgpa-cred" value="${defaultCred || 22}" placeholder="22" min="1" step="1" oninput="calcSgpa()"></td>
-    <td style="text-align: center;"><button type="button" class="remove-row-btn" onclick="removeSgpaRow(this)" title="Remove semester">&times;</button></td>
-  `;
-  box.appendChild(row);
-  reindexSgpaBadges();
-}
-
-function addSgpaRowAuto() {
-  const currentRows = document.querySelectorAll('#sgpa_rows_box tr').length;
-  createSgpaRow(currentRows + 1, 22);
-  calcSgpa();
-}
-
-function removeSgpaRow(btn) {
-  btn.closest('tr').remove();
-  reindexSgpaBadges();
-  calcSgpa();
-}
-
-function reindexSgpaBadges() {
-  const rows = document.querySelectorAll('#sgpa_rows_box tr');
-  rows.forEach((row, idx) => {
-    const badge = row.querySelector('.sem-badge');
-    if (badge) badge.textContent = `Sem ${idx + 1}`;
-  });
-}
-
-function calcSgpa() {
-  const rows = document.querySelectorAll('#sgpa_rows_box tr');
-  let totalWeighted = 0;
-  let totalCredits = 0;
-  const breakdown = [];
-
-  rows.forEach((row, idx) => {
-    const sInput = row.querySelector('.sgpa-val');
-    const scaleInput = row.querySelector('.sgpa-scale');
-    const cInput = row.querySelector('.sgpa-cred');
-
-    const sVal = parseFloat(sInput?.value);
-    const scaleVal = parseFloat(scaleInput?.value || scaleInput?.placeholder || '10');
-    const cVal = parseFloat(cInput?.value || cInput?.placeholder || '22');
-    
-    if (sInput?.value !== '' && !isNaN(sVal) && sVal >= 0 && !isNaN(scaleVal) && scaleVal > 0) {
-      const cred = (!isNaN(cVal) && cVal > 0) ? cVal : 22;
-      const normalizedSgpa = (sVal / scaleVal) * 10;
-      const pts = normalizedSgpa * cred;
-      totalWeighted += pts;
-      totalCredits += cred;
-      breakdown.push({ 
-        sem: `Sem ${idx + 1}`, 
-        sgpa: normalizedSgpa, 
-        credits: cred, 
-        weighted: pts 
-      });
-    }
-  });
-
-  const resVal = document.getElementById('s_res_val');
-  const pctVal = document.getElementById('s_pct_val');
-  const pctBox = document.getElementById('s_pct_box');
-  const summaryBox = document.getElementById('sgpa_summary_box');
-  const summaryBody = document.getElementById('sgpa_summary_body');
-
-  if (totalCredits > 0) {
-    const cgpa = totalWeighted / totalCredits;
-    const cgpaFormatted = cgpa.toFixed(2);
-    if (resVal) resVal.textContent = cgpaFormatted;
-    
-    const pctApprox = Math.min(cgpa * 9.5, 100).toFixed(1) + '%';
-    if (pctVal) pctVal.textContent = pctApprox;
-    if (pctBox) pctBox.style.display = 'block';
-
-    if (summaryBody && summaryBox) {
-      summaryBody.innerHTML = breakdown.map(item => `
-        <tr>
-          <td>${item.sem}</td>
-          <td>${item.sgpa.toFixed(2)}</td>
-          <td>${item.credits}</td>
-          <td>${item.weighted.toFixed(2)}</td>
-        </tr>
-      `).join('') + `
-        <tr class="summary-total-row">
-          <td><strong>Total / CGPA</strong></td>
-          <td><strong>—</strong></td>
-          <td><strong>${totalCredits}</strong></td>
-          <td><strong>${cgpaFormatted} CGPA</strong></td>
-        </tr>
-      `;
-      summaryBox.style.display = 'block';
-    }
-  } else {
-    if (resVal) resVal.textContent = '—';
-    if (pctBox) pctBox.style.display = 'none';
-    if (summaryBox) summaryBox.style.display = 'none';
-  }
-}
-window.calcSgpa = calcSgpa;
-
-// ── Marks to CGPA ────────────────────────────────────
-let marksCount = 0;
-
-function initMarksRows() {
-  const box = document.getElementById('marks_rows_box');
-  if (!box || box.children.length > 0) return;
-  // Start with 1 empty row — user adds more via + button
-  createMarksRow(1);
-}
-
-function createMarksRow(subNum) {
-  const box = document.getElementById('marks_rows_box');
-  marksCount++;
-  const num = subNum || marksCount;
-  const row = document.createElement('tr');
-  row.className = 'marks-calc-row';
-  row.innerHTML = `
-    <td style="text-align: center;"><span class="sub-badge">Sub ${num}</span></td>
-    <td><input type="number" class="marks-obt" placeholder="e.g. 85" min="0" oninput="calcMarks()"></td>
-    <td><input type="number" class="marks-max" placeholder="100" min="1" value="100" oninput="calcMarks()"></td>
-    <td style="text-align: center;"><button type="button" class="remove-row-btn" onclick="removeMarksRow(this)" title="Remove subject">&times;</button></td>
-  `;
-  box.appendChild(row);
-  reindexMarksBadges();
-}
-
-function addMarksRowAuto() {
-  const currentRows = document.querySelectorAll('#marks_rows_box tr').length;
-  createMarksRow(currentRows + 1);
-  calcMarks();
-}
-
-function removeMarksRow(btn) {
-  btn.closest('tr').remove();
-  reindexMarksBadges();
-  calcMarks();
-}
-
-function reindexMarksBadges() {
-  const rows = document.querySelectorAll('#marks_rows_box tr');
-  rows.forEach((row, idx) => {
-    const badge = row.querySelector('.sub-badge');
-    if (badge) badge.textContent = `Sub ${idx + 1}`;
-  });
-}
-
-function calcMarks() {
-  const rows = document.querySelectorAll('#marks_rows_box tr');
-  let totalObtained = 0;
-  let totalMax = 0;
-
-  rows.forEach(row => {
-    const o = parseFloat(row.querySelector('.marks-obt')?.value);
-    const m = parseFloat(row.querySelector('.marks-max')?.value || 100);
-    if (!isNaN(o) && o >= 0 && !isNaN(m) && m > 0) {
-      totalObtained += o;
-      totalMax += m;
-    }
-  });
-
-  const resVal = document.getElementById('m_res_val');
-  if (totalMax > 0 && totalObtained > 0) {
-    const cgpa = (totalObtained / totalMax) * 10;
-    if (resVal) resVal.textContent = cgpa.toFixed(2);
-  } else {
-    if (resVal) resVal.textContent = '—';
-  }
-}
-window.calcMarks = calcMarks;
-
-// ── Conversion Chart ─────────────────────────────────
-function buildConversionChart() {
-  const tbody = document.getElementById('chart-tbody');
-  if (!tbody || tbody.children.length > 0) return;
-  const values = [10.0, 9.5, 9.0, 8.5, 8.0, 7.5, 7.0, 6.5, 6.0, 5.5, 5.0, 4.5, 4.0];
-  tbody.innerHTML = values.map(c => {
-    const cbse = (c * 9.5).toFixed(1) + '%';
-    const sppu = Math.max(0, (c * 10) - 7.5).toFixed(1) + '%';
-    const vtu = (c * 10).toFixed(1) + '%';
-    const mumbai = ((7.1 * c) + 11).toFixed(1) + '%';
-    let grade = 'F';
-    if (c >= 9.0) grade = 'O (Outstanding)';
-    else if (c >= 8.0) grade = 'A+ (Excellent)';
-    else if (c >= 7.0) grade = 'A (Very Good)';
-    else if (c >= 6.0) grade = 'B+ (Good)';
-    else if (c >= 5.0) grade = 'B (Average)';
-    else if (c >= 4.0) grade = 'C (Pass)';
-
-    return `
-      <tr>
-        <td><strong>${c.toFixed(1)}</strong></td>
-        <td>${cbse}</td>
-        <td>${sppu}</td>
-        <td>${vtu}</td>
-        <td>${mumbai}</td>
-        <td><span class="grade-pill">${grade}</span></td>
-      </tr>
-    `;
-  }).join('');
-}
-
-// ── FAQ ───────────────────────────────────────────────
 function toggleFaq(btn) {
   const item = btn.closest('.faq-item');
   const isOpen = item.classList.contains('open');
@@ -1077,37 +545,5 @@ function toggleFaq(btn) {
 }
 
 // ── Theme Toggle ──────────────────────────────────────
-function toggleTheme() {
-  const isLight = document.documentElement.classList.toggle('light-theme');
-  const theme = isLight ? 'light' : 'dark';
-  if (isLight) {
-    document.documentElement.classList.remove('dark');
-    document.documentElement.setAttribute('data-theme', 'light');
-  } else {
-    document.documentElement.classList.add('dark');
-    document.documentElement.setAttribute('data-theme', 'dark');
-  }
-  localStorage.setItem('gcgpa-theme', theme);
-  localStorage.setItem('theme', theme);
-  syncThemeBtn(theme);
-}
-
-function syncThemeBtn(theme) {
-  const icon = document.getElementById('themeIcon');
-  const label = document.getElementById('themeLabel');
-  if (!icon || !label) return;
-  if (theme === 'light') {
-    icon.textContent = '🌙';
-    label.textContent = 'Dark';
-  } else {
-    icon.textContent = '☀️';
-    label.textContent = 'Light';
-  }
-}
-
-(function() {
-  const currentTheme = document.documentElement.classList.contains('light-theme') ? 'light' : 'dark';
-  syncThemeBtn(currentTheme);
-})();
 </script>
 </Layout>

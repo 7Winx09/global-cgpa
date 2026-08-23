@@ -1,61 +1,81 @@
 ---
-// Footer.astro
+const year = new Date().getFullYear();
+const calculators = [
+  { label: 'CGPA to Percentage', href: '/' },
+  { label: 'Percentage to CGPA', href: '/percentage-to-cgpa' },
+  { label: 'CGPA to GPA (4.0)', href: '/cgpa-to-gpa' },
+  { label: 'SGPA to CGPA', href: '/sgpa-to-cgpa' },
+  { label: 'Marks to CGPA', href: '/marks-to-cgpa' },
+  { label: 'Conversion Chart', href: '/cgpa-to-percentage-chart' },
+];
+const universityLinks = [
+  { label: 'SPPU Calculator', href: '/sppu-cgpa-to-percentage' },
+  { label: 'VTU Calculator', href: '/vtu-cgpa-to-percentage' },
+  { label: 'Mumbai University', href: '/mumbai-university-cgpa-to-percentage' },
+  { label: 'Anna University', href: '/anna-university-cgpa-to-percentage' },
+  { label: 'AKTU / UPTU', href: '/aktu-cgpa-to-percentage' },
+  { label: 'GTU Calculator', href: '/gtu-cgpa-to-percentage' },
+  { label: 'KTU Calculator', href: '/ktu-cgpa-to-percentage' },
+];
+const learn = [
+  { label: 'All Guides', href: '/guides' },
+  { label: 'CGPA for Placements', href: '/guides/cgpa-good-for-placements' },
+  { label: 'CGPA to GPA for MS Abroad', href: '/guides/cgpa-to-gpa-4-scale-ms-abroad' },
+  { label: 'Conversion Certificate', href: '/guides/cgpa-to-percentage-certificate' },
+];
+const company = [
+  { label: 'About Us', href: '/about' },
+  { label: 'Contact Us', href: '/contact' },
+  { label: 'Privacy Policy', href: '/privacy-policy' },
+  { label: 'Terms & Conditions', href: '/terms' },
+];
 ---
 
 <footer class="site-footer">
   <div class="footer-inner">
-    <!-- Brand column -->
     <div class="footer-brand">
       <a href="/" class="footer-logo" aria-label="GlobalCGPA Home">
         <svg width="24" height="24" viewBox="0 0 64 64" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
-          <rect width="64" height="64" rx="12" fill="#171717"/>
+          <rect width="64" height="64" rx="12" fill="#10B981"/>
           <text x="32" y="46" text-anchor="middle" font-family="system-ui,sans-serif" font-size="44" font-weight="700" fill="#ffffff">%</text>
         </svg>
         <span>GlobalCGPA</span>
       </a>
-      <p class="footer-tagline">Free CGPA to percentage calculator for Indian university students. Supports SPPU, VTU, Mumbai University, Anna University, AKTU and more.</p>
+      <p class="footer-tagline">Free CGPA to percentage calculator for Indian university students. Supports SPPU, VTU, Mumbai University, Anna University, AKTU, GTU, KTU and more.</p>
       <p class="footer-domain">globalcgpa.in</p>
     </div>
 
-    <!-- Calculators -->
     <div class="footer-col">
       <div class="footer-col-title">Calculators</div>
       <ul class="footer-links">
-        <li><a href="/#calculator">CGPA to Percentage</a></li>
-        <li><a href="/#calculator">Percentage to CGPA</a></li>
-        <li><a href="/#calculator">CGPA to GPA (4.0)</a></li>
-        <li><a href="/#calculator">SGPA to CGPA</a></li>
-        <li><a href="/#calculator">Marks to CGPA</a></li>
+        {calculators.map((l) => <li><a href={l.href}>{l.label}</a></li>)}
       </ul>
     </div>
 
-    <!-- Universities -->
     <div class="footer-col">
       <div class="footer-col-title">Universities</div>
       <ul class="footer-links">
-        <li><a href="/#universities">SPPU Calculator</a></li>
-        <li><a href="/#universities">VTU Calculator</a></li>
-        <li><a href="/#universities">Mumbai University</a></li>
-        <li><a href="/#universities">Anna University</a></li>
-        <li><a href="/#universities">AKTU / UPTU</a></li>
+        {universityLinks.map((l) => <li><a href={l.href}>{l.label}</a></li>)}
       </ul>
     </div>
 
-    <!-- Company -->
+    <div class="footer-col">
+      <div class="footer-col-title">Learn</div>
+      <ul class="footer-links">
+        {learn.map((l) => <li><a href={l.href}>{l.label}</a></li>)}
+      </ul>
+    </div>
+
     <div class="footer-col">
       <div class="footer-col-title">Company</div>
       <ul class="footer-links">
-        <li><a href="/about">About Us</a></li>
-        <li><a href="/contact">Contact Us</a></li>
-        <li><a href="/privacy-policy">Privacy Policy</a></li>
-        <li><a href="/terms">Terms &amp; Conditions</a></li>
+        {company.map((l) => <li><a href={l.href}>{l.label}</a></li>)}
       </ul>
     </div>
   </div>
 
-  <!-- Bottom bar -->
   <div class="footer-bottom">
-    <span class="footer-copy">© {new Date().getFullYear()} GlobalCGPA. All rights reserved. Results are approximate — verify with your university.</span>
+    <span class="footer-copy">© {year} GlobalCGPA. All rights reserved. Results are approximate — verify with your university.</span>
     <div class="footer-bottom-links">
       <a href="/privacy-policy">Privacy</a>
       <a href="/terms">Terms</a>
@@ -68,17 +88,17 @@
   .site-footer {
     background: var(--bg-card);
     border-top: 1px solid var(--border);
-    padding: 64px 24px 0;
+    padding: 56px 24px 0;
+    margin-top: 24px;
   }
 
   .footer-inner {
-    max-width: 1100px;
+    max-width: 1160px;
     margin: 0 auto;
     display: grid;
-    grid-template-columns: 2fr 1fr 1fr 1fr;
-    gap: 40px;
-    padding-bottom: 48px;
-    border-bottom: 1px solid var(--border);
+    grid-template-columns: 1.5fr 1fr 1fr 1fr 0.9fr;
+    gap: 32px;
+    padding-bottom: 44px;
   }
 
   .footer-brand {
@@ -94,7 +114,7 @@
     text-decoration: none;
     color: var(--text-ink);
     font-size: 15px;
-    font-weight: 600;
+    font-weight: 700;
     letter-spacing: -0.02em;
   }
 
@@ -102,32 +122,30 @@
     font-size: 13px;
     color: var(--text-mute);
     line-height: 1.65;
-    max-width: 280px;
+    max-width: 260px;
     margin: 0;
   }
 
   .footer-domain {
-    font-family: 'JetBrains Mono', monospace;
     font-size: 11px;
     color: var(--text-mute);
     margin: 0;
   }
 
   .footer-col-title {
-    font-family: 'JetBrains Mono', monospace;
     font-size: 10px;
-    font-weight: 400;
+    font-weight: 700;
     text-transform: uppercase;
-    letter-spacing: 0.08em;
+    letter-spacing: 0.1em;
     color: var(--text-mute);
-    margin-bottom: 16px;
+    margin-bottom: 14px;
   }
 
   .footer-links {
     list-style: none;
     display: flex;
     flex-direction: column;
-    gap: 10px;
+    gap: 9px;
   }
 
   .footer-links a {
@@ -135,17 +153,17 @@
     color: var(--text-body);
     text-decoration: none;
     transition: color 0.15s;
-    letter-spacing: -0.01em;
   }
 
   .footer-links a:hover {
-    color: var(--text-ink);
+    color: var(--primary);
   }
 
   .footer-bottom {
-    max-width: 1100px;
+    max-width: 1160px;
     margin: 0 auto;
-    padding: 20px 0 24px;
+    padding: 18px 0 22px;
+    border-top: 1px solid var(--border);
     display: flex;
     justify-content: space-between;
     align-items: center;
@@ -160,23 +178,22 @@
 
   .footer-bottom-links {
     display: flex;
-    gap: 20px;
+    gap: 18px;
   }
 
   .footer-bottom-links a {
     font-size: 12px;
     color: var(--text-mute);
     text-decoration: none;
-    transition: color 0.15s;
   }
 
   .footer-bottom-links a:hover {
-    color: var(--text-ink);
+    color: var(--primary);
   }
 
-  @media (max-width: 900px) {
+  @media (max-width: 980px) {
     .footer-inner {
-      grid-template-columns: 1fr 1fr;
+      grid-template-columns: 1fr 1fr 1fr;
     }
     .footer-brand {
       grid-column: 1 / -1;
@@ -185,11 +202,8 @@
 
   @media (max-width: 560px) {
     .footer-inner {
-      grid-template-columns: 1fr;
-      gap: 32px;
-    }
-    .footer-brand {
-      grid-column: unset;
+      grid-template-columns: 1fr 1fr;
+      gap: 28px;
     }
     .footer-bottom {
       flex-direction: column;

@@ -1,5 +1,7 @@
 ---
 import Layout from '../layouts/Layout.astro';
+import SiteHeader from '../components/Nav.astro';
+import SiteFooter from '../components/Footer.astro';
 ---
 
 <Layout 
@@ -7,7 +9,9 @@ import Layout from '../layouts/Layout.astro';
   description="Contact the Global CGPA team. Report a formula error, suggest a university, or ask a question."
   canonical="https://globalcgpa.in/contact"
 >
-  <main class="max-w-[780px] mx-auto px-6 py-14">
+  <SiteHeader />
+
+  <main class="max-w-[780px] mx-auto px-6 py-14" style="flex:1;">
     <div class="text-xs font-bold uppercase tracking-wider text-emerald-500 mb-2">Contact Us</div>
     <h1 class="text-3xl sm:text-4xl font-extrabold tracking-tight mb-3">Get in touch</h1>
     <p class="text-slate-500 dark:text-zinc-400 text-base mb-10">
@@ -68,4 +72,5 @@ import Layout from '../layouts/Layout.astro';
       </div>
     </div>
   </main>
+  <SiteFooter />
 </Layout>

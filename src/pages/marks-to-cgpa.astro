@@ -1,0 +1,247 @@
+---
+import Layout from '../layouts/Layout.astro';
+import SiteHeader from '../components/Nav.astro';
+import SiteFooter from '../components/Footer.astro';
+import Breadcrumbs from '../components/Breadcrumbs.astro';
+import FaqAccordion from '../components/FaqAccordion.astro';
+
+const faqs = [
+  { q: 'How is CGPA calculated from marks?', a: 'Add up the marks you obtained across all subjects, divide by the total maximum marks, and multiply by 10. For example, 1,700 marks out of 2,000 gives (1700 ÷ 2000) × 10 = <strong>8.5 CGPA</strong>. This is the standard 10-point approximation used across Indian universities.' },
+  { q: 'Is marks-to-CGPA conversion accurate for my university?', a: 'It is accurate for any university where grade points map linearly to marks on a 10-point scale. Universities with their own ordinances (like SPPU or Mumbai University) compute CGPA from <em>grade points</em> per subject rather than raw marks, so use this tool for estimates and your university\'s grade table for official figures.' },
+  { q: 'What is 70% in CGPA?', a: '70% equals <strong>7.4 CGPA</strong> on the 10-point scale (70 ÷ 10 × 10 = 7.37, rounded). Under the CBSE reverse formula it is 7.37, and under VTU/KTU-style direct conversion it is 7.0.' },
+  { q: 'Can I calculate SGPA from semester marks?', a: 'Yes — enter just that semester\'s subjects and the result is your SGPA for the semester. Then use our <a href="/sgpa-to-cgpa">SGPA to CGPA calculator</a> to combine all semesters with credit weighting.' },
+  { q: 'Does every subject count equally?', a: 'In this calculator, yes — it weights by marks. Real CGPA calculations weight by <em>credits</em>, so a 4-credit subject affects your CGPA twice as much as a 2-credit one. Treat the result as a close estimate, especially if your credit distribution is uneven.' },
+];
+---
+
+<Layout
+  title="Marks to CGPA Calculator — Convert Subject Marks to CGPA | GlobalCGPA"
+  description="Free marks to CGPA calculator. Enter marks obtained and maximum marks for each subject to get your CGPA on a 10-point scale instantly, with percentage equivalent. Works for any university."
+  canonical="https://globalcgpa.in/marks-to-cgpa"
+  schema={{
+    '@context': 'https://schema.org',
+    '@type': 'WebApplication',
+    'name': 'Marks to CGPA Calculator',
+    'url': 'https://globalcgpa.in/marks-to-cgpa',
+    'description': 'Convert subject marks to CGPA on a 10-point scale instantly.',
+    'applicationCategory': 'EducationalApplication',
+    'operatingSystem': 'Any',
+    'offers': { '@type': 'Offer', 'price': '0', 'priceCurrency': 'INR' },
+    'isAccessibleForFree': true,
+  }}
+>
+  <SiteHeader />
+
+  <main style="flex:1;">
+    <section class="tool-hero">
+      <div class="tool-hero-inner">
+        <Breadcrumbs items={[{ label: 'Marks to CGPA' }]} />
+        <div class="tool-tag">Subject-Wise Converter</div>
+        <h1 class="tool-h1">Marks to CGPA Calculator</h1>
+        <p class="tool-sub">Enter the marks you obtained and the maximum marks for each subject. Your CGPA updates live as you type — nothing is uploaded anywhere.</p>
+
+        <div class="calc-shell">
+          <div class="marks-table-wrap">
+            <table class="marks-table">
+              <thead>
+                <tr>
+                  <th class="col-subject">Subject</th>
+                  <th>Marks Obtained</th>
+                  <th>Max Marks</th>
+                  <th class="col-remove"></th>
+                </tr>
+              </thead>
+              <tbody id="marks-rows"></tbody>
+            </table>
+          </div>
+          <button type="button" class="add-row-btn" id="add-subject">+ Add Subject</button>
+
+          <div class="calc-output">
+            <button type="button" class="calc-copy" id="copy-marks" title="Copy result" aria-label="Copy result">⎘</button>
+            <div class="marks-result-group">
+              <div>
+                <div class="calc-out-val" id="marks-cgpa-out">—</div>
+                <div class="calc-out-lbl">CGPA / SGPA</div>
+              </div>
+              <div>
+                <div class="calc-out-val marks-out-sm" id="marks-pct-out">—</div>
+                <div class="calc-out-lbl">≈ Percentage</div>
+              </div>
+            </div>
+            <div class="marks-totals" id="marks-totals"></div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <section class="prose tool-article">
+      <h2>How to Convert Marks to CGPA</h2>
+      <p>Indian universities on the 10-point scale derive CGPA from the ratio of marks obtained to maximum marks. The standard conversion is:</p>
+      <div class="formula-block">
+        <div class="f-label">Standard formula</div>
+        <div class="f-text">CGPA = (Total Marks Obtained ÷ Total Maximum Marks) × 10</div>
+        <div class="f-example">Example: 1,428 ÷ 1,800 × 10 = <strong>7.93 CGPA</strong> (≈ 75.3%)</div>
+      </div>
+      <p>The calculator above applies this formula across every subject row you add, summing obtained and maximum marks separately. The percentage shown alongside uses the standard CBSE multiplier (CGPA × 9.5); if your university prescribes a different conversion, use our university-specific calculators linked below.</p>
+
+      <h2>Worked Example: Six Subjects</h2>
+      <div class="table-scroll">
+        <table>
+          <thead><tr><th>Subject</th><th>Obtained</th><th>Max</th></tr></thead>
+          <tbody>
+            <tr><td>Engineering Maths</td><td>78</td><td>100</td></tr>
+            <tr><td>Data Structures</td><td>85</td><td>100</td></tr>
+            <tr><td>Digital Electronics</td><td>72</td><td>100</td></tr>
+            <tr><td>Soft Skills</td><td>90</td><td>50</td></tr>
+            <tr><td>Physics</td><td>65</td><td>100</td></tr>
+            <tr><td>Lab</td><td>48</td><td>50</td></tr>
+          </tbody>
+        </table>
+      </div>
+      <p>Totals: 438 obtained out of 500 maximum. CGPA = (438 ÷ 500) × 10 = <strong>8.76</strong>, which is roughly 83.2% under the CBSE multiplier. Notice that subjects with different maximums (like a 50-mark lab) are handled correctly because the ratio is computed on totals, not per-subject averages.</p>
+
+      <h2>Limitations to Keep in Mind</h2>
+      <ul>
+        <li><strong>Credits are not weighted.</strong> Official CGPA weights each subject by its credit value. If your high-credit subjects have lower marks, the real CGPA will be slightly lower than this estimate.</li>
+        <li><strong>Grade boundaries are not linear everywhere.</strong> Many universities award grade points in bands (an 85 and an 92 both earn a 9), so converting raw marks can differ slightly from your official grade-point calculation.</li>
+        <li><strong>University formulas vary.</strong> For the final percentage, always apply your own university's conversion — see our <a href="/cgpa-to-percentage-chart">full conversion chart</a> for every major formula.</li>
+      </ul>
+      <p>For a single semester, the result of this calculator is effectively your <strong>SGPA</strong>. Chain it with the <a href="/sgpa-to-cgpa">SGPA to CGPA calculator</a> to project your cumulative average across all semesters, or convert the final figure with the <a href="/">CGPA to percentage calculator</a>.</p>
+    </section>
+
+    <section class="prose tool-faq">
+      <h2>Frequently Asked Questions</h2>
+      <FaqAccordion faqs={faqs} />
+    </section>
+  </main>
+
+  <SiteFooter />
+
+  <style>
+    .tool-hero { padding: 20px 20px 8px; }
+    .tool-hero-inner { max-width: 640px; margin: 0 auto; }
+    .tool-tag {
+      font-size: 0.72rem; font-weight: 700; text-transform: uppercase;
+      letter-spacing: 1.2px; color: var(--primary); margin-bottom: 8px;
+    }
+    .tool-h1 {
+      font-size: clamp(1.8rem, 5vw, 2.5rem); font-weight: 900;
+      letter-spacing: -0.8px; line-height: 1.18; color: var(--text-ink); margin-bottom: 10px;
+    }
+    .tool-sub {
+      font-size: 0.95rem; color: var(--text-body); line-height: 1.7;
+      margin-bottom: 26px; max-width: 560px;
+    }
+    .tool-article, .tool-faq { padding: 0 20px; margin-top: 44px; }
+
+    .marks-table-wrap { overflow-x: auto; }
+    .marks-table { width: 100%; border-collapse: separate; border-spacing: 0 8px; }
+    .marks-table th {
+      padding: 0 6px 6px; font-size: 0.7rem; font-weight: 700; text-transform: uppercase;
+      letter-spacing: 0.5px; color: var(--text-mute); text-align: left; border-bottom: 1px solid var(--border);
+    }
+    .marks-table td { padding: 0 4px; }
+    .marks-table td:first-child { padding-left: 0; }
+    .marks-table input {
+      width: 100%; height: 40px; padding: 0 10px;
+      border: 1px solid var(--border); background: var(--bg-soft); color: var(--text-ink);
+      font-size: 0.9rem; font-weight: 500; border-radius: 8px; font-family: inherit;
+      transition: border-color 0.2s;
+    }
+    .marks-table input:focus { outline: none; border-color: var(--primary); }
+    .sub-badge {
+      background: var(--bg-soft); border: 1px solid var(--border); height: 40px;
+      display: flex; align-items: center; justify-content: center; border-radius: 8px;
+      font-size: 0.78rem; font-weight: 700; color: var(--primary); white-space: nowrap;
+    }
+    .remove-btn {
+      background: var(--bg-soft); border: 1px solid var(--border); color: var(--text-mute);
+      width: 40px; height: 40px; border-radius: 8px; cursor: pointer; font-size: 1.05rem;
+      display: flex; align-items: center; justify-content: center; transition: all 0.2s;
+    }
+    .remove-btn:hover { border-color: #ef4444; color: #ef4444; background: rgba(239,68,68,0.12); }
+    .add-row-btn {
+      width: 100%; padding: 11px; margin-top: 8px; background: transparent;
+      border: 1px dashed var(--border); border-radius: 12px; color: var(--text-mute);
+      font-size: 0.85rem; font-weight: 600; cursor: pointer; font-family: inherit; transition: all 0.2s;
+    }
+    .add-row-btn:hover { border-color: var(--primary); color: var(--primary); }
+    .marks-result-group {
+      display: flex; justify-content: center; gap: 40px; align-items: center; flex-wrap: wrap;
+    }
+    .marks-out-sm { font-size: 1.5rem; color: var(--text-ink); }
+    .marks-totals {
+      margin-top: 12px; font-size: 0.78rem; color: var(--text-mute); text-align: center;
+      min-height: 1em;
+    }
+    @media (max-width: 480px) {
+      .col-subject, .col-remove { display: none; }
+    }
+  </style>
+
+  <script>
+    const box = document.getElementById('marks-rows') as HTMLTableSectionElement;
+    const addBtn = document.getElementById('add-subject') as HTMLButtonElement;
+    const cgpaOut = document.getElementById('marks-cgpa-out')!;
+    const pctOut = document.getElementById('marks-pct-out')!;
+    const totalsOut = document.getElementById('marks-totals')!;
+
+    function addRow() {
+      const n = box.querySelectorAll('tr').length + 1;
+      const tr = document.createElement('tr');
+      tr.innerHTML = `
+        <td style="text-align:center;"><span class="sub-badge">Sub ${n}</span></td>
+        <td><input type="number" class="m-obt" min="0" placeholder="e.g. 85" inputmode="decimal" /></td>
+        <td><input type="number" class="m-max" min="1" value="100" inputmode="decimal" /></td>
+        <td><button type="button" class="remove-btn" title="Remove subject" aria-label="Remove subject">×</button></td>
+      `;
+      tr.querySelector('.remove-btn')?.addEventListener('click', () => {
+        tr.remove();
+        reindex();
+        calc();
+      });
+      tr.querySelectorAll('input').forEach((inp) => inp.addEventListener('input', calc));
+      box.appendChild(tr);
+    }
+
+    function reindex() {
+      box.querySelectorAll('tr').forEach((row, i) => {
+        const badge = row.querySelector('.sub-badge');
+        if (badge) badge.textContent = `Sub ${i + 1}`;
+      });
+    }
+
+    function calc() {
+      let obt = 0;
+      let max = 0;
+      box.querySelectorAll('tr').forEach((row) => {
+        const o = parseFloat((row.querySelector('.m-obt') as HTMLInputElement)?.value || '');
+        const m = parseFloat((row.querySelector('.m-max') as HTMLInputElement)?.value || '100');
+        if (!isNaN(o) && o >= 0 && !isNaN(m) && m > 0) { obt += o; max += m; }
+      });
+      if (max > 0 && obt > 0) {
+        const cgpa = (obt / max) * 10;
+        cgpaOut.textContent = cgpa.toFixed(2);
+        pctOut.textContent = Math.min(100, cgpa * 9.5).toFixed(1) + '%';
+        totalsOut.textContent = `${obt} marks obtained out of ${max} total`;
+      } else {
+        cgpaOut.textContent = '—';
+        pctOut.textContent = '—';
+        totalsOut.textContent = '';
+      }
+    }
+
+    addBtn.addEventListener('click', () => { addRow(); calc(); });
+    addRow();
+    calc();
+
+    document.getElementById('copy-marks')?.addEventListener('click', function (this: HTMLElement) {
+      const txt = cgpaOut.textContent || '';
+      if (!txt || txt === '—') return;
+      navigator.clipboard.writeText(txt).catch(() => {});
+      const orig = this.textContent;
+      this.textContent = '✓';
+      setTimeout(() => { this.textContent = orig; }, 1400);
+    });
+  </script>
+</Layout>

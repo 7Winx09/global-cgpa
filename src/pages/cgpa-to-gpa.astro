@@ -1,0 +1,185 @@
+---
+import Layout from '../layouts/Layout.astro';
+import SiteHeader from '../components/Nav.astro';
+import SiteFooter from '../components/Footer.astro';
+import Breadcrumbs from '../components/Breadcrumbs.astro';
+import FaqAccordion from '../components/FaqAccordion.astro';
+
+const rows = [10, 9.5, 9, 8.5, 8, 7.5, 7, 6.5, 6, 5.5, 5];
+
+const faqs = [
+  { q: 'How do I convert CGPA to a 4.0 GPA?', a: 'The standard linear conversion is GPA = (CGPA ÷ 10) × 4. So an 8.5 CGPA equals <strong>3.4 GPA</strong> and a 7.0 equals 2.8. This is the approximation most Indian students use on application forms that ask for a 4.0-scale figure.' },
+  { q: 'Is the linear CGPA to GPA conversion accepted by universities?', a: 'Most US universities do not ask you to convert at all — they prefer your original 10-point CGPA with the scale explained, and evaluators like WES recalculate from transcripts. Use the linear figure only for self-assessment or forms that explicitly require a number on the 4.0 scale.' },
+  { q: 'What is a 3.0 GPA in CGPA?', a: 'Working backwards, 3.0 GPA ÷ 4 × 10 = <strong>7.5 CGPA</strong> on the 10-point scale. A 3.5 GPA corresponds to 8.75 CGPA, and a perfect 4.0 to 10.0.' },
+  { q: 'What CGPA is good for MS in the US?', a: 'Most US graduate programmes look for roughly 3.0/4.0 or higher, which is about 7.5 CGPA on the Indian 10-point scale. Competitive programmes and funding (assistantships, scholarships) often effectively expect 8.0+ (3.2+).' },
+  { q: 'Does WES use the same conversion?', a: 'No. WES and other evaluators convert course-by-course using their own methodology based on your institution\'s grading, and the result is usually different from the linear formula. Always order an official evaluation rather than self-converting for admissions.' },
+];
+---
+
+<Layout
+  title="CGPA to GPA Calculator — Convert 10-Point CGPA to 4.0 GPA | GlobalCGPA"
+  description="Convert Indian CGPA (10-point) to US 4.0 GPA instantly with the standard linear formula, plus a conversion table and WES guidance. Free CGPA to GPA calculator for MS applications."
+  canonical="https://globalcgpa.in/cgpa-to-gpa"
+  schema={{
+    '@context': 'https://schema.org',
+    '@type': 'WebApplication',
+    'name': 'CGPA to GPA (4.0) Calculator',
+    'url': 'https://globalcgpa.in/cgpa-to-gpa',
+    'description': 'Convert a 10-point CGPA to a 4.0 GPA scale instantly.',
+    'applicationCategory': 'EducationalApplication',
+    'operatingSystem': 'Any',
+    'offers': { '@type': 'Offer', 'price': '0', 'priceCurrency': 'INR' },
+    'isAccessibleForFree': true,
+  }}
+>
+  <SiteHeader />
+
+  <main style="flex:1;">
+    <section class="tool-hero">
+      <div class="tool-hero-inner">
+        <Breadcrumbs items={[{ label: 'CGPA to GPA (4.0)' }]} />
+        <div class="tool-tag">International Scale</div>
+        <h1 class="tool-h1">CGPA to GPA (4.0) Calculator</h1>
+        <p class="tool-sub">Convert your 10-point CGPA to the US 4.0 GPA scale — and back — using the standard linear conversion.</p>
+
+        <div class="calc-shell">
+          <div class="calc-tabs" role="tablist" aria-label="Conversion direction">
+            <button type="button" class="calc-tab active" id="tab-fwd" role="tab" aria-selected="true">CGPA → GPA (4.0)</button>
+            <button type="button" class="calc-tab" id="tab-inv" role="tab" aria-selected="false">GPA (4.0) → CGPA</button>
+          </div>
+
+          <div id="panel-fwd">
+            <label class="calc-label" for="cgpa-in">Enter your CGPA (out of 10)</label>
+            <input class="calc-input" type="number" id="cgpa-in" min="0" max="10" step="0.01" placeholder="e.g. 8.5" inputmode="decimal" />
+            <div class="calc-output" style="margin-top:16px;">
+              <button type="button" class="calc-copy" id="copy-fwd" title="Copy result" aria-label="Copy result">⎘</button>
+              <div class="calc-out-val" id="gpa-out">—</div>
+              <div class="calc-out-lbl">GPA on 4.0 scale</div>
+            </div>
+          </div>
+
+          <div id="panel-inv" style="display:none;">
+            <label class="calc-label" for="gpa-in">Enter your GPA (out of 4.0)</label>
+            <input class="calc-input" type="number" id="gpa-in" min="0" max="4" step="0.01" placeholder="e.g. 3.4" inputmode="decimal" />
+            <div class="calc-output" style="margin-top:16px;">
+              <button type="button" class="calc-copy" id="copy-inv" title="Copy result" aria-label="Copy result">⎘</button>
+              <div class="calc-out-val" id="cgpa-out">—</div>
+              <div class="calc-out-lbl">CGPA on 10-point scale</div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <section class="prose tool-article">
+      <h2>How the CGPA to GPA Conversion Works</h2>
+      <p>Indian universities grade on a 10-point scale; US universities use a 4.0 scale. The standard linear conversion rescales one to the other:</p>
+      <div class="formula-block">
+        <div class="f-label">Linear conversion</div>
+        <div class="f-text">GPA (4.0) = (CGPA ÷ 10) × 4 &nbsp;&nbsp;·&nbsp;&nbsp; CGPA = (GPA ÷ 4) × 10</div>
+        <div class="f-example">Example: 8.0 CGPA → (8.0 ÷ 10) × 4 = <strong>3.2 GPA</strong></div>
+      </div>
+      <p>Because both scales are linear, the conversion is exact in both directions — the calculator above applies the same line either way.</p>
+
+      <h2>CGPA to GPA Conversion Table</h2>
+      <div class="table-scroll">
+        <table>
+          <thead><tr><th>CGPA (10-point)</th><th>GPA (4.0 scale)</th><th>Typical Standing</th></tr></thead>
+          <tbody>
+            {rows.map((c) => (
+              <tr>
+                <td>{c.toFixed(1)}</td>
+                <td>{((c / 10) * 4).toFixed(2)}</td>
+                <td>{c >= 9 ? 'Top of class' : c >= 8 ? 'Very competitive' : c >= 7 ? 'Above average' : c >= 6 ? 'Meets most minimums' : 'Below typical minimums'}</td>
+              </tr>
+            ))}
+          </tbody>
+        </table>
+      </div>
+
+      <h2>What US Universities Actually Want</h2>
+      <p>Here is the part most conversion guides skip: most American graduate programmes do <strong>not</strong> want you to convert your CGPA at all. Application systems ask for your cumulative average <em>and the scale it is on</em>. Admissions teams — and credential evaluators like WES, which most US universities require for international transcripts — recalculate your GPA themselves using course-by-course analysis calibrated to your institution's grading culture.</p>
+      <p>In practice that means:</p>
+      <ul>
+        <li><strong>Enter your original CGPA wherever possible</strong> and state the scale clearly: "8.4/10.0".</li>
+        <li><strong>Use the linear figure only for self-assessment</strong> — checking whether you clear a 3.0 minimum, comparing yourself to posted class profiles, or filling forms with no other option.</li>
+        <li><strong>Order an official evaluation</strong> (WES, ECE, or whatever your target university specifies) for the number that actually counts.</li>
+        <li><strong>Don't inflate.</strong> Self-reporting a rounded-up GPA that your evaluation contradicts is the fastest way to lose an admit.</li>
+      </ul>
+      <p>For the percentage your Indian forms need, head back to the <a href="/">CGPA to percentage calculator</a>, or read our full guide on <a href="/guides/cgpa-to-gpa-4-scale-ms-abroad">using your CGPA for MS applications abroad</a>.</p>
+    </section>
+
+    <section class="prose tool-faq">
+      <h2>Frequently Asked Questions</h2>
+      <FaqAccordion faqs={faqs} />
+    </section>
+  </main>
+
+  <SiteFooter />
+
+  <style>
+    .tool-hero { padding: 20px 20px 8px; }
+    .tool-hero-inner { max-width: 560px; margin: 0 auto; }
+    .tool-tag {
+      font-size: 0.72rem; font-weight: 700; text-transform: uppercase;
+      letter-spacing: 1.2px; color: var(--primary); margin-bottom: 8px;
+    }
+    .tool-h1 {
+      font-size: clamp(1.8rem, 5vw, 2.5rem); font-weight: 900;
+      letter-spacing: -0.8px; line-height: 1.18; color: var(--text-ink); margin-bottom: 10px;
+    }
+    .tool-sub {
+      font-size: 0.95rem; color: var(--text-body); line-height: 1.7;
+      margin-bottom: 26px; max-width: 560px;
+    }
+    .tool-article, .tool-faq { padding: 0 20px; margin-top: 44px; }
+    .calc-tabs { display: flex; gap: 8px; margin-bottom: 18px; }
+  </style>
+
+  <script>
+    const tabFwd = document.getElementById('tab-fwd') as HTMLButtonElement;
+    const tabInv = document.getElementById('tab-inv') as HTMLButtonElement;
+    const panelFwd = document.getElementById('panel-fwd')!;
+    const panelInv = document.getElementById('panel-inv')!;
+    const cgpaIn = document.getElementById('cgpa-in') as HTMLInputElement;
+    const gpaIn = document.getElementById('gpa-in') as HTMLInputElement;
+    const gpaOut = document.getElementById('gpa-out')!;
+    const cgpaOut = document.getElementById('cgpa-out')!;
+
+    const setTab = (fwd: boolean) => {
+      tabFwd.classList.toggle('active', fwd);
+      tabInv.classList.toggle('active', !fwd);
+      tabFwd.setAttribute('aria-selected', String(fwd));
+      tabInv.setAttribute('aria-selected', String(!fwd));
+      panelFwd.style.display = fwd ? 'block' : 'none';
+      panelInv.style.display = fwd ? 'none' : 'block';
+    };
+    tabFwd.addEventListener('click', () => setTab(true));
+    tabInv.addEventListener('click', () => setTab(false));
+
+    cgpaIn.addEventListener('input', () => {
+      const v = parseFloat(cgpaIn.value);
+      if (isNaN(v) || v < 0 || v > 10) { gpaOut.textContent = '—'; return; }
+      gpaOut.textContent = ((v / 10) * 4).toFixed(2);
+    });
+    gpaIn.addEventListener('input', () => {
+      const v = parseFloat(gpaIn.value);
+      if (isNaN(v) || v < 0 || v > 4) { cgpaOut.textContent = '—'; return; }
+      cgpaOut.textContent = ((v / 4) * 10).toFixed(2);
+    });
+
+    const wireCopy = (btnId: string, outId: string) => {
+      const btn = document.getElementById(btnId);
+      btn?.addEventListener('click', function (this: HTMLElement) {
+        const txt = document.getElementById(outId)?.textContent || '';
+        if (!txt || txt === '—') return;
+        navigator.clipboard.writeText(txt).catch(() => {});
+        const orig = this.textContent;
+        this.textContent = '✓';
+        setTimeout(() => { this.textContent = orig; }, 1400);
+      });
+    };
+    wireCopy('copy-fwd', 'gpa-out');
+    wireCopy('copy-inv', 'cgpa-out');
+  </script>
+</Layout>

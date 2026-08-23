@@ -1,13 +1,17 @@
 ---
 import Layout from '../layouts/Layout.astro';
+import SiteHeader from '../components/Nav.astro';
+import SiteFooter from '../components/Footer.astro';
 ---
 
-<Layout 
+<Layout
   title="About Us | Global CGPA – CGPA to Percentage Calculator"
-  description="Learn about Global CGPA – a free, student-built CGPA to percentage calculator tool built for Indian university students."
+  description="Learn about Global CGPA – a free, student-built CGPA to percentage calculator with official university formulas, guides and conversion tools for Indian students."
   canonical="https://globalcgpa.in/about"
 >
-  <main class="max-w-[780px] mx-auto px-6 py-14">
+  <SiteHeader />
+
+  <main class="max-w-[780px] mx-auto px-6 py-14" style="flex:1;">
     <div class="text-xs font-bold uppercase tracking-wider text-emerald-500 mb-2">About Us</div>
     <h1 class="text-3xl sm:text-4xl font-extrabold tracking-tight mb-3">Built by students, for students.</h1>
     <p class="text-slate-500 dark:text-zinc-400 text-base mb-10 max-w-xl">
@@ -20,12 +24,12 @@ import Layout from '../layouts/Layout.astro';
         <span class="text-xs font-semibold text-slate-500 dark:text-zinc-400 uppercase tracking-wider mt-1 block">Converters</span>
       </div>
       <div class="bg-slate-50 dark:bg-zinc-900 border border-slate-200 dark:border-zinc-800 rounded-xl p-5 text-center">
-        <span class="text-3xl font-extrabold text-emerald-500 block">15+</span>
+        <span class="text-3xl font-extrabold text-emerald-500 block">7+</span>
         <span class="text-xs font-semibold text-slate-500 dark:text-zinc-400 uppercase tracking-wider mt-1 block">Universities</span>
       </div>
       <div class="bg-slate-50 dark:bg-zinc-900 border border-slate-200 dark:border-zinc-800 rounded-xl p-5 text-center">
         <span class="text-3xl font-extrabold text-emerald-500 block">0</span>
-        <span class="text-xs font-semibold text-slate-500 dark:text-zinc-400 uppercase tracking-wider mt-1 block">Ads or trackers</span>
+        <span class="text-xs font-semibold text-slate-500 dark:text-zinc-400 uppercase tracking-wider mt-1 block">Signups needed</span>
       </div>
       <div class="bg-slate-50 dark:bg-zinc-900 border border-slate-200 dark:border-zinc-800 rounded-xl p-5 text-center">
         <span class="text-3xl font-extrabold text-emerald-500 block">100%</span>
@@ -47,11 +51,23 @@ import Layout from '../layouts/Layout.astro';
         Global CGPA is a fast, clean client-side tool. Every calculation happens entirely in your browser.
       </p>
       <ul class="list-disc pl-5 space-y-2 text-slate-500 dark:text-zinc-400">
-        <li>Your data never leaves your device.</li>
+        <li>Your inputs never leave your device.</li>
         <li>The page loads instantly on any connection.</li>
         <li>Works offline once loaded.</li>
-        <li>No account signup or tracking required.</li>
+        <li>No account signup required.</li>
       </ul>
+
+      <h2 class="text-xl font-bold text-slate-900 dark:text-white mt-8">How We Keep It Free</h2>
+      <p>
+        Running a website costs money, so the site is supported by a limited number of unobtrusive ads (Google AdSense). We deliberately keep ads away from the calculator inputs and results, and we never use pop-ups or full-screen interstitials that interrupt a conversion. See our <a href="/privacy-policy" class="text-emerald-500 underline">Privacy Policy</a> for details on what ad services may collect.
+      </p>
+
+      <h2 class="text-xl font-bold text-slate-900 dark:text-white mt-8">Accuracy First</h2>
+      <p>
+        Every university formula on this site is sourced from the university's own ordinance or circular, and each calculator page cites it. Universities do revise their rules — if you spot a formula that no longer matches your university's latest regulation, <a href="/contact" class="text-emerald-500 underline">tell us</a> and we'll fix it.
+      </p>
     </div>
   </main>
+
+  <SiteFooter />
 </Layout>

@@ -1,0 +1,46 @@
+---
+import UniPage from '../components/UniPage.astro';
+import { getUniversity } from '../data/universities';
+
+const uni = getUniversity('gtu')!;
+---
+
+<UniPage
+  uni={uni}
+  title="GTU CGPA to Percentage Calculator (Official (CGPA−0.5)×10 Formula) | GlobalCGPA"
+  description="Convert GTU CGPA/CPI/SPI to percentage using the official formula (CGPA − 0.5) × 10 from GTU Notification 1/2012. Free calculator, conversion table, class thresholds and FAQ for GTU students."
+  intro="Enter your GTU CGPA (or CPI/SPI) to get your percentage using the official Notification 1/2012 formula — plus reverse conversion, a reference table and GTU class thresholds."
+>
+  <h2>How the GTU CGPA to Percentage Conversion Works</h2>
+  <p>Gujarat Technological University affiliates engineering, pharmacy, management and MCA programmes across Gujarat, and it uses its own vocabulary: SPI for one semester (what other universities call SGPA), CPI for the cumulative index of a programme, and CGPA for the overall average. For all three, the official conversion is the same:</p>
+  <div class="formula-block">
+    <div class="f-label">GTU official formula</div>
+    <div class="f-text">Percentage = (CGPA − 0.5) × 10</div>
+  </div>
+  <p>This rule comes from GTU's own notification on CPI-CGPA equivalent class (Notification 1/2012, re-circulated in 2013), and it produces numbers that surprise many students: a perfect 10.0 CGPA at GTU equals 95%, not 100%, because of the fixed 0.5 subtraction.</p>
+
+  <h3>Worked examples</h3>
+  <div class="table-scroll">
+    <table>
+      <thead><tr><th>CGPA / CPI</th><th>Calculation</th><th>GTU Percentage</th></tr></thead>
+      <tbody>
+        <tr><td>9.0</td><td>(9.0 − 0.5) × 10</td><td>85%</td></tr>
+        <tr><td>8.0</td><td>(8.0 − 0.5) × 10</td><td>75%</td></tr>
+        <tr><td>7.5</td><td>(7.5 − 0.5) × 10</td><td>70%</td></tr>
+        <tr><td>7.1</td><td>(7.1 − 0.5) × 10</td><td>66%</td></tr>
+        <tr><td>6.5</td><td>(6.5 − 0.5) × 10</td><td>60%</td></tr>
+      </tbody>
+    </table>
+  </div>
+
+  <h2>Why GTU's Formula Is Different (and Often Copied Wrong)</h2>
+  <p>Two wrong formulas circulate for GTU: the CBSE ×9.5 rule and SPPU's (CGPA × 10) − 7.5. Neither matches GTU's notification. GTU subtracts 0.5 before multiplying — equivalent to CGPA × 10 − 5 — which sits between the two common wrong answers. For an 8.0 CGPA, GTU's official figure is 75%, while the wrong formulas would give 76% and 72.5% respectively.</p>
+  <p>GTU's calibration reflects its stricter grade boundaries: its top AA grade requires 85+ raw marks and its per-subject pass mark (DD grade) is 35, lower than the 40-mark norm at most technical universities. The 0.5 offset keeps converted percentages aligned with that internal calibration.</p>
+
+  <h2>GTU Class Thresholds</h2>
+  <p>GTU's equivalent-class notification defines the bands directly in CPI terms: <strong>First Class with Distinction</strong> at 7.1 CPI or above (about 66% converted), <strong>First Class</strong> at 6.5 (60%), and <strong>Second Class</strong> at 5.5 (50%), with a Pass Class below that. Unlike some universities, GTU's notification does not require a first-attempt pass for Distinction — students who cleared backlogs can still graduate with Distinction if the final CPI crosses 7.1.</p>
+  <p>Because the Distinction boundary is 7.1 rather than a round 7.0, it is worth checking your exact CPI before writing "First Class with Distinction" on a resume — 7.05 misses the band even though it rounds visually close.</p>
+
+  <h2>Certificates and Official Documents</h2>
+  <p>For government job forms, scholarships and foreign applications, GTU students can obtain an official conversion certificate through the Student Services Portal or their college's exam cell. The certificate applies the same (CGPA − 0.5) × 10 formula as this calculator, so your figures will always match. When filling forms that ask for both CGPA and percentage, enter both exactly as computed here — consistency across fields is what verification teams check first.</p>
+</UniPage>

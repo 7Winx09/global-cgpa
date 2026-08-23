@@ -1,0 +1,46 @@
+---
+import UniPage from '../components/UniPage.astro';
+import { getUniversity } from '../data/universities';
+
+const uni = getUniversity('mumbai')!;
+---
+
+<UniPage
+  uni={uni}
+  title="Mumbai University CGPA to Percentage Calculator (7.1×CGPA + 11) | GlobalCGPA"
+  description="Convert Mumbai University CGPA to percentage using the official formula (7.1 × CGPA) + 11. Free calculator with reverse conversion, conversion table, class thresholds and FAQ for MU students."
+  intro="Enter your Mumbai University CGPA to convert it to a percentage using the official 7.1×CGPA + 11 formula — plus the reverse conversion, a full reference table and MU class thresholds."
+>
+  <h2>How the Mumbai University CGPA to Percentage Conversion Works</h2>
+  <p>The University of Mumbai uses one of the most distinctive conversion formulas of any Indian university. Under its credit-based grading systems (CBCGS and CBSGS) for engineering and technology programmes, the official conversion is:</p>
+  <div class="formula-block">
+    <div class="f-label">Mumbai University formula</div>
+    <div class="f-text">Percentage = (7.1 × CGPA) + 11</div>
+  </div>
+  <p>The 7.1 slope and the 11-point offset come from how Mumbai University calibrated its grade points against raw marks when it adopted the credit system. Because of that offset, Mumbai University percentages do not behave like other universities: a 10.0 CGPA converts to 82%, not 100%, and the differences between CGPA values are compressed (each 1.0 CGPA is worth 7.1 percentage points, not 9.5 or 10).</p>
+
+  <h3>Worked examples</h3>
+  <div class="table-scroll">
+    <table>
+      <thead><tr><th>CGPA</th><th>Calculation</th><th>MU Percentage</th></tr></thead>
+      <tbody>
+        <tr><td>9.5</td><td>(7.1 × 9.5) + 11</td><td>78.5%</td></tr>
+        <tr><td>9.0</td><td>(7.1 × 9.0) + 11</td><td>74.9%</td></tr>
+        <tr><td>8.0</td><td>(7.1 × 8.0) + 11</td><td>67.8%</td></tr>
+        <tr><td>7.0</td><td>(7.1 × 7.0) + 11</td><td>60.7%</td></tr>
+        <tr><td>6.0</td><td>(7.1 × 6.0) + 11</td><td>53.6%</td></tr>
+      </tbody>
+    </table>
+  </div>
+
+  <h2>Why Your MU Percentage Looks "Low" — And Why That Is Fine</h2>
+  <p>Mumbai University students often panic when they first convert their CGPA: a strong 8.5 CGPA becomes about 71.4%, which can look unimpressive next to the 80%+ figures friends at other universities quote. This is a calibration difference, not a reflection of your performance. Recruiters who regularly hire from Mumbai University — and MU's own certificates — use the 7.1×CGPA + 11 figure, so the numbers line up once everyone applies the same rule.</p>
+  <p>The practical takeaway: never convert your MU CGPA with the ×9.5 or ×10 formulas. An 8.0 CGPA written as 80% instead of the official 67.8% creates a mismatch with your documents that can get an application rejected during verification.</p>
+
+  <h2>Class Thresholds at Mumbai University</h2>
+  <p>Under the official formula, <strong>First Class</strong> begins around 6.48 CGPA (57%), and the pass boundary sits near 4.0 CGPA. Because the offset compresses the scale, small CGPA improvements move your percentage more slowly than at other universities — going from 7.0 to 8.0 CGPA adds only about 7 percentage points.</p>
+  <p>If your target is a 60% eligibility cut-off for a company or government form, you need roughly a 6.9 CGPA at Mumbai University — noticeably higher than the 6.0 that would clear the same bar under VTU's ×10 rule. Use the reverse tab in the calculator above to find the exact CGPA any percentage target requires.</p>
+
+  <h2>Official Documents and Certificates</h2>
+  <p>Your MU consolidated marksheet and degree certificate state your CGPA (and sometimes the converted percentage). If an employer or university insists on an official percentage document, you can request a conversion or medium of instruction-style certificate from your college's examination cell, which will apply the same 7.1×CGPA + 11 formula shown by this calculator. For semester-wise percentage breakdowns — for instance, when a form asks for final-year percentage — convert each semester's SGPA individually or use our <a href="/sgpa-to-cgpa">SGPA to CGPA calculator</a> first.</p>
+</UniPage>

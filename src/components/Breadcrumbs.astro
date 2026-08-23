@@ -1,0 +1,31 @@
+---
+interface Crumb {
+  label: string;
+  href?: string;
+}
+const { items } = Astro.props;
+---
+
+<nav class="crumbs" aria-label="Breadcrumb">
+  <a href="/">Home</a>
+  {items.map((item) => (
+    <>
+      <span class="sep">/</span>
+      {item.href ? <a href={item.href}>{item.label}</a> : <span class="current">{item.label}</span>}
+    </>
+  ))}
+</nav>
+
+<script type="application/ld+json" set:html={JSON.stringify({
+  '@context': 'https://schema.org',
+  '@type': 'BreadcrumbList',
+  'itemListElement': [
+    { '@type': 'ListItem', 'position': 1, 'name': 'Home', 'item': 'https://globalcgpa.in/' },
+    ...items.map((item, i) => ({
+      '@type': 'ListItem',
+      'position': i + 2,
+      'name': item.label,
+      ...(item.href ? { 'item': `https://globalcgpa.in${item.href}` } : {}),
+    })),
+  ],
+})} />

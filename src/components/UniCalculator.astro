@@ -1,0 +1,111 @@
+---
+import type { University } from '../data/universities';
+const { uni } = Astro.props;
+---
+
+<div class="calc-shell" id="uni-calc" data-uni={uni.key}>
+  <div class="calc-tabs" role="tablist" aria-label="Conversion direction">
+    <button type="button" class="calc-tab active" id="tab-fwd" role="tab" aria-selected="true">CGPA → Percentage</button>
+    <button type="button" class="calc-tab" id="tab-inv" role="tab" aria-selected="false">Percentage → CGPA</button>
+  </div>
+
+  <div id="panel-fwd">
+    <label class="calc-label" for="uni-cgpa-in">Enter your {uni.short} CGPA (out of 10)</label>
+    <input class="calc-input" type="number" id="uni-cgpa-in" min="0" max="10" step="0.01" placeholder="e.g. 8.25" inputmode="decimal" />
+    <div class="calc-output" style="margin-top:16px;">
+      <button type="button" class="calc-copy" id="copy-fwd" title="Copy result" aria-label="Copy result">⎘</button>
+      <div class="calc-out-val" id="uni-pct-out">—</div>
+      <div class="calc-out-lbl">Equivalent Percentage</div>
+    </div>
+  </div>
+
+  <div id="panel-inv" style="display:none;">
+    <label class="calc-label" for="uni-pct-in">Enter your percentage (0 – 100)</label>
+    <input class="calc-input" type="number" id="uni-pct-in" min="0" max="100" step="0.1" placeholder="e.g. 72.5" inputmode="decimal" />
+    <div class="calc-output" style="margin-top:16px;">
+      <button type="button" class="calc-copy" id="copy-inv" title="Copy result" aria-label="Copy result">⎘</button>
+      <div class="calc-out-val" id="uni-cgpa-out">—</div>
+      <div class="calc-out-lbl">Equivalent CGPA</div>
+    </div>
+  </div>
+
+  <p class="calc-formula-note">Formula: <strong>{uni.formulaText}</strong></p>
+</div>
+
+<style>
+  .calc-tabs {
+    display: flex;
+    gap: 8px;
+    margin-bottom: 18px;
+  }
+  .calc-formula-note {
+    margin-top: 14px;
+    font-size: 0.78rem;
+    color: var(--text-mute);
+    text-align: center;
+  }
+  .calc-formula-note strong { color: var(--text-body); }
+</style>
+
+<script>
+  const formulas: Record<string, { fwd: (c: number) => number; inv: (p: number) => number }> = {
+    sppu: { fwd: (c) => c * 10 - 7.5, inv: (p) => (p + 7.5) / 10 },
+    vtu: { fwd: (c) => c * 10, inv: (p) => p / 10 },
+    mumbai: { fwd: (c) => 7.1 * c + 11, inv: (p) => (p - 11) / 7.1 },
+    anna: { fwd: (c) => c * 10, inv: (p) => p / 10 },
+    aktu: { fwd: (c) => (c - 0.75) * 10, inv: (p) => p / 10 + 0.75 },
+    gtu: { fwd: (c) => (c - 0.5) * 10, inv: (p) => p / 10 + 0.5 },
+    ktu: { fwd: (c) => c * 10, inv: (p) => p / 10 },
+  };
+
+  const shell = document.getElementById('uni-calc');
+  if (shell) {
+    const key = shell.dataset.uni || 'cbse';
+    const f = formulas[key] || formulas.anna;
+    const tabFwd = document.getElementById('tab-fwd') as HTMLButtonElement;
+    const tabInv = document.getElementById('tab-inv') as HTMLButtonElement;
+    const panelFwd = document.getElementById('panel-fwd')!;
+    const panelInv = document.getElementById('panel-inv')!;
+    const cgpaIn = document.getElementById('uni-cgpa-in') as HTMLInputElement;
+    const pctIn = document.getElementById('uni-pct-in') as HTMLInputElement;
+    const pctOut = document.getElementById('uni-pct-out')!;
+    const cgpaOut = document.getElementById('uni-cgpa-out')!;
+
+    const setTab = (fwd: boolean) => {
+      tabFwd.classList.toggle('active', fwd);
+      tabInv.classList.toggle('active', !fwd);
+      tabFwd.setAttribute('aria-selected', String(fwd));
+      tabInv.setAttribute('aria-selected', String(!fwd));
+      panelFwd.style.display = fwd ? 'block' : 'none';
+      panelInv.style.display = fwd ? 'none' : 'block';
+    };
+    tabFwd.addEventListener('click', () => setTab(true));
+    tabInv.addEventListener('click', () => setTab(false));
+
+    cgpaIn.addEventListener('input', () => {
+      const v = parseFloat(cgpaIn.value);
+      if (isNaN(v) || v < 0 || v > 10) { pctOut.textContent = '—'; return; }
+      pctOut.textContent = Math.min(100, Math.max(0, f.fwd(v))).toFixed(2) + '%';
+    });
+
+    pctIn.addEventListener('input', () => {
+      const v = parseFloat(pctIn.value);
+      if (isNaN(v) || v < 0 || v > 100) { cgpaOut.textContent = '—'; return; }
+      cgpaOut.textContent = Math.min(10, Math.max(0, f.inv(v))).toFixed(2);
+    });
+
+    const wireCopy = (btnId: string, outId: string) => {
+      const btn = document.getElementById(btnId);
+      btn?.addEventListener('click', () => {
+        const txt = document.getElementById(outId)?.textContent || '';
+        if (!txt || txt === '—') return;
+        navigator.clipboard.writeText(txt).catch(() => {});
+        const orig = btn.textContent;
+        btn.textContent = '✓';
+        setTimeout(() => { btn.textContent = orig; }, 1400);
+      });
+    };
+    wireCopy('copy-fwd', 'uni-pct-out');
+    wireCopy('copy-inv', 'uni-cgpa-out');
+  }
+</script>

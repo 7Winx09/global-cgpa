@@ -1,0 +1,186 @@
+---
+import Layout from '../layouts/Layout.astro';
+import SiteHeader from '../components/Nav.astro';
+import SiteFooter from '../components/Footer.astro';
+import Breadcrumbs from '../components/Breadcrumbs.astro';
+import UniCalculator from '../components/UniCalculator.astro';
+import ConversionTable from '../components/ConversionTable.astro';
+import FaqAccordion from '../components/FaqAccordion.astro';
+import type { University } from '../data/universities';
+import { universities } from '../data/universities';
+
+interface Props {
+  uni: University;
+  title: string;
+  description: string;
+  intro: string;
+}
+
+const { uni, title, description, intro } = Astro.props;
+const others = universities.filter((u) => u.key !== uni.key);
+
+const schema = {
+  '@context': 'https://schema.org',
+  '@type': 'WebApplication',
+  'name': `${uni.short} CGPA to Percentage Calculator`,
+  'url': `https://globalcgpa.in/${uni.slug}`,
+  'description': description,
+  'applicationCategory': 'EducationalApplication',
+  'operatingSystem': 'Any',
+  'offers': { '@type': 'Offer', 'price': '0', 'priceCurrency': 'INR' },
+  'inLanguage': 'en-IN',
+  'isAccessibleForFree': true,
+};
+---
+
+<Layout title={title} description={description} canonical={`https://globalcgpa.in/${uni.slug}`} schema={schema}>
+  <SiteHeader />
+
+  <main style="flex:1;">
+    <section class="uni-hero">
+      <div class="uni-hero-inner">
+        <Breadcrumbs items={[{ label: 'Universities', href: '/#universities' }, { label: uni.short }]} />
+        <div class="uni-tag">{uni.name} · {uni.state}</div>
+        <h1 class="uni-h1">{uni.short} CGPA to Percentage Calculator</h1>
+        <p class="uni-sub">{intro}</p>
+
+        <div class="uni-calc-wrap">
+          <UniCalculator uni={uni} />
+        </div>
+
+        <div class="formula-block uni-formula">
+          <div class="f-label">Official {uni.short} formula</div>
+          <div class="f-text">{uni.formulaText}</div>
+          <div class="f-example">Example: {uni.exampleCgpa} CGPA → {Math.min(100, Math.max(0, uni.forward(uni.exampleCgpa))).toFixed(1)}%</div>
+        </div>
+      </div>
+    </section>
+
+    <section class="prose uni-article">
+      <slot />
+    </section>
+
+    <section class="prose uni-tables">
+      <h2>{uni.short} CGPA to Percentage Conversion Table</h2>
+      <p>Quick reference for the most common CGPA values, calculated with the official {uni.short} formula. All values are pre-calculated — the table works even with JavaScript disabled.</p>
+      <ConversionTable uni={uni} />
+
+      <h2>{uni.short} Class &amp; Division Thresholds</h2>
+      <div class="table-scroll">
+        <table>
+          <thead>
+            <tr><th>Class / Division</th><th>Approximate CGPA</th></tr>
+          </thead>
+          <tbody>
+            {uni.classes.map((c) => (
+              <tr><td>{c.label}</td><td>{c.cgpa}</td></tr>
+            ))}
+          </tbody>
+        </table>
+      </div>
+      {uni.note && (
+        <blockquote><strong>Note:</strong> {uni.note}</blockquote>
+      )}
+    </section>
+
+    <section class="prose uni-faq">
+      <h2>Frequently Asked Questions</h2>
+      <FaqAccordion faqs={uni.faqs} />
+    </section>
+
+    <section class="prose uni-related">
+      <h2>Other University Calculators</h2>
+      <div class="uni-related-grid">
+        {others.map((u) => (
+          <a href={`/${u.slug}`} class="uni-related-card">
+            <span class="uni-related-name">{u.short}</span>
+            <span class="uni-related-state">{u.name}</span>
+            <span class="uni-related-formula">{u.formulaLabel}</span>
+          </a>
+        ))}
+      </div>
+    </section>
+  </main>
+
+  <SiteFooter />
+</Layout>
+
+<style>
+  .uni-hero {
+    padding: 20px 20px 8px;
+  }
+  .uni-hero-inner {
+    max-width: 640px;
+    margin: 0 auto;
+  }
+  .uni-tag {
+    font-size: 0.72rem;
+    font-weight: 700;
+    text-transform: uppercase;
+    letter-spacing: 1.2px;
+    color: var(--primary);
+    margin-bottom: 8px;
+  }
+  .uni-h1 {
+    font-size: clamp(1.8rem, 5vw, 2.5rem);
+    font-weight: 900;
+    letter-spacing: -0.8px;
+    line-height: 1.18;
+    color: var(--text-ink);
+    margin-bottom: 10px;
+  }
+  .uni-sub {
+    font-size: 0.95rem;
+    color: var(--text-body);
+    line-height: 1.7;
+    margin-bottom: 26px;
+    max-width: 560px;
+  }
+  .uni-calc-wrap {
+    margin-bottom: 22px;
+  }
+  .uni-formula {
+    margin-bottom: 0;
+  }
+  .uni-article, .uni-tables, .uni-faq, .uni-related {
+    padding: 0 20px;
+    margin-top: 40px;
+  }
+  .uni-article { margin-top: 44px; }
+  .uni-related-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(200px, 1fr));
+    gap: 12px;
+  }
+  .uni-related-card {
+    background: var(--bg-card);
+    border: 1px solid var(--border);
+    border-radius: 14px;
+    padding: 14px 16px;
+    text-decoration: none;
+    display: flex;
+    flex-direction: column;
+    gap: 3px;
+    transition: border-color 0.2s, transform 0.2s;
+  }
+  .uni-related-card:hover {
+    border-color: var(--primary);
+    transform: translateY(-2px);
+  }
+  .uni-related-name {
+    font-weight: 800;
+    font-size: 0.95rem;
+    color: var(--primary);
+  }
+  .uni-related-state {
+    font-size: 0.78rem;
+    color: var(--text-body);
+    line-height: 1.4;
+  }
+  .uni-related-formula {
+    font-size: 0.72rem;
+    color: var(--text-mute);
+    font-family: 'Courier New', monospace;
+    margin-top: 4px;
+  }
+</style>

@@ -1,0 +1,46 @@
+---
+import UniPage from '../components/UniPage.astro';
+import { getUniversity } from '../data/universities';
+
+const uni = getUniversity('aktu')!;
+---
+
+<UniPage
+  uni={uni}
+  title="AKTU CGPA to Percentage Calculator (Official Ordinance Formula) | GlobalCGPA"
+  description="Convert AKTU/UPTU CGPA to percentage using the official formula (CGPA − 0.75) × 10 from the AKTU ordinance effective 2019-20 onwards. Free calculator, conversion table, division thresholds and FAQ."
+  intro="Enter your AKTU (UPTU) CGPA to get your percentage using the official ordinance formula (CGPA − 0.75) × 10 — plus reverse conversion, a reference table and AKTU division thresholds."
+>
+  <h2>How the AKTU CGPA to Percentage Conversion Works</h2>
+  <p>Dr. A.P.J. Abdul Kalam Technical University (AKTU), formerly UPTU, affiliates hundreds of engineering, management and pharmacy colleges across Uttar Pradesh — from KIET and ABES to JSS and Galgotias. Its conversion rule is set out in the university's B.Tech ordinance, effective from the 2019-20 session onwards:</p>
+  <div class="formula-block">
+    <div class="f-label">AKTU official formula</div>
+    <div class="f-text">Percentage = (CGPA − 0.75) × 10</div>
+  </div>
+  <p>The formula is mathematically identical to (CGPA × 10) − 7.5, but the subtraction happens first, which changes the result compared with every generic multiplier. A perfect 10.0 CGPA at AKTU converts to 92.5%, and an 8.0 CGPA converts to 72.5% — not the 76% that the CBSE ×9.5 rule would suggest.</p>
+
+  <h3>Worked examples</h3>
+  <div class="table-scroll">
+    <table>
+      <thead><tr><th>CGPA</th><th>Calculation</th><th>AKTU Percentage</th></tr></thead>
+      <tbody>
+        <tr><td>9.0</td><td>(9.0 − 0.75) × 10</td><td>82.5%</td></tr>
+        <tr><td>8.25</td><td>(8.25 − 0.75) × 10</td><td>75.0%</td></tr>
+        <tr><td>8.0</td><td>(8.0 − 0.75) × 10</td><td>72.5%</td></tr>
+        <tr><td>7.0</td><td>(7.0 − 0.75) × 10</td><td>62.5%</td></tr>
+        <tr><td>6.75</td><td>(6.75 − 0.75) × 10</td><td>60.0%</td></tr>
+      </tbody>
+    </table>
+  </div>
+
+  <h2>Why the ×9.5 Formula Is Wrong for AKTU</h2>
+  <p>Many older blog posts and generic calculators apply the CBSE ×9.5 multiplier to every Indian CGPA. For AKTU students that produces a figure roughly 3.5 percentage points higher than the ordinance value for a typical CGPA — for example, 76% instead of 72.5% for an 8.0. On a placement form that gets verified against your documents, that mismatch is a real problem.</p>
+  <p>The ordinance formula exists because AKTU's grade points are anchored to wider mark bands than the CBSE model (its lowest pass grade covers 40–49 raw marks, not a narrow band). If your batch predates the 2019-20 session, ask your college's exam cell which conversion your ordinance names — very old schemes were converted differently.</p>
+
+  <h2>AKTU Division Thresholds</h2>
+  <p>Mapped through the official formula, <strong>First Division with Distinction</strong> starts at 8.25 CGPA (75%), and most ordinances add a condition that every subject was cleared in the first attempt — backlogs can disqualify you from Distinction even if your final CGPA crosses the line. <strong>First Division</strong> begins at 6.75 CGPA (60%), which is the cut-off most placement forms and government applications actually check. The minimum CGPA for the degree itself is 5.0.</p>
+  <p>Because AKTU rounds CGPA to two decimals on transcripts, keep two decimals in your converted percentage too — (7.45 − 0.75) × 10 is exactly 67.00%, and writing 67% or 67.5% on a form creates an avoidable mismatch.</p>
+
+  <h2>Official Conversion Certificates</h2>
+  <p>For government recruitment (UPPSC, SSC, banking, PSUs) and for credential evaluations abroad, the safest document is an official AKTU CGPA-to-percentage conversion certificate, available through your college's examination cell or the AKTU student portal. The certificate applies exactly the (CGPA − 0.75) × 10 rule shown by this calculator, so your self-calculated figure and the certified one will always agree.</p>
+</UniPage>

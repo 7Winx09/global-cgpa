@@ -1,0 +1,45 @@
+---
+import UniPage from '../components/UniPage.astro';
+import { getUniversity } from '../data/universities';
+
+const uni = getUniversity('ktu')!;
+---
+
+<UniPage
+  uni={uni}
+  title="KTU CGPA to Percentage Calculator (Official ×10 Formula) | GlobalCGPA"
+  description="Convert KTU (APJ Abdul Kalam Technological University) CGPA to percentage using the official CGPA × 10 formula from the 2023 Academic Council revision. Free calculator, conversion table, class thresholds and FAQ."
+  intro="Enter your KTU CGPA to get your percentage using the official ×10 formula from the 2023 revision — plus reverse conversion, a reference table and KTU class thresholds for placements and higher studies."
+>
+  <h2>How the KTU CGPA to Percentage Conversion Works</h2>
+  <p>APJ Abdul Kalam Technological University (KTU) governs engineering colleges across Kerala. In 2023, its Academic Council simplified the university's conversion rule: the percentage equivalent of a CGPA is now the CGPA multiplied by 10, replacing the older offset formula that had been in place since the university's early schemes.</p>
+  <div class="formula-block">
+    <div class="f-label">KTU current formula (2023 revision)</div>
+    <div class="f-text">Percentage = CGPA × 10</div>
+  </div>
+  <p>Under the current rule, an 8.5 CGPA is exactly 85% and a perfect 10.0 is 100%. The change matters if you are comparing documents: certificates issued under the older rule show slightly lower percentages, and both remain valid for the documents on which they appear.</p>
+
+  <h3>Worked examples</h3>
+  <div class="table-scroll">
+    <table>
+      <thead><tr><th>CGPA</th><th>Current Formula (×10)</th><th>Old Formula (10G − 3.75)</th></tr></thead>
+      <tbody>
+        <tr><td>9.0</td><td>90%</td><td>86.25%</td></tr>
+        <tr><td>8.5</td><td>85%</td><td>81.25%</td></tr>
+        <tr><td>8.0</td><td>80%</td><td>76.25%</td></tr>
+        <tr><td>7.0</td><td>70%</td><td>66.25%</td></tr>
+        <tr><td>6.5</td><td>65%</td><td>61.25%</td></tr>
+      </tbody>
+    </table>
+  </div>
+
+  <h2>The Old KTU Formula (For Older Documents)</h2>
+  <p>Before the 2023 revision, KTU converted CGPA to percentage as <em>(10 × CGPA) − 3.75</em>, so an 8.5 CGPA was 81.25% rather than 85%. If you are filling a form that asks for the percentage "as per university rules", use the formula that matches your scheme and the documents you hold. For current conversions — new applications, fresh certificates, anything produced after the revision — the ×10 rule is the one to use. When in doubt, your college's exam cell can confirm which formula your batch's certificates used.</p>
+
+  <h2>KTU Class Thresholds</h2>
+  <p>KTU awards <strong>First Class with Honours</strong> at roughly 8.5 CGPA and above, <strong>First Class</strong> from about 6.5 CGPA (65% under the current formula), and <strong>Second Class</strong> below that, with the degree itself requiring a minimum CGPA around 5.0. Honours awards can carry additional conditions in your specific scheme, such as completing extra credits or clearing all subjects within the standard duration, so check your regulation if you are near the 8.5 boundary.</p>
+  <p>For placements, the practical cut-offs are simple: most service-based companies filter at 6.0–6.5 CGPA (60–65%) and competitive product roles at 7.5+ (75%). KTU's CGPA is a credit-weighted average of your semester SGPAs — if you want to project it before consolidation, use our <a href="/sgpa-to-cgpa">SGPA to CGPA calculator</a>, which applies the same credit-weighting KTU does.</p>
+
+  <h2>Using Your KTU Percentage</h2>
+  <p>Within India — for Kerala PSC applications, GATE counselling, campus placements and scholarships — the ×10 percentage from this calculator is the figure to quote alongside your CGPA. For foreign universities, submit your original CGPA with the scale noted (for example, "8.2/10.0, KTU India") and let credential evaluators handle the conversion; our <a href="/cgpa-to-gpa">CGPA to GPA converter</a> gives you a quick linear estimate for self-assessment.</p>
+</UniPage>

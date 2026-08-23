@@ -114,24 +114,15 @@ Added a full dark/light theme system:
 - CSS custom properties (`--bg`, `--text-ink`, `--border`, etc.) defined in `global.css` with `[data-theme="dark"]` overrides
 - The `<html>` element gets `data-theme="dark"` or `data-theme="light"` attribute
 
-### Commit 9 — `13f197c` Formula accuracy pass ← **Most recent**
-Full audit and correction of all CGPA → Percentage university formulas in `Calculator.astro`:
+### Commit 9 — `13f197c` Formula accuracy pass
+Full audit and correction of all CGPA → Percentage university formulas in `Calculator.astro`.
 
-| University | Was (WRONG) | Now (CORRECT) | Source |
-|---|---|---|---|
-| **VTU** | `CGPA × 10` | `(CGPA − 0.75) × 10` | VTU official — 2015/2017/2018 schemes |
-| **Anna University** | `(CGPA × 10) − 7.5` | `CGPA × 10` | Anna Univ R-2015/R-2017/R-2019 official |
-| **GTU** | `(CGPA × 10) − 7.5` | `(CGPA − 0.5) × 10` | GTU official notification |
-| **SPPU/Pune** | `(CGPA × 10) − 7.5` | `CGPA × 10` (labelled approx) | SPPU uses grade-range system, no single formula |
-| **Mumbai** | `7.1 × CGPA + 11` | ✅ unchanged | Mumbai Univ 2019 circular |
-| **CBSE/AKTU** | `CGPA × 9.5` | ✅ unchanged | Standard |
-
-Additional changes in this commit:
-- Each university entry in the `UNIS` object now has a `note` field with the official source/scheme name
-- The formula result line now appends the note (e.g. `"VTU 2015 / 2017 / 2018 schemes (official)"`)
-- Dropdown option labels updated to show correct formulas at a glance
-- **Conversion Chart** expanded from 3 columns (CBSE, old-SPPU, VTU) to **5 columns** (CBSE, VTU, Anna, GTU, Mumbai) — all with correct formulas
-- All `fn()` calls now clamp at 100 with `Math.min(..., 100)`
+### Commit 10 & 11 — `aa6fc5f` & `503f368` Sub-calculator modal tabular redesign & dynamic scale support ← **Most recent**
+- Rebuilt both sub-calculator modals (**SGPA to Cumulative CGPA** and **Marks to CGPA / SGPA**) using a borderless semantic table architecture (`<table class="subcalc-table">`).
+- **Initial State:** Both modals start with 1 empty row on open; users add more via `+` and remove via `×`.
+- **SGPA Modal Columns:** `Semester | Score / Marks | Out of (Scale, default 10) | Credits (default 22) | ×`.
+- **Scale Flexibility:** Automatically supports standard 10-point scale, 100-point percentage scale, 4-point scale, or custom college scales with real-time weighted normalization.
+- **Global & Scoped Styling:** Used `:global()` selectors to ensure dynamically created rows and inputs have exact padding, border-radius, outline containment, and no browser number spinner arrows.
 
 ---
 
