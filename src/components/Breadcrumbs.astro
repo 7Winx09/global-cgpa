@@ -25,7 +25,9 @@ const { items } = Astro.props;
       '@type': 'ListItem',
       'position': i + 2,
       'name': item.label,
-      ...(item.href ? { 'item': `https://globalcgpa.in${item.href}` } : {}),
+      ...(item.href
+        ? { 'item': `https://globalcgpa.in${item.href}` }
+        : { 'item': `https://globalcgpa.in${Astro.url.pathname.replace(/\/+$/, '') || ''}` }),
     })),
   ],
 })} />

@@ -47,6 +47,11 @@ const schema = {
   description="CGPA ko percentage mein kaise badlein? Free Hindi CGPA to percentage calculator — CBSE ×9.5 formula aur SPPU, VTU, Mumbai University, AKTU, GTU ke official formulas ke saath."
   canonical="https://globalcgpa.in/cgpa-to-percentage-in-hindi"
   schema={schema}
+  alternates={[
+    { hreflang: 'hi', href: 'https://globalcgpa.in/cgpa-to-percentage-in-hindi' },
+    { hreflang: 'en', href: 'https://globalcgpa.in/' },
+    { hreflang: 'x-default', href: 'https://globalcgpa.in/' },
+  ]}
 >
   <SiteHeader />
 
@@ -65,7 +70,7 @@ const schema = {
           <label class="sp-label" for="hi-formula">फॉर्मूला चुनें</label>
           <select id="hi-formula">
             <option value="cbse" selected>मानक / CBSE — CGPA × 9.5</option>
-            <option value="/sppu-cgpa-to-percentage">SPPU — (CGPA × 10) − 7.5</option>
+            <option value="sppu">SPPU — (CGPA × 10) − 7.5</option>
             <option value="vtu">VTU / Anna / KTU — CGPA × 10</option>
             <option value="mumbai">Mumbai University — (7.1 × CGPA) + 11</option>
             <option value="aktu">AKTU — (CGPA − 0.75) × 10</option>
@@ -177,6 +182,7 @@ const schema = {
 
     const formulas: Record<string, { fn: (x: number) => number; label: string }> = {
       cbse: { fn: (x) => x * 9.5, label: 'CBSE/UGC formula' },
+      sppu: { fn: (x) => x * 10 - 7.5, label: 'SPPU formula' },
       vtu: { fn: (x) => x * 10, label: 'VTU / Anna / KTU formula' },
       mumbai: { fn: (x) => 7.1 * x + 11, label: 'Mumbai University formula' },
       aktu: { fn: (x) => (x - 0.75) * 10, label: 'AKTU formula' },

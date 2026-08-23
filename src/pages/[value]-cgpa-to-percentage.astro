@@ -27,6 +27,7 @@ const rows = [
   { name: 'AKTU / UPTU', href: '/aktu-cgpa-to-percentage', formula: '(CGPA − 0.75) × 10', result: `${pct((x) => (x - 0.75) * 10)}%` },
   { name: 'GTU (Gujarat)', href: '/gtu-cgpa-to-percentage', formula: '(CGPA − 0.5) × 10', result: `${pct((x) => (x - 0.5) * 10)}%` },
   { name: 'KTU (Kerala)', href: '/ktu-cgpa-to-percentage', formula: 'CGPA × 10', result: `${pct((x) => x * 10)}%` },
+  { name: 'DU (Delhi University)', href: '/du-cgpa-to-percentage', formula: 'CGPA × 9.5', result: `${pct((x) => x * 9.5)}%` },
 ];
 
 const neighbors = [v - 0.5, v + 0.5].filter((n) => n >= 5 && n <= 10);
@@ -78,7 +79,7 @@ const schema = {
   '@type': 'WebApplication',
   'name': `${label} CGPA to Percentage Converter`,
   'url': `https://globalcgpa.in/${label}-cgpa-to-percentage`,
-  'description': `Convert ${label} CGPA to percentage using the standard CBSE formula or official rules for SPPU, VTU, Mumbai University, Anna University, AKTU, GTU and KTU.`,
+  'description': `Convert ${label} CGPA to percentage using the standard CBSE formula or official rules for SPPU, VTU, Mumbai University, Anna University, AKTU, GTU, KTU and DU.`,
   'applicationCategory': 'EducationalApplication',
   'operatingSystem': 'Any',
   'offers': { '@type': 'Offer', 'price': '0', 'priceCurrency': 'INR' },

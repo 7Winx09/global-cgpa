@@ -71,7 +71,7 @@ export const universities: University[] = [
     formulaLabel: 'CGPA × 10',
     inverseLabel: 'CGPA = Percentage ÷ 10',
     source: 'VTU official circular on CGPA-to-percentage conversion for CBCS schemes',
-    note: 'VTU uses the direct ×10 multiplier across its CBCS schemes (2015, 2017, 2018, 2021-22). If you studied under a very old pre-CBCS marks-based scheme, your marks are already percentages and no conversion is needed.',
+    note: 'VTU uses the direct ×10 multiplier under its current 2021 and 2022 B.E./B.Tech regulations (students admitted from 2021-22 onwards). The older 2015, 2017 and 2018 CBCS schemes converted with Percentage = (CGPA − 0.75) × 10 instead. If you studied under a very old pre-CBCS marks-based scheme, your marks are already percentages and no conversion is needed.',
     exampleCgpa: 8.5,
     forward: (c) => c * 10,
     inverse: (p) => p / 10,
@@ -84,7 +84,7 @@ export const universities: University[] = [
     faqs: [
       {
         q: 'What is the VTU CGPA to percentage formula?',
-        a: 'VTU uses the simple formula Percentage = CGPA × 10. So 8.5 CGPA equals 85%, 9.0 CGPA equals 90%, and a perfect 10.0 CGPA equals 100%.',
+        a: 'Under the current 2021 and 2022 B.E./B.Tech regulations, VTU uses the simple formula Percentage = CGPA × 10. So 8.5 CGPA equals 85%, 9.0 CGPA equals 90%, and a perfect 10.0 CGPA equals 100%. Students from the older 2015/2017/2018 CBCS schemes should apply (CGPA − 0.75) × 10 instead.',
       },
       {
         q: 'Is VTU CGPA equal to percentage directly?',
@@ -266,7 +266,7 @@ export const universities: University[] = [
     formulaLabel: 'CGPA × 10',
     inverseLabel: 'CGPA = Percentage ÷ 10',
     source: 'KTU Academic Council decision (2023) on CGPA-to-percentage conversion',
-    note: 'KTU revised its conversion in 2023, replacing the older (10 × CGPA − 3.75) formula with the direct CGPA × 10. If you need a percentage for a document issued before the revision, check which formula your certificate mentions.',
+    note: 'KTU revised its conversion in June 2023 (U.O.No. 1584/2023/KTU), replacing the B.Tech 2019-scheme formula Percentage = (10 × CGPA) − 2.5 with the direct CGPA × 10. Certificates issued before the amendment keep the earlier figure, and still-older schemes may reference other constants — check which scheme your document cites.',
     exampleCgpa: 8.5,
     forward: (c) => c * 10,
     inverse: (p) => p / 10,
@@ -279,11 +279,11 @@ export const universities: University[] = [
     faqs: [
       {
         q: 'What is the official KTU CGPA to percentage formula?',
-        a: 'Since the 2023 Academic Council revision, KTU converts CGPA to percentage as simply CGPA × 10. An 8.5 CGPA equals exactly 85%. The older 10 × CGPA − 3.75 formula has been replaced for current schemes.',
+        a: 'Since the June 2023 order (U.O.No. 1584/2023/KTU), KTU converts CGPA to percentage as simply CGPA × 10. An 8.5 CGPA equals exactly 85%. This replaced the 10 × CGPA − 2.5 formula of the B.Tech 2019 scheme; documents issued before that amendment keep the earlier figure.',
       },
       {
         q: 'What was the old KTU formula?',
-        a: 'Before the 2023 revision, KTU used Percentage = (10 × CGPA) − 3.75, so 8.5 CGPA was 81.25%. Documents issued under the old rule keep that figure; current conversions use ×10.',
+        a: 'It depended on your scheme. The B.Tech 2019 regulations used Percentage = (10 × CGPA) − 2.5, so 8.5 CGPA was 82.5% until June 2023, when it was amended to CGPA × 10. The pre-2019 schemes carried an older (10 × CGPA) − 3.75 constant. Check which scheme and regulation your certificate cites before converting.',
       },
       {
         q: 'Is 7 CGPA good in KTU?',

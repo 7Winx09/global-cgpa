@@ -16,12 +16,25 @@ const faqs = [
   { q: 'Is 9.5 the right multiplier for CBSE?', a: 'Yes — CBSE itself defines Percentage = CGPA × 9.5, derived from the average marks (95) of students who scored a perfect 10 grade point. It remains the standard default for boards and UGC-institutions without their own formula.' },
   { q: 'Can I use this chart for official documents?', a: 'The chart matches the official formulas exactly, but for anything legally binding — visa, PSU verification, court work — request a conversion certificate from your university so the figure comes on official letterhead.' },
 ];
+
+const schema = {
+  '@context': 'https://schema.org',
+  '@type': 'WebApplication',
+  'name': 'CGPA to Percentage Conversion Chart',
+  'url': 'https://globalcgpa.in/cgpa-to-percentage-chart',
+  'description': 'Complete CGPA to percentage conversion chart comparing CBSE ×9.5, SPPU, VTU, Mumbai University, Anna University, AKTU, GTU and KTU formulas side by side, from 4.0 to 10.0 CGPA.',
+  'applicationCategory': 'EducationalApplication',
+  'operatingSystem': 'Any',
+  'offers': { '@type': 'Offer', 'price': '0', 'priceCurrency': 'INR' },
+  'isAccessibleForFree': true,
+};
 ---
 
 <Layout
   title="CGPA to Percentage Conversion Chart — All University Formulas | GlobalCGPA"
   description="Complete CGPA to percentage conversion chart comparing CBSE ×9.5, SPPU, VTU, Mumbai University, Anna University, AKTU, GTU and KTU formulas side by side, from 4.0 to 10.0 CGPA."
   canonical="https://globalcgpa.in/cgpa-to-percentage-chart"
+  schema={schema}
 >
   <SiteHeader />
 
