@@ -1,0 +1,209 @@
+---
+import Layout from '../layouts/Layout.astro';
+import SiteHeader from '../components/Nav.astro';
+import SiteFooter from '../components/Footer.astro';
+import Breadcrumbs from '../components/Breadcrumbs.astro';
+import FaqAccordion from '../components/FaqAccordion.astro';
+
+const cgpaValues = [10, 9.5, 9, 8.5, 8, 7.5, 7, 6.5, 6];
+const pct = (c: number) => Math.min(100, Math.max(0, c * 9.5)).toFixed(1);
+
+const uniRows = [
+  { name: 'SPPU (पुणे यूनिवर्सिटी)', href: '/sppu-cgpa-to-percentage', formula: '(CGPA × 10) − 7.5', example: '72.5%' },
+  { name: 'VTU (कर्नाटक)', href: '/vtu-cgpa-to-percentage', formula: 'CGPA × 10', example: '80%' },
+  { name: 'Anna University (तमिलनाडु)', href: '/anna-university-cgpa-to-percentage', formula: 'CGPA × 10', example: '80%' },
+  { name: 'Mumbai University', href: '/mumbai-university-cgpa-to-percentage', formula: '(7.1 × CGPA) + 11', example: '67.8%' },
+  { name: 'AKTU / UPTU (उत्तर प्रदेश)', href: '/aktu-cgpa-to-percentage', formula: '(CGPA − 0.75) × 10', example: '72.5%' },
+  { name: 'GTU (गुजरात)', href: '/gtu-cgpa-to-percentage', formula: '(CGPA − 0.5) × 10', example: '75%' },
+  { name: 'KTU (केरल)', href: '/ktu-cgpa-to-percentage', formula: 'CGPA × 10', example: '80%' },
+  { name: 'DU (दिल्ली यूनिवर्सिटी)', href: '/du-cgpa-to-percentage', formula: 'CGPA × 9.5', example: '76%' },
+];
+
+const faqs = [
+  { q: 'CGPA को प्रतिशत में कैसे बदलें?', a: 'सबसे आसान तरीका है अपने CGPA को 9.5 से गुणा करना। जैसे — 8 CGPA × 9.5 = 76%। यह CBSE/UGC का मानक फॉर्मूला है। लेकिन अगर आपकी यूनिवर्सिटी (जैसे SPPU, Mumbai University, AKTU, GTU) का अपना आधिकारिक फॉर्मूला है, तो उसी का इस्तेमाल करें।' },
+  { q: '8 CGPA कितने प्रतिशत के बराबर है?', a: 'मानक फॉर्मूले से 8 CGPA = 8 × 9.5 = <strong>76%</strong>। VTU, Anna University और KTU के नियमों में यह 80% होता है, जबकि SPPU में (8 × 10) − 7.5 = 72.5% और Mumbai University में (7.1 × 8) + 11 = 67.8%।' },
+  { q: 'SGPA और CGPA में क्या अंतर है?', a: 'SGPA किसी एक सेमेस्टर का स्कोर है, जबकि CGPA पूरे कोर्स के सभी सेमेस्टर का क्रेडिट-वेटेड औसत है। दोनों को प्रतिशत में बदलने का फॉर्मूला एक ही है। सेमेस्टर के अंकों के लिए <a href="/sgpa-to-percentage">SGPA to percentage calculator</a> इस्तेमाल करें।' },
+  { q: 'क्या रिज़्यूमे में प्रतिशत लिखना ज़रूरी है?', a: 'ज़्यादातर भर्ती फॉर्म और कंपनियां percentage मांगती हैं। हमेशा अपनी यूनिवर्सिटी के आधिकारिक फॉर्मूले से ही प्रतिशत निकालें, क्योंकि वेरिफिकेशन के समय वही फॉर्मूला लागू होता है।' },
+  { q: '70% के लिए कितना CGPA चाहिए?', a: 'मानक ×9.5 फॉर्मूले से 70% के लिए लगभग 7.37 CGPA चाहिए। VTU/Anna/KTU नियमों में 7.0 CGPA = 70%, जबकि AKTU में 7.75 CGPA और Mumbai University में लगभग 8.31 CGPA चाहिए।' },
+];
+
+const schema = {
+  '@context': 'https://schema.org',
+  '@type': 'WebApplication',
+  'name': 'CGPA to Percentage Calculator in Hindi (CGPA से प्रतिशत)',
+  'url': 'https://globalcgpa.in/cgpa-to-percentage-in-hindi',
+  'description': 'Hindi CGPA se percentage calculator using the standard CBSE ×9.5 formula or official university formulas.',
+  'applicationCategory': 'EducationalApplication',
+  'operatingSystem': 'Any',
+  'offers': { '@type': 'Offer', 'price': '0', 'priceCurrency': 'INR' },
+  'inLanguage': 'hi-IN',
+  'isAccessibleForFree': true,
+};
+---
+
+<Layout
+  lang="hi"
+  title="CGPA से प्रतिशत कैलकुलेटर – CGPA to Percentage in Hindi | GlobalCGPA"
+  description="CGPA ko percentage mein kaise badlein? Free Hindi CGPA to percentage calculator — CBSE ×9.5 formula aur SPPU, VTU, Mumbai University, AKTU, GTU ke official formulas ke saath."
+  canonical="https://globalcgpa.in/cgpa-to-percentage-in-hindi"
+  schema={schema}
+>
+  <SiteHeader />
+
+  <main style="flex:1;">
+    <section class="tool-hero">
+      <div class="tool-hero-inner">
+        <Breadcrumbs items={[{ label: 'CGPA से प्रतिशत (हिंदी)' }]} />
+        <div class="tool-tag">हिंदी में</div>
+        <h1 class="tool-h1">CGPA से प्रतिशत कैलकुलेटर</h1>
+        <p class="tool-sub">अपना CGPA डालें और तुरंत प्रतिशत (percentage) पाएँ — CBSE के मानक ×9.5 फॉर्मूले या अपनी यूनिवर्सिटी के आधिकारिक फॉर्मूले से।</p>
+
+        <div class="calc-shell">
+          <label class="sp-label" for="hi-cgpa">अपना CGPA लिखें</label>
+          <input type="number" id="hi-cgpa" min="0" max="10" step="0.01" placeholder="जैसे 8.25" inputmode="decimal" />
+
+          <label class="sp-label" for="hi-formula">फॉर्मूला चुनें</label>
+          <select id="hi-formula">
+            <option value="cbse" selected>मानक / CBSE — CGPA × 9.5</option>
+            <option value="/sppu-cgpa-to-percentage">SPPU — (CGPA × 10) − 7.5</option>
+            <option value="vtu">VTU / Anna / KTU — CGPA × 10</option>
+            <option value="mumbai">Mumbai University — (7.1 × CGPA) + 11</option>
+            <option value="aktu">AKTU — (CGPA − 0.75) × 10</option>
+            <option value="gtu">GTU — (CGPA − 0.5) × 10</option>
+          </select>
+
+          <div class="calc-output">
+            <button type="button" class="calc-copy" id="hi-copy" title="Copy result" aria-label="Copy result">⎘</button>
+            <div>
+              <div class="calc-out-val" id="hi-out">—</div>
+              <div class="calc-out-lbl">प्रतिशत (Percentage)</div>
+            </div>
+            <div class="sp-formula-note" id="hi-note"></div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <section class="prose tool-article">
+      <h2>CGPA को प्रतिशत में बदलने का तरीका</h2>
+      <p>भारत की ज़्यादातर यूनिवर्सिटी अब marksheet पर CGPA दिखाती हैं, लेकिन नौकरी के फॉर्म, GATE counselling और admissions ज़्यादातर percentage मांगते हैं। सबसे आम तरीका:</p>
+      <div class="formula-block">
+        <div class="f-label">मानक फॉर्मूला (CBSE / UGC)</div>
+        <div class="f-text">Percentage = CGPA × 9.5</div>
+        <div class="f-example">उदाहरण: 8.4 × 9.5 = <strong>79.8%</strong></div>
+      </div>
+      <p>9.5 गुणक CBSE के विश्लेषण से आया है — grade point 10 पाने वालों के औसत अंक लगभग 95 थे। जब तक आपकी यूनिवर्सिटी का अपना फॉर्मूला न हो, यही मानक तरीका है।</p>
+
+      <h2>यूनिवर्सिटी के आधिकारिक फॉर्मूले</h2>
+      <div class="table-scroll">
+        <table>
+          <thead><tr><th>यूनिवर्सिटी</th><th>फॉर्मूला</th><th>उदाहरण (8.0)</th></tr></thead>
+          <tbody>
+            {uniRows.map((u) => (
+              <tr><td><a href={u.href}>{u.name}</a></td><td>{u.formula}</td><td>{u.example}</td></tr>
+            ))}
+            <tr><td>कोई rule नहीं (autonomous colleges)</td><td>CGPA × 9.5</td><td>76%</td></tr>
+          </tbody>
+        </table>
+      </div>
+        <h2>CGPA से प्रतिशत टेबल (×9.5)</h2>
+      <div class="table-scroll">
+        <table>
+          <thead><tr><th>CGPA</th><th>प्रतिशत</th><th>CGPA</th><th>प्रतिशत</th></tr></thead>
+          <tbody>
+            {[0, 1, 2, 3].map((i) => (
+              <tr>
+                <td>{cgpaValues[i]?.toFixed(1)}</td><td>{cgpaValues[i] !== undefined ? pct(cgpaValues[i]) + '%' : ''}</td>
+                <td>{cgpaValues[i + 4]?.toFixed(1)}</td><td>{cgpaValues[i + 4] !== undefined ? pct(cgpaValues[i + 4]) + '%' : ''}</td>
+              </tr>
+            ))}
+          </tbody>
+        </table>
+      </div>
+
+      <h2>कितना CGPA अच्छा माना जाता है?</h2>
+      <ul>
+        <li><strong>7.0+ CGPA (66.5%+)</strong> — First Class, placements के लिए काफ़ी</li>
+        <li><strong>7.5–8.0+ CGPA (71–76%+)</strong> — Distinction, product companies के लिए competitive</li>
+        <li><strong>9.0+ CGPA (85.5%+)</strong> — PSU shortlists और scholarships के लिए मज़बूत</li>
+      </ul>
+      <p>अंग्रेज़ी में पूरी guide — <a href="/">CGPA to Percentage Calculator</a>, <a href="/sgpa-to-cgpa">SGPA to CGPA</a>, <a href="/guides/how-to-improve-cgpa">CGPA सुधारने के तरीके</a>।</p>
+    </section>
+
+    <section class="prose tool-faq">
+      <h2>अक्सर पूछे जाने वाले सवाल</h2>
+      <FaqAccordion faqs={faqs} />
+    </section>
+  </main>
+
+  <SiteFooter />
+  <style>
+    .tool-hero { padding: 20px 20px 8px; }
+    .tool-hero-inner { max-width: 640px; margin: 0 auto; }
+    .tool-tag {
+      font-size: 0.72rem; font-weight: 700; text-transform: uppercase;
+      letter-spacing: 1.2px; color: var(--primary); margin-bottom: 8px;
+    }
+    .tool-h1 {
+      font-size: clamp(1.8rem, 5vw, 2.5rem); font-weight: 900;
+      letter-spacing: -0.8px; line-height: 1.18; color: var(--text-ink); margin-bottom: 10px;
+    }
+    .tool-sub {
+      font-size: 0.95rem; color: var(--text-body); line-height: 1.7;
+      margin-bottom: 26px; max-width: 560px;
+    }
+    .tool-article, .tool-faq { padding: 0 20px; margin-top: 44px; }
+    .tool-article { max-width: 720px; }
+    .sp-label {
+      display: block; font-size: 0.72rem; font-weight: 700; text-transform: uppercase;
+      letter-spacing: 0.6px; color: var(--text-mute); margin-bottom: 6px;
+    }
+    .calc-shell input[type="number"], .calc-shell select {
+      width: 100%; height: 46px; padding: 0 14px; margin-bottom: 16px;
+      border: 1px solid var(--border); background: var(--bg-soft); color: var(--text-ink);
+      font-size: 0.95rem; font-weight: 500; border-radius: 10px; font-family: inherit;
+      transition: border-color 0.2s;
+    }
+    .calc-shell input:focus, .calc-shell select:focus { outline: none; border-color: var(--primary); }
+    .sp-formula-note { margin-top: 10px; font-size: 0.75rem; color: var(--text-mute); text-align: center; }
+    .calc-output { position: relative; text-align: center; }
+  </style>
+
+  <script>
+    const cgpaInput = document.getElementById('hi-cgpa') as HTMLInputElement;
+    const formulaSelect = document.getElementById('hi-formula') as HTMLSelectElement;
+    const out = document.getElementById('hi-out')!;
+    const note = document.getElementById('hi-note')!;
+
+    const formulas: Record<string, { fn: (x: number) => number; label: string }> = {
+      cbse: { fn: (x) => x * 9.5, label: 'CBSE/UGC formula' },
+      vtu: { fn: (x) => x * 10, label: 'VTU / Anna / KTU formula' },
+      mumbai: { fn: (x) => 7.1 * x + 11, label: 'Mumbai University formula' },
+      aktu: { fn: (x) => (x - 0.75) * 10, label: 'AKTU formula' },
+      gtu: { fn: (x) => (x - 0.5) * 10, label: 'GTU formula' },
+    };
+
+    function calc() {
+      const v = parseFloat(cgpaInput.value);
+      if (isNaN(v) || v < 0 || v > 10) {
+        out.textContent = '—';
+        note.textContent = isNaN(v) ? '' : 'CGPA 0 se 10 ke beech hona chahiye';
+        return;
+      }
+      const f = formulas[formulaSelect.value] ?? formulas.cbse;
+      out.textContent = Math.min(100, Math.max(0, f.fn(v))).toFixed(1) + '%';
+      note.textContent = f.label;
+    }
+
+    cgpaInput.addEventListener('input', calc);
+    formulaSelect.addEventListener('change', calc);
+
+    document.getElementById('hi-copy')?.addEventListener('click', function (this: HTMLElement) {
+      const txt = out.textContent || '';
+      if (!txt || txt === '—') return;
+      navigator.clipboard.writeText(txt).catch(() => {});
+      this.textContent = '✓';
+      setTimeout(() => { this.textContent = '⎘'; }, 1400);
+    });
+  </script>
+</Layout>

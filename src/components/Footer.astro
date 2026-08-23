@@ -5,6 +5,7 @@ const calculators = [
   { label: 'Percentage to CGPA', href: '/percentage-to-cgpa' },
   { label: 'CGPA to GPA (4.0)', href: '/cgpa-to-gpa' },
   { label: 'SGPA to CGPA', href: '/sgpa-to-cgpa' },
+  { label: 'SGPA to Percentage', href: '/sgpa-to-percentage' },
   { label: 'Marks to CGPA', href: '/marks-to-cgpa' },
   { label: 'Conversion Chart', href: '/cgpa-to-percentage-chart' },
 ];
@@ -16,6 +17,17 @@ const universityLinks = [
   { label: 'AKTU / UPTU', href: '/aktu-cgpa-to-percentage' },
   { label: 'GTU Calculator', href: '/gtu-cgpa-to-percentage' },
   { label: 'KTU Calculator', href: '/ktu-cgpa-to-percentage' },
+  { label: 'DU (Delhi University)', href: '/du-cgpa-to-percentage' },
+];
+const popularLinks = [
+  { label: '10 CGPA to Percentage', href: '/10-cgpa-to-percentage' },
+  { label: '9.5 CGPA to Percentage', href: '/9.5-cgpa-to-percentage' },
+  { label: '9 CGPA to Percentage', href: '/9-cgpa-to-percentage' },
+  { label: '8.5 CGPA to Percentage', href: '/8.5-cgpa-to-percentage' },
+  { label: '8 CGPA to Percentage', href: '/8-cgpa-to-percentage' },
+  { label: '7.5 CGPA to Percentage', href: '/7.5-cgpa-to-percentage' },
+  { label: 'Engineering Conversion', href: '/cgpa-to-percentage-for-engineering' },
+  { label: 'हिंदी में कैलकुलेटर', href: '/cgpa-to-percentage-in-hindi' },
 ];
 const learn = [
   { label: 'All Guides', href: '/guides' },
@@ -60,6 +72,13 @@ const company = [
     </div>
 
     <div class="footer-col">
+      <div class="footer-col-title">Popular Conversions</div>
+      <ul class="footer-links">
+        {popularLinks.map((l) => <li><a href={l.href}>{l.label}</a></li>)}
+      </ul>
+    </div>
+
+    <div class="footer-col">
       <div class="footer-col-title">Learn</div>
       <ul class="footer-links">
         {learn.map((l) => <li><a href={l.href}>{l.label}</a></li>)}
@@ -96,8 +115,8 @@ const company = [
     max-width: 1160px;
     margin: 0 auto;
     display: grid;
-    grid-template-columns: 1.5fr 1fr 1fr 1fr 0.9fr;
-    gap: 32px;
+    grid-template-columns: 1.3fr 1fr 1fr 1fr 1fr 0.9fr;
+    gap: 28px;
     padding-bottom: 44px;
   }
 

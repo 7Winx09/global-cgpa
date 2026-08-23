@@ -1,0 +1,229 @@
+---
+import Layout from '../layouts/Layout.astro';
+import SiteHeader from '../components/Nav.astro';
+import SiteFooter from '../components/Footer.astro';
+import Breadcrumbs from '../components/Breadcrumbs.astro';
+import FaqAccordion from '../components/FaqAccordion.astro';
+
+export function getStaticPaths() {
+  const values = [10, 9.5, 9, 8.5, 8, 7.5, 7, 6.5, 6, 5.5, 5];
+  return values.map((v) => ({ params: { value: String(v) } }));
+}
+
+const valueStr = Astro.params.value!;
+const v = parseFloat(valueStr);
+const label = valueStr;
+
+const num = (n: number) => parseFloat(n.toFixed(2)).toString();
+const pct = (fn: (c: number) => number) => Math.min(100, Math.max(0, fn(v))).toFixed(1);
+
+const cbsePct = Math.min(100, v * 9.5);
+const rows = [
+  { name: 'CBSE / UGC generic', href: '/cgpa-to-percentage-chart', formula: '× 9.5', result: `${pct((x) => x * 9.5)}%` },
+  { name: 'SPPU (Pune)', href: '/sppu-cgpa-to-percentage', formula: '(CGPA × 10) − 7.5', result: `${pct((x) => x * 10 - 7.5)}%` },
+  { name: 'VTU (Karnataka)', href: '/vtu-cgpa-to-percentage', formula: 'CGPA × 10', result: `${pct((x) => x * 10)}%` },
+  { name: 'Anna University', href: '/anna-university-cgpa-to-percentage', formula: 'CGPA × 10', result: `${pct((x) => x * 10)}%` },
+  { name: 'Mumbai University', href: '/mumbai-university-cgpa-to-percentage', formula: '(7.1 × CGPA) + 11', result: `${pct((x) => 7.1 * x + 11)}%` },
+  { name: 'AKTU / UPTU', href: '/aktu-cgpa-to-percentage', formula: '(CGPA − 0.75) × 10', result: `${pct((x) => (x - 0.75) * 10)}%` },
+  { name: 'GTU (Gujarat)', href: '/gtu-cgpa-to-percentage', formula: '(CGPA − 0.5) × 10', result: `${pct((x) => (x - 0.5) * 10)}%` },
+  { name: 'KTU (Kerala)', href: '/ktu-cgpa-to-percentage', formula: 'CGPA × 10', result: `${pct((x) => x * 10)}%` },
+];
+
+const neighbors = [v - 0.5, v + 0.5].filter((n) => n >= 5 && n <= 10);
+const lower = v - 0.5;
+const higher = v + 0.5;
+
+let standing: string;
+let goodAnswer: string;
+if (cbsePct >= 90) {
+  standing = 'top-of-the-class territory — above the 75% Distinction bar at every major Indian university and comfortably past every First Class threshold';
+  goodAnswer = `Yes — ${label} CGPA is an excellent score. It converts to roughly ${Math.round(cbsePct)}% under the standard formula (and up to ${rows[2].result} under direct ×10 rules), which clears Distinction cut-offs everywhere, keeps you competitive for PSU shortlists that screen at 70%+, and strengthens applications for MS programmes, MBA admissions and merit scholarships.`;
+} else if (cbsePct >= 75) {
+  standing = 'Distinction-level at most Indian universities — well clear of the 60% First Class bar everywhere';
+  goodAnswer = `Yes — ${label} CGPA is a strong score. At about ${Math.round(cbsePct)}% under the standard formula (up to ${rows[2].result} under ×10 rules), it sits in Distinction territory at most universities, clears nearly every campus-placement cut-off (typically 60–70%) and meets the eligibility bar for GATE, PSU applications and most postgraduate admissions.`;
+} else if (cbsePct >= 60) {
+  standing = 'First Class at essentially every Indian university';
+  goodAnswer = `${label} CGPA converts to roughly ${Math.round(cbsePct)}% under the standard formula, which is solidly First Class at virtually every university. It clears the 60% minimum used by most government job notifications, IT company drives and higher-studies applications. Product companies and top-tier programmes often prefer 75%+, where the <a href="/${num(v + 0.5)}-cgpa-to-percentage">${num(v + 0.5)} CGPA</a> page shows what one more semester of improvement delivers.`;
+} else if (cbsePct >= 50) {
+  standing = 'Second Class at most universities — above the minimum-pass line but below the common 60% First Class bar';
+  goodAnswer = `${label} CGPA converts to roughly ${Math.round(cbsePct)}% under the standard formula — Second Class at most universities. Many recruiters and government forms screen at 60%, so you may fall just short on those. There are still plenty of paths: companies without percentage screens, Lateral-entry and private university M.Tech/MBA programmes, and raising future SGPAs — even one strong semester can push you over the First Class line.`;
+} else {
+  standing = 'at or near the minimum-pass band at most universities';
+  goodAnswer = `${label} CGPA converts to roughly ${Math.round(cbsePct)}% under the standard formula, which sits at or near the pass boundary at most Indian universities. Check your own transcript carefully — your university's official formula may report a different figure — and focus on upcoming semesters: because CGPA is credit-weighted over completed terms, strong future semesters raise it meaningfully. Our guide on <a href="/guides/how-to-improve-cgpa">how to improve CGPA</a> covers practical strategies.`;
+}
+
+const formulaList = rows.map((r) => `${r.result} (${r.name})`).join(', ');
+
+const faqs = [
+  {
+    q: `What is ${label} CGPA in percentage?`,
+    a: `${label} CGPA converts to <strong>${rows[0].result}</strong> under the standard CBSE/UGC formula (CGPA × 9.5). University-specific rules give different figures: ${formulaList}. Use your own university's rule whenever the number goes on an official document.`,
+  },
+  {
+    q: `Is ${label} CGPA good?`,
+    a: goodAnswer,
+  },
+  {
+    q: `How do I convert ${label} CGPA to percentage manually?`,
+    a: `Multiply by 9.5: ${label} × 9.5 = <strong>${rows[0].result}</strong>. That is the standard CBSE-derived method used when no university-specific formula applies. If your marksheet comes from SPPU, Mumbai University, AKTU or GTU, their published formulas differ slightly — apply those instead so the figure matches what your university itself would certify.`,
+  },
+  {
+    q: `Why do different sites show different percentages for ${label} CGPA?`,
+    a: `Because there is no single national conversion. The generic ×9.5 rule gives ${rows[0].result}, while ×10-rule universities (VTU, Anna, KTU) give ${rows[2].result}, and offset formulas like SPPU's (−7.5) or Mumbai University's (7.1× + 11) give yet other figures. Every site picks a default — the honest ones show which formula they applied, like the comparison table on this page.`,
+  },
+];
+
+const schema = {
+  '@context': 'https://schema.org',
+  '@type': 'WebApplication',
+  'name': `${label} CGPA to Percentage Converter`,
+  'url': `https://globalcgpa.in/${label}-cgpa-to-percentage`,
+  'description': `Convert ${label} CGPA to percentage using the standard CBSE formula or official rules for SPPU, VTU, Mumbai University, Anna University, AKTU, GTU and KTU.`,
+  'applicationCategory': 'EducationalApplication',
+  'operatingSystem': 'Any',
+  'offers': { '@type': 'Offer', 'price': '0', 'priceCurrency': 'INR' },
+  'isAccessibleForFree': true,
+};
+---
+
+<Layout
+  title={`${label} CGPA to Percentage – ${pct((x) => x * 9.5)}% & All Formulas | GlobalCGPA`}
+  description={`${label} CGPA equals ${pct((x) => x * 9.5)}% under the standard CBSE formula. See exact ${label} CGPA to % conversions for SPPU, VTU, Mumbai University, Anna University, AKTU, GTU & KTU.`}
+  canonical={`https://globalcgpa.in/${label}-cgpa-to-percentage`}
+  schema={schema}
+>
+  <SiteHeader />
+
+  <main style="flex:1;">
+    <section class="tool-hero">
+      <div class="tool-hero-inner">
+        <Breadcrumbs items={[{ label: 'CGPA Conversions', href: '/cgpa-to-percentage-chart' }, { label: `${label} CGPA to %` }]} />
+        <div class="tool-tag">Exact Conversion</div>
+        <h1 class="tool-h1">{label} CGPA to Percentage</h1>
+        <p class="tool-sub">{label} CGPA is <strong>{rows[0].result}</strong> under the standard CBSE/UGC formula — but every university converts differently. Here are all the official figures.</p>
+
+        <div class="answer-card">
+          <div class="answer-main">
+            <div class="answer-num">{rows[0].result}</div>
+            <div class="answer-label">Standard CBSE/UGC formula<br />({label} × 9.5)</div>
+          </div>
+          <div class="answer-grid">
+            {rows.slice(1).map((r) => (
+              <a href={r.href} class="answer-chip">
+                <span class="chip-val">{r.result}</span>
+                <span class="chip-name">{r.name}</span>
+              </a>
+            ))}
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <section class="prose tool-article">
+      <h2>{label} CGPA to Percentage — All University Formulas</h2>
+      <p>There is no single nationwide conversion rule, so the same {label} CGPA maps to different percentages depending on whose ordinance applies. This table pre-calculates {label} CGPA under every major formula:</p>
+      <div class="table-scroll">
+        <table>
+          <thead><tr><th>Formula</th><th>Rule</th><th>{label} CGPA equals</th></tr></thead>
+          <tbody>
+            {rows.map((r) => (
+              <tr><td><a href={r.href}>{r.name}</a></td><td>{r.formula}</td><td>{r.result}</td></tr>
+            ))}
+          </tbody>
+        </table>
+      </div>
+
+      <h2>What {label} CGPA Means Academically</h2>
+      <p>Under standard conversion, {label} CGPA lands around {Math.round(cbsePct)}%, which is {standing}. Exact class divisions depend on your institution's own formula, so confirm against your university's classification rules before writing a class or division on any form.</p>
+
+      <h2>Nearby Conversions</h2>
+      <div class="table-scroll">
+        <table>
+          <thead><tr><th>CGPA</th><th>% (CBSE ×9.5)</th><th>% (VTU/Anna/KTU ×10)</th></tr></thead>
+          <tbody>
+            {[...neighbors.filter((n) => n < v), v, ...neighbors.filter((n) => n > v)].map((n) => (
+              <tr class={n === v ? 'row-current' : ''}>
+                <td>
+                  {n === v ? <strong>{num(n)}</strong> : <a href={`/${num(n)}-cgpa-to-percentage`}>{num(n)}</a>}
+                </td>
+                <td>{Math.min(100, n * 9.5).toFixed(1)}%</td>
+                <td>{(n * 10).toFixed(0)}%</td>
+              </tr>
+            ))}
+          </tbody>
+        </table>
+      </div>
+
+      <p>Need a value not listed here, or an instant calculation? Use the main <a href="/">CGPA to percentage calculator</a>, browse the <a href="/cgpa-to-percentage-chart">full conversion chart</a>, or convert a semester score with the <a href="/sgpa-to-percentage">SGPA to percentage calculator</a>. Working backwards from a target percentage? Try the <a href="/percentage-to-cgpa">percentage to CGPA converter</a>.</p>
+    </section>
+
+    <section class="prose tool-faq">
+      <h2>Frequently Asked Questions — {label} CGPA</h2>
+      <FaqAccordion faqs={faqs} />
+    </section>
+
+    <nav class="value-nav" aria-label={`Other CGPA conversions`}>
+      {(lower >= 5) && <a href={`/${num(lower)}-cgpa-to-percentage`} class="value-nav-link">← {num(lower)} CGPA to %</a>}
+      {(higher <= 10) && <a href={`/${num(higher)}-cgpa-to-percentage`} class="value-nav-link value-nav-next">{num(higher)} CGPA to % →</a>}
+    </nav>
+  </main>
+
+  <SiteFooter />
+
+  <style>
+    .tool-hero { padding: 20px 20px 8px; }
+    .tool-hero-inner { max-width: 640px; margin: 0 auto; }
+    .tool-tag {
+      font-size: 0.72rem; font-weight: 700; text-transform: uppercase;
+      letter-spacing: 1.2px; color: var(--primary); margin-bottom: 8px;
+    }
+    .tool-h1 {
+      font-size: clamp(1.8rem, 5vw, 2.5rem); font-weight: 900;
+      letter-spacing: -0.8px; line-height: 1.18; color: var(--text-ink); margin-bottom: 10px;
+    }
+    .tool-sub {
+      font-size: 0.95rem; color: var(--text-body); line-height: 1.7;
+      margin-bottom: 26px; max-width: 560px;
+    }
+    .tool-article, .tool-faq { padding: 0 20px; margin-top: 44px; }
+    .tool-article { max-width: 720px; }
+
+    .answer-card {
+      background: var(--bg-card); border: 1px solid var(--border); border-radius: 16px;
+      padding: 22px; box-shadow: 0 12px 32px rgba(0,0,0,0.18);
+    }
+    .answer-main {
+      display: flex; align-items: center; gap: 18px;
+      padding-bottom: 16px; border-bottom: 1px solid var(--border); margin-bottom: 14px;
+    }
+    .answer-num {
+      font-size: clamp(2.6rem, 8vw, 3.6rem); font-weight: 900; letter-spacing: -1px;
+      color: var(--primary); line-height: 1;
+    }
+    .answer-label { font-size: 0.8rem; color: var(--text-mute); line-height: 1.45; }
+    .answer-grid {
+      display: grid; grid-template-columns: repeat(auto-fill, minmax(130px, 1fr)); gap: 8px;
+    }
+    .answer-chip {
+      background: var(--bg-soft); border: 1px solid var(--border); border-radius: 10px;
+      padding: 9px 11px; text-decoration: none; display: flex; flex-direction: column; gap: 2px;
+      transition: border-color 0.15s;
+    }
+    .answer-chip:hover { border-color: var(--primary); }
+    .chip-val { font-weight: 800; font-size: 0.98rem; color: var(--text-ink); }
+    .chip-name { font-size: 0.68rem; color: var(--text-mute); line-height: 1.3; }
+
+    .row-current td { background: rgba(16,185,129,0.08); }
+    .value-nav {
+      display: flex; justify-content: space-between; gap: 12px;
+      max-width: 720px; margin: 36px auto 0; padding: 0 20px;
+    }
+    .value-nav-link {
+      color: var(--primary); text-decoration: none; font-weight: 600; font-size: 0.9rem;
+      padding: 10px 14px; border: 1px solid var(--border); border-radius: 10px;
+      transition: border-color 0.15s;
+    }
+    .value-nav-link:hover { border-color: var(--primary); }
+    .value-nav-next { margin-left: auto; }
+  </style>
+</Layout>

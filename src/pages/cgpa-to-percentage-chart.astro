@@ -72,7 +72,7 @@ const faqs = [
 
       <h2>Which Column Applies to You?</h2>
       <ul>
-        <li><strong>CBSE ×9.5</strong> — CBSE board students and any UGC institution without its own published formula. This is the default most generic calculators use.</li>
+        <li><strong>CBSE ×9.5</strong> — CBSE board students, <a href="/du-cgpa-to-percentage">Delhi University (DU)</a>, and any UGC institution without its own published formula. This is the default most generic calculators use.</li>
         <li><strong>SPPU (×10 − 7.5)</strong> — Savitribai Phule Pune University engineering programmes on the CBCGS pattern.</li>
         <li><strong>VTU / Anna / KTU (×10)</strong> — direct multiplication, per each university's own regulations.</li>
         <li><strong>Mumbai University (7.1×CGPA + 11)</strong> — the compressed scale used by MU's credit-based grading systems.</li>
@@ -98,6 +98,15 @@ const faqs = [
         </table>
       </div>
       <p>Your CGPA is the credit-weighted average of these grade points across all subjects and semesters — which is why two students with the same percentage of total marks can show different CGPAs if their credit distributions differ.</p>
+
+      <h2>Most-Searched Specific Conversions</h2>
+      <p>Jump straight to a pre-calculated page for the exact value you need — each one shows every university's figure, class-standing context and FAQs:</p>
+      <div class="chart-links">
+        {['10', '9.5', '9', '8.5', '8', '7.5', '7', '6.5', '6'].map((val) => (
+          <a href={`/${val}-cgpa-to-percentage`} class="chart-link-chip">{val} CGPA to %</a>
+        ))}
+        <a href="/cgpa-to-percentage-for-engineering" class="chart-link-chart">Engineering students' guide</a>
+      </div>
     </section>
 
     <section class="prose tool-faq">
@@ -125,5 +134,14 @@ const faqs = [
     }
     .tool-article, .tool-faq { padding: 0 20px; margin-top: 44px; }
     .tool-article { max-width: 900px; }
+    .chart-links {
+      display: flex; flex-wrap: wrap; gap: 8px; margin-top: 4px;
+    }
+    .chart-link-chip, .chart-link-chart {
+      display: inline-block; padding: 8px 14px; border: 1px solid var(--border);
+      border-radius: 999px; font-size: 0.85rem; font-weight: 600;
+      color: var(--text-ink); text-decoration: none; transition: border-color 0.15s, color 0.15s;
+    }
+    .chart-link-chip:hover, .chart-link-chart:hover { border-color: var(--primary); color: var(--primary); }
   </style>
 </Layout>

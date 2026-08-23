@@ -1,0 +1,54 @@
+---
+import UniPage from '../components/UniPage.astro';
+import { getUniversity } from '../data/universities';
+
+const uni = getUniversity('du')!;
+---
+
+<UniPage
+  uni={uni}
+  title="DU CGPA to Percentage Calculator (Official ×9.5 Formula) | GlobalCGPA"
+  description="Convert DU CGPA to percentage instantly using the official Delhi University formula CGPA × 9.5. Free calculator with reverse conversion, conversion table, First Division and Distinction thresholds for UGCF & CBCS students."
+  intro="Enter your University of Delhi CGPA to get your percentage instantly using the official ×9.5 conversion — plus a full reference table, DU division thresholds and guidance for placements, PG admissions and study abroad."
+>
+  <h2>How the DU CGPA to Percentage Conversion Works</h2>
+  <p>The University of Delhi reports results as a 10-point CGPA under both the Choice Based Credit System (CBCS) and the Undergraduate Curriculum Framework (UGCF). Job forms, UPSC/SSC notifications, PG admissions and visa paperwork usually ask for a percentage instead — and DU's official conversion is one of the simplest in India:</p>
+  <div class="formula-block">
+    <div class="f-label">Official DU formula (Examination Section)</div>
+    <div class="f-text">Percentage = CGPA × 9.5</div>
+    <div class="f-example">Example: 8.0 CGPA → (8.0 × 9.5) = <strong>76%</strong></div>
+  </div>
+  <p>The same ×9.5 multiplier applies to all undergraduate and postgraduate programmes across Delhi University's colleges, and to SOL (School of Open Learning) and NCWEB students. Because the multiplier matches the CBSE rule, your DU percentage is simply your CGPA times 9.5 — no offsets or adjustments.</p>
+
+  <h3>Worked examples</h3>
+  <div class="table-scroll">
+    <table>
+      <thead><tr><th>DU CGPA</th><th>Calculation</th><th>Percentage</th></tr></thead>
+      <tbody>
+        <tr><td>9.0</td><td>9.0 × 9.5</td><td>85.5%</td></tr>
+        <tr><td>8.5</td><td>8.5 × 9.5</td><td>80.75%</td></tr>
+        <tr><td>8.0</td><td>8.0 × 9.5</td><td>76%</td></tr>
+        <tr><td>7.0</td><td>7.0 × 9.5</td><td>66.5%</td></tr>
+        <tr><td>6.0</td><td>6.0 × 9.5</td><td>57%</td></tr>
+        <tr><td>5.0</td><td>5.0 × 9.5</td><td>47.5%</td></tr>
+      </tbody>
+    </table>
+  </div>
+
+  <h2>DU Division Thresholds: What Your Percentage Means</h2>
+  <p>Degree classifications at DU map cleanly onto the ×9.5 conversion:</p>
+  <ul>
+    <li><strong>Distinction</strong> — roughly 7.5+ CGPA (71.25%+)</li>
+    <li><strong>First Division</strong> — 6.0+ CGPA (57%+), the bar most government recruiters use when they ask for "first class"</li>
+    <li><strong>Second Division</strong> — 5.00–5.99 CGPA (47.5–56.9%)</li>
+    <li><strong>Third Division / Pass</strong> — 4.00–4.99 CGPA (38–47.4%)</li>
+  </ul>
+  <p>Placement season makes these numbers practical: companies screening at 60% are effectively filtering at 6.32 CGPA, so a 6.5 CGPA (61.75%) clears that cut-off with room to spare.</p>
+
+  <h2>DU vs DTU — Don't Mix Up the Formulas</h2>
+  <p>A common mistake among Delhi students: Delhi University (DU) and Delhi Technological University (DTU) are separate institutions. DU uses CGPA × 9.5; DTU's engineering ordinance uses its own offset-based rule. Applying DTU's formula to a DU transcript — or vice versa — produces a figure your exam branch will not certify, which can trigger eligibility queries during document verification. Always confirm which university issued your marksheet before converting.</p>
+
+  <h2>Getting an Official Conversion Certificate from DU</h2>
+  <p>For government applications, WES evaluations, and most official purposes, request a provisional certificate or conversion attestation through your college's exam cell or the DU Examination Section. The certificate applies the same ×9.5 formula shown on this page, but on official letterhead — which is what verification officers actually accept. Self-calculated figures are fine for resumes and preliminary forms.</p>
+  <p>If you are applying abroad, evaluators such as WES recalculate directly from your transcript, so submit transcripts rather than self-converted percentages. For a quick self-check against US scales, our <a href="/cgpa-to-gpa">CGPA to GPA converter</a> approximates the 4.0-scale equivalent.</p>
+</UniPage>

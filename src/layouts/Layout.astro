@@ -5,6 +5,7 @@ interface Props {
   canonical?: string;
   ogImage?: string;
   schema?: Record<string, unknown>;
+  lang?: string;
 }
 
 const {
@@ -13,6 +14,7 @@ const {
   canonical = 'https://globalcgpa.in',
   ogImage = '/og-image.png',
   schema,
+  lang = 'en',
 } = Astro.props;
 
 import '../styles/global.css';
@@ -34,7 +36,7 @@ const structuredData = JSON.stringify(schema ?? defaultSchema);
 ---
 
 <!doctype html>
-<html lang="en">
+<html lang={lang}>
   <head>
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
@@ -68,7 +70,7 @@ const structuredData = JSON.stringify(schema ?? defaultSchema);
     <meta property="og:url" content={canonical} />
     <meta property="og:title" content={title} />
     <meta property="og:description" content={description} />
-    <meta property="og:image" content={ogImage} />
+    <meta property="og:image" content={ogImage.startsWith('http') ? ogImage : `https://globalcgpa.in${ogImage}`} />
     <meta property="og:site_name" content="GlobalCGPA" />
     <meta property="og:locale" content="en_IN" />
 
@@ -76,7 +78,7 @@ const structuredData = JSON.stringify(schema ?? defaultSchema);
     <meta name="twitter:card" content="summary_large_image" />
     <meta name="twitter:title" content={title} />
     <meta name="twitter:description" content={description} />
-    <meta name="twitter:image" content={ogImage} />
+    <meta name="twitter:image" content={ogImage.startsWith('http') ? ogImage : `https://globalcgpa.in${ogImage}`} />
 
     <!-- Favicon -->
     <link rel="icon" type="image/svg+xml" href="/favicon.svg" />

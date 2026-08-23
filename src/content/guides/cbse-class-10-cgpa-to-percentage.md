@@ -1,6 +1,6 @@
 ---
-title: "CBSE Class 10 CGPA to Percentage: How the Old System Worked"
-description: "CBSE awarded Class 10 results as CGPA until 2017. How the ×9.5 formula was derived, the full conversion table, and why your old certificate says what it says."
+title: "CBSE CGPA to Percentage: Class 10 Conversion & the ×9.5 Formula"
+description: "Convert CBSE CGPA to percentage with the official ×9.5 formula. How the old Class 10 CGPA system worked, the full conversion table, and what your certificate means."
 pubDate: 2026-07-23
 tag: "Documents"
 ---

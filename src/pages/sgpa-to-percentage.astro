@@ -1,0 +1,205 @@
+---
+import Layout from '../layouts/Layout.astro';
+import SiteHeader from '../components/Nav.astro';
+import SiteFooter from '../components/Footer.astro';
+import Breadcrumbs from '../components/Breadcrumbs.astro';
+import FaqAccordion from '../components/FaqAccordion.astro';
+import { universities } from '../data/universities';
+
+const sgpaValues = [10, 9.5, 9, 8.5, 8, 7.5, 7, 6.5, 6];
+const pct = (fn: (c: number) => number, c: number) => Math.min(100, Math.max(0, fn(c))).toFixed(1);
+
+const faqs = [
+  { q: 'How do I convert SGPA to percentage?', a: 'Multiply your SGPA by 9.5 — the standard CBSE/UGC multiplier. For example, 8.5 SGPA × 9.5 = 80.75%. If your university publishes its own conversion formula (SPPU, Mumbai University, AKTU and GTU all do), use that instead — the calculator above includes every major formula.' },
+  { q: 'Is SGPA to percentage the same as CGPA to percentage?', a: 'The formulas are identical — both convert a 10-point grade average into a percentage. The only difference is scope: SGPA measures a single semester, while CGPA aggregates every completed semester. The same ×9.5 (or university-specific) multiplier applies to both.' },
+  { q: 'What is 8 SGPA in percentage?', a: 'Under the standard CBSE formula, 8 SGPA = 8 × 9.5 = <strong>76%</strong>. Under VTU, Anna University or KTU rules it converts to exactly 80%, while SPPU\'s ordinance gives (8 × 10) − 7.5 = 72.5%.' },
+  { q: 'Which formula should I use on my resume?', a: 'Use the one your university prescribes, because recruiters verifying against your transcript will apply the same rule. When no university formula exists, the CBSE ×9.5 multiplier is the widely accepted default.' },
+  { q: 'Can I combine semester SGPAs first and then convert?', a: 'Yes — and it is usually better. Combine your SGPAs into a cumulative CGPA with the <a href="/sgpa-to-cgpa">SGPA to CGPA calculator</a> (credit-weighted), then convert once. Converting each semester separately and averaging can give a slightly different figure than converting the true weighted CGPA.' },
+];
+
+const schema = {
+  '@context': 'https://schema.org',
+  '@type': 'WebApplication',
+  'name': 'SGPA to Percentage Calculator',
+  'url': 'https://globalcgpa.in/sgpa-to-percentage',
+  'description': 'Convert semester SGPA to percentage using the standard CBSE ×9.5 formula or official university formulas for SPPU, VTU, Mumbai University, AKTU, GTU and more.',
+  'applicationCategory': 'EducationalApplication',
+  'operatingSystem': 'Any',
+  'offers': { '@type': 'Offer', 'price': '0', 'priceCurrency': 'INR' },
+  'isAccessibleForFree': true,
+};
+---
+
+<Layout
+  title="SGPA to Percentage Calculator – ×9.5 & University Formulas | GlobalCGPA"
+  description="Free SGPA to percentage calculator. Convert any semester SGPA to % instantly using the standard CBSE formula or official rules for SPPU, VTU, Mumbai University, AKTU, GTU, KTU & more."
+  canonical="https://globalcgpa.in/sgpa-to-percentage"
+  schema={schema}
+>
+  <SiteHeader />
+
+  <main style="flex:1;">
+    <section class="tool-hero">
+      <div class="tool-hero-inner">
+        <Breadcrumbs items={[{ label: 'SGPA to Percentage' }]} />
+        <div class="tool-tag">Semester Score Converter</div>
+        <h1 class="tool-h1">SGPA to Percentage Calculator</h1>
+        <p class="tool-sub">Enter your semester SGPA and get the equivalent percentage instantly — with your choice of the standard ×9.5 rule or official university formulas.</p>
+
+        <div class="calc-shell">
+          <label class="sp-label" for="sp-sgpa">Enter SGPA</label>
+          <input type="number" id="sp-sgpa" min="0" max="10" step="0.01" placeholder="e.g. 8.35" inputmode="decimal" />
+
+          <label class="sp-label" for="sp-formula">Conversion Formula</label>
+          <select id="sp-formula">
+            <option value="cbse" selected>Standard / CBSE — SGPA × 9.5</option>
+            {universities.map((u) => (
+              <option value={u.key}>{u.short} — {u.formulaLabel}</option>
+            ))}
+          </select>
+
+          <div class="calc-output">
+            <button type="button" class="calc-copy" id="sp-copy" title="Copy result" aria-label="Copy result">⎘</button>
+            <div>
+              <div class="calc-out-val" id="sp-out">—</div>
+              <div class="calc-out-lbl">Percentage</div>
+            </div>
+            <div class="sp-formula-note" id="sp-note">Using standard CBSE formula</div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <section class="prose tool-article">
+      <h2>How SGPA Converts to Percentage</h2>
+      <p>SGPA (Semester Grade Point Average) is a credit-weighted average of the grade points you earned in one semester, expressed on a 10-point scale at most Indian universities. Because forms, resumes and eligibility criteria usually ask for a percentage, you need one multiplication to bridge the two:</p>
+      <div class="formula-block">
+        <div class="f-label">Standard formula (CBSE / UGC default)</div>
+        <div class="f-text">Percentage = SGPA × 9.5</div>
+        <div class="f-example">Example: 8.4 SGPA × 9.5 = <strong>79.8%</strong></div>
+      </div>
+      <p>The 9.5 multiplier comes from CBSE's own analysis of marks corresponding to each grade point, and it remains the accepted default for boards, universities and recruiters when an institution has not published its own rule.</p>
+
+      <h2>University-Specific SGPA to Percentage Formulas</h2>
+      <p>Several state universities calibrate their grade points differently, so their official conversion produces a different figure for the same SGPA. Applying your own university's rule matters whenever the number appears on an official form:</p>
+      <div class="table-scroll">
+        <table>
+          <thead><tr><th>University</th><th>Official Formula</th><th>Example (8.0 SGPA)</th></tr></thead>
+          <tbody>
+            <tr><td>CBSE / UGC generic</td><td>SGPA × 9.5</td><td>76.0%</td></tr>
+            {universities.map((u) => (
+              <tr><td><a href={`/${u.slug}`}>{u.short}</a></td><td>{u.formulaText.replace('CGPA', 'SGPA')}</td><td>{pct(u.forward, 8)}%</td></tr>
+            ))}
+          </tbody>
+        </table>
+      </div>
+
+      <h2>SGPA to Percentage Conversion Table</h2>
+      <p>Pre-calculated with the standard ×9.5 formula so the table works even with JavaScript disabled:</p>
+      <div class="table-scroll">
+        <table>
+          <thead><tr><th>SGPA</th><th>Percentage (×9.5)</th></tr></thead>
+          <tbody>
+            {sgpaValues.map((s) => (
+              <tr><td>{s.toFixed(1)}</td><td>{pct((x) => x * 9.5, s)}%</td></tr>
+            ))}
+          </tbody>
+        </table>
+      </div>
+
+      <h2>SGPA vs CGPA — Which Should You Convert?</h2>
+      <ul>
+        <li><strong>SGPA</strong> describes one semester. Use it for scholarship forms, internship applications or anything scoped to a specific term.</li>
+        <li><strong>CGPA</strong> aggregates every completed semester and is what most employers and universities mean by "academic score". Convert that instead for placements and admissions.</li>
+        <li>Your final marksheet usually shows both. If you only have semester SGPAs, roll them up first with the <a href="/sgpa-to-cgpa">SGPA to CGPA calculator</a>, then convert the result.</li>
+      </ul>
+      <p>Need the reverse direction? The <a href="/percentage-to-cgpa">percentage to CGPA converter</a> works backwards from a target percentage, and the <a href="/cgpa-to-percentage-chart">full conversion chart</a> lists pre-calculated values for every major formula.</p>
+    </section>
+
+    <section class="prose tool-faq">
+      <h2>Frequently Asked Questions</h2>
+      <FaqAccordion faqs={faqs} />
+    </section>
+  </main>
+
+  <SiteFooter />
+
+  <style>
+    .tool-hero { padding: 20px 20px 8px; }
+    .tool-hero-inner { max-width: 640px; margin: 0 auto; }
+    .tool-tag {
+      font-size: 0.72rem; font-weight: 700; text-transform: uppercase;
+      letter-spacing: 1.2px; color: var(--primary); margin-bottom: 8px;
+    }
+    .tool-h1 {
+      font-size: clamp(1.8rem, 5vw, 2.5rem); font-weight: 900;
+      letter-spacing: -0.8px; line-height: 1.18; color: var(--text-ink); margin-bottom: 10px;
+    }
+    .tool-sub {
+      font-size: 0.95rem; color: var(--text-body); line-height: 1.7;
+      margin-bottom: 26px; max-width: 560px;
+    }
+    .tool-article, .tool-faq { padding: 0 20px; margin-top: 44px; }
+    .tool-article { max-width: 720px; }
+
+    .sp-label {
+      display: block; font-size: 0.72rem; font-weight: 700; text-transform: uppercase;
+      letter-spacing: 0.6px; color: var(--text-mute); margin-bottom: 6px;
+    }
+    .calc-shell input[type="number"], .calc-shell select {
+      width: 100%; height: 46px; padding: 0 14px; margin-bottom: 16px;
+      border: 1px solid var(--border); background: var(--bg-soft); color: var(--text-ink);
+      font-size: 0.95rem; font-weight: 500; border-radius: 10px; font-family: inherit;
+      transition: border-color 0.2s;
+    }
+    .calc-shell input:focus, .calc-shell select:focus { outline: none; border-color: var(--primary); }
+    .sp-formula-note {
+      margin-top: 10px; font-size: 0.75rem; color: var(--text-mute); text-align: center;
+    }
+    .calc-output { position: relative; text-align: center; }
+  </style>
+
+  <script>
+    const sgpaInput = document.getElementById('sp-sgpa') as HTMLInputElement;
+    const formulaSelect = document.getElementById('sp-formula') as HTMLSelectElement;
+    const out = document.getElementById('sp-out')!;
+    const note = document.getElementById('sp-note')!;
+
+    const formulas: Record<string, { fn: (x: number) => number; label: string }> = {
+      cbse: { fn: (x) => x * 9.5, label: 'Using standard CBSE formula' },
+      du: { fn: (x) => x * 9.5, label: 'Using DU formula' },
+      sppu: { fn: (x) => x * 10 - 7.5, label: 'Using SPPU ordinance formula' },
+      vtu: { fn: (x) => x * 10, label: 'Using VTU formula' },
+      mumbai: { fn: (x) => 7.1 * x + 11, label: 'Using Mumbai University formula' },
+      anna: { fn: (x) => x * 10, label: 'Using Anna University formula' },
+      aktu: { fn: (x) => (x - 0.75) * 10, label: 'Using AKTU ordinance formula' },
+      gtu: { fn: (x) => (x - 0.5) * 10, label: 'Using GTU notification formula' },
+      ktu: { fn: (x) => x * 10, label: 'Using KTU formula' },
+    };
+
+    function calc() {
+      const v = parseFloat(sgpaInput.value);
+      if (isNaN(v) || v < 0 || v > 10) {
+        out.textContent = '—';
+        note.textContent = isNaN(v) ? '' : 'SGPA should be between 0 and 10';
+        return;
+      }
+      const f = formulas[formulaSelect.value] ?? formulas.cbse;
+      const result = Math.min(100, Math.max(0, f.fn(v)));
+      out.textContent = result.toFixed(1) + '%';
+      note.textContent = f.label;
+    }
+
+    sgpaInput.addEventListener('input', calc);
+    formulaSelect.addEventListener('change', calc);
+
+    document.getElementById('sp-copy')?.addEventListener('click', function (this: HTMLElement) {
+      const txt = out.textContent || '';
+      if (!txt || txt === '—') return;
+      navigator.clipboard.writeText(txt).catch(() => {});
+      const orig = this.textContent;
+      this.textContent = '✓';
+      setTimeout(() => { this.textContent = orig; }, 1400);
+    });
+  </script>
+</Layout>

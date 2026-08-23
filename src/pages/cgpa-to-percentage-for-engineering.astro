@@ -1,0 +1,145 @@
+---
+import Layout from '../layouts/Layout.astro';
+import SiteHeader from '../components/Nav.astro';
+import SiteFooter from '../components/Footer.astro';
+import Breadcrumbs from '../components/Breadcrumbs.astro';
+import FaqAccordion from '../components/FaqAccordion.astro';
+import { universities } from '../data/universities';
+
+const engUnis = universities.filter((u) => u.key !== 'du');
+const cgpaValues = [10, 9, 8.5, 8, 7.5, 7, 6.5, 6];
+const pct = (fn: (c: number) => number, c: number) => Math.min(100, Math.max(0, fn(c))).toFixed(1);
+
+const faqs = [
+  { q: 'How do engineering students convert CGPA to percentage?', a: 'Find the formula your university\'s ordinance prescribes — most B.Tech/B.E. students fall under one of the eight rules in the table above. If your college has no published formula, the CBSE default Percentage = CGPA × 9.5 is the accepted fallback.' },
+  { q: 'Is CGPA × 10 correct for engineering?', a: 'Only for universities whose ordinance says so — VTU, Anna University and KTU prescribe a direct ×10 conversion, while SPPU ((CGPA×10) − 7.5), AKTU ((CGPA−0.75)×10), GTU ((CGPA−0.5)×10) and Mumbai University (7.1×CGPA + 11) use different rules. Multiplying by 10 when your university uses an offset formula overstates your percentage and fails document verification.' },
+  { q: 'What is 8 CGPA in engineering percentage?', a: 'It depends on your university: 80% under VTU/Anna/KTU rules, 76% under the CBSE default, 75% at GTU, 72.5% at SPPU and AKTU, and about 67.8% at Mumbai University. The <a href="/8-cgpa-to-percentage">8 CGPA to percentage page</a> shows every figure side by side.' },
+  { q: 'What percentage do companies require in engineering placements?', a: 'Most service-based IT companies screen at 60% or 6.0–6.5 CGPA equivalent; product companies and core firms typically prefer 70%+ (7.0–7.5 CGPA). Because formulas differ, convert with your own university\'s rule before checking a cut-off.' },
+  { q: 'Do I need percentage for M.Tech or MS admissions?', a: 'Indian M.Tech/ME admissions through GATE counselling often list both CGPA and percentage thresholds, while foreign universities prefer your raw CGPA on a 10-point scale plus transcripts. Use our <a href="/guides/cgpa-to-gpa-4-scale-ms-abroad">guide to converting CGPA to a 4.0 GPA</a> for applications abroad.' },
+];
+
+const schema = {
+  '@context': 'https://schema.org',
+  '@type': 'WebApplication',
+  'name': 'CGPA to Percentage Calculator for Engineering Students',
+  'url': 'https://globalcgpa.in/cgpa-to-percentage-for-engineering',
+  'description': 'Convert engineering CGPA to percentage using official formulas for VTU, SPPU, Anna University, Mumbai University, AKTU, GTU, KTU and more.',
+  'applicationCategory': 'EducationalApplication',
+  'operatingSystem': 'Any',
+  'offers': { '@type': 'Offer', 'price': '0', 'priceCurrency': 'INR' },
+  'isAccessibleForFree': true,
+};
+---
+
+<Layout
+  title="CGPA to Percentage for Engineering Students – All Formulas | GlobalCGPA"
+  description="Convert engineering CGPA to percentage correctly. Official B.Tech/B.E. conversion formulas for VTU, SPPU, Anna University, Mumbai University, AKTU, GTU & KTU, placement cut-offs explained, and a free calculator."
+  canonical="https://globalcgpa.in/cgpa-to-percentage-for-engineering"
+  schema={schema}
+>
+  <SiteHeader />
+
+  <main style="flex:1;">
+    <section class="tool-hero">
+      <div class="tool-hero-inner">
+        <Breadcrumbs items={[{ label: 'Engineering Conversion' }]} />
+        <div class="tool-tag">For B.Tech / B.E. Students</div>
+        <h1 class="tool-h1">CGPA to Percentage for Engineering Students</h1>
+        <p class="tool-sub">Engineering marksheets show CGPA; job forms and PG admissions ask for a percentage. Here is exactly how each major technical university converts it.</p>
+
+        <div class="formula-block eng-hero-formula">
+          <div class="f-label">No single formula exists</div>
+          <div class="f-text">Your university's ordinance decides the rule</div>
+          <div class="f-example">Pick your university below — using the wrong one can fail document verification</div>
+        </div>
+      </div>
+    </section>
+
+    <section class="prose tool-article">
+      <h2>Official CGPA to Percentage Formulas for Engineering Universities</h2>
+      <p>Nearly every state technical university in India publishes its own CGPA-to-percentage rule for engineering programmes. These are the prescribed formulas for B.E./B.Tech students:</p>
+      <div class="table-scroll">
+        <table>
+          <thead><tr><th>University</th><th>Official Formula</th><th>Example (8.0 CGPA)</th></tr></thead>
+          <tbody>
+            {engUnis.map((u) => (
+              <tr><td><a href={`/${u.slug}`}>{u.short} <span class="uni-state">({u.name})</span></a></td><td>{u.formulaText.replace('Percentage = ', '')}</td><td>{pct(u.forward, 8)}%</td></tr>
+            ))}
+            <tr><td>No published formula (autonomous colleges, deemed universities)</td><td>CBSE default: CGPA × 9.5</td><td>{pct((x) => x * 9.5, 8)}%</td></tr>
+          </tbody>
+        </table>
+      </div>
+      <p>Each university's page goes deeper: regulation notes, reverse conversion, class thresholds and certificate guidance. For quick reference, all formulas are pre-calculated side by side on the <a href="/cgpa-to-percentage-chart">master conversion chart</a>.</p>
+
+      <h2>Quick Reference: Common Engineering CGPAs Converted</h2>
+      <div class="table-scroll">
+        <table>
+          <thead>
+            <tr>
+              <th>CGPA</th>
+              {engUnis.map((u) => <th>{u.short}</th>)}
+              <th>CBSE</th>
+            </tr>
+          </thead>
+          <tbody>
+            {cgpaValues.map((c) => (
+              <tr>
+                <td><a href={`/${c.toFixed(1).replace(/\.0$/, '')}-cgpa-to-percentage`}>{c.toFixed(1)}</a></td>
+                {engUnis.map((u) => <td>{pct(u.forward, c)}%</td>)}
+                <td>{pct((x) => x * 9.5, c)}%</td>
+              </tr>
+            ))}
+          </tbody>
+        </table>
+      </div>
+
+      <h2>Why Engineering Conversions Are Different</h2>
+      <ul>
+        <li><strong>Offset formulas anchor grade points to marks bands.</strong> SPPU subtracts 7.5 after scaling, AKTU subtracts 0.75 before multiplying, and Mumbai University applies a compressed 7.1× slope — each calibrated so their pass and top grades map to realistic mark bands.</li>
+        <li><strong>The same CGPA means different performance levels.</strong> An 8.0 CGPA is 80% at VTU but 67.8% at Mumbai University — yet both may represent similar relative standing within their own cohorts.</li>
+        <li><strong>Recruiters verify against your university's rule.</strong> During document verification, HR teams apply the formula printed in your university's ordinance. A self-converted figure using the wrong multiplier creates mismatches that delay offers.</li>
+      </ul>
+
+      <h2>Placement Cut-offs in Percentage Terms</h2>
+      <p>Most engineering campus drives filter at one of three bars: <strong>60%</strong> (mass recruiters and many government forms), <strong>70%</strong> (product companies and core engineering firms), and <strong>75–80%</strong> (top-tier software and research roles). Convert your CGPA with your own university's formula first, then compare against the cut-off — a 6.5 CGPA student at Mumbai University (57.15%) misses a 60% filter that a 6.5 CGPA student at VTU (65%) clears easily.</p>
+      <p>Semester scores matter too: eligibility often considers your CGPA up to the latest completed semester. Track per-semester performance with the <a href="/sgpa-to-percentage">SGPA to percentage calculator</a>, and project your final aggregate with the <a href="/sgpa-to-cgpa">SGPA to CGPA calculator</a>.</p>
+
+      <h2>How to Convert Step by Step (Any Engineering University)</h2>
+      <ol>
+        <li>Open your latest marksheet and note your cumulative CGPA (not the semester SGPA).</li>
+        <li>Identify your university in the table above and note its official formula.</li>
+        <li>Apply the formula carefully — watch for offsets applied before vs after multiplication.</li>
+        <li>Cross-check with the main <a href="/">CGPA to percentage calculator</a>, which includes every university as a preset.</li>
+        <li>For official submissions, request a conversion certificate from your college exam cell so the figure carries letterhead.</li>
+      </ol>
+    </section>
+
+    <section class="prose tool-faq">
+      <h2>Frequently Asked Questions</h2>
+      <FaqAccordion faqs={faqs} />
+    </section>
+  </main>
+
+  <SiteFooter />
+
+  <style>
+    .tool-hero { padding: 20px 20px 8px; }
+    .tool-hero-inner { max-width: 720px; margin: 0 auto; }
+    .tool-tag {
+      font-size: 0.72rem; font-weight: 700; text-transform: uppercase;
+      letter-spacing: 1.2px; color: var(--primary); margin-bottom: 8px;
+    }
+    .tool-h1 {
+      font-size: clamp(1.8rem, 5vw, 2.5rem); font-weight: 900;
+      letter-spacing: -0.8px; line-height: 1.18; color: var(--text-ink); margin-bottom: 10px;
+    }
+    .tool-sub {
+      font-size: 0.95rem; color: var(--text-body); line-height: 1.7;
+      margin-bottom: 26px; max-width: 600px;
+    }
+    .tool-article, .tool-faq { padding: 0 20px; margin-top: 44px; }
+    .tool-article { max-width: 800px; }
+    .eng-hero-formula { text-align: center; }
+    .uni-state { font-weight: 400; font-size: 0.82em; color: var(--text-mute); }
+  </style>
+</Layout>
