@@ -9,10 +9,27 @@ import { universities } from '../data/universities';
 const cgpaValues = [10, 9.5, 9, 8.5, 8, 7.5, 7, 6.9, 6.5, 6, 5.5, 5, 4.5, 4];
 const pct = (fn: (c: number) => number, c: number) => Math.min(100, Math.max(0, fn(c))).toFixed(1) + '%';
 
+const sppuFn = (c: number) => {
+  if (c >= 9.5) return 20 * c - 100;
+  if (c >= 8.25) return 12 * c - 25;
+  if (c >= 6.75) return 10 * c - 7.5;
+  if (c >= 5.75) return 5 * c + 26.25;
+  if (c >= 5.25) return 10 * c - 2.5;
+  if (c >= 4.75) return 10 * c - 2.5;
+  if (c >= 4.0) return 6.6 * c + 13.6;
+  return 0;
+};
+
+const vtuFn2022 = (c: number) => c * 10;
+const vtuFnOld = (c: number) => (c - 0.75) * 10;
+const mumbaiFn = (c: number) => Math.min(100, Math.max(0, 7.1 * c + 11));
+const aktuFn = (c: number) => Math.max(0, (c - 0.75) * 10);
+const gtuFn = (c: number) => Math.max(0, (c - 0.5) * 10);
+
 const faqs = [
-  { q: 'Which conversion formula should I use?', a: 'The one your own university prescribes. CBSE\'s ×9.5 is the generic default, but SPPU, Mumbai University, AKTU and GTU publish different official formulas. Using the wrong one creates a mismatch with your documents — the table above shows every major formula side by side so you can pick correctly.' },
-  { q: 'Why is 8 CGPA not always 80%?', a: 'It is 80% only under the ×10 formulas (VTU, KTU, Anna University). Under CBSE it is 76%, under SPPU 72.5%, under Mumbai University 67.8%, under AKTU 72.5% and under GTU 75%. Each university anchors grade points to different raw-mark bands.' },
-  { q: 'What percentage is First Class?', a: 'First Class generally begins at 60% at most Indian universities, with First Class with Distinction at 70–75% depending on the institution. Because formulas differ, the CGPA that hits 60% also differs — 6.0 at VTU but about 6.9 at Mumbai University.' },
+  { q: 'Which conversion formula should I use?', a: 'The one your own university prescribes. CBSE\'s ×9.5 is the generic default, but SPPU (piecewise), Mumbai University (pre-2026 vs post-2026), VTU (scheme-dependent), AKTU and GTU publish different official formulas. Using the wrong one creates a mismatch with your documents — the table above shows every major formula side by side so you can pick correctly.' },
+  { q: 'Why is 8 CGPA not always 80%?', a: 'It is 80% only under the ×10 formulas (VTU 2022, KTU, Anna University). Under CBSE it is 76%, under SPPU 72.5% (Grade A), under Mumbai University pre-2026 67.8%, under AKTU 72.5% and under GTU 75%. Each university anchors grade points to different raw-mark bands.' },
+  { q: 'What percentage is First Class?', a: 'First Class generally begins at 60% at most Indian universities, with First Class with Distinction at 70–75% depending on the institution. Because formulas differ, the CGPA that hits 60% also differs — 6.0 at VTU 2022 but about 6.9 at Mumbai University pre-2026.' },
   { q: 'Is 9.5 the right multiplier for CBSE?', a: 'Yes — CBSE itself defines Percentage = CGPA × 9.5, derived from the average marks (95) of students who scored a perfect 10 grade point. It remains the standard default for boards and UGC-institutions without their own formula.' },
   { q: 'Can I use this chart for official documents?', a: 'The chart matches the official formulas exactly, but for anything legally binding — visa, PSU verification, court work — request a conversion certificate from your university so the figure comes on official letterhead.' },
 ];
@@ -70,13 +87,13 @@ const schema = {
               <tr>
                 <td>{c.toFixed(1)}</td>
                 <td>{pct((x) => x * 9.5, c)}</td>
-                <td>{pct((x) => x * 10 - 7.5, c)}</td>
+                <td>{pct(sppuFn, c)}</td>
+                <td>{pct(vtuFn2022, c)}</td>
+                <td>{pct(mumbaiFn, c)}</td>
                 <td>{pct((x) => x * 10, c)}</td>
-                <td>{pct((x) => 7.1 * x + 11, c)}</td>
-                <td>{pct((x) => x * 10, c)}</td>
-                <td>{pct((x) => (x - 0.75) * 10, c)}</td>
-                <td>{pct((x) => (x - 0.5) * 10, c)}</td>
-                <td>{pct((x) => x * 10, c)}</td>
+                <td>{pct(aktuFn, c)}</td>
+                <td>{pct(gtuFn, c)}</td>
+                <td>{pct(vtuFn2022, c)}</td>
               </tr>
             ))}
           </tbody>
@@ -86,11 +103,12 @@ const schema = {
       <h2>Which Column Applies to You?</h2>
       <ul>
         <li><strong>CBSE ×9.5</strong> — CBSE board students, <a href="/du-cgpa-to-percentage">Delhi University (DU)</a>, and any UGC institution without its own published formula. This is the default most generic calculators use.</li>
-        <li><strong>SPPU (×10 − 7.5)</strong> — Savitribai Phule Pune University engineering programmes on the CBCGS pattern.</li>
-        <li><strong>VTU / Anna / KTU (×10)</strong> — direct multiplication, per each university's own regulations.</li>
-        <li><strong>Mumbai University (7.1×CGPA + 11)</strong> — the compressed scale used by MU's credit-based grading systems.</li>
-        <li><strong>AKTU (−0.75 then ×10)</strong> — the ordinance formula for AKTU/UPTU batches from 2019-20 onwards.</li>
-        <li><strong>GTU (−0.5 then ×10)</strong> — per GTU's Notification 1/2012, applying to SPI, CPI and CGPA alike.</li>
+        <li><strong>SPPU (Piecewise, Circular 332/2020)</strong> — Savitribai Phule Pune University UG degrees under CBCS (2019 pattern onwards). Formula depends on grade band (O, A+, A, B+, B, C, D/P).</li>
+        <li><strong>VTU 2022/2021 scheme (×10)</strong> — Current for students admitted 2021-22 onwards. <strong>VTU 2015/2017/2018 schemes:</strong> (CGPA − 0.75) × 10.</li>
+        <li><strong>Anna University / KTU (×10)</strong> — Direct multiplication per current regulations.</li>
+        <li><strong>Mumbai University (Pre-2026: 7.1×CGPA+11)</strong> — Applies to transcripts dated ≤ 31 Dec 2025. <strong>Post-2026:</strong> Raw marks conversion (no formula).</li>
+        <li><strong>AKTU (−0.75 then ×10)</strong> — Ordinance formula for batches from 2019-20 onwards.</li>
+        <li><strong>GTU (−0.5 then ×10)</strong> — Per GTU Notification 1/2012.</li>
       </ul>
       <p>Need the reverse direction, or an exact figure for a CGPA not listed here? Use the <a href="/">CGPA to percentage calculator</a> for instant results, or the <a href="/percentage-to-cgpa">percentage to CGPA converter</a> to work backwards. University-specific pages — <a href="/sppu-cgpa-to-percentage">SPPU</a>, <a href="/vtu-cgpa-to-percentage">VTU</a>, <a href="/mumbai-university-cgpa-to-percentage">Mumbai</a>, <a href="/anna-university-cgpa-to-percentage">Anna</a>, <a href="/aktu-cgpa-to-percentage">AKTU</a>, <a href="/gtu-cgpa-to-percentage">GTU</a> and <a href="/ktu-cgpa-to-percentage">KTU</a> — include worked examples, class thresholds and certificate guidance.</p>
 

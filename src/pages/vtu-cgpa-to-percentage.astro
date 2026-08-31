@@ -7,40 +7,57 @@ const uni = getUniversity('vtu')!;
 
 <UniPage
   uni={uni}
-  title="VTU CGPA to Percentage Calculator (Official ×10 Formula) | GlobalCGPA"
-  description="Convert VTU CGPA to percentage instantly using the official Visvesvaraya Technological University formula CGPA × 10. Free calculator with reverse conversion, conversion table, First Class thresholds and FAQ."
-  intro="Enter your VTU CGPA to get your percentage instantly using the official ×10 conversion — plus reverse conversion, a full reference table and VTU class thresholds for placements and higher studies."
+  title="VTU CGPA to Percentage Calculator (Scheme-Dependent Formula) | GlobalCGPA"
+  description="Convert VTU CGPA to percentage using the correct formula for your regulation scheme. 2022/2021 scheme: CGPA × 10. 2015/2017/2018 schemes: (CGPA − 0.75) × 10. Free calculator with reverse conversion, conversion table, class thresholds and FAQ."
+  intro="Enter your VTU CGPA to get your percentage using the correct scheme formula. The calculator defaults to the current 2022 scheme (CGPA × 10). If you are on an older 2015/2017/2018 scheme, use (CGPA − 0.75) × 10 instead."
 >
   <h2>How the VTU CGPA to Percentage Conversion Works</h2>
-  <p>Visvesvaraya Technological University (VTU), based in Belagavi, affiliates most engineering colleges in Karnataka. Unlike universities that use offset-based formulas, VTU's official conversion is the simplest in India: your percentage is your CGPA multiplied by 10.</p>
+  <p>Visvesvaraya Technological University (VTU) has two different conversion formulas depending on your regulation scheme. It is critical to use the correct one for your batch.</p>
+
+  <h3>Current Scheme (2022/2021) — Students Admitted 2021-22 Onwards</h3>
+  <p>Under the VTU Regulations 2022 (§22OB 6.7), the conversion is the simplest in India:</p>
   <div class="formula-block">
-    <div class="f-label">VTU formula</div>
+    <div class="f-label">VTU 2022/2021 scheme formula</div>
     <div class="f-text">Percentage = CGPA × 10</div>
   </div>
-  <p>This rule applies across VTU's CBCS schemes (2015, 2017, 2018 and the 2021-22 scheme), so whether you are a current student or graduated a few years ago, the same multiplication applies. Students on very old marks-based schemes already have percentages on their marksheets and do not need any conversion.</p>
 
-  <h3>Worked examples</h3>
+  <h3>Older Schemes (2015, 2017, 2018 CBCS)</h3>
+  <p>Students under the 2015, 2017, or 2018 CBCS schemes must use the older formula, as confirmed by VTU's own "CGPA Standard Formula" page:</p>
+  <div class="formula-block">
+    <div class="f-label">VTU 2015/2017/2018 scheme formula</div>
+    <div class="f-text">Percentage = (CGPA − 0.75) × 10</div>
+  </div>
+
+  <h3>Worked Examples</h3>
   <div class="table-scroll">
     <table>
-      <thead><tr><th>CGPA</th><th>Calculation</th><th>VTU Percentage</th></tr></thead>
+      <thead><tr><th>CGPA</th><th>2022/2021 Scheme (×10)</th><th>2015–2018 Schemes (−0.75×10)</th></tr></thead>
       <tbody>
-        <tr><td>9.5</td><td>9.5 × 10</td><td>95%</td></tr>
-        <tr><td>8.75</td><td>8.75 × 10</td><td>87.5%</td></tr>
-        <tr><td>8.0</td><td>8.0 × 10</td><td>80%</td></tr>
-        <tr><td>7.0</td><td>7.0 × 10</td><td>70%</td></tr>
-        <tr><td>6.2</td><td>6.2 × 10</td><td>62%</td></tr>
+        <tr><td>9.5</td><td>95%</td><td>87.5%</td></tr>
+        <tr><td>8.75</td><td>87.5%</td><td>80.0%</td></tr>
+        <tr><td>8.0</td><td>80%</td><td>72.5%</td></tr>
+        <tr><td>7.0</td><td>70%</td><td>62.5%</td></tr>
+        <tr><td>6.2</td><td>62%</td><td>54.5%</td></tr>
       </tbody>
     </table>
   </div>
 
   <h2>VTU Class Thresholds: What Your Percentage Means</h2>
-  <p>Because VTU uses the ×10 multiplier, the class boundaries line up neatly with round percentages. <strong>First Class with Distinction</strong> requires roughly 7.0 CGPA (70%), <strong>First Class</strong> starts at 6.0 CGPA (60%), and <strong>Second Class</strong> at 5.0 CGPA (50%). Distinction awards can carry an additional condition — such as clearing all subjects in a single attempt — depending on your scheme, so read the classification section of your own regulation if you are close to a boundary.</p>
-  <p>These thresholds matter most during placement season. Many companies that visit VTU campuses filter applicants at 60% or 70%, which is exactly 6.0 or 7.0 CGPA under the VTU formula.</p>
+  <p>Because the formulas differ, the class boundaries also differ by scheme:</p>
+  <ul>
+    <li><strong>2022/2021 scheme:</strong> First Class with Distinction ≥ 7.0 CGPA (70%+), First Class ≥ 6.0 CGPA (60%+), Second Class ≥ 5.0 CGPA (50%+), Pass ≥ 4.0 CGPA (40%+).</li>
+    <li><strong>2015–2018 schemes:</strong> First Class with Distinction ≥ 7.75 CGPA (70%+), First Class ≥ 6.75 CGPA (60%+), Second Class ≥ 5.75 CGPA (50%+), Pass ≥ 4.75 CGPA (40%+).</li>
+  </ul>
+  <p>Distinction awards can carry an additional condition — such as clearing all subjects in a single attempt — depending on your scheme, so read the classification section of your own regulation if you are close to a boundary.</p>
+  <p>These thresholds matter most during placement season. Many companies that visit VTU campuses filter applicants at 60% or 70%, which is exactly 6.0/7.0 CGPA under the 2022 scheme but 6.75/7.75 CGPA under the older schemes.</p>
+
+  <h2>How to Identify Your Scheme</h2>
+  <p>Check your marksheet or grade card for the regulation/scheme year. It is usually printed as "2022 Scheme", "2018 Scheme", "2017 Scheme", or "2015 Scheme". If you are unsure, contact your college exam cell. The calculator above defaults to the 2022/2021 scheme formula (CGPA × 10). If you are on an older scheme, apply (CGPA − 0.75) × 10 instead.</p>
 
   <h2>SGPA, CGPA and Your Final VTU Percentage</h2>
   <p>Your VTU marksheet shows an SGPA for each semester and a cumulative CGPA once multiple semesters are complete. The CGPA is a credit-weighted average, meaning semesters with more credits pull the final figure more strongly. If you want to project your final CGPA from your semester SGPAs before results are consolidated, use our <a href="/sgpa-to-cgpa">SGPA to CGPA calculator</a> — it applies exactly the credit-weighted formula VTU uses, then you can convert the result to a percentage here.</p>
 
   <h2>Using Your VTU Percentage Abroad</h2>
   <p>For MS applications in the US, Canada or Europe, most universities prefer to see your original CGPA with the scale explained (for example, "8.4/10.0, VTU India") rather than a self-converted percentage. Credential evaluators such as WES recalculate from your official transcripts directly. As a quick self-check, the linear approximation GPA ≈ (CGPA ÷ 10) × 4 puts an 8.0 CGPA near 3.2 on the 4.0 scale — our <a href="/cgpa-to-gpa">CGPA to GPA converter</a> handles the maths for you.</p>
-  <p>For Indian purposes — GATE counselling, PSU forms, state government jobs in Karnataka, and campus placements — the ×10 percentage from this page is the figure to use.</p>
+  <p>For Indian purposes — GATE counselling, PSU forms, state government jobs in Karnataka, and campus placements — use the formula matching your scheme. The calculator above handles both.</p>
 </UniPage>

@@ -17,15 +17,33 @@ const label = valueStr;
 const num = (n: number) => parseFloat(n.toFixed(2)).toString();
 const pct = (fn: (c: number) => number) => Math.min(100, Math.max(0, fn(v))).toFixed(1);
 
+const sppuFn = (c: number) => {
+  if (c >= 9.5) return 20 * c - 100;
+  if (c >= 8.25) return 12 * c - 25;
+  if (c >= 6.75) return 10 * c - 7.5;
+  if (c >= 5.75) return 5 * c + 26.25;
+  if (c >= 5.25) return 10 * c - 2.5;
+  if (c >= 4.75) return 10 * c - 2.5;
+  if (c >= 4.0) return 6.6 * c + 13.6;
+  return 0;
+};
+
+const vtuFn2022 = (c: number) => c * 10;
+const vtuFnOld = (c: number) => (c - 0.75) * 10;
+const mumbaiFn = (c: number) => Math.min(100, Math.max(0, 7.1 * c + 11));
+const aktuFn = (c: number) => Math.max(0, (c - 0.75) * 10);
+const gtuFn = (c: number) => Math.max(0, (c - 0.5) * 10);
+
 const cbsePct = Math.min(100, v * 9.5);
 const rows = [
   { name: 'CBSE / UGC generic', href: '/cgpa-to-percentage-chart', formula: '× 9.5', result: `${pct((x) => x * 9.5)}%` },
-  { name: 'SPPU (Pune)', href: '/sppu-cgpa-to-percentage', formula: '(CGPA × 10) − 7.5', result: `${pct((x) => x * 10 - 7.5)}%` },
-  { name: 'VTU (Karnataka)', href: '/vtu-cgpa-to-percentage', formula: 'CGPA × 10', result: `${pct((x) => x * 10)}%` },
+  { name: 'SPPU (Pune) — Piecewise', href: '/sppu-cgpa-to-percentage', formula: 'Circular 332/2020 (grade bands)', result: `${pct(sppuFn)}%` },
+  { name: 'VTU (2022 scheme)', href: '/vtu-cgpa-to-percentage', formula: 'CGPA × 10', result: `${pct(vtuFn2022)}%` },
+  { name: 'VTU (2015–2018 schemes)', href: '/vtu-cgpa-to-percentage', formula: '(CGPA − 0.75) × 10', result: `${pct(vtuFnOld)}%` },
   { name: 'Anna University', href: '/anna-university-cgpa-to-percentage', formula: 'CGPA × 10', result: `${pct((x) => x * 10)}%` },
-  { name: 'Mumbai University', href: '/mumbai-university-cgpa-to-percentage', formula: '(7.1 × CGPA) + 11', result: `${pct((x) => 7.1 * x + 11)}%` },
-  { name: 'AKTU / UPTU', href: '/aktu-cgpa-to-percentage', formula: '(CGPA − 0.75) × 10', result: `${pct((x) => (x - 0.75) * 10)}%` },
-  { name: 'GTU (Gujarat)', href: '/gtu-cgpa-to-percentage', formula: '(CGPA − 0.5) × 10', result: `${pct((x) => (x - 0.5) * 10)}%` },
+  { name: 'Mumbai University (pre-2026)', href: '/mumbai-university-cgpa-to-percentage', formula: '(7.1 × CGPA) + 11', result: `${pct(mumbaiFn)}%` },
+  { name: 'AKTU / UPTU', href: '/aktu-cgpa-to-percentage', formula: '(CGPA − 0.75) × 10', result: `${pct(aktuFn)}%` },
+  { name: 'GTU (Gujarat)', href: '/gtu-cgpa-to-percentage', formula: '(CGPA − 0.5) × 10', result: `${pct(gtuFn)}%` },
   { name: 'KTU (Kerala)', href: '/ktu-cgpa-to-percentage', formula: 'CGPA × 10', result: `${pct((x) => x * 10)}%` },
   { name: 'DU (Delhi University)', href: '/du-cgpa-to-percentage', formula: 'CGPA × 9.5', result: `${pct((x) => x * 9.5)}%` },
 ];
@@ -66,11 +84,11 @@ const faqs = [
   },
   {
     q: `How do I convert ${label} CGPA to percentage manually?`,
-    a: `Multiply by 9.5: ${label} × 9.5 = <strong>${rows[0].result}</strong>. That is the standard CBSE-derived method used when no university-specific formula applies. If your marksheet comes from SPPU, Mumbai University, AKTU or GTU, their published formulas differ slightly — apply those instead so the figure matches what your university itself would certify.`,
+    a: `Multiply by 9.5: ${label} × 9.5 = <strong>${rows[0].result}</strong>. That is the standard CBSE-derived method used when no university-specific formula applies. If your marksheet comes from SPPU (piecewise), Mumbai University (pre-2026), AKTU or GTU, their published formulas differ — apply those instead so the figure matches what your university itself would certify.`,
   },
   {
     q: `Why do different sites show different percentages for ${label} CGPA?`,
-    a: `Because there is no single national conversion. The generic ×9.5 rule gives ${rows[0].result}, while ×10-rule universities (VTU, Anna, KTU) give ${rows[2].result}, and offset formulas like SPPU's (−7.5) or Mumbai University's (7.1× + 11) give yet other figures. Every site picks a default — the honest ones show which formula they applied, like the comparison table on this page.`,
+    a: `Because there is no single national conversion. The generic ×9.5 rule gives ${rows[0].result}, while ×10-rule universities (VTU 2022, KTU, Anna) give ${rows[3].result}, and offset formulas like SPPU (piecewise), Mumbai University (pre-2026: 7.1×+11), AKTU (−0.75×10) or GTU (−0.5×10) give yet other figures. Every site picks a default — the honest ones show which formula they applied, like the comparison table on this page.`,
   },
 ];
 

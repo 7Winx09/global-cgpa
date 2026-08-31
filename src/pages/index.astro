@@ -3,6 +3,39 @@ import Layout from '../layouts/Layout.astro';
 import SiteHeader from '../components/Nav.astro';
 import SiteFooter from '../components/Footer.astro';
 import { universities } from '../data/universities';
+
+const howToSchema = {
+  '@context': 'https://schema.org',
+  '@type': 'HowTo',
+  'name': 'How to Convert CGPA to Percentage',
+  'description': 'Step-by-step guide to convert CGPA to percentage using the standard CBSE formula and university-specific formulas.',
+  'step': [
+    {
+      '@type': 'HowToStep',
+      'position': 1,
+      'name': 'Find your CGPA',
+      'text': 'Locate your CGPA on your grade card or marksheet. It is usually printed as a decimal number between 0.00 and 10.00.'
+    },
+    {
+      '@type': 'HowToStep',
+      'position': 2,
+      'name': 'Identify your university formula',
+      'text': 'Check which formula your university uses. CBSE/UGC: ×9.5. SPPU: piecewise by grade band. VTU: ×10 (2022 scheme) or (CGPA−0.75)×10 (older schemes). Anna University: ×10. Mumbai University pre-2026: 7.1×CGPA+11. AKTU: (CGPA−0.75)×10. GTU: (CGPA−0.5)×10. KTU: ×10.'
+    },
+    {
+      '@type': 'HowToStep',
+      'position': 3,
+      'name': 'Apply the formula',
+      'text': 'Multiply your CGPA by the appropriate factor or apply the university-specific formula. For example, 8.0 CGPA × 9.5 = 76% (CBSE).'
+    },
+    {
+      '@type': 'HowToStep',
+      'position': 4,
+      'name': 'Verify for official use',
+      'text': 'For official documents, always obtain a percentage equivalence certificate from your university registrar. The calculator gives the same figure the certificate will show.'
+    }
+  ]
+};
 ---
 
 <Layout
@@ -285,6 +318,7 @@ select:focus, input[type="number"]:focus { outline: none; border-color: var(--pr
   <hr class="seo-divider">
 
   <h2 itemprop="headline">CGPA to Percentage – The Complete Guide for Indian Students</h2>
+  <script type="application/ld+json" set:html={JSON.stringify(howToSchema)} />
   <p>Whether you are filling out a job application, applying for higher studies, or simply trying to understand where you stand academically, knowing how to <strong>convert CGPA to percentage</strong> is an essential skill for every Indian university student. With the shift from traditional marking systems to credit-based grading, most universities now award a Cumulative Grade Point Average (CGPA) instead of a raw percentage — yet most recruiters, government forms, and international universities still ask for a percentage equivalent. This guide explains the formulas, walks you through the calculations step by step, and clarifies the specific rules used by major Indian universities including SPPU.</p>
 
   <h2>What is CGPA and Why Does It Need Conversion?</h2>
@@ -340,13 +374,13 @@ select:focus, input[type="number"]:focus { outline: none; border-color: var(--pr
       </thead>
       <tbody>
         <tr><td>CBSE / UGC Generic</td><td>CGPA × 9.5</td><td>76.0%</td></tr>
-        <tr><td><a href="/sppu-cgpa-to-percentage">SPPU (Pune University)</a></td><td>(CGPA × 10) − 7.5</td><td>72.5%</td></tr>
-        <tr><td><a href="/vtu-cgpa-to-percentage">VTU (Bangalore)</a></td><td>CGPA × 10</td><td>80.0%</td></tr>
+        <tr><td><a href="/sppu-cgpa-to-percentage">SPPU (Pune University)</a></td><td>Piecewise by grade band (Circular 332/2020)</td><td>72.5% (Grade A)</td></tr>
+        <tr><td><a href="/vtu-cgpa-to-percentage">VTU (Bangalore)</a></td><td>2022 scheme: CGPA × 10<br>2015–2018: (CGPA − 0.75) × 10</td><td>80.0% (2022 scheme)</td></tr>
         <tr><td><a href="/anna-university-cgpa-to-percentage">Anna University</a></td><td>CGPA × 10</td><td>80.0%</td></tr>
-        <tr><td><a href="/mumbai-university-cgpa-to-percentage">Mumbai University</a></td><td>(7.1 × CGPA) + 11</td><td>67.8%</td></tr>
+        <tr><td><a href="/mumbai-university-cgpa-to-percentage">Mumbai University</a></td><td>Pre-2026: (7.1×CGPA)+11<br>Post-2026: Raw marks</td><td>67.8% (pre-2026)</td></tr>
         <tr><td><a href="/aktu-cgpa-to-percentage">AKTU / UPTU</a></td><td>(CGPA − 0.75) × 10</td><td>72.5%</td></tr>
         <tr><td><a href="/gtu-cgpa-to-percentage">GTU (Gujarat)</a></td><td>(CGPA − 0.5) × 10</td><td>75.0%</td></tr>
-        <tr><td><a href="/ktu-cgpa-to-percentage">KTU (Kerala)</a></td><td>CGPA × 10</td><td>80.0%</td></tr>
+        <tr><td><a href="/ktu-cgpa-to-percentage">KTU (Kerala)</a></td><td>CGPA × 10 (all schemes, 2023)</td><td>80.0%</td></tr>
       </tbody>
     </table>
   </div>

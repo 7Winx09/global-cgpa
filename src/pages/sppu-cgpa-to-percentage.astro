@@ -7,36 +7,48 @@ const uni = getUniversity('sppu')!;
 
 <UniPage
   uni={uni}
-  title="SPPU CGPA to Percentage Calculator (Official Formula) | GlobalCGPA"
-  description="Convert SPPU CGPA to percentage instantly using the official Savitribai Phule Pune University formula (CGPA × 10) − 7.5. Free calculator, conversion table, class thresholds and FAQ."
-  intro="Enter your CGPA to get your percentage using the official SPPU engineering formula — plus the reverse conversion, a full conversion table and the class thresholds that matter for placements."
+  title="SPPU CGPA to Percentage Calculator (Official Piecewise Formula) | GlobalCGPA"
+  description="Convert SPPU CGPA to percentage using the official piecewise grade-band formula from Circular 332/2020. Free calculator with reverse conversion, conversion table, class thresholds and FAQ."
+  intro="Enter your CGPA to get your percentage using the official SPPU piecewise formula — the calculator automatically applies the correct grade-band formula. Includes worked examples, reverse conversion, full conversion table and class thresholds."
 >
   <h2>How the SPPU CGPA to Percentage Conversion Works</h2>
-  <p>Savitribai Phule Pune University is one of the largest universities in India, with hundreds of affiliated engineering colleges across Pune and Maharashtra. When SPPU moved its engineering programmes to the credit-based grading system (CBCGS), it also published its own rule for converting the 10-point CGPA on your marksheet into a percentage — and that rule is <strong>not</strong> the generic CBSE multiplier that most online calculators use.</p>
-  <p>The official SPPU formula is:</p>
-  <div class="formula-block">
-    <div class="f-label">SPPU formula</div>
-    <div class="f-text">Percentage = (CGPA × 10) − 7.5</div>
-  </div>
-  <p>The calculator above applies this formula in both directions, so you can also enter a percentage from a job application form and see the CGPA it corresponds to.</p>
+  <p>Savitribai Phule Pune University (SPPU) does not use a single multiplier to convert CGPA to percentage. Instead, per <strong>Circular No. 332/2020 (08 Dec 2020)</strong>, the university prescribes a piecewise (grade-band) conversion where the formula depends on the letter grade corresponding to your CGPA range.</p>
+  <p>This applies to UG degrees under the CBCS (2019 pattern onwards) across all faculties. The calculator above automatically selects the correct formula based on your CGPA.</p>
 
-  <h3>Worked examples</h3>
+  <h3>Official SPPU Grade-Band Formulas</h3>
+  <div class="formula-block">
+    <div class="f-label">SPPU Circular 332/2020 — Piecewise Conversion</div>
+    <div class="f-text">Grade O (CGPA ≥ 9.50): Percentage = 20 × CGPA − 100</div>
+    <div class="f-text">Grade A+ (8.25 ≤ CGPA < 9.50): Percentage = 12 × CGPA − 25</div>
+    <div class="f-text">Grade A (6.75 ≤ CGPA < 8.25): Percentage = 10 × CGPA − 7.5</div>
+    <div class="f-text">Grade B+ (5.75 ≤ CGPA < 6.75): Percentage = 5 × CGPA + 26.25</div>
+    <div class="f-text">Grade B (5.25 ≤ CGPA < 5.75): Percentage = 10 × CGPA − 2.5</div>
+    <div class="f-text">Grade C (4.75 ≤ CGPA < 5.25): Percentage = 10 × CGPA − 2.5</div>
+    <div class="f-text">Grade D/P (4.00 ≤ CGPA < 4.75): Percentage = 6.6 × CGPA + 13.6</div>
+  </div>
+  <p>The calculator above applies these formulas in both directions, so you can also enter a percentage from a job application form and see the CGPA it corresponds to.</p>
+
+  <h3>Worked Examples</h3>
   <div class="table-scroll">
     <table>
-      <thead><tr><th>CGPA</th><th>Calculation</th><th>SPPU Percentage</th></tr></thead>
+      <thead><tr><th>CGPA</th><th>Grade Band</th><th>Formula Applied</th><th>SPPU Percentage</th></tr></thead>
       <tbody>
-        <tr><td>9.2</td><td>(9.2 × 10) − 7.5</td><td>84.5%</td></tr>
-        <tr><td>8.5</td><td>(8.5 × 10) − 7.5</td><td>77.5%</td></tr>
-        <tr><td>8.0</td><td>(8.0 × 10) − 7.5</td><td>72.5%</td></tr>
-        <tr><td>7.3</td><td>(7.3 × 10) − 7.5</td><td>65.5%</td></tr>
-        <tr><td>6.75</td><td>(6.75 × 10) − 7.5</td><td>60.0%</td></tr>
+        <tr><td>9.5</td><td>O (≥9.50)</td><td>20 × 9.5 − 100</td><td>90.0%</td></tr>
+        <tr><td>9.0</td><td>A+ (8.25–9.50)</td><td>12 × 9.0 − 25</td><td>83.0%</td></tr>
+        <tr><td>8.5</td><td>A (6.75–8.25)</td><td>10 × 8.5 − 7.5</td><td>77.5%</td></tr>
+        <tr><td>8.0</td><td>A (6.75–8.25)</td><td>10 × 8.0 − 7.5</td><td>72.5%</td></tr>
+        <tr><td>7.0</td><td>A (6.75–8.25)</td><td>10 × 7.0 − 7.5</td><td>62.5%</td></tr>
+        <tr><td>6.5</td><td>B+ (5.75–6.75)</td><td>5 × 6.5 + 26.25</td><td>58.75%</td></tr>
+        <tr><td>6.0</td><td>B (5.25–5.75)</td><td>10 × 6.0 − 2.5</td><td>57.5%</td></tr>
+        <tr><td>5.5</td><td>C (4.75–5.25)</td><td>10 × 5.5 − 2.5</td><td>52.5%</td></tr>
+        <tr><td>4.5</td><td>D/P (4.00–4.75)</td><td>6.6 × 4.5 + 13.6</td><td>43.3%</td></tr>
       </tbody>
     </table>
   </div>
 
-  <h2>Why SPPU's Percentage Is Lower Than the ×9.5 Formula</h2>
-  <p>If you compare formulas, you will notice that SPPU's conversion gives a lower percentage than the CBSE ×9.5 rule for the same CGPA. An 8.5 CGPA is 77.5% under the SPPU ordinance but 80.75% under the CBSE multiplier. That gap exists because SPPU anchors its grade points differently: the top grades demand higher raw marks, so the same grade point average represents a slightly different level of marks.</p>
-  <p>This matters in practice. If a company's eligibility form asks for your percentage and you write the ×9.5 figure, the number on your documents will not match when they verify against your SPPU certificate. Always use the ordinance formula — the one this calculator applies — for anything official.</p>
+  <h2>Why SPPU Uses a Piecewise Formula</h2>
+  <p>Unlike universities that apply a single multiplier (×9.5, ×10, or an offset), SPPU's Circular 332/2020 ties the conversion to the letter grade bands used in its grading system. The same CGPA can map to different percentages depending on which grade band it falls in — though in practice the bands are defined by CGPA ranges, so the mapping is deterministic.</p>
+  <p>This means <strong>you cannot simply multiply by 9.5 or use (CGPA × 10) − 7.5 for all values</strong>. The formula (CGPA × 10) − 7.5 only applies to the Grade A band (6.75–8.25). For higher CGPAs (Grade A+ and O), the percentage is higher; for lower CGPAs (Grade B+ and below), the formula differs significantly.</p>
 
   <h2>Where You Will Need Your SPPU Percentage</h2>
   <ul>
@@ -47,6 +59,6 @@ const uni = getUniversity('sppu')!;
   </ul>
 
   <h2>Getting an Official Conversion Certificate from SPPU</h2>
-  <p>For most purposes the calculator's figure is accepted, but some organisations — particularly PSUs, visa authorities and foreign universities — ask for an official document. You can obtain a <strong>percentage equivalence certificate</strong> from SPPU through your college's exam cell or the university examination department. The certificate states your CGPA and the percentage derived using the official formula, which will match the number this calculator shows you.</p>
-  <p>Keep your consolidated marksheet handy, as the application typically requires a copy of it along with a nominal fee. If your programme is not engineering (for example B.Com, BBA or law under SPPU), confirm the conversion rule with your own faculty, since this page covers the engineering ordinance that the vast majority of SPPU searches are about.</p>
+  <p>For most purposes the calculator's figure is accepted, but some organisations — particularly PSUs, visa authorities and foreign universities — ask for an official document. You can obtain a <strong>percentage equivalence certificate</strong> from SPPU through your college's exam cell or the university examination department. The certificate states your CGPA and the percentage derived using the official piecewise formula, which will match the number this calculator shows you.</p>
+  <p>Keep your consolidated marksheet handy, as the application typically requires a copy of it along with a nominal fee. If your programme is not engineering (for example B.Com, BBA or law under SPPU), confirm the conversion rule with your own faculty, since this page covers the CBCS ordinance that the vast majority of SPPU searches are about.</p>
 </UniPage>

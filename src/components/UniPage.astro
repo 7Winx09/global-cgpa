@@ -31,6 +31,13 @@ const schema = {
   'inLanguage': 'en-IN',
   'isAccessibleForFree': true,
 };
+
+const sourceLinkSchema = uni.sourceUrl ? {
+  '@context': 'https://schema.org',
+  '@type': 'CreativeWork',
+  'name': `Official source: ${uni.source}`,
+  'url': uni.sourceUrl
+} : null;
 ---
 
 <Layout title={title} description={description} canonical={`https://globalcgpa.in/${uni.slug}`} schema={schema}>
@@ -52,9 +59,16 @@ const schema = {
           <div class="f-label">Official {uni.short} formula</div>
           <div class="f-text">{uni.formulaText}</div>
           <div class="f-example">Example: {uni.exampleCgpa} CGPA → {Math.min(100, Math.max(0, uni.forward(uni.exampleCgpa))).toFixed(1)}%</div>
+          {uni.sourceUrl && (
+            <div class="source-link">
+              <a href={uni.sourceUrl} target="_blank" rel="noopener">View official source →</a>
+            </div>
+          )}
         </div>
       </div>
     </section>
+
+    {sourceLinkSchema && <script type="application/ld+json" set:html={JSON.stringify(sourceLinkSchema)} />}
 
     <section class="prose uni-article">
       <slot />
@@ -177,10 +191,23 @@ const schema = {
     color: var(--text-body);
     line-height: 1.4;
   }
-  .uni-related-formula {
+.uni-related-formula {
     font-size: 0.72rem;
     color: var(--text-mute);
     font-family: 'Courier New', monospace;
     margin-top: 4px;
   }
+  .source-link {
+    margin-top: 12px;
+  }
+  .source-link a {
+    color: var(--primary);
+    text-decoration: none;
+    font-weight: 600;
+    font-size: 0.85rem;
+  }
+  .source-link a:hover {
+    text-decoration: underline;
+  }
+}
 </style>

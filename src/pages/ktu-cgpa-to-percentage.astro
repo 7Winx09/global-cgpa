@@ -7,34 +7,40 @@ const uni = getUniversity('ktu')!;
 
 <UniPage
   uni={uni}
-  title="KTU CGPA to Percentage Calculator (Official ×10 Formula) | GlobalCGPA"
-  description="Convert KTU (APJ Abdul Kalam Technological University) CGPA to percentage using the official CGPA × 10 formula from the 2023 Academic Council revision. Free calculator, conversion table, class thresholds and FAQ."
-  intro="Enter your KTU CGPA to get your percentage using the official ×10 formula from the 2023 revision — plus reverse conversion, a reference table and KTU class thresholds for placements and higher studies."
+  title="KTU CGPA to Percentage Calculator (Unified CGPA × 10 Formula) | GlobalCGPA"
+  description="Convert KTU CGPA to percentage using the unified CGPA × 10 formula (U.O. 3078/2023). Replaces older scheme-specific formulas. Free calculator with reverse conversion, conversion table, class thresholds and FAQ."
+  intro="Enter your KTU CGPA to get your percentage using the current unified CGPA × 10 formula — plus reverse conversion, a reference table and KTU class thresholds for placements and higher studies."
 >
   <h2>How the KTU CGPA to Percentage Conversion Works</h2>
-  <p>APJ Abdul Kalam Technological University (KTU) governs engineering colleges across Kerala. In 2023, its Academic Council simplified the university's conversion rule: the percentage equivalent of a CGPA is now the CGPA multiplied by 10, replacing the older offset formula that had been in place since the university's early schemes.</p>
+  <p>APJ Abdul Kalam Technological University (KTU) now uses a single unified formula for all UG and PG programmes across all schemes, per <strong>U.O. No. 3078/2023/KTU (26 Nov 2023)</strong>:</p>
   <div class="formula-block">
-    <div class="f-label">KTU current formula (2023 revision)</div>
+    <div class="f-label">KTU current formula (all schemes)</div>
     <div class="f-text">Percentage = CGPA × 10</div>
   </div>
-  <p>Under the current rule, an 8.5 CGPA is exactly 85% and a perfect 10.0 is 100%. The change matters if you are comparing documents: certificates issued under the older rule show slightly lower percentages, and both remain valid for the documents on which they appear.</p>
+  <p>Under the current rule, an 8.5 CGPA is exactly 85% and a perfect 10.0 is 100%. This unified formula replaced earlier scheme-specific offset formulas through a series of university orders in 2023.</p>
 
-  <h3>Worked examples</h3>
+  <h3>Worked Examples (Current Formula)</h3>
   <div class="table-scroll">
     <table>
-      <thead><tr><th>CGPA</th><th>Current Formula (×10)</th><th>Old Formula (10G − 3.75)</th></tr></thead>
+      <thead><tr><th>CGPA</th><th>Current Formula (×10)</th><th>Old B.Tech 2019 (10×CGPA−2.5)</th><th>Old M.Tech 2015 (10×CGPA−3.75)</th></tr></thead>
       <tbody>
-        <tr><td>9.0</td><td>90%</td><td>86.25%</td></tr>
-        <tr><td>8.5</td><td>85%</td><td>81.25%</td></tr>
-        <tr><td>8.0</td><td>80%</td><td>76.25%</td></tr>
-        <tr><td>7.0</td><td>70%</td><td>66.25%</td></tr>
-        <tr><td>6.5</td><td>65%</td><td>61.25%</td></tr>
+        <tr><td>9.0</td><td>90%</td><td>87.5%</td><td>86.25%</td></tr>
+        <tr><td>8.5</td><td>85%</td><td>82.5%</td><td>81.25%</td></tr>
+        <tr><td>8.0</td><td>80%</td><td>77.5%</td><td>76.25%</td></tr>
+        <tr><td>7.0</td><td>70%</td><td>67.5%</td><td>66.25%</td></tr>
+        <tr><td>6.5</td><td>65%</td><td>62.5%</td><td>61.25%</td></tr>
       </tbody>
     </table>
   </div>
 
-  <h2>The Old KTU Formula (For Older Documents)</h2>
-  <p>Before the 2023 revision, KTU converted CGPA to percentage as <em>(10 × CGPA) − 3.75</em>, so an 8.5 CGPA was 81.25% rather than 85%. If you are filling a form that asks for the percentage "as per university rules", use the formula that matches your scheme and the documents you hold. For current conversions — new applications, fresh certificates, anything produced after the revision — the ×10 rule is the one to use. When in doubt, your college's exam cell can confirm which formula your batch's certificates used.</p>
+  <h2>Historical Context: The 2023 Revisions</h2>
+  <p>KTU unified its conversion through three university orders in 2023:</p>
+  <ul>
+    <li><strong>U.O. No. 1584/2023/KTU (29 Jun 2023):</strong> Changed B.Tech 2019 scheme from <code>Percentage = (10 × CGPA) − 2.5</code> to <code>CGPA × 10</code>.</li>
+    <li><strong>U.O. No. 1867/2023/KTU (27 Jul 2023):</strong> Extended the <code>CGPA × 10</code> formula to the B.Tech 2015 scheme.</li>
+    <li><strong>U.O. No. 3078/2023/KTU (26 Nov 2023):</strong> Unified all UG and PG programmes across all schemes under <code>Percentage = CGPA × 10</code>, including M.Tech 2015 (which previously used <code>(10 × CGPA) − 3.75</code>).</li>
+  </ul>
+  <p>Certificates issued before the respective amendments retain their original converted percentages. For current conversions and new certificates, use <code>CGPA × 10</code>.</p>
 
   <h2>KTU Class Thresholds</h2>
   <p>KTU awards <strong>First Class with Honours</strong> at roughly 8.5 CGPA and above, <strong>First Class</strong> from about 6.5 CGPA (65% under the current formula), and <strong>Second Class</strong> below that, with the degree itself requiring a minimum CGPA around 5.0. Honours awards can carry additional conditions in your specific scheme, such as completing extra credits or clearing all subjects within the standard duration, so check your regulation if you are near the 8.5 boundary.</p>

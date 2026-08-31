@@ -7,19 +7,38 @@ const uni = getUniversity('mumbai')!;
 
 <UniPage
   uni={uni}
-  title="Mumbai University CGPA to Percentage Calculator (7.1×CGPA + 11) | GlobalCGPA"
-  description="Convert Mumbai University CGPA to percentage using the official formula (7.1 × CGPA) + 11. Free calculator with reverse conversion, conversion table, class thresholds and FAQ for MU students."
-  intro="Enter your Mumbai University CGPA to convert it to a percentage using the official 7.1×CGPA + 11 formula — plus the reverse conversion, a full reference table and MU class thresholds."
+  title="Mumbai University CGPA to Percentage Calculator (Pre-2026 & Post-2026) | GlobalCGPA"
+  description="Convert Mumbai University CGPA to percentage. Pre-2026: (7.1×CGPA)+11 (general) or (7.4×CGPA)+12 (engineering). Post-2026: raw marks-based conversion per Circular 803/2026. Free calculator, conversion table, class thresholds and FAQ."
+  intro="Enter your CGPA to convert using the correct rule for your transcript date. Pre-2026 transcripts use the formula-based conversion; post-2026 transcripts use raw marks with opt-in certificate."
 >
-  <h2>How the Mumbai University CGPA to Percentage Conversion Works</h2>
-  <p>The University of Mumbai uses one of the most distinctive conversion formulas of any Indian university. Under its credit-based grading systems (CBCGS and CBSGS) for engineering and technology programmes, the official conversion is:</p>
-  <div class="formula-block">
-    <div class="f-label">Mumbai University formula</div>
-    <div class="f-text">Percentage = (7.1 × CGPA) + 11</div>
-  </div>
-  <p>The 7.1 slope and the 11-point offset come from how Mumbai University calibrated its grade points against raw marks when it adopted the credit system. Because of that offset, Mumbai University percentages do not behave like other universities: a 10.0 CGPA converts to 82%, not 100%, and the differences between CGPA values are compressed (each 1.0 CGPA is worth 7.1 percentage points, not 9.5 or 10).</p>
+  <h2>Important: Rule Change Effective 1 January 2026</h2>
+  <p><strong>Mumbai University repealed all formula-based CGPA-to-percentage conversion</strong> via <strong>Circular No. Exam/Result/803 of 2026</strong>, dated 1 January 2026. The change is forward-looking and applies based on your transcript date:</p>
+  <ul>
+    <li><strong>Transcripts dated on or before 31 December 2025 (pre-2026):</strong> Use the pre-2026 formulas below.</li>
+    <li><strong>Transcripts dated 1 January 2026 or later (post-2026):</strong> No formula applies. The college computes percentage from actual raw marks (total obtained ÷ total maximum × 100) and issues a conversion certificate only on student request.</li>
+  </ul>
+  <p>The calculator below applies the pre-2026 formulas for reference. If your transcript is post-2026, you must request a conversion certificate from your college — the percentage will be based on your actual semester marks, not a formula.</p>
 
-  <h3>Worked examples</h3>
+  <h2>Pre-2026 Formulas (Transcripts ≤ 31 Dec 2025)</h2>
+  <p>Under the now-repealed Circular Exam/Com/97 of 2018 (re-affirmed by Exam/Result/157 of 2019), the official formulas were:</p>
+  <div class="formula-block">
+    <div class="f-label">Pre-2026: General programmes (CBCGS/CBSGS)</div>
+    <div class="f-text">Percentage = (7.1 × CGPA) + 11</div>
+    <div class="f-example">Example: 8.0 CGPA → (7.1 × 8) + 11 = <strong>67.8%</strong></div>
+  </div>
+  <div class="formula-block">
+    <div class="f-label">Pre-2026: Engineering (Faculty of Technology, CGPA ≥ 7)</div>
+    <div class="f-text">Percentage = (7.4 × CGPA) + 12</div>
+    <div class="f-example">Example: 8.0 CGPA → (7.4 × 8) + 12 = <strong>71.2%</strong></div>
+  </div>
+  <div class="formula-block">
+    <div class="f-label">Pre-2026: Engineering (Faculty of Technology, CGPA < 7)</div>
+    <div class="f-text">Percentage = (7.1 × CGPA) + 11.6</div>
+    <div class="f-example">Example: 6.5 CGPA → (7.1 × 6.5) + 11.6 = <strong>57.75%</strong></div>
+  </div>
+  <p>The calculator above uses the general formula. For engineering, select the appropriate variant if you know your faculty and CGPA range.</p>
+
+  <h3>Worked Examples (Pre-2026 General Formula)</h3>
   <div class="table-scroll">
     <table>
       <thead><tr><th>CGPA</th><th>Calculation</th><th>MU Percentage</th></tr></thead>
@@ -33,14 +52,27 @@ const uni = getUniversity('mumbai')!;
     </table>
   </div>
 
-  <h2>Why Your MU Percentage Looks "Low" — And Why That Is Fine</h2>
-  <p>Mumbai University students often panic when they first convert their CGPA: a strong 8.5 CGPA becomes about 71.4%, which can look unimpressive next to the 80%+ figures friends at other universities quote. This is a calibration difference, not a reflection of your performance. Recruiters who regularly hire from Mumbai University — and MU's own certificates — use the 7.1×CGPA + 11 figure, so the numbers line up once everyone applies the same rule.</p>
-  <p>The practical takeaway: never convert your MU CGPA with the ×9.5 or ×10 formulas. An 8.0 CGPA written as 80% instead of the official 67.8% creates a mismatch with your documents that can get an application rejected during verification.</p>
+  <h2>Post-2026: No Formula — Raw Marks Conversion (Transcripts ≥ 1 Jan 2026)</h2>
+  <p>Under <strong>Circular No. Exam/Result/803 of 2026</strong>, effective 1 January 2026:</p>
+  <ul>
+    <li>The formula-based conversion is <strong>repealed</strong>. The earlier circulars (Exam/Com/97 of 2018 and Exam/Result/157 of 2019) are explicitly listed as repealed.</li>
+    <li>There is <strong>no replacement formula</strong>. The university no longer uses a multiplier or offset.</li>
+    <li>Percentage is computed from <strong>actual raw marks</strong>: total marks obtained across all semesters (Sem I–VI) divided by total maximum marks across those semesters, × 100.</li>
+    <li>The CGPA itself does not enter the calculation.</li>
+    <li>Conversion is <strong>opt-in</strong>: the percentage is not printed on the transcript by default. You must request a separate conversion certificate from your affiliated college (which forwards to the university for attestation if needed).</li>
+  </ul>
+  <p>This means a student with 9.6 CGPA whose actual marks average 88.2% will receive 88.2% on a 2026 conversion certificate — not the 79.2% the old formula would have produced.</p>
 
-  <h2>Class Thresholds at Mumbai University</h2>
-  <p>Under the official formula, <strong>First Class</strong> begins around 6.48 CGPA (57%), and the pass boundary sits near 4.0 CGPA. Because the offset compresses the scale, small CGPA improvements move your percentage more slowly than at other universities — going from 7.0 to 8.0 CGPA adds only about 7 percentage points.</p>
-  <p>If your target is a 60% eligibility cut-off for a company or government form, you need roughly a 6.9 CGPA at Mumbai University — noticeably higher than the 6.0 that would clear the same bar under VTU's ×10 rule. Use the reverse tab in the calculator above to find the exact CGPA any percentage target requires.</p>
+  <h2>Why Your MU Percentage Looks Different from Other Universities</h2>
+  <p>The pre-2026 formula (7.1×CGPA + 11) compresses the scale: a 10.0 CGPA converts to 82%, not 100%. Each 1.0 CGPA step is worth only 7.1 percentage points. This is a calibration difference, not a reflection of your performance. Recruiters familiar with Mumbai University use the same rule, so the numbers align once everyone applies the correct formula for the transcript date.</p>
+  <p><strong>Never use the ×9.5 or ×10 formulas for Mumbai University.</strong> An 8.0 CGPA written as 80% instead of the official 67.8% (pre-2026) creates a mismatch with your documents that can get an application rejected during verification.</p>
+
+  <h2>Class Thresholds (Pre-2026)</h2>
+  <p>Under the pre-2026 formula, <strong>First Class</strong> begins around 6.48 CGPA (57%), and the pass boundary sits near 4.0 CGPA. Because the offset compresses the scale, small CGPA improvements move your percentage more slowly than at other universities — going from 7.0 to 8.0 CGPA adds only about 7 percentage points.</p>
+  <p>If your target is a 60% eligibility cut-off for a company or government form, you need roughly a 6.9 CGPA at Mumbai University (pre-2026) — noticeably higher than the 6.0 that would clear the same bar under VTU's ×10 rule.</p>
 
   <h2>Official Documents and Certificates</h2>
-  <p>Your MU consolidated marksheet and degree certificate state your CGPA (and sometimes the converted percentage). If an employer or university insists on an official percentage document, you can request a conversion or medium of instruction-style certificate from your college's examination cell, which will apply the same 7.1×CGPA + 11 formula shown by this calculator. For semester-wise percentage breakdowns — for instance, when a form asks for final-year percentage — convert each semester's SGPA individually or use our <a href="/sgpa-to-cgpa">SGPA to CGPA calculator</a> first.</p>
+  <p><strong>Pre-2026 transcripts:</strong> Your MU consolidated marksheet and degree certificate state your CGPA and the converted percentage (using the old formula). If an employer or university insists on an official percentage document, request a conversion certificate from your college's examination cell.</p>
+  <p><strong>Post-2026 transcripts:</strong> The consolidated marksheet carries only your CGPA. For a percentage, you must request a conversion certificate from your college's examination cell, citing Circular Exam/Result/803 of 2026. The college will compute the percentage from your raw semester marks and issue the certificate. Turnaround is typically 7–21 working days.</p>
+  <p>For semester-wise percentage breakdowns (e.g., final-year percentage for a form), convert each semester's SGPA individually or use our <a href="/sgpa-to-cgpa">SGPA to CGPA calculator</a> first.</p>
 </UniPage>

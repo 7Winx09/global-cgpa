@@ -10,10 +10,29 @@ const engUnis = universities.filter((u) => u.key !== 'du');
 const cgpaValues = [10, 9, 8.5, 8, 7.5, 7, 6.5, 6];
 const pct = (fn: (c: number) => number, c: number) => Math.min(100, Math.max(0, fn(c))).toFixed(1);
 
+const sppuFn = (c: number) => {
+  if (c >= 9.5) return 20 * c - 100;
+  if (c >= 8.25) return 12 * c - 25;
+  if (c >= 6.75) return 10 * c - 7.5;
+  if (c >= 5.75) return 5 * c + 26.25;
+  if (c >= 5.25) return 10 * c - 2.5;
+  if (c >= 4.75) return 10 * c - 2.5;
+  if (c >= 4.0) return 6.6 * c + 13.6;
+  return 0;
+};
+
+const vtuFn2022 = (c: number) => c * 10;
+const vtuFnOld = (c: number) => (c - 0.75) * 10;
+const mumbaiFn = (c: number) => Math.min(100, Math.max(0, 7.1 * c + 11));
+const aktuFn = (c: number) => Math.max(0, (c - 0.75) * 10);
+const gtuFn = (c: number) => Math.max(0, (c - 0.5) * 10);
+const ktuFn = (c: number) => c * 10;
+const annaFn = (c: number) => c * 10;
+
 const faqs = [
-  { q: 'How do engineering students convert CGPA to percentage?', a: 'Find the formula your university\'s ordinance prescribes — most B.Tech/B.E. students fall under one of the eight rules in the table above. If your college has no published formula, the CBSE default Percentage = CGPA × 9.5 is the accepted fallback.' },
-  { q: 'Is CGPA × 10 correct for engineering?', a: 'Only for universities whose ordinance says so — VTU, Anna University and KTU prescribe a direct ×10 conversion, while SPPU ((CGPA×10) − 7.5), AKTU ((CGPA−0.75)×10), GTU ((CGPA−0.5)×10) and Mumbai University (7.1×CGPA + 11) use different rules. Multiplying by 10 when your university uses an offset formula overstates your percentage and fails document verification.' },
-  { q: 'What is 8 CGPA in engineering percentage?', a: 'It depends on your university: 80% under VTU/Anna/KTU rules, 76% under the CBSE default, 75% at GTU, 72.5% at SPPU and AKTU, and about 67.8% at Mumbai University. The <a href="/8-cgpa-to-percentage">8 CGPA to percentage page</a> shows every figure side by side.' },
+  { q: 'How do engineering students convert CGPA to percentage?', a: 'Find the formula your university\'s ordinance prescribes — most B.Tech/B.E. students fall under one of the rules in the table above. If your college has no published formula, the CBSE default Percentage = CGPA × 9.5 is the accepted fallback.' },
+  { q: 'Is CGPA × 10 correct for engineering?', a: 'Only for universities whose ordinance says so — VTU (2022 scheme), Anna University and KTU prescribe a direct ×10 conversion, while SPPU (piecewise grade bands), AKTU ((CGPA−0.75)×10), GTU ((CGPA−0.5)×10), VTU (2015–2018 schemes: (CGPA−0.75)×10) and Mumbai University (pre-2026: 7.1×CGPA+11) use different rules. Multiplying by 10 when your university uses an offset or piecewise formula overstates your percentage and fails document verification.' },
+  { q: 'What is 8 CGPA in engineering percentage?', a: 'It depends on your university: 80% under VTU 2022/Anna/KTU rules, 76% under the CBSE default, 75% at GTU, 72.5% at SPPU (Grade A) and AKTU, and about 67.8% at Mumbai University (pre-2026). The <a href="/8-cgpa-to-percentage">8 CGPA to percentage page</a> shows every figure side by side.' },
   { q: 'What percentage do companies require in engineering placements?', a: 'Most service-based IT companies screen at 60% or 6.0–6.5 CGPA equivalent; product companies and core firms typically prefer 70%+ (7.0–7.5 CGPA). Because formulas differ, convert with your own university\'s rule before checking a cut-off.' },
   { q: 'Do I need percentage for M.Tech or MS admissions?', a: 'Indian M.Tech/ME admissions through GATE counselling often list both CGPA and percentage thresholds, while foreign universities prefer your raw CGPA on a 10-point scale plus transcripts. Use our <a href="/guides/cgpa-to-gpa-4-scale-ms-abroad">guide to converting CGPA to a 4.0 GPA</a> for applications abroad.' },
 ];
@@ -63,7 +82,16 @@ const schema = {
           <thead><tr><th>University</th><th>Official Formula</th><th>Example (8.0 CGPA)</th></tr></thead>
           <tbody>
             {engUnis.map((u) => (
-              <tr><td><a href={`/${u.slug}`}>{u.short} <span class="uni-state">({u.name})</span></a></td><td>{u.formulaText.replace('Percentage = ', '')}</td><td>{pct(u.forward, 8)}%</td></tr>
+              <tr>
+                <td><a href={`/${u.slug}`}>{u.short} <span class="uni-state">({u.name})</span></a></td>
+                <td>{u.formulaText.replace('Percentage = ', '')}</td>
+                <td>
+                  {u.key === 'sppu' ? `${pct(sppuFn, 8)}%` :
+                   u.key === 'vtu' ? `${pct(vtuFn2022, 8)}% (2022 scheme)` :
+                   u.key === 'mumbai' ? `${pct(mumbaiFn, 8)}% (pre-2026)` :
+                   `${pct(u.forward, 8)}%`}
+                </td>
+              </tr>
             ))}
             <tr><td>No published formula (autonomous colleges, deemed universities)</td><td>CBSE default: CGPA × 9.5</td><td>{pct((x) => x * 9.5, 8)}%</td></tr>
           </tbody>
@@ -85,7 +113,14 @@ const schema = {
             {cgpaValues.map((c) => (
               <tr>
                 <td><a href={`/${c.toFixed(1).replace(/\.0$/, '')}-cgpa-to-percentage`}>{c.toFixed(1)}</a></td>
-                {engUnis.map((u) => <td>{pct(u.forward, c)}%</td>)}
+                {engUnis.map((u) => {
+                  let val: string;
+                  if (u.key === 'sppu') val = `${pct(sppuFn, c)}%`;
+                  else if (u.key === 'vtu') val = `${pct(vtuFn2022, c)}%`;
+                  else if (u.key === 'mumbai') val = `${pct(mumbaiFn, c)}%`;
+                  else val = `${pct(u.forward, c)}%`;
+                  return <td>{val}</td>;
+                })}
                 <td>{pct((x) => x * 9.5, c)}%</td>
               </tr>
             ))}
