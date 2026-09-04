@@ -147,6 +147,17 @@ const ogLocale = lang === 'hi' ? 'hi_IN' : 'en_IN';
 
     <!-- AdSense -->
     <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-1016421061571791" crossorigin="anonymous"></script>
+    <style is:global>
+      body {
+        min-height: 100vh;
+        display: flex;
+        flex-direction: column;
+      }
+      main {
+        flex: 1;
+        width: 100%;
+      }
+    </style>
   </head>
   <body>
     <slot />
