@@ -1,0 +1,112 @@
+---
+import Layout from '../../../../layouts/Layout.astro';
+import SiteHeader from '../../../../components/Nav.astro';
+import SiteFooter from '../../../../components/Footer.astro';
+
+const canonical = 'https://globalcgpa.in/ja/jp/guides/';
+---
+
+<Layout
+  title="GPA 計算ガイド・解説記事 | 日本の大学生向け | GlobalCGPA 日本版"
+  description="GPA 計算方法、累積 GPA、留学出願用換算、大学別評価方式など、日本の大学生に役立つ解説記事をまとめています。"
+  canonical={canonical}
+  alternates={[
+    { hreflang: 'ja', href: 'https://globalcgpa.in/ja/jp/guides/' },
+    { hreflang: 'en', href: 'https://globalcgpa.in/guides/' },
+    { hreflang: 'x-default', href: 'https://globalcgpa.in/guides/' },
+  ]}
+  schema={{
+    "@context": "https://schema.org",
+    "@type": "CollectionPage",
+    "name": "GPA 計算ガイド一覧",
+    "url": canonical,
+    "description": "日本の大学生向け GPA 計算・換算の解説記事コレクション。",
+    "inLanguage": "ja-JP"
+  }}
+>
+  <SiteHeader />
+
+  <main class="hero-main" style="padding-bottom: 40px;">
+    <div class="hero-tag">解説ガイド</div>
+    <h1>GPA 計算ガイド・解説記事</h1>
+    <p class="subtitle">GPA の基本から留学出願用換算、大学別評価方式まで、日本の大学生が知っておくべき知識を網羅しています。</p>
+  </main>
+
+  <section class="bottom-belt-section" style="border-top:none; padding-top:0;">
+    <div class="belt-title">カテゴリ別ガイド</div>
+    <div class="belt-grid">
+      <a class="belt-card" href="/ja/jp/guides/gpa-calculation-basics/">
+        <span style="font-size:1.5rem;">📖</span>
+        <div>
+          <div style="font-weight:700;">GPA 計算の基本</div>
+          <div style="font-size:0.8rem; color:var(--muted);">仕組み・式・ステップ解説</div>
+        </div>
+      </a>
+      <a class="belt-card" href="/ja/jp/guides/cumulative-gpa-explained/">
+        <span style="font-size:1.5rem;">📈</span>
+        <div>
+          <div style="font-weight:700;">累積 GPA とは</div>
+          <div style="font-size:0.8rem; color:var(--muted);">通算 GPA の計算・卒業要件</div>
+        </div>
+      </a>
+      <a class="belt-card" href="/ja/jp/guides/study-abroad-gpa-conversion/">
+        <span style="font-size:1.5rem;">🌍</span>
+        <div>
+          <div style="font-weight:700;">留学・海外出願用換算</div>
+          <div style="font-size:0.8rem; color:var(--muted);">4.0 スケール換算・WES・公式証明書</div>
+        </div>
+      </a>
+      <a class="belt-card" href="/ja/jp/guides/university-grading-systems/">
+        <span style="font-size:1.5rem;">🏫</span>
+        <div>
+          <div style="font-weight:700;">大学別評価方式</div>
+          <div style="font-size:0.8rem; color:var(--muted);">4.0/4.3/4.5・主要大学一覧</div>
+        </div>
+      </a>
+      <a class="belt-card" href="/ja/jp/guides/gpa-vs-percentage/">
+        <span style="font-size:1.5rem;">🔁</span>
+        <div>
+          <div style="font-weight:700;">GPA ⇔ パーセンテージ</div>
+          <div style="font-size:0.8rem; color:var(--muted);">相互換算・注意点</div>
+        </div>
+      </a>
+      <a class="belt-card" href="/ja/jp/guides/high-school-gpa/">
+        <span style="font-size:1.5rem;">🏫</span>
+        <div>
+          <div style="font-weight:700;">高校 GPA・評定平均</div>
+          <div style="font-size:0.8rem; color:var(--muted);">調査書・推薦入試対応</div>
+        </div>
+      </a>
+    </div>
+  </section>
+
+  <article class="seo-article" itemscope itemtype="https://schema.org/Article">
+    <hr class="seo-divider">
+
+    <h2 itemprop="headline">人気のガイド記事</h2>
+
+    <div class="seo-table-wrap">
+      <table class="seo-table">
+        <thead><tr><th>記事</th><th>対象読者</th><th>所要時間</th></tr></thead>
+        <tbody>
+          <tr><td><a href="/ja/jp/guides/gpa-calculation-basics/">GPA 計算の基本 — 仕組みと手順</a></td><td>全大学生</td><td>5 分</td></tr>
+          <tr><td><a href="/ja/jp/guides/cumulative-gpa-explained/">累積 GPA（通算 GPA）の計算方法</a></td><td>2 年生〜卒業予定者</td><td>7 分</td></tr>
+          <tr><td><a href="/ja/jp/guides/study-abroad-gpa-conversion/">留学・海外大学院出願用 GPA 換算ガイド</a></td><td>留学希望者</td><td>10 分</td></tr>
+          <tr><td><a href="/ja/jp/guides/university-grading-systems/">主要大学の評価方式一覧（4.0/4.3/4.5）</a></td><td>全大学生</td><td>5 分</td></tr>
+          <tr><td><a href="/ja/jp/guides/gpa-vs-percentage/">GPA とパーセンテージの相互換算</a></td><td>全大学生</td><td>5 分</td></tr>
+          <tr><td><a href="/ja/jp/guides/high-school-gpa/">高校の評定平均・GPA 計算</a></td><td>高校生・保護者</td><td>5 分</td></tr>
+        </tbody>
+      </table>
+    </div>
+
+    <h2>計算機と併せてご活用ください</h2>
+    <ul>
+      <li><a href="/ja/jp/gpa-calculator/">🧮 GPA 計算機（成績・単位入力）</a></li>
+      <li><a href="/ja/jp/cumulative-gpa/">📈 累積 GPA 計算機（全学期対応）</a></li>
+      <li><a href="/ja/jp/percentage-to-gpa/">🔁 パーセンテージ → GPA 換算機</a></li>
+      <li><a href="/ja/jp/university-gpa/">🏫 大学別 GPA 計算・換算</a></li>
+    </ul>
+  </article>
+
+  <SiteFooter />
+</Layout>

@@ -1,0 +1,230 @@
+---
+import Layout from '../../../layouts/Layout.astro';
+import SiteHeader from '../../../components/Nav.astro';
+import SiteFooter from '../../../components/Footer.astro';
+
+const canonical = 'https://globalcgpa.in/ja/jp/cumulative-gpa/';
+---
+
+<Layout
+  title="累積 GPA 計算 | 通算 GPA 計算機 | GlobalCGPA 日本版"
+  description="累積 GPA（通算 GPA）を正確に計算。全学期の成績・単位を入力するだけで単位加重平均を自動算出。卒業要件確認や留学出願書類準備に。"
+  canonical={canonical}
+  alternates={[
+    { hreflang: 'ja', href: 'https://globalcgpa.in/ja/jp/cumulative-gpa/' },
+    { hreflang: 'en', href: 'https://globalcgpa.in/sgpa-to-cgpa/' },
+    { hreflang: 'x-default', href: 'https://globalcgpa.in/sgpa-to-cgpa/' },
+  ]}
+  schema={{
+    "@context": "https://schema.org",
+    "@type": "WebApplication",
+    "name": "累積 GPA 計算機",
+    "url": canonical,
+    "description": "全学期の成績と単位から累積 GPA（通算 GPA）を計算。単位加重平均に対応。",
+    "applicationCategory": "EducationalApplication",
+    "operatingSystem": "Any",
+    "offers": { "@type": "Offer", "price": "0", "priceCurrency": "JPY" },
+    "inLanguage": "ja-JP",
+    "isAccessibleForFree": true
+  }}
+>
+  <SiteHeader />
+
+  <main class="hero-main">
+    <div class="hero-tag">累積 GPA 計算</div>
+    <h1>累積 GPA 計算 — 通算 GPA 計算機</h1>
+    <p class="subtitle">全学期の成績と単位数を入力して累積 GPA（通算 GPA）を算出。単位加重平均方式で正確に計算。卒業判定・留学出願・編入試験の準備にご活用ください。</p>
+
+    <div class="main-calc-card">
+      <label for="cum_scale">評価スケール</label>
+      <select id="cum_scale" onchange="updateCumGradeOptions()">
+        <option value="4.0">4.0 段階</option>
+        <option value="4.3">4.3 段階</option>
+        <option value="4.5">4.5 段階</option>
+        <option value="5.0">5 段階</option>
+      </select>
+
+      <div id="cum_semesters">
+        <div class="cum-semester">
+          <div class="cum-semester-header">
+            <span class="cum-sem-label">第 1 学期</span>
+            <button type="button" class="cum-remove-sem" onclick="removeCumSemester(this)" style="display:none;">学期削除</button>
+          </div>
+          <div class="cum-subjects"></div>
+          <button type="button" class="cum-add-subj" onclick="addCumSubject(this)">科目追加</button>
+        </div>
+      </div>
+      <button type="button" class="jp-add-btn" style="margin-top:16px;" onclick="addCumSemester()">学期を追加</button>
+
+      <div class="output-display">
+        <button class="copy-btn" onclick="copyCumGpa()" title="コピー">⎘</button>
+        <div class="out-val" id="cum_gpa_result">—</div>
+        <div class="out-lbl">累積 GPA</div>
+      </div>
+      <div class="output-display" style="margin-top:12px;">
+        <div class="out-val" id="cum_total_credits" style="font-size:1.5rem; color:var(--text);">—</div>
+        <div class="out-lbl">総修得単位数</div>
+      </div>
+    </div>
+  </main>
+
+  <section class="bottom-belt-section">
+    <div class="belt-title">関連ページ</div>
+    <div class="belt-grid">
+      <a class="belt-card" href="/ja/jp/gpa-calculator/">🧮 GPA 計算（シンプル版）</a>
+      <a class="belt-card" href="/ja/jp/percentage-to-gpa/">🔁 パーセンテージ → GPA</a>
+      <a class="belt-card" href="/ja/jp/university-gpa/">🏫 大学別 GPA 計算</a>
+      <a class="belt-card" href="/ja/jp/guides/">📚 解説ガイド</a>
+    </div>
+  </section>
+
+  <article class="seo-article" itemscope itemtype="https://schema.org/Article">
+    <hr class="seo-divider">
+
+    <h2 itemprop="headline">累積 GPA（通算 GPA）とは？計算方法と活用場面</h2>
+
+    <h2>累積 GPA と学期 GPA の違い</h2>
+    <p><strong>学期 GPA（SGPA / 学期成績平均）</strong> はその学期のみの履修科目を対象とした平均値です。一方 <strong>累積 GPA（CGPA / 通算 GPA）</strong> は、入学から現在までの全履修科目を対象とし、単位数で加重平均した値です。卒業要件、留学出願、編入試験、奨学金審査などでは累積 GPA が参照されます。</p>
+
+    <h2>累積 GPA の計算式</h2>
+    <div class="seo-formula-block">
+      <div class="formula-label">単位加重平均</div>
+      <div class="formula-text">累積 GPA = Σ（全科目のグレードポイント × 単位数） ÷ Σ（全科目の単位数）</div>
+    </div>
+
+    <h3>計算手順</h3>
+    <ol>
+      <li>全学期の履修科目について「成績（グレード）」と「単位数」を収集する</li>
+      <li>大学の評価スケール（4.0 / 4.3 / 4.5 / 5段階）に合わせて各成績をグレードポイントに変換</li>
+      <li>「グレードポイント × 単位数」を全科目分計算し合計</li>
+      <li>総単位数で割る</li>
+    </ol>
+
+    <h2>よくある質問</h2>
+    <div class="faq-section" itemscope itemtype="https://schema.org/FAQPage">
+      <div class="faq-group-label">基本</div>
+
+      <div class="faq-item" itemscope itemprop="mainEntity" itemtype="https://schema.org/Question">
+        <button class="faq-q" onclick="toggleFaq(this)" itemprop="name">履修取消・不合格科目は含めますか<span class="faq-icon">+</span></button>
+        <div class="faq-a" itemscope itemprop="acceptedAnswer" itemtype="https://schema.org/Answer"><div itemprop="text">大学によって扱いが異なります。多くは「F（不合格）」はグレードポイント 0 として含めますが、履修取消（W）は単位数に含めないケースが一般的です。所属大学の学則・履修要項で確認してください。</div></div>
+      </div>
+
+      <div class="faq-item" itemscope itemprop="mainEntity" itemtype="https://schema.org/Question">
+        <button class="faq-q" onclick="toggleFaq(this)" itemprop="name">再履修した科目はどう扱いますか<span class="faq-icon">+</span></button>
+        <div class="faq-a" itemscope itemprop="acceptedAnswer" itemtype="https://schema.org/Answer"><div itemprop="text">再履修の扱いも大学によります。「初回の成績を残す」「最新の成績のみ採用」「両方含める」等があります。計算機では「最新成績のみ」で入力することを推奨しますが、大学のルールに合わせて調整してください。</div></div>
+      </div>
+
+      <div class="faq-item" itemscope itemprop="mainEntity" itemtype="https://schema.org/Question">
+        <button class="faq-q" onclick="toggleFaq(this)" itemprop="name">卒業要件の GPA 基準はどこで見られますか<span class="faq-icon">+</span></button>
+        <div class="faq-a" itemscope itemprop="acceptedAnswer" itemtype="https://schema.org/Answer"><div itemprop="text">学部・学科の「履修要項」「学生便覧」「卒業要件一覧」等に記載されています。一般的に累積 GPA 2.0 以上（4.0 スケール）等が卒業条件とされることが多いですが、学部により異なります。</div></div>
+      </div>
+    </div>
+  </article>
+
+  <SiteFooter />
+
+  <script is:inline>
+  const jpGradeMaps = {
+    '4.0': { 'A+': 4.0, 'A': 4.0, 'A-': 3.7, 'B+': 3.3, 'B': 3.0, 'B-': 2.7, 'C+': 2.3, 'C': 2.0, 'C-': 1.7, 'D': 1.0, 'F': 0 },
+    '4.3': { 'A+': 4.3, 'A': 4.0, 'A-': 3.7, 'B+': 3.3, 'B': 3.0, 'B-': 2.7, 'C+': 2.3, 'C': 2.0, 'C-': 1.7, 'D': 1.0, 'F': 0 },
+    '4.5': { 'A+': 4.5, 'A': 4.5, 'A-': 4.0, 'B+': 3.5, 'B': 3.5, 'B-': 3.0, 'C+': 2.5, 'C': 2.5, 'C-': 2.0, 'D': 1.5, 'F': 0 },
+    '5.0': { 'S': 5.0, 'A': 4.0, 'B': 3.0, 'C': 2.0, 'D': 1.0, 'F': 0, '5': 5.0, '4': 4.0, '3': 3.0, '2': 2.0, '1': 1.0 }
+  };
+
+  function makeGradeOptions(map) {
+    return '<option value="">成績を選択</option>' + Object.entries(map).map(([k,v]) => `<option value="${v}">${k} (${v})</option>`).join('');
+  }
+
+  function addCumSemester() {
+    const container = document.getElementById('cum_semesters');
+    const semNum = container.children.length + 1;
+    const scale = document.getElementById('cum_scale').value;
+    const map = jpGradeMaps[scale];
+    const div = document.createElement('div');
+    div.className = 'cum-semester';
+    div.innerHTML = `<div class="cum-semester-header"><span class="cum-sem-label">第 ${semNum} 学期</span><button type="button" class="cum-remove-sem" onclick="removeCumSemester(this)">学期削除</button></div><div class="cum-subjects"></div><button type="button" class="cum-add-subj" onclick="addCumSubject(this)">科目追加</button>`;
+    container.appendChild(div);
+    updateSemLabels();
+  }
+
+  function removeCumSemester(btn) {
+    const sems = document.querySelectorAll('.cum-semester');
+    if (sems.length > 1) btn.closest('.cum-semester').remove();
+    updateSemLabels();
+    calcCumGpa();
+  }
+
+  function updateSemLabels() {
+    document.querySelectorAll('.cum-semester').forEach((sem, i) => {
+      sem.querySelector('.cum-sem-label').textContent = `第 ${i+1} 学期`;
+      sem.querySelector('.cum-remove-sem').style.display = sems => sems.length > 1 ? 'inline-block' : 'none';
+    });
+  }
+
+  function addCumSubject(btn) {
+    const subjContainer = btn.previousElementSibling;
+    const scale = document.getElementById('cum_scale').value;
+    const map = jpGradeMaps[scale];
+    const div = document.createElement('div');
+    div.className = 'jp-subject-row';
+    div.innerHTML = '<select class="jp-grade-select" onchange="calcCumGpa()">' + makeGradeOptions(map) + '</select><input type="number" class="jp-credit-input" min="0" step="0.5" placeholder="単位" onchange="calcCumGpa()"><button type="button" class="jp-remove-btn" onclick="removeCumRow(this)">削除</button>';
+    subjContainer.appendChild(div);
+  }
+
+  function removeCumRow(btn) {
+    const rows = btn.closest('.cum-subjects').querySelectorAll('.jp-subject-row');
+    if (rows.length > 1) btn.parentElement.remove();
+    calcCumGpa();
+  }
+
+  function updateCumGradeOptions() {
+    const scale = document.getElementById('cum_scale').value;
+    const map = jpGradeMaps[scale];
+    const opts = makeGradeOptions(map);
+    document.querySelectorAll('.jp-grade-select').forEach(sel => {
+      const cur = sel.value;
+      sel.innerHTML = opts;
+      if (map[cur]) sel.value = cur;
+    });
+    calcCumGpa();
+  }
+
+  function calcCumGpa() {
+    let totalPoints = 0, totalCredits = 0;
+    document.querySelectorAll('.jp-subject-row').forEach(row => {
+      const grade = parseFloat(row.querySelector('.jp-grade-select').value);
+      const credit = parseFloat(row.querySelector('.jp-credit-input').value);
+      if (!isNaN(grade) && !isNaN(credit) && credit > 0) {
+        totalPoints += grade * credit;
+        totalCredits += credit;
+      }
+    });
+    document.getElementById('cum_gpa_result').textContent = totalCredits > 0 ? (totalPoints / totalCredits).toFixed(2) : '—';
+    document.getElementById('cum_total_credits').textContent = totalCredits > 0 ? totalCredits.toFixed(1) : '—';
+  }
+
+  function copyCumGpa() { copyEl('cum_gpa_result'); }
+  function copyEl(id) {
+    const txt = document.getElementById(id).textContent;
+    if (txt === '—') return;
+    navigator.clipboard.writeText(txt).catch(() => { const ta = document.createElement('textarea'); ta.value = txt; document.body.appendChild(ta); ta.select(); document.execCommand('copy'); document.body.removeChild(ta); });
+    const btn = event.currentTarget; const orig = btn.textContent; btn.textContent = '✓'; btn.style.color = 'var(--primary)'; setTimeout(() => { btn.textContent = orig; btn.style.color = ''; }, 1500);
+  }
+
+  function toggleFaq(btn) { const item = btn.closest('.faq-item'); const isOpen = item.classList.contains('open'); document.querySelectorAll('.faq-item.open').forEach(i => i.classList.remove('open')); if (!isOpen) item.classList.add('open'); }
+
+  // 初期化: 2学期 × 3科目
+  addCumSemester();
+  addCumSemester();
+  document.querySelectorAll('.cum-subjects').forEach(c => { addCumSubject(c.nextElementSibling); addCumSubject(c.nextElementSibling); addCumSubject(c.nextElementSibling); });
+  </script>
+
+  <style>
+  .cum-semester { border: 1px solid var(--border); border-radius: 12px; padding: 16px; margin-bottom: 16px; background: var(--card); }
+  .cum-semester-header { display: flex; justify-content: space-between; align-items: center; margin-bottom: 12px; font-weight: 700; color: var(--primary); }
+  .cum-remove-sem { padding: 6px 12px; background: var(--result-bg); border: 1px solid var(--border); border-radius: 6px; color: var(--muted); font-size: 0.8rem; cursor: pointer; }
+  .cum-remove-sem:hover { border-color: #ef4444; color: #ef4444; }
+  .cum-add-subj { margin-top: 8px; padding: 8px 16px; background: transparent; border: 1px dashed var(--border); border-radius: 8px; color: var(--primary); font-size: 0.85rem; cursor: pointer; }
+  .cum-add-subj:hover { border-color: var(--primary); background: rgba(16,185,129,0.1); }
+  </style>
+</Layout>

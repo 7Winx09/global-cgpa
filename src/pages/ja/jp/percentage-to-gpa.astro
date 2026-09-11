@@ -1,0 +1,145 @@
+---
+import Layout from '../../../layouts/Layout.astro';
+import SiteHeader from '../../../components/Nav.astro';
+import SiteFooter from '../../../components/Footer.astro';
+
+const canonical = 'https://globalcgpa.in/ja/jp/percentage-to-gpa/';
+---
+
+<Layout
+  title="パーセンテージ → GPA 換算 | 100点満点を GPA に変換 | GlobalCGPA 日本版"
+  description="100点満点のパーセンテージを GPA（4.0 / 4.3 / 4.5 スケール）に換算。海外大学院出願・留学準備に。大学別の換算基準も解説。"
+  canonical={canonical}
+  alternates={[
+    { hreflang: 'ja', href: 'https://globalcgpa.in/ja/jp/percentage-to-gpa/' },
+    { hreflang: 'en', href: 'https://globalcgpa.in/percentage-to-cgpa/' },
+    { hreflang: 'x-default', href: 'https://globalcgpa.in/percentage-to-cgpa/' },
+  ]}
+  schema={{
+    "@context": "https://schema.org",
+    "@type": "WebApplication",
+    "name": "パーセンテージ → GPA 換算機",
+    "url": canonical,
+    "description": "100点満点を GPA に換算。4.0 / 4.3 / 4.5 スケール対応。留学出願用の目安計算に。",
+    "applicationCategory": "EducationalApplication",
+    "operatingSystem": "Any",
+    "offers": { "@type": "Offer", "price": "0", "priceCurrency": "JPY" },
+    "inLanguage": "ja-JP",
+    "isAccessibleForFree": true
+  }}
+>
+  <SiteHeader />
+
+  <main class="hero-main">
+    <div class="hero-tag">パーセンテージ換算</div>
+    <h1>パーセンテージ → GPA 換算</h1>
+    <p class="subtitle">100点満点（パーセンテージ）を GPA に変換。4.0・4.3・4.5 スケールに対応。海外大学院出願書類の準備や、自身の成績を GPA 基準で把握する際の目安としてご利用ください。</p>
+
+    <div class="main-calc-card">
+      <label for="p2g_pct">パーセンテージ（0-100）</label>
+      <input type="number" id="p2g_pct" min="0" max="100" step="0.1" placeholder="例: 87.5" oninput="calcP2G()">
+
+      <label for="p2g_scale">換算先 GPA スケール</label>
+      <select id="p2g_scale" onchange="calcP2G()">
+        <option value="4.0">4.0 段階（最も一般的・海外標準）</option>
+        <option value="4.3">4.3 段階（早稲田・慶應等）</option>
+        <option value="4.5">4.5 段階（東工大・一橋大等）</option>
+      </select>
+
+      <div class="output-display">
+        <button class="copy-btn" onclick="copyP2G()" title="コピー">⎘</button>
+        <div class="out-val" id="p2g_result">—</div>
+        <div class="out-lbl">換算 GPA</div>
+      </div>
+    </div>
+  </main>
+
+  <section class="bottom-belt-section">
+    <div class="belt-title">関連計算機</div>
+    <div class="belt-grid">
+      <a class="belt-card" href="/ja/jp/gpa-calculator/">🧮 GPA 計算（成績・単位入力）</a>
+      <a class="belt-card" href="/ja/jp/cumulative-gpa/">📈 累積 GPA 計算</a>
+      <a class="belt-card" href="/ja/jp/gpa-to-percentage/">🔁 GPA → パーセンテージ</a>
+      <a class="belt-card" href="/ja/jp/university-gpa/">🏫 大学別 GPA 計算</a>
+    </div>
+  </section>
+
+  <article class="seo-article" itemscope itemtype="https://schema.org/Article">
+    <hr class="seo-divider">
+
+    <h2 itemprop="headline">パーセンテージから GPA への換算方法と注意点</h2>
+
+    <h2>換算の基本式（線形換算）</h2>
+    <p>最も一般的な換算は線形換算です。パーセンテージを 100 で割り、目標スケールの最高点を掛けます。</p>
+    <div class="seo-formula-block">
+      <div class="formula-label">線形換算式</div>
+      <div class="formula-text">GPA = （パーセンテージ ÷ 100）× 目標スケール最高点</div>
+      <div class="formula-example">例：85% → 4.0スケール = (85 ÷ 100) × 4.0 = 3.40</div>
+    </div>
+
+    <h3>スケール別の換算例</h3>
+    <div class="seo-table-wrap">
+      <table class="seo-table">
+        <thead><tr><th>パーセンテージ</th><th>4.0 スケール</th><th>4.3 スケール</th><th>4.5 スケール</th></tr></thead>
+        <tbody>
+          <tr><td>100%</td><td>4.00</td><td>4.30</td><td>4.50</td></tr>
+          <tr><td>90%</td><td>3.60</td><td>3.87</td><td>4.05</td></tr>
+          <tr><td>80%</td><td>3.20</td><td>3.44</td><td>3.60</td></tr>
+          <tr><td>70%</td><td>2.80</td><td>3.01</td><td>3.15</td></tr>
+          <tr><td>60%</td><td>2.40</td><td>2.58</td><td>2.70</td></tr>
+          <tr><td>50%</td><td>2.00</td><td>2.15</td><td>2.25</td></tr>
+        </tbody>
+      </table>
+    </div>
+
+    <h2>重要：大学ごとの換算基準が異なる場合があります</h2>
+    <p>上記は機械的な線形換算の目安です。実際の留学出願では、以下の点にご注意ください：</p>
+    <ul>
+      <li><strong>出願先大学の指定方式を最優先</strong>：多くの海外大学は独自の換算表や、WES 等の資格評価機関を通じた公式換算を要求します。</li>
+      <li><strong>成績分布を考慮する大学も</strong>：単純な線形換算ではなく、自大学での成績分布（上位何％か）で判断するケースがあります。</li>
+      <li><strong>日本の大学公式換算</strong>：一部の大学（東京大学、京都大学等）は独自の「GPA 換算証明書」を発行しています。発行可能か留学センター等で確認してください。</li>
+    </ul>
+
+    <h2>よくある質問</h2>
+    <div class="faq-section" itemscope itemtype="https://schema.org/FAQPage">
+      <div class="faq-group-label">換算方法</div>
+
+      <div class="faq-item" itemscope itemprop="mainEntity" itemtype="https://schema.org/Question">
+        <button class="faq-q" onclick="toggleFaq(this)" itemprop="name">パーセンテージから GPA を正確に出す方法は？<span class="faq-icon">+</span></button>
+        <div class="faq-a" itemscope itemprop="acceptedAnswer" itemtype="https://schema.org/Answer"><div itemprop="text">正確な GPA には「各科目のグレード（A/B/C等）と単位数」が必要です。パーセンテージのみからは概算しか出せません。可能なら成績表のグレードを用いて <a href="/ja/jp/gpa-calculator/">GPA 計算機</a> で計算してください。</div></div>
+      </div>
+
+      <div class="faq-item" itemscope itemprop="mainEntity" itemtype="https://schema.org/Question">
+        <button class="faq-q" onclick="toggleFaq(this)" itemprop="name">90点以上なら 4.0 になりますか？<span class="faq-icon">+</span></button>
+        <div class="faq-a" itemscope itemprop="acceptedAnswer" itemtype="https://schema.org/Answer"><div itemprop="text">線形換算では 100% = 4.0 ですが、多くの大学で A（90-100点）は 4.0 とされます。ただし A+ が 4.3 や 4.5 になるスケールでは 90% でも 4.0 を超えることがあります。大学の評価基準を確認してください。</div></div>
+      </div>
+
+      <div class="faq-group-label">留学出願</div>
+
+      <div class="faq-item" itemscope itemprop="mainEntity" itemtype="https://schema.org/Question">
+        <button class="faq-q" onclick="toggleFaq(this)" itemprop="name">海外大学院出願でこの換算値を使えますか？<span class="faq-icon">+</span></button>
+        <div class="faq-a" itemscope itemprop="acceptedAnswer" itemtype="https://schema.org/Answer"><div itemprop="text">あくまで「自己申告用の目安」です。正式な出願では、大学発行の成績証明書（GPA 記載版）や、WES 等の評価機関による公式換算レポートが必要な場合が多いです。募集要項の「GPA requirement」欄を必ず確認してください。</div></div>
+      </div>
+
+      <div class="faq-item" itemscope itemprop="mainEntity" itemtype="https://schema.org/Question">
+        <button class="faq-q" onclick="toggleFaq(this)" itemprop="name">大学が公式換算証明書を出してくれない場合は？<span class="faq-icon">+</span></button>
+        <div class="faq-a" itemscope itemprop="acceptedAnswer" itemtype="https://schema.org/Answer"><div itemprop="text">所属大学の留学支援室・教務課に相談し、「海外出願用に GPA 記載の成績証明書が必要」と伝えてみてください。無理な場合は、出願先大学に「所属大学は GPA 制度ではないが、成績分布は以下の通り」と説明文を添えて相談するケースもあります。</div></div>
+      </div>
+    </div>
+  </article>
+
+  <SiteFooter />
+
+  <script is:inline>
+  function calcP2G() {
+    const pct = parseFloat(document.getElementById('p2g_pct').value);
+    const scale = parseFloat(document.getElementById('p2g_scale').value);
+    if (isNaN(pct)) { document.getElementById('p2g_result').textContent = '—'; return; }
+    const gpa = Math.min(scale, Math.max(0, (pct / 100) * scale)).toFixed(2);
+    document.getElementById('p2g_result').textContent = gpa;
+  }
+  function copyP2G() { copyEl('p2g_result'); }
+  function copyEl(id) { const txt = document.getElementById(id).textContent; if (txt === '—') return; navigator.clipboard.writeText(txt).catch(() => { const ta = document.createElement('textarea'); ta.value = txt; document.body.appendChild(ta); ta.select(); document.execCommand('copy'); document.body.removeChild(ta); }); const btn = event.currentTarget; const orig = btn.textContent; btn.textContent = '✓'; btn.style.color = 'var(--primary)'; setTimeout(() => { btn.textContent = orig; btn.style.color = ''; }, 1500); }
+  function toggleFaq(btn) { const item = btn.closest('.faq-item'); const isOpen = item.classList.contains('open'); document.querySelectorAll('.faq-item.open').forEach(i => i.classList.remove('open')); if (!isOpen) item.classList.add('open'); }
+  </script>
+</Layout>

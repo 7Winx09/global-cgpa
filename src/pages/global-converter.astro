@@ -1,0 +1,331 @@
+---
+import Layout from '../layouts/Layout.astro';
+import SiteHeader from '../components/Nav.astro';
+import SiteFooter from '../components/Footer.astro';
+
+const pageTitle = 'Global Grade Converter — CGPA to GPA, Percentage & International Grades';
+const pageDescription = 'Convert your grades to Germany (Bavarian Formula), UK Honours, US 4.0 GPA and more. Free academic reference calculator with verified institutional formulas. Fast, accurate, no login required.';
+const canonicalUrl = 'https://globalcgpa.in/global-converter';
+
+const schema = {
+  "@context": "https://schema.org",
+  "@type": "WebApplication",
+  "name": "Global Grade Converter",
+  "url": "https://globalcgpa.in/global-converter",
+  "description": "Convert CGPA, percentage, and grades to Germany (Bavarian), UK Honours, US 4.0 GPA scales. Verified against published university ordinances.",
+  "applicationCategory": "EducationalApplication",
+  "operatingSystem": "Any",
+  "offers": { "@type": "Offer", "price": "0", "priceCurrency": "INR" },
+  "inLanguage": "en-IN",
+  "isAccessibleForFree": true
+};
+---
+
+<Layout
+  title={pageTitle}
+  description={pageDescription}
+  canonical={canonicalUrl}
+  schema={schema}
+  alternates={[
+    { hreflang: 'en', href: 'https://globalcgpa.in/global-converter' },
+    { hreflang: 'x-default', href: 'https://globalcgpa.in/global-converter' },
+  ]}
+>
+<style>
+  :root {
+    --bg: #111827;
+    --card: #1F2937;
+    --text: #F3F4F6;
+    --muted: #9CA3AF;
+    --primary: #10B981;
+    --primary-dark: #059669;
+    --border: #374151;
+    --shadow: rgba(0,0,0,0.4);
+    --result-bg: #111827;
+  }
+
+  html.light-theme, [data-theme="light"] {
+    --bg: #F8FAFC;
+    --card: #FFFFFF;
+    --text: #0F172A;
+    --muted: #64748B;
+    --primary: #059669;
+    --primary-dark: #047857;
+    --border: #E2E8F0;
+    --shadow: rgba(15, 23, 42, 0.08);
+    --result-bg: #F1F5F9;
+  }
+
+  * { box-sizing: border-box; margin: 0; padding: 0; }
+  body {
+    font-family: 'Inter', system-ui, -apple-system, sans-serif;
+    background: var(--bg); color: var(--text); line-height: 1.5;
+    transition: background 0.25s ease, color 0.25s ease;
+  }
+
+  .global-hero {
+    display: flex; flex-direction: column; justify-content: center;
+    align-items: center; padding: 48px 20px; text-align: center;
+    max-width: 800px; margin: 0 auto; width: 100%;
+  }
+
+  .hero-tag {
+    text-transform: uppercase; font-size: 0.72rem; font-weight: 700;
+    letter-spacing: 1.5px; color: var(--primary); background: rgba(0,210,133,0.1);
+    padding: 4px 12px; border-radius: 999px; margin-bottom: 14px; display: inline-block;
+  }
+
+  .global-hero h1 {
+    font-size: clamp(2rem, 5vw, 2.8rem); font-weight: 900;
+    letter-spacing: -1px; line-height: 1.2; margin-bottom: 10px;
+  }
+
+  .global-hero .subtitle {
+    color: var(--muted); font-size: 1rem; max-width: 600px; margin-bottom: 36px;
+  }
+
+  .converter-card {
+    background: var(--card); border: 1px solid var(--border);
+    box-shadow: 0 20px 40px var(--shadow), 0 1px 3px rgba(0,0,0,0.02);
+    border-radius: 24px; padding: 32px; width: 100%; max-width: 560px; margin: 0 auto;
+  }
+
+  .label {
+    display: block; font-size: 0.78rem; font-weight: 700;
+    text-transform: uppercase; letter-spacing: 0.5px; margin-bottom: 6px; color: var(--muted);
+  }
+
+  .select-wrapper {
+    margin-bottom: 20px;
+  }
+
+  .calc-select {
+    width: 100%; padding: 14px 16px; border: 1px solid var(--border);
+    background: var(--result-bg); color: var(--text); font-size: 1rem;
+    font-weight: 500; border-radius: 14px; margin-bottom: 20px;
+    transition: border-color 0.2s; appearance: none; font-family: inherit;
+  }
+
+  .calc-select:focus { outline: none; border-color: var(--primary); }
+
+  .input-group {
+    margin-bottom: 20px;
+  }
+
+  .calc-input {
+    width: 100%; padding: 14px 16px; border: 1px solid var(--border);
+    background: var(--result-bg); color: var(--text); font-size: 1rem;
+    font-weight: 500; border-radius: 14px;
+    transition: border-color 0.2s; font-family: inherit;
+  }
+
+  .calc-input:focus { outline: none; border-color: var(--primary); }
+
+  .input-hint {
+    font-size: 0.75rem; color: var(--muted); margin-top: 6px;
+    font-family: 'Courier New', monospace;
+  }
+
+  .output-display {
+    background: var(--result-bg); border-radius: 16px; padding: 24px;
+    text-align: center; margin-top: 8px; border: 1px solid var(--border); position: relative;
+  }
+
+  .out-val { font-size: 2.5rem; font-weight: 800; color: var(--primary); line-height: 1.1; margin-bottom: 4px; }
+  .out-lbl { font-size: 0.75rem; color: var(--muted); text-transform: uppercase; font-weight: 700; letter-spacing: 1px; }
+  .out-formula { font-size: 0.8rem; color: var(--muted); margin-top: 12px; font-family: 'Courier New', monospace; }
+
+  .ad-slot {
+    text-align: center; padding: 16px 0; margin: 20px 0;
+    border-top: 1px dashed var(--border);
+    border-bottom: 1px dashed var(--border);
+  }
+
+  .ad-label { font-size: 0.7rem; font-weight: 700; text-transform: uppercase; letter-spacing: 1px; color: var(--muted); }
+
+  .info-grid {
+    display: grid; grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+    gap: 16px; margin-top: 32px;
+  }
+
+  .info-card {
+    background: var(--card); border: 1px solid var(--border);
+    border-radius: 16px; padding: 20px;
+  }
+
+  .info-card h3 { font-size: 1rem; font-weight: 700; color: var(--text); margin-bottom: 8px; }
+  .info-card p { font-size: 0.88rem; color: var(--muted); line-height: 1.6; }
+  .info-card .formula { font-family: 'Courier New', monospace; font-size: 0.8rem; color: var(--primary); background: var(--result-bg); padding: 8px 12px; border-radius: 8px; margin-top: 8px; display: inline-block; }
+
+  .disclaimer {
+    margin-top: 24px; padding: 16px; background: var(--result-bg);
+    border: 1px solid var(--border); border-radius: 12px;
+    font-size: 0.8rem; color: var(--muted); line-height: 1.6;
+  }
+
+  .disclaimer strong { color: var(--text); }
+
+  @media (max-width: 540px) {
+    .converter-card { padding: 20px; }
+    .global-hero h1 { font-size: 1.85rem; }
+  }
+</style>
+
+<SiteHeader />
+
+<main class="global-hero">
+  <div class="hero-tag">International Grade Conversion</div>
+  <h1>Global Grade Converter</h1>
+  <p class="subtitle">Convert your CGPA, percentage, or grades to German (Bavarian Formula), UK Honours Class, or US 4.0 GPA scales. Formulas cross-referenced and verified against published university academic ordinances.</p>
+
+  <!-- AD_SLOT_GLOBAL_TOP -->
+  <div class="ad-slot">
+    <span class="ad-label">Advertisement</span>
+    <!-- AD_SLOT_GLOBAL_TOP -->
+  </div>
+
+  <div class="converter-card">
+    <div class="select-wrapper">
+      <label for="destination-system">Destination System</label>
+      <select id="destination-system" class="calc-select">
+        <option value="germany">Germany — Bavarian Formula (1.0 – 5.0)</option>
+        <option value="uk">United Kingdom — Honours Classification</option>
+        <option value="us">United States — 4.0 GPA Scale</option>
+      </select>
+    </div>
+
+    <div class="input-group">
+      <label for="score-input" id="score-label">Enter Percentage Score (0 – 100)</label>
+      <input type="number" id="score-input" class="calc-input" step="0.01" min="0" max="100" placeholder="e.g. 78.5" oninput="calculate()">
+      <div class="input-hint" id="input-hint">Input: Percentage (0–100)</div>
+    </div>
+
+    <div class="output-display" id="output-display">
+      <div class="out-val" id="output-value">—</div>
+      <div class="out-lbl" id="output-label">Converted Grade</div>
+      <div class="out-formula" id="output-formula"></div>
+    </div>
+  </div>
+
+  <div class="info-grid" id="info-cards">
+    <div class="info-card">
+      <h3>Germany — Bavarian Formula</h3>
+      <p>Used by German universities for international admission. Formula: <strong>1 + 3 × ((Max − Score) / (Max − MinPass))</strong>. Output clamped to <strong>1.0 (best) – 5.0 (fail)</strong>.</p>
+      <div class="formula" id="formula-germany">1 + 3 × ((100 − Score) / (100 − 50))</div>
+    </div>
+    <div class="info-card">
+      <h3>UK — Honours Classification</h3>
+      <p>Standard degree classification bands used across UK universities. First ≥70%, Upper Second (2:1) ≥60%, Lower Second (2:2) ≥50%, Third ≥40%, Fail <40%.</p>
+      <div class="formula" id="formula-uk">≥70% → 1st Class | ≥60% → 2:1 | ≥50% → 2:2 | ≥40% → 3rd | <40% → Fail</div>
+    </div>
+    <div class="info-card">
+      <h3>US — 4.0 GPA Scale</h3>
+      <p>Linear mapping commonly used for international transcript evaluation. Percentage ÷ 25 = GPA (capped at 4.0). Many US universities use WES or internal tables; this provides a baseline estimate.</p>
+      <div class="formula" id="formula-us">GPA = min(Percentage / 25, 4.0)</div>
+    </div>
+  </div>
+
+  <div class="disclaimer">
+    <strong>Academic Reference Notice:</strong> This tool provides estimates based on widely published conversion formulas. For official admissions, visa, or employment purposes, always request a formal credential evaluation from the receiving institution or an accredited evaluation service (e.g., WES, uni-assist, NARIC). Formulas are cross-referenced and verified against published university academic ordinances where available.
+  </div>
+</main>
+
+<SiteFooter />
+
+<script is:inline>
+// Configuration per destination system
+const SYSTEM_CONFIG = {
+  germany: {
+    label: 'German Grade (1.0 – 5.0)',
+    inputLabel: 'Enter Percentage Score (0 – 100)',
+    hint: 'Input: Percentage (0–100)',
+    max: 100,
+    minPassing: 50,
+    maxPossible: 100,
+    calculate: (score) => {
+      const max = 100;
+      const minPass = 50;
+      // Bavarian Formula: 1 + 3 * ((Max - Score) / (Max - MinPass))
+      let result = 1 + 3 * ((max - score) / (max - minPass));
+      // Clamp between 1.0 and 5.0
+      result = Math.max(1.0, Math.min(5.0, result));
+      return result.toFixed(1);
+    },
+    formulaText: (score) => `1 + 3 × ((100 − ${score}) / (100 − 50)) = ${(1 + 3 * ((100 - score) / 50)).toFixed(2)} → clamped to ${(1 + 3 * ((100 - score) / 50)).toFixed(1)}`
+  },
+  uk: {
+    label: 'UK Honours Class',
+    inputLabel: 'Enter Percentage Score (0 – 100)',
+    hint: 'Input: Percentage (0–100)',
+    max: 100,
+    calculate: (score) => {
+      if (score >= 70) return 'First Class Honours (1st)';
+      if (score >= 60) return 'Upper Second Class (2:1)';
+      if (score >= 50) return 'Lower Second Class (2:2)';
+      if (score >= 40) return 'Third Class (3rd)';
+      return 'Fail';
+    },
+    formulaText: (score) => {
+      if (score >= 70) return `${score}% ≥ 70% → First Class Honours (1st)`;
+      if (score >= 60) return `${score}% ≥ 60% → Upper Second Class (2:1)`;
+      if (score >= 50) return `${score}% ≥ 50% → Lower Second Class (2:2)`;
+      if (score >= 40) return `${score}% ≥ 40% → Third Class (3rd)`;
+      return `${score}% < 40% → Fail`;
+    }
+  },
+  us: {
+    label: 'US GPA (4.0 Scale)',
+    inputLabel: 'Enter Percentage Score (0 – 100)',
+    hint: 'Input: Percentage (0–100)',
+    max: 100,
+    calculate: (score) => {
+      const gpa = Math.min(score / 25, 4.0);
+      return gpa.toFixed(2);
+    },
+    formulaText: (score) => {
+      const gpa = Math.min(score / 25, 4.0);
+      return `min(${score} / 25, 4.0) = ${gpa.toFixed(2)}`;
+    }
+  }
+};
+
+let currentSystem = 'germany';
+
+const systemSelect = document.getElementById('destination-system');
+const scoreInput = document.getElementById('score-input');
+const scoreLabel = document.getElementById('score-label');
+const inputHint = document.getElementById('input-hint');
+const outputValue = document.getElementById('output-value');
+const outputLabel = document.getElementById('output-label');
+const outputFormula = document.getElementById('output-formula');
+
+systemSelect.addEventListener('change', () => {
+  currentSystem = systemSelect.value;
+  const cfg = SYSTEM_CONFIG[currentSystem];
+  scoreLabel.textContent = cfg.inputLabel;
+  scoreInput.max = cfg.max;
+  scoreInput.placeholder = 'e.g. 78.5';
+  inputHint.textContent = cfg.hint;
+  outputLabel.textContent = cfg.label;
+  calculate();
+});
+
+function calculate() {
+  const cfg = SYSTEM_CONFIG[currentSystem];
+  const raw = parseFloat(scoreInput.value);
+
+  if (isNaN(raw) || raw < 0 || raw > cfg.max) {
+    outputValue.textContent = '—';
+    outputFormula.textContent = '';
+    return;
+  }
+
+  const result = cfg.calculate(raw);
+  outputValue.textContent = result;
+  outputFormula.textContent = `Formula: ${cfg.formulaText(raw)}`;
+}
+
+// Initial calculation
+calculate();
+</script>
+</Layout>

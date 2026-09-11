@@ -1,0 +1,182 @@
+---
+import Layout from '../../../layouts/Layout.astro';
+import SiteHeader from '../../../components/Nav.astro';
+import SiteFooter from '../../../components/Footer.astro';
+
+const canonical = 'https://globalcgpa.in/ja/jp/university-gpa/';
+---
+
+<Layout
+  title="大学別 GPA 計算・換算 | 主要大学の評価方式まとめ | GlobalCGPA 日本版"
+  description="東京大・京都大・早稲田・慶應・東工大・一橋大等、主要大学の GPA 評価スケール（4.0/4.3/4.5）と換算方法をまとめ。あなたの大学に合わせた正確な計算が可能。"
+  canonical={canonical}
+  alternates={[
+    { hreflang: 'ja', href: 'https://globalcgpa.in/ja/jp/university-gpa/' },
+    { hreflang: 'en', href: 'https://globalcgpa.in/#universities' },
+    { hreflang: 'x-default', href: 'https://globalcgpa.in/#universities' },
+  ]}
+  schema={{
+    "@context": "https://schema.org",
+    "@type": "CollectionPage",
+    "name": "大学別 GPA 計算・換算ガイド",
+    "url": canonical,
+    "description": "日本の主要大学の GPA 評価方式・スケール・換算方法を網羅。",
+    "inLanguage": "ja-JP"
+  }}
+>
+  <SiteHeader />
+
+  <main class="hero-main">
+    <div class="hero-tag">大学別対応</div>
+    <h1>大学別 GPA 計算・換算ガイド</h1>
+    <p class="subtitle">主要大学の評価スケール（4.0 / 4.3 / 4.5 / 5段階）と公式換算方法を掲載。あなたの大学を選んで正確な GPA を算出、または留学出願用の換算目安を確認できます。</p>
+
+    <div class="main-calc-card" style="max-width: 600px; text-align: left;">
+      <label for="uni_select">大学を選択して計算機へ</label>
+      <select id="uni_select" onchange="goToUniCalc()">
+        <option value="">-- 大学を選択 --</option>
+        <optgroup label="4.0 段階評価">
+          <option value="/ja/jp/university/tokyo/">東京大学 (4.0)</option>
+          <option value="/ja/jp/university/kyoto/">京都大学 (4.0)</option>
+          <option value="/ja/jp/university/osaka/">大阪大学 (4.0)</option>
+          <option value="/ja/jp/university/tohoku/">東北大学 (4.0)</option>
+          <option value="/ja/jp/university/nagoya/">名古屋大学 (4.0)</option>
+          <option value="/ja/jp/university/hiroshima/">広島大学 (4.0)</option>
+          <option value="/ja/jp/university/kyushu/">九州大学 (4.0)</option>
+        </optgroup>
+        <optgroup label="4.3 段階評価">
+          <option value="/ja/jp/university/waseda/">早稲田大学 (4.3)</option>
+          <option value="/ja/jp/university/keio/">慶應義塾大学 (4.3)</option>
+          <option value="/ja/jp/university/rikkyo/">立教大学 (4.3)</option>
+          <option value="/ja/jp/university/meiji/">明治大学 (4.3)</option>
+        </optgroup>
+        <optgroup label="4.5 段階評価">
+          <option value="/ja/jp/university/titech/">東京工業大学 (4.5)</option>
+          <option value="/ja/jp/university/hitotsubashi/">一橋大学 (4.5)</option>
+        </optgroup>
+        <optgroup label="その他・5段階等">
+          <option value="/ja/jp/university/sophia/">上智大学</option>
+          <option value="/ja/jp/university/icu/">国際基督教大学 (ICU)</option>
+          <option value="/ja/jp/university/apu/">立命館アジア太平洋大学</option>
+        </optgroup>
+      </select>
+      <p style="margin-top:12px; font-size:0.85rem; color:var(--muted);">掲載されていない大学は <a href="/ja/jp/gpa-calculator/">汎用 GPA 計算機</a> でスケールを選んで計算できます。</p>
+    </div>
+  </main>
+
+  <section class="bottom-belt-section" style="border-top:none; padding-top:0;">
+    <div class="belt-title">評価スケール別 一覧</div>
+    <div class="belt-grid uni-belt">
+      <div class="belt-card uni-card" style="cursor:default;">
+        <span class="uni-card-name">4.0 段階</span>
+        <span class="uni-card-formula">最も一般的・A=4.0, B=3.0, C=2.0, D=1.0, F=0</span>
+      </div>
+      <div class="belt-card uni-card" style="cursor:default;">
+        <span class="uni-card-name">4.3 段階</span>
+        <span class="uni-card-formula">早稲田・慶應等・A+=4.3, A=4.0, A-=3.7...</span>
+      </div>
+      <div class="belt-card uni-card" style="cursor:default;">
+        <span class="uni-card-name">4.5 段階</span>
+        <span class="uni-card-formula">東工大・一橋大等・A=4.5, B=3.5, C=2.5...</span>
+      </div>
+      <div class="belt-card uni-card" style="cursor:default;">
+        <span class="uni-card-name">5 段階</span>
+        <span class="uni-card-formula">S/A/B/C/D または 5/4/3/2/1</span>
+      </div>
+    </div>
+  </section>
+
+  <article class="seo-article" itemscope itemtype="https://schema.org/Article">
+    <hr class="seo-divider">
+
+    <h2 itemprop="headline">主要大学の GPA 評価方式一覧</h2>
+
+    <h2>4.0 段階評価を採用する主な大学</h2>
+    <p>国公立大学の多くと、多くの私立大学で採用されている標準的な方式です。</p>
+    <div class="seo-table-wrap">
+      <table class="seo-table">
+        <thead><tr><th>大学</th><th>スケール</th><th>グレードポイント例</th><th>備考</th></tr></thead>
+        <tbody>
+          <tr><td>東京大学</td><td>4.0</td><td>A+=4.0, A=3.5, B=3.0, C=2.0, D=1.0, F=0</td><td>学部により運用差あり</td></tr>
+          <tr><td>京都大学</td><td>4.0</td><td>S=4.0, A=3.5, B=3.0, C=2.0, D=1.0, F=0</td><td>S/A/B/C/D 表記</td></tr>
+          <tr><td>大阪大学</td><td>4.0</td><td>A=4.0, B=3.0, C=2.0, D=1.0, F=0</td><td></td></tr>
+          <tr><td>東北大学</td><td>4.0</td><td>A=4.0, B=3.0, C=2.0, D=1.0, F=0</td><td></td></tr>
+          <tr><td>名古屋大学</td><td>4.0</td><td>A=4.0, B=3.0, C=2.0, D=1.0, F=0</td><td></td></tr>
+          <tr><td>北海道大学</td><td>4.0</td><td>A=4.0, B=3.0, C=2.0, D=1.0, F=0</td><td></td></tr>
+          <tr><td>九州大学</td><td>4.0</td><td>A=4.0, B=3.0, C=2.0, D=1.0, F=0</td><td></td></tr>
+        </tbody>
+      </table>
+    </div>
+
+    <h2>4.3 段階評価を採用する主な大学</h2>
+    <p>早稲田大学・慶應義塾大学を中心に、プラス/マイナス評価を細分化した方式です。</p>
+    <div class="seo-table-wrap">
+      <table class="seo-table">
+        <thead><tr><th>大学</th><th>スケール</th><th>グレードポイント例</th><th>備考</th></tr></thead>
+        <tbody>
+          <tr><td>早稲田大学</td><td>4.3</td><td>A+=4.3, A=4.0, A-=3.7, B+=3.3, B=3.0...</td><td>学部により A+ 扱い異なる場合あり</td></tr>
+          <tr><td>慶應義塾大学</td><td>4.3</td><td>A+=4.3, A=4.0, A-=3.7, B+=3.3, B=3.0...</td><td>学部・学科で詳細異なる場合あり</td></tr>
+          <tr><td>立教大学</td><td>4.3</td><td>A+=4.3, A=4.0, A-=3.7...</td><td></td></tr>
+          <tr><td>明治大学</td><td>4.3</td><td>A+=4.3, A=4.0, A-=3.7...</td><td>一部学部で 4.0 採用の場合あり</td></tr>
+        </tbody>
+      </table>
+    </div>
+
+    <h2>4.5 段階評価を採用する主な大学</h2>
+    <p>東京工業大学・一橋大学等で採用。0.5 刻みの評価です。</p>
+    <div class="seo-table-wrap">
+      <table class="seo-table">
+        <thead><tr><th>大学</th><th>スケール</th><th>グレードポイント例</th><th>備考</th></tr></thead>
+        <tbody>
+          <tr><td>東京工業大学</td><td>4.5</td><td>A=4.5, B=3.5, C=2.5, D=1.5, F=0</td><td></td></tr>
+          <tr><td>一橋大学</td><td>4.5</td><td>A=4.5, B=3.5, C=2.5, D=1.5, F=0</td><td></td></tr>
+        </tbody>
+      </table>
+    </div>
+
+    <h2>その他の評価方式</h2>
+    <div class="seo-table-wrap">
+      <table class="seo-table">
+        <thead><tr><th>大学</th><th>方式</th><th>備考</th></tr></thead>
+        <tbody>
+          <tr><td>上智大学</td><td>4.0 段階相当</td><td>グレード制、換算は学部確認</td></tr>
+          <tr><td>国際基督教大学 (ICU)</td><td>4.0 段階</td><td>米国式に近い運用</td></tr>
+          <tr><td>立命館アジア太平洋大学</td><td>4.0 / 100点併用</td><td>英語ベースカリキュラム</td></tr>
+        </tbody>
+      </table>
+    </div>
+
+    <h2>大学別計算機へのリンク（準備中）</h2>
+    <p>各大学専用の計算機ページを順次公開予定です。現時点では上部のセレクタから汎用計算機に遷移し、スケールを合わせてご利用ください。公式な換算式・履修取消・再履修の扱い等は、必ず所属学部の履修要項でご確認ください。</p>
+
+    <h2>よくある質問</h2>
+    <div class="faq-section" itemscope itemtype="https://schema.org/FAQPage">
+      <div class="faq-group-label">大学別</div>
+
+      <div class="faq-item" itemscope itemprop="mainEntity" itemtype="https://schema.org/Question">
+        <button class="faq-q" onclick="toggleFaq(this)" itemprop="name">自分の大学がどのスケールか分かりません<span class="faq-icon">+</span></button>
+        <div class="faq-a" itemscope itemprop="acceptedAnswer" itemtype="https://schema.org/Answer"><div itemprop="text">成績証明書や履修要項の「成績評価基準」「GPA 算出方法」欄を確認してください。最高点が 4.0 なら 4.0 段階、4.3 なら 4.3 段階、4.5 なら 4.5 段階です。不明な場合は教務課に問い合わせるのが確実です。</div></div>
+      </div>
+
+      <div class="faq-item" itemscope itemprop="mainEntity" itemtype="https://schema.org/Question">
+        <button class="faq-q" onclick="toggleFaq(this)" itemprop="name">同一大学でも学部でスケールが違いますか？<span class="faq-icon">+</span></button>
+        <div class="faq-a" itemscope itemprop="acceptedAnswer" itemtype="https://schema.org/Answer"><div itemprop="text">はい、稀にあります。例：明治大学は全学で 4.3 ですが、一部学部で 4.0 を採用しています。必ず「所属学部の履修要項」で確認してください。</div></div>
+      </div>
+
+      <div class="faq-item" itemscope itemprop="mainEntity" itemtype="https://schema.org/Question">
+        <button class="faq-q" onclick="toggleFaq(this)" itemprop="name">大学別の専用計算機はいつ公開されますか？<span class="faq-icon">+</span></button>
+        <div class="faq-a" itemscope itemprop="acceptedAnswer" itemtype="https://schema.org/Answer"><div itemprop="text">順次追加予定です。リクエストがある大学を優先しますので、お問い合わせフォームからご要望ください。</div></div>
+      </div>
+    </div>
+  </article>
+
+  <SiteFooter />
+
+  <script is:inline>
+  function goToUniCalc() {
+    const sel = document.getElementById('uni_select');
+    if (sel.value) window.location.href = sel.value;
+  }
+  function toggleFaq(btn) { const item = btn.closest('.faq-item'); const isOpen = item.classList.contains('open'); document.querySelectorAll('.faq-item.open').forEach(i => i.classList.remove('open')); if (!isOpen) item.classList.add('open'); }
+  </script>
+</Layout>

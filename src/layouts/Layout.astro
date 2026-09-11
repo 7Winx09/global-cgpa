@@ -7,16 +7,18 @@ interface Props {
   schema?: Record<string, unknown>;
   lang?: string;
   alternates?: { hreflang: string; href: string }[];
+  noIndex?: boolean;
 }
 
 const {
-  title = 'CGPA to Percentage Calculator | GlobalCGPA',
-  description = 'Free CGPA to percentage calculator. Convert CGPA, SGPA & GPA instantly using university-specific formulas for SPPU, VTU, Mumbai University, Anna University & more.',
+  title = 'CGPA to Percentage Calculator | Fast Reference Converter',
+  description = 'Free CGPA to percentage calculator. Convert CGPA, SGPA & GPA instantly using university-specific formulas for SPPU, VTU, Mumbai University, Anna University & more. Calculate percentage from CGPA online quickly using verified institutional multipliers.',
   canonical = 'https://globalcgpa.in',
   ogImage = '/og-image.png',
   schema,
   lang = 'en',
   alternates,
+  noIndex = false,
 } = Astro.props;
 
 import '../styles/global.css';
@@ -26,7 +28,7 @@ const defaultSchema = {
   "@type": "WebApplication",
   "name": "GlobalCGPA — CGPA to Percentage Calculator",
   "url": "https://globalcgpa.in",
-  "description": "Free online CGPA to percentage calculator supporting SPPU, VTU, Mumbai University, Anna University and more.",
+  "description": "Free online CGPA to percentage calculator supporting SPPU, VTU, Mumbai University, Anna University and more. Calculate percentage from CGPA online quickly using verified institutional multipliers.",
   "applicationCategory": "EducationalApplication",
   "operatingSystem": "Any",
   "offers": { "@type": "Offer", "price": "0", "priceCurrency": "INR" },
@@ -40,7 +42,7 @@ const organizationSchema = {
   "name": "GlobalCGPA",
   "url": "https://globalcgpa.in",
   "logo": "https://globalcgpa.in/og-image.png",
-  "description": "Free CGPA to percentage calculator for Indian university students. Supports SPPU, VTU, Mumbai University, Anna University, AKTU, GTU, KTU and more with official formulas.",
+  "description": "Free CGPA to percentage calculator for Indian university students. Supports SPPU, VTU, Mumbai University, Anna University, AKTU, GTU, KTU and more. Formulas cross-referenced and verified against published university academic ordinances.",
   "contactPoint": {
     "@type": "ContactPoint",
     "telephone": "",
@@ -56,7 +58,7 @@ const websiteSchema = {
   "@type": "WebSite",
   "name": "GlobalCGPA",
   "url": "https://globalcgpa.in",
-  "description": "Free CGPA to percentage calculator for Indian university students.",
+  "description": "Free CGPA to percentage calculator for Indian university students. Academic Reference Hub for grade conversion.",
   "publisher": {
     "@type": "Organization",
     "name": "GlobalCGPA"
@@ -68,6 +70,11 @@ const structuredData = JSON.stringify(schema ?? defaultSchema);
 const structuredDataOrg = JSON.stringify(organizationSchema);
 const structuredDataWebsite = JSON.stringify(websiteSchema);
 const ogLocale = lang === 'hi' ? 'hi_IN' : 'en_IN';
+
+const canonicalUrl = canonical.startsWith('http') ? canonical : `https://globalcgpa.in${canonical}`;
+const fullOgImage = ogImage.startsWith('http') ? ogImage : `https://globalcgpa.in${ogImage}`;
+
+const pageKeywords = 'cgpa to percentage, cgpa to percentage calculator, cgpa calculator, gpa calculator, sgpa to cgpa, percentage converter, sppu cgpa, vtu cgpa, anna university cgpa, mumbai university cgpa, aktu cgpa, gtu cgpa, ktu cgpa, du cgpa, cgpa to gpa 4.0, percentage to cgpa, marks to cgpa, sgpa to percentage, cgpa conversion chart, cbse cgpa to percentage, engineering cgpa calculator, university cgpa calculator, cgpa equivalence certificate, cgpa full form, cgpa meaning, how to convert cgpa to percentage, cgpa grade conversion, sgpa cgpa difference, first class cgpa, distinction cgpa, pass cgpa, gpa 計算方法, gpa 計算, gpa計算, gpa計算方法, gpa 計算方法 5段階, gpa計算サイト, gpa 計算 4段階, 日本 gpa 計算, 日本の大学 gpa 計算';
 ---
 
 <!doctype html>
@@ -75,7 +82,7 @@ const ogLocale = lang === 'hi' ? 'hi_IN' : 'en_IN';
   <head>
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <meta name="robots" content="index, follow" />
+    <meta name="robots" content={noIndex ? 'noindex, nofollow' : 'index, follow'} />
 
     <!-- Theme Initialization (Anti-FOUC) -->
     <script is:inline>
@@ -97,16 +104,16 @@ const ogLocale = lang === 'hi' ? 'hi_IN' : 'en_IN';
     <!-- Primary Meta -->
     <title>{title}</title>
     <meta name="description" content={description} />
-    <link rel="canonical" href={canonical} />
+    <link rel="canonical" href={canonicalUrl} />
     {alternates?.map((a) => <link rel="alternate" hreflang={a.hreflang} href={a.href} />)}
-    <meta name="keywords" content="cgpa to percentage, cgpa to percentage calculator, cgpa calculator, gpa calculator, sgpa to cgpa, percentage converter, sppu cgpa, vtu cgpa, anna university cgpa" />
+    <meta name="keywords" content={pageKeywords} />
 
     <!-- Open Graph -->
     <meta property="og:type" content="website" />
-    <meta property="og:url" content={canonical} />
+    <meta property="og:url" content={canonicalUrl} />
     <meta property="og:title" content={title} />
     <meta property="og:description" content={description} />
-    <meta property="og:image" content={ogImage.startsWith('http') ? ogImage : `https://globalcgpa.in${ogImage}`} />
+    <meta property="og:image" content={fullOgImage} />
     <meta property="og:site_name" content="GlobalCGPA" />
     <meta property="og:locale" content={ogLocale} />
 
@@ -114,7 +121,7 @@ const ogLocale = lang === 'hi' ? 'hi_IN' : 'en_IN';
     <meta name="twitter:card" content="summary_large_image" />
     <meta name="twitter:title" content={title} />
     <meta name="twitter:description" content={description} />
-    <meta name="twitter:image" content={ogImage.startsWith('http') ? ogImage : `https://globalcgpa.in${ogImage}`} />
+    <meta name="twitter:image" content={fullOgImage} />
 
     <!-- Favicon -->
     <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
