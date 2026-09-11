@@ -1,0 +1,172 @@
+---
+// MultiToolNav.astro — Fixed horizontal sub-tool navigation bar
+// Provides quick access to all sub-utilities with clean internal linking
+---
+
+<div class="multi-tool-nav" role="navigation" aria-label="Academic conversion tools">
+  <div class="multi-tool-nav-inner">
+    <a href="/percentage-to-cgpa" class="multi-tool-tab" data-tool="pct2cgpa">
+      <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+        <path d="M18 3a3 3 0 0 0-3 3v12a3 3 0 0 0 3 3 3 3 0 0 0 3-3 3 3 0 0 0-3-3H6a3 3 0 0 0-3 3 3 3 0 0 0 3 3 3 3 0 0 0 3-3V6a3 3 0 0 0-3-3 3 3 0 0 0-3 3 3 3 0 0 0 3 3h12a3 3 0 0 0 3-3 3 3 0 0 0-3-3z"></path>
+        <polyline points="12 8 16 12 12 16"></polyline>
+        <polyline points="8 12 12 8 12 16"></polyline>
+      </svg>
+      <span>% to CGPA</span>
+    </a>
+
+    <a href="/sgpa-to-cgpa" class="multi-tool-tab" data-tool="sgpa2cgpa">
+      <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+        <line x1="18" y1="20" x2="18" y2="10"></line>
+        <line x1="12" y1="20" x2="12" y2="4"></line>
+        <line x1="6" y1="20" x2="6" y2="16"></line>
+      </svg>
+      <span>SGPA to CGPA</span>
+    </a>
+
+    <a href="/sgpa-to-percentage" class="multi-tool-tab" data-tool="sgpa2pct">
+      <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+        <circle cx="12" cy="12" r="10"></circle>
+        <line x1="12" y1="6" x2="12" y2="12"></line>
+        <line x1="12" y1="16" x2="12.01" y2="16"></line>
+      </svg>
+      <span>SGPA to %</span>
+    </a>
+
+    <a href="/cgpa-to-gpa" class="multi-tool-tab" data-tool="cgpa2gpa">
+      <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+        <path d="M21 16V8a2 2 0 0 0-1-1.73l-7-4a2 2 0 0 0-2 0l-7 4A2 2 0 0 0 3 8v8a2 2 0 0 0 1 1.73l7 4a2 2 0 0 0 2 0l7-4A2 2 0 0 0 21 16z"></path>
+        <polyline points="3.27 6.96 12 12.01 20.73 6.96"></polyline>
+        <line x1="12" y1="22.08" x2="12" y2="12"></line>
+      </svg>
+      <span>GPA Calculator</span>
+    </a>
+
+    <a href="/marks-to-cgpa" class="multi-tool-tab" data-tool="marks2cgpa">
+      <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+        <path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"></path>
+        <polyline points="14 2 14 8 20 8"></polyline>
+        <line x1="16" y1="13" x2="8" y2="13"></line>
+        <line x1="16" y1="17" x2="8" y2="17"></line>
+        <polyline points="10 9 9 9 8 9"></polyline>
+      </svg>
+      <span>Marks % Calculator</span>
+    </a>
+
+    <a href="/cgpa-to-percentage-chart" class="multi-tool-tab" data-tool="chart">
+      <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+        <line x1="18" y1="20" x2="18" y2="10"></line>
+        <line x1="12" y1="20" x2="12" y2="4"></line>
+        <line x1="6" y1="20" x2="6" y2="14"></line>
+      </svg>
+      <span>Conversion Chart</span>
+    </a>
+  </div>
+</div>
+
+<style>
+  .multi-tool-nav {
+    position: sticky;
+    top: 64px;
+    z-index: 50;
+    background: var(--card);
+    border-bottom: 1px solid var(--border);
+    padding: 8px 0;
+    backdrop-filter: blur(8px);
+    -webkit-backdrop-filter: blur(8px);
+  }
+
+  .multi-tool-nav-inner {
+    max-width: 1200px;
+    margin: 0 auto;
+    padding: 0 20px;
+    display: flex;
+    gap: 8px;
+    overflow-x: auto;
+    scroll-snap-type: x mandatory;
+    -webkit-overflow-scrolling: touch;
+    scrollbar-width: thin;
+    scrollbar-color: var(--border) transparent;
+  }
+
+  .multi-tool-nav-inner::-webkit-scrollbar {
+    height: 4px;
+  }
+
+  .multi-tool-nav-inner::-webkit-scrollbar-track {
+    background: transparent;
+  }
+
+  .multi-tool-nav-inner::-webkit-scrollbar-thumb {
+    background: var(--border);
+    border-radius: 2px;
+  }
+
+  .multi-tool-tab {
+    flex: 0 0 auto;
+    scroll-snap-align: start;
+    display: inline-flex;
+    align-items: center;
+    gap: 8px;
+    padding: 10px 16px;
+    background: var(--bg);
+    border: 1px solid var(--border);
+    border-radius: 999px;
+    color: var(--text);
+    text-decoration: none;
+    font-size: 0.82rem;
+    font-weight: 500;
+    font-family: inherit;
+    white-space: nowrap;
+    transition: all 0.18s ease;
+    user-select: none;
+  }
+
+  .multi-tool-tab:hover {
+    border-color: var(--primary);
+    color: var(--primary);
+    background: var(--card);
+    transform: translateY(-1px);
+    box-shadow: 0 4px 12px var(--shadow);
+  }
+
+  .multi-tool-tab:focus-visible {
+    outline: 2px solid var(--primary);
+    outline-offset: 2px;
+  }
+
+  .multi-tool-tab svg {
+    flex-shrink: 0;
+    color: var(--muted);
+    transition: color 0.18s;
+  }
+
+  .multi-tool-tab:hover svg {
+    color: var(--primary);
+  }
+
+  @media (max-width: 640px) {
+    .multi-tool-nav {
+      top: 56px;
+    }
+    .multi-tool-nav-inner {
+      padding: 0 16px;
+      gap: 6px;
+    }
+    .multi-tool-tab {
+      padding: 8px 12px;
+      font-size: 0.78rem;
+    }
+    .multi-tool-tab span {
+      display: none;
+    }
+    .multi-tool-tab:has(span) {
+      padding: 8px;
+    }
+  }
+
+  @media (min-width: 641px) and (max-width: 900px) {
+    .multi-tool-tab span {
+      font-size: 0.78rem;
+    }
+  }
+</style>

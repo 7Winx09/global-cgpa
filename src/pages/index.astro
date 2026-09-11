@@ -2,6 +2,10 @@
 import Layout from '../layouts/Layout.astro';
 import SiteHeader from '../components/Nav.astro';
 import SiteFooter from '../components/Footer.astro';
+import MultiToolNav from '../components/MultiToolNav.astro';
+import UniversityQuickToggle from '../components/UniversityQuickToggle.astro';
+import SubjectGradeCalculator from '../components/SubjectGradeCalculator.astro';
+import CalculationHistory from '../components/CalculationHistory.astro';
 import { universities } from '../data/universities';
 
 const howToSchema = {
@@ -264,6 +268,9 @@ select:focus, input[type="number"]:focus { outline: none; border-color: var(--pr
 <!-- Header -->
 <SiteHeader />
 
+<!-- Multi-Tool Navigation Bar -->
+<MultiToolNav />
+
 <!-- Hero + Calculator -->
 <main class="hero-main">
   <div class="hero-tag">Accurate Reference Converter</div>
@@ -271,6 +278,15 @@ select:focus, input[type="number"]:focus { outline: none; border-color: var(--pr
   <p class="subtitle">Convert CGPA to percentage (%) instantly — or switch to SGPA, GPA, marks and reverse conversions — with accurate formulas for every major Indian university. Fast, free, no login required.</p>
 
   <div class="main-calc-card">
+    <!-- AD_SLOT_HOME_TOP -->
+    <div class="ad-slot" style="text-align:center;padding:12px 0;margin:-20px -24px 20px;border-top:1px dashed var(--border);border-bottom:1px dashed var(--border);">
+      <span style="font-size:0.7rem;font-weight:700;text-transform:uppercase;letter-spacing:1px;color:var(--muted);">Advertisement</span>
+      <!-- AD_SLOT_HOME_TOP -->
+    </div>
+
+    <!-- University Quick Toggle Grid -->
+    <UniversityQuickToggle />
+
     <label for="calc_type">Select Operation</label>
     <select id="calc_type" onchange="switchOperation()">
       <option value="cgpa2pct">CGPA to Percentage</option>
@@ -301,6 +317,12 @@ select:focus, input[type="number"]:focus { outline: none; border-color: var(--pr
     </div>
   </div>
 </main>
+
+<!-- Subject Grade Calculator (Weighted SGPA/CGPA) -->
+<SubjectGradeCalculator />
+
+<!-- Calculation History with localStorage Persistence -->
+<CalculationHistory />
 
 <!-- Belt: Advanced Calculators -->
 <section class="bottom-belt-section">
@@ -538,6 +560,26 @@ select:focus, input[type="number"]:focus { outline: none; border-color: var(--pr
 <SiteFooter />
 
 <script is:inline>
+// ── University Formula Integration ──────────────────────
+let currentUniFormula = {
+  key: 'cbse',
+  name: 'CBSE / Generic',
+  forward: (c) => Math.min(c * 9.5, 100),
+  inverse: (p) => p / 9.5,
+  formulaText: 'Percentage = CGPA × 9.5'
+};
+
+window.addEventListener('uniFormulaChange', (e) => {
+  const { key, formula } = e.detail;
+  currentUniFormula = { key, ...formula };
+  // Recalculate if input has value
+  const mainInput = document.getElementById('main_input');
+  if (mainInput && mainInput.value) {
+    const event = new Event('input', { bubbles: true });
+    mainInput.dispatchEvent(event);
+  }
+});
+
 // ── Core Calculator ────────────────────────────────────
 const opConfig = {
   cgpa2pct: { label: 'Enter CGPA',          outLabel: 'Percentage',        scale: true,  max: null },
@@ -564,20 +606,42 @@ function runCoreCalculation() {
   const val  = parseFloat(document.getElementById('main_input').value);
   const scale = parseFloat(document.getElementById('main_scale').value);
   const outVal = document.getElementById('output_val');
+  const outLabel = document.getElementById('output_label');
+
   if (isNaN(val) || val < 0) { outVal.textContent = '—'; return; }
+
   let result;
+  let inputDisplay = '';
+  let outputDisplay = '';
+
   if (type === 'cgpa2pct') {
-    const pct = scale === 10 ? val * 9.5 : (val / scale) * 100;
+    // Use selected university formula
+    const pct = currentUniFormula.forward(val);
     result = Math.min(pct, 100).toFixed(2) + '%';
+    inputDisplay = `${val} CGPA`;
+    outputDisplay = result;
   } else if (type === 'pct2cgpa') {
-    const cgpa = scale === 10 ? val / 9.5 : (val / 100) * scale;
-    result = Math.min(cgpa, scale).toFixed(2);
+    // Use selected university inverse formula
+    const cgpa = currentUniFormula.inverse(val);
+    result = Math.min(cgpa, 10).toFixed(2);
+    inputDisplay = `${val}%`;
+    outputDisplay = `${result} CGPA`;
   } else if (type === 'cgpa2gpa') {
     result = Math.min((val / scale) * 4, 4).toFixed(2);
+    inputDisplay = `${val} CGPA (${scale}pt)`;
+    outputDisplay = `${result} GPA`;
   } else if (type === 'gpa2cgpa') {
     result = Math.min((val / 4) * 10, 10).toFixed(2);
+    inputDisplay = `${val} GPA`;
+    outputDisplay = `${result} CGPA`;
   }
+
   outVal.textContent = result;
+
+  // Save to calculation history for CGPA↔Percentage conversions
+  if ((type === 'cgpa2pct' || type === 'pct2cgpa') && window.addToCalcHistory) {
+    window.addToCalcHistory(inputDisplay, outputDisplay, currentUniFormula.key);
+  }
 }
 
 // ── Copy ───────────────────────────────────────────────

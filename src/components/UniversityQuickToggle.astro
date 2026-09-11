@@ -1,0 +1,300 @@
+---
+// UniversityQuickToggle.astro — Responsive button grid for top 6 universities
+// Dynamically injects correct math logic multiplier into main calculator
+---
+
+<div class="uni-quick-toggle" role="group" aria-label="University quick selector">
+  <div class="uni-toggle-header">
+    <span class="uni-toggle-label">University Formula</span>
+    <span class="uni-toggle-badge" id="uni-badge">CBSE (×9.5)</span>
+  </div>
+  <div class="uni-toggle-grid" id="uni-grid">
+    <button type="button" class="uni-btn active" data-uni="cbse" data-formula="×9.5" data-forward="c => Math.min(c * 9.5, 100)" data-inverse="p => p / 9.5" data-multiplier="9.5" aria-pressed="true">
+      <span class="uni-btn-code">CBSE</span>
+      <span class="uni-btn-name">Generic</span>
+    </button>
+    <button type="button" class="uni-btn" data-uni="sppu" data-formula="Piecewise" data-forward="SPPU_FORWARD" data-inverse="SPPU_INVERSE" data-multiplier="piecewise" aria-pressed="false">
+      <span class="uni-btn-code">SPPU</span>
+      <span class="uni-btn-name">Pune</span>
+    </button>
+    <button type="button" class="uni-btn" data-uni="vtu" data-formula="×10" data-forward="c => c * 10" data-inverse="p => p / 10" data-multiplier="10" aria-pressed="false">
+      <span class="uni-btn-code">VTU</span>
+      <span class="uni-btn-name">Bangalore</span>
+    </button>
+    <button type="button" class="uni-btn" data-uni="gtu" data-formula="(×10)−5" data-forward="c => Math.max(0, (c - 0.5) * 10)" data-inverse="p => p / 10 + 0.5" data-multiplier="gtu" aria-pressed="false">
+      <span class="uni-btn-code">GTU</span>
+      <span class="uni-btn-name">Gujarat</span>
+    </button>
+    <button type="button" class="uni-btn" data-uni="aktu" data-formula="(×10)−7.5" data-forward="c => Math.max(0, (c - 0.75) * 10)" data-inverse="p => p / 10 + 0.75" data-multiplier="aktu" aria-pressed="false">
+      <span class="uni-btn-code">AKTU</span>
+      <span class="uni-btn-name">UPTU</span>
+    </button>
+    <button type="button" class="uni-btn" data-uni="anna" data-formula="×10" data-forward="c => c * 10" data-inverse="p => p / 10" data-multiplier="10" aria-pressed="false">
+      <span class="uni-btn-code">Anna</span>
+      <span class="uni-btn-name">Univ</span>
+    </button>
+  </div>
+  <div class="uni-formula-display" id="uni-formula-display">
+    <span class="formula-prefix">Active:</span>
+    <code class="formula-code" id="active-formula">Percentage = CGPA × 9.5</code>
+  </div>
+</div>
+
+<style>
+  .uni-quick-toggle {
+    background: var(--card);
+    border: 1px solid var(--border);
+    border-radius: 16px;
+    padding: 20px;
+    margin-bottom: 20px;
+  }
+
+  .uni-toggle-header {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    margin-bottom: 16px;
+    flex-wrap: wrap;
+    gap: 8px;
+  }
+
+  .uni-toggle-label {
+    font-size: 0.75rem;
+    font-weight: 700;
+    text-transform: uppercase;
+    letter-spacing: 0.5px;
+    color: var(--muted);
+  }
+
+  .uni-toggle-badge {
+    font-size: 0.75rem;
+    font-weight: 600;
+    color: var(--primary);
+    background: rgba(16, 185, 129, 0.12);
+    padding: 4px 10px;
+    border-radius: 999px;
+    font-family: 'JetBrains Mono', monospace;
+  }
+
+  .uni-toggle-grid {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 10px;
+    margin-bottom: 16px;
+  }
+
+  .uni-btn {
+    position: relative;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 4px;
+    padding: 14px 12px;
+    background: var(--bg);
+    border: 2px solid var(--border);
+    border-radius: 12px;
+    cursor: pointer;
+    transition: all 0.18s ease;
+    font-family: inherit;
+  }
+
+  .uni-btn:hover {
+    border-color: var(--primary);
+    transform: translateY(-2px);
+    box-shadow: 0 6px 16px var(--shadow);
+  }
+
+  .uni-btn.active {
+    border-color: var(--primary);
+    background: linear-gradient(135deg, rgba(16, 185, 129, 0.12), rgba(16, 185, 129, 0.04));
+  }
+
+  .uni-btn:focus-visible {
+    outline: 2px solid var(--primary);
+    outline-offset: 2px;
+  }
+
+  .uni-btn-code {
+    font-size: 0.8rem;
+    font-weight: 800;
+    color: var(--text);
+    letter-spacing: 0.5px;
+  }
+
+  .uni-btn-name {
+    font-size: 0.65rem;
+    color: var(--muted);
+    text-transform: uppercase;
+    letter-spacing: 0.3px;
+  }
+
+  .uni-btn.active .uni-btn-name {
+    color: var(--primary);
+  }
+
+  .uni-formula-display {
+    padding: 12px 16px;
+    background: var(--bg);
+    border: 1px solid var(--border);
+    border-radius: 10px;
+    font-size: 0.85rem;
+  }
+
+  .formula-prefix {
+    font-weight: 600;
+    color: var(--muted);
+    margin-right: 8px;
+  }
+
+  .formula-code {
+    font-family: 'JetBrains Mono', monospace;
+    color: var(--text);
+    background: var(--card);
+    padding: 2px 8px;
+    border-radius: 6px;
+    border: 1px solid var(--border);
+  }
+
+  @media (max-width: 640px) {
+    .uni-toggle-grid {
+      grid-template-columns: repeat(3, 1fr);
+      gap: 8px;
+    }
+    .uni-btn {
+      padding: 12px 8px;
+    }
+    .uni-btn-code {
+      font-size: 0.75rem;
+    }
+    .uni-btn-name {
+      font-size: 0.6rem;
+    }
+  }
+
+  @media (max-width: 480px) {
+    .uni-toggle-grid {
+      grid-template-columns: repeat(2, 1fr);
+    }
+  }
+</style>
+
+<script is:inline>
+// University formula definitions
+const UNI_FORMULAS = {
+  cbse: {
+    name: 'CBSE / Generic',
+    formula: 'Percentage = CGPA × 9.5',
+    forward: (c) => Math.min(c * 9.5, 100),
+    inverse: (p) => p / 9.5,
+    multiplier: 9.5
+  },
+  sppu: {
+    name: 'SPPU (Pune)',
+    formula: 'Piecewise by Grade Band (Circular 332/2020)',
+    forward: (c) => {
+      if (c >= 9.5) return Math.max(0, 20 * c - 100);
+      if (c >= 8.25) return Math.max(0, 12 * c - 25);
+      if (c >= 6.75) return Math.max(0, 10 * c - 7.5);
+      if (c >= 5.75) return Math.max(0, 5 * c + 26.25);
+      if (c >= 5.25) return Math.max(0, 10 * c - 2.5);
+      if (c >= 4.75) return Math.max(0, 10 * c - 2.5);
+      if (c >= 4.0) return Math.max(0, 6.6 * c + 13.6);
+      return 0;
+    },
+    inverse: (p) => {
+      if (p >= 90) return (p + 100) / 20;
+      if (p >= 74) return (p + 25) / 12;
+      if (p >= 60) return (p + 7.5) / 10;
+      if (p >= 55) return (p - 26.25) / 5;
+      if (p >= 50) return (p + 2.5) / 10;
+      if (p >= 40) return (p + 2.5) / 10;
+      if (p >= 26.4) return (p - 13.6) / 6.6;
+      return p / 10;
+    },
+    multiplier: 'piecewise'
+  },
+  vtu: {
+    name: 'VTU (Bangalore)',
+    formula: 'Percentage = CGPA × 10 (2022 scheme)',
+    forward: (c) => Math.min(c * 10, 100),
+    inverse: (p) => p / 10,
+    multiplier: 10
+  },
+  gtu: {
+    name: 'GTU (Gujarat)',
+    formula: 'Percentage = (CGPA − 0.5) × 10',
+    forward: (c) => Math.max(0, Math.min((c - 0.5) * 10, 100)),
+    inverse: (p) => p / 10 + 0.5,
+    multiplier: 'gtu'
+  },
+  aktu: {
+    name: 'AKTU / UPTU',
+    formula: 'Percentage = (CGPA − 0.75) × 10',
+    forward: (c) => Math.max(0, Math.min((c - 0.75) * 10, 100)),
+    inverse: (p) => p / 10 + 0.75,
+    multiplier: 'aktu'
+  },
+  anna: {
+    name: 'Anna University',
+    formula: 'Percentage = CGPA × 10',
+    forward: (c) => Math.min(c * 10, 100),
+    inverse: (p) => p / 10,
+    multiplier: 10
+  }
+};
+
+let currentUni = 'cbse';
+
+function initUniToggle() {
+  const grid = document.getElementById('uni-grid');
+  const badge = document.getElementById('uni-badge');
+  const formulaDisplay = document.getElementById('active-formula');
+
+  if (!grid || !badge || !formulaDisplay) return;
+
+  grid.addEventListener('click', (e) => {
+    const btn = e.target.closest('.uni-btn');
+    if (!btn) return;
+
+    const uniKey = btn.dataset.uni;
+    if (!UNI_FORMULAS[uniKey]) return;
+
+    // Update active state
+    document.querySelectorAll('.uni-btn').forEach(b => {
+      b.classList.remove('active');
+      b.setAttribute('aria-pressed', 'false');
+    });
+    btn.classList.add('active');
+    btn.setAttribute('aria-pressed', 'true');
+
+    currentUni = uniKey;
+    const formula = UNI_FORMULAS[uniKey];
+
+    badge.textContent = `${formula.name} (${typeof formula.multiplier === 'number' ? '×' + formula.multiplier : formula.multiplier})`;
+    formulaDisplay.textContent = formula.formula;
+
+    // Dispatch custom event for main calculator to listen
+    window.dispatchEvent(new CustomEvent('uniFormulaChange', {
+      detail: { key: uniKey, formula }
+    }));
+
+    // Recalculate if input has value
+    const mainInput = document.getElementById('main_input');
+    if (mainInput && mainInput.value) {
+      const event = new Event('input', { bubbles: true });
+      mainInput.dispatchEvent(event);
+    }
+  });
+}
+
+// Export for main calculator to use
+window.getCurrentUniFormula = () => UNI_FORMULAS[currentUni];
+window.getCurrentUniKey = () => currentUni;
+
+// Initialize when DOM ready
+if (document.readyState === 'loading') {
+  document.addEventListener('DOMContentLoaded', initUniToggle);
+} else {
+  initUniToggle();
+}
+</script>

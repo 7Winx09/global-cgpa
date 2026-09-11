@@ -1,0 +1,493 @@
+---
+// CalculationHistory.astro — Session-persistent calculation history table with localStorage
+// Records: Sr. No | Input CGPA | Converted Percentage | Selected University
+---
+
+<div class="calc-history" id="calc-history">
+  <div class="ch-header">
+    <h3 class="ch-title">
+      <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+        <circle cx="12" cy="12" r="10"></circle>
+        <polyline points="12 6 12 12 16 14"></polyline>
+      </svg>
+      Calculation History
+    </h3>
+    <div class="ch-actions">
+      <button type="button" class="ch-btn" id="ch-export" title="Export as CSV">
+        <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+          <path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"></path>
+          <polyline points="7 10 12 15 17 10"></polyline>
+          <line x1="12" y1="15" x2="12" y2="3"></line>
+        </svg>
+        <span>Export</span>
+      </button>
+      <button type="button" class="ch-btn ch-btn-danger" id="ch-clear" title="Clear history">
+        <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+          <polyline points="3 6 5 6 21 6"></polyline>
+          <path d="M19 6v14a2 2 0 0 1-2 2H7a2 2 0 0 1-2-2V6m3 0V4a2 2 0 0 1 2-2h4a2 2 0 0 1 2 2v2"></path>
+        </svg>
+        <span>Clear</span>
+      </button>
+    </div>
+  </div>
+
+  <!-- AD_SLOT_HISTORY_TOP -->
+  <div class="ad-slot" style="text-align:center;padding:12px 0;margin:0 -24px 20px;border-top:1px dashed var(--border);border-bottom:1px dashed var(--border);">
+    <span style="font-size:0.7rem;font-weight:700;text-transform:uppercase;letter-spacing:1px;color:var(--muted);">Advertisement</span>
+    <!-- AD_SLOT_HISTORY_TOP -->
+  </div>
+
+  <div class="ch-table-wrap">
+    <table class="ch-table" aria-label="Calculation history">
+      <thead>
+        <tr>
+          <th scope="col" style="width: 50px;">Sr. No</th>
+          <th scope="col">Input CGPA</th>
+          <th scope="col">Converted %</th>
+          <th scope="col">University</th>
+          <th scope="col" style="width: 120px;">Timestamp</th>
+          <th scope="col" style="width: 50px;">
+            <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true">
+              <path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"></path>
+              <polyline points="7 10 12 15 17 10"></polyline>
+              <line x1="12" y1="15" x2="12" y2="3"></line>
+            </svg>
+          </th>
+        </tr>
+      </thead>
+      <tbody id="ch-tbody">
+        <!-- History rows inserted here -->
+      </tbody>
+    </table>
+  </div>
+
+  <div class="ch-empty" id="ch-empty" style="display: none;">
+    <svg width="48" height="48" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" aria-hidden="true">
+      <circle cx="12" cy="12" r="10"></circle>
+      <polyline points="12 6 12 12 16 14"></polyline>
+    </svg>
+    <p>No calculations yet</p>
+    <small>Enter a CGPA above and click convert to see history here</small>
+  </div>
+
+  <div class="ch-summary" id="ch-summary" style="display: none;">
+    <span class="ch-summary-item">
+      <strong id="ch-count">0</strong> calculations this session
+    </span>
+    <span class="ch-summary-item">
+      Avg: <strong id="ch-avg">—</strong>
+    </span>
+    <span class="ch-summary-item">
+      Range: <strong id="ch-range">—</strong>
+    </span>
+  </div>
+</div>
+
+<style>
+  .calc-history {
+    background: var(--card);
+    border: 1px solid var(--border);
+    border-radius: 16px;
+    padding: 24px;
+    margin-top: 24px;
+  }
+
+  .ch-header {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    margin-bottom: 20px;
+    flex-wrap: wrap;
+    gap: 12px;
+  }
+
+  .ch-title {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    font-size: 1.1rem;
+    font-weight: 700;
+    color: var(--text);
+    margin: 0;
+  }
+
+  .ch-title svg {
+    color: var(--primary);
+  }
+
+  .ch-actions {
+    display: flex;
+    gap: 8px;
+  }
+
+  .ch-btn {
+    display: inline-flex;
+    align-items: center;
+    gap: 6px;
+    padding: 8px 12px;
+    background: var(--bg);
+    border: 1px solid var(--border);
+    border-radius: 8px;
+    font-family: inherit;
+    font-size: 0.78rem;
+    font-weight: 500;
+    color: var(--text);
+    cursor: pointer;
+    transition: all 0.15s;
+  }
+
+  .ch-btn:hover {
+    border-color: var(--primary);
+    color: var(--primary);
+  }
+
+  .ch-btn-danger:hover {
+    border-color: #fca5a5;
+    color: #dc2626;
+    background: #fef2f2;
+  }
+
+  .ch-table-wrap {
+    overflow-x: auto;
+    border-radius: 10px;
+    border: 1px solid var(--border);
+    margin-bottom: 16px;
+  }
+
+  .ch-table {
+    width: 100%;
+    border-collapse: collapse;
+    font-size: 0.85rem;
+  }
+
+  .ch-table th {
+    background: var(--bg);
+    padding: 10px 12px;
+    text-align: left;
+    font-size: 0.7rem;
+    font-weight: 700;
+    text-transform: uppercase;
+    letter-spacing: 0.5px;
+    color: var(--muted);
+    border-bottom: 1px solid var(--border);
+    font-family: 'JetBrains Mono', monospace;
+    white-space: nowrap;
+  }
+
+  .ch-table td {
+    padding: 12px;
+    border-bottom: 1px solid var(--border);
+    vertical-align: middle;
+  }
+
+  .ch-table tbody tr:last-child td {
+    border-bottom: none;
+  }
+
+  .ch-table tbody tr:hover {
+    background: var(--bg);
+  }
+
+  .ch-sr {
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 0.8rem;
+    font-weight: 600;
+    color: var(--muted);
+  }
+
+  .ch-input-val {
+    font-family: 'JetBrains Mono', monospace;
+    font-weight: 600;
+    color: var(--text);
+  }
+
+  .ch-output-val {
+    font-family: 'JetBrains Mono', monospace;
+    font-weight: 700;
+    color: var(--primary);
+    font-size: 0.95rem;
+  }
+
+  .ch-uni {
+    font-size: 0.8rem;
+    font-weight: 500;
+    color: var(--text);
+  }
+
+  .ch-time {
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 0.75rem;
+    color: var(--muted);
+  }
+
+  .ch-action-btn {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 32px;
+    height: 32px;
+    background: none;
+    border: 1px solid var(--border);
+    border-radius: 8px;
+    color: var(--muted);
+    cursor: pointer;
+    transition: all 0.15s;
+  }
+
+  .ch-action-btn:hover {
+    background: #fef2f2;
+    border-color: #fca5a5;
+    color: #dc2626;
+  }
+
+  .ch-empty {
+    text-align: center;
+    padding: 40px 20px;
+    color: var(--muted);
+  }
+
+  .ch-empty svg {
+    margin-bottom: 12px;
+    opacity: 0.4;
+  }
+
+  .ch-empty p {
+    font-size: 0.95rem;
+    font-weight: 500;
+    margin: 0 0 4px;
+  }
+
+  .ch-empty small {
+    font-size: 0.8rem;
+  }
+
+  .ch-summary {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 20px;
+    padding: 16px;
+    background: var(--bg);
+    border: 1px solid var(--border);
+    border-radius: 10px;
+    font-size: 0.85rem;
+    color: var(--text);
+  }
+
+  .ch-summary-item {
+    display: flex;
+    align-items: center;
+    gap: 6px;
+  }
+
+  .ch-summary-item strong {
+    font-family: 'JetBrains Mono', monospace;
+    color: var(--primary);
+  }
+
+  @media (max-width: 640px) {
+    .calc-history {
+      padding: 16px;
+    }
+    .ch-header {
+      flex-direction: column;
+      align-items: flex-start;
+    }
+    .ch-actions {
+      width: 100%;
+      justify-content: flex-end;
+    }
+    .ch-table th:nth-child(4),
+    .ch-table td:nth-child(4) {
+      display: none;
+    }
+    .ch-summary {
+      flex-direction: column;
+      gap: 8px;
+    }
+  }
+</style>
+
+<script is:inline>
+const STORAGE_KEY = 'gcgpa_calc_history';
+const MAX_HISTORY = 50;
+
+function loadHistory() {
+  try {
+    const stored = localStorage.getItem(STORAGE_KEY);
+    return stored ? JSON.parse(stored) : [];
+  } catch {
+    return [];
+  }
+}
+
+function saveHistory(history) {
+  try {
+    localStorage.setItem(STORAGE_KEY, JSON.stringify(history.slice(-MAX_HISTORY)));
+  } catch (e) {
+    console.warn('Failed to save history:', e);
+  }
+}
+
+function formatTimestamp(ts) {
+  const date = new Date(ts);
+  return date.toLocaleString(undefined, {
+    month: 'short',
+    day: 'numeric',
+    hour: '2-digit',
+    minute: '2-digit'
+  });
+}
+
+function formatUniName(key) {
+  const names = {
+    cbse: 'CBSE / Generic',
+    sppu: 'SPPU (Pune)',
+    vtu: 'VTU (Bangalore)',
+    gtu: 'GTU (Gujarat)',
+    aktu: 'AKTU / UPTU',
+    anna: 'Anna University'
+  };
+  return names[key] || key.toUpperCase();
+}
+
+function renderHistory() {
+  const tbody = document.getElementById('ch-tbody');
+  const emptyState = document.getElementById('ch-empty');
+  const summary = document.getElementById('ch-summary');
+  const countEl = document.getElementById('ch-count');
+  const avgEl = document.getElementById('ch-avg');
+  const rangeEl = document.getElementById('ch-range');
+
+  if (!tbody || !emptyState || !summary) return;
+
+  const history = loadHistory();
+
+  if (history.length === 0) {
+    tbody.innerHTML = '';
+    emptyState.style.display = 'block';
+    summary.style.display = 'none';
+    return;
+  }
+
+  emptyState.style.display = 'none';
+  summary.style.display = 'flex';
+
+  // Render rows (newest first)
+  tbody.innerHTML = history
+    .slice()
+    .reverse()
+    .map((entry, idx) => `
+      <tr data-id="${entry.id}">
+        <td><span class="ch-sr">${history.length - idx}</span></td>
+        <td><span class="ch-input-val">${entry.input}</span></td>
+        <td><span class="ch-output-val">${entry.output}</span></td>
+        <td><span class="ch-uni">${formatUniName(entry.university)}</span></td>
+        <td><span class="ch-time">${formatTimestamp(entry.timestamp)}</span></td>
+        <td>
+          <button type="button" class="ch-action-btn ch-copy-btn" data-id="${entry.id}" aria-label="Copy result" title="Copy result">
+            <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="9" y="9" width="13" height="13" rx="2"></rect><path d="M5 15H4a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h9a2 2 0 0 1 2 2v1"></path></svg>
+          </button>
+        </td>
+      </tr>
+    `).join('');
+
+  // Update summary
+  const outputs = history.map(h => parseFloat(h.output.replace('%', ''))).filter(n => !isNaN(n));
+  countEl.textContent = history.length;
+  if (outputs.length > 0) {
+    avgEl.textContent = (outputs.reduce((a, b) => a + b, 0) / outputs.length).toFixed(1) + '%';
+    rangeEl.textContent = `${Math.min(...outputs).toFixed(1)}% – ${Math.max(...outputs).toFixed(1)}%`;
+  } else {
+    avgEl.textContent = '—';
+    rangeEl.textContent = '—';
+  }
+
+  // Bind copy buttons
+  tbody.querySelectorAll('.ch-copy-btn').forEach(btn => {
+    btn.addEventListener('click', (e) => {
+      e.stopPropagation();
+      const id = btn.dataset.id;
+      const entry = history.find(h => h.id === id);
+      if (entry) {
+        navigator.clipboard.writeText(entry.output).then(() => {
+          const original = btn.innerHTML;
+          btn.innerHTML = '<svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="#00c853" stroke-width="2.5"><polyline points="20 6 9 17 4 12"></polyline></svg>';
+          btn.style.color = '#00c853';
+          btn.style.borderColor = '#00c853';
+          setTimeout(() => {
+            btn.innerHTML = original;
+            btn.style.color = '';
+            btn.style.borderColor = '';
+          }, 1200);
+        });
+      }
+    });
+  });
+}
+
+function addToHistory(input, output, university) {
+  const history = loadHistory();
+  const entry = {
+    id: Date.now().toString(36) + Math.random().toString(36).substr(2, 5),
+    input,
+    output,
+    university,
+    timestamp: Date.now()
+  };
+  history.push(entry);
+  saveHistory(history);
+  renderHistory();
+}
+
+function clearHistory() {
+  if (confirm('Clear all calculation history? This cannot be undone.')) {
+    localStorage.removeItem(STORAGE_KEY);
+    renderHistory();
+  }
+}
+
+function exportHistory() {
+  const history = loadHistory();
+  if (history.length === 0) {
+    alert('No history to export');
+    return;
+  }
+
+  const headers = ['Sr. No', 'Input CGPA', 'Converted Percentage', 'University', 'Timestamp'];
+  const rows = history.map((entry, idx) => [
+    history.length - idx,
+    entry.input,
+    entry.output,
+    formatUniName(entry.university),
+    new Date(entry.timestamp).toISOString()
+  ]);
+
+  const csv = [headers, ...rows].map(r => r.map(v => `"${v}"`).join(',')).join('\n');
+  const blob = new Blob([csv], { type: 'text/csv;charset=utf-8;' });
+  const link = document.createElement('a');
+  link.href = URL.createObjectURL(blob);
+  link.download = `cgpa-calc-history-${new Date().toISOString().split('T')[0]}.csv`;
+  link.click();
+  URL.revokeObjectURL(link.href);
+}
+
+function initCalcHistory() {
+  const clearBtn = document.getElementById('ch-clear');
+  const exportBtn = document.getElementById('ch-export');
+
+  if (clearBtn) clearBtn.addEventListener('click', clearHistory);
+  if (exportBtn) exportBtn.addEventListener('click', exportHistory);
+
+  // Initial render
+  renderHistory();
+}
+
+// Make addToHistory globally available for main calculator
+window.addToCalcHistory = addToHistory;
+
+if (document.readyState === 'loading') {
+  document.addEventListener('DOMContentLoaded', initCalcHistory);
+} else {
+  initCalcHistory();
+}
+</script>
