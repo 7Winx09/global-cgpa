@@ -90,8 +90,8 @@ export const universities: University[] = [
       if (p >= 60) return (p + 7.5) / 10;
       if (p >= 55) return (p - 26.25) / 5;
       if (p >= 50) return (p + 2.5) / 10;
-      if (p >= 40) return (p + 2.5) / 10;
-      if (p >= 26.4) return (p - 13.6) / 6.6;
+      if (p >= 45) return (p + 2.5) / 10;
+      if (p >= 40) return (p - 13.6) / 6.6;
       return p / 10;
     },
     classes: [
@@ -184,7 +184,7 @@ export const universities: University[] = [
     inverseLabel: 'Pre-2026: (Pct−11)÷7.1 / Post-2026: Not applicable',
     source: 'University of Mumbai Circular No. Exam/Result/803 of 2026 (1 Jan 2026) — Repeals formula-based conversion; Circular Exam/Com/97 of 2018 (17 Oct 2018) — Pre-2026 formula',
     sourceUrl: 'https://mu.ac.in/admin/upload/circular/27129CGPA_CGPI to Conversion Circular of 2026.pdf',
-    note: 'Effective 1 January 2026, the University of Mumbai withdrew all formula-based CGPA-to-percentage conversion through Circular No. Exam/Result/803 of 2026. The formulas shown below — (7.1 × CGPA) + 11 for general programmes and (7.4 × CGPA) + 12 for engineering (CGPA ≥ 7) — apply exclusively to transcripts dated on or before 31 December 2025. For transcripts issued on or after 1 January 2026, no conversion formula is used; the affiliated college calculates the percentage directly from raw marks obtained across all semesters, and a conversion certificate is provided only upon student request.',
+    note: 'The University of Mumbai ended formula-based CGPA-to-percentage conversion on 1 January 2026 via Circular No. Exam/Result/803 of 2026. Before that date, two formulas applied: (7.1 × CGPA) + 11 for general programmes, and (7.4 × CGPA) + 12 for engineering (where CGPA ≥ 7). These pre-2026 formulas now apply only to transcripts issued on or before 31 December 2025. Starting 1 January 2026, the university no longer uses any conversion formula — instead, the affiliated college computes the percentage directly from raw marks across all semesters (total obtained ÷ total maximum × 100). A conversion certificate is now issued only when a student specifically requests one; it is no longer printed on the transcript by default.',
     exampleCgpa: 8,
     forward: (c) => Math.min(100, Math.max(0, 7.1 * c + 11)),
     inverse: (p) => (p - 11) / 7.1,
