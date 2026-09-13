@@ -4,6 +4,7 @@ import SiteHeader from '../components/Nav.astro';
 import SiteFooter from '../components/Footer.astro';
 import Breadcrumbs from '../components/Breadcrumbs.astro';
 import FaqAccordion from '../components/FaqAccordion.astro';
+import { universities } from '../data/universities';
 
 const faqs = [
   { q: 'How do I convert percentage to CGPA?', a: 'On the standard 10-point scale, divide your percentage by 9.5 (the CBSE/UGC convention). So 76% ÷ 9.5 = <strong>8.0 CGPA</strong>. Universities with their own formulas — SPPU, Mumbai, AKTU, GTU — use different reverse calculations, which the formula selector above handles.' },
@@ -48,10 +49,11 @@ const faqs = [
           <select class="calc-select" id="pct-formula">
             <option value="cbse">CBSE / UGC standard — CGPA = % ÷ 9.5</option>
             <option value="direct">Direct ÷10 (VTU, KTU, Anna University)</option>
-            <option value="sppu">SPPU — CGPA = (% + 7.5) ÷ 10</option>
-            <option value="mumbai">Mumbai University — CGPA = (% − 11) ÷ 7.1</option>
+            <option value="sppu">SPPU — Piecewise reverse (Circular 332/2020)</option>
+            <option value="mumbai">Mumbai University — CGPA = (% − 11) ÷ 7.1 (pre-2026)</option>
             <option value="aktu">AKTU — CGPA = (% ÷ 10) + 0.75</option>
             <option value="gtu">GTU — CGPA = (% ÷ 10) + 0.5</option>
+            <option value="du">DU — CGPA = % ÷ 9.5</option>
             <option value="gpa4">4.0 GPA scale — GPA = (% ÷ 100) × 4</option>
           </select>
 
@@ -79,14 +81,15 @@ const faqs = [
           <tbody>
             <tr><td>CBSE / UGC</td><td>CGPA × 9.5</td><td>% ÷ 9.5</td><td>8.95</td></tr>
             <tr><td>VTU / KTU / Anna</td><td>CGPA × 10</td><td>% ÷ 10</td><td>8.50</td></tr>
-            <tr><td>SPPU</td><td>(CGPA × 10) − 7.5</td><td>(% + 7.5) ÷ 10</td><td>9.25</td></tr>
-            <tr><td>Mumbai University</td><td>(7.1 × CGPA) + 11</td><td>(% − 11) ÷ 7.1</td><td>10.42*</td></tr>
+            <tr><td>SPPU</td><td>Piecewise (Circular 332/2020)</td><td>Piecewise inverse</td><td>8.75 (Grade A band)</td></tr>
+            <tr><td>Mumbai University</td><td>(7.1 × CGPA) + 11 (pre-2026)</td><td>(% − 11) ÷ 7.1</td><td>10.42*</td></tr>
             <tr><td>AKTU</td><td>(CGPA − 0.75) × 10</td><td>(% ÷ 10) + 0.75</td><td>9.25</td></tr>
             <tr><td>GTU</td><td>(CGPA − 0.5) × 10</td><td>(% ÷ 10) + 0.5</td><td>9.00</td></tr>
+            <tr><td>DU</td><td>CGPA × 9.5</td><td>% ÷ 9.5</td><td>8.95</td></tr>
           </tbody>
         </table>
       </div>
-      <p>*Mumbai University's scale caps a 10.0 CGPA at 82%, so percentages above 82% have no valid CGPA on the MU scale — the calculator clamps results to the 0–10 range and flags the impossibility by capping.</p>
+      <p>*Mumbai University's pre-2026 scale caps a 10.0 CGPA at 82%, so percentages above 82% have no valid CGPA on the MU scale — the calculator clamps results to the 0–10 range and flags the impossibility by capping. For post-2026 transcripts, no formula applies; percentage is computed from raw marks.</p>
 
       <h2>When Do You Actually Need This?</h2>
       <ul>
@@ -130,13 +133,24 @@ const faqs = [
     const out = document.getElementById('pct-out')!;
     const outLabel = document.getElementById('pct-out-label')!;
 
+    // Build reverse formulas from universities.ts data
     const reverse: Record<string, { fn: (p: number) => number; max: number; label: string }> = {
       cbse: { fn: (p) => p / 9.5, max: 95, label: 'Equivalent CGPA' },
       direct: { fn: (p) => p / 10, max: 100, label: 'Equivalent CGPA' },
-      sppu: { fn: (p) => (p + 7.5) / 10, max: 92.5, label: 'Equivalent CGPA' },
-      mumbai: { fn: (p) => (p - 11) / 7.1, max: 82, label: 'Equivalent CGPA' },
+      sppu: { fn: (p) => {
+        if (p >= 90) return (p + 100) / 20;
+        if (p >= 74) return (p + 25) / 12;
+        if (p >= 60) return (p + 7.5) / 10;
+        if (p >= 55) return (p - 26.25) / 5;
+        if (p >= 50) return (p + 2.5) / 10;
+        if (p >= 40) return (p + 2.5) / 10;
+        if (p >= 26.4) return (p - 13.6) / 6.6;
+        return p / 10;
+      }, max: 92.5, label: 'Equivalent CGPA' },
+      mumbai: { fn: (p) => (p - 11) / 7.1, max: 82, label: 'Equivalent CGPA (pre-2026)' },
       aktu: { fn: (p) => p / 10 + 0.75, max: 92.5, label: 'Equivalent CGPA' },
       gtu: { fn: (p) => p / 10 + 0.5, max: 95, label: 'Equivalent CGPA' },
+      du: { fn: (p) => p / 9.5, max: 95, label: 'Equivalent CGPA' },
       gpa4: { fn: (p) => (p / 100) * 4, max: 100, label: 'Equivalent GPA (4.0 scale)' },
     };
 

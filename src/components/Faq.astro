@@ -11,15 +11,15 @@ const faqGroups = [
       { q: 'How to convert CGPA to percentage out of 4?', a: 'If your CGPA is on a 4.0 scale (US system), convert to percentage using: <strong>Percentage = (CGPA ÷ 4) × 100</strong>. So 3.5 out of 4.0 = 87.5%. To go the other direction (percentage → GPA out of 4), use: GPA = (Percentage ÷ 100) × 4.' },
     ],
   },
-  {
-    label: 'University-Specific',
-    items: [
-      { q: 'What is the SPPU CGPA to percentage formula?', a: 'SPPU (Savitribai Phule Pune University) uses the formula: <strong>Percentage = (CGPA × 10) − 7.5</strong>. For example, 8.5 CGPA → (8.5 × 10) − 7.5 = 77.5%. This applies to B.E./B.Tech and M.E./M.Tech programmes under SPPU on a 10-point grading scale.' },
-      { q: 'What is the VTU CGPA to percentage formula?', a: 'VTU (Visvesvaraya Technological University) uses a direct multiplication: <strong>Percentage = CGPA × 10</strong>. So 8.0 CGPA = 80.0%. This makes VTU conversions straightforward compared to CBSE or SPPU formulas.' },
-      { q: 'What formula does Mumbai University use?', a: 'Mumbai University uses a linear regression formula: <strong>Percentage = (7.1 × CGPA) + 11</strong>. For 8.0 CGPA: (7.1 × 8) + 11 = 67.8%. This is the most unique formula among major Indian universities.' },
-      { q: 'Does 8 CGPA mean 80 percentage?', a: 'Not always. Under VTU and KTU (which use CGPA × 10), 8 CGPA does equal exactly 80%. However, under the standard CBSE formula it equals <strong>76%</strong> (8 × 9.5), and under SPPU it equals <strong>72.5%</strong> (8 × 10 − 7.5). The "8 CGPA = 80%" assumption only holds for universities using a direct ×10 multiplier.' },
-    ],
-  },
+{
+      label: 'University-Specific',
+      items: [
+        { q: 'What is the SPPU CGPA to percentage formula?', a: 'SPPU (Savitribai Phule Pune University) uses a piecewise (grade-band) conversion per Circular 332/2020. The formula depends on your CGPA range:\n• ≥9.50 (Grade O): Percentage = 20 × CGPA − 100\n• 8.25–9.49 (Grade A+): Percentage = 12 × CGPA − 25\n• 6.75–8.24 (Grade A): Percentage = 10 × CGPA − 7.5\n• 5.75–6.74 (Grade B+): Percentage = 5 × CGPA + 26.25\n• 5.25–5.74 (Grade B): Percentage = 10 × CGPA − 2.5\n• 4.75–5.24 (Grade C): Percentage = 10 × CGPA − 2.5\n• 4.00–4.74 (Grade D/P): Percentage = 6.6 × CGPA + 13.6\n\nFor example, 8.5 CGPA (Grade A) = 10 × 8.5 − 7.5 = 77.5%. 9.5 CGPA (Grade O) = 20 × 9.5 − 100 = 90%.' },
+        { q: 'What is the VTU CGPA to percentage formula?', a: 'VTU (Visvesvaraya Technological University) has two formulas depending on your regulation scheme:\n• 2022/2021 scheme (current): Percentage = CGPA × 10\n• 2015/2017/2018 schemes: Percentage = (CGPA − 0.75) × 10\n\nCheck your marksheet for the scheme year. The calculator defaults to the current 2022 scheme.' },
+        { q: 'What formula does Mumbai University use?', a: 'It depends on your transcript date:\n• Pre-2026 (on or before 31 Dec 2025): General: (7.1 × CGPA) + 11; Engineering (CGPA ≥ 7): (7.4 × CGPA) + 12\n• Post-2026 (1 Jan 2026 onwards): No formula — percentage is computed from raw marks by the college. Conversion certificate issued on request only.' },
+        { q: 'Does 8 CGPA mean 80 percentage?', a: 'Not always. Under VTU and KTU (which use CGPA × 10), 8 CGPA equals exactly 80%. Under the standard CBSE formula it equals <strong>76%</strong> (8 × 9.5), and under SPPU (Grade A band) it equals <strong>72.5%</strong> (10 × 8 − 7.5). The "8 CGPA = 80%" assumption only holds for universities using a direct ×10 multiplier.' },
+      ],
+    },
   {
     label: 'Specific CGPA Values',
     items: [

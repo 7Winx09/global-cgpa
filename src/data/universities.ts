@@ -23,6 +23,45 @@ export interface University {
 
 export const universities: University[] = [
   {
+    key: 'du',
+    name: 'University of Delhi',
+    short: 'DU',
+    slug: 'du-cgpa-to-percentage',
+    state: 'Delhi',
+    formulaText: 'Percentage = CGPA × 9.5',
+    formulaLabel: 'CGPA × 9.5',
+    inverseLabel: 'CGPA = Percentage ÷ 9.5',
+    source: 'DU Examination Section notification on CBCS/UGCF CGPA-to-percentage equivalence (also applies to SOL and NCWEB)',
+    note: 'The University of Delhi follows the UGC-prescribed ×9.5 multiplier across CBCS and UGCF programmes, including SOL and NCWEB. Do not confuse DU with Delhi Technological University (DTU), a separate institution whose engineering ordinance uses a different conversion. For anything official, request a conversion certificate from your college or the DU exam branch.',
+    exampleCgpa: 8,
+    forward: (c) => Math.min(100, Math.max(0, c * 9.5)),
+    inverse: (p) => p / 9.5,
+    classes: [
+      { label: 'Distinction', cgpa: '≈ 7.5+ (71.25%+)' },
+      { label: 'First Division', cgpa: '≈ 6.0+ (57%+)' },
+      { label: 'Second Division', cgpa: '≈ 5.0–5.99 (47.5%+)' },
+      { label: 'Third Division / Pass', cgpa: '≈ 4.0–4.99' },
+    ],
+    faqs: [
+      {
+        q: 'What is the official DU CGPA to percentage formula?',
+        a: 'The University of Delhi converts CGPA to percentage using Percentage = CGPA × 9.5, as notified by the DU Examination Section. So 8.0 CGPA equals 76%, and 9.0 CGPA equals 85.5%. The same rule applies to UGCF and CBCS batches, including SOL and NCWEB students.',
+      },
+      {
+        q: 'Is the DU formula the same as the CBSE formula?',
+        a: 'Mathematically yes — both use the ×9.5 multiplier derived from CBSE\'s analysis of board marks. That makes DU one of the easiest conversions: multiply your CGPA by 9.5 and the figure matches what your college will certify.',
+      },
+      {
+        q: 'What CGPA is First Division at DU?',
+        a: 'A final CGPA of 6.00 or above (about 57%+) puts you in First Division at Delhi University. Distinction requires roughly 7.5 CGPA (71.25%+). Second Division covers 5.00–5.99 CGPA.',
+      },
+      {
+        q: 'Is DU CGPA to percentage different from DTU?',
+        a: 'Yes. Delhi Technological University (formerly Delhi College of Engineering) is a separate university and uses its own engineering ordinance, while DU uses CGPA × 9.5. Check which institution issued your marksheet before converting.',
+      },
+    ],
+  },
+  {
     key: 'sppu',
     name: 'Savitribai Phule Pune University',
     short: 'SPPU',
@@ -145,7 +184,7 @@ export const universities: University[] = [
     inverseLabel: 'Pre-2026: (Pct−11)÷7.1 / Post-2026: Not applicable',
     source: 'University of Mumbai Circular No. Exam/Result/803 of 2026 (1 Jan 2026) — Repeals formula-based conversion; Circular Exam/Com/97 of 2018 (17 Oct 2018) — Pre-2026 formula',
     sourceUrl: 'https://mu.ac.in/admin/upload/circular/27129CGPA_CGPI to Conversion Circular of 2026.pdf',
-    note: 'IMPORTANT: Effective 1 January 2026, Mumbai University repealed all formula-based CGPA-to-percentage conversion via Circular No. Exam/Result/803 of 2026. The pre-2026 formulas below apply ONLY to transcripts dated on or before 31 December 2025. For transcripts dated 1 January 2026 or later, the university no longer uses a formula — the affiliated college computes the percentage from actual raw marks across all semesters, and issues a conversion certificate only on student request.',
+    note: 'Effective 1 January 2026, the University of Mumbai withdrew all formula-based CGPA-to-percentage conversion through Circular No. Exam/Result/803 of 2026. The formulas shown below — (7.1 × CGPA) + 11 for general programmes and (7.4 × CGPA) + 12 for engineering (CGPA ≥ 7) — apply exclusively to transcripts dated on or before 31 December 2025. For transcripts issued on or after 1 January 2026, no conversion formula is used; the affiliated college calculates the percentage directly from raw marks obtained across all semesters, and a conversion certificate is provided only upon student request.',
     exampleCgpa: 8,
     forward: (c) => Math.min(100, Math.max(0, 7.1 * c + 11)),
     inverse: (p) => (p - 11) / 7.1,

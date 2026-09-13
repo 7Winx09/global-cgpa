@@ -4,19 +4,39 @@ import SiteHeader from '../components/Nav.astro';
 import SiteFooter from '../components/Footer.astro';
 import Breadcrumbs from '../components/Breadcrumbs.astro';
 import FaqAccordion from '../components/FaqAccordion.astro';
+import { universities } from '../data/universities';
 
 const cgpaValues = [10, 9.5, 9, 8.5, 8, 7.5, 7, 6.5, 6];
-const pct = (c: number) => Math.min(100, Math.max(0, c * 9.5)).toFixed(1);
+
+// Pre-compute examples at build time
+const getExample = (u: typeof universities[0]) => {
+  const c = 8;
+  if (u.key === 'sppu') {
+    if (c >= 9.5) return Math.max(0, 20 * c - 100);
+    if (c >= 8.25) return Math.max(0, 12 * c - 25);
+    if (c >= 6.75) return Math.max(0, 10 * c - 7.5);
+    if (c >= 5.75) return Math.max(0, 5 * c + 26.25);
+    if (c >= 5.25) return Math.max(0, 10 * c - 2.5);
+    if (c >= 4.75) return Math.max(0, 10 * c - 2.5);
+    if (c >= 4.0) return Math.max(0, 6.6 * c + 13.6);
+    return 0;
+  }
+  if (u.key === 'mumbai') return Math.min(100, Math.max(0, 7.1 * c + 11));
+  if (u.key === 'aktu') return Math.max(0, (c - 0.75) * 10);
+  if (u.key === 'gtu') return Math.max(0, (c - 0.5) * 10);
+  if (['vtu', 'anna', 'ktu'].includes(u.key)) return Math.min(100, c * 10);
+  if (u.key === 'du') return Math.min(100, c * 9.5);
+  return Math.min(100, c * 9.5);
+};
 
 const uniRows = [
-  { name: 'SPPU (पुणे यूनिवर्सिटी)', href: '/sppu-cgpa-to-percentage', formula: '(CGPA × 10) − 7.5', example: '72.5%' },
-  { name: 'VTU (कर्नाटक)', href: '/vtu-cgpa-to-percentage', formula: 'CGPA × 10', example: '80%' },
-  { name: 'Anna University (तमिलनाडु)', href: '/anna-university-cgpa-to-percentage', formula: 'CGPA × 10', example: '80%' },
-  { name: 'Mumbai University', href: '/mumbai-university-cgpa-to-percentage', formula: '(7.1 × CGPA) + 11', example: '67.8%' },
-  { name: 'AKTU / UPTU (उत्तर प्रदेश)', href: '/aktu-cgpa-to-percentage', formula: '(CGPA − 0.75) × 10', example: '72.5%' },
-  { name: 'GTU (गुजरात)', href: '/gtu-cgpa-to-percentage', formula: '(CGPA − 0.5) × 10', example: '75%' },
-  { name: 'KTU (केरल)', href: '/ktu-cgpa-to-percentage', formula: 'CGPA × 10', example: '80%' },
-  { name: 'DU (दिल्ली यूनिवर्सिटी)', href: '/du-cgpa-to-percentage', formula: 'CGPA × 9.5', example: '76%' },
+  { name: 'CBSE / Generic', href: '/', formula: 'CGPA × 9.5', example: '76%' },
+  ...universities.map((u) => ({
+    name: u.name + (u.key === 'mumbai' ? ' (2026 से पहले)' : ''),
+    href: `/${u.slug}`,
+    formula: u.formulaLabel,
+    example: getExample(u).toFixed(1) + '%',
+  })),
 ];
 
 const faqs = [
@@ -70,11 +90,9 @@ const schema = {
           <label class="sp-label" for="hi-formula">फॉर्मूला चुनें</label>
           <select id="hi-formula">
             <option value="cbse" selected>मानक / CBSE — CGPA × 9.5</option>
-            <option value="sppu">SPPU — (CGPA × 10) − 7.5</option>
-            <option value="vtu">VTU / Anna / KTU — CGPA × 10</option>
-            <option value="mumbai">Mumbai University — (7.1 × CGPA) + 11</option>
-            <option value="aktu">AKTU — (CGPA − 0.75) × 10</option>
-            <option value="gtu">GTU — (CGPA − 0.5) × 10</option>
+            {universities.map((u) => (
+              <option value={u.key}>{u.short} — {u.formulaLabel}</option>
+            ))}
           </select>
 
           <div class="calc-output">
@@ -118,8 +136,8 @@ const schema = {
           <tbody>
             {[0, 1, 2, 3].map((i) => (
               <tr>
-                <td>{cgpaValues[i]?.toFixed(1)}</td><td>{cgpaValues[i] !== undefined ? pct(cgpaValues[i]) + '%' : ''}</td>
-                <td>{cgpaValues[i + 4]?.toFixed(1)}</td><td>{cgpaValues[i + 4] !== undefined ? pct(cgpaValues[i + 4]) + '%' : ''}</td>
+                <td>{cgpaValues[i]?.toFixed(1)}</td><td>{cgpaValues[i] !== undefined ? (cgpaValues[i] * 9.5).toFixed(1) + '%' : ''}</td>
+                <td>{cgpaValues[i + 4]?.toFixed(1)}</td><td>{cgpaValues[i + 4] !== undefined ? (cgpaValues[i + 4] * 9.5).toFixed(1) + '%' : ''}</td>
               </tr>
             ))}
           </tbody>
@@ -180,14 +198,31 @@ const schema = {
     const out = document.getElementById('hi-out')!;
     const note = document.getElementById('hi-note')!;
 
+    // Build formulas from universities.ts data
     const formulas: Record<string, { fn: (x: number) => number; label: string }> = {
       cbse: { fn: (x) => x * 9.5, label: 'CBSE/UGC formula' },
-      sppu: { fn: (x) => x * 10 - 7.5, label: 'SPPU formula' },
-      vtu: { fn: (x) => x * 10, label: 'VTU / Anna / KTU formula' },
-      mumbai: { fn: (x) => 7.1 * x + 11, label: 'Mumbai University formula' },
-      aktu: { fn: (x) => (x - 0.75) * 10, label: 'AKTU formula' },
-      gtu: { fn: (x) => (x - 0.5) * 10, label: 'GTU formula' },
     };
+    
+    {universities.map((u) => `
+      ${u.key}: { fn: (x) => {
+        if (u.key === 'sppu') {
+          if (x >= 9.5) return Math.max(0, 20 * x - 100);
+          if (x >= 8.25) return Math.max(0, 12 * x - 25);
+          if (x >= 6.75) return Math.max(0, 10 * x - 7.5);
+          if (x >= 5.75) return Math.max(0, 5 * x + 26.25);
+          if (x >= 5.25) return Math.max(0, 10 * x - 2.5);
+          if (x >= 4.75) return Math.max(0, 10 * x - 2.5);
+          if (x >= 4.0) return Math.max(0, 6.6 * x + 13.6);
+          return 0;
+        }
+        if (u.key === 'mumbai') return Math.min(100, Math.max(0, 7.1 * x + 11));
+        if (u.key === 'aktu') return Math.max(0, (x - 0.75) * 10);
+        if (u.key === 'gtu') return Math.max(0, (x - 0.5) * 10);
+        if (['vtu', 'anna', 'ktu'].includes(u.key)) return Math.min(100, x * 10);
+        if (u.key === 'du') return Math.min(100, x * 9.5);
+        return x * 9.5;
+      }, label: u.short + ' formula' },
+    `).join(',')}
 
     function calc() {
       const v = parseFloat(cgpaInput.value);

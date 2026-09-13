@@ -165,17 +165,32 @@ const schema = {
     const out = document.getElementById('sp-out')!;
     const note = document.getElementById('sp-note')!;
 
+    // Build formulas from universities.ts data
     const formulas: Record<string, { fn: (x: number) => number; label: string }> = {
       cbse: { fn: (x) => x * 9.5, label: 'Using standard CBSE formula' },
-      du: { fn: (x) => x * 9.5, label: 'Using DU formula' },
-      sppu: { fn: (x) => x * 10 - 7.5, label: 'Using SPPU ordinance formula' },
-      vtu: { fn: (x) => x * 10, label: 'Using VTU formula' },
-      mumbai: { fn: (x) => 7.1 * x + 11, label: 'Using Mumbai University formula' },
-      anna: { fn: (x) => x * 10, label: 'Using Anna University formula' },
-      aktu: { fn: (x) => (x - 0.75) * 10, label: 'Using AKTU ordinance formula' },
-      gtu: { fn: (x) => (x - 0.5) * 10, label: 'Using GTU notification formula' },
-      ktu: { fn: (x) => x * 10, label: 'Using KTU formula' },
     };
+    
+    // Add university formulas from the data
+    {universities.map((u) => `
+      ${u.key}: { fn: (x) => {
+        if (u.key === 'sppu') {
+          if (x >= 9.5) return Math.max(0, 20 * x - 100);
+          if (x >= 8.25) return Math.max(0, 12 * x - 25);
+          if (x >= 6.75) return Math.max(0, 10 * x - 7.5);
+          if (x >= 5.75) return Math.max(0, 5 * x + 26.25);
+          if (x >= 5.25) return Math.max(0, 10 * x - 2.5);
+          if (x >= 4.75) return Math.max(0, 10 * x - 2.5);
+          if (x >= 4.0) return Math.max(0, 6.6 * x + 13.6);
+          return 0;
+        }
+        if (u.key === 'mumbai') return Math.min(100, Math.max(0, 7.1 * x + 11));
+        if (u.key === 'aktu') return Math.max(0, (x - 0.75) * 10);
+        if (u.key === 'gtu') return Math.max(0, (x - 0.5) * 10);
+        if (['vtu', 'anna', 'ktu'].includes(u.key)) return Math.min(100, x * 10);
+        if (u.key === 'du') return Math.min(100, x * 9.5);
+        return x * 9.5;
+      }, label: 'Using ' + u.short + ' formula' },
+    `).join(',')}
 
     function calc() {
       const v = parseFloat(sgpaInput.value);

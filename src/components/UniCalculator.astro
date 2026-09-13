@@ -48,20 +48,10 @@ const { uni } = Astro.props;
 </style>
 
 <script>
-  const formulas: Record<string, { fwd: (c: number) => number; inv: (p: number) => number }> = {
-    sppu: { fwd: (c) => c * 10 - 7.5, inv: (p) => (p + 7.5) / 10 },
-    vtu: { fwd: (c) => c * 10, inv: (p) => p / 10 },
-    mumbai: { fwd: (c) => 7.1 * c + 11, inv: (p) => (p - 11) / 7.1 },
-    anna: { fwd: (c) => c * 10, inv: (p) => p / 10 },
-    aktu: { fwd: (c) => (c - 0.75) * 10, inv: (p) => p / 10 + 0.75 },
-    gtu: { fwd: (c) => (c - 0.5) * 10, inv: (p) => p / 10 + 0.5 },
-    ktu: { fwd: (c) => c * 10, inv: (p) => p / 10 },
-  };
-
   const shell = document.getElementById('uni-calc');
   if (shell) {
     const key = shell.dataset.uni || 'cbse';
-    const f = formulas[key] || formulas.anna;
+    const f = { fwd: uni.forward, inv: uni.inverse };
     const tabFwd = document.getElementById('tab-fwd') as HTMLButtonElement;
     const tabInv = document.getElementById('tab-inv') as HTMLButtonElement;
     const panelFwd = document.getElementById('panel-fwd')!;

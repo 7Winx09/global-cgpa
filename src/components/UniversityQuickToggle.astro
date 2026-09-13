@@ -1,6 +1,9 @@
 ---
 // UniversityQuickToggle.astro — Responsive button grid for top 6 universities
 // Dynamically injects correct math logic multiplier into main calculator
+import { getQuickToggleUniversities } from '../data/university-formulas';
+
+const quickUnis = getQuickToggleUniversities();
 ---
 
 <div class="uni-quick-toggle" role="group" aria-label="University quick selector">
@@ -9,30 +12,12 @@
     <span class="uni-toggle-badge" id="uni-badge">CBSE (×9.5)</span>
   </div>
   <div class="uni-toggle-grid" id="uni-grid">
-    <button type="button" class="uni-btn active" data-uni="cbse" data-formula="×9.5" data-forward="c => Math.min(c * 9.5, 100)" data-inverse="p => p / 9.5" data-multiplier="9.5" aria-pressed="true">
-      <span class="uni-btn-code">CBSE</span>
-      <span class="uni-btn-name">Generic</span>
-    </button>
-    <button type="button" class="uni-btn" data-uni="sppu" data-formula="Piecewise" data-forward="SPPU_FORWARD" data-inverse="SPPU_INVERSE" data-multiplier="piecewise" aria-pressed="false">
-      <span class="uni-btn-code">SPPU</span>
-      <span class="uni-btn-name">Pune</span>
-    </button>
-    <button type="button" class="uni-btn" data-uni="vtu" data-formula="×10" data-forward="c => c * 10" data-inverse="p => p / 10" data-multiplier="10" aria-pressed="false">
-      <span class="uni-btn-code">VTU</span>
-      <span class="uni-btn-name">Bangalore</span>
-    </button>
-    <button type="button" class="uni-btn" data-uni="gtu" data-formula="(×10)−5" data-forward="c => Math.max(0, (c - 0.5) * 10)" data-inverse="p => p / 10 + 0.5" data-multiplier="gtu" aria-pressed="false">
-      <span class="uni-btn-code">GTU</span>
-      <span class="uni-btn-name">Gujarat</span>
-    </button>
-    <button type="button" class="uni-btn" data-uni="aktu" data-formula="(×10)−7.5" data-forward="c => Math.max(0, (c - 0.75) * 10)" data-inverse="p => p / 10 + 0.75" data-multiplier="aktu" aria-pressed="false">
-      <span class="uni-btn-code">AKTU</span>
-      <span class="uni-btn-name">UPTU</span>
-    </button>
-    <button type="button" class="uni-btn" data-uni="anna" data-formula="×10" data-forward="c => c * 10" data-inverse="p => p / 10" data-multiplier="10" aria-pressed="false">
-      <span class="uni-btn-code">Anna</span>
-      <span class="uni-btn-name">Univ</span>
-    </button>
+    {quickUnis.map((u) => (
+      <button type="button" class="uni-btn" data-uni={u.key} data-formula={u.formula} data-multiplier={typeof u.multiplier === 'number' ? '×' + u.multiplier : u.multiplier} aria-pressed={u.key === 'cbse'}>
+        <span class="uni-btn-code">{u.code}</span>
+        <span class="uni-btn-name">{u.name}</span>
+      </button>
+    ))}
   </div>
   <div class="uni-formula-display" id="uni-formula-display">
     <span class="formula-prefix">Active:</span>
@@ -179,7 +164,7 @@
 </style>
 
 <script is:inline>
-// University formula definitions
+// University formula definitions (injected at build time from universities.ts)
 const UNI_FORMULAS = {
   cbse: {
     name: 'CBSE / Generic',
@@ -279,7 +264,7 @@ function initUniToggle() {
     }));
 
     // Recalculate if input has value
-    const mainInput = document.getElementById('main_input');
+    const mainInput = document.getElementById('main-input');
     if (mainInput && mainInput.value) {
       const event = new Event('input', { bubbles: true });
       mainInput.dispatchEvent(event);

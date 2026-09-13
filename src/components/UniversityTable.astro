@@ -1,14 +1,19 @@
 ---
 // UniversityTable.astro
-const universities = [
+import { universities } from '../data/universities';
+
+const pct = (fn: (c: number) => number, c: number) => Math.min(100, Math.max(0, fn(c))).toFixed(1);
+
+const tableRows = [
   { name: 'CBSE / Generic', formula: 'CGPA × 9.5', eg8: '76.0%', eg7: '66.5%', eg9: '85.5%', note: 'Most widely used default' },
-  { name: 'SPPU (Pune Univ.)', formula: '(CGPA × 10) − 7.5', eg8: '72.5%', eg7: '62.5%', eg9: '82.5%', note: 'B.E./B.Tech & PG Engineering' },
-  { name: 'VTU (Bangalore)', formula: 'CGPA × 10', eg8: '80.0%', eg7: '70.0%', eg9: '90.0%', note: 'Direct ×10 mapping' },
-  { name: 'Mumbai University', formula: '(7.1 × CGPA) + 11', eg8: '67.8%', eg7: '60.7%', eg9: '74.9%', note: 'Linear regression formula' },
-  { name: 'Anna University', formula: '(CGPA × 10) − 7.5', eg8: '72.5%', eg7: '62.5%', eg9: '82.5%', note: 'Same as SPPU' },
-  { name: 'AKTU / UPTU', formula: 'CGPA × 9.5', eg8: '76.0%', eg7: '66.5%', eg9: '85.5%', note: 'Same as CBSE' },
-  { name: 'GTU (Gujarat)', formula: '(CGPA × 10) − 7.5', eg8: '72.5%', eg7: '62.5%', eg9: '82.5%', note: 'Same as SPPU' },
-  { name: 'KTU (Kerala)', formula: 'CGPA × 10', eg8: '80.0%', eg7: '70.0%', eg9: '90.0%', note: 'Same as VTU' },
+  ...universities.map((u) => ({
+    name: u.name,
+    formula: u.formulaLabel,
+    eg8: pct(u.forward, 8) + '%',
+    eg7: pct(u.forward, 7) + '%',
+    eg9: pct(u.forward, 9) + '%',
+    note: u.note?.split('\n')[0] || '',
+  })),
 ];
 ---
 
@@ -33,7 +38,7 @@ const universities = [
           </tr>
         </thead>
         <tbody>
-          {universities.map((u) => (
+          {tableRows.map((u) => (
             <tr>
               <td class="uni-name">{u.name}</td>
               <td class="uni-formula"><code>{u.formula}</code></td>
