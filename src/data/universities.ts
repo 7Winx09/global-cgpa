@@ -417,6 +417,86 @@ export const universities: University[] = [
       },
     ],
   },
+  {
+    key: 'makaut',
+    name: 'Maulana Abul Kalam Azad University of Technology',
+    short: 'MAKAUT',
+    slug: 'makaut-cgpa-to-percentage',
+    state: 'West Bengal',
+    formulaText: 'Percentage = (CGPA − 0.75) × 10',
+    formulaLabel: '(CGPA − 0.75) × 10',
+    inverseLabel: 'CGPA = (Percentage ÷ 10) + 0.75',
+    source: 'MAKAUT Letter No. COE/MAKAUT,WB/2021-22/0357 (02 Dec 2021) — Controller of Examinations official conversion notice; MAKAUT "How to Calculate Percentage from Your Grade Point" notice (makautwb.ac.in)',
+    sourceUrl: 'https://makautexam.net/pdf18/Percentage-Conversion.pdf',
+    note: 'MAKAUT (formerly WBUT) uses Percentage = (CGPA − 0.75) × 10 for UG technology programmes (B.Tech, B.Pharm, etc.). The formula applies to both CGPA and DGPA (Degree Grade Point Average) on the final grade card. Important: MAKAUT does not award any class or division on the degree — Clause (iv) of Chapter I, Part 2 of the First Regulation (as amended by Circular COE/MAKAUT,WB/51/2020) states "there shall be no class/division awarded to a student either at semester or degree level". The grade card reports DGPA only. Figures like "First Class at DGPA 6.50" or "Distinction at 7.50" circulating online have no basis in any MAKAUT regulation.',
+    exampleCgpa: 8.5,
+    forward: (c) => Math.max(0, (c - 0.75) * 10),
+    inverse: (p) => p / 10 + 0.75,
+    classes: [
+      { label: 'No class/division awarded (per MAKAUT regulation)', cgpa: 'DGPA only' },
+    ],
+    faqs: [
+      {
+        q: 'What is the official MAKAUT CGPA to percentage formula?',
+        a: 'Per MAKAUT Letter No. COE/MAKAUT,WB/2021-22/0357 (02 Dec 2021) from the Controller of Examinations, the official formula is Percentage = (CGPA − 0.75) × 10. For example, 8.5 CGPA = (8.5 − 0.75) × 10 = 77.5%. The same formula applies to DGPA on the final consolidated grade card.',
+      },
+      {
+        q: 'Is CGPA × 10 correct for MAKAUT?',
+        a: 'No. The ×10 formula would give 85% for 8.5 CGPA, but MAKAUT\'s official figure is 77.5%. The 0.75 offset is an essential part of the university\'s calibration. Always use (CGPA − 0.75) × 10 for MAKAUT marksheets.',
+      },
+      {
+        q: 'Does MAKAUT award First Class or Distinction?',
+        a: 'No. MAKAUT\'s First Regulation (2002), as amended by Circular COE/MAKAUT,WB/51/2020, explicitly states: "There shall be no class/division awarded to a student either at semester or degree level." The degree certificate and grade card report your DGPA (and its percentage equivalent) only. Any "First Class at 6.50 DGPA" or "Distinction at 7.50 DGPA" figures you see online are not from any MAKAUT document.',
+      },
+      {
+        q: 'Where can I find the official MAKAUT conversion notice?',
+        a: 'The Controller of Examinations notice "How to Calculate Percentage from Your Grade Point" is available at: https://makautexam.net/pdf18/Percentage-Conversion.pdf. It includes a grade-point-to-percentage table (6.25 = 55%, 6.75 = 60%, 7.25 = 65%, 7.75 = 70%, 8.25 = 75%) that confirms the (CGPA − 0.75) × 10 formula.',
+      },
+    ],
+  },
+  {
+    key: 'calcutta',
+    name: 'University of Calcutta',
+    short: 'Calcutta Univ.',
+    slug: 'calcutta-university-cgpa-to-percentage',
+    state: 'West Bengal',
+    formulaText: 'Percentage = CGPA × 10',
+    formulaLabel: 'CGPA × 10',
+    inverseLabel: 'CGPA = Percentage ÷ 10',
+    source: 'University of Calcutta Notification CSR/143/2024 (24 Dec 2024) — Syndicate notification setting CGPA × 10 = Percentage for UG under CCF; CBCS UG Regulation (clause 24 grade table: grade point = 0.10 × percentage)',
+    sourceUrl: 'https://www.caluniv.ac.in/ccf-ug/files/CGPA-CSR-143-2024.pdf',
+    note: 'University of Calcutta uses Percentage = CGPA × 10 for undergraduate programmes under the Curriculum and Credit Framework (CCF) per Notification CSR/143/2024 (24 Dec 2024). The CBCS regulation grade table (clause 24) sets the numerical grade point at 0.10 × percentage, confirming CGPA × 10. Calcutta University does not award a class or division on UG degrees — instead it assigns letter grades with remarks: A++ Outstanding (9.000+), A+ Excellent (8.000+), A Very Good (7.000+), B+ Good (6.000+), B Average (5.000+), C+ Fair (4.000+), C Satisfactory (3.000+), F Fail. An Honours degree requires minimum CGPA 4.000; 3.000–4.000 gets a General degree. "First Class at CGPA 6.0" figures circulate but come from a postgraduate merit rule, not the UG regulation.',
+    exampleCgpa: 8.2,
+    forward: (c) => c * 10,
+    inverse: (p) => p / 10,
+    classes: [
+      { label: 'A++ Outstanding', cgpa: '≥ 9.000' },
+      { label: 'A+ Excellent', cgpa: '8.000–8.999' },
+      { label: 'A Very Good', cgpa: '7.000–7.999' },
+      { label: 'B+ Good', cgpa: '6.000–6.999' },
+      { label: 'B Average', cgpa: '5.000–5.999' },
+      { label: 'C+ Fair', cgpa: '4.000–4.999' },
+      { label: 'C Satisfactory (Honours min.)', cgpa: '3.000–3.999' },
+    ],
+    faqs: [
+      {
+        q: 'What is the official Calcutta University CGPA to percentage formula?',
+        a: 'Per University of Calcutta Notification CSR/143/2024 (24 Dec 2024), the official formula is Percentage = CGPA × 10. An 8.2 CGPA equals 82%, and 7.5 CGPA equals 75%. This applies to UG programmes under the Curriculum and Credit Framework (CCF).',
+      },
+      {
+        q: 'Does Calcutta University award First Class or Distinction?',
+        a: 'No. The UG CBCS/CCF regulation does not award class or division. Instead, the degree shows your CGPA (to three decimal places) and a letter grade with a plain-English remark: A++ Outstanding (9.000+), A+ Excellent (8.000+), A Very Good (7.000+), B+ Good (6.000+), B Average (5.000+), C+ Fair (4.000+), C Satisfactory (3.000+). "First Class at CGPA 6.0" is from a postgraduate merit rule, not the UG ordinance.',
+      },
+      {
+        q: 'Is the formula different for pre-CBCS batches?',
+        a: 'Pre-CBCS (older) batches received marks-based result cards with percentages already printed — no conversion needed. For CBCS/CCF batches (recent years), use CGPA × 10. If your marksheet already shows a percentage, use that figure directly.',
+      },
+      {
+        q: 'Where can I read the official CSR/143/2024 notification?',
+        a: 'The notification is available on the university site: https://www.caluniv.ac.in/ccf-ug/files/CGPA-CSR-143-2024.pdf',
+      },
+    ],
+  },
 ];
 
 export function getUniversity(key: string): University | undefined {

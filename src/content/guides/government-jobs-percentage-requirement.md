@@ -46,7 +46,7 @@ PSUs are where academic marks matter most:
 
 ## Common Mistakes That Cost Interviews
 
-- Using ×9.5 when your university uses (CGPA × 10) − 7.5 or (7.1 × CGPA) + 11 — producing a figure your own certificate contradicts.
+- Using ×9.5 when your university uses a different formula — producing a figure your own certificate contradicts. For example, SPPU uses a piecewise grade-band formula (Circular 332/2020), AKTU uses (CGPA − 0.75) × 10, GTU uses (CGPA − 0.5) × 10, and Mumbai University (pre-2026) used (7.1 × CGPA) + 11. Always use your university's specific formula.
 - Writing SGPA (one semester) where cumulative CGPA was asked.
 - Claiming "First Class" without checking your university's Distinction/First Class conditions, especially first-attempt rules at AKTU and similar ordinances.
 - Leaving the CGPA field blank when the form allows either — a filled, correct percentage always beats an empty field.

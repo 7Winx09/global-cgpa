@@ -1,0 +1,65 @@
+---
+import UniPage from '../components/UniPage.astro';
+import { getUniversity } from '../data/universities';
+
+const uni = getUniversity('calcutta')!;
+---
+
+<UniPage
+  uni={uni}
+  title="Calcutta University CGPA to Percentage Calculator (Official ×10 Formula) | GlobalCGPA"
+  description="Convert University of Calcutta CGPA to percentage using the official CGPA × 10 formula from Notification CSR/143/2024. Free calculator with reverse conversion, conversion table, letter grades and FAQ."
+  intro="Enter your Calcutta University CGPA to get your percentage using the official Syndicate-notified formula — plus reverse conversion, a reference table, and the letter-grade/remark system that replaces class/division."
+>
+  <h2>How the Calcutta University CGPA to Percentage Conversion Works</h2>
+  <p>University of Calcutta (est. 1857) uses a straightforward conversion for its undergraduate programmes under the Curriculum and Credit Framework (CCF):</p>
+  <div class="formula-block">
+    <div class="f-label">Calcutta University official formula</div>
+    <div class="f-text">Percentage = CGPA × 10</div>
+  </div>
+  <p>This is set by <strong>Notification No. CSR/143/2024 (24 Dec 2024)</strong> issued by the Syndicate, which explicitly states "CGPA × 10 = Percentage of marks" for UG courses under CCF. The earlier CBCS UG regulation (clause 24 grade table) also confirms this by defining the grade point as 0.10 × percentage.</p>
+
+  <h3>Worked Examples</h3>
+  <div class="table-scroll">
+    <table>
+      <thead><tr><th>CGPA</th><th>Calculation</th><th>Calcutta University Percentage</th></tr></thead>
+      <tbody>
+        <tr><td>9.0</td><td>9.0 × 10</td><td>90%</td></tr>
+        <tr><td>8.5</td><td>8.5 × 10</td><td>85%</td></tr>
+        <tr><td>8.2</td><td>8.2 × 10</td><td>82%</td></tr>
+        <tr><td>7.5</td><td>7.5 × 10</td><td>75%</td></tr>
+        <tr><td>7.0</td><td>7.0 × 10</td><td>70%</td></tr>
+        <tr><td>6.5</td><td>6.5 × 10</td><td>65%</td></tr>
+        <tr><td>6.0</td><td>6.0 × 10</td><td>60%</td></tr>
+        <tr><td>5.5</td><td>5.5 × 10</td><td>55%</td></tr>
+        <tr><td>5.0</td><td>5.0 × 10</td><td>50%</td></tr>
+        <tr><td>4.0</td><td>4.0 × 10</td><td>40%</td></tr>
+      </tbody>
+    </table>
+  </div>
+
+  <h2>Calcutta University Uses Letter Grades, Not Class/Division</h2>
+  <p>The UG regulation (both CBCS and CCF) does not award First Class, Second Class, or Distinction. Instead, the final grade sheet reports your CGPA (to three decimal places) and a letter grade with a plain-English remark:</p>
+  <div class="table-scroll">
+    <table>
+      <thead><tr><th>Letter Grade</th><th>Remark</th><th>CGPA Range</th></tr></thead>
+      <tbody>
+        <tr><td>A++</td><td>Outstanding</td><td>≥ 9.000</td></tr>
+        <tr><td>A+</td><td>Excellent</td><td>8.000–8.999</td></tr>
+        <tr><td>A</td><td>Very Good</td><td>7.000–7.999</td></tr>
+        <tr><td>B+</td><td>Good</td><td>6.000–6.999</td></tr>
+        <tr><td>B</td><td>Average</td><td>5.000–5.999</td></tr>
+        <tr><td>C+</td><td>Fair</td><td>4.000–4.999</td></tr>
+        <tr><td>C</td><td>Satisfactory</td><td>3.000–3.999</td></tr>
+        <tr><td>F</td><td>Fail</td><td>< 3.000</td></tr>
+      </tbody>
+    </table>
+  </div>
+  <p><strong>Degree awarding:</strong> An Honours degree requires a minimum CGPA of 4.000. A candidate with CGPA between 3.000 and 4.000 is awarded a General degree instead. The "First Class at CGPA 6.0" figure that circulates online is lifted from a postgraduate merit-rank rule, not the UG regulation, and no CU UG regulation names a Distinction tier.</p>
+
+  <h2>Pre-CBCS Batches</h2>
+  <p>If you graduated before the CBCS system was introduced, your marksheet already shows a percentage — no conversion is needed. The CGPA × 10 formula applies to CBCS/CCF batches (recent years). If your marksheet already displays a percentage, use that figure directly.</p>
+
+  <h2>Certificates and Official Documents</h2>
+  <p>For government job forms (GATE, PSU, UPSC, PSC, banking), scholarships, and foreign applications, you can request a conversion certificate from the University of Calcutta examination section or your affiliated college registrar. Submit a written request with your registration number, programme name, and batch year, asking them to cite the official formula: CGPA × 10 (Notification CSR/143/2024). Most employers and agencies accept this letter alongside your official transcript.</p>
+</UniPage>

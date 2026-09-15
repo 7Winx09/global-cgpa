@@ -1,0 +1,49 @@
+---
+import UniPage from '../components/UniPage.astro';
+import { getUniversity } from '../data/universities';
+
+const uni = getUniversity('makaut')!;
+---
+
+<UniPage
+  uni={uni}
+  title="MAKAUT CGPA to Percentage Calculator (Official (CGPA−0.75)×10 Formula) | GlobalCGPA"
+  description="Convert MAKAUT (formerly WBUT) CGPA/DGPA to percentage using the official formula (CGPA − 0.75) × 10 from COE Letter No. COE/MAKAUT,WB/2021-22/0357. Free calculator, conversion table, and FAQ."
+  intro="Enter your MAKAUT CGPA or DGPA to get your percentage using the official Controller of Examinations formula — plus reverse conversion, a reference table, and the key fact that MAKAUT awards no class or division on the degree."
+>
+  <h2>How the MAKAUT CGPA to Percentage Conversion Works</h2>
+  <p>Maulana Abul Kalam Azad University of Technology (MAKAUT), formerly West Bengal University of Technology (WBUT), affiliates engineering, pharmacy and management colleges across West Bengal. The university publishes its own CGPA-to-percentage conversion via the Controller of Examinations.</p>
+  <div class="formula-block">
+    <div class="f-label">MAKAUT official formula</div>
+    <div class="f-text">Percentage = (CGPA − 0.75) × 10</div>
+  </div>
+  <p>This rule comes from <strong>Letter No. COE/MAKAUT,WB/2021-22/0357 (02 Dec 2021)</strong> and is confirmed by the university's "How to Calculate Percentage from Your Grade Point" notice, which includes a grade-point-to-percentage table (6.25 = 55%, 6.75 = 60%, 7.25 = 65%, 7.75 = 70%, 8.25 = 75%) that exactly matches the formula.</p>
+  <p>The same formula applies to <strong>DGPA (Degree Grade Point Average)</strong> printed on your final consolidated grade card, so DGPA-to-percentage works identically.</p>
+
+  <h3>Worked Examples</h3>
+  <div class="table-scroll">
+    <table>
+      <thead><tr><th>CGPA / DGPA</th><th>Calculation</th><th>MAKAUT Percentage</th></tr></thead>
+      <tbody>
+        <tr><td>9.0</td><td>(9.0 − 0.75) × 10</td><td>82.5%</td></tr>
+        <tr><td>8.5</td><td>(8.5 − 0.75) × 10</td><td>77.5%</td></tr>
+        <tr><td>8.0</td><td>(8.0 − 0.75) × 10</td><td>72.5%</td></tr>
+        <tr><td>7.5</td><td>(7.5 − 0.75) × 10</td><td>67.5%</td></tr>
+        <tr><td>7.0</td><td>(7.0 − 0.75) × 10</td><td>62.5%</td></tr>
+        <tr><td>6.75</td><td>(6.75 − 0.75) × 10</td><td>60.0%</td></tr>
+        <tr><td>6.25</td><td>(6.25 − 0.75) × 10</td><td>55.0%</td></tr>
+      </tbody>
+    </table>
+  </div>
+
+  <h2>MAKAUT Awards No Class or Division</h2>
+  <p>Unlike most Indian universities, <strong>MAKAUT does not award First Class, Second Class, or Distinction</strong>. Clause (iv) of Chapter I, Part 2 of the First Regulation (2002), as amended by <strong>Circular COE/MAKAUT,WB/51/2020</strong>, states explicitly:</p>
+  <blockquote>There shall be no class/division awarded to a student either at semester or degree level.</blockquote>
+  <p>Your degree certificate and grade card report your DGPA (and CGPA per semester) only. The percentage equivalent via (DGPA − 0.75) × 10 is the figure employers, PSUs, and higher-studies evaluators work from. Any website or forum claiming "First Class at DGPA 6.50" or "Distinction at DGPA 7.50" is not citing a MAKAUT document — such figures have no regulatory basis.</p>
+
+  <h2>Common Misconception: The Flat ×10 Formula</h2>
+  <p>Many students assume MAKAUT uses a straight CGPA × 10 multiplier because it is a 10-point scale. That gives the wrong figure — for example, 8.0 CGPA would incorrectly show as 80% instead of the official 72.5%. The 0.75 offset is an essential part of MAKAUT's internal calibration and must be applied. The university's own published table confirms this at every reference point.</p>
+
+  <h2>Certificates and Official Documents</h2>
+  <p>For government job forms, scholarships, and foreign applications, MAKAUT students can obtain an official transcript or duplicate grade card through the <a href="https://members.makautwb.ac.in/" target="_blank" rel="noopener">MAKAUT Member's Area</a> or ask their college's Controller of Examinations to issue the conversion on the university's format. The certificate will apply the same (CGPA − 0.75) × 10 formula as this calculator, so your figures will always match.</p>
+</UniPage>

@@ -39,9 +39,9 @@ While each university has its own portal, the pattern is consistent:
 
 ## University-Specific Notes
 
-- **SPPU:** apply through your college exam cell or the university's online student services; engineering students receive the conversion per the (CGPA × 10) − 7.5 ordinance.
-- **VTU:** the ×10 conversion is printed in VTU circulars; certificates issue through the regional VTU centres or your college's principal's office.
-- **Mumbai University:** the Kalina campus exam section handles conversions under the 7.1×CGPA + 11 rule; many affiliated colleges forward applications in batches.
+- **SPPU:** apply through your college exam cell or the university's online student services; the certificate uses the piecewise formula from Circular 332/2020 (see [SPPU conversion](/sppu-cgpa-to-percentage) for the exact grade-band equations). See also our dedicated [SPPU conversion certificate guide](/sppu-cgpa-to-percentage-conversion-certificate).
+- **VTU:** the ×10 conversion (2022/2021 scheme) or (CGPA−0.75)×10 (older schemes) is printed in VTU circulars; certificates issue through the regional VTU centres or your college's principal's office.
+- **Mumbai University:** the university ended formula-based conversion on 1 January 2026 (Circular Exam/Result/803 of 2026). For transcripts dated on or before 31 Dec 2025, the pre-2026 formulas ((7.1×CGPA)+11 general, (7.4×CGPA)+12 engineering) apply. For 1 Jan 2026 onwards, the college computes percentage from raw marks; a conversion certificate is issued only on request. See [Mumbai University conversion](/mumbai-university-cgpa-to-percentage).
 - **Anna University:** request through your college's COE; the ×10 rule from the regulations is applied.
 - **AKTU:** conversion certificates are available through the university's student service portal and exam cells, using the (CGPA − 0.75) × 10 ordinance formula.
 - **GTU:** the Student Services Portal handles academic services including conversion certificates under Notification 1/2012's formula.

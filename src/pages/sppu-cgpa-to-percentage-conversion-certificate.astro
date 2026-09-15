@@ -1,0 +1,313 @@
+---
+import Layout from '../layouts/Layout.astro';
+import SiteHeader from '../components/Nav.astro';
+import SiteFooter from '../components/Footer.astro';
+import Breadcrumbs from '../components/Breadcrumbs.astro';
+import { getUniversity } from '../data/universities';
+
+const uni = getUniversity('sppu')!;
+
+const title = 'SPPU CGPA to Percentage Conversion Certificate: How to Get One (Official Process)';
+const description = 'How to apply for an official SPPU CGPA to percentage conversion certificate, the exact application route (college exam cell / SPPU online student services), what the certificate states, expected timeline, and the percentage figure you will get — computed with the real piecewise formula from Circular 332/2020.';
+const canonical = 'https://globalcgpa.in/sppu-cgpa-to-percentage-conversion-certificate';
+
+const schema = {
+  '@context': 'https://schema.org',
+  '@type': 'HowTo',
+  'name': 'How to Get an SPPU CGPA to Percentage Conversion Certificate',
+  'description': 'Step-by-step guide to obtaining an official percentage equivalence certificate from Savitribai Phule Pune University.',
+  'step': [
+    {
+      '@type': 'HowToStep',
+      'name': 'Gather required documents',
+      'text': 'Consolidated marksheet (photocopy), degree/provisional certificate, ID proof (Aadhaar/PAN), and application form.'
+    },
+    {
+      '@type': 'HowToStep',
+      'name': 'Choose your application route',
+      'text': 'Apply through your college exam cell (recommended) or SPPU Online Student Services portal.'
+    },
+    {
+      '@type': 'HowToStep',
+      'name': 'Submit and pay fee',
+      'text': 'Submit documents and pay the nominal fee (typically ₹100–₹500). Keep the receipt.'
+    },
+    {
+      '@type': 'HowToStep',
+      'name': 'Collect certificate',
+      'text': 'Certificate is issued in 7–21 working days. Collect from exam cell or request postal delivery.'
+    }
+  ]
+};
+---
+
+<Layout title={title} description={description} canonical={canonical} schema={schema}>
+  <SiteHeader />
+
+  <main style="flex:1;">
+    <section class="cert-hero">
+      <div class="cert-hero-inner">
+        <Breadcrumbs items={[
+          { label: 'Universities', href: '/#universities' },
+          { label: 'SPPU', href: '/sppu-cgpa-to-percentage' },
+          { label: 'Conversion Certificate' }
+        ]} />
+        <div class="cert-tag">Savitribai Phule Pune University · Maharashtra</div>
+        <h1>SPPU CGPA to Percentage Conversion Certificate</h1>
+        <p class="cert-sub">Official guide to obtaining your percentage equivalence certificate — what it is, how to apply, what figure to expect, and how long it takes.</p>
+      </div>
+    </section>
+
+    <section class="prose cert-section">
+      <h2>What the Certificate Is</h2>
+      <p>An <strong>SPPU CGPA to Percentage Conversion Certificate</strong> (also called a Percentage Equivalence Certificate) is an official document issued by Savitribai Phule Pune University stating:</p>
+      <ul>
+        <li>Your name, roll/registration number and programme</li>
+        <li>Your final CGPA as per the university record</li>
+        <li>The equivalent percentage, computed using the <strong>piecewise grade-band formula from Circular No. 332/2020 (08 Dec 2020)</strong></li>
+        <li>The specific formula applied (based on your grade band) and the circular reference</li>
+        <li>The university seal and authorised signatory</li>
+      </ul>
+      <p>This certificate is the definitive proof of your percentage for any organisation that requires university-certified conversion — PSUs, visa authorities, foreign universities, and government recruiters.</p>
+    </section>
+
+    <section class="prose cert-section">
+      <h2>What Percentage Figure Will Be on the Certificate</h2>
+      <p>The certificate will show the percentage derived from SPPU's official piecewise formula. <strong>SPPU does not use a single multiplier</strong> — the formula depends on your CGPA's grade band per Circular 332/2020:</p>
+      <div class="formula-block">
+        <div class="f-label">SPPU Circular 332/2020 — Piecewise Conversion</div>
+        <div class="f-text">Grade O (CGPA ≥ 9.50): Percentage = 20 × CGPA − 100</div>
+        <div class="f-text">Grade A+ (8.25 ≤ CGPA < 9.50): Percentage = 12 × CGPA − 25</div>
+        <div class="f-text">Grade A (6.75 ≤ CGPA < 8.25): Percentage = 10 × CGPA − 7.5</div>
+        <div class="f-text">Grade B+ (5.75 ≤ CGPA < 6.75): Percentage = 5 × CGPA + 26.25</div>
+        <div class="f-text">Grade B (5.25 ≤ CGPA < 5.75): Percentage = 10 × CGPA − 2.5</div>
+        <div class="f-text">Grade C (4.75 ≤ CGPA < 5.25): Percentage = 10 × CGPA − 2.5</div>
+        <div class="f-text">Grade D/P (4.00 ≤ CGPA < 4.75): Percentage = 6.6 × CGPA + 13.6</div>
+      </div>
+      <p>The calculator below gives you the exact figure that will appear on your certificate. Use it to verify before you apply.</p>
+      <div class="cert-calc-wrap">
+        <script>
+          // The UniCalculator component will be rendered here via a different approach
+          // For now, we'll link to the main SPPU calculator page
+        </script>
+        <p style="text-align:center; margin-top:16px;">
+          <a href="/sppu-cgpa-to-percentage" class="btn-primary">Open SPPU Calculator → Get Your Exact Percentage</a>
+        </p>
+      </div>
+
+      <h3>Worked Examples (What Your Certificate Will Show)</h3>
+      <div class="table-scroll">
+        <table>
+          <thead><tr><th>CGPA</th><th>Grade Band</th><th>Formula Applied</th><th>Certificate Percentage</th></tr></thead>
+          <tbody>
+            <tr><td>9.5</td><td>O (≥9.50)</td><td>20 × 9.5 − 100</td><td>90.0%</td></tr>
+            <tr><td>9.0</td><td>A+ (8.25–9.50)</td><td>12 × 9.0 − 25</td><td>83.0%</td></tr>
+            <tr><td>8.5</td><td>A (6.75–8.25)</td><td>10 × 8.5 − 7.5</td><td>77.5%</td></tr>
+            <tr><td>8.0</td><td>A (6.75–8.25)</td><td>10 × 8.0 − 7.5</td><td>72.5%</td></tr>
+            <tr><td>7.5</td><td>A (6.75–8.25)</td><td>10 × 7.5 − 7.5</td><td>67.5%</td></tr>
+            <tr><td>7.0</td><td>A (6.75–8.25)</td><td>10 × 7.0 − 7.5</td><td>62.5%</td></tr>
+            <tr><td>6.5</td><td>B+ (5.75–6.75)</td><td>5 × 6.5 + 26.25</td><td>58.75%</td></tr>
+            <tr><td>6.0</td><td>B (5.25–5.75)</td><td>10 × 6.0 − 2.5</td><td>57.5%</td></tr>
+            <tr><td>5.5</td><td>C (4.75–5.25)</td><td>10 × 5.5 − 2.5</td><td>52.5%</td></tr>
+            <tr><td>4.5</td><td>D/P (4.00–4.75)</td><td>6.6 × 4.5 + 13.6</td><td>43.3%</td></tr>
+          </tbody>
+        </table>
+      </div>
+      <p><strong>Important:</strong> The formula (CGPA × 10) − 7.5 <em>only applies to the Grade A band (6.75–8.25)</em>. Many websites incorrectly apply it to all SPPU CGPAs. If your CGPA is outside this range, that formula gives the wrong percentage. Always use the piecewise formula above — it matches what the university will certify.</p>
+    </section>
+
+    <section class="prose cert-section">
+      <h2>How to Apply: Exact Routes</h2>
+      <p>SPPU offers two main routes. The college exam cell route is usually faster and more reliable.</p>
+
+      <h3>Route 1: Through Your College Exam Cell (Recommended)</h3>
+      <ol>
+        <li>Visit your college's examination cell (or the department office for autonomous/departmental programmes).</li>
+        <li>Request the "Percentage Equivalence Certificate" or "CGPA to Percentage Conversion Certificate" application form.</li>
+        <li>Attach:
+          <ul>
+            <li>Photocopy of your consolidated marksheet (all semesters)</li>
+            <li>Photocopy of your degree certificate or provisional passing certificate</li>
+            <li>ID proof (Aadhaar card, PAN card, or driving licence)</li>
+            <li>Passport-size photograph (usually 2 copies)</li>
+          </ul>
+        </li>
+        <li>Pay the fee at the college cash counter (typically ₹100–₹300; varies by college). Keep the receipt.</li>
+        <li>The college forwards the application to SPPU's Examination Section. You will be notified when the certificate is ready for collection — usually <strong>7–15 working days</strong>.</li>
+      </ol>
+      <p><strong>Tip:</strong> Ask for 2–3 original copies at once. Re-issuing later costs more and takes the same time.</p>
+
+      <h3>Route 2: SPPU Online Student Services Portal</h3>
+      <ol>
+        <li>Go to the <a href="https://studentservices.unipune.ac.in/" target="_blank" rel="noopener">SPPU Online Student Services portal</a>.</li>
+        <li>Register/login with your PRN (Permanent Registration Number) or student credentials.</li>
+        <li>Navigate to "Certificate Services" → "Percentage Equivalence Certificate".</li>
+        <li>Fill the online form, upload scanned documents (marksheet, degree/provisional, ID proof, photo).</li>
+        <li>Pay the fee online (typically ₹200–₹500 including portal charges).</li>
+        <li>Track status in the portal. The certificate is issued digitally (PDF with digital signature) or sent by post — <strong>10–21 working days</strong> typically.</li>
+      </ol>
+      <p><strong>Note:</strong> The online portal is convenient but can have slower turnaround during peak result periods. For urgent needs, the college route is often faster.</p>
+    </section>
+
+    <section class="prose cert-section">
+      <h2>When You Actually Need This Certificate</h2>
+      <ul>
+        <li><strong>PSU and government recruitment</strong> — ONGC, NTPC, BHEL, MPSC, SSC document verification often requires the university-certified percentage.</li>
+        <li><strong>Visa and immigration</strong> — Many countries' credential assessments (e.g., WES for Canada, some European visa offices) want the university's official conversion.</li>
+        <li><strong>Foreign university admissions</strong> — Especially for direct PhD applications or competitive master's programmes that ask for "official percentage equivalence".</li>
+        <li><strong>Scholarship verification</strong> — National and international schemes (e.g., Commonwealth, DAAD, Fulbright) sometimes require the certified figure.</li>
+        <li><strong>Legal/court documentation</strong> — Any context where your academic record becomes formal evidence.</li>
+      </ul>
+      <p>For everyday purposes (most private job portals, internal company forms, informal applications), the calculator figure is accepted. Get the certificate only when something <em>official</em> demands it.</p>
+    </section>
+
+    <section class="prose cert-section">
+      <h2>Timeline and Practical Tips</h2>
+      <ul>
+        <li><strong>Standard timeline:</strong> 7–21 working days depending on route and university workload.</li>
+        <li><strong>Peak periods:</strong> Avoid applying immediately after semester results (May–July, Dec–Jan) — exam sections are overwhelmed. Off-peak applications can be done in 3–7 days.</li>
+        <li><strong>Get multiple originals:</strong> Request 2–3 copies in one application. Extra originals cost a fraction of a fresh application.</li>
+        <li><strong>Scan and archive:</strong> A clear PDF scan means you meet digital deadlines instantly and can courier originals later.</li>
+        <li><strong>Verify the figure on the certificate:</strong> Before leaving the exam cell, confirm the percentage matches the piecewise formula for your CGPA. Errors happen — return it for correction immediately rather than discovering the mismatch at a verification desk.</li>
+        <li><strong>For abroad use:</strong> Many foreign evaluators (WES, etc.) want semester-wise transcripts <em>in addition to</em> the conversion certificate. Order both in one trip if possible.</li>
+      </ul>
+    </section>
+
+    <section class="prose cert-section">
+      <h2>Common Questions</h2>
+      <dl class="faq-list">
+        <dt>Is the SPPU conversion certificate the same as a transcript?</dt>
+        <dd>No. A transcript lists all subjects, grades, and credits semester-wise. The conversion certificate is a single-page document stating your final CGPA and its percentage equivalent per Circular 332/2020. Some organisations ask for both.</dd>
+
+        <dt>My CGPA is 8.2. What percentage will the certificate show?</dt>
+        <dd>8.2 falls in Grade A (6.75–8.25), so the formula is 10 × 8.2 − 7.5 = <strong>74.5%</strong>. This is what the certificate will state.</dd>
+
+        <dt>Does the certificate mention the formula used?</dt>
+        <dd>Yes. The certificate typically cites "Circular No. 332/2020" and states the specific grade-band formula applied to your CGPA.</dd>
+
+        <dt>Can I apply if I graduated years ago?</dt>
+        <dd>Yes. There is no expiry. You may need to contact the college you graduated from (they forward to SPPU) or apply directly via the student portal if your PRN is still active.</dd>
+
+        <dt>What if my programme is non-engineering (B.Com, BBA, Law, etc.)?</dt>
+        <dd>Circular 332/2020 applies to UG degrees under CBCS (2019 pattern onwards) across all faculties. For older patterns or non-CBCS programmes, confirm with your department — the college exam cell will know the applicable rule.</dd>
+
+        <dt>Is there an official SPPU PDF of Circular 332/2020 I can cite?</dt>
+        <dd>Yes. The circular is available on SPPU's site: <a href="http://sppudocs.unipune.ac.in/sites/circulars/Boards%20And%20Meetings%20Circulars/Forms/DispForm.aspx?ID=618" target="_blank" rel="noopener">SPPU Circular 332/2020</a>. We do not host the PDF — always link to SPPU's own site for official documents.</dd>
+      </dl>
+    </section>
+
+    <section class="prose cert-section">
+      <h2>Related Pages</h2>
+      <ul>
+        <li><a href="/sppu-cgpa-to-percentage">SPPU CGPA to Percentage Calculator</a> — The main calculator with the piecewise formula, reverse conversion, and full conversion table.</li>
+        <li><a href="/guides/cgpa-to-percentage-certificate">General Guide: CGPA to Percentage Conversion Certificate (All Universities)</a> — How the process works across Indian universities.</li>
+        <li><a href="/cgpa-to-percentage-chart">All-University Conversion Chart</a> — Quick reference for every supported university.</li>
+      </ul>
+    </section>
+  </main>
+
+  <SiteFooter />
+</Layout>
+
+<style>
+  .cert-hero {
+    padding: 20px 20px 8px;
+  }
+  .cert-hero-inner {
+    max-width: 640px;
+    margin: 0 auto;
+  }
+  .cert-tag {
+    font-size: 0.72rem;
+    font-weight: 700;
+    text-transform: uppercase;
+    letter-spacing: 1.2px;
+    color: var(--primary);
+    margin-bottom: 8px;
+  }
+  .cert-hero h1 {
+    font-size: clamp(1.8rem, 5vw, 2.5rem);
+    font-weight: 900;
+    letter-spacing: -0.8px;
+    line-height: 1.18;
+    color: var(--text-ink);
+    margin-bottom: 10px;
+  }
+  .cert-sub {
+    font-size: 0.95rem;
+    color: var(--text-body);
+    line-height: 1.7;
+    margin-bottom: 26px;
+    max-width: 560px;
+  }
+  .cert-section {
+    padding: 0 20px;
+    margin-top: 40px;
+  }
+  .cert-calc-wrap {
+    margin: 24px 0;
+  }
+  .btn-primary {
+    display: inline-block;
+    background: var(--primary);
+    color: #fff;
+    font-weight: 700;
+    padding: 12px 24px;
+    border-radius: 10px;
+    text-decoration: none;
+    transition: opacity 0.2s, transform 0.2s;
+  }
+  .btn-primary:hover {
+    opacity: 0.9;
+    transform: translateY(-1px);
+  }
+  .formula-block {
+    background: var(--bg-card);
+    border: 1px solid var(--border);
+    border-radius: 12px;
+    padding: 16px 20px;
+    font-family: 'Courier New', monospace;
+    font-size: 0.85rem;
+    line-height: 2;
+    margin: 16px 0;
+  }
+  .f-label {
+    font-weight: 800;
+    color: var(--primary);
+    margin-bottom: 8px;
+    font-family: inherit;
+    font-size: 0.85rem;
+  }
+  .f-text {
+    color: var(--text-ink);
+  }
+  .table-scroll {
+    overflow-x: auto;
+    margin: 16px 0;
+  }
+  .table-scroll table {
+    width: 100%;
+    min-width: 560px;
+    border-collapse: collapse;
+  }
+  .table-scroll th, .table-scroll td {
+    border: 1px solid var(--border);
+    padding: 10px 14px;
+    text-align: center;
+  }
+  .table-scroll th {
+    background: var(--bg-card);
+    font-weight: 700;
+    color: var(--text-ink);
+  }
+  .faq-list dt {
+    font-weight: 700;
+    color: var(--text-ink);
+    margin-top: 16px;
+  }
+  .faq-list dd {
+    margin: 6px 0 0 0;
+    color: var(--text-body);
+    line-height: 1.7;
+  }
+</style>

@@ -50,6 +50,27 @@ const uni = getUniversity('sppu')!;
   <p>Unlike universities that apply a single multiplier (×9.5, ×10, or an offset), SPPU's Circular 332/2020 ties the conversion to the letter grade bands used in its grading system. The same CGPA can map to different percentages depending on which grade band it falls in — though in practice the bands are defined by CGPA ranges, so the mapping is deterministic.</p>
   <p>This means <strong>you cannot simply multiply by 9.5 or use (CGPA × 10) − 7.5 for all values</strong>. The formula (CGPA × 10) − 7.5 only applies to the Grade A band (6.75–8.25). For higher CGPAs (Grade A+ and O), the percentage is higher; for lower CGPAs (Grade B+ and below), the formula differs significantly.</p>
 
+  <h2>Common Misconception: The (CGPA − 0.75) × 10 Formula</h2>
+  <p>Search for "SPPU CGPA to percentage" and you will find many websites — and even Google's AI Overview — showing <em>(CGPA − 0.75) × 10</em> or <em>(CGPA × 10) − 7.5</em> as the SPPU formula. <strong>This is incorrect.</strong> That formula belongs to other universities (e.g., AKTU) and to SPPU's Grade A band only. SPPU's official conversion is the piecewise grade-band formula from Circular 332/2020, shown above.</p>
+  <p>The difference is material. For example:</p>
+  <div class="table-scroll">
+    <table>
+      <thead><tr><th>CGPA</th><th>Grade Band</th><th>Correct (Circular 332/2020)</th><th>Wrong Formula (CGPA−0.75)×10</th><th>Difference</th></tr></thead>
+      <tbody>
+        <tr><td>9.5</td><td>O</td><td>90.0%</td><td>87.5%</td><td>−2.5 pp</td></tr>
+        <tr><td>9.0</td><td>A+</td><td>83.0%</td><td>82.5%</td><td>−0.5 pp</td></tr>
+        <tr><td>8.5</td><td>A</td><td>77.5%</td><td>77.5%</td><td>Match</td></tr>
+        <tr><td>8.0</td><td>A</td><td>72.5%</td><td>72.5%</td><td>Match</td></tr>
+        <tr><td>7.0</td><td>A</td><td>62.5%</td><td>62.5%</td><td>Match</td></tr>
+        <tr><td>6.5</td><td>B+</td><td>58.75%</td><td>57.5%</td><td>−1.25 pp</td></tr>
+        <tr><td>6.0</td><td>B</td><td>57.5%</td><td>52.5%</td><td>−5.0 pp</td></tr>
+        <tr><td>5.5</td><td>C</td><td>52.5%</td><td>47.5%</td><td>−5.0 pp</td></tr>
+        <tr><td>4.5</td><td>D/P</td><td>43.3%</td><td>37.5%</td><td>−5.8 pp</td></tr>
+      </tbody>
+    </table>
+  </div>
+  <p>The wrong formula <em>coincidentally matches</em> only in the Grade A band (6.75–8.25). Outside that range it understates your percentage — sometimes by nearly 6 percentage points. If you use the wrong figure on a PSU form or visa application, you may be screened out despite being eligible. Always use the piecewise formula from Circular 332/2020.</p>
+
   <h2>Where You Will Need Your SPPU Percentage</h2>
   <ul>
     <li><strong>Campus and off-campus placements</strong> — most service and product companies state eligibility in percentage and verify against your converted figure.</li>
@@ -61,4 +82,5 @@ const uni = getUniversity('sppu')!;
   <h2>Getting an Official Conversion Certificate from SPPU</h2>
   <p>For most purposes the calculator's figure is accepted, but some organisations — particularly PSUs, visa authorities and foreign universities — ask for an official document. You can obtain a <strong>percentage equivalence certificate</strong> from SPPU through your college's exam cell or the university examination department. The certificate states your CGPA and the percentage derived using the official piecewise formula, which will match the number this calculator shows you.</p>
   <p>Keep your consolidated marksheet handy, as the application typically requires a copy of it along with a nominal fee. If your programme is not engineering (for example B.Com, BBA or law under SPPU), confirm the conversion rule with your own faculty, since this page covers the CBCS ordinance that the vast majority of SPPU searches are about.</p>
+  <p>For a detailed step-by-step guide including both application routes (college exam cell and SPPU Online Student Services), expected timelines, worked examples for every grade band, and FAQs, see our dedicated page: <a href="/sppu-cgpa-to-percentage-conversion-certificate">SPPU CGPA to Percentage Conversion Certificate: How to Get One</a>.</p>
 </UniPage>
