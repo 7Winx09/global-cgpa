@@ -24,8 +24,13 @@ const getExample = (u: typeof universities[0]) => {
   if (u.key === 'mumbai') return Math.min(100, Math.max(0, 7.1 * c + 11));
   if (u.key === 'aktu') return Math.max(0, (c - 0.75) * 10);
   if (u.key === 'gtu') return Math.max(0, (c - 0.5) * 10);
-  if (['vtu', 'anna', 'ktu'].includes(u.key)) return Math.min(100, c * 10);
+  if (['vtu', 'anna', 'ktu', 'calcutta', 'rtu', 'rgpv', 'jntuk', 'ikgptu', 'bharathiar', 'periyar', 'bamu', 'csjmu'].includes(u.key)) return Math.min(100, c * 10);
+  if (['makaut', 'bangalore'].includes(u.key)) return Math.max(0, (c - 0.75) * 10);
+  if (['jntuh', 'bput'].includes(u.key)) return Math.max(0, (c - 0.5) * 10);
+  if (u.key === 'osmania') return Math.min(100, c * 9.5);
   if (u.key === 'du') return Math.min(100, c * 9.5);
+  if (['andhra', 'kerala', 'mdu', 'kurukshetra', 'shivaji'].includes(u.key)) return Math.min(100, c * 9.5);
+  if (['rtmnu'].includes(u.key)) return Math.min(100, c * 10);
   return Math.min(100, c * 9.5);
 };
 
@@ -40,11 +45,15 @@ const uniRows = [
 ];
 
 const faqs = [
-  { q: 'CGPA को प्रतिशत में कैसे बदलें?', a: 'सबसे आसान तरीका है अपने CGPA को 9.5 से गुणा करना। जैसे — 8 CGPA × 9.5 = 76%। यह CBSE/UGC का मानक फॉर्मूला है। लेकिन अगर आपकी यूनिवर्सिटी (जैसे SPPU, Mumbai University, AKTU, GTU) का अपना आधिकारिक फॉर्मूला है, तो उसी का इस्तेमाल करें।' },
-  { q: '8 CGPA कितने प्रतिशत के बराबर है?', a: 'मानक फॉर्मूले से 8 CGPA = 8 × 9.5 = <strong>76%</strong>। VTU, Anna University और KTU के नियमों में यह 80% होता है, जबकि SPPU में (8 × 10) − 7.5 = 72.5% और Mumbai University में (7.1 × 8) + 11 = 67.8%।' },
+  { q: 'CGPA को प्रतिशत में कैसे बदलें?', a: 'सबसे आसान तरीका है अपने CGPA को 9.5 से गुणा करना। जैसे — 8 CGPA × 9.5 = 76%। यह CBSE/UGC का मानक फॉर्मूला है। लेकिन अगर आपकी यूनिवर्सिटी (जैसे SPPU, Mumbai University, AKTU, GTU, VTU, JNTU, BPUT) का अपना आधिकारिक फॉर्मूला है, तो उसी का इस्तेमाल करें।' },
+  { q: '8 CGPA कितने प्रतिशत के बराबर है?', a: 'मानक फॉर्मूले से 8 CGPA = 8 × 9.5 = <strong>76%</strong>। VTU, Anna University, KTU, RTU, RGPV, Calcutta University के नियमों में यह 80% होता है, जबकि SPPU में (8 × 10) − 7.5 = 72.5%, Mumbai University में (7.1 × 8) + 11 = 67.8%, JNTUH/BPUT में (8 − 0.5) × 10 = 75%, MAKAUT/Bangalore/AKTU में (8 − 0.75) × 10 = 72.5%।' },
   { q: 'SGPA और CGPA में क्या अंतर है?', a: 'SGPA किसी एक सेमेस्टर का स्कोर है, जबकि CGPA पूरे कोर्स के सभी सेमेस्टर का क्रेडिट-वेटेड औसत है। दोनों को प्रतिशत में बदलने का फॉर्मूला एक ही है। सेमेस्टर के अंकों के लिए <a href="/sgpa-to-percentage">SGPA to percentage calculator</a> इस्तेमाल करें।' },
   { q: 'क्या रिज़्यूमे में प्रतिशत लिखना ज़रूरी है?', a: 'ज़्यादातर भर्ती फॉर्म और कंपनियां percentage मांगती हैं। हमेशा अपनी यूनिवर्सिटी के आधिकारिक फॉर्मूले से ही प्रतिशत निकालें, क्योंकि वेरिफिकेशन के समय वही फॉर्मूला लागू होता है।' },
-  { q: '70% के लिए कितना CGPA चाहिए?', a: 'मानक ×9.5 फॉर्मूले से 70% के लिए लगभग 7.37 CGPA चाहिए। VTU/Anna/KTU नियमों में 7.0 CGPA = 70%, जबकि AKTU में 7.75 CGPA और Mumbai University में लगभग 8.31 CGPA चाहिए।' },
+  { q: '70% के लिए कितना CGPA चाहिए?', a: 'मानक ×9.5 फॉर्मूले से 70% के लिए लगभग 7.37 CGPA चाहिए। VTU/Anna/KTU/RTU/RGPV/Calcutta/RTMNU/Periyar/CSJMU नियमों में 7.0 CGPA = 70%, जबकि AKTU/MAKAUT/Bangalore/JNTUK में 7.75 CGPA, JNTUH/BPUT में 7.5 CGPA, SPPU में 7.75 CGPA, और Mumbai University में लगभग 8.31 CGPA चाहिए।' },
+  { q: '7.5 CGPA अच्छा है या बुरा?', a: '7.5 CGPA अच्छा है — मानक फॉर्मूले से 71.25%। यह First Class है और अधिकांश IT कंपनियों (TCS, Infosys, Wipro) के कट-ऑफ को पूरा करता है। Product companies के लिए 8.0+ बेहतर है।' },
+  { q: 'क्या सभी यूनिवर्सिटी का फॉर्मूला एक जैसा है?', a: 'नहीं। हर यूनिवर्सिटी का अपना फॉर्मूला है। CBSE/DU/Andhra/Kerala/MDU/KUK/Shivaji/Bharathiar ×9.5 उपयोग करते हैं। VTU/Anna/KTU/Calcutta/RTU/RGPV/RTMNU/Periyar/IKGPTU/CSJMU/BAMU ×10 उपयोग करते हैं। SPPU piecewise grade-band फॉर्मूला उपयोग करता है। AKTU/MAKAUT/Bangalore/JNTUK (CGPA − 0.75) × 10 उपयोग करते हैं। JNTUH/BPUT (CGPA − 0.5) × 10 उपयोग करते हैं। GTU (CGPA − 0.5) × 10 उपयोग करता है। Mumbai University (pre-2026) (7.1×CGPA)+11 उपयोग करता था।' },
+  { q: 'क्या मैं अपनी यूनिवर्सिटी से आधिकारिक conversion certificate ले सकता हूँ?', a: 'हाँ। अपनी यूनिवर्सिटी के Controller of Examinations या college exam cell से contact करें। वे official letterhead पर CGPA-to-percentage conversion certificate जारी करते हैं। कुछ यूनिवर्सिटी (जैसे Mumbai University post-2026) अब request पर ही certificate देती हैं।' },
+  { q: 'Distinction के लिए कितना CGPA चाहिए?', a: 'यह यूनिवर्सिटी पर निर्भर करता है: VTU/Anna/KTU/RTU/RGPV/RTMNU/Periyar/IKGPTU/CSJMU/BAMU में 7.5 CGPA (75%+), JNTUH/BPUT/GTU में 7.5 CGPA, SPPU में 8.25+ CGPA, DU/Andhra/Kerala/MDU/KUK/Shivaji/Bharathiar में 7.9 CGPA (×9.5 फॉर्मूले से 75%+), AKTU/MAKAUT/Bangalore/JNTUK में 8.25 CGPA (75%+), Mumbai University (pre-2026) में 7.5 CGPA।' },
 ];
 
 const schema = {
@@ -218,8 +227,13 @@ const schema = {
         if (u.key === 'mumbai') return Math.min(100, Math.max(0, 7.1 * x + 11));
         if (u.key === 'aktu') return Math.max(0, (x - 0.75) * 10);
         if (u.key === 'gtu') return Math.max(0, (x - 0.5) * 10);
-        if (['vtu', 'anna', 'ktu'].includes(u.key)) return Math.min(100, x * 10);
+        if (['vtu', 'anna', 'ktu', 'calcutta', 'rtu', 'rgpv', 'jntuk', 'ikgptu', 'bharathiar', 'periyar', 'bamu', 'csjmu'].includes(u.key)) return Math.min(100, x * 10);
+        if (['makaut', 'bangalore'].includes(u.key)) return Math.max(0, (x - 0.75) * 10);
+        if (['jntuh', 'bput'].includes(u.key)) return Math.max(0, (x - 0.5) * 10);
+        if (u.key === 'osmania') return Math.min(100, x * 9.5);
         if (u.key === 'du') return Math.min(100, x * 9.5);
+        if (['andhra', 'kerala', 'mdu', 'kurukshetra', 'shivaji'].includes(u.key)) return Math.min(100, x * 9.5);
+        if (['rtmnu'].includes(u.key)) return Math.min(100, x * 10);
         return x * 9.5;
       }, label: u.short + ' formula' },
     `).join(',')}

@@ -41,6 +41,8 @@ const aktuFn = (c: number) => Math.max(0, (c - 0.75) * 10);
 const gtuFn = (c: number) => Math.max(0, (c - 0.5) * 10);
 
 const cbsePct = Math.min(100, v * 9.5);
+const makautFn = (c: number) => Math.max(0, (c - 0.75) * 10);
+const calcuttaFn = (c: number) => c * 10;
 const rows = [
   { name: 'CBSE / UGC generic', href: '/cgpa-to-percentage-chart', formula: '× 9.5', result: `${pct((x) => x * 9.5)}%` },
   { name: 'SPPU (Pune) — Piecewise', href: '/sppu-cgpa-to-percentage', formula: 'Circular 332/2020 (grade bands)', result: `${pct(sppuFn)}%` },
@@ -52,6 +54,8 @@ const rows = [
   { name: 'GTU (Gujarat)', href: '/gtu-cgpa-to-percentage', formula: '(CGPA − 0.5) × 10', result: `${pct(gtuFn)}%` },
   { name: 'KTU (Kerala)', href: '/ktu-cgpa-to-percentage', formula: 'CGPA × 10', result: `${pct((x) => x * 10)}%` },
   { name: 'DU (Delhi University)', href: '/du-cgpa-to-percentage', formula: 'CGPA × 9.5', result: `${pct((x) => x * 9.5)}%` },
+  { name: 'MAKAUT (WBUT)', href: '/makaut-cgpa-to-percentage', formula: '(CGPA − 0.75) × 10', result: `${pct(makautFn)}%` },
+  { name: 'Calcutta University', href: '/calcutta-university-cgpa-to-percentage', formula: 'CGPA × 10', result: `${pct(calcuttaFn)}%` },
 ];
 
 const neighbors = [v - 0.5, v + 0.5].filter((n) => n >= 5 && n <= 10);
@@ -90,11 +94,11 @@ const faqs = [
   },
   {
     q: `How do I convert ${label} CGPA to percentage manually?`,
-    a: `Multiply by 9.5: ${label} × 9.5 = <strong>${rows[0].result}</strong>. That is the standard CBSE-derived method used when no university-specific formula applies. If your marksheet comes from SPPU (piecewise), Mumbai University (pre-2026), AKTU or GTU, their published formulas differ — apply those instead so the figure matches what your university itself would certify.`,
+    a: `Multiply by 9.5: ${label} × 9.5 = <strong>${rows[0].result}</strong>. That is the standard CBSE-derived method used when no university-specific formula applies. If your marksheet comes from SPPU (piecewise), Mumbai University (pre-2026), AKTU, GTU, MAKAUT or Calcutta University, their published formulas differ — apply those instead so the figure matches what your university itself would certify.`,
   },
   {
     q: `Why do different sites show different percentages for ${label} CGPA?`,
-    a: `Because there is no single national conversion. The generic ×9.5 rule gives ${rows[0].result}, while ×10-rule universities (VTU 2022, KTU, Anna) give ${rows[3].result}, and offset formulas like SPPU (piecewise), Mumbai University (pre-2026: 7.1×+11), AKTU (−0.75×10) or GTU (−0.5×10) give yet other figures. Every site picks a default — the honest ones show which formula they applied, like the comparison table on this page.`,
+    a: `Because there is no single national conversion. The generic ×9.5 rule gives ${rows[0].result}, while ×10-rule universities (VTU 2022, KTU, Anna, Calcutta) give ${rows[3].result}, and offset formulas like SPPU (piecewise), Mumbai University (pre-2026: 7.1×+11), AKTU (−0.75×10), MAKAUT (−0.75×10) or GTU (−0.5×10) give yet other figures. Every site picks a default — the honest ones show which formula they applied, like the comparison table on this page.`,
   },
 ];
 
@@ -103,7 +107,7 @@ const schema = {
   '@type': 'WebApplication',
   'name': `${label} CGPA to Percentage Converter`,
   'url': `https://globalcgpa.in/${label}-cgpa-to-percentage`,
-  'description': `Convert ${label} CGPA to percentage using the standard CBSE formula or official rules for SPPU, VTU, Mumbai University, Anna University, AKTU, GTU, KTU and DU.`,
+  'description': `Convert ${label} CGPA to percentage using the standard CBSE formula or official rules for SPPU, VTU, Mumbai University, Anna University, AKTU, GTU, KTU, DU, MAKAUT and Calcutta University.`,
   'applicationCategory': 'EducationalApplication',
   'operatingSystem': 'Any',
   'offers': { '@type': 'Offer', 'price': '0', 'priceCurrency': 'INR' },
@@ -113,7 +117,7 @@ const schema = {
 
 <Layout
   title={`${label} CGPA to Percentage – ${pct((x) => x * 9.5)}% & All Formulas | GlobalCGPA`}
-  description={`${label} CGPA equals ${pct((x) => x * 9.5)}% under the standard CBSE formula. See exact ${label} CGPA to % conversions for SPPU, VTU, Mumbai University, Anna University, AKTU, GTU & KTU.`}
+  description={`${label} CGPA equals ${pct((x) => x * 9.5)}% under the standard CBSE formula. See exact ${label} CGPA to % conversions for SPPU, VTU, Mumbai University, Anna University, AKTU, GTU, KTU, DU, MAKAUT & Calcutta University.`}
   canonical={`https://globalcgpa.in/${label}-cgpa-to-percentage`}
   schema={schema}
 >

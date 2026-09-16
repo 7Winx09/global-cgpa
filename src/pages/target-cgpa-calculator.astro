@@ -1,0 +1,277 @@
+---
+import Layout from '../layouts/Layout.astro';
+import SiteHeader from '../components/Nav.astro';
+import SiteFooter from '../components/Footer.astro';
+import Breadcrumbs from '../components/Breadcrumbs.astro';
+import FaqAccordion from '../components/FaqAccordion.astro';
+
+const schema = {
+  '@context': 'https://schema.org',
+  '@type': 'WebApplication',
+  'name': 'Target CGPA Calculator — Required SGPA per Semester to Reach Goal CGPA',
+  'url': 'https://globalcgpa.in/target-cgpa-calculator',
+  'description': 'Calculate the exact SGPA you need in each remaining semester to hit your target CGPA. Credit-weighted math, optional per-semester credits, and clear "mathematically unreachable" detection.',
+  'applicationCategory': 'EducationalApplication',
+  'operatingSystem': 'Any',
+  'offers': { '@type': 'Offer', 'price': '0', 'priceCurrency': 'INR' },
+  'inLanguage': 'en-IN',
+  'isAccessibleForFree': true,
+};
+---
+
+<Layout
+  title="Target CGPA Calculator — Required SGPA per Semester to Reach Goal CGPA"
+  description="Calculate the SGPA you need each remaining semester to reach your target CGPA. Credit-weighted, optional per-semester credits, and instant unreachable-target detection. Free, no login."
+  canonical="https://globalcgpa.in/target-cgpa-calculator"
+  schema={schema}
+  alternates={[
+    { hreflang: 'en', href: 'https://globalcgpa.in/target-cgpa-calculator' },
+    { hreflang: 'x-default', href: 'https://globalcgpa.in/target-cgpa-calculator' },
+  ]}
+>
+  <SiteHeader />
+
+  <main style="flex:1;">
+    <section class="tool-hero">
+      <div class="tool-hero-inner">
+        <Breadcrumbs items={[{ label: 'Calculators', href: '/' }, { label: 'Target CGPA Calculator' }]} />
+        <div class="tool-tag">New Tool</div>
+        <h1 class="tool-h1">Target CGPA Calculator</h1>
+        <p class="tool-sub">Enter your current CGPA, semesters completed, total semesters, and target CGPA. Get the exact SGPA you need each remaining semester — credit-weighted, with optional per-semester credits. Instantly flags mathematically unreachable targets.</p>
+
+        <div class="calc-shell" id="target-calc">
+          <div class="input-grid">
+            <div class="input-group">
+              <label class="sp-label" for="curr-cgpa">Current CGPA</label>
+              <input type="number" id="curr-cgpa" min="0" max="10" step="0.01" placeholder="e.g. 7.25" inputmode="decimal" />
+            </div>
+            <div class="input-group">
+              <label class="sp-label" for="completed-sem">Semesters Completed</label>
+              <input type="number" id="completed-sem" min="0" max="10" step="1" placeholder="e.g. 4" inputmode="numeric" />
+            </div>
+            <div class="input-group">
+              <label class="sp-label" for="total-sem">Total Semesters in Programme</label>
+              <input type="number" id="total-sem" min="1" max="12" step="1" placeholder="e.g. 8" inputmode="numeric" />
+            </div>
+            <div class="input-group">
+              <label class="sp-label" for="target-cgpa">Target CGPA</label>
+              <input type="number" id="target-cgpa" min="0" max="10" step="0.01" placeholder="e.g. 8.00" inputmode="decimal" />
+            </div>
+          </div>
+
+          <details class="credits-toggle" id="credits-toggle">
+            <summary class="credits-summary">
+              <span>⚙️ Per-semester credits (optional)</span>
+              <span class="chevron">▼</span>
+            </summary>
+            <div class="credits-grid" id="credits-grid"></div>
+            <p class="credits-hint">Leave blank to assume equal credits each semester. Enter credits for each remaining semester if they vary.</p>
+          </details>
+
+          <div class="calc-output">
+            <div class="output-main" id="output-main">
+              <div class="out-val" id="out-need">—</div>
+              <div class="out-lbl">Required SGPA per remaining semester</div>
+            </div>
+            <div class="output-detail" id="output-detail"></div>
+            <div class="sp-formula-note" id="out-note"></div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <section class="prose tool-article">
+      <h2>How the Target CGPA Calculator Works</h2>
+      <p>This tool uses <strong>credit-weighted math</strong>, not a naive average. Your CGPA is the weighted average of all semester SGPAs:</p>
+      <div class="formula-block">
+        <div class="f-label">CGPA Formula</div>
+        <div class="f-text">CGPA = Σ(SGPA<sub>i</sub> × Credits<sub>i</sub>) ÷ Σ(Credits<sub>i</sub>)</div>
+      </div>
+      <p>Given your current CGPA (which already embeds completed credits), the required SGPA for each remaining semester is:</p>
+      <div class="formula-block">
+        <div class="f-label">Required SGPA (equal credits)</div>
+        <div class="f-text">Required SGPA = [Target CGPA × Total Credits − Current CGPA × Completed Credits] ÷ Remaining Credits</div>
+      </div>
+      <p>If credits differ by semester, the calculator distributes the required weighted points across remaining semesters proportionally to their credits.</p>
+
+      <h3>Mathematically Unreachable Targets</h3>
+      <p>If the required SGPA exceeds <strong>10.0</strong> (the maximum on a 10-point scale), the target is <strong>impossible</strong> no matter how well you perform. The calculator will clearly state this and show the maximum achievable CGPA if you score 10.0 in every remaining semester.</p>
+
+      <h3>Worked Example</h3>
+      <ul>
+        <li>Current CGPA: 7.2 after 4 semesters (80 credits)</li>
+        <li>Total semesters: 8 (160 credits total)</li>
+        <li>Target CGPA: 8.5</li>
+        <li>Remaining credits: 80</li>
+        <li>Required weighted points: 8.5 × 160 = 1360</li>
+        <li>Current weighted points: 7.2 × 80 = 576</li>
+        <li>Needed from remaining: 1360 − 576 = 784</li>
+        <li>Required SGPA: 784 ÷ 80 = <strong>9.8</strong></li>
+      </ul>
+      <p>At 9.8 SGPA, the target is barely reachable. If target were 8.75, required SGPA = 10.3 → <strong>unreachable</strong>.</p>
+
+      <h2>Related Tools</h2>
+      <ul>
+        <li><a href="/sgpa-to-cgpa">SGPA to CGPA Calculator</a> — Build your CGPA from semester SGPAs</li>
+        <li><a href="/backlog-impact-calculator">Backlog Impact Calculator</a> — See how a failed subject affects your CGPA</li>
+        <li><a href="/guides/does-backlog-affect-cgpa">Guide: Do Backlogs Affect Your CGPA?</a> — Recovery math and strategy</li>
+      </ul>
+    </section>
+
+    <section class="prose tool-faq">
+      <h2>Frequently Asked Questions</h2>
+      <FaqAccordion faqs={[
+        { q: 'What if my semesters have different credit loads?', a: 'Click "Per-semester credits" and enter the credits for each remaining semester. The calculator will weight each semester\'s required SGPA by its credits. If left blank, equal credits are assumed.' },
+        { q: 'Why does the calculator say my target is unreachable?', a: 'The required SGPA exceeds 10.0 (the maximum grade point). Even scoring 10.0 in every remaining semester won\'t raise your CGPA enough. The tool shows the maximum achievable CGPA with perfect 10.0 SGPAs.' },
+        { q: 'Can I use this for a 4-point or 5-point scale?', a: 'This calculator is designed for the 10-point CGPA scale used by most Indian universities. For other scales, the math is similar but the maximum grade point differs (4.0 or 5.0).' },
+        { q: 'Does this account for backlogs or failed subjects?', a: 'No — this assumes you clear all remaining subjects. For backlog impact, use the <a href="/backlog-impact-calculator">Backlog Impact Calculator</a> which models a failed subject (0 grade points) and its re-exam replacement.' },
+        { q: 'What if I don\'t know my total credits, only semesters?', a: 'The calculator assumes equal credits per semester if you don\'t enter per-semester credits. This is accurate for most programmes where each semester carries roughly the same credit load.' },
+      ]} />
+    </section>
+  </main>
+
+  <SiteFooter />
+
+  <style>
+    .tool-hero { padding: 20px 20px 8px; }
+    .tool-hero-inner { max-width: 720px; margin: 0 auto; }
+    .tool-tag { font-size: 0.72rem; font-weight: 700; text-transform: uppercase; letter-spacing: 1.2px; color: var(--primary); margin-bottom: 8px; }
+    .tool-h1 { font-size: clamp(1.8rem, 5vw, 2.5rem); font-weight: 900; letter-spacing: -0.8px; line-height: 1.18; color: var(--text-ink); margin-bottom: 10px; }
+    .tool-sub { font-size: 0.95rem; color: var(--text-body); line-height: 1.7; margin-bottom: 26px; max-width: 560px; }
+    .sp-label { display: block; font-size: 0.72rem; font-weight: 700; text-transform: uppercase; letter-spacing: 0.6px; color: var(--text-mute); margin-bottom: 6px; }
+    .input-grid { display: grid; grid-template-columns: repeat(2, 1fr); gap: 16px; margin-bottom: 16px; }
+    .calc-shell input[type="number"] { width: 100%; height: 46px; padding: 0 14px; border: 1px solid var(--border); background: var(--bg-soft); color: var(--text-ink); font-size: 0.95rem; font-weight: 500; border-radius: 10px; font-family: inherit; transition: border-color 0.2s; }
+    .calc-shell input:focus { outline: none; border-color: var(--primary); }
+    .credits-toggle { background: var(--bg-card); border: 1px solid var(--border); border-radius: 12px; padding: 16px; margin-bottom: 20px; }
+    .credits-summary { display: flex; justify-content: space-between; align-items: center; cursor: pointer; font-weight: 600; color: var(--text-ink); }
+    .credits-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(120px, 1fr)); gap: 12px; margin-top: 16px; }
+    .credits-grid input { width: 100%; height: 42px; padding: 0 12px; border: 1px solid var(--border); background: var(--bg-soft); color: var(--text-ink); font-size: 0.9rem; font-weight: 500; border-radius: 8px; font-family: inherit; }
+    .credits-hint { font-size: 0.8rem; color: var(--text-mute); margin-top: 12px; }
+    .calc-output { text-align: center; margin-top: 8px; }
+    .output-main { background: var(--bg-card); border: 1px solid var(--border); border-radius: 16px; padding: 24px; margin-bottom: 16px; }
+    .out-val { font-size: clamp(2rem, 5vw, 3rem); font-weight: 800; color: var(--primary); line-height: 1.1; margin-bottom: 4px; }
+    .out-lbl { font-size: 0.85rem; color: var(--text-mute); text-transform: uppercase; font-weight: 700; letter-spacing: 0.5px; }
+    .output-detail { background: var(--bg-soft); border: 1px solid var(--border); border-radius: 12px; padding: 16px; text-align: left; font-size: 0.9rem; line-height: 1.7; color: var(--text-body); }
+    .output-detail .unreachable { color: var(--danger); font-weight: 700; }
+    .output-detail .reachable { color: var(--primary); font-weight: 700; }
+    .sp-formula-note { margin-top: 12px; font-size: 0.8rem; color: var(--text-mute); text-align: center; }
+    .tool-article, .tool-faq { padding: 0 20px; margin-top: 44px; max-width: 780px; margin-left: auto; margin-right: auto; }
+    .formula-block { background: var(--bg-soft); border: 1px solid var(--border); border-left: 3px solid var(--primary); border-radius: 12px; padding: 18px 22px; margin: 1.2rem 0; }
+    .formula-block .f-label { font-size: 0.72rem; font-weight: 700; text-transform: uppercase; letter-spacing: 1px; color: var(--primary); margin-bottom: 6px; }
+    .formula-block .f-text { font-family: 'Courier New', monospace; font-size: 1rem; font-weight: 600; color: var(--text-ink); line-height: 1.6; }
+    @media (max-width: 600px) { .input-grid { grid-template-columns: 1fr; } }
+  </style>
+
+  <script>
+    const currCgpa = document.getElementById('curr-cgpa');
+    const completedSem = document.getElementById('completed-sem');
+    const totalSem = document.getElementById('total-sem');
+    const targetCgpa = document.getElementById('target-cgpa');
+    const creditsToggle = document.getElementById('credits-toggle');
+    const creditsGrid = document.getElementById('credits-grid');
+    const outNeed = document.getElementById('out-need');
+    const outDetail = document.getElementById('output-detail');
+    const outNote = document.getElementById('out-note');
+
+    function updateCreditsGrid() {
+      const completed = parseInt(completedSem.value) || 0;
+      const total = parseInt(totalSem.value) || 0;
+      const remaining = total - completed;
+      creditsGrid.innerHTML = '';
+      if (remaining > 0 && remaining <= 10) {
+        for (let i = 1; i <= remaining; i++) {
+          const div = document.createElement('div');
+          div.innerHTML = `<label class="sp-label" style="font-size:0.65rem;">Sem ${completed + i} Credits</label><input type="number" class="credit-input" data-sem="${completed + i}" min="0" max="30" step="0.5" placeholder="e.g. 20">`;
+          creditsGrid.appendChild(div);
+        }
+      }
+    }
+
+    [completedSem, totalSem].forEach(el => el.addEventListener('input', updateCreditsGrid));
+
+    creditsToggle.addEventListener('toggle', () => {
+      if (creditsToggle.open) updateCreditsGrid();
+    });
+
+    function calculate() {
+      const cCgpa = parseFloat(currCgpa.value);
+      const cSem = parseInt(completedSem.value);
+      const tSem = parseInt(totalSem.value);
+      const tCgpa = parseFloat(targetCgpa.value);
+
+      if ([cCgpa, cSem, tSem, tCgpa].some(isNaN) || cSem < 0 || tSem <= 0 || cSem >= tSem) {
+        outNeed.textContent = '—';
+        outDetail.textContent = '';
+        outNote.textContent = 'Fill all fields. Completed semesters must be less than total semesters.';
+        return;
+      }
+
+      const creditInputs = document.querySelectorAll('.credit-input');
+      let customCredits = false;
+      let remainingCredits = 0;
+      const semCredits = [];
+
+      for (const inp of creditInputs) {
+        const val = parseFloat(inp.value);
+        if (!isNaN(val) && val > 0) {
+          customCredits = true;
+          semCredits.push(val);
+          remainingCredits += val;
+        }
+      }
+
+      const remainingSem = tSem - cSem;
+
+      let completedCredits, avgCreditsPerSem;
+      if (customCredits && semCredits.length === remainingSem) {
+        completedCredits = cSem * (remainingCredits / remainingSem);
+        avgCreditsPerSem = remainingCredits / remainingSem;
+      } else {
+        avgCreditsPerSem = 20;
+        completedCredits = cSem * avgCreditsPerSem;
+        remainingCredits = remainingSem * avgCreditsPerSem;
+      }
+
+      const totalCredits = completedCredits + remainingCredits;
+      const currentPoints = cCgpa * completedCredits;
+      const targetPoints = tCgpa * totalCredits;
+      const neededPoints = targetPoints - currentPoints;
+
+      if (neededPoints <= 0) {
+        outNeed.textContent = '0.00';
+        outDetail.innerHTML = `Your current CGPA (${cCgpa.toFixed(2)}) already meets or exceeds your target (${tCgpa.toFixed(2)}). No additional SGPA required.`;
+        outNote.textContent = 'Target already achieved';
+        return;
+      }
+
+      const requiredSgpa = neededPoints / remainingCredits;
+
+      if (requiredSgpa > 10) {
+        const maxAchievableCgpa = (currentPoints + 10 * remainingCredits) / totalCredits;
+        outNeed.textContent = 'Impossible';
+        outNeed.style.color = 'var(--danger)';
+        outDetail.innerHTML = `<span class="unreachable">Mathematically unreachable.</span> Required SGPA would be <strong>${requiredSgpa.toFixed(2)}</strong> (max is 10.0).<br><br>Maximum achievable CGPA with perfect 10.0 in all remaining semesters: <strong>${maxAchievableCgpa.toFixed(2)}</strong>.`;
+        outNote.textContent = `Even with 10.0 SGPA every remaining semester, max CGPA = ${maxAchievableCgpa.toFixed(2)}`;
+        return;
+      }
+
+      outNeed.textContent = requiredSgpa.toFixed(2);
+      outNeed.style.color = 'var(--primary)';
+
+      let detail = `You need <strong>${requiredSgpa.toFixed(2)} SGPA</strong> in each of the ${remainingSem} remaining semester${remainingSem > 1 ? 's' : ''}`;
+      if (customCredits) {
+        detail += ` (weighted by your entered credits: ${remainingCredits} total remaining credits)`;
+      } else {
+        detail += ` (assuming ${avgCreditsPerSem} credits/semester = ${completedCredits} completed, ${remainingCredits} remaining credits)`;
+      }
+      detail += `.<br><br>Current weighted points: ${currentPoints.toFixed(1)} (${cCgpa} × ${completedCredits}). Target weighted points: ${targetPoints.toFixed(1)} (${tCgpa} × ${totalCredits}). Needed: ${neededPoints.toFixed(1)}.`;
+      outDetail.innerHTML = detail;
+      outNote.textContent = `Credit-weighted calculation. Maximum grade point is 10.0.`;
+    }
+
+    [currCgpa, completedSem, totalSem, targetCgpa].forEach(el => el.addEventListener('input', calculate));
+    creditsGrid.addEventListener('input', calculate);
+
+    calculate();
+  </script>
+</Layout>

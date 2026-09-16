@@ -1,0 +1,235 @@
+---
+import Layout from '../layouts/Layout.astro';
+import SiteHeader from '../components/Nav.astro';
+import SiteFooter from '../components/Footer.astro';
+import Breadcrumbs from '../components/Breadcrumbs.astro';
+import FaqAccordion from '../components/FaqAccordion.astro';
+
+const schema = {
+  '@context': 'https://schema.org',
+  '@type': 'WebApplication',
+  'name': 'Backlog Impact Calculator — CGPA Drop from Failed Subject & Re-exam Recovery',
+  'url': 'https://globalcgpa.in/backlog-impact-calculator',
+  'description': 'Calculate exactly how much a failed subject drops your CGPA, and how much it recovers when you clear the re-exam. Credit-weighted math with original vs. re-exam grade points. Cross-linked with backlog guide.',
+  'applicationCategory': 'EducationalApplication',
+  'operatingSystem': 'Any',
+  'offers': { '@type': 'Offer', 'price': '0', 'priceCurrency': 'INR' },
+  'inLanguage': 'en-IN',
+  'isAccessibleForFree': true,
+};
+---
+
+<Layout
+  title="Backlog Impact Calculator — CGPA Drop & Re-exam Recovery"
+  description="Calculate the exact CGPA impact of a failed subject (0 grade points) and how much it recovers when you pass the re-exam. Credit-weighted, shows drop, recovery, and final CGPA. Free, no login."
+  canonical="https://globalcgpa.in/backlog-impact-calculator"
+  schema={schema}
+  alternates={[
+    { hreflang: 'en', href: 'https://globalcgpa.in/backlog-impact-calculator' },
+    { hreflang: 'x-default', href: 'https://globalcgpa.in/backlog-impact-calculator' },
+  ]}
+>
+  <SiteHeader />
+
+  <main style="flex:1;">
+    <section class="tool-hero">
+      <div class="tool-hero-inner">
+        <Breadcrumbs items={[{ label: 'Calculators', href: '/' }, { label: 'Backlog Impact Calculator' }]} />
+        <div class="tool-tag">New Tool</div>
+        <h1 class="tool-h1">Backlog Impact Calculator</h1>
+        <p class="tool-sub">Enter your current CGPA, total credits completed, the failed subject's credits, and the grade points you'll get on re-exam. See the immediate CGPA drop, the recovery after re-exam, and your final CGPA.</p>
+
+        <div class="calc-shell" id="backlog-calc">
+          <div class="input-grid">
+            <div class="input-group">
+              <label class="sp-label" for="curr-cgpa">Current CGPA (before backlog)</label>
+              <input type="number" id="curr-cgpa" min="0" max="10" step="0.01" placeholder="e.g. 8.00" inputmode="decimal" />
+            </div>
+            <div class="input-group">
+              <label class="sp-label" for="completed-credits">Total Credits Completed</label>
+              <input type="number" id="completed-credits" min="1" max="300" step="1" placeholder="e.g. 80" inputmode="numeric" />
+            </div>
+            <div class="input-group">
+              <label class="sp-label" for="failed-credits">Failed Subject Credits</label>
+              <input type="number" id="failed-credits" min="0.5" max="10" step="0.5" placeholder="e.g. 4" inputmode="decimal" />
+            </div>
+            <div class="input-group">
+              <label class="sp-label" for="reexam-grade">Re-exam Grade Points (0–10)</label>
+              <input type="number" id="reexam-grade" min="0" max="10" step="0.5" placeholder="e.g. 8" inputmode="decimal" />
+              <p class="input-hint">0 = still failed / not cleared. Enter expected grade points after re-exam (e.g., 8 for A, 9 for A+).</p>
+            </div>
+          </div>
+
+          <div class="calc-output">
+            <div class="output-row">
+              <div class="output-box">
+                <div class="out-val" id="out-drop">—</div>
+                <div class="out-lbl">CGPA Drop (immediate)</div>
+              </div>
+              <div class="output-box">
+                <div class="out-val" id="out-after-fail">—</div>
+                <div class="out-lbl">CGPA with Backlog (0 pts)</div>
+              </div>
+            </div>
+            <div class="output-row">
+              <div class="output-box">
+                <div class="out-val" id="out-recovery">—</div>
+                <div class="out-lbl">CGPA Recovery (re-exam)</div>
+              </div>
+              <div class="output-box">
+                <div class="out-val" id="out-final">—</div>
+                <div class="out-lbl">Final CGPA (after re-exam)</div>
+              </div>
+            </div>
+            <div class="sp-formula-note" id="out-note"></div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <section class="prose tool-article">
+      <h2>How the Backlog Impact Calculator Works</h2>
+      <p>A failed subject earns <strong>0 grade points but keeps its credits</strong> in the CGPA formula. This is the immediate damage. When you clear the re-exam, the new grade points replace the zero.</p>
+
+      <div class="formula-block">
+        <div class="f-label">CGPA Formula (Credit-Weighted)</div>
+        <div class="f-text">CGPA = Σ(Grade Points × Credits) ÷ Σ(Credits)</div>
+      </div>
+
+      <h3>Step 1: Immediate Drop (Backlog Active)</h3>
+      <div class="formula-block">
+        <div class="f-text">CGPA<sub>with backlog</sub> = (Current CGPA × Completed Credits) ÷ (Completed Credits + Failed Credits)</div>
+        <div class="f-example">The failed subject adds credits to the denominator but 0 points to the numerator.</div>
+      </div>
+
+      <h3>Step 2: Recovery After Re-exam</h3>
+      <div class="formula-block">
+        <div class="f-text">CGPA<sub>final</sub> = (Current CGPA × Completed Credits + Re-exam Grade Points × Failed Credits) ÷ (Completed Credits + Failed Credits)</div>
+        <div class="f-example">The 0 is replaced by the re-exam grade points. Total credits stay the same.</div>
+      </div>
+
+      <h3>Worked Example</h3>
+      <ul>
+        <li>Current CGPA: 8.00</li>
+        <li>Credits completed: 80</li>
+        <li>Failed subject: 4 credits</li>
+        <li>Re-exam grade: 8 (A)</li>
+      </ul>
+      <p><strong>Immediate drop:</strong> (8.00 × 80) ÷ 84 = <strong>7.62</strong> (drop of 0.38)</p>
+      <p><strong>After re-exam:</strong> (8.00 × 80 + 8 × 4) ÷ 84 = <strong>8.00</strong> (full recovery because re-exam grade equals original CGPA)</p>
+      <p>If re-exam grade were 6 (B): Final CGPA = (640 + 24) ÷ 84 = <strong>7.90</strong> (partial recovery)</p>
+      <p>If re-exam grade were 10 (O): Final CGPA = (640 + 40) ÷ 84 = <strong>8.10</strong> (CGPA actually increases!)</p>
+
+      <h2>Key Insights</h2>
+      <ul>
+        <li><strong>Higher credits = bigger drop.</strong> A 4-credit core subject hurts twice as much as a 2-credit lab.</li>
+        <li><strong>Re-exam grade matters.</strong> Clearing with a high grade doesn't just remove the zero — it actively adds points.</li>
+        <li><strong>Timing matters.</strong> The earlier the backlog, the more semesters you have to recover. Use the <a href="/target-cgpa-calculator">Target CGPA Calculator</a> to plan recovery.</li>
+        <li><strong>Distinction rules.</strong> Some universities (AKTU, JNTUH) require <em>first-attempt pass in all subjects</em> for Distinction, even if final CGPA qualifies. Check your ordinance.</li>
+      </ul>
+
+      <h2>Related Resources</h2>
+      <ul>
+        <li><a href="/guides/does-backlog-affect-cgpa">Guide: Do Backlogs Affect Your CGPA?</a> — Recovery math, transcript notation, and placement impact</li>
+        <li><a href="/target-cgpa-calculator">Target CGPA Calculator</a> — Plan the SGPA needed in remaining semesters to recover</li>
+        <li><a href="/sgpa-to-cgpa">SGPA to CGPA Calculator</a> — Build CGPA from semester SGPAs</li>
+      </ul>
+    </section>
+
+    <section class="prose tool-faq">
+      <h2>Frequently Asked Questions</h2>
+      <FaqAccordion faqs={[
+        { q: 'Does a backlog permanently lower my CGPA?', a: 'No. In nearly all universities, when you pass the re-exam, the new grade points replace the zero. The CGPA recovers based on the re-exam grade. What usually remains is a transcript notation (*, R, or a second entry) showing the re-appearance.' },
+        { q: 'What if I fail the re-exam too?', a: 'Set the re-exam grade points to 0. The calculator will show your CGPA with the backlog still active. You can re-run when you eventually clear it.' },
+        { q: 'My university uses a different grade point scale (e.g., 4.0). Does this work?', a: 'This calculator is designed for the 10-point scale used by most Indian universities. For a 4.0 scale, the math is identical but grade points range 0–4. You can still use it — just enter values on your scale.' },
+        { q: 'Does the backlog affect my degree class/Distinction?', a: 'Depends on your university. Some (AKTU, JNTUH) require first-attempt pass in ALL subjects for Distinction, regardless of final CGPA. Others (GTU, most state universities) only look at final CGPA. Check your specific ordinance. The guide linked above covers this in detail.' },
+        { q: 'Can I use this for multiple backlogs?', a: 'Run the calculator once per backlog, using the updated CGPA each time. For multiple simultaneous backlogs, sum their credits and use 0 for all until cleared, then add re-exam grades one by one.' },
+      ]} />
+    </section>
+  </main>
+
+  <SiteFooter />
+
+  <style>
+    .tool-hero { padding: 20px 20px 8px; }
+    .tool-hero-inner { max-width: 720px; margin: 0 auto; }
+    .tool-tag { font-size: 0.72rem; font-weight: 700; text-transform: uppercase; letter-spacing: 1.2px; color: var(--primary); margin-bottom: 8px; }
+    .tool-h1 { font-size: clamp(1.8rem, 5vw, 2.5rem); font-weight: 900; letter-spacing: -0.8px; line-height: 1.18; color: var(--text-ink); margin-bottom: 10px; }
+    .tool-sub { font-size: 0.95rem; color: var(--text-body); line-height: 1.7; margin-bottom: 26px; max-width: 560px; }
+    .sp-label { display: block; font-size: 0.72rem; font-weight: 700; text-transform: uppercase; letter-spacing: 0.6px; color: var(--text-mute); margin-bottom: 6px; }
+    .input-grid { display: grid; grid-template-columns: repeat(2, 1fr); gap: 16px; margin-bottom: 16px; }
+    .calc-shell input[type="number"] { width: 100%; height: 46px; padding: 0 14px; border: 1px solid var(--border); background: var(--bg-soft); color: var(--text-ink); font-size: 0.95rem; font-weight: 500; border-radius: 10px; font-family: inherit; transition: border-color 0.2s; }
+    .calc-shell input:focus { outline: none; border-color: var(--primary); }
+    .input-hint { font-size: 0.75rem; color: var(--text-mute); margin-top: 6px; font-family: 'Courier New', monospace; }
+    .calc-output { margin-top: 8px; }
+    .output-row { display: grid; grid-template-columns: repeat(2, 1fr); gap: 16px; margin-bottom: 16px; }
+    .output-box { background: var(--bg-card); border: 1px solid var(--border); border-radius: 16px; padding: 20px; text-align: center; }
+    .out-val { font-size: clamp(1.8rem, 4vw, 2.5rem); font-weight: 800; color: var(--primary); line-height: 1.1; margin-bottom: 4px; }
+    .out-lbl { font-size: 0.75rem; color: var(--text-mute); text-transform: uppercase; font-weight: 700; letter-spacing: 0.5px; }
+    .sp-formula-note { margin-top: 12px; font-size: 0.8rem; color: var(--text-mute); text-align: center; }
+    .tool-article, .tool-faq { padding: 0 20px; margin-top: 44px; max-width: 780px; margin-left: auto; margin-right: auto; }
+    .formula-block { background: var(--bg-soft); border: 1px solid var(--border); border-left: 3px solid var(--primary); border-radius: 12px; padding: 18px 22px; margin: 1.2rem 0; }
+    .formula-block .f-label { font-size: 0.72rem; font-weight: 700; text-transform: uppercase; letter-spacing: 1px; color: var(--primary); margin-bottom: 6px; }
+    .formula-block .f-text { font-family: 'Courier New', monospace; font-size: 1rem; font-weight: 600; color: var(--text-ink); line-height: 1.6; }
+    .formula-block .f-example { font-size: 0.82rem; color: var(--text-mute); margin-top: 6px; }
+    @media (max-width: 600px) { .input-grid, .output-row { grid-template-columns: 1fr; } }
+  </style>
+
+  <script>
+    const currCgpa = document.getElementById('curr-cgpa');
+    const completedCredits = document.getElementById('completed-credits');
+    const failedCredits = document.getElementById('failed-credits');
+    const reexamGrade = document.getElementById('reexam-grade');
+
+    const outDrop = document.getElementById('out-drop');
+    const outAfterFail = document.getElementById('out-after-fail');
+    const outRecovery = document.getElementById('out-recovery');
+    const outFinal = document.getElementById('out-final');
+    const outNote = document.getElementById('out-note');
+
+    function calculate() {
+      const cCgpa = parseFloat(currCgpa.value);
+      const cCredits = parseFloat(completedCredits.value);
+      const fCredits = parseFloat(failedCredits.value);
+      const rGrade = parseFloat(reexamGrade.value);
+
+      if ([cCgpa, cCredits, fCredits, rGrade].some(isNaN) || cCredits <= 0 || fCredits <= 0) {
+        outDrop.textContent = '—';
+        outAfterFail.textContent = '—';
+        outRecovery.textContent = '—';
+        outFinal.textContent = '—';
+        outNote.textContent = 'Fill all fields. Credits must be positive.';
+        return;
+      }
+
+      const totalCreditsAfter = cCredits + fCredits;
+      const currentPoints = cCgpa * cCredits;
+
+      // Immediate CGPA with backlog (0 grade points for failed subject)
+      const cgpaWithBacklog = currentPoints / totalCreditsAfter;
+      const drop = cCgpa - cgpaWithBacklog;
+
+      // Final CGPA after re-exam
+      const reexamPoints = rGrade * fCredits;
+      const finalCgpa = (currentPoints + reexamPoints) / totalCreditsAfter;
+      const recovery = finalCgpa - cgpaWithBacklog;
+
+      outDrop.textContent = drop.toFixed(2);
+      outAfterFail.textContent = cgpaWithBacklog.toFixed(2);
+      outRecovery.textContent = recovery.toFixed(2);
+      outFinal.textContent = finalCgpa.toFixed(2);
+
+      if (rGrade === 0) {
+        outNote.textContent = 'Re-exam grade is 0 (backlog still active). Final CGPA = CGPA with backlog.';
+      } else if (rGrade >= cCgpa) {
+        outNote.textContent = `Re-exam grade (${rGrade}) ≥ original CGPA (${cCgpa.toFixed(2)}). Final CGPA ≥ original.`;
+      } else {
+        outNote.textContent = `Re-exam grade (${rGrade}) < original CGPA (${cCgpa.toFixed(2)}). Partial recovery.`;
+      }
+    }
+
+    [currCgpa, completedCredits, failedCredits, reexamGrade].forEach(el => el.addEventListener('input', calculate));
+
+    calculate();
+  </script>
+</Layout>

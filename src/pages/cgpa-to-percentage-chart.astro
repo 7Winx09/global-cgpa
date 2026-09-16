@@ -25,6 +25,8 @@ const vtuFnOld = (c: number) => (c - 0.75) * 10;
 const mumbaiFn = (c: number) => Math.min(100, Math.max(0, 7.1 * c + 11));
 const aktuFn = (c: number) => Math.max(0, (c - 0.75) * 10);
 const gtuFn = (c: number) => Math.max(0, (c - 0.5) * 10);
+const makautFn = (c: number) => Math.max(0, (c - 0.75) * 10);
+const calcuttaFn = (c: number) => c * 10;
 
 const faqs = [
   { q: 'Which conversion formula should I use?', a: 'The one your own university prescribes. CBSE\'s ×9.5 is the generic default, but SPPU (piecewise), Mumbai University (pre-2026 vs post-2026), VTU (scheme-dependent), AKTU and GTU publish different official formulas. Using the wrong one creates a mismatch with your documents — the table above shows every major formula side by side so you can pick correctly.' },
@@ -39,7 +41,7 @@ const schema = {
   '@type': 'WebApplication',
   'name': 'CGPA to Percentage Conversion Chart',
   'url': 'https://globalcgpa.in/cgpa-to-percentage-chart',
-  'description': 'Complete CGPA to percentage conversion chart comparing CBSE ×9.5, SPPU, VTU, Mumbai University, Anna University, AKTU, GTU and KTU formulas side by side, from 4.0 to 10.0 CGPA.',
+  'description': 'Complete CGPA to percentage conversion chart comparing CBSE ×9.5, SPPU, VTU, Mumbai University, Anna University, AKTU, GTU, KTU, MAKAUT and Calcutta University formulas side by side, from 4.0 to 10.0 CGPA.',
   'applicationCategory': 'EducationalApplication',
   'operatingSystem': 'Any',
   'offers': { '@type': 'Offer', 'price': '0', 'priceCurrency': 'INR' },
@@ -80,6 +82,8 @@ const schema = {
               <th>AKTU −0.75</th>
               <th>GTU −0.5</th>
               <th>KTU ×10</th>
+              <th>MAKAUT −0.75</th>
+              <th>Calcutta ×10</th>
             </tr>
           </thead>
           <tbody>
@@ -94,6 +98,8 @@ const schema = {
                 <td>{pct(aktuFn, c)}</td>
                 <td>{pct(gtuFn, c)}</td>
                 <td>{pct(vtuFn2022, c)}</td>
+                <td>{pct(makautFn, c)}</td>
+                <td>{pct(calcuttaFn, c)}</td>
               </tr>
             ))}
           </tbody>
@@ -109,8 +115,10 @@ const schema = {
         <li><strong>Mumbai University (Pre-2026: 7.1×CGPA+11)</strong> — Applies to transcripts dated ≤ 31 Dec 2025. <strong>Post-2026:</strong> Raw marks conversion (no formula).</li>
         <li><strong>AKTU (−0.75 then ×10)</strong> — Ordinance formula for batches from 2019-20 onwards.</li>
         <li><strong>GTU (−0.5 then ×10)</strong> — Per GTU Notification 1/2012.</li>
+        <li><strong>MAKAUT (−0.75 then ×10)</strong> — Per Controller of Examinations notice COE/MAKAUT,WB/2021-22/0357 (02 Dec 2021). No class/division awarded.</li>
+        <li><strong>Calcutta University (×10)</strong> — Per Notification CSR/143/2024 (24 Dec 2024) for UG under CCF. No class/division awarded.</li>
       </ul>
-      <p>Need the reverse direction, or an exact figure for a CGPA not listed here? Use the <a href="/">CGPA to percentage calculator</a> for instant results, or the <a href="/percentage-to-cgpa">percentage to CGPA converter</a> to work backwards. University-specific pages — <a href="/sppu-cgpa-to-percentage">SPPU</a>, <a href="/vtu-cgpa-to-percentage">VTU</a>, <a href="/mumbai-university-cgpa-to-percentage">Mumbai</a>, <a href="/anna-university-cgpa-to-percentage">Anna</a>, <a href="/aktu-cgpa-to-percentage">AKTU</a>, <a href="/gtu-cgpa-to-percentage">GTU</a> and <a href="/ktu-cgpa-to-percentage">KTU</a> — include worked examples, class thresholds and certificate guidance.</p>
+      <p>Need the reverse direction, or an exact figure for a CGPA not listed here? Use the <a href="/">CGPA to percentage calculator</a> for instant results, or the <a href="/percentage-to-cgpa">percentage to CGPA converter</a> to work backwards. University-specific pages — <a href="/sppu-cgpa-to-percentage">SPPU</a>, <a href="/vtu-cgpa-to-percentage">VTU</a>, <a href="/mumbai-university-cgpa-to-percentage">Mumbai</a>, <a href="/anna-university-cgpa-to-percentage">Anna</a>, <a href="/aktu-cgpa-to-percentage">AKTU</a>, <a href="/gtu-cgpa-to-percentage">GTU</a>, <a href="/ktu-cgpa-to-percentage">KTU</a>, <a href="/makaut-cgpa-to-percentage">MAKAUT</a> and <a href="/calcutta-university-cgpa-to-percentage">Calcutta University</a> — include worked examples, class thresholds and certificate guidance.</p>
 
       <h2>Grade Bands Behind the Numbers</h2>
       <p>The 10-point scale used by most Indian technical universities maps letter grades to grade points in bands. While exact mark ranges vary by university, the pattern below is the most common:</p>
