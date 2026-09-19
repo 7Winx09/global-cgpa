@@ -1,0 +1,145 @@
+---
+import Layout from '../../layouts/Layout.astro';
+import { getUniversitiesByCountry } from '../../data/universities-global';
+
+const universities = getUniversitiesByCountry('BR');
+
+const pageTitle = 'Comparação de Média | Principais Universidades Brasileiras';
+const description = 'Comparação das regras de média das 5 principais universidades brasileiras (USP, UNICAMP, UFRJ, UFMG, UFBA): escala 0–10, conceitos A–F, aprovação mínima 5.0 ou 6.0, coeficiente de rendimento.';
+const canonical = 'https://globalcgpa.in/pt/universidades-comparacao';
+const ogImage = '/og-image-pt.png';
+const lang = 'pt';
+const alternates = [
+  { hreflang: 'en', href: 'https://globalcgpa.in/universities' },
+  { hreflang: 'pt', href: 'https://globalcgpa.in/pt/universidades-comparacao' },
+];
+---
+
+<Layout title={pageTitle} description={description} canonical={canonical} ogImage={ogImage} lang={lang} alternates={alternates}>
+  <main class="max-w-[1160px] mx-auto px-6 py-14" style="flex:1;">
+    <div class="text-xs font-bold uppercase tracking-wider text-emerald-500 mb-2">Comparação de Universidades</div>
+    <h1 class="text-3xl sm:text-4xl font-extrabold tracking-tight mb-3">Regras de Média — Principais Universidades Brasileiras</h1>
+    <p class="text-slate-500 dark:text-zinc-400 text-base mb-10">
+      Todas usam a escala 0–10 com média ponderada por créditos (Média = Σ(Créditos × Nota) ÷ ΣCréditos).
+      A diferença principal está na nota mínima de aprovação: 5.0 na maioria, 6.0 na UFRJ.
+    </p>
+
+    <section class="mb-16" aria-labelledby="comparison-heading">
+      <h2 id="comparison-heading" class="text-2xl font-extrabold tracking-tight mb-6">Tabela Comparativa</h2>
+      <div class="table-scroll">
+        <table>
+          <thead>
+            <tr>
+              <th>Universidade</th>
+              <th class="text-center">Sigla</th>
+              <th class="text-center">Escala</th>
+              <th class="text-center">Aprovação Mín.</th>
+              <th class="text-center">Conceitos</th>
+              <th class="text-center">Coef. Rendimento</th>
+              <th>Observações</th>
+            </tr>
+          </thead>
+          <tbody>
+            {universities.map(u => (
+              <tr>
+                <td><strong>{u.name}</strong></td>
+                <td class="text-center font-mono">{u.nameEn.split(' ').map(w => w[0]).join('')}</td>
+                <td class="text-center">{u.system}</td>
+                <td class="text-center">
+                  {u.name === 'Universidade Federal do Rio de Janeiro' ? '6.0' : '5.0'}
+                </td>
+                <td class="text-center">A, B, C, D, F</td>
+                <td class="text-center">≥ 5.0 (formatura)</td>
+                <td>{u.note}</td>
+              </tr>
+            ))}
+          </tbody>
+        </table>
+      </div>
+    </section>
+
+    <section class="mb-16" aria-labelledby="conceitos-heading">
+      <h2 id="conceitos-heading" class="text-2xl font-extrabold tracking-tight mb-6">Conceitos ↔ Notas ↔ Percentuais (Padrão)</h2>
+      <div class="table-scroll">
+        <table>
+          <thead>
+            <tr>
+              <th>Conceito</th>
+              <th class="text-center">Nota</th>
+              <th class="text-center">Percentual</th>
+              <th class="text-center">Situação</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr><td><strong>A</strong></td><td class="text-center font-mono">9.0</td><td class="text-center">90–100%</td><td class="text-center text-green-600">Excelente</td></tr>
+            <tr><td><strong>B</strong></td><td class="text-center font-mono">7.5</td><td class="text-center">70–89%</td><td class="text-center text-blue-600">Bom</td></tr>
+            <tr><td><strong>C</strong></td><td class="text-center font-mono">6.0</td><td class="text-center">60–69%</td><td class="text-center text-yellow-600">Regular</td></tr>
+            <tr><td><strong>D</strong></td><td class="text-center font-mono">4.0</td><td class="text-center">50–59%</td><td class="text-center text-orange-600">Abaixo da média</td></tr>
+            <tr><td><strong>F</strong></td><td class="text-center font-mono">0.0</td><td class="text-center">0–49%</td><td class="text-center text-red-600">Reprovado</td></tr>
+          </tbody>
+        </table>
+      </div>
+      <p class="text-xs text-slate-500 dark:text-zinc-400 mt-3 text-center">
+        Nota: UFRJ exige 6.0 para aprovação (conceito C é mínimo). Demais: 5.0 (conceito D é aprovado, mas baixo).
+      </p>
+    </section>
+
+    <section class="mb-16" aria-labelledby="univ-detail-heading">
+      <h2 id="univ-detail-heading" class="text-2xl font-extrabold tracking-tight mb-6">Detalhes por Universidade</h2>
+      <div class="grid gap-6">
+        {universities.map(u => (
+          <article class="calc-shell p-6">
+            <div class="flex flex-wrap items-baseline gap-3 mb-4">
+              <h3 class="text-xl font-extrabold text-slate-900 dark:text-white">{u.name}</h3>
+              <span class="px-3 py-1 bg-emerald-100 dark:bg-emerald-900/30 text-emerald-700 dark:text-emerald-300 text-xs font-bold rounded-full">
+                {u.system}
+              </span>
+              <span class="text-sm text-slate-500 dark:text-zinc-400">{u.nameEn}</span>
+            </div>
+
+            <div class="prose mb-4">
+              <p>{u.formulaText}</p>
+              <p><strong>Fonte:</strong> <a href={u.sourceUrl} target="_blank" rel="noopener">{u.source}</a></p>
+              {u.note && <p><strong>Nota:</strong> {u.note}</p>}
+            </div>
+
+            <div class="flex flex-wrap gap-3">
+              <a href={`/pt/${u.slug}`} class="calc-tab active">Calculadora desta universidade</a>
+              <a href={u.sourceUrl} target="_blank" rel="noopener" class="calc-tab">Regulamento oficial</a>
+            </div>
+          </article>
+        ))}
+      </div>
+    </section>
+
+    <section aria-labelledby="coef-heading">
+      <h2 id="coef-heading" class="text-2xl font-extrabold tracking-tight mb-6">Coeficiente de Rendimento (CR / IRG)</h2>
+      <div class="calc-shell p-6">
+        <p class="text-sm text-slate-600 dark:text-zinc-400 mb-4">
+          O Coeficiente de Rendimento (também chamado Índice de Rendimento Geral — IRG em algumas universidades)
+          é a média ponderada acumulada de todas as disciplinas cursadas. É o equivalente brasileiro ao GPA cumulativo.
+        </p>
+        <div class="table-scroll">
+          <table>
+            <thead>
+              <tr>
+                <th>Universidade</th>
+                <th class="text-center">Nome do Índice</th>
+                <th class="text-center">Mínimo Formatura</th>
+                <th class="text-center">Menção Honrosa</th>
+                <th>Critérios Adicionais</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr><td><strong>USP</strong></td><td class="text-center">Coeficiente de Rendimento (CR)</td><td class="text-center">≥ 5.0</td><td class="text-center">CR ≥ 8.5 (ou por unidade)</td><td>Sem reprovação por frequência no último ano</td></tr>
+              <tr><td><strong>UNICAMP</strong></td><td class="text-center">Índice de Rendimento (IR)</td><td class="text-center">≥ 5.0</td><td class="text-center">IR ≥ 8.5</td><td>Integralização em tempo regulamentar</td></tr>
+              <tr><td><strong>UFRJ</strong></td><td class="text-center">Coeficiente de Rendimento (CR)</td><td class="text-center">≥ 6.0</td><td class="text-center">CR ≥ 8.0</td><td>Aprovação mínima 6.0 em todas as disciplinas</td></tr>
+              <tr><td><strong>UFMG</strong></td><td class="text-center">Coeficiente de Rendimento (CR)</td><td class="text-center">≥ 5.0</td><td class="text-center">CR ≥ 8.5</td><td>Sem dependências, tempo regulamentar</td></tr>
+              <tr><td><strong>UFBA</strong></td><td class="text-center">Coeficiente de Rendimento (CR)</td><td class="text-center">≥ 5.0</td><td class="text-center">CR ≥ 8.5</td><td>Integralização curricular completa</td></tr>
+            </tbody>
+          </table>
+        </div>
+      </div>
+    </section>
+  </main>
+</Layout>

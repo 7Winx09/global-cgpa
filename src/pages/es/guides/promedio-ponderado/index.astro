@@ -1,0 +1,151 @@
+---
+import Layout from '../../../../layouts/Layout.astro';
+
+const pageTitle = 'CÃ¡lculo Promedio Ponderado | FÃ³rmula Oficial ECTS EspaÃ±a (0-10)';
+const description = 'FÃ³rmula oficial para calcular el promedio ponderado en universidades espaÃ±olas: Î£(ECTS Ã— Nota) Ã· Î£ECTS. Redondeo a 1 decimal, ponderaciÃ³n por crÃ©ditos, ejemplos prÃ¡cticos.';
+const canonical = 'https://globalcgpa.in/es/guides/promedio-ponderado';
+const ogImage = '/og-image-es.png';
+const lang = 'es';
+const alternates = [
+  { hreflang: 'en', href: 'https://globalcgpa.in/guides/weighted-average' },
+  { hreflang: 'es', href: 'https://globalcgpa.in/es/guides/promedio-ponderado' },
+];
+---
+
+<Layout title={pageTitle} description={description} canonical={canonical} ogImage={ogImage} lang={lang} alternates={alternates}>
+  <main class="max-w-[780px] mx-auto px-6 py-14" style="flex:1;">
+    <nav class="crumbs mb-6" aria-label="Breadcrumb">
+      <a href="/es/">Calculadora</a>
+      <span class="sep">/</span>
+      <a href="/es/guides">GuÃ­as</a>
+      <span class="sep">/</span>
+      <span class="current">Promedio Ponderado</span>
+    </nav>
+
+    <div class="text-xs font-bold uppercase tracking-wider text-emerald-500 mb-2">GuÃ­a AcadÃ©mica</div>
+    <h1 class="text-3xl sm:text-4xl font-extrabold tracking-tight mb-3">CÃ¡lculo del Promedio Ponderado</h1>
+    <p class="text-slate-500 dark:text-zinc-400 text-base mb-10">
+      FÃ³rmula oficial segÃºn RD 1125/2003 y normativa de cada universidad (UCM, UB, UV, US, UPV, UAM).
+      PonderaciÃ³n por crÃ©ditos ECTS, redondeo a un decimal.
+    </p>
+
+    <section class="prose mb-12">
+      <h2>FÃ³rmula Oficial</h2>
+      <div class="formula-block mb-4">
+        <div class="f-label">Promedio Ponderado (0-10)</div>
+        <div class="f-text">Promedio = Î£(ECTSáµ¢ Ã— Notaáµ¢) Ã· Î£ECTSáµ¢</div>
+        <div class="f-example">i = cada asignatura superada. Nota en escala 0-10 (1 decimal). Redondeo final: 1 decimal.</div>
+      </div>
+      <p>Todas las universidades espaÃ±olas usan esta fÃ³rmula. Diferencias menores en:</p>
+      <ul class="list-disc list-inside space-y-1">
+        <li>Asignaturas incluidas (todas vs. solo obligatorias vs. excluir TFG)</li>
+        <li>PonderaciÃ³n TFG/TFM (factor 1.0, 1.5, 2.0, o crÃ©ditos Ã— 2)</li>
+        <li>ExclusiÃ³n de "mejores notas" en optativas sobrantes (algunas PT)</li>
+      </ul>
+    </section>
+
+    <section class="prose mb-12">
+      <h2>Ejemplo Paso a Paso</h2>
+      <div class="table-scroll">
+        <table>
+          <thead><tr><th>Asignatura</th><th class="text-center">ECTS</th><th class="text-center">Nota</th><th class="text-center">ECTS Ã— Nota</th></tr></thead>
+          <tbody>
+            <tr><td>CÃ¡lculo I</td><td class="text-center">6</td><td class="text-center">8.5</td><td class="text-center">51.0</td></tr>
+            <tr><td>FÃ­sica General</td><td class="text-center">6</td><td class="text-center">7.0</td><td class="text-center">42.0</td></tr>
+            <tr><td>Ãlgebra Lineal</td><td class="text-center">6</td><td class="text-center">9.0</td><td class="text-center">54.0</td></tr>
+            <tr><td>ProgramaciÃ³n I</td><td class="text-center">6</td><td class="text-center">8.0</td><td class="text-center">48.0</td></tr>
+            <tr><td>QuÃ­mica</td><td class="text-center">6</td><td class="text-center">6.5</td><td class="text-center">39.0</td></tr>
+            <tr><td>TFG</td><td class="text-center">12</td><td class="text-center">9.5</td><td class="text-center">114.0</td></tr>
+          </tbody>
+          <tfoot>
+            <tr class="font-bold bg-slate-100 dark:bg-zinc-800">
+              <td>TOTAL</td><td class="text-center">42</td><td></td><td class="text-center">348.0</td>
+            </tr>
+          </tfoot>
+        </table>
+      </div>
+      <div class="formula-block mt-4">
+        <div class="f-label">CÃ¡lculo</div>
+        <div class="f-text">Promedio = 348.0 Ã· 42 = 8.2857...</div>
+        <div class="f-example">Redondeo a 1 decimal: <strong>8.3</strong></div>
+      </div>
+    </section>
+
+    <section class="prose mb-12">
+      <h2>Reglas de Redondeo (RD 1125/2003)</h2>
+      <div class="bg-amber-50 dark:bg-amber-900/20 border border-amber-200 dark:border-amber-800 rounded-xl p-6">
+        <ul class="list-disc list-inside space-y-2">
+          <li><strong>1 decimal obligatorio</strong> en todas las calificaciones (asignaturas y promedio final)</li>
+          <li><strong>Redondeo estÃ¡ndar:</strong> â‰¥ 0.05 â†’ al alza; < 0.05 â†’ a la baja</li>
+          <li><strong>Ejemplos:</strong> 8.25 â†’ 8.3 | 8.24 â†’ 8.2 | 7.05 â†’ 7.1 | 7.04 â†’ 7.0</li>
+          <li>El redondeo se aplica <strong>solo al resultado final</strong>, no en cÃ¡lculos intermedios</li>
+          <li>CÃ¡lculos intermedios: usar todos los decimales disponibles</li>
+        </ul>
+      </div>
+    </section>
+
+    <section class="prose mb-12">
+      <h2>Casos Especiales por Universidad</h2>
+      <div class="table-scroll">
+        <table>
+          <thead><tr><th>Universidad</th><th>TFG/TFM PonderaciÃ³n</th><th>Optativas Sobrantes</th><th>Observaciones</th></tr></thead>
+          <tbody>
+            <tr><td><strong>UCM</strong></td><td>CrÃ©ditos Ã— 1 (estÃ¡ndar)</td><td>Mejores notas hasta completar crÃ©ditos</td><td>ConversiÃ³n 0-4 a 0-10 oficial por servicios acadÃ©micos</td></tr>
+            <tr><td><strong>UB</strong></td><td>CrÃ©ditos Ã— 1</td><td>Mejores notas</td><td>Pla docent define ponderaciÃ³n si difiere</td></tr>
+            <tr><td><strong>US</strong></td><td>CrÃ©ditos Ã— 1</td><td>SegÃºn normativa centro</td><td>TFG 12-18 ECTS segÃºn titulaciÃ³n</td></tr>
+            <tr><td><strong>UPV</strong></td><td>CrÃ©ditos Ã— 1</td><td>Mejores notas</td><td>Reglament avaluaciÃ³ (Consell Social)</td></tr>
+            <tr><td><strong>UAM</strong></td><td>CrÃ©ditos Ã— 1</td><td>Mejores notas</td><td>TFG 6-12 ECTS (Grado), 15-30 (MÃ¡ster)</td></tr>
+            <tr><td><strong>MatemÃ¡ticas (US/UAM)</strong></td><td>TFG factor 1.5</td><td>â€”</td><td>EspecÃ­fico en ordenaciÃ³n propia</td></tr>
+          </tbody>
+        </table>
+      </div>
+    </section>
+
+    <section class="prose mb-12">
+      <h2>Promedio por Curso vs. Promedio Final</h2>
+      <div class="table-scroll">
+        <table>
+          <thead><tr><th>Tipo</th><th>FÃ³rmula</th><th>Uso</th></tr></thead>
+          <tbody>
+            <tr><td><strong>Promedio Curso</strong></td><td>Î£(ECTS_curso Ã— Nota) Ã· Î£ECTS_curso</td><td>Beca, movilidad, evaluaciÃ³n continua, PA</td></tr>
+            <tr><td><strong>Promedio Acumulado</strong></td><td>Î£(ECTS_acum Ã— Nota) Ã· Î£ECTS_acum</td><td>Expediente, traslado, acceso mÃ¡ster</td></tr>
+            <tr><td><strong>Promedio Final (TÃ­tulo)</strong></td><td>Î£(ECTS_total Ã— Nota) Ã· Î£ECTS_total</td><td>TÃ­tulo, SET, acceso doctorado, oposiciones</td></tr>
+          </tbody>
+        </table>
+      </div>
+    </section>
+
+    <section class="prose mb-12">
+      <h2>Asignaturas No Incluidas en el Promedio</h2>
+      <ul class="list-disc list-inside space-y-1">
+        <li>Asignaturas <strong>no superadas</strong> (Suspenso / No presentado)</li>
+        <li>Asignaturas con calificaciÃ³n <strong>"No Presentado" (NP)</strong></li>
+        <li>Asignaturas de <strong>reconocimiento de crÃ©ditos</strong> sin calificaciÃ³n numÃ©rica (solo "Aprobado/Convalidado")</li>
+        <li>Actividades <strong>extracurriculares</strong> reconocidas por crÃ©ditos (deportes, voluntariado, etc.) â€” segÃºn normativa PT</li>
+        <li>En algunas PT: <strong>TFG/TFM</strong> si se evalÃºa solo "Aprobado/No Aprobado" (raro en Grado)</li>
+      </ul>
+    </section>
+
+    <section class="prose mb-12">
+      <h2>Acceso a MÃ¡ster / Doctorado â€” Corte de Promedio</h2>
+      <div class="calc-shell p-4">
+        <h3 class="font-bold mb-2">Criterios Comunes</h3>
+        <ul class="list-disc list-inside text-sm space-y-1">
+          <li><strong>MÃ¡ster oficial:</strong> Promedio â‰¥ 6.0â€“7.0 (competitivo: â‰¥ 7.5â€“8.0 en top PT)</li>
+          <li><strong>MÃ¡ster universitario (propio):</strong> Promedio â‰¥ 5.5â€“6.5</li>
+          <li><strong>Doctorado:</strong> Promedio â‰¥ 7.0â€“8.0 + TFM â‰¥ 8.0 + idiomas + CV investigador</li>
+          <li><strong>Becas (MEC, autonÃ³micas):</strong> Promedio â‰¥ 6.5â€“7.0 + renta</li>
+        </ul>
+      </div>
+    </section>
+
+    <section class="prose">
+      <h2>Referencias</h2>
+      <ul>
+        <li>RD 1125/2003 Art. 5.4 â€” CÃ¡lculo de la calificaciÃ³n media</li>
+        <li>RD 822/2021 Art. 10 â€” Reconocimiento y transferencia de crÃ©ditos</li>
+        <li>Normativas de evaluaciÃ³n: UCM, UB, UV, US, UPV, UAM (Consejo de Gobierno / Claustro)</li>
+      </ul>
+    </section>
+  </main>
+</Layout>

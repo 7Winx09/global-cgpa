@@ -1,0 +1,155 @@
+---
+import Layout from '../../../layouts/Layout.astro';
+import { getUniversitiesByCountry } from '../../../data/universities-global';
+
+const universities = getUniversitiesByCountry('ID');
+
+const pageTitle = 'Perbandingan IPK Universitas | Skala 4.0 Indonesia';
+const description = 'Perbandingan sistem IPK 7 universitas terkemuka Indonesia: UI, ITB, UGM, UNAIR, IPB, Unpad, ITS. Tabel nilai huruf, bobot angka, persentase, dan predikat kelulusan.';
+const canonical = 'https://globalcgpa.in/id/universities';
+const ogImage = '/og-image-id.png';
+const lang = 'id';
+const alternates = [
+  { hreflang: 'en', href: 'https://globalcgpa.in/universities' },
+  { hreflang: 'id', href: 'https://globalcgpa.in/id/universities' },
+];
+---
+
+<Layout title={pageTitle} description={description} canonical={canonical} ogImage={ogImage} lang={lang} alternates={alternates}>
+  <main class="max-w-[1160px] mx-auto px-6 py-14" style="flex:1;">
+    <div class="text-xs font-bold uppercase tracking-wider text-emerald-500 mb-2">Perbandingan Sistem IPK</div>
+    <h1 class="text-3xl sm:text-4xl font-extrabold tracking-tight mb-3">Sistem IPK Universitas Indonesia</h1>
+    <p class="text-slate-500 dark:text-zinc-400 text-base mb-10">
+      Semua universitas Indonesia menggunakan skala 4.0 namun detail bobot nilai dan persentase berbeda.
+      Bandingkan UI, ITB, UGM, UNAIR, IPB, Unpad, ITS dalam satu tampilan.
+    </p>
+
+    <section class="mb-16" aria-labelledby="comparison-heading">
+      <h2 id="comparison-heading" class="text-2xl font-extrabold tracking-tight mb-6">Perbandingan Bobot Nilai Huruf</h2>
+      <div class="table-scroll">
+        <table>
+          <thead>
+            <tr>
+              <th>Nilai Huruf</th>
+              {universities.map(u => (
+                <th scope="col" class="text-center">{u.name}<br><span class="text-xs font-normal text-slate-400 dark:text-zinc-500">{u.system}</span></th>
+              ))}
+            </tr>
+          </thead>
+          <tbody>
+            {(() => {
+              const allGrades = new Set<string>();
+              universities.forEach(u => Object.keys(u.gradeMapping).forEach(g => allGrades.add(g)));
+              const gradeOrder = ['A', 'A-', 'B+', 'B', 'B-', 'C+', 'C', 'C-', 'D', 'E', 'AB', 'BC', 'A/B', 'B/C', 'C/D', 'D+'];
+              return gradeOrder.filter(g => allGrades.has(g));
+            })().map(grade => (
+              <tr>
+                <td><strong>{grade}</strong></td>
+                {universities.map(u => (
+                  <td class="text-center font-mono text-lg">
+                    {u.gradeMapping[grade] !== undefined ? u.gradeMapping[grade].toFixed(2) : '—'}
+                  </td>
+                ))}
+              </tr>
+            ))}
+          </tbody>
+        </table>
+      </div>
+      <p class="text-xs text-slate-500 dark:text-zinc-400 mt-3 text-center">
+        ※ UGM menggunakan skala 14 tingkat (A, A-, A/B, B+, B, B-, B/C, C+, C, C-, C/D, D+, D, E). Lainnya menggunakan 7-9 tingkat.
+      </p>
+    </section>
+
+    <section class="mb-16" aria-labelledby="percentage-heading">
+      <h2 id="percentage-heading" class="text-2xl font-extrabold tracking-tight mb-6">Perbandingan Rentang Persentase</h2>
+      <div class="table-scroll">
+        <table>
+          <thead>
+            <tr>
+              <th>Nilai Huruf</th>
+              {universities.map(u => (
+                <th scope="col" class="text-center">{u.name}<br><span class="text-xs font-normal text-slate-400 dark:text-zinc-500">{u.system}</span></th>
+              ))}
+            </tr>
+          </thead>
+          <tbody>
+            {(() => {
+              const allGrades = new Set<string>();
+              universities.forEach(u => Object.keys(u.percentageMapping || {}).forEach(g => allGrades.add(g)));
+              const gradeOrder = ['A', 'A-', 'B+', 'B', 'B-', 'C+', 'C', 'C-', 'D', 'E', 'AB', 'BC', 'A/B', 'B/C', 'C/D', 'D+'];
+              return gradeOrder.filter(g => allGrades.has(g));
+            })().map(grade => (
+              <tr>
+                <td><strong>{grade}</strong></td>
+                {universities.map(u => (
+                  <td class="text-center">
+                    {u.percentageMapping && u.percentageMapping[grade]
+                      ? `${u.percentageMapping[grade][0]}~${u.percentageMapping[grade][1]}%`
+                      : '—'}
+                  </td>
+                ))}
+              </tr>
+            ))}
+          </tbody>
+        </table>
+      </div>
+      <p class="text-xs text-slate-500 dark:text-zinc-400 mt-3 text-center">
+        ※ Rentang persentase bersifat acuan (PAP - Penilaian Acuan Patokan). PAN (acuan normal) bisa berbeda per kelas.
+      </p>
+    </section>
+
+    <section class="mb-16" aria-labelledby="univ-detail-heading">
+      <h2 id="univ-detail-heading" class="text-2xl font-extrabold tracking-tight mb-6">Detail Per Universitas</h2>
+      <div class="grid gap-6">
+        {universities.map(u => (
+          <article class="calc-shell p-6">
+            <div class="flex flex-wrap items-baseline gap-3 mb-4">
+              <h3 class="text-xl font-extrabold text-slate-900 dark:text-white">{u.name}</h3>
+              <span class="px-3 py-1 bg-emerald-100 dark:bg-emerald-900/30 text-emerald-700 dark:text-emerald-300 text-xs font-bold rounded-full">
+                {u.system}
+              </span>
+              <span class="text-sm text-slate-500 dark:text-zinc-400">{u.nameEn}</span>
+            </div>
+
+            <div class="prose mb-4">
+              <p>{u.formulaText}</p>
+              <p><strong>Sumber:</strong> <a href={u.sourceUrl} target="_blank" rel="noopener">{u.source}</a></p>
+              {u.note && <p><strong>Catatan:</strong> {u.note}</p>}
+            </div>
+
+            <div class="flex flex-wrap gap-3">
+              <a href={`/id/${u.slug}`} class="calc-tab active">Buka Kalkulator</a>
+              <a href={u.sourceUrl} target="_blank" rel="noopener" class="calc-tab">Lihat Regulasi</a>
+            </div>
+          </article>
+        ))}
+      </div>
+    </section>
+
+    <section aria-labelledby="conversion-heading">
+      <h2 id="conversion-heading" class="text-2xl font-extrabold tracking-tight mb-6">Predikat Kelulusan Sarjana (Umum)</h2>
+      <div class="calc-shell p-6">
+        <div class="table-scroll">
+          <table>
+            <thead>
+              <tr>
+                <th>Predikat</th>
+                <th class="text-center">Rentang IPK</th>
+                <th>Keterangan</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr><td><strong>Cum Laude</strong></td><td class="text-center">3.51 – 4.00</td><td>Dengan Pujian (biasanya max 4-5 tahun studi, tanpa nilai D/E)</td></tr>
+              <tr><td><strong>Sangat Memuaskan</strong></td><td class="text-center">3.01 – 3.50</td><td>Prestasi di atas rata-rata</td></tr>
+              <tr><td><strong>Memuaskan</strong></td><td class="text-center">2.76 – 3.00</td><td>Memenuhi standar kelulusan dengan baik</td></tr>
+              <tr><td><strong>Lulus</strong></td><td class="text-center">2.00 – 2.75</td><td>Memenuhi minimum IPK, tanpa nilai E, max 20% nilai D</td></tr>
+            </tbody>
+          </table>
+        </div>
+        <p class="text-xs text-slate-500 dark:text-zinc-400 mt-3 text-center">
+          Kriteria detail bervariasi per universitas (lihat halaman masing-masing). UGM minimal 2.50 (bisa 2.00 dengan pertimbangan).
+        </p>
+      </div>
+    </section>
+  </main>
+</Layout>

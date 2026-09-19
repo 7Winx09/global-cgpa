@@ -1,0 +1,156 @@
+---
+import Layout from '../../../layouts/Layout.astro';
+import { getUniversitiesByCountry } from '../../../data/universities-global';
+
+const universities = getUniversitiesByCountry('DE');
+
+const pageTitle = 'Notensysteme Vergleich | Deutsche Universitäten 1-6';
+const description = 'Vergleich Notenskalen 6 deutscher Spitzenuniversitäten: TUM, Heidelberg, HU Berlin, KIT, RWTH, LMU. Skala 1,0-4,0, Modifizierte Bayerische Formel, ECTS-Grades, Gesamtnote Berechnung.';
+const canonical = 'https://globalcgpa.in/de/universities';
+const ogImage = '/og-image-de.png';
+const lang = 'de';
+const alternates = [
+  { hreflang: 'en', href: 'https://globalcgpa.in/universities' },
+  { hreflang: 'de', href: 'https://globalcgpa.in/de/universities' },
+];
+---
+
+<Layout title={pageTitle} description={description} canonical={canonical} ogImage={ogImage} lang={lang} alternates={alternates}>
+  <main class="max-w-[1160px] mx-auto px-6 py-14" style="flex:1;">
+    <div class="text-xs font-bold uppercase tracking-wider text-emerald-500 mb-2">Notensysteme Vergleich Deutschland</div>
+    <h1 class="text-3xl sm:text-4xl font-extrabold tracking-tight mb-3">Deutsche Notenskala 1,0–4,0 im Vergleich</h1>
+    <p class="text-slate-500 dark:text-zinc-400 text-base mb-10">
+      Alle 6 Universitäten nutzen die Standardskala 1,0–4,0 (Schritte 0,3; 0,7, 4,3, 4,7, 5,3 ausgeschlossen).
+      Unterschiede liegen in Prüfungsordnungen, Gewichtung, Promotionsnoten und Auslandsumrechnung.
+    </p>
+
+    <section class="mb-16" aria-labelledby="comparison-heading">
+      <h2 id="comparison-heading" class="text-2xl font-extrabold tracking-tight mb-6">Notenskala & Qualitative Beurteilung</h2>
+      <div class="table-scroll">
+        <table>
+          <thead>
+            <tr>
+              <th>Note</th>
+              {universities.map(u => (
+                <th scope="col" class="text-center">{u.name}<br><span class="text-xs font-normal text-slate-400 dark:text-zinc-500">{u.system}</span></th>
+              ))}
+            </tr>
+          </thead>
+          <tbody>
+            {(() => {
+              const allGrades = new Set<string>();
+              universities.forEach(u => Object.keys(u.gradeMapping).forEach(g => allGrades.add(g)));
+              const gradeOrder = ['1,0', '1,3', '1,7', '2,0', '2,3', '2,7', '3,0', '3,3', '3,7', '4,0', '5,0'];
+              return gradeOrder.filter(g => allGrades.has(g));
+            })().map(grade => (
+              <tr>
+                <td><strong>{grade}</strong></td>
+                {universities.map(u => (
+                  <td class="text-center font-mono text-lg">
+                    {u.gradeMapping[grade] !== undefined ? u.gradeMapping[grade].toFixed(1) : '—'}
+                  </td>
+                ))}
+              </tr>
+            ))}
+          </tbody>
+        </table>
+      </div>
+      <div class="mt-4 grid gap-2 sm:grid-cols-4 text-sm text-slate-600 dark:text-zinc-400">
+        <div><strong>1,0–1,5</strong> sehr gut</div>
+        <div><strong>1,6–2,5</strong> gut</div>
+        <div><strong>2,6–3,5</strong> befriedigend</div>
+        <div><strong>3,6–4,0</strong> ausreichend</div>
+      </div>
+      <p class="text-xs text-slate-500 dark:text-zinc-400 mt-3 text-center">
+        ※ 1. Dezimalstelle, keine Rundung. >4,0 = nicht ausreichend. LMU: 2 Dezimalstellen bei Modulnote.
+      </p>
+    </section>
+
+    <section class="mb-16" aria-labelledby="overall-heading">
+      <h2 id="overall-heading" class="text-2xl font-extrabold tracking-tight mb-6">Gesamtnote (Bachelor/Master) – Prädikate</h2>
+      <div class="table-scroll">
+        <table>
+          <thead>
+            <tr>
+              <th>Universität</th>
+              <th class="text-center">Sehr Gut</th>
+              <th class="text-center">Gut</th>
+              <th class="text-center">Befriedigend</th>
+              <th class="text-center">Ausreichend</th>
+              <th>Besonderheiten</th>
+            </tr>
+          </thead>
+          <tbody>
+            {universities.map(u => (
+              <tr>
+                <td class="font-bold">{u.name}</td>
+                <td class="text-center">≤ 1,5</td>
+                <td class="text-center">1,6–2,5</td>
+                <td class="text-center">2,6–3,5</td>
+                <td class="text-center">3,6–4,0</td>
+                <td class="text-sm">
+                  {u.key === 'de-tum' && 'Mit Auszeichnung bei 1,0 + Arbeit 1,0'}
+                  {u.key === 'de-rwth' && 'Mit Auszeichnung bei 1,0 + Arbeit 1,0'}
+                  {u.key === 'de-lmu' && 'Jura: 18-Punkte-Skala; 2 Dezimalstellen Modul'}
+                  {u.key === 'de-kit' && 'Doktorat: <1,5 magna, 1,5–2,5 cum laude'}
+                  {u.key === 'de-heidelberg' && 'Länderspezifische Umrechnungstabellen'}
+                  {u.key === 'de-hu-berlin' && 'NUS+ Tool (AGNES); ECTS A-E optional'}
+                </td>
+              </tr>
+            ))}
+          </tbody>
+        </table>
+      </div>
+    </section>
+
+    <section class="mb-16" aria-labelledby="univ-detail-heading">
+      <h2 id="univ-detail-heading" class="text-2xl font-extrabold tracking-tight mb-6">Detail pro Universität</h2>
+      <div class="grid gap-6">
+        {universities.map(u => (
+          <article class="calc-shell p-6">
+            <div class="flex flex-wrap items-baseline gap-3 mb-4">
+              <h3 class="text-xl font-extrabold text-slate-900 dark:text-white">{u.name}</h3>
+              <span class="px-3 py-1 bg-emerald-100 dark:bg-emerald-900/30 text-emerald-700 dark:text-emerald-300 text-xs font-bold rounded-full">
+                {u.system}
+              </span>
+              <span class="text-sm text-slate-500 dark:text-zinc-400">{u.nameEn}</span>
+            </div>
+
+            <div class="prose mb-4">
+              <p>{u.formulaText}</p>
+              <p><strong>Quelle:</strong> <a href={u.sourceUrl} target="_blank" rel="noopener">{u.source}</a></p>
+              {u.note && <p><strong>Hinweis:</strong> {u.note}</p>}
+            </div>
+
+            <div class="flex flex-wrap gap-3">
+              <a href={`/de/${u.slug}`} class="calc-tab active">Rechner Öffnen</a>
+              <a href={u.sourceUrl} target="_blank" rel="noopener" class="calc-tab">Prüfungsordnung</a>
+            </div>
+          </article>
+        ))}
+      </div>
+    </section>
+
+    <section aria-labelledby="bavarian-heading">
+      <h2 id="bavarian-heading" class="text-2xl font-extrabold tracking-tight mb-6">Modifizierte Bayerische Formel (KMK)</h2>
+      <div class="calc-shell p-6">
+        <div class="formula-block mb-4">
+          <div class="f-label">Formel</div>
+          <div class="f-text">x = 1 + 3 × (N<sub>max</sub> − N<sub>d</sub>) ÷ (N<sub>max</sub> − N<sub>min</sub>)</div>
+          <div class="f-example">N<sub>max</sub> = Bestnote im Auslandssystem, N<sub>min</sub> = Bestehensnote, N<sub>d</sub> = erzielte Note</div>
+        </div>
+        <div class="prose">
+          <h3>Anwendung an den 6 Universitäten</h3>
+          <ul>
+            <li><strong>TUM:</strong> APSO §16(6) – verbindlich für nicht-kompatible Systeme</li>
+            <li><strong>Heidelberg:</strong> KMK-Beschluss + länderspezifische Tabellen (Anpassung Höchstnote teils nötig)</li>
+            <li><strong>HU Berlin:</strong> NUS+ Tool in AGNES integriert; Prüfungsausschuss entscheidet endgültig (§110 ZSP-HU)</li>
+            <li><strong>KIT:</strong> KMK-Empfehlung; bei Doppelabschluss binationaler Vereinbarungen</li>
+            <li><strong>RWTH:</strong> ÜPO §10 – KMK-Formel für ausländische Noten; 1. Dezimalstelle</li>
+            <li><strong>LMU:</strong> BayHSchG; Jurastudium eigene 18-Punkte-Skala</li>
+          </ul>
+        </div>
+      </div>
+    </section>
+  </main>
+</Layout>

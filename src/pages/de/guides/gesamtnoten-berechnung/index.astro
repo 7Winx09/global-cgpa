@@ -1,0 +1,192 @@
+---
+import Layout from '../../../../layouts/Layout.astro';
+
+const pageTitle = 'Gesamtnote Bachelor/Master Berechnung | Gewichtung, Prädikate, Rundung';
+const description = 'Berechnung der Gesamtnote an deutschen Unis: gewichtetes Mittel nach ECTS/LP, 1 Dezimalstelle ohne Rundung, Prädikate (mit Auszeichnung, sehr gut, gut), Besonderheiten TUM, Heidelberg, HU, KIT, RWTH, LMU.';
+const canonical = 'https://globalcgpa.in/de/guides/gesamtnoten-berechnung';
+const ogImage = '/og-image-de.png';
+const lang = 'de';
+const alternates = [
+  { hreflang: 'en', href: 'https://globalcgpa.in/guides/overall-grade-calculation' },
+  { hreflang: 'de', href: 'https://globalcgpa.in/de/guides/gesamtnoten-berechnung' },
+];
+---
+
+<Layout title={pageTitle} description={description} canonical={canonical} ogImage={ogImage} lang={lang} alternates={alternates}>
+  <main class="max-w-[780px] mx-auto px-6 py-14" style="flex:1;">
+    <nav class="crumbs mb-6" aria-label="Breadcrumb">
+      <a href="/de/">Notenrechner</a>
+      <span class="sep">/</span>
+      <a href="/de/guides">Guides</a>
+      <span class="sep">/</span>
+      <span class="current">Gesamtnote Berechnung</span>
+    </nav>
+
+    <div class="text-xs font-bold uppercase tracking-wider text-emerald-500 mb-2">Akademischer Guide</div>
+    <h1 class="text-3xl sm:text-4xl font-extrabold tracking-tight mb-3">Gesamtnote Berechnung (Bachelor/Master)</h1>
+    <p class="text-slate-500 dark:text-zinc-400 text-base mb-10">
+      Einheitliche Methode an TUM, Heidelberg, HU Berlin, KIT, RWTH, LMU: gewichtetes arithmetisches Mittel nach ECTS/LP/Credits.
+      1 Dezimalstelle, keine Rundung (abschneiden). Prädikate für Abschlusszeugnis.
+    </p>
+
+    <section class="prose mb-12">
+      <h2>Formel (Einheitlich an allen 6 Unis)</h2>
+      <div class="formula-block mb-4">
+        <div class="f-label">Gesamtnote = Σ(LPᵢ × Noteᵢ) ÷ ΣLPᵢ</div>
+        <div class="f-text">
+          LP = Leistungspunkte / ECTS / Credits des Moduls<br>
+          Note = Modulnote (bereits gewichtet nach Modulteilprüfungen)<br>
+          Summe über alle Module + Abschlussarbeit
+        </div>
+        <div class="f-example">
+          Beispiel: 6 LP × 1,3 + 6 LP × 2,0 + 12 LP × 1,0 = 7,8 + 12,0 + 12,0 = 31,8 ÷ 24 LP = 1,325 → <strong>1,3</strong> (abschneiden)
+        </div>
+      </div>
+    </section>
+
+    <section class="prose mb-12">
+      <h2>Rundungsregel: 1 Dezimalstelle, KEINE Rundung</h2>
+      <div class="bg-amber-50 dark:bg-amber-900/20 border border-amber-200 dark:border-amber-800 rounded-xl p-6">
+        <h3 class="font-bold mb-3">Abschneiden (Truncation), nicht runden!</h3>
+        <div class="table-scroll">
+          <table>
+            <thead><tr><th>Berechneter Wert</th><th class="text-center">Offizielle Note</th><th>Falsch (Runden)</th></tr></thead>
+            <tbody>
+              <tr><td class="font-mono">1,32</td><td class="text-center"><strong>1,3</strong></td><td class="text-center">1,3 ✓</td></tr>
+              <tr><td class="font-mono">1,38</td><td class="text-center"><strong>1,3</strong></td><td class="text-center">1,4 ✗</td></tr>
+              <tr><td class="font-mono">2,59</td><td class="text-center"><strong>2,5</strong></td><td class="text-center">2,6 ✗</td></tr>
+              <tr><td class="font-mono">3,51</td><td class="text-center"><strong>3,5</strong></td><td class="text-center">3,5 ✓</td></tr>
+              <tr><td class="font-mono">3,59</td><td class="text-center"><strong>3,5</strong></td><td class="text-center">3,6 ✗</td></tr>
+            </tbody>
+          </table>
+        </div>
+        <p class="mt-3 text-sm">Ausnahme LMU: Modulnote 2 Dezimalstellen (kein Runden), Gesamtnote 1 Dezimalstelle (abschneiden).</p>
+      </div>
+    </section>
+
+    <section class="prose mb-12">
+      <h2>Prädikate für Gesamtnote (Bachelor/Master)</h2>
+      <div class="table-scroll">
+        <table>
+          <thead><tr><th>Gesamtnote</th><th class="text-center">Prädikat (Zeugnis)</th><th>Bedeutung</th></tr></thead>
+          <tbody>
+            <tr><td class="font-mono font-bold">≤ 1,5</td><td class="text-center">sehr gut</td><td>hervorragende Leistung</td></tr>
+            <tr><td class="font-mono font-bold">1,6 – 2,5</td><td class="text-center">gut</td><td>deutlich über Durchschnitt</td></tr>
+            <tr><td class="font-mono font-bold">2,6 – 3,5</td><td class="text-center">befriedigend</td><td>durchschnittlich</td></tr>
+            <tr><td class="font-mono font-bold">3,6 – 4,0</td><td class="text-center">ausreichend</td><td>trotz Mängel bestanden</td></tr>
+          </tbody>
+        </table>
+      </div>
+    </section>
+
+    <section class="prose mb-12">
+      <h2>Besondere Prädikate (Urkunden-Text)</h2>
+      <div class="bg-emerald-50 dark:bg-emerald-900/20 border border-emerald-200 dark:border-emerald-800 rounded-xl p-6">
+        <h3 class="font-bold mb-3">TUM (APSO §17 Abs. 6) & RWTH (ÜPO §10 Abs. 14)</h3>
+        <ul class="list-disc list-inside space-y-2">
+          <li><strong>Mit Auszeichnung bestanden:</strong> ≤ 1,2 UND Abschlussarbeit 1,0</li>
+          <li><strong>Sehr gut bestanden:</strong> 1,3 – 1,5</li>
+          <li><strong>Gut bestanden:</strong> 1,6 – 2,5</li>
+          <li><strong>Befriedigend bestanden:</strong> 2,6 – 3,5</li>
+          <li><strong>Bestanden:</strong> 3,6 – 4,0</li>
+        </ul>
+        <h3 class="font-bold mt-4 mb-2">KIT (Promotion §20/21)</h3>
+        <ul class="list-disc list-inside space-y-2">
+          <li><strong>magna cum laude:</strong> < 1,5 (Dissertation + Kolloquium)</li>
+          <li><strong>cum laude:</strong> 1,5 – 2,5</li>
+          <li><strong>rite:</strong> 2,5 – 3,0</li>
+          <li><strong>summa cum laude:</strong> 1,0 + einstimmig + Gutachter-Vorschlag</li>
+        </ul>
+        <h3 class="font-bold mt-4 mb-2">Heidelberg / HU Berlin / LMU (Promotion)</h3>
+        <ul class="list-disc list-inside space-y-2">
+          <li><strong>summa cum laude:</strong> < 1,5</li>
+          <li><strong>magna cum laude:</strong> 1,5 – 2,5</li>
+          <li><strong>cum laude:</strong> 2,5 – 3,0 (teilweise bis 3,5)</li>
+          <li><strong>rite:</strong> 3,0 – 4,0</li>
+          <li><strong>non sufficit:</strong> > 4,0</li>
+        </ul>
+      </div>
+    </section>
+
+    <section class="prose mb-12">
+      <h2>Besonderheiten pro Universität</h2>
+      <div class="table-scroll">
+        <table>
+          <thead><tr><th>Universität</th><th>Modulnote Dezimal</th><th>Gesamtnote Dezimal</th><th>Abschlussarbeit Gewicht</th><th>Besonderheiten</th></tr></thead>
+          <tbody>
+            <tr><td><strong>TUM</strong></td><td class="text-center">1</td><td class="text-center">1</td><td class="text-center">LP</td><td>FPSO kann abweichende Gewichtung festlegen; Wahlmodule: beste Noten zählen</td></tr>
+            <tr><td><strong>Heidelberg</strong></td><td class="text-center">1</td><td class="text-center">1</td><td class="text-center">ECTS</td><td>Abschlussarbeit Faktor 2 in Gesamtnote (manche Fächer)</td></tr>
+            <tr><td><strong>HU Berlin</strong></td><td class="text-center">1</td><td class="text-center">1</td><td class="text-center">LP</td><td>NUS+ Tool; ECTS Grades optional; Open Design Double Degree (UBA)</td></tr>
+            <tr><td><strong>KIT</strong></td><td class="text-center">1</td><td class="text-center">1</td><td class="text-center">LP</td><td>Bachelor: Fächer §20 doppelt gewichtet; Orientierungsprüfung (GOP) 1. Jahr</td></tr>
+            <tr><td><strong>RWTH</strong></td><td class="text-center">1</td><td class="text-center">1</td><td class="text-center">CP</td><td>Masterarbeit: fachspezifisch (Math 1,5×, Inf 16/30); Freiversuche ≤15 CP löschbar</td></tr>
+            <tr><td><strong>LMU</strong></td><td class="text-center">2</td><td class="text-center">1</td><td class="text-center">ECTS</td><td>Jura: 18-Punkte-Skala; Nebenfach 60 ECTS separat gewichtet; "gut mit Auszeichnung" ≤1,20 (BWL)</td></tr>
+          </tbody>
+        </table>
+      </div>
+    </section>
+
+    <section class="prose mb-12">
+      <h2>Beispielrechnung (Vollständig)</h2>
+      <p>Bachelor Informatik, 180 LP:</p>
+      <div class="table-scroll">
+        <table>
+          <thead><tr><th>Modul</th><th class="text-center">LP</th><th class="text-center">Note</th><th class="text-center">LP × Note</th></tr></thead>
+          <tbody>
+            <tr><td>Analysis I–III</td><td class="text-center">18</td><td class="text-center">1,7</td><td class="text-center">30,6</td></tr>
+            <tr><td>Lineare Algebra I–II</td><td class="text-center">12</td><td class="text-center">2,0</td><td class="text-center">24,0</td></tr>
+            <tr><td>Programmierung I–III</td><td class="text-center">18</td><td class="text-center">1,3</td><td class="text-center">23,4</td></tr>
+            <tr><td>Algorithmen & Datenstrukturen</td><td class="text-center">12</td><td class="text-center">2,3</td><td class="text-center">27,6</td></tr>
+            <tr><td>Datenbanken</td><td class="text-center">6</td><td class="text-center">1,7</td><td class="text-center">10,2</td></tr>
+            <tr><td>Software Engineering</td><td class="text-center">6</td><td class="text-center">2,0</td><td class="text-center">12,0</td></tr>
+            <tr><td>Betriebssysteme</td><td class="text-center">6</td><td class="text-center">2,7</td><td class="text-center">16,2</td></tr>
+            <tr><td>Rechnernetze</td><td class="text-center">6</td><td class="text-center">2,3</td><td class="text-center">13,8</td></tr>
+            <tr><td>Wahlpflicht (beste 30 LP)</td><td class="text-center">30</td><td class="text-center">1,7</td><td class="text-center">51,0</td></tr>
+            <tr><td>Bachelorarbeit</td><td class="text-center">12</td><td class="text-center">1,0</td><td class="text-center">12,0</td></tr>
+            <tr class="font-bold bg-slate-100 dark:bg-zinc-800"><td>SUMME</td><td class="text-center">126</td><td></td><td class="text-center">220,8</td></tr>
+          </tbody>
+        </table>
+      </div>
+      <div class="formula-block mt-4">
+        <div class="f-label">Berechnung</div>
+        <div class="f-text">Gesamtnote = 220,8 ÷ 126 = 1,75238...</div>
+        <div class="f-example">Abschneiden nach 1. Dezimalstelle: <strong>1,7</strong> → Prädikat: <strong>gut</strong></div>
+      </div>
+    </section>
+
+    <section class="prose mb-12">
+      <h2>Freiversuche / Notenverbesserung / Löschung</h2>
+      <div class="grid gap-4 sm:grid-cols-2">
+        <div class="calc-shell p-4">
+          <h3 class="font-bold mb-2">🔁 Wiederholung</h3>
+          <ul class="list-disc list-inside text-sm space-y-1">
+            <li>Nicht bestandene (5,0): Pflichtwiederholung</li>
+            <li>Bestandene: Meist 1 Freiwiederholung (Notenverbesserung)</li>
+            <li>Letzte Note zählt (vorherige entfällt)</li>
+            <li>Max. 2–3 Versuche gesamt pro Modul</li>
+          </ul>
+        </div>
+        <div class="calc-shell p-4">
+          <h3 class="font-bold mb-2">🗑️ Notenlöschung (Freiversuche)</h3>
+          <ul class="list-disc list-inside text-sm space-y-1">
+            <li>TUM: FPSO regelt (meist nicht)</li>
+            <li>RWTH: §10 Abs. 13: ≤15 CP in Regelstudienzeit löschbar</li>
+            <li>KIT: Master: 1 gewichtete Modulnote ≤15 CP löschbar</li>
+            <li>HU Berlin: Nicht standardmäßig</li>
+          </ul>
+        </div>
+      </div>
+    </section>
+
+    <section class="prose">
+      <h2>Referenzen</h2>
+      <ul>
+        <li>TUM: APSO §17 (Gesamtnote, Prädikate, ECTS Table)</li>
+        <li>Heidelberg: Prüfungsordnungen §12–13 (Modulnote, Gesamtnote)</li>
+        <li>HU Berlin: ZSP-HU §112 (Gesamtnote, Abschneiden)</li>
+        <li>KIT: SPO §7 (Modulnote, Gesamtnote, Prädikate)</li>
+        <li>RWTH: ÜPO §10 (Gesamtnote, Freiversuche, Masterarbeit-Gewichtung)</li>
+        <li>LMU: PSO §10 (Modulnote 2 Dez., Gesamtnote 1 Dez., Jura-Skala)</li>
+      </ul>
+    </section>
+  </main>
+</Layout>

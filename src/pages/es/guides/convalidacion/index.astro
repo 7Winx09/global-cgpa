@@ -1,0 +1,169 @@
+---
+import Layout from '../../../../layouts/Layout.astro';
+
+const pageTitle = 'ConvalidaciÃ³n y Transferencia | Reconocimiento de CrÃ©ditos EspaÃ±a (RD 822/2021)';
+const description = 'Procedimiento de convalidaciÃ³n, reconocimiento y transferencia de crÃ©ditos entre universidades espaÃ±olas y extranjeras. RD 822/2021, ANECA, plazos, documentaciÃ³n y criterios de kesepadanan.';
+const canonical = 'https://globalcgpa.in/es/guides/convalidacion';
+const ogImage = '/og-image-es.png';
+const lang = 'es';
+const alternates = [
+  { hreflang: 'en', href: 'https://globalcgpa.in/guides/credit-transfer' },
+  { hreflang: 'es', href: 'https://globalcgpa.in/es/guides/convalidacion' },
+];
+---
+
+<Layout title={pageTitle} description={description} canonical={canonical} ogImage={ogImage} lang={lang} alternates={alternates}>
+  <main class="max-w-[780px] mx-auto px-6 py-14" style="flex:1;">
+    <nav class="crumbs mb-6" aria-label="Breadcrumb">
+      <a href="/es/">Calculadora</a>
+      <span class="sep">/</span>
+      <a href="/es/guides">GuÃ­as</a>
+      <span class="sep">/</span>
+      <span class="current">ConvalidaciÃ³n</span>
+    </nav>
+
+    <div class="text-xs font-bold uppercase tracking-wider text-emerald-500 mb-2">GuÃ­a AcadÃ©mica</div>
+    <h1 class="text-3xl sm:text-4xl font-extrabold tracking-tight mb-3">ConvalidaciÃ³n y Transferencia de CrÃ©ditos</h1>
+    <p class="text-slate-500 dark:text-zinc-400 text-base mb-10">
+      Marco legal RD 822/2021 (Art. 10) y reglamentos universitarios (UCM, UB, UV, US, UPV, UAM).
+      Tipos: convalidaciÃ³n, reconocimiento, transferencia. Plazos, documentaciÃ³n y criterios de kesepadanan.
+    </p>
+
+    <section class="prose mb-12">
+      <h2>Tipos de Reconocimiento (RD 822/2021 Art. 3)</h2>
+      <div class="table-scroll">
+        <table>
+          <thead><tr><th>Tipo</th><th>DefiniciÃ³n</th><th>Ejemplo</th><th>Nota en Expediente</th></tr></thead>
+          <tbody>
+            <tr><td><strong>ConvalidaciÃ³n</strong></td><td>AceptaciÃ³n de crÃ©ditos de estudios oficiales previos (misma u otra universidad) para tÃ­tulo distinto</td><td>Grado A â†’ Grado B (mismo/otro PT)</td><td>Nota original o "Convalidada" (equivalente a 5.0/Aprobado)</td></tr>
+            <tr><td><strong>Reconocimiento</strong></td><td>CrÃ©ditos de enseÃ±anzas no oficiales, experiencia laboral, formaciÃ³n continua, actividades universitarias</td><td>MÃ¡ster propio, experiencia profesional, voluntariado, deportes</td><td>"Reconocido" / "Aprobado" (sin nota numÃ©rica, no computa en promedio)</td></tr>
+            <tr><td><strong>Transferencia</strong></td><td>InclusiÃ³n de enseÃ±anzas oficiales cursadas (sin obtener tÃ­tulo) en nuevo expediente</td><td>Cambio de universidad mismo Grado, movilidad Erasmus sin tÃ­tulo</td><td>Nota original (0-10) â†’ computa en promedio ponderado</td></tr>
+          </tbody>
+        </table>
+      </div>
+    </section>
+
+    <section class="prose mb-12">
+      <h2>Criterios de Kesepadanan (Equivalencia)</h2>
+      <div class="bg-emerald-50 dark:bg-emerald-900/20 border border-emerald-200 dark:border-emerald-800 rounded-xl p-6">
+        <h3 class="font-bold mb-3">Principios (RD 822/2021 Art. 3.4)</h3>
+        <ul class="list-disc list-inside space-y-2">
+          <li><strong>Coherencia acadÃ©mica/formativa:</strong> Resultados de aprendizaje equivalentes (â‰¥ 80% CPMK)</li>
+          <li><strong>No solo coincidencia de nombre:</strong> Se analiza contenido, competencias, nivel (MECES), carga de trabajo</li>
+          <li><strong>Nivel MECES:</strong> Mismo nivel (Grado=MECES 2, MÃ¡ster=MECES 3, Doctor=MECES 4)</li>
+          <li><strong>Carga de trabajo (ECTS):</strong> Similar (Â± 20% tolerancia habitual)</li>
+        </ul>
+      </div>
+    </section>
+
+    <section class="prose mb-12">
+      <h2>Procedimiento y Plazos</h2>
+      <div class="table-scroll">
+        <table>
+          <thead><tr><th>Fase</th><th>AcciÃ³n</th><th>Plazo TÃ­pico</th><th>Responsable</th></tr></thead>
+          <tbody>
+            <tr><td>1. Solicitud</td><td>Formulario + documentaciÃ³n (estudiante)</td><td>Hasta 30 dÃ­as tras matrÃ­cula / inicio curso</td><td>Estudiante â†’ SecretarÃ­a / Ka. Prodi</td></tr>
+            <tr><td>2. Informe Prodi</td><td>AnÃ¡lisis kesepadanan (Ka. Prodi + ComisiÃ³n)</td><td>15â€“30 dÃ­as</td><td>ComisiÃ³n de Convalidaciones / Ka. Prodi</td></tr>
+            <tr><td>3. ResoluciÃ³n</td><td>ResoluciÃ³n Decano / Vicerrectorado</td><td>10â€“15 dÃ­as</td><td>Decano / Vicerrector Estudios</td></tr>
+            <tr><td>4. NotificaciÃ³n</td><td>ComunicaciÃ³n + inscripciÃ³n en expediente</td><td>5â€“10 dÃ­as</td><td>SecretarÃ­a / GestiÃ³n AcadÃ©mica</td></tr>
+          </tbody>
+        </table>
+      </div>
+    </section>
+
+    <section class="prose mb-12">
+      <h2>DocumentaciÃ³n Requerida</h2>
+      <div class="bg-slate-50 dark:bg-zinc-900 border border-slate-200 dark:border-zinc-800 rounded-xl p-6">
+        <ul class="list-disc list-inside space-y-2">
+          <li><strong>Solicitud formal</strong> (modelo universidad: motivo, asignaturas, tÃ­tulo origen/destino)</li>
+          <li><strong>CertificaciÃ³n acadÃ©mica oficial</strong> (notas, ECTS, fechas, sello PT origen)</li>
+          <li><strong>Programas / GuÃ­as docentes / RPS</strong> de asignaturas a convalidar (contenido, competencias, ECTS)</li>
+          <li><strong>Plan de estudios origen</strong> (estructura, asignaturas, crÃ©ditos totales)</li>
+          <li><strong>TÃ­tulo / Certificado estudios</strong> (si ya obtenido)</li>
+          <li><strong>TraducciÃ³n jurada</strong> (si docs en idioma â‰  espaÃ±ol/cooficial)</li>
+          <li><strong>DeclaraciÃ³n responsable</strong> de no haber obtenido reconocimiento previo por mismos estudios</li>
+        </ul>
+      </div>
+    </section>
+
+    <section class="prose mb-12">
+      <h2>LÃ­mites y Restricciones</h2>
+      <ul class="list-disc list-inside space-y-2">
+        <li><strong>MÃ¡ximo reconocible:</strong> 50â€“75% crÃ©ditos totales del tÃ­tulo destino (residencia mÃ­nima 25â€“50%)</li>
+        <li><strong>TFG/TFM:</strong> Generalmente <strong>no convalidable</strong> (debe hacerse en PT destino)</li>
+        <li><strong>PrÃ¡cticas externas:</strong> Convalidables si equivalentes (informe tutor + certificado entidad)</li>
+        <li><strong>Asignaturas suspensas:</strong> No convalidables (solo superadas)</li>
+        <li><strong>MÃ¡ximo convocatorias:</strong> Algunas PT limitan convalidaciÃ³n si > 4 convocatorias en origen</li>
+        <li><strong>AntigÃ¼edad:</strong> Estudios > 5-7 aÃ±os pueden requerir actualizaciÃ³n/convalidaciÃ³n parcial</li>
+      </ul>
+    </section>
+
+    <section class="prose mb-12">
+      <h2>Movilidad Internacional (Erasmus+ / Convenios)</h2>
+      <div class="grid gap-4 sm:grid-cols-2">
+        <div class="calc-shell p-4">
+          <h3 class="font-bold mb-2">ðŸ“š Learning Agreement (LA)</h3>
+          <ul class="list-disc list-inside text-sm space-y-1">
+            <li>Firmado ANTES de la movilidad (estudiante + Ka. Prodi origen + destino)</li>
+            <li>Define asignaturas a cursar y equivalencias pre-acordadas</li>
+            <li>Cambios durante movilidad: "During Mobility" (firmar en 30 dÃ­as)</li>
+            <li>Tras movilidad: Transcript of Records â†’ reconocimiento automÃ¡tico segÃºn LA</li>
+          </ul>
+        </div>
+        <div class="calc-shell p-4">
+          <h3 class="font-bold mb-2">ðŸ“‹ Reconocimiento Post-Movilidad</h3>
+          <ul class="list-disc list-inside text-sm space-y-1">
+            <li>Plazo: 5 semanas tras recibir Transcript (RD 822/2021)</li>
+            <li>Nota original (0-10 o escala local) â†’ conversiÃ³n a 0-10</li>
+            <li>ConversiÃ³n: tabla oficial PT o fÃ³rmula (ej. UCM: tabla conversiÃ³n 0-4 a 0-10)</li>
+            <li>Computa en promedio ponderado (transferencia, no convalidaciÃ³n)</li>
+          </ul>
+        </div>
+      </div>
+    </section>
+
+    <section class="prose mb-12">
+      <h2>Experiencia Laboral / Profesional (Reconocimiento)</h2>
+      <ul class="list-disc list-inside space-y-2">
+        <li><strong>MÃ¡ximo:</strong> 15% crÃ©ditos totales (RD 822/2021), algunas PT hasta 30%</li>
+        <li><strong>Requisitos:</strong> Experiencia relacionada con competencias del tÃ­tulo, mÃ­nimo 1-3 aÃ±os</li>
+        <li><strong>Evidencia:</strong> Certificados empresa, vida laboral, portfolio, proyectos, publicaciones</li>
+        <li><strong>EvaluaciÃ³n:</strong> ComisiÃ³n acadÃ©mica + tribunal si procede</li>
+        <li><strong>Nota:</strong> "Reconocido" / "Aprobado" â†’ <strong>no computa en promedio</strong></li>
+      </ul>
+    </section>
+
+    <section class="prose mb-12">
+      <h2>Ejemplos por Universidad</h2>
+      <details class="faq-row">
+        <summary>UCM â€” Reglamento 2024 (Consejo de Gobierno 25/06/2024)</summary>
+        <div class="faq-body">
+          <p>Unifica convalidaciÃ³n, reconocimiento y transferencia. MÃ¡x. 75% crÃ©ditos. TFG no convalidable. Plazo: 30 dÃ­as tras matrÃ­cula. ConversiÃ³n notas extranjeras: tabla oficial servicios acadÃ©micos.</p>
+        </div>
+      </details>
+      <details class="faq-row">
+        <summary>UB â€” Normativa AvaluaciÃ³ (Consell Govern 27/02/2020)</summary>
+        <div class="faq-body">
+          <p>Kesepadanan â‰¥ 80% CPMK. ComisiÃ³n Prodi emite informe. MÃ¡x. 60% crÃ©ditos. TFG no convalidable. TraducciÃ³n jurada obligatoria docs â‰  catalÃ¡n/espaÃ±ol.</p>
+        </div>
+      </details>
+      <details class="faq-row">
+        <summary>UPV â€” Reglament AvaluaciÃ³ (Consell Social)</summary>
+        <div class="faq-body">
+          <p>EspecÃ­fico titulaciones tÃ©cnico. PrÃ¡cticas convalidables si informe tutor + certificado. MÃ¡x. 50% crÃ©ditos. TFG no convalidable. Idioma: valenciano/espaÃ±ol.</p>
+        </div>
+      </details>
+    </section>
+
+    <section class="prose">
+      <h2>Referencias</h2>
+      <ul>
+        <li>RD 822/2021 Art. 10 â€” Reconocimiento y transferencia de crÃ©ditos</li>
+        <li>RD 1125/2003 â€” Sistema ECTS y calificaciones</li>
+        <li>RD 1044/2003 â€” Suplemento Europeo al TÃ­tulo</li>
+        <li>ANECA â€” GuÃ­a de verificaciÃ³n (criterios kesepadanan)</li>
+        <li>Reglamentos: UCM (2024), UB (2020), UV, US, UPV, UAM</li>
+      </ul>
+    </section>
+  </main>
+</Layout>

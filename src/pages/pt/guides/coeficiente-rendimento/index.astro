@@ -1,0 +1,119 @@
+---
+import Layout from '../../../../layouts/Layout.astro';
+
+const pageTitle = 'Coeficiente de Rendimento (CR/IR) | Cálculo, Formatura, Menções';
+const description = 'Como calcular o Coeficiente de Rendimento (CR) ou Índice de Rendimento (IR) nas universidades brasileiras. Mínimos para formatura, menções honrosas, regras por universidade (USP, UNICAMP, UFRJ, UFMG, UFBA).';
+const canonical = 'https://globalcgpa.in/pt/guides/coeficiente-rendimento';
+const ogImage = '/og-image-pt.png';
+const lang = 'pt';
+const alternates = [
+  { hreflang: 'en', href: 'https://globalcgpa.in/guides/coefficient-rendimento' },
+  { hreflang: 'pt', href: 'https://globalcgpa.in/pt/guides/coeficiente-rendimento' },
+];
+---
+
+<Layout title={pageTitle} description={description} canonical={canonical} ogImage={ogImage} lang={lang} alternates={alternates}>
+  <main class="max-w-[780px] mx-auto px-6 py-14" style="flex:1;">
+    <nav class="crumbs mb-6" aria-label="Breadcrumb">
+      <a href="/pt/">Calculadora de Média</a>
+      <span class="sep">/</span>
+      <a href="/pt/guides">Guias</a>
+      <span class="sep">/</span>
+      <span class="current">Coeficiente de Rendimento</span>
+    </nav>
+
+    <div class="text-xs font-bold uppercase tracking-wider text-emerald-500 mb-2">Guia Acadêmico</div>
+    <h1 class="text-3xl sm:text-4xl font-extrabold tracking-tight mb-3">Coeficiente de Rendimento (CR / IR / IRG)</h1>
+    <p class="text-slate-500 dark:text-zinc-400 text-base mb-10">
+      O Coeficiente de Rendimento (CR) — também chamado Índice de Rendimento (IR) na UNICAMP ou Índice de Rendimento Geral (IRG) —
+      é a média ponderada acumulada de <strong>todas</strong> as disciplinas cursadas no curso.
+      É o equivalente brasileiro ao GPA cumulativo internacional.
+    </p>
+
+    <section class="prose mb-12">
+      <h2>Fórmula do CR</h2>
+      <div class="formula-block">
+        <div class="f-label">Cálculo Acumulado</div>
+        <div class="f-text">CR = Σ(Créditos da disciplina × Nota final) ÷ ΣCréditos de todas as disciplinas cursadas</div>
+        <div class="f-example">Inclui reprovações (nota 0.0/F) nas disciplinas cursadas, exceto se a universidade permitir exclusão</div>
+      </div>
+    </section>
+
+    <section class="prose mb-12">
+      <h2>Regras por Universidade</h2>
+      <div class="table-scroll">
+        <table>
+          <thead>
+            <tr>
+              <th>Universidade</th>
+              <th class="text-center">Nome do Índice</th>
+              <th class="text-center">Mínimo Formatura</th>
+              <th class="text-center">Menção Honrosa</th>
+              <th>Critérios Extras</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr><td><strong>USP</strong></td><td class="text-center">Coeficiente de Rendimento (CR)</td><td class="text-center">≥ 5.0</td><td class="text-center">CR ≥ 8.5 (por unidade)</td><td>Sem reprovação por frequência no último ano; tempo regulamentar</td></tr>
+            <tr><td><strong>UNICAMP</strong></td><td class="text-center">Índice de Rendimento (IR)</td><td class="text-center">≥ 5.0</td><td class="text-center">IR ≥ 8.5</td><td>Integralização em tempo regulamentar; sem dependências</td></tr>
+            <tr><td><strong>UFRJ</strong></td><td class="text-center">Coeficiente de Rendimento (CR)</td><td class="text-center">≥ 6.0</td><td class="text-center">CR ≥ 8.0</td><td>Aprovação mínima 6.0 em todas; sem reprovações</td></tr>
+            <tr><td><strong>UFMG</strong></td><td class="text-center">Coeficiente de Rendimento (CR)</td><td class="text-center">≥ 5.0</td><td class="text-center">CR ≥ 8.5</td><td>Sem dependências; tempo regulamentar; integralização completa</td></tr>
+            <tr><td><strong>UFBA</strong></td><td class="text-center">Coeficiente de Rendimento (CR)</td><td class="text-center">≥ 5.0</td><td class="text-center">CR ≥ 8.5</td><td>Integralização curricular completa; tempo regulamentar</td></tr>
+          </tbody>
+        </table>
+      </div>
+    </section>
+
+    <section class="prose mb-12">
+      <h2>Reprovações e o CR</h2>
+      <ul>
+        <li><strong>Disciplina reprovada (F/0.0):</strong> Entra no cálculo do CR com nota 0.0, puxando a média para baixo</li>
+        <li><strong>Reprovação por frequência (< 75%):</strong> Conceito F automático, nota 0.0, conta no CR</li>
+        <li><strong>Repetição de disciplina:</strong> A maioria das universidades considera a <strong>melhor nota</strong> nas repetições para o CR, mas a disciplina permanece no histórico</li>
+        <li><strong>Trancamento de disciplina:</strong> Não entra no CR (diferente de reprovação)</li>
+      </ul>
+    </section>
+
+    <section class="prose mb-12">
+      <h2>Menções Honrosas / Diploma com Louvor</h2>
+      <p>Concedidas ao aluno que atinge alto desempenho acadêmico. Critérios típicos:</p>
+      <ul>
+        <li><strong>CR/IR alto:</strong> Geralmente ≥ 8.5 (USP, UNICAMP, UFMG, UFBA) ou ≥ 8.0 (UFRJ)</li>
+        <li><strong>Tempo regulamentar:</strong> Formatura no prazo previsto do curso (sem prorrogação)</li>
+        <li><strong>Sem reprovações:</strong> Nenhuma disciplina com conceito F ou reprovação por frequência</li>
+        <li><strong>Sem dependências:</strong> Todas as disciplinas aprovadas na primeira vez ou na repetição</li>
+        <li><strong>Integralização completa:</strong> Todos os créditos obrigatórios e eletivos cumpridos</li>
+      </ul>
+      <p>Na USP, a menção pode variar por unidade (Faculdade). Na UNICAMP, é automática se CR ≥ 8.5 e demais critérios.</p>
+    </section>
+
+    <section class="prose mb-12">
+      <h2>CR vs. Média Periódica (IPS/IRS)</h2>
+      <div class="table-scroll">
+        <table>
+          <thead>
+            <tr>
+              <th>Índice</th>
+              <th>Escopo</th>
+              <th>Uso</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr><td><strong>Média Periódica (IPS/IRS)</strong></td><td>Um semestre/período</td><td>Bolsas, monitoria, intercâmbio, alerta acadêmico</td></tr>
+            <tr><td><strong>Coeficiente de Rendimento (CR/IR/IRG)</strong></td><td>Todo o curso (acumulado)</td><td>Formatura, menções honrosas, transferência, pós-graduação</td></tr>
+          </tbody>
+        </table>
+      </div>
+    </section>
+
+    <section class="prose">
+      <h2>Referências</h2>
+      <ul>
+        <li>USP Regulamento Geral de Graduação Art. 86–88</li>
+        <li>UNICAMP Regulamento de Graduação Art. 35–37</li>
+        <li>UFRJ Resolução CEG — Coeficiente de Rendimento</li>
+        <li>UFMG Regimento Geral Art. 102–105</li>
+        <li>UFBA Regulamento de Graduação Art. 45–48</li>
+      </ul>
+    </section>
+  </main>
+</Layout>

@@ -1,0 +1,156 @@
+---
+import Layout from '../../../../layouts/Layout.astro';
+
+const pageTitle = 'MatrÃ­cula de Honor y Premios | Requisitos, Procedimiento y Beneficios EspaÃ±a';
+const description = 'MatrÃ­cula de Honor en universidades espaÃ±olas: nota â‰¥ 9.0, mÃ¡ximo 5% alumnado, procedimiento de concesiÃ³n, beneficios (exenciÃ³n tasas, currÃ­culum), normativa RD 1125/2003 y universitarias.';
+const canonical = 'https://globalcgpa.in/es/guides/matricula-honor';
+const ogImage = '/og-image-es.png';
+const lang = 'es';
+const alternates = [
+  { hreflang: 'en', href: 'https://globalcgpa.in/guides/honors' },
+  { hreflang: 'es', href: 'https://globalcgpa.in/es/guides/matricula-honor' },
+];
+---
+
+<Layout title={pageTitle} description={description} canonical={canonical} ogImage={ogImage} lang={lang} alternates={alternates}>
+  <main class="max-w-[780px] mx-auto px-6 py-14" style="flex:1;">
+    <nav class="crumbs mb-6" aria-label="Breadcrumb">
+      <a href="/es/">Calculadora</a>
+      <span class="sep">/</span>
+      <a href="/es/guides">GuÃ­as</a>
+      <span class="sep">/</span>
+      <span class="current">MatrÃ­cula de Honor</span>
+    </nav>
+
+    <div class="text-xs font-bold uppercase tracking-wider text-emerald-500 mb-2">GuÃ­a AcadÃ©mica</div>
+    <h1 class="text-3xl sm:text-4xl font-extrabold tracking-tight mb-3">MatrÃ­cula de Honor y Premios AcadÃ©micos</h1>
+    <p class="text-slate-500 dark:text-zinc-400 text-base mb-10">
+      MÃ¡xima distinciÃ³n acadÃ©mica en EspaÃ±a: nota â‰¥ 9.0, lÃ­mite 5% alumnado. Procedimiento, beneficios (gratuidad matrÃ­cula), premios nacionales y autonÃ³micos.
+    </p>
+
+    <section class="prose mb-12">
+      <h2>Requisitos Oficiales (RD 1125/2003 Art. 5.3)</h2>
+      <div class="bg-emerald-50 dark:bg-emerald-900/20 border border-emerald-200 dark:border-emerald-800 rounded-xl p-6">
+        <ul class="list-disc list-inside space-y-2">
+          <li><strong>CalificaciÃ³n numÃ©rica:</strong> â‰¥ <strong>9.0</strong> (un decimal) en la asignatura</li>
+          <li><strong>LÃ­mite cuantitativo:</strong> MÃ¡ximo <strong>5%</strong> del alumnado matriculado en la asignatura/grupo</li>
+          <li><strong>ExcepciÃ³n grupos pequeÃ±os:</strong> Si < 20 estudiantes â†’ mÃ¡ximo <strong>1</strong> MatrÃ­cula de Honor</li>
+          <li><strong>ConcesiÃ³n:</strong> Por el profesor responsable (no automÃ¡tica por nota)</li>
+          <li><strong>ValoraciÃ³n:</strong> Excelencia global (no solo nota numÃ©rica): participaciÃ³n, trabajos, actitud</li>
+        </ul>
+      </div>
+    </section>
+
+    <section class="prose mb-12">
+      <h2>Beneficios de la MatrÃ­cula de Honor</h2>
+      <div class="grid gap-4 sm:grid-cols-2">
+        <div class="calc-shell p-4">
+          <h3 class="font-bold mb-2">ðŸ’° ExenciÃ³n EconÃ³mica</h3>
+          <ul class="list-disc list-inside text-sm space-y-1">
+            <li>Gratuidad de la matrÃ­cula de la asignatura (curso siguiente)</li>
+            <li>En algunas PT: exenciÃ³n parcial/total matrÃ­cula curso completo</li>
+            <li>No computan para lÃ­mite de crÃ©ditos de matrÃ­cula</li>
+          </ul>
+        </div>
+        <div class="calc-shell p-4">
+          <h3 class="font-bold mb-2">ðŸ“œ AcadÃ©micos</h3>
+          <ul class="list-disc list-inside text-sm space-y-1">
+            <li>Constancia en expediente y Suplemento Europeo (SET)</li>
+            <li>Valor curricular: CV, oposiciones, becas, mÃ¡ster/doctorado</li>
+            <li>Requisito para Premios Extraordinarios Fin de Carrera</li>
+          </ul>
+        </div>
+      </div>
+    </section>
+
+    <section class="prose mb-12">
+      <h2>Procedimiento de ConcesiÃ³n</h2>
+      <ol class="list-decimal list-inside space-y-3">
+        <li><strong>PublicaciÃ³n notas:</strong> Profesor publica calificaciones (acta)</li>
+        <li><strong>IdentificaciÃ³n candidatos:</strong> Alumnos con nota â‰¥ 9.0</li>
+        <li><strong>SelecciÃ³n profesor:</strong> EvalÃºa excelencia global (participaciÃ³n, trabajos, actitud, no solo nota)</li>
+        <li><strong>ComunicaciÃ³n:</strong> Profesor indica en acta "MH" junto a nota</li>
+        <li><strong>VerificaciÃ³n lÃ­mite 5%:</strong> SecretarÃ­a verifica no supera 5% (o 1 si <20)</li>
+        <li><strong>ResoluciÃ³n:</strong> Si exceso â†’ profesor prioriza (criterios: nota mÃ¡s alta, expediente, etc.)</li>
+        <li><strong>Registro:</strong> En acta final y expediente del alumno</li>
+      </ol>
+    </section>
+
+    <section class="prose mb-12">
+      <h2>Premios Extraordinarios Fin de Estudios</h2>
+      <div class="table-scroll">
+        <table>
+          <thead><tr><th>Premio</th><th>Ãmbito</th><th>Requisitos Principales</th><th>DotaciÃ³n</th></tr></thead>
+          <tbody>
+            <tr><td><strong>Premio Extraordinario Fin de Grado</strong></td><td>Universidad (PT)</td><td>Promedio â‰¥ 8.0â€“9.0, MH en â‰¥ 2-3 asignaturas, TFG â‰¥ 9.0, tiempo â‰¤ 4-5 aÃ±os</td><td>Diploma, exenciÃ³n tasas mÃ¡ster, menciÃ³n SET</td></tr>
+            <tr><td><strong>Premio Nacional Fin de Estudios Universitarios</strong></td><td>Ministerio (MEC)</td><td>Premio Extraordinario PT + mejor expediente EspaÃ±a (curso), CV investigador</td><td>3.300 â‚¬ + diploma + menciÃ³n honorÃ­fica</td></tr>
+            <tr><td><strong>Premios AutonÃ³micos</strong></td><td>Comunidad AutÃ³noma</td><td>Premio Extraordinario PT + residentes CA, expediente brillante</td><td>Variable (1.000â€“3.000 â‚¬, diploma)</td></tr>
+            <tr><td><strong>Premios de ColaboraciÃ³n / InvestigaciÃ³n</strong></td><td>PT / Departamentos</td><td>Estudiantes Ãºltimos cursos, proyecto I+D, tutor, expediente â‰¥ 7.5â€“8.0</td><td>Beca 1.500â€“2.500 â‚¬/aÃ±o + certificado</td></tr>
+          </tbody>
+        </table>
+      </div>
+    </section>
+
+    <section class="prose mb-12">
+      <h2>Premio Nacional Fin de Estudios (Orden EDU/1770/2010)</h2>
+      <div class="bg-blue-50 dark:bg-blue-900/20 border border-blue-200 dark:border-blue-800 rounded-xl p-6">
+        <h3 class="font-bold mb-3">Convocatoria Anual (BOE junio/julio)</h3>
+        <ul class="list-disc list-inside space-y-2">
+          <li><strong>Candidatos:</strong> Titulados curso anterior con Premio Extraordinario PT</li>
+          <li><strong>Criterios:</strong> Expediente acadÃ©mico (70%), CV investigador (30%)</li>
+          <li><strong>Expediente:</strong> Promedio ponderado, MH, TFG, tiempo dedicaciÃ³n, movilidad</li>
+          <li><strong>CV:</strong> Publicaciones, congresos, estancias, idiomas, becas, premios</li>
+          <li><strong>DotaciÃ³n:</strong> 3.300 â‚¬ + Diploma + MenciÃ³n en SET</li>
+          <li><strong>Plazo:</strong> ~1 mes desde publicaciÃ³n BOE (sede electrÃ³nica MEC)</li>
+        </ul>
+      </div>
+    </section>
+
+    <section class="prose mb-12">
+      <h2>Preguntas Frecuentes</h2>
+      <details class="faq-row">
+        <summary>Â¿La MH se concede automÃ¡tico con 9.0?</summary>
+        <div class="faq-body"><p><strong>No.</strong> Es potestad del profesor. Debe valorar "excelencia global". Un 9.5 no garantiza MH si el profesor considera que otro alumno (con 9.0) tuvo mejor participaciÃ³n/trabajos.</p></div>
+      </details>
+      <details class="faq-row">
+        <summary>Â¿QuÃ© pasa si hay mÃ¡s candidatos del 5%?</summary>
+        <div class="faq-body"><p>Profesor prioriza. Criterios habituales: (1) Nota mÃ¡s alta, (2) Mejor expediente global, (3) ParticipaciÃ³n/clase, (4) Calidad TFG/trabajos. SecretarÃ­a verifica y ajusta.</p></div>
+      </details>
+      <details class="faq-row">
+        <summary>Â¿MH en reevaluaciÃ³n / convocatoria extraordinaria?</summary>
+        <div class="faq-body"><p>Generalmente <strong>no</strong>. La mayorÃ­a de PT limitan MH a convocatoria ordinaria. Revisa normativa de tu PT (ej. UCM: solo ordinaria; UB: solo ordinaria).</p></div>
+      </details>
+      <details class="faq-row">
+        <summary>Â¿Pierdo la MH si repito curso?</summary>
+        <div class="faq-body"><p><strong>No.</strong> La MH se queda en el expediente de la asignatura superada. Repetir curso no borra MH previas. Pero no puedes obtener MH en la misma asignatura dos veces.</p></div>
+      </details>
+    </section>
+
+    <section class="prose mb-12">
+      <h2>Variaciones por Universidad</h2>
+      <div class="table-scroll">
+        <table>
+          <thead><tr><th>Universidad</th><th>LÃ­mite 5%</th><th>MH en Extraordinaria</th><th>ExenciÃ³n MatrÃ­cula</th><th>Premio Fin Grado</th></tr></thead>
+          <tbody>
+            <tr><td>UCM</td><td>Estricto (5% / 1 si <20)</td><td>No</td><td>Asignatura curso siguiente</td><td>Promedio â‰¥ 8.5, â‰¥ 2 MH</td></tr>
+            <tr><td>UB</td><td>Estricto</td><td>No</td><td>Asignatura / curso (segÃºn centro)</td><td>Promedio â‰¥ 9.0, â‰¥ 3 MH</td></tr>
+            <tr><td>UV</td><td>Estricto</td><td>No</td><td>Asignatura</td><td>Promedio â‰¥ 8.0, â‰¥ 2 MH</td></tr>
+            <tr><td>US</td><td>Estricto</td><td>No</td><td>Asignatura</td><td>Promedio â‰¥ 8.5, MH</td></tr>
+            <tr><td>UPV</td><td>Estricto</td><td>No</td><td>Asignatura</td><td>Promedio â‰¥ 8.5, â‰¥ 2 MH</td></tr>
+            <tr><td>UAM</td><td>Estricto</td><td>No</td><td>Asignatura</td><td>Promedio â‰¥ 8.5, â‰¥ 2 MH</td></tr>
+          </tbody>
+        </table>
+      </div>
+    </section>
+
+    <section class="prose">
+      <h2>Referencias</h2>
+      <ul>
+        <li>RD 1125/2003 Art. 5.3 â€” MatrÃ­cula de Honor</li>
+        <li>Orden EDU/1770/2010 â€” Premios Nacionales Fin de Estudios</li>
+        <li>RD 1044/2003 â€” Suplemento Europeo al TÃ­tulo (menciÃ³n MH)</li>
+        <li>Normativas: UCM, UB, UV, US, UPV, UAM (Premios Extraordinarios Fin de Grado)</li>
+      </ul>
+    </section>
+  </main>
+</Layout>

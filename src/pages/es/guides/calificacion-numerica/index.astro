@@ -1,0 +1,161 @@
+---
+import Layout from '../../../../layouts/Layout.astro';
+
+const pageTitle = 'CalificaciÃ³n NumÃ©rica vs Cualitativa | Tablas de ConversiÃ³n Oficiales EspaÃ±a';
+const description = 'Correspondencia oficial entre calificaciÃ³n numÃ©rica (0-10, un decimal) y cualitativa (Suspenso, Aprobado, Notable, Sobresaliente, MatrÃ­cula de Honor). Tablas de conversiÃ³n por universidad (UCM, UB, UV, US, UPV, UAM).';
+const canonical = 'https://globalcgpa.in/es/guides/calificacion-numerica';
+const ogImage = '/og-image-es.png';
+const lang = 'es';
+const alternates = [
+  { hreflang: 'en', href: 'https://globalcgpa.in/guides/numeric-qualitative' },
+  { hreflang: 'es', href: 'https://globalcgpa.in/es/guides/calificacion-numerica' },
+];
+---
+
+<Layout title={pageTitle} description={description} canonical={canonical} ogImage={ogImage} lang={lang} alternates={alternates}>
+  <main class="max-w-[780px] mx-auto px-6 py-14" style="flex:1;">
+    <nav class="crumbs mb-6" aria-label="Breadcrumb">
+      <a href="/es/">Calculadora</a>
+      <span class="sep">/</span>
+      <a href="/es/guides">GuÃ­as</a>
+      <span class="sep">/</span>
+      <span class="current">NumÃ©rica vs Cualitativa</span>
+    </nav>
+
+    <div class="text-xs font-bold uppercase tracking-wider text-emerald-500 mb-2">GuÃ­a AcadÃ©mica</div>
+    <h1 class="text-3xl sm:text-4xl font-extrabold tracking-tight mb-3">CalificaciÃ³n NumÃ©rica vs Cualitativa</h1>
+    <p class="text-slate-500 dark:text-zinc-400 text-base mb-10">
+      Correspondencia oficial segÃºn RD 1125/2003. Ambas aparecen en actas, expedientes y Suplemento Europeo al TÃ­tulo (SET).
+      Tablas de conversiÃ³n detalladas para UCM, UB, UV, US, UPV, UAM.
+    </p>
+
+    <section class="prose mb-12">
+      <h2>Tabla Oficial Base (RD 1125/2003 Anexo)</h2>
+      <div class="table-scroll">
+        <table>
+          <thead>
+            <tr>
+              <th>NumÃ©rica (0-10)</th>
+              <th class="text-center">Cualitativa</th>
+              <th class="text-center">Rango % Referencia</th>
+              <th>DescripciÃ³n</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr><td class="font-mono">10.0 â€“ 9.5</td><td class="text-center">MatrÃ­cula de Honor / Sobresaliente</td><td class="text-center">95â€“100%</td><td>Excepcional / Excelente</td></tr>
+            <tr><td class="font-mono">9.4 â€“ 9.0</td><td class="text-center">Sobresaliente</td><td class="text-center">90â€“94%</td><td>Excelente</td></tr>
+            <tr><td class="font-mono">8.9 â€“ 8.5</td><td class="text-center">Notable</td><td class="text-center">85â€“89%</td><td>Muy bueno</td></tr>
+            <tr><td class="font-mono">8.4 â€“ 8.0</td><td class="text-center">Notable</td><td class="text-center">80â€“84%</td><td>Muy bueno</td></tr>
+            <tr><td class="font-mono">7.9 â€“ 7.5</td><td class="text-center">Notable</td><td class="text-center">75â€“79%</td><td>Bueno</td></tr>
+            <tr><td class="font-mono">7.4 â€“ 7.0</td><td class="text-center">Notable</td><td class="text-center">70â€“74%</td><td>Bueno</td></tr>
+            <tr><td class="font-mono">6.9 â€“ 6.5</td><td class="text-center">Aprobado</td><td class="text-center">65â€“69%</td><td>Suficiente alto</td></tr>
+            <tr><td class="font-mono">6.4 â€“ 6.0</td><td class="text-center">Aprobado</td><td class="text-center">60â€“64%</td><td>Suficiente</td></tr>
+            <tr><td class="font-mono">5.9 â€“ 5.5</td><td class="text-center">Aprobado</td><td class="text-center">55â€“59%</td><td>Suficiente</td></tr>
+            <tr><td class="font-mono">5.4 â€“ 5.0</td><td class="text-center">Aprobado</td><td class="text-center">50â€“54%</td><td>Suficiente (mÃ­nimo)</td></tr>
+            <tr><td class="font-mono">4.9 â€“ 0.0</td><td class="text-center">Suspenso</td><td class="text-center">0â€“49%</td><td>Insuficiente</td></tr>
+          </tbody>
+        </table>
+      </div>
+    </section>
+
+    <section class="prose mb-12">
+      <h2>Reglas de Redondeo y Decimales</h2>
+      <div class="bg-amber-50 dark:bg-amber-900/20 border border-amber-200 dark:border-amber-800 rounded-xl p-6">
+        <ul class="list-disc list-inside space-y-2">
+          <li><strong>Un decimal obligatorio:</strong> 5.0, 5.5, 6.0, 7.3, 8.7, 9.2, 10.0</li>
+          <li><strong>Redondeo estÃ¡ndar:</strong> 0.05 â†’ al alza (ej. 7.25 â†’ 7.3); < 0.05 â†’ a la baja (7.24 â†’ 7.2)</li>
+          <li><strong>Solo en resultado final:</strong> CÃ¡lculos intermedios con todos los decimales</li>
+          <li><strong>En actas:</strong> Ambas columnas (numÃ©rica y cualitativa) requeridas</li>
+        </ul>
+      </div>
+    </section>
+
+    <section class="prose mb-12">
+      <h2>Tablas de ConversiÃ³n por Universidad</h2>
+      
+      <h3 class="mt-6 mb-3">UCM â€” Acuerdo Consejo Gobierno (BOUC 29-7-2009, modif. 2011)</h3>
+      <div class="table-scroll">
+        <table>
+          <thead><tr><th>NumÃ©rica</th><th class="text-center">Cualitativa</th><th class="text-center">Escala 0-4 (ConversiÃ³n Oficial)</th></tr></thead>
+          <tbody>
+            <tr><td class="font-mono">10.0 â€“ 9.5</td><td class="text-center">MatrÃ­cula Honor / Sobresaliente</td><td class="text-center">4.0 â€“ 3.8</td></tr>
+            <tr><td class="font-mono">9.4 â€“ 9.0</td><td class="text-center">Sobresaliente</td><td class="text-center">3.7 â€“ 3.5</td></tr>
+            <tr><td class="font-mono">8.9 â€“ 8.0</td><td class="text-center">Notable</td><td class="text-center">3.4 â€“ 3.0</td></tr>
+            <tr><td class="font-mono">7.9 â€“ 7.0</td><td class="text-center">Notable</td><td class="text-center">2.9 â€“ 2.5</td></tr>
+            <tr><td class="font-mono">6.9 â€“ 5.0</td><td class="text-center">Aprobado</td><td class="text-center">2.4 â€“ 1.0</td></tr>
+            <tr><td class="font-mono">4.9 â€“ 0.0</td><td class="text-center">Suspenso</td><td class="text-center">0.9 â€“ 0.0</td></tr>
+          </tbody>
+        </table>
+      </div>
+      <p class="text-sm text-slate-500 mt-2">ConversiÃ³n 0-4 â†’ 0-10: tabla oficial servicios acadÃ©micos UCM (no proporcional simple).</p>
+
+      <h3 class="mt-6 mb-3">UB â€” Normativa AvaluaciÃ³ (Consell Govern 27/02/2020)</h3>
+      <div class="table-scroll">
+        <table>
+          <thead><tr><th>NumÃ¨rica</th><th class="text-center">Qualitativa</th><th class="text-center">ECTS Grade</th></tr></thead>
+          <tbody>
+            <tr><td class="font-mono">10.0 â€“ 9.0</td><td class="text-center">MatrÃ­cula d'Honor / ExcelÂ·lent</td><td class="text-center">A (top 10%)</td></tr>
+            <tr><td class="font-mono">8.9 â€“ 7.0</td><td class="text-center">Notable</td><td class="text-center">B (25%) / C (30%)</td></tr>
+            <tr><td class="font-mono">6.9 â€“ 5.0</td><td class="text-center">Aprovat</td><td class="text-center">C / D (25%) / E (10%)</td></tr>
+            <tr><td class="font-mono">4.9 â€“ 0.0</td><td class="text-center">Suspens</td><td class="text-center">FX/F</td></tr>
+          </tbody>
+        </table>
+      </div>
+      <p class="text-sm text-slate-500 mt-2">MatrÃ­cula d'Honor: â‰¥ 9.0, mÃ¡x. 5% alumnat. Un decimal obligatori.</p>
+
+      <h3 class="mt-6 mb-3">UV / US / UPV / UAM â€” RD 1125/2003 Directo</h3>
+      <div class="table-scroll">
+        <table>
+          <thead><tr><th>NumÃ©rica</th><th class="text-center">Cualitativa</th><th class="text-center">ECTS Grade Estimado</th></tr></thead>
+          <tbody>
+            <tr><td class="font-mono">10.0 â€“ 9.0</td><td class="text-center">MatrÃ­cula Honor / Sobresaliente</td><td class="text-center">A</td></tr>
+            <tr><td class="font-mono">8.9 â€“ 7.0</td><td class="text-center">Notable</td><td class="text-center">B / C</td></tr>
+            <tr><td class="font-mono">6.9 â€“ 5.0</td><td class="text-center">Aprobado</td><td class="text-center">D / E</td></tr>
+            <tr><td class="font-mono">4.9 â€“ 0.0</td><td class="text-center">Suspenso</td><td class="text-center">FX/F</td></tr>
+          </tbody>
+        </table>
+      </div>
+    </section>
+
+    <section class="prose mb-12">
+      <h2>ConversiÃ³n a Sistemas Extranjeros (Referencia)</h2>
+      <div class="formula-block mb-4">
+        <div class="f-label">EspaÃ±a 0-10 â†’ US GPA 4.0 (WES / aproximado)</div>
+        <div class="f-text">GPA â‰ˆ (Nota_ES - 5) Ã— 4 Ã· 5 + 1  (vÃ¡lido para notas 5.0â€“10.0)</div>
+        <div class="f-example">10.0 â†’ 4.0 | 9.0 â†’ 3.2 | 7.5 â†’ 2.5 | 6.0 â†’ 1.8 | 5.0 â†’ 1.0 | <5.0 â†’ 0.0</div>
+      </div>
+      <div class="formula-block mb-4">
+        <div class="f-label">EspaÃ±a 0-10 â†’ UK % / Class</div>
+        <div class="f-text">% â‰ˆ Nota_ES Ã— 10  |  Class: â‰¥7.0 (1st), 6.0-6.9 (2:1), 5.0-5.9 (2:2), 4.0-4.9 (3rd), <4.0 (Fail)</div>
+        <div class="f-example">9.0 â†’ 90% (1st) | 7.0 â†’ 70% (2:1) | 6.0 â†’ 60% (2:2) | 5.0 â†’ 50% (3rd)</div>
+      </div>
+      <p class="text-sm text-slate-500">Para conversiones oficiales: WES, NARIC, ANECA, o servicios acadÃ©micos de cada universidad.</p>
+    </section>
+
+    <section class="prose mb-12">
+      <h2>En el Suplemento Europeo al TÃ­tulo (SET)</h2>
+      <p>El SET muestra <strong>ambas</strong> calificaciones por asignatura:</p>
+      <div class="table-scroll">
+        <table>
+          <thead><tr><th>Asignatura</th><th class="text-center">ECTS</th><th class="text-center">CalificaciÃ³n (0-10)</th><th class="text-center">Cualitativa</th><th class="text-center">ECTS Grade</th></tr></thead>
+          <tbody>
+            <tr><td>CÃ¡lculo I</td><td class="text-center">6</td><td class="text-center">8.5</td><td class="text-center">Notable</td><td class="text-center">B</td></tr>
+            <tr><td>FÃ­sica General</td><td class="text-center">6</td><td class="text-center">7.0</td><td class="text-center">Notable</td><td class="text-center">C</td></tr>
+            <tr><td>TFG</td><td class="text-center">12</td><td class="text-center">9.5</td><td class="text-center">MatrÃ­cula Honor</td><td class="text-center">A</td></tr>
+          </tbody>
+        </table>
+      </div>
+      <p class="mt-2">Promedio final: numÃ©rico (1 decimal) + ECTS grade final (percentil cohorte completa).</p>
+    </section>
+
+    <section class="prose">
+      <h2>Referencias</h2>
+      <ul>
+        <li>RD 1125/2003 Anexo â€” Sistema europeo de crÃ©ditos y calificaciones</li>
+        <li>Acuerdo Consejo Gobierno UCM (BOUC 29-7-2009, modif. 2011) â€” ConversiÃ³n 0-4 a 0-10</li>
+        <li>Normativa AvaluaciÃ³ UB (Consell Govern 27/02/2020)</li>
+        <li>Reglamentos: UV, US, UPV, UAM (Consejo de Gobierno / Claustro)</li>
+      </ul>
+    </section>
+  </main>
+</Layout>

@@ -1,0 +1,169 @@
+---
+import Layout from '../../../../layouts/Layout.astro';
+
+const pageTitle = 'Modifizierte Bayerische Formel | KMK-Empfehlung für Auslandsumrechnung';
+const description = 'Modifizierte Bayerische Formel (x = 1 + 3 × (Nmax - Nd) ÷ (Nmax - Nmin)) für Umrechnung ausländischer Noten in deutsches System. Anwendung an TUM, Heidelberg, HU Berlin, KIT, RWTH, LMU.';
+const canonical = 'https://globalcgpa.in/de/guides/bayerische-formel';
+const ogImage = '/og-image-de.png';
+const lang = 'de';
+const alternates = [
+  { hreflang: 'en', href: 'https://globalcgpa.in/guides/bavarian-formula' },
+  { hreflang: 'de', href: 'https://globalcgpa.in/de/guides/bayerische-formel' },
+];
+---
+
+<Layout title={pageTitle} description={description} canonical={canonical} ogImage={ogImage} lang={lang} alternates={alternates}>
+  <main class="max-w-[780px] mx-auto px-6 py-14" style="flex:1;">
+    <nav class="crumbs mb-6" aria-label="Breadcrumb">
+      <a href="/de/">Notenrechner</a>
+      <span class="sep">/</span>
+      <a href="/de/guides">Guides</a>
+      <span class="sep">/</span>
+      <span class="current">Bayerische Formel</span>
+    </nav>
+
+    <div class="text-xs font-bold uppercase tracking-wider text-emerald-500 mb-2">Akademischer Guide</div>
+    <h1 class="text-3xl sm:text-4xl font-extrabold tracking-tight mb-3">Modifizierte Bayerische Formel</h1>
+    <p class="text-slate-500 dark:text-zinc-400 text-base mb-10">
+      Offizielle KMK-Empfehlung (Kultusministerkonferenz) für Umrechnung ausländischer Notensysteme in die deutsche Skala 1,0–4,0.
+      Verwendet an TUM, Heidelberg, HU Berlin, KIT, RWTH, LMU.
+    </p>
+
+    <section class="prose mb-12">
+      <h2>Die Formel</h2>
+      <div class="formula-block mb-4">
+        <div class="f-label">Formel</div>
+        <div class="f-text">x = 1 + 3 × (N<sub>max</sub> − N<sub>d</sub>) ÷ (N<sub>max</sub> − N<sub>min</sub>)</div>
+        <div class="f-example">
+          x = deutsche Note (1,0–4,0)<br>
+          N<sub>max</sub> = Bestnote im Auslandssystem<br>
+          N<sub>min</sub> = Bestehensnote (Minimum zum Bestehen)<br>
+          N<sub>d</sub> = erzielte ausländische Note
+        </div>
+      </div>
+    </section>
+
+    <section class="prose mb-12">
+      <h2>Schritt-für-Schritt Berechnung</h2>
+      <ol class="list-decimal list-inside space-y-3">
+        <li><strong>Ermittle N<sub>max</sub>:</strong> Höchstmögliche Note im ausländischen System (z.B. 100, 20, 5.0, A+)</li>
+        <li><strong>Ermittle N<sub>min</sub>:</strong> Mindestnote zum Bestehen (z.B. 50, 10, 2.0, C/D)</li>
+        <li><strong>Ermittle N<sub>d</sub>:</strong> Deine erzielte Durchschnittsnote</li>
+        <li><strong>Berechne Differenz:</strong> (N<sub>max</sub> − N<sub>d</sub>) ÷ (N<sub>max</sub> − N<sub>min</sub>)</li>
+        <li><strong>Multipliziere mit 3:</strong> Ergebnis × 3</li>
+        <li><strong>Addiere 1:</strong> + 1 = deutsche Note x</li>
+        <li><strong>Runde:</strong> 1 Dezimalstelle, keine Rundung (abschneiden)</li>
+      </ol>
+    </section>
+
+    <section class="prose mb-12">
+      <h2>Beispiele</h2>
+      
+      <h3 class="mt-4 mb-2">USA GPA 4.0 → Deutsch (Nmax=4.0, Nmin=2.0)</h3>
+      <div class="table-scroll">
+        <table>
+          <thead><tr><th>US GPA</th><th class="text-center">Berechnung</th><th class="text-center">Deutsche Note</th></tr></thead>
+          <tbody>
+            <tr><td class="font-mono">4.00</td><td class="text-center">1 + 3×(4-4)/(4-2) = 1</td><td class="text-center">1,0</td></tr>
+            <tr><td class="font-mono">3.70</td><td class="text-center">1 + 3×(4-3.7)/(4-2) = 1.45</td><td class="text-center">1,4</td></tr>
+            <tr><td class="font-mono">3.30</td><td class="text-center">1 + 3×(4-3.3)/(4-2) = 2.05</td><td class="text-center">2,0</td></tr>
+            <tr><td class="font-mono">3.00</td><td class="text-center">1 + 3×(4-3)/(4-2) = 2.5</td><td class="text-center">2,5</td></tr>
+            <tr><td class="font-mono">2.70</td><td class="text-center">1 + 3×(4-2.7)/(4-2) = 2.95</td><td class="text-center">2,9</td></tr>
+            <tr><td class="font-mono">2.50</td><td class="text-center">1 + 3×(4-2.5)/(4-2) = 3.25</td><td class="text-center">3,2</td></tr>
+            <tr><td class="font-mono">2.00</td><td class="text-center">1 + 3×(4-2)/(4-2) = 4.0</td><td class="text-center">4,0</td></tr>
+          </tbody>
+        </table>
+      </div>
+
+      <h3 class="mt-4 mb-2">Frankreich 20-Punkte → Deutsch (Nmax=20, Nmin=10*)</h3>
+      <p class="text-sm text-slate-500 mb-3">*Heidelberg: Nmax angepasst auf 17 (Erfahrungswerte)</p>
+      <div class="table-scroll">
+        <table>
+          <thead><tr><th>Note FR</th><th class="text-center">Standard (20/10)</th><th class="text-center">Heidelberg (17/10)</th></tr></thead>
+          <tbody>
+            <tr><td class="font-mono">18</td><td class="text-center">1,3</td><td class="text-center">1,2</td></tr>
+            <tr><td class="font-mono">16</td><td class="text-center">1,7</td><td class="text-center">1,5</td></tr>
+            <tr><td class="font-mono">14</td><td class="text-center">2,2</td><td class="text-center">1,9</td></tr>
+            <tr><td class="font-mono">12</td><td class="text-center">2,8</td><td class="text-center">2,4</td></tr>
+            <tr><td class="font-mono">10</td><td class="text-center">4,0</td><td class="text-center">3,4</td></tr>
+          </tbody>
+        </table>
+      </div>
+
+      <h3 class="mt-4 mb-2">UK Percentage → Deutsch (Nmax=100, Nmin=40)</h3>
+      <div class="table-scroll">
+        <table>
+          <thead><tr><th>UK %</th><th class="text-center">Deutsche Note</th></tr></thead>
+          <tbody>
+            <tr><td class="font-mono">85</td><td class="text-center">1,2</td></tr>
+            <tr><td class="font-mono">70</td><td class="text-center">1,9</td></tr>
+            <tr><td class="font-mono">60</td><td class="text-center">2,5</td></tr>
+            <tr><td class="font-mono">50</td><td class="text-center">3,1</td></tr>
+            <tr><td class="font-mono">40</td><td class="text-center">4,0</td></tr>
+          </tbody>
+        </table>
+      </div>
+    </section>
+
+    <section class="prose mb-12">
+      <h2>Anwendung an den 6 Universitäten</h2>
+      <div class="table-scroll">
+        <table>
+          <thead><tr><th>Universität</th><th>Rechtsgrundlage</th><th>Besonderheiten</th></tr></thead>
+          <tbody>
+            <tr><td><strong>TUM</strong></td><td>APSO §16 Abs. 6</td><td>Verbindlich für nicht-kompatible Systeme; 1 Dezimalstelle, keine Rundung</td></tr>
+            <tr><td><strong>Heidelberg</strong></td><td>KMK-Beschluss + Anerkennungssatzung 2023</td><td>Länderspezifische Tabellen; Nmax teils angepasst (FR 17, UK 85); Tabelle = Standardumrechnung</td></tr>
+            <tr><td><strong>HU Berlin</strong></td><td>ZSP-HU §110 + NUS+ Tool (AGNES)</td><td>NUS+ Tool nutzt Bayerische Formel; Endgültig entscheidet Prüfungsausschuss</td></tr>
+            <tr><td><strong>KIT</strong></td><td>KMK-Empfehlung</td><td>Bei binationalen Programmen; Doppelabschlussvereinbarungen</td></tr>
+            <tr><td><strong>RWTH</strong></td><td>ÜPO §10 GER</td><td>KMK-Formel für ausländische Noten; 1 Dezimalstelle, keine Rundung</td></tr>
+            <tr><td><strong>LMU</strong></td><td>BayHSchG</td><td>Jura: 18-Punkte-Skala; sonst Standard Bayerische Formel</td></tr>
+          </tbody>
+        </table>
+      </div>
+    </section>
+
+    <section class="prose mb-12">
+      <h2>Wichtige Hinweise</h2>
+      <div class="bg-amber-50 dark:bg-amber-900/20 border border-amber-200 dark:border-amber-800 rounded-xl p-6">
+        <ul class="list-disc list-inside space-y-2">
+          <li><strong>Kein Rechtsanspruch:</strong> Lissabon-Konvention gibt kein Recht auf deutsche Äquivalenznote</li>
+          <li><strong>Alternative:</strong> Anerkennung als "bestanden" ohne Note möglich (Vermerk im Zeugnis)</li>
+          <li><strong>Länderspezifische Tabellen:</strong> Heidelberger Tabellen = mathematische Standardumrechnung; Nmax teils angepasst</li>
+          <li><strong>Dokumentation:</strong> Antragsteller soll offizielles Notensystem der ausländischen Hochschule vorlegen (Bestnote, Bestehensnote)</li>
+          <li><strong>Prüfungsausschuss:</strong> Hat endgültige Entscheidungsbefugnis (alle 6 Unis)</li>
+        </ul>
+      </div>
+    </section>
+
+    <section class="prose mb-12">
+      <h2>Häufige Auslandssysteme — Eckwerte</h2>
+      <div class="table-scroll">
+        <table>
+          <thead><tr><th>Land / System</th><th class="text-center">N<sub>max</sub></th><th class="text-center">N<sub>min</sub></th><th>Hinweis</th></tr></thead>
+          <tbody>
+            <tr><td>USA GPA 4.0</td><td class="text-center">4.0</td><td class="text-center">2.0</td><td>C = 2.0 = Bestehen</td></tr>
+            <tr><td>UK Percentage</td><td class="text-center">100</td><td class="text-center">40</td><td>40% = Pass</td></tr>
+            <tr><td>Frankreich 20</td><td class="text-center">20 (17*)</td><td class="text-center">10</td><td>*Heidelberg: 17</td></tr>
+            <tr><td>Italien 30</td><td class="text-center">30</td><td class="text-center">18</td><td>18 = min. Bestehen</td></tr>
+            <tr><td>Spanien 10</td><td class="text-center">10</td><td class="text-center">5</td><td>5 = Aprobado</td></tr>
+            <tr><td>Niederlande 10</td><td class="text-center">10</td><td class="text-center">5.5</td><td>5.5 = voldoende</td></tr>
+            <tr><td>Österreich 1–5</td><td class="text-center">1</td><td class="text-center">4</td><td>1=sehr gut, 4=genügend</td></tr>
+            <tr><td>Polen 5–2</td><td class="text-center">5</td><td class="text-center">3</td><td>3 = dstateczna</td></tr>
+            <tr><td>Türkei 4.0</td><td class="text-center">4.0</td><td class="text-center">2.0</td><td>2.0 = geçer</td></tr>
+          </tbody>
+        </table>
+      </div>
+    </section>
+
+    <section class="prose">
+      <h2>Referenzen</h2>
+      <ul>
+        <li>KMK-Beschluss: "Modifizierte Bayerische Formel" (PDF, 0.1 MB)</li>
+        <li>TUM: APSO §16 Abs. 6 (Grade Conversion)</li>
+        <li>Heidelberg: Anerkennungssatzung 02.03.2023 + Ländertabellen</li>
+        <li>HU Berlin: ZSP-HU §110 + NUS+ Tool (AGNES)</li>
+        <li>DAAD: "Notenumrechnung" Länderprofile</li>
+      </ul>
+    </section>
+  </main>
+</Layout>

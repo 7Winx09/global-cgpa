@@ -1,0 +1,176 @@
+---
+import Layout from '../../../../layouts/Layout.astro';
+
+const pageTitle = 'Sistema ECTS y Grados A-E | Suplemento Europeo al TÃ­tulo EspaÃ±a';
+const description = 'Sistema ECTS en universidades espaÃ±olas: crÃ©ditos, grados A-E (percentiles), Suplemento Europeo al TÃ­tulo (SET), conversiÃ³n y reconocimiento internacional.';
+const canonical = 'https://globalcgpa.in/es/guides/ects-grades';
+const ogImage = '/og-image-es.png';
+const lang = 'es';
+const alternates = [
+  { hreflang: 'en', href: 'https://globalcgpa.in/guides/ects-grades' },
+  { hreflang: 'es', href: 'https://globalcgpa.in/es/guides/ects-grades' },
+];
+---
+
+<Layout title={pageTitle} description={description} canonical={canonical} ogImage={ogImage} lang={lang} alternates={alternates}>
+  <main class="max-w-[780px] mx-auto px-6 py-14" style="flex:1;">
+    <nav class="crumbs mb-6" aria-label="Breadcrumb">
+      <a href="/es/">Calculadora</a>
+      <span class="sep">/</span>
+      <a href="/es/guides">GuÃ­as</a>
+      <span class="sep">/</span>
+      <span class="current">ECTS Grades A-E</span>
+    </nav>
+
+    <div class="text-xs font-bold uppercase tracking-wider text-emerald-500 mb-2">GuÃ­a AcadÃ©mica</div>
+    <h1 class="text-3xl sm:text-4xl font-extrabold tracking-tight mb-3">Sistema ECTS y Grados A-E</h1>
+    <p class="text-slate-500 dark:text-zinc-400 text-base mb-10">
+      European Credit Transfer and Accumulation System (ECTS) en EspaÃ±a: crÃ©ditos, carga de trabajo,
+      grados relativos A-E (percentiles) y Suplemento Europeo al TÃ­tulo (SET).
+    </p>
+
+    <section class="prose mb-12">
+      <h2>CrÃ©ditos ECTS â€” DefiniciÃ³n</h2>
+      <div class="table-scroll">
+        <table>
+          <thead><tr><th>Concepto</th><th>Valor</th></tr></thead>
+          <tbody>
+            <tr><td><strong>1 CrÃ©dito ECTS</strong></td><td>25â€“30 horas de trabajo del estudiante</td></tr>
+            <tr><td><strong>Carga anual (60 ECTS)</strong></td><td>1500â€“1800 horas (curso acadÃ©mico completo)</td></tr>
+            <tr><td><strong>Grado (240 ECTS)</strong></td><td>4 aÃ±os Ã— 60 ECTS = 240 ECTS</td></tr>
+            <tr><td><strong>MÃ¡ster (60â€“120 ECTS)</strong></td><td>1â€“2 aÃ±os Ã— 60 ECTS</td></tr>
+            <tr><td><strong>Incluye</strong></td><td>Clases, estudio autÃ³nomo, prÃ¡cticas, exÃ¡menes, TFG/TFM</td></tr>
+          </tbody>
+        </table>
+      </div>
+    </section>
+
+    <section class="prose mb-12">
+      <h2>Grados ECTS A-E (Percentiles Relativos)</h2>
+      <p>Asignados a asignaturas <strong>aprobadas</strong> segÃºn posiciÃ³n en cohorte (RD 1125/2003, Anexo):</p>
+      <div class="table-scroll">
+        <table>
+          <thead>
+            <tr>
+              <th>Grado ECTS</th>
+              <th class="text-center">Percentil</th>
+              <th class="text-center">% Alumnado</th>
+              <th>DefiniciÃ³n</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr><td class="font-mono font-bold text-lg">A</td><td class="text-center">Top 10%</td><td class="text-center">10%</td><td>Excelente â€” rendimiento sobresaliente</td></tr>
+            <tr><td class="font-mono font-bold text-lg">B</td><td class="text-center">Siguiente 25%</td><td class="text-center">25%</td><td>Muy bueno â€” rendimiento por encima de la media</td></tr>
+            <tr><td class="font-mono font-bold text-lg">C</td><td class="text-center">Siguiente 30%</td><td class="text-center">30%</td><td>Bueno â€” rendimiento medio</td></tr>
+            <tr><td class="font-mono font-bold text-lg">D</td><td class="text-center">Siguiente 25%</td><td class="text-center">25%</td><td>Satisfactorio â€” rendimiento aceptable</td></tr>
+            <tr><td class="font-mono font-bold text-lg">E</td><td class="text-center">Ãšltimo 10%</td><td class="text-center">10%</td><td>Suficiente â€” rendimiento mÃ­nimo para aprobar</td></tr>
+            <tr><td class="font-mono font-bold text-lg">FX/F</td><td class="text-center">â€”</td><td class="text-center">â€”</td><td>Suspenso â€” no se concede grado ECTS</td></tr>
+          </tbody>
+        </table>
+      </div>
+    </section>
+
+    <section class="prose mb-12">
+      <h2>CÃ¡lculo de Percentiles (Base de Datos)</h2>
+      <ul>
+        <li><strong>Cohorte:</strong> Alumnado que supera la asignatura en la convocatoria actual + 1-2 cursos anteriores</li>
+        <li><strong>TamaÃ±o mÃ­nimo:</strong> â‰¥ 30 estudiantes para percentiles fiables</li>
+        <li><strong>ActualizaciÃ³n:</strong> Anual (curso acadÃ©mico)</li>
+        <li><strong>Responsable:</strong> SecretarÃ­a / Servicios AcadÃ©micos de la universidad</li>
+      </ul>
+      <div class="formula-block mb-4">
+        <div class="f-label">Ejemplo DistribuciÃ³n (100 aprobados)</div>
+        <div class="f-text">A: 10 mejores | B: 25 siguientes | C: 30 siguientes | D: 25 siguientes | E: 10 Ãºltimos</div>
+      </div>
+    </section>
+
+    <section class="prose mb-12">
+      <h2>Suplemento Europeo al TÃ­tulo (SET)</h2>
+      <div class="bg-blue-50 dark:bg-blue-900/20 border border-blue-200 dark:border-blue-800 rounded-xl p-6">
+        <h3 class="font-bold mb-3">Â¿QuÃ© incluye el SET?</h3>
+        <ul class="list-disc list-inside space-y-2">
+          <li>Datos del titular (nombre, DNI/NIE, fecha nacimiento)</li>
+          <li>TitulaciÃ³n oficial (nombre, nivel MECES, rama de conocimiento)</li>
+          <li>InstituciÃ³n otorgante (universidad, facultad/escuela)</li>
+          <li><strong>Plan de estudios:</strong> Lista de asignaturas, ECTS, calificaciones (0-10 + ECTS grade A-E)</li>
+          <li><strong>Promedio ponderado final:</strong> NumÃ©rico (0-10, 1 decimal) + ECTS grade final</li>
+          <li>Acceso a estudios posteriores (nivel MECES, doctorado, etc.)</li>
+          <li>Sistema de educaciÃ³n superior espaÃ±ol (descripciÃ³n ENIC-NARIC)</li>
+          <li>Firma digital / cÃ³digo de verificaciÃ³n (CSV)</li>
+        </ul>
+      </div>
+    </section>
+
+    <section class="prose mb-12">
+      <h2>ECTS Grade Final (TitulaciÃ³n Completa)</h2>
+      <p>Calculado sobre el <strong>promedio ponderado final</strong> de todo el expediente:</p>
+      <div class="table-scroll">
+        <table>
+          <thead><tr><th>Promedio Final (0-10)</th><th class="text-center">Grado ECTS Estimado</th></tr></thead>
+          <tbody>
+            <tr><td>> 9.0 (MatrÃ­cula Honor posible)</td><td class="text-center">A</td></tr>
+            <tr><td>8.0 â€“ 8.9</td><td class="text-center">A / B</td></tr>
+            <tr><td>7.0 â€“ 7.9</td><td class="text-center">B / C</td></tr>
+            <tr><td>6.0 â€“ 6.9</td><td class="text-center">C / D</td></tr>
+            <tr><td>5.0 â€“ 5.9</td><td class="text-center">D / E</td></tr>
+          </tbody>
+        </table>
+      </div>
+      <p class="mt-3 text-sm text-slate-500 dark:text-zinc-400">
+        â€» Grado exacto depende de la distribuciÃ³n de la cohorte de tu promociÃ³n (percentil real).
+      </p>
+    </section>
+
+    <section class="prose mb-12">
+      <h2>Reconocimiento Internacional</h2>
+      <div class="grid gap-4 sm:grid-cols-2">
+        <div class="calc-shell p-4">
+          <h3 class="font-bold mb-2">ðŸ‡ªðŸ‡º Espacio Europeo EducaciÃ³n Superior (EEES)</h3>
+          <ul class="list-disc list-inside text-sm space-y-1">
+            <li>ECTS grades entendidos en 49 paÃ­ses EEES</li>
+            <li>SET obligatorio para tÃ­tulos oficiales (RD 1044/2003)</li>
+            <li>Facilita movilidad Erasmus+, mÃ¡steres conjuntos, doctorado</li>
+          </ul>
+        </div>
+        <div class="calc-shell p-4">
+          <h3 class="font-bold mb-2">ðŸŒ Fuera de Europa</h3>
+          <ul class="list-disc list-inside text-sm space-y-1">
+            <li>WES (World Education Services): evalÃºa SET + expediente</li>
+            <li>NARIC nacional: reconocimiento profesional/acadÃ©mico</li>
+            <li>ConversiÃ³n a GPA 4.0 (US), Percentage (UK/India), etc.</li>
+          </ul>
+        </div>
+      </div>
+    </section>
+
+    <section class="prose mb-12">
+      <h2>FAQ</h2>
+      <details class="faq-row">
+        <summary>Â¿El grado ECTS sustituye a la nota 0-10?</summary>
+        <div class="faq-body"><p><strong>No.</strong> Son complementarios. En el SET aparecen <strong>ambos</strong>: calificaciÃ³n numÃ©rica (0-10, 1 decimal) + grado ECTS (A-E). La numÃ©rica es la oficial en EspaÃ±a.</p></div>
+      </details>
+      <details class="faq-row">
+        <summary>Â¿Puedo elegir no tener grado ECTS?</summary>
+        <div class="faq-body"><p><strong>No.</strong> Para tÃ­tulos oficiales (Grado/MÃ¡ster), el SET con grado ECTS es obligatorio (RD 1044/2003, RD 1125/2003). Solo tÃ­tulos propios pueden omitirlo.</p></div>
+      </details>
+      <details class="faq-row">
+        <summary>Â¿CÃ³mo afecta la reevaluaciÃ³n al grado ECTS?</summary>
+        <div class="faq-body"><p>La calificaciÃ³n de reevaluaciÃ³n (mÃ¡x. 5.0) es la que cuenta para el expediente y por tanto para el grado ECTS. Si apruebas en reevaluaciÃ³n con 5.0 â†’ grado ECTS probable D/E (percentil bajo).</p></div>
+      </details>
+      <details class="faq-row">
+        <summary>Â¿DÃ³nde solicito el SET?</summary>
+        <div class="faq-body"><p>En la <strong>SecretarÃ­a de tu facultad/escuela</strong> o vÃ­a sede electrÃ³nica de la universidad. Suele estar disponible tras la firma del acta de tÃ­tulo (post-yudisium). Gratuito en universidades pÃºblicas.</p></div>
+      </details>
+    </section>
+
+    <section class="prose">
+      <h2>Referencias</h2>
+      <ul>
+        <li>RD 1125/2003 â€” Anexo: Sistema europeo de crÃ©ditos y calificaciones</li>
+        <li>RD 1044/2003 â€” Procedimiento expediciÃ³n Suplemento Europeo al TÃ­tulo</li>
+        <li>GuÃ­a ECTS 2015 (ComisiÃ³n Europea) â€” Users' Guide</li>
+        <li>ANECA â€” GuÃ­as de verificaciÃ³n y acreditaciÃ³n (ECTS en memoria de tÃ­tulo)</li>
+      </ul>
+    </section>
+  </main>
+</Layout>

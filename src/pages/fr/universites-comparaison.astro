@@ -1,0 +1,145 @@
+---
+import Layout from '../../layouts/Layout.astro';
+import { getUniversitiesByCountry } from '../../data/universities-global';
+
+const universities = getUniversitiesByCountry('FR');
+
+const pageTitle = 'Comparaison Moyennes | Universités & Grandes Écoles Françaises';
+const description = 'Comparaison des systèmes de notation français: universités (Sorbonne, Sciences Po) vs Grandes Écoles (Polytechnique, CentraleSupélec). Échelle 0–20, ECTS, mentions, validation 10/20.';
+const canonical = 'https://globalcgpa.in/fr/universites-comparaison';
+const ogImage = '/og-image-fr.png';
+const lang = 'fr';
+const alternates = [
+  { hreflang: 'en', href: 'https://globalcgpa.in/universities' },
+  { hreflang: 'fr', href: 'https://globalcgpa.in/fr/universites-comparaison' },
+];
+---
+
+<Layout title={pageTitle} description={description} canonical={canonical} ogImage={ogImage} lang={lang} alternates={alternates}>
+  <main class="max-w-[1160px] mx-auto px-6 py-14" style="flex:1;">
+    <div class="text-xs font-bold uppercase tracking-wider text-emerald-500 mb-2">Comparaison Universités Françaises</div>
+    <h1 class="text-3xl sm:text-4xl font-extrabold tracking-tight mb-3">Systèmes de Notation — Universités vs Grandes Écoles</h1>
+    <p class="text-slate-500 dark:text-zinc-400 text-base mb-10">
+      L'enseignement supérieur français utilise l'échelle 0–20 avec validation à 10/20.
+      Les universités (LMD) utilisent les ECTS standard; les Grandes Écoles utilisent souvent des coefficients spécifiques.
+    </p>
+
+    <section class="mb-16" aria-labelledby="comparison-heading">
+      <h2 id="comparison-heading" class="text-2xl font-extrabold tracking-tight mb-6">Tableau Comparatif</h2>
+      <div class="table-scroll">
+        <table>
+          <thead>
+            <tr>
+              <th>Établissement</th>
+              <th class="text-center">Type</th>
+              <th class="text-center">Échelle</th>
+              <th class="text-center">Validation</th>
+              <th class="text-center">Crédits</th>
+              <th class="text-center">Mentions</th>
+              <th>Particularités</th>
+            </tr>
+          </thead>
+          <tbody>
+            {universities.map(u => (
+              <tr>
+                <td><strong>{u.name}</strong></td>
+                <td class="text-center">
+                  {u.name.includes('Polytechnique') || u.name.includes('Centrale') ? 'Grande École' : 'Université'}
+                </td>
+                <td class="text-center">{u.system}</td>
+                <td class="text-center">10/20</td>
+                <td class="text-center">
+                  {u.name.includes('Polytechnique') ? 'Coefficients' : 'ECTS'}
+                </td>
+                <td class="text-center">Passable → Excellent</td>
+                <td>{u.note}</td>
+              </tr>
+            ))}
+          </tbody>
+        </table>
+      </div>
+    </section>
+
+    <section class="mb-16" aria-labelledby="mentions-heading">
+      <h2 id="mentions-heading" class="text-2xl font-extrabold tracking-tight mb-6">Barème des Mentions (Standard National)</h2>
+      <div class="table-scroll">
+        <table>
+          <thead>
+            <tr>
+              <th>Moyenne /20</th>
+              <th class="text-center">Mention</th>
+              <th class="text-center">Équivalent %</th>
+              <th class="text-center">ECTS Grade</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr><td class="font-mono text-center">18.0–20.0</td><td class="text-center text-purple-600 font-bold">Excellent</td><td class="text-center">90–100%</td><td class="text-center">A</td></tr>
+            <tr><td class="font-mono text-center">16.0–17.9</td><td class="text-center text-blue-600 font-bold">Très Bien</td><td class="text-center">80–89%</td><td class="text-center">B</td></tr>
+            <tr><td class="font-mono text-center">14.0–15.9</td><td class="text-center text-green-600 font-bold">Bien</td><td class="text-center">70–79%</td><td class="text-center">C</td></tr>
+            <tr><td class="font-mono text-center">12.0–13.9</td><td class="text-center text-amber-600 font-bold">Assez Bien</td><td class="text-center">60–69%</td><td class="text-center">D</td></tr>
+            <tr><td class="font-mono text-center">10.0–11.9</td><td class="text-center text-slate-600 font-bold">Passable</td><td class="text-center">50–59%</td><td class="text-center">E</td></tr>
+            <tr><td class="font-mono text-center">0.0–9.9</td><td class="text-center text-red-600 font-bold">Non validé</td><td class="text-center">0–49%</td><td class="text-center">F/FX</td></tr>
+          </tbody>
+        </table>
+      </div>
+    </section>
+
+    <section class="mb-16" aria-labelledby="univ-detail-heading">
+      <h2 id="univ-detail-heading" class="text-2xl font-extrabold tracking-tight mb-6">Détails par Établissement</h2>
+      <div class="grid gap-6">
+        {universities.map(u => (
+          <article class="calc-shell p-6">
+            <div class="flex flex-wrap items-baseline gap-3 mb-4">
+              <h3 class="text-xl font-extrabold text-slate-900 dark:text-white">{u.name}</h3>
+              <span class="px-3 py-1 bg-emerald-100 dark:bg-emerald-900/30 text-emerald-700 dark:text-emerald-300 text-xs font-bold rounded-full">
+                {u.system}
+              </span>
+              <span class="text-sm text-slate-500 dark:text-zinc-400">{u.nameEn}</span>
+            </div>
+
+            <div class="prose mb-4">
+              <p>{u.formulaText}</p>
+              <p><strong>Source:</strong> <a href={u.sourceUrl} target="_blank" rel="noopener">{u.source}</a></p>
+              {u.note && <p><strong>Note:</strong> {u.note}</p>}
+            </div>
+
+            <div class="flex flex-wrap gap-3">
+              <a href={`/fr/${u.slug}`} class="calc-tab active">Calculateur</a>
+              <a href={u.sourceUrl} target="_blank" rel="noopener" class="calc-tab">Règlement officiel</a>
+            </div>
+          </article>
+        ))}
+      </div>
+    </section>
+
+    <section aria-labelledby="differences-heading">
+      <h2 id="differences-heading" class="text-2xl font-extrabold tracking-tight mb-6">Universités vs Grandes Écoles — Différences Clés</h2>
+      <div class="calc-shell p-6">
+        <div class="grid gap-6 sm:grid-cols-2">
+          <div>
+            <h3 class="font-bold text-lg text-slate-900 dark:text-white mb-4">🏛️ Universités (LMD)</h3>
+            <ul class="list-disc list-inside space-y-2 text-sm">
+              <li>Système LMD standardisé (Bologne)</li>
+              <li>ECTS : 60 crédits/an, 180 Licence, 120 Master</li>
+              <li>Moyenne = Σ(ECTS × Note) ÷ ΣECTS</li>
+              <li>Compensation entre UE possible (souvent ≥ 10/20)</li>
+              <li>Capitalisation des crédits acquise à vie</li>
+              <li>Diploma Supplement obligatoire</li>
+            </ul>
+          </div>
+          <div>
+            <h3 class="font-bold text-lg text-slate-900 dark:text-white mb-4">🎓 Grandes Écoles</h3>
+            <ul class="list-disc list-inside space-y-2 text-sm">
+              <li>Sélection sur concours (CPGE, admissions parallèles)</li>
+              <li>Coefficients propres (pas toujours ECTS standard)</li>
+              <li>Moyenne = Σ(Coeff × Note) ÷ ΣCoeff</li>
+              <li>Classement de sortie déterminant pour l'insertion</li>
+              <li>Pas de compensation systématique (note éliminatoire possible)</li>
+              <li>Double diplôme fréquent avec universités</li>
+            </ul>
+          </div>
+        </div>
+      </div>
+    </section>
+  </main>
+</Layout>

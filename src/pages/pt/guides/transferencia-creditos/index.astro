@@ -1,0 +1,151 @@
+---
+import Layout from '../../../../layouts/Layout.astro';
+
+const pageTitle = 'Transferência e Aproveitamento de Créditos | Regras Brasil';
+const description = 'Regras de transferência entre universidades brasileiras e aproveitamento de disciplinas cursadas. Documentos necessários, prazos, limites de créditos, equivalência de ementas. USP, UNICAMP, UFRJ, UFMG, UFBA.';
+const canonical = 'https://globalcgpa.in/pt/guides/transferencia-creditos';
+const ogImage = '/og-image-pt.png';
+const lang = 'pt';
+const alternates = [
+  { hreflang: 'en', href: 'https://globalcgpa.in/guides/credit-transfer-brazil' },
+  { hreflang: 'pt', href: 'https://globalcgpa.in/pt/guides/transferencia-creditos' },
+];
+---
+
+<Layout title={pageTitle} description={description} canonical={canonical} ogImage={ogImage} lang={lang} alternates={alternates}>
+  <main class="max-w-[780px] mx-auto px-6 py-14" style="flex:1;">
+    <nav class="crumbs mb-6" aria-label="Breadcrumb">
+      <a href="/pt/">Calculadora de Média</a>
+      <span class="sep">/</span>
+      <a href="/pt/guides">Guias</a>
+      <span class="sep">/</span>
+      <span class="current">Transferência e Aproveitamento</span>
+    </nav>
+
+    <div class="text-xs font-bold uppercase tracking-wider text-emerald-500 mb-2">Guia Acadêmico</div>
+    <h1 class="text-3xl sm:text-4xl font-extrabold tracking-tight mb-3">Transferência e Aproveitamento de Créditos</h1>
+    <p class="text-slate-500 dark:text-zinc-400 text-base mb-10">
+      Processo para transferir de universidade ou aproveitar disciplinas já cursadas em outra instituição.
+      Regras variam entre universidades, mas seguem diretrizes do MEC e resoluções do CNE.
+    </p>
+
+    <section class="prose mb-12">
+      <h2>Modalidades de Transferência</h2>
+      <div class="table-scroll">
+        <table>
+          <thead>
+            <tr>
+              <th>Modalidade</th>
+              <th>Descrição</th>
+              <th>Requisito Principal</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr><td><strong>Transferência Externa</strong></td><td>Aluno de outra IES para a universidade</td><td>Vaga aberta + edital + compatibilidade curricular</td></tr>
+            <tr><td><strong>Transferência Interna</strong></td><td>Mudança de curso dentro da mesma universidade</td><td>Processo seletivo interno + aproveitamento de créditos</td></tr>
+            <tr><td><strong>Reingresso</strong></td><td>Aluno que abandonou o curso e quer voltar</td><td>Prazo de prescrição + compatibilidade curricular</td></tr>
+            <tr><td><strong>Aproveitamento Isolado</strong></td><td>Disciplinas cursadas como aluno especial/isolado</td><td>Ementa equivalente + nota mínima (geralmente C/6.0)</td></tr>
+          </tbody>
+        </table>
+      </div>
+    </section>
+
+    <section class="prose mb-12">
+      <h2>Documentos Necessários</h2>
+      <ul>
+        <li><strong>Histórico escolar</strong> original ou cópia autenticada (com cargas horárias, notas, conceitos)</li>
+        <li><strong>Ementas das disciplinas</strong> oficiais (com carga horária, bibliografia, objetivos)</li>
+        <li><strong>Certidão de vínculo</strong> ou declaração de matrícula ativa/trancada</li>
+        <li><strong>Documentos pessoais</strong> (RG, CPF, certidão de nascimento/casamento)</li>
+        <li><strong>Comprovante de conclusão do Ensino Médio</strong></li>
+        <li><strong>Formulário de solicitação</strong> da universidade de destino</li>
+      </ul>
+    </section>
+
+    <section class="prose mb-12">
+      <h2>Análise de Equivalência (Aproveitamento)</h2>
+      <div class="bg-amber-50 dark:bg-amber-900/20 border border-amber-200 dark:border-amber-800 rounded-xl p-6">
+        <h3 class="font-bold mb-3">Critérios Comuns</h3>
+        <ul class="list-disc list-inside space-y-2">
+          <li><strong>Carga horária:</strong> Disciplina de origem deve ter carga ≥ disciplina de destino (geralmente 75% mínimo)</li>
+          <li><strong>Conteúdo programático:</strong> Ementa com ≥ 75% de similaridade (análise por comissão/departamento)</li>
+          <li><strong>Nota/conceito mínimo:</strong> Geralmente C (6.0) ou B (7.0) — conceitos D/F não são aproveitados</li>
+          <li><strong>Prazo de validade:</strong> Disciplinas muito antigas (10+ anos) podem exigir revalidação</li>
+        </ul>
+      </div>
+    </section>
+
+    <section class="prose mb-12">
+      <h2>Limites de Aproveitamento</h2>
+      <div class="table-scroll">
+        <table>
+          <thead>
+            <tr>
+              <th>Universidade</th>
+              <th class="text-center">Máx. Créditos Aproveitados</th>
+              <th class="text-center">Nota Mínima</th>
+              <th>Observação</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr><td>USP</td><td class="text-center">Até 100% do currículo</td><td class="text-center">C (6.0)</td><td>Análise por comissão de graduação da unidade</td></tr>
+            <tr><td>UNICAMP</td><td class="text-center">Até 100%</td><td class="text-center">C (6.0)</td><td>Resolução GR-025/2020 — aproveitamento integral permitido</td></tr>
+            <tr><td>UFRJ</td><td class="text-center">Até 100%</td><td class="text-center">C (6.0)</td><td>Resolução CEG — exige ementa compatível 75%+</td></tr>
+            <tr><td>UFMG</td><td class="text-center">Até 100%</td><td class="text-center">C (6.0)</td><td>Regimento Art. 106 — aproveitamento total ou parcial</td></tr>
+            <tr><td>UFBA</td><td class="text-center">Até 100%</td><td class="text-center">C (6.0)</td><td>Regulamento Art. 48 — análise caso a caso</td></tr>
+          </tbody>
+        </table>
+      </div>
+    </section>
+
+    <section class="prose mb-12">
+      <h2>Transferência Internacional (Revalidação)</h2>
+      <p>Diplomas e disciplinas do exterior passam por <strong>revalidação</strong> (graduação) ou <strong>reconhecimento</strong> (pós-graduação):</p>
+      <ul>
+        <li>Processo via universidade pública com curso semelhante (Art. 48 LDB)</li>
+        <li>Exige tradução juramentada, apostila de Haia, histórico e ementas</li>
+        <li>Análise de carga horária, conteúdo, nível do curso</li>
+        <li>Pode exigir exames complementares ou defesa de trabalho</li>
+        <li>Prazo: 6–24 meses dependendo da universidade</li>
+      </ul>
+    </section>
+
+    <section class="prose mb-12">
+      <h2>Prazos e Fluxo Típico</h2>
+      <ol class="list-decimal list-inside space-y-3">
+        <li>Verificar edital de transferência (geralmente 2x ao ano: jan/jul)</li>
+        <li>Reunir documentos (histórico, ementas, certidões)</li>
+        <li>Protocolar solicitação na secretaria/DAA da universidade de destino</li>
+        <li>Aguardar análise de equivalência pela comissão/departamento (30–90 dias)</li>
+        <li>Resultado: deferido (aproveitado), indeferido ou deferido parcialmente</li>
+        <li>Recurso administrativo (se indeferido) — prazo 10–15 dias</li>
+        <li>Matrícula nas disciplinas não aproveitadas</li>
+      </ol>
+    </section>
+
+    <section class="prose mb-12">
+      <h2>Aluno Especial / Isolado</h2>
+      <p>Cursar disciplinas avulsas sem vínculo com curso regular:</p>
+      <ul>
+        <li>Vagas remanescentes após matrícula de regulares</li>
+        <li>Máximo 2–3 disciplinas por semestre (varia por universidade)</li>
+        <li>Nota mínima para posterior aproveitamento: geralmente C (6.0)</li>
+        <li>Prazo para aproveitamento: geralmente 2–5 anos após cursar</li>
+        <li>Não garante vaga em transferência posterior</li>
+      </ul>
+    </section>
+
+    <section class="prose">
+      <h2>Referências</h2>
+      <ul>
+        <li>LDB Lei 9.394/96 Art. 47–49 (transferência e aproveitamento)</li>
+        <li>CNE/CES Resolução 1/2007 — Diretrizes para transferência</li>
+        <li>USP Regulamento Geral Art. 89–91</li>
+        <li>UNICAMP Resolução GR-025/2020</li>
+        <li>UFRJ Resolução CEG — Aproveitamento de Estudos</li>
+        <li>UFMG Regimento Geral Art. 106–108</li>
+        <li>UFBA Regulamento de Graduação Art. 48–50</li>
+      </ul>
+    </section>
+  </main>
+</Layout>

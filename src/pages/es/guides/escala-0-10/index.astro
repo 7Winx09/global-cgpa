@@ -1,0 +1,141 @@
+---
+import Layout from '../../../../layouts/Layout.astro';
+
+const pageTitle = 'Escala 0-10 y Cualitativas | Sistema de Calificaciones EspaÃ±a (RD 1125/2003)';
+const description = 'Escala oficial 0-10 en universidades espaÃ±olas: Suspenso, Aprobado, Notable, Sobresaliente, MatrÃ­cula de Honor. Correspondencia numÃ©rica, porcentajes y normativa RD 1125/2003.';
+const canonical = 'https://globalcgpa.in/es/guides/escala-0-10';
+const ogImage = '/og-image-es.png';
+const lang = 'es';
+const alternates = [
+  { hreflang: 'en', href: 'https://globalcgpa.in/guides/10-point-scale' },
+  { hreflang: 'es', href: 'https://globalcgpa.in/es/guides/escala-0-10' },
+];
+---
+
+<Layout title={pageTitle} description={description} canonical={canonical} ogImage={ogImage} lang={lang} alternates={alternates}>
+  <main class="max-w-[780px] mx-auto px-6 py-14" style="flex:1;">
+    <nav class="crumbs mb-6" aria-label="Breadcrumb">
+      <a href="/es/">Calculadora</a>
+      <span class="sep">/</span>
+      <a href="/es/guides">GuÃ­as</a>
+      <span class="sep">/</span>
+      <span class="current">Escala 0-10</span>
+    </nav>
+
+    <div class="text-xs font-bold uppercase tracking-wider text-emerald-500 mb-2">GuÃ­a AcadÃ©mica</div>
+    <h1 class="text-3xl sm:text-4xl font-extrabold tracking-tight mb-3">Escala 0-10 y Cualitativas</h1>
+    <p class="text-slate-500 dark:text-zinc-400 text-base mb-10">
+      Sistema oficial de calificaciones en EspaÃ±a segÃºn Real Decreto 1125/2003.
+      Aplicable a todas las universidades pÃºblicas y privadas (UCM, UB, UV, US, UPV, UAM, etc.).
+    </p>
+
+    <section class="prose mb-12">
+      <h2>Escala Oficial (RD 1125/2003, Art. 5)</h2>
+      <div class="table-scroll">
+        <table>
+          <thead>
+            <tr>
+              <th>Cualitativa</th>
+              <th class="text-center">NumÃ©rica (0-10)</th>
+              <th class="text-center">Rango Porcentual</th>
+              <th>DescripciÃ³n</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr><td><strong>MatrÃ­cula de Honor</strong></td><td class="text-center">9.0 â€“ 10.0</td><td class="text-center">95â€“100%</td><td>PrestaciÃ³n excepcional (mÃ¡x. 5% alumnado)</td></tr>
+            <tr><td><strong>Sobresaliente</strong></td><td class="text-center">9.0 â€“ 10.0</td><td class="text-center">90â€“94%</td><td>PrestaciÃ³n excelente</td></tr>
+            <tr><td><strong>Notable</strong></td><td class="text-center">7.0 â€“ 8.9</td><td class="text-center">70â€“89%</td><td>PrestaciÃ³n destacada</td></tr>
+            <tr><td><strong>Aprobado</strong></td><td class="text-center">5.0 â€“ 6.9</td><td class="text-center">50â€“69%</td><td>PrestaciÃ³n suficiente</td></tr>
+            <tr><td><strong>Suspenso</strong></td><td class="text-center">0.0 â€“ 4.9</td><td class="text-center">0â€“49%</td><td>PrestaciÃ³n insuficiente</td></tr>
+          </tbody>
+        </table>
+      </div>
+      <p class="text-sm text-slate-500 dark:text-zinc-400 mt-3">
+        â€» Un decimal obligatorio. MÃ­nimo para aprobar: <strong>5.0</strong>. MatrÃ­cula de Honor: â‰¥ 9.0, mÃ¡x. 5% del alumnado (1 si <20).
+      </p>
+    </section>
+
+    <section class="prose mb-12">
+      <h2>Correspondencia Detallada (Un Decimal)</h2>
+      <div class="table-scroll">
+        <table>
+          <thead><tr><th>NumÃ©rica</th><th class="text-center">Cualitativa</th><th>Rango %</th></tr></thead>
+          <tbody>
+            <tr><td class="font-mono">10.0 â€“ 9.5</td><td class="text-center">MatrÃ­cula de Honor / Sobresaliente</td><td>95â€“100%</td></tr>
+            <tr><td class="font-mono">9.4 â€“ 9.0</td><td class="text-center">Sobresaliente</td><td>90â€“94%</td></tr>
+            <tr><td class="font-mono">8.9 â€“ 8.5</td><td class="text-center">Notable</td><td>85â€“89%</td></tr>
+            <tr><td class="font-mono">8.4 â€“ 8.0</td><td class="text-center">Notable</td><td>80â€“84%</td></tr>
+            <tr><td class="font-mono">7.9 â€“ 7.5</td><td class="text-center">Notable</td><td>75â€“79%</td></tr>
+            <tr><td class="font-mono">7.4 â€“ 7.0</td><td class="text-center">Notable</td><td>70â€“74%</td></tr>
+            <tr><td class="font-mono">6.9 â€“ 6.5</td><td class="text-center">Aprobado</td><td>65â€“69%</td></tr>
+            <tr><td class="font-mono">6.4 â€“ 6.0</td><td class="text-center">Aprobado</td><td>60â€“64%</td></tr>
+            <tr><td class="font-mono">5.9 â€“ 5.5</td><td class="text-center">Aprobado</td><td>55â€“59%</td></tr>
+            <tr><td class="font-mono">5.4 â€“ 5.0</td><td class="text-center">Aprobado</td><td>50â€“54%</td></tr>
+            <tr><td class="font-mono">4.9 â€“ 0.0</td><td class="text-center">Suspenso</td><td>0â€“49%</td></tr>
+          </tbody>
+        </table>
+      </div>
+    </section>
+
+    <section class="prose mb-12">
+      <h2>MatrÃ­cula de Honor â€” Reglas Especiales</h2>
+      <div class="bg-emerald-50 dark:bg-emerald-900/20 border border-emerald-200 dark:border-emerald-800 rounded-xl p-6">
+        <ul class="list-disc list-inside space-y-2">
+          <li><strong>Nota mÃ­nima:</strong> 9.0 (un decimal)</li>
+          <li><strong>LÃ­mite cuantitativo:</strong> MÃ¡ximo 5% del alumnado matriculado en la asignatura</li>
+          <li><strong>ExcepciÃ³n:</strong> Si el grupo tiene <20 estudiantes â†’ mÃ¡ximo 1 MatrÃ­cula de Honor</li>
+          <li><strong>ConcesiÃ³n:</strong> Por el profesor responsable, considerando excelencia global (no solo nota numÃ©rica)</li>
+          <li><strong>Registro:</strong> Constancia en acta de evaluaciÃ³n y acta de calificaciÃ³n final</li>
+        </ul>
+      </div>
+    </section>
+
+    <section class="prose mb-12">
+      <h2>Variaciones por Universidad (Ejemplos)</h2>
+      <p>Todas siguen RD 1125/2003, pero algunas definen sub-rangos internos:</p>
+      <div class="table-scroll">
+        <table>
+          <thead><tr><th>Universidad</th><th>Sobresaliente</th><th>Notable</th><th>Aprobado</th><th>Nota</th></tr></thead>
+          <tbody>
+            <tr><td><strong>UCM</strong></td><td>9.0â€“10.0</td><td>7.0â€“8.9</td><td>5.0â€“6.9</td><td>ConversiÃ³n 0-4 oficial por servicios acadÃ©micos</td></tr>
+            <tr><td><strong>UB</strong></td><td>9.0â€“10.0 (ExcelÂ·lent)</td><td>7.0â€“8.9 (Notable)</td><td>5.0â€“6.9 (Aprovat)</td><td>CatalÃ¡n/ES. MatrÃ­cula d'Honor â‰¤5% (â‰¥9.0)</td></tr>
+            <tr><td><strong>UV</strong></td><td>9.0â€“10.0</td><td>7.0â€“8.9</td><td>5.0â€“6.9</td><td>Aplicable RD 1125/2003 directo</td></tr>
+            <tr><td><strong>US</strong></td><td>9.0â€“10.0</td><td>7.0â€“8.9</td><td>5.0â€“6.9</td><td>Normativa evaluaciÃ³n US (Consejo de Gobierno)</td></tr>
+            <tr><td><strong>UPV</strong></td><td>9.0â€“10.0</td><td>7.0â€“8.9</td><td>5.0â€“6.9</td><td>Reglament avaluaciÃ³ UPV (Consell Social)</td></tr>
+            <tr><td><strong>UAM</strong></td><td>9.0â€“10.0</td><td>7.0â€“8.9</td><td>5.0â€“6.9</td><td>Normativa evaluaciÃ³n UAM</td></tr>
+          </tbody>
+        </table>
+      </div>
+    </section>
+
+    <section class="prose mb-12">
+      <h2>ReevaluaciÃ³n (Art. 12 Normativa Tipo)</h2>
+      <ul>
+        <li>PerÃ­odo de reevaluaciÃ³n tras publicaciÃ³n de calificaciones finales</li>
+        <li>Solo para asignaturas <strong>suspensas</strong> (no para subir nota de aprobado)</li>
+        <li>CalificaciÃ³n final de reevaluaciÃ³n: <strong>mÃ¡ximo 5.0 (Aprobado)</strong> en la mayorÃ­a de universidades</li>
+        <li>Convocatorias: Ordinaria (enero/junio) + Extraordinaria (julio/septiembre)</li>
+        <li>MÃ¡ximo 4â€“6 convocatorias por asignatura (segÃºn PT)</li>
+      </ul>
+    </section>
+
+    <section class="prose mb-12">
+      <h2>ConversiÃ³n a Sistemas Extranjeros</h2>
+      <div class="formula-block mb-4">
+        <div class="f-label">EspaÃ±a 0-10 â†’ US GPA 4.0 (Aproximado)</div>
+        <div class="f-text">GPA â‰ˆ (Nota_ES - 5) Ã— 4 Ã· 5 + 1  (para notas 5-10)</div>
+        <div class="f-example">Ej: 9.0 â†’ 3.2 | 7.5 â†’ 2.5 | 5.0 â†’ 1.0 | <5.0 â†’ 0.0 (F)</div>
+      </div>
+      <p>Para conversiones oficiales: <strong>WES, NARIC, ANECA</strong> o servicios acadÃ©micos de cada universidad.</p>
+    </section>
+
+    <section class="prose">
+      <h2>Referencia Legal</h2>
+      <ul>
+        <li><strong>Real Decreto 1125/2003</strong>, de 5 de septiembre â€” Sistema europeo de crÃ©ditos y sistema de calificaciones en titulaciones universitarias oficiales (BOE 18-9-2003)</li>
+        <li><strong>Real Decreto 822/2021</strong>, de 28 de septiembre â€” OrganizaciÃ³n de enseÃ±anzas universitarias y procedimiento de aseguramiento de su calidad</li>
+        <li>Normativas de evaluaciÃ³n de cada universidad (Consejo de Gobierno / Claustro)</li>
+      </ul>
+    </section>
+  </main>
+</Layout>

@@ -1,0 +1,215 @@
+---
+import Layout from '../../../layouts/Layout.astro';
+import { getUniversityByKey } from '../../../data/universities-global';
+
+const univ = getUniversityByKey('es-uam')!;
+const pageTitle = `${univ.name} Calculadora | ${univ.system} Escala`;
+const description = `${univ.name} (UAM) calculadora de promedio ponderado. Escala 0-10 (RD 1125/2003). Matrícula de Honor, Sobresaliente, Notable, Aprobado, Suspenso. Créditos ECTS.`;
+const canonical = `https://globalcgpa.in/es/${univ.slug}`;
+const ogImage = '/og-image-es.png';
+const lang = 'es';
+const alternates = [
+  { hreflang: 'en', href: 'https://globalcgpa.in/university/uam' },
+  { hreflang: 'es', href: `https://globalcgpa.in/es/${univ.slug}` },
+];
+---
+
+<Layout title={pageTitle} description={description} canonical={canonical} ogImage={ogImage} lang={lang} alternates={alternates}>
+  <main class="max-w-[780px] mx-auto px-6 py-14" style="flex:1;">
+    <nav class="crumbs mb-6" aria-label="Breadcrumb">
+      <a href="/es/">Calculadora</a>
+      <span class="sep">/</span>
+      <a href="/es/universities">Universidades</a>
+      <span class="sep">/</span>
+      <span class="current">{univ.name}</span>
+    </nav>
+
+    <div class="text-xs font-bold uppercase tracking-wider text-emerald-500 mb-2">{univ.name} ({univ.nameEn})</div>
+    <h1 class="text-3xl sm:text-4xl font-extrabold tracking-tight mb-3">{univ.name} Calculadora</h1>
+    <p class="text-slate-500 dark:text-zinc-400 text-base mb-8">
+      {univ.name} escala oficial 0-10 (RD 1125/2003). Introduce calificación (0-10) y créditos ECTS por asignatura para calcular el promedio ponderado oficial.
+    </p>
+
+    <div class="calc-shell space-y-6" id="univ-gpa-calculator">
+      <div class="flex items-center gap-3">
+        <span class="px-3 py-1 bg-emerald-100 dark:bg-emerald-900/30 text-emerald-700 dark:text-emerald-300 text-xs font-bold rounded-full">
+          Escala {univ.system}
+        </span>
+        <span class="text-sm text-slate-500 dark:text-zinc-400">Cualitativas: Suspenso, Aprobado, Notable, Sobresaliente, Matrícula Honor</span>
+      </div>
+
+      <div class="grid gap-4 sm:grid-cols-2">
+        <div>
+          <label class="calc-label" for="course-count">Número de Asignaturas</label>
+          <input type="number" id="course-count" class="calc-input" min="1" max="30" value="6" aria-label="Número de asignaturas" />
+        </div>
+        <div>
+          <label class="calc-label" for="semester">Curso (Opcional)</label>
+          <select id="semester" class="calc-select" aria-label="Curso académico">
+            <option value="">Todos los cursos (Promedio Final)</option>
+            <option value="1">1º Curso</option>
+            <option value="2">2º Curso</option>
+            <option value="3">3º Curso</option>
+            <option value="4">4º Curso</option>
+          </select>
+        </div>
+      </div>
+
+      <div id="courses" class="space-y-3" role="list" aria-label="Lista de asignaturas"></div>
+
+      <button type="button" class="w-full sm:w-auto px-6 py-3 bg-emerald-500 hover:bg-emerald-600 text-slate-900 font-bold text-sm rounded-xl transition-colors" id="calculate-btn">
+        Calcular Promedio
+      </button>
+
+      <div class="calc-output" aria-live="polite" aria-label="Resultado cálculo">
+        <div class="calc-out-val" id="result">0.00</div>
+        <div class="calc-out-lbl">Promedio Ponderado (0-10)</div>
+        <div class="calc-out-lbl" style="margin-top:8px; font-size:0.68rem;" id="detail">Total ECTS: 0 | Suma Ponderada: 0.00</div>
+      </div>
+
+      <div class="formula-block">
+        <div class="f-label">Fórmula Oficial</div>
+        <div class="f-text">Promedio = Σ(ECTS × Calificación) ÷ ΣECTS (1 decimal)</div>
+        <div class="f-example" id="formula-example">Ej: 6 ECTS × 9.0 + 6 ECTS × 7.0 = 96 ÷ 12 = 8.0</div>
+      </div>
+    </div>
+
+    <section class="mt-12" aria-labelledby="regulation-heading">
+      <h2 id="regulation-heading" class="text-2xl font-extrabold tracking-tight mb-6">Normativa UAM</h2>
+      <div class="prose">
+        <h3>Escala de Calificaciones ({univ.system})</h3>
+        <div class="table-scroll">
+          <table>
+            <thead>
+              <tr>
+                <th>Cualitativa</th>
+                <th class="text-center">Numérica</th>
+                <th class="text-center">Rango %</th>
+              </tr>
+            </thead>
+            <tbody>
+              {Object.entries(univ.gradeMapping).map(([grade, point]) => (
+                <tr>
+                  <td><strong>{grade}</strong></td>
+                  <td class="text-center font-mono">{point.toFixed(1)}</td>
+                  <td class="text-center">
+                    {univ.percentageMapping && univ.percentageMapping[grade]
+                      ? `${univ.percentageMapping[grade][0]}–${univ.percentageMapping[grade][1]}%`
+                      : '—'}
+                  </td>
+                </tr>
+              ))}
+            </tbody>
+          </table>
+        </div>
+
+        <h3 class="mt-6">Reglas Académicas Clave</h3>
+        <ul>
+          <li><strong>Promedio Ponderado:</strong> Σ(ECTS × Nota) ÷ ΣECTS (redondeo a 1 decimal)</li>
+          <li><strong>Aprobado:</strong> Nota ≥ 5.0</li>
+          <li><strong>Matrícula de Honor:</strong> Nota ≥ 9.0, máximo 5% del alumnado</li>
+          <li><strong>RD 1125/2003:</strong> Sistema oficial de Estado - aplicable a todas las universidades españolas</li>
+          <li><strong>ECTS Grades:</strong> A (top 10%), B (25%), C (30%), D (25%), E (10%) en Suplemento Europeo</li>
+          <li><strong>Convalidación:</strong> Reconocimiento de créditos entre universidades españolas y extranjeras</li>
+        </ul>
+
+        <h3 class="mt-6">Fuente Oficial</h3>
+        <p><strong>{univ.source}</strong></p>
+        <p><a href={univ.sourceUrl} target="_blank" rel="noopener" class="underline hover:text-emerald-500">{univ.sourceUrl}</a></p>
+        {univ.note && <p class="text-sm text-slate-500 dark:text-zinc-400"><strong>Nota:</strong> {univ.note}</p>}
+      </div>
+    </section>
+
+    <section class="mt-12" aria-labelledby="related-heading">
+      <h2 id="related-heading" class="text-2xl font-extrabold tracking-tight mb-6">Otras Universidades</h2>
+      <div class="grid gap-3 sm:grid-cols-2 lg:grid-cols-3">
+        <a href="/es/universidad-complutense-madrid-calculadora" class="calc-shell p-4 hover:border-emerald-500 transition-all text-center">UCM — 10.0</a>
+        <a href="/es/universitat-de-barcelona-calculadora" class="calc-shell p-4 hover:border-emerald-500 transition-all text-center">UB — 10.0</a>
+        <a href="/es/universitat-de-valencia-calculadora" class="calc-shell p-4 hover:border-emerald-500 transition-all text-center">UV — 10.0</a>
+        <a href="/es/universidad-de-sevilla-calculadora" class="calc-shell p-4 hover:border-emerald-500 transition-all text-center">US — 10.0</a>
+        <a href="/es/universitat-politonica-de-valencia-calculadora" class="calc-shell p-4 hover:border-emerald-500 transition-all text-center">UPV — 10.0</a>
+      </div>
+    </section>
+  </main>
+</Layout>
+
+<script is:inline>
+  const GRADES = ['10', '9.5', '9', '8.5', '8', '7.5', '7', '6.5', '6', '5.5', '5', '4.5', '4', '3.5', '3', '2.5', '2', '1.5', '1', '0.5', '0'];
+  const POINTS = {};
+  GRADES.forEach(g => { POINTS[g] = parseFloat(g); });
+
+  function createCourseRow(index) {
+    const row = document.createElement('div');
+    row.className = 'grid gap-3 sm:grid-cols-[1fr_80px_100px] items-end';
+    row.setAttribute('role', 'listitem');
+    row.innerHTML = `
+      <div>
+        <label class="calc-label" for="grade-${index}">Asignatura ${index + 1} Calificación</label>
+        <select id="grade-${index}" class="calc-select grade-select" aria-label="Asignatura ${index + 1} calificación">
+          ${GRADES.map(g => `<option value="${g}">${g}</option>`).join('')}
+        </select>
+      </div>
+      <div>
+        <label class="calc-label" for="credit-${index}">ECTS</label>
+        <input type="number" id="credit-${index}" class="calc-input credit-input" value="6" min="1" max="30" step="1" aria-label="Asignatura ${index + 1} ECTS" />
+      </div>
+      <div>
+        <label class="calc-label" for="course-name-${index}">Nombre (Opcional)</label>
+        <input type="text" id="course-name-${index}" class="calc-input" placeholder="Ej: Cálculo" aria-label="Asignatura ${index + 1} nombre" />
+      </div>
+    `;
+    return row;
+  }
+
+  function renderCourses(count) {
+    const container = document.getElementById('courses');
+    container.innerHTML = '';
+    for (let i = 0; i < count; i++) {
+      container.appendChild(createCourseRow(i));
+    }
+  }
+
+  function calculateGPA() {
+    const gradeSelects = document.querySelectorAll('#courses .grade-select');
+    const creditInputs = document.querySelectorAll('#courses .credit-input');
+
+    let totalCredits = 0;
+    let totalPoints = 0;
+
+    gradeSelects.forEach((select, i) => {
+      const grade = select.value;
+      const credit = parseFloat(creditInputs[i].value) || 0;
+      const point = POINTS[grade] || 0;
+
+      totalCredits += credit;
+      totalPoints += credit * point;
+    });
+
+    const gpa = totalCredits > 0 ? totalPoints / totalCredits : 0;
+    document.getElementById('result').textContent = gpa.toFixed(2);
+    document.getElementById('detail').textContent = `Total ECTS: ${totalCredits} | Suma Ponderada: ${totalPoints.toFixed(2)}`;
+  }
+
+  const countInput = document.getElementById('course-count');
+  const calculateBtn = document.getElementById('calculate-btn');
+  let currentCount = parseInt(countInput.value) || 6;
+
+  renderCourses(currentCount);
+  calculateGPA();
+
+  countInput.addEventListener('input', () => {
+    let newCount = parseInt(countInput.value) || 1;
+    newCount = Math.max(1, Math.min(30, newCount));
+    currentCount = newCount;
+    renderCourses(newCount);
+    calculateGPA();
+  });
+
+  calculateBtn.addEventListener('click', calculateGPA);
+
+  document.getElementById('courses').addEventListener('change', e => {
+    if (e.target.matches('.grade-select, .credit-input')) {
+      calculateGPA();
+    }
+  });
+</script>

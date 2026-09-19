@@ -1,0 +1,156 @@
+---
+import Layout from '../../../layouts/Layout.astro';
+import { getUniversitiesByCountry } from '../../../data/universities-global';
+
+const universities = getUniversitiesByCountry('ES');
+
+const pageTitle = 'Comparativa Calificaciones | Universidades España 0-10';
+const description = 'Comparativa sistemas de calificación 6 universidades españolas: UCM, UB, UV, US, UPV, UAM. Escala 0-10, Matrícula de Honor, Sobresaliente, Notable, Aprobado, Suspenso según RD 1125/2003.';
+const canonical = 'https://globalcgpa.in/es/universities';
+const ogImage = '/og-image-es.png';
+const lang = 'es';
+const alternates = [
+  { hreflang: 'en', href: 'https://globalcgpa.in/universities' },
+  { hreflang: 'es', href: 'https://globalcgpa.in/es/universities' },
+];
+---
+
+<Layout title={pageTitle} description={description} canonical={canonical} ogImage={ogImage} lang={lang} alternates={alternates}>
+  <main class="max-w-[1160px] mx-auto px-6 py-14" style="flex:1;">
+    <div class="text-xs font-bold uppercase tracking-wider text-emerald-500 mb-2">Comparativa Calificaciones España</div>
+    <h1 class="text-3xl sm:text-4xl font-extrabold tracking-tight mb-3">Sistemas de Calificación 0-10</h1>
+    <p class="text-slate-500 dark:text-zinc-400 text-base mb-10">
+      Todas las universidades españolas siguen el RD 1125/2003 (escala 0-10, un decimal).
+      Compara UCM, UB, UV, US, UPV, UAM: cualitativas, Matrícula de Honor, ECTS grades.
+    </p>
+
+    <section class="mb-16" aria-labelledby="comparison-heading">
+      <h2 id="comparison-heading" class="text-2xl font-extrabold tracking-tight mb-6">Cualitativas y Numéricas</h2>
+      <div class="table-scroll">
+        <table>
+          <thead>
+            <tr>
+              <th>Cualitativa</th>
+              {universities.map(u => (
+                <th scope="col" class="text-center">{u.name}<br><span class="text-xs font-normal text-slate-400 dark:text-zinc-500">{u.system}</span></th>
+              ))}
+            </tr>
+          </thead>
+          <tbody>
+            {(() => {
+              const allGrades = new Set<string>();
+              universities.forEach(u => Object.keys(u.gradeMapping).forEach(g => allGrades.add(g)));
+              const gradeOrder = ['Matrícula de Honor', 'Matrícula d\'Honor', 'Sobresaliente', 'Excel·lent', 'Notable', 'Aprobado', 'Aprovat', 'Suspenso', 'Suspens'];
+              return gradeOrder.filter(g => allGrades.has(g));
+            })().map(grade => (
+              <tr>
+                <td><strong>{grade}</strong></td>
+                {universities.map(u => (
+                  <td class="text-center font-mono text-lg">
+                    {u.gradeMapping[grade] !== undefined ? u.gradeMapping[grade].toFixed(1) : '—'}
+                  </td>
+                ))}
+              </tr>
+            ))}
+          </tbody>
+        </table>
+      </div>
+      <p class="text-xs text-slate-500 dark:text-zinc-400 mt-3 text-center">
+        ※ Matrícula de Honor: ≥ 9.0, máximo 5% del alumnado (RD 1125/2003 Art. 5). Nota mínima aprobado: 5.0.
+      </p>
+    </section>
+
+    <section class="mb-16" aria-labelledby="percentage-heading">
+      <h2 id="percentage-heading" class="text-2xl font-extrabold tracking-tight mb-6">Rangos Porcentuales de Referencia</h2>
+      <div class="table-scroll">
+        <table>
+          <thead>
+            <tr>
+              <th>Cualitativa</th>
+              {universities.map(u => (
+                <th scope="col" class="text-center">{u.name}<br><span class="text-xs font-normal text-slate-400 dark:text-zinc-500">{u.system}</span></th>
+              ))}
+            </tr>
+          </thead>
+          <tbody>
+            {(() => {
+              const allGrades = new Set<string>();
+              universities.forEach(u => Object.keys(u.percentageMapping || {}).forEach(g => allGrades.add(g)));
+              const gradeOrder = ['Matrícula de Honor', 'Matrícula d\'Honor', 'Sobresaliente', 'Excel·lent', 'Notable', 'Aprobado', 'Aprovat', 'Suspenso', 'Suspens'];
+              return gradeOrder.filter(g => allGrades.has(g));
+            })().map(grade => (
+              <tr>
+                <td><strong>{grade}</strong></td>
+                {universities.map(u => (
+                  <td class="text-center">
+                    {u.percentageMapping && u.percentageMapping[grade]
+                      ? `${u.percentageMapping[grade][0]}–${u.percentageMapping[grade][1]}%`
+                      : '—'}
+                  </td>
+                ))}
+              </tr>
+            ))}
+          </tbody>
+        </table>
+      </div>
+      <p class="text-xs text-slate-500 dark:text-zinc-400 mt-3 text-center">
+        ※ Rangos orientativos. Cada universidad define correspondencia exacta en su normativa de evaluación.
+      </p>
+    </section>
+
+    <section class="mb-16" aria-labelledby="univ-detail-heading">
+      <h2 id="univ-detail-heading" class="text-2xl font-extrabold tracking-tight mb-6">Detalle por Universidad</h2>
+      <div class="grid gap-6">
+        {universities.map(u => (
+          <article class="calc-shell p-6">
+            <div class="flex flex-wrap items-baseline gap-3 mb-4">
+              <h3 class="text-xl font-extrabold text-slate-900 dark:text-white">{u.name}</h3>
+              <span class="px-3 py-1 bg-emerald-100 dark:bg-emerald-900/30 text-emerald-700 dark:text-emerald-300 text-xs font-bold rounded-full">
+                {u.system}
+              </span>
+              <span class="text-sm text-slate-500 dark:text-zinc-400">{u.nameEn}</span>
+            </div>
+
+            <div class="prose mb-4">
+              <p>{u.formulaText}</p>
+              <p><strong>Fuente:</strong> <a href={u.sourceUrl} target="_blank" rel="noopener">{u.source}</a></p>
+              {u.note && <p><strong>Nota:</strong> {u.note}</p>}
+            </div>
+
+            <div class="flex flex-wrap gap-3">
+              <a href={`/es/${u.slug}`} class="calc-tab active">Abrir Calculadora</a>
+              <a href={u.sourceUrl} target="_blank" rel="noopener" class="calc-tab">Ver Normativa</a>
+            </div>
+          </article>
+        ))}
+      </div>
+    </section>
+
+    <section aria-labelledby="ects-heading">
+      <h2 id="ects-heading" class="text-2xl font-extrabold tracking-tight mb-6">ECTS Grades (Suplemento Europeo al Título)</h2>
+      <div class="calc-shell p-6">
+        <div class="table-scroll">
+          <table>
+            <thead>
+              <tr>
+                <th>ECTS Grade</th>
+                <th class="text-center">Percentil</th>
+                <th>Descripción</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr><td class="font-mono font-bold">A</td><td class="text-center">Top 10%</td><td>Excelente</td></tr>
+              <tr><td class="font-mono font-bold">B</td><td class="text-center">Siguiente 25%</td><td>Muy Bueno</td></tr>
+              <tr><td class="font-mono font-bold">C</td><td class="text-center">Siguiente 30%</td><td>Bueno</td></tr>
+              <tr><td class="font-mono font-bold">D</td><td class="text-center">Siguiente 25%</td><td>Satisfactorio</td></tr>
+              <tr><td class="font-mono font-bold">E</td><td class="text-center">Último 10%</td><td>Suficiente</td></tr>
+            </tbody>
+          </table>
+        </div>
+        <p class="text-xs text-slate-500 dark:text-zinc-400 mt-3 text-center">
+          Base: cohortes de 2-3 años académicos. Obligatorio en Suplemento Europeo al Título (SET).
+        </p>
+      </div>
+    </section>
+  </main>
+</Layout>

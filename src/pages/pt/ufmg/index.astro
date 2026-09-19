@@ -1,0 +1,260 @@
+---
+import Layout from '../../../layouts/Layout.astro';
+import { getUniversityByKey } from '../../../data/universities-global';
+
+const univ = getUniversityByKey('br-ufmg')!;
+const pageTitle = `${univ.name} Média | ${univ.system} Escala`;
+const description = `${univ.name} (UFMG) calculadora de média ponderada. Escala 0–10, conceitos A–F, aprovação mínima 5.0. Regulamento: ${univ.source}`;
+const canonical = `https://globalcgpa.in/pt/${univ.slug}`;
+const ogImage = '/og-image-pt.png';
+const lang = 'pt';
+const alternates = [
+  { hreflang: 'en', href: 'https://globalcgpa.in/university/ufmg' },
+  { hreflang: 'pt', href: `https://globalcgpa.in/pt/${univ.slug}` },
+];
+---
+
+<Layout title={pageTitle} description={description} canonical={canonical} ogImage={ogImage} lang={lang} alternates={alternates}>
+  <main class="max-w-[780px] mx-auto px-6 py-14" style="flex:1;">
+    <nav class="crumbs mb-6" aria-label="Breadcrumb">
+      <a href="/pt/">Calculadora de Média</a>
+      <span class="sep">/</span>
+      <a href="/pt/universidades-comparacao">Universidades</a>
+      <span class="sep">/</span>
+      <span class="current">{univ.name}</span>
+    </nav>
+
+    <div class="text-xs font-bold uppercase tracking-wider text-emerald-500 mb-2">{univ.name} ({univ.nameEn})</div>
+    <h1 class="text-3xl sm:text-4xl font-extrabold tracking-tight mb-3">{univ.name} Calculadora de Média</h1>
+    <p class="text-slate-500 dark:text-zinc-400 text-base mb-8">
+      Calculadora oficial da {univ.name} com a escala 0–10 e conceitos A–F.
+      Média ponderada por créditos. Aprovação mínima: 5.0.
+    </p>
+
+    <div class="calc-shell space-y-6" id="univ-media-calculator">
+      <div class="flex items-center gap-3">
+        <span class="px-3 py-1 bg-emerald-100 dark:bg-emerald-900/30 text-emerald-700 dark:text-emerald-300 text-xs font-bold rounded-full">
+          {univ.system}
+        </span>
+        <span class="text-sm text-slate-500 dark:text-zinc-400">Conceitos: A, B, C, D, F | Aprovação: 5.0</span>
+      </div>
+
+      <div class="grid gap-4 sm:grid-cols-2">
+        <div>
+          <label class="calc-label" for="course-count">Número de disciplinas</label>
+          <input type="number" id="course-count" class="calc-input" min="1" max="30" value="6" aria-label="Número de disciplinas" />
+        </div>
+        <div>
+          <label class="calc-label" for="semester">Período (opcional)</label>
+          <select id="semester" class="calc-select" aria-label="Período">
+            <option value="">Todos os períodos</option>
+            <option value="1">1º Semestre</option>
+            <option value="2">2º Semestre</option>
+            <option value="summer">Período Especial</option>
+          </select>
+        </div>
+      </div>
+
+      <div id="courses" class="space-y-3" role="list" aria-label="Lista de disciplinas"></div>
+
+      <button type="button" class="w-full sm:w-auto px-6 py-3 bg-emerald-500 hover:bg-emerald-600 text-slate-900 font-bold text-sm rounded-xl transition-colors" id="calculate-btn">
+        Calcular Média
+      </button>
+
+      <div class="calc-output" aria-live="polite" aria-label="Resultado da média">
+        <div class="calc-out-val" id="result">0.00</div>
+        <div class="calc-out-lbl">Média Ponderada (CR)</div>
+        <div class="calc-out-lbl" style="margin-top:8px; font-size:0.68rem;" id="detail">Total créditos: 0 | Soma ponderada: 0.00</div>
+        <div class="calc-out-lbl" style="margin-top:8px; font-size:0.68rem;" id="status"></div>
+      </div>
+
+      <div class="formula-block">
+        <div class="f-label">Fórmula UFMG</div>
+        <div class="f-text">Média = Σ(Créditos × Nota) ÷ ΣCréditos</div>
+        <div class="f-example" id="formula-example">Ex: 4 créditos × 8.5 + 2 créditos × 7.0 = (34+14)÷6 = 8.00</div>
+      </div>
+    </div>
+
+    <section class="mt-12" aria-labelledby="regulation-heading">
+      <h2 id="regulation-heading" class="text-2xl font-extrabold tracking-tight mb-6">Regulamento Oficial UFMG</h2>
+      <div class="prose">
+        <h3>Sistema de Conceitos e Notas</h3>
+        <div class="table-scroll">
+          <table>
+            <thead>
+              <tr>
+                <th>Conceito</th>
+                <th class="text-center">Nota</th>
+                <th class="text-center">Percentual</th>
+                <th class="text-center">Situação</th>
+              </tr>
+            </thead>
+            <tbody>
+              {Object.entries(univ.gradeMapping).map(([grade, point]) => (
+                <tr>
+                  <td><strong>{grade}</strong></td>
+                  <td class="text-center font-mono">{point.toFixed(1)}</td>
+                  <td class="text-center">
+                    {univ.percentageMapping && univ.percentageMapping[grade]
+                      ? `${univ.percentageMapping[grade][0]}~${univ.percentageMapping[grade][1]}%`
+                      : '—'}
+                  </td>
+                  <td class="text-center">
+                    {grade === 'F' ? '<span class="text-red-600">Reprovado</span>' :
+                     grade === 'D' ? '<span class="text-orange-600">Aprovado (baixo)</span>' :
+                     grade === 'C' ? '<span class="text-yellow-600">Regular</span>' :
+                     grade === 'B' ? '<span class="text-blue-600">Bom</span>' :
+                     '<span class="text-green-600">Excelente</span>'}
+                  </td>
+                </tr>
+              ))}
+            </tbody>
+          </table>
+        </div>
+
+        <h3 class="mt-6">Principais Regras Acadêmicas (Regimento Geral Art. 102)</h3>
+        <ul>
+          <li><strong>Média ponderada:</strong> Σ(Créditos × Nota) ÷ ΣCréditos</li>
+          <li><strong>Aprovação mínima:</strong> Conceito D (nota 4.0) ou média 5.0</li>
+          <li><strong>Reprovação por frequência:</strong> < 75% de frequência = conceito F automático</li>
+          <li><strong>Coeficiente de Rendimento (CR):</strong> Média acumulada de todas as disciplinas</li>
+          <li><strong>Formatura:</strong> CR ≥ 5.0, integralização curricular, sem dependências</li>
+          <li><strong>Menção honrosa:</strong> CR ≥ 8.5, sem reprovações, tempo regulamentar</li>
+        </ul>
+
+        <h3 class="mt-6">Fonte</h3>
+        <p><strong>{univ.source}</strong></p>
+        <p><a href={univ.sourceUrl} target="_blank" rel="noopener" class="underline hover:text-emerald-500">{univ.sourceUrl}</a></p>
+        {univ.note && <p class="text-sm text-slate-500 dark:text-zinc-400"><strong>Nota:</strong> {univ.note}</p>}
+      </div>
+    </section>
+
+    <section class="mt-12" aria-labelledby="related-heading">
+      <h2 id="related-heading" class="text-2xl font-extrabold tracking-tight mb-6">Outras Universidades</h2>
+      <div class="grid gap-3 sm:grid-cols-2 lg:grid-cols-3">
+        <a href="/pt/usp" class="calc-shell p-4 hover:border-emerald-500 transition-all text-center">USP — 0–10 (aprov. 5.0)</a>
+        <a href="/pt/unicamp" class="calc-shell p-4 hover:border-emerald-500 transition-all text-center">UNICAMP — 0–10 (aprov. 5.0)</a>
+        <a href="/pt/ufrj" class="calc-shell p-4 hover:border-emerald-500 transition-all text-center">UFRJ — 0–10 (aprov. 6.0)</a>
+        <a href="/pt/ufba" class="calc-shell p-4 hover:border-emerald-500 transition-all text-center">UFBA — 0–10 (aprov. 5.0)</a>
+        <a href="/pt/universidades-comparacao" class="calc-shell p-4 hover:border-emerald-500 transition-all text-center">Comparação completa</a>
+      </div>
+    </section>
+  </main>
+</Layout>
+
+<script is:inline>
+  const CONCEITOS = ['A', 'B', 'C', 'D', 'F'];
+  const NOTAS = { 'A': 9.0, 'B': 7.5, 'C': 6.0, 'D': 4.0, 'F': 0.0 };
+  const PERCS = { 'A': [90, 100], 'B': [70, 89], 'C': [60, 69], 'D': [50, 59], 'F': [0, 49] };
+
+  function createCourseRow(index) {
+    const row = document.createElement('div');
+    row.className = 'grid gap-3 sm:grid-cols-[1fr_80px_100px] items-end';
+    row.setAttribute('role', 'listitem');
+    row.innerHTML = `
+      <div>
+        <label class="calc-label" for="grade-${index}">Disciplina ${index + 1} Conceito</label>
+        <select id="grade-${index}" class="calc-select grade-select" aria-label="Disciplina ${index + 1} conceito">
+          ${CONCEITOS.map(c => `<option value="${c}">${c} (${NOTAS[c]}) ↔ ${PERCS[c][0]}~${PERCS[c][1]}%</option>`).join('')}
+          <option value="custom">Nota numérica (0–10)</option>
+        </select>
+      </div>
+      <div>
+        <label class="calc-label" for="credit-${index}">Créditos</label>
+        <input type="number" id="credit-${index}" class="calc-input credit-input" value="4" min="1" max="8" step="1" aria-label="Disciplina ${index + 1} créditos" />
+      </div>
+      <div>
+        <label class="calc-label" for="course-name-${index}">Nome (opcional)</label>
+        <input type="text" id="course-name-${index}" class="calc-input" placeholder="Ex: Cálculo I" aria-label="Disciplina ${index + 1} nome" />
+      </div>
+    `;
+    return row;
+  }
+
+  function renderCourses(count) {
+    const container = document.getElementById('courses');
+    container.innerHTML = '';
+    for (let i = 0; i < count; i++) {
+      container.appendChild(createCourseRow(i));
+    }
+  }
+
+  function calculateMedia() {
+    const gradeSelects = document.querySelectorAll('#courses .grade-select');
+    const creditInputs = document.querySelectorAll('#courses .credit-input');
+
+    let totalCredits = 0;
+    let totalPoints = 0;
+
+    gradeSelects.forEach((select, i) => {
+      const value = select.value;
+      const credit = parseFloat(creditInputs[i].value) || 0;
+      let point = 0;
+
+      if (value === 'custom') {
+        const customInput = select.parentElement.querySelector('.custom-note-input');
+        point = customInput ? parseFloat(customInput.value) || 0 : 0;
+      } else {
+        point = NOTAS[value] || 0;
+      }
+
+      totalCredits += credit;
+      totalPoints += credit * point;
+    });
+
+    const media = totalCredits > 0 ? totalPoints / totalCredits : 0;
+    document.getElementById('result').textContent = media.toFixed(2);
+    document.getElementById('detail').textContent = `Total créditos: ${totalCredits} | Soma ponderada: ${totalPoints.toFixed(2)}`;
+
+    const statusEl = document.getElementById('status');
+    if (media >= 5.0) {
+      statusEl.textContent = '✓ Aprovado (média ≥ 5.0)';
+      statusEl.style.color = '#059669';
+    } else {
+      statusEl.textContent = '✗ Abaixo da aprovação (média < 5.0)';
+      statusEl.style.color = '#dc2626';
+    }
+  }
+
+  const countInput = document.getElementById('course-count');
+  const calculateBtn = document.getElementById('calculate-btn');
+  let currentCount = parseInt(countInput.value) || 6;
+
+  renderCourses(currentCount);
+  calculateMedia();
+
+  countInput.addEventListener('input', () => {
+    let newCount = parseInt(countInput.value) || 1;
+    newCount = Math.max(1, Math.min(30, newCount));
+    currentCount = newCount;
+    renderCourses(newCount);
+    calculateMedia();
+  });
+
+  calculateBtn.addEventListener('click', calculateMedia);
+
+  document.getElementById('courses').addEventListener('change', e => {
+    if (e.target.matches('.grade-select, .credit-input')) {
+      calculateMedia();
+    }
+    if (e.target.matches('.grade-select') && e.target.value === 'custom') {
+      const select = e.target;
+      if (!select.parentElement.querySelector('.custom-note-input')) {
+        const input = document.createElement('input');
+        input.type = 'number';
+        input.className = 'calc-input custom-note-input';
+        input.min = '0';
+        input.max = '10';
+        input.step = '0.1';
+        input.placeholder = '0.0–10.0';
+        input.style.marginTop = '4px';
+        select.parentElement.appendChild(input);
+        input.addEventListener('input', calculateMedia);
+      }
+    } else if (e.target.matches('.grade-select')) {
+      const parent = e.target.parentElement;
+      const customInput = parent.querySelector('.custom-note-input');
+      if (customInput) customInput.remove();
+    }
+  });
+</script>

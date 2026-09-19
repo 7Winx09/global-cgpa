@@ -1,0 +1,156 @@
+---
+import Layout from '../../../../layouts/Layout.astro';
+
+const pageTitle = '4.3 만점 vs 4.5 만점 차이 | 한국 대학 학점 체계 비교';
+const description = '한국 대학의 4.3 만점과 4.5 만점 체계 차이, 등급별 평점 비교, 성적증명서 발급 시 선택 기준, 환산 방법 총정리.';
+const canonical = 'https://globalcgpa.in/ko/guides/4-3-vs-4-5';
+const ogImage = '/og-image-ko.png';
+const lang = 'ko';
+const alternates = [
+  { hreflang: 'en', href: 'https://globalcgpa.in/guides/4-3-vs-4-5' },
+  { hreflang: 'ko', href: 'https://globalcgpa.in/ko/guides/4-3-vs-4-5' },
+];
+---
+
+<Layout title={pageTitle} description={description} canonical={canonical} ogImage={ogImage} lang={lang} alternates={alternates}>
+  <main class="max-w-[780px] mx-auto px-6 py-14" style="flex:1;">
+    <nav class="crumbs mb-6" aria-label="브레드크럼">
+      <a href="/ko/">학점계산기</a>
+      <span class="sep">/</span>
+      <a href="/ko/guides">가이드</a>
+      <span class="sep">/</span>
+      <span class="current">4.3 vs 4.5 만점 차이</span>
+    </nav>
+
+    <div class="text-xs font-bold uppercase tracking-wider text-emerald-500 mb-2">가이드</div>
+    <h1 class="text-3xl sm:text-4xl font-extrabold tracking-tight mb-3">4.3 만점 vs 4.5 만점 — 완벽 비교 가이드</h1>
+    <p class="text-slate-500 dark:text-zinc-400 text-base mb-10">
+      한국 대학은 크게 4.3 만점(서울대, 카이스트, 연세대, 이화여대 등)과 4.5 만점(고려대, 성균관대, 건국대 등) 두 체계로 나뉩니다.
+      이 가이드에서는 두 체계의 차이점, 등급별 평점 비교, 성적증명서 발급 시 유의사항을 정리했습니다.
+    </p>
+
+    <section class="prose mb-12">
+      <h2>핵심 차이 한눈에 보기</h2>
+      <div class="table-scroll">
+        <table>
+          <thead>
+            <tr>
+              <th>구분</th>
+              <th class="text-center">4.3 만점</th>
+              <th class="text-center">4.5 만점</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr><td><strong>최고 평점</strong></td><td class="text-center">A+ = 4.30</td><td class="text-center">A+ = 4.50</td></tr>
+            <tr><td><strong>A0 평점</strong></td><td class="text-center">4.00</td><td class="text-center">4.00 (A)</td></tr>
+            <tr><td><strong>세부 등급</strong></td><td class="text-center">A+, A0, A-, B+… (13단계)</td><td class="text-center">A+, A, B+, B… (9단계)</td></tr>
+            <tr><td><strong>주요 대학</strong></td><td class="text-center">서울대, 카이스트, 연세대, 이화여대</td><td class="text-center">고려대, 성균관대, 건국대</td></tr>
+            <tr><td><strong>학사경고 기준</strong></td><td class="text-center">~2.0/4.3 (약 46.5%)</td><td class="text-center">~2.0/4.5 (약 44.4%)</td></tr>
+            <tr><td><strong>졸업 우등</strong></td><td class="text-center">3.75~4.0+ (Magna/Summa)</td><td class="text-center">3.75~4.0+ (동일 비율)</td></tr>
+          </tbody>
+        </table>
+      </div>
+    </section>
+
+    <section class="prose mb-12">
+      <h2>등급별 평점 상세 비교표</h2>
+      <div class="table-scroll">
+        <table>
+          <thead>
+            <tr>
+              <th>등급</th>
+              <th class="text-center">4.3 만점</th>
+              <th class="text-center">4.5 만점</th>
+              <th class="text-center">차이</th>
+              <th class="text-center">백분율(%)</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr><td><strong>A+</strong></td><td class="text-center font-mono">4.30</td><td class="text-center font-mono">4.50</td><td class="text-center">+0.20</td><td class="text-center">95~100</td></tr>
+            <tr><td><strong>A0 / A</strong></td><td class="text-center font-mono">4.00</td><td class="text-center font-mono">4.00</td><td class="text-center">0.00</td><td class="text-center">90~94</td></tr>
+            <tr><td><strong>A-</strong></td><td class="text-center font-mono">3.70</td><td class="text-center">—</td><td class="text-center">—</td><td class="text-center">85~89</td></tr>
+            <tr><td><strong>B+</strong></td><td class="text-center font-mono">3.30</td><td class="text-center font-mono">3.50</td><td class="text-center">+0.20</td><td class="text-center">80~84 / 85~89</td></tr>
+            <tr><td><strong>B0 / B</strong></td><td class="text-center font-mono">3.00</td><td class="text-center font-mono">3.00</td><td class="text-center">0.00</td><td class="text-center">75~79 / 80~84</td></tr>
+            <tr><td><strong>B-</strong></td><td class="text-center font-mono">2.70</td><td class="text-center">—</td><td class="text-center">—</td><td class="text-center">70~74</td></tr>
+            <tr><td><strong>C+</strong></td><td class="text-center font-mono">2.30</td><td class="text-center font-mono">2.50</td><td class="text-center">+0.20</td><td class="text-center">65~69 / 75~79</td></tr>
+            <tr><td><strong>C0 / C</strong></td><td class="text-center font-mono">2.00</td><td class="text-center font-mono">2.00</td><td class="text-center">0.00</td><td class="text-center">60~64 / 70~74</td></tr>
+            <tr><td><strong>C-</strong></td><td class="text-center font-mono">1.70</td><td class="text-center">—</td><td class="text-center">—</td><td class="text-center">55~59</td></tr>
+            <tr><td><strong>D+</strong></td><td class="text-center font-mono">1.30</td><td class="text-center font-mono">1.50</td><td class="text-center">+0.20</td><td class="text-center">50~54 / 65~69</td></tr>
+            <tr><td><strong>D0 / D</strong></td><td class="text-center font-mono">1.00</td><td class="text-center font-mono">1.00</td><td class="text-center">0.00</td><td class="text-center">45~49 / 60~64</td></tr>
+            <tr><td><strong>D-</strong></td><td class="text-center font-mono">0.70</td><td class="text-center">—</td><td class="text-center">—</td><td class="text-center">40~44</td></tr>
+            <tr><td><strong>F</strong></td><td class="text-center font-mono">0.00</td><td class="text-center font-mono">0.00</td><td class="text-center">0.00</td><td class="text-center">0~39 / 0~59</td></tr>
+          </tbody>
+        </table>
+      </div>
+      <p class="text-sm text-slate-500 dark:text-zinc-400 mt-3">
+        ※ 4.5 만점 체계는 A0/A-/B0/B- 등 세부 등급이 없습니다. 백분율 구간도 체계별로 다르게 설정됩니다.
+      </p>
+    </section>
+
+    <section class="prose mb-12">
+      <h2>왜 두 체계가 존재하는가?</h2>
+      <ul>
+        <li><strong>4.3 만점 (UGC 표준):</strong> 대학평가원(UGC) 권고안에 따른 표준 체계. A+, A0, A- 등 세부 등급으로 성적 변별력 확보.</li>
+        <li><strong>4.5 만점 (전통적):</strong> 과거 4.0 만점(A=4.0)에서 A+를 4.5로 확장한 체계. 등급 간격이 0.5로 넓어 성적 인플레이션 완화 효과.</li>
+        <li><strong>현실:</strong> 두 체계 모두 현재 한국 대학에서 공존. 건국대는 두 체계 동시 운영 및 공식 환산표 제공.</li>
+      </ul>
+    </section>
+
+    <section class="prose mb-12">
+      <h2>성적증명서 발급 시 선택 기준</h2>
+      <div class="bg-slate-50 dark:bg-zinc-900 border border-slate-200 dark:border-zinc-800 rounded-xl p-6">
+        <h3 class="font-bold mb-3">발급 전 확인사항</h3>
+        <ol>
+          <li><strong>제출처 요구사항 확인:</strong> 해외 대학원/취업 시 요구하는 만점 기준(4.0, 4.3, 4.5, 100점) 확인</li>
+          <li><strong>본교 체계 확인:</strong> 내 대학이 기본으로 사용하는 체계가 무엇인지 확인 (대부분 기본 체계로 발급)</li>
+          <li><strong>환산 여부:</strong> 건국대 등 일부 대학은 4.3/4.5 중 선택 발급 가능. 타 대학은 기본 체계만 발급하는 경우가 많음</li>
+        </ol>
+        <div class="formula-block mt-4">
+          <div class="f-label">환산 공식 (건국대 공식 환산표 기준)</div>
+          <div class="f-text">4.5 만점 → 4.3 만점: 비선형 환산 (위 환산표 참조)</div>
+          <div class="f-text">4.3 만점 → 4.5 만점: 역환산 동일 표 사용</div>
+          <div class="f-example">단순 비례 환산(×4.3/4.5 또는 ×4.5/4.3)은 정확하지 않음. 공식 환산표 사용 필수.</div>
+        </div>
+      </div>
+    </section>
+
+    <section class="prose mb-12">
+      <h2>자주 묻는 질문 (FAQ)</h2>
+      <details class="faq-row">
+        <summary>내 대학이 4.3 만점인데, 4.5 만점으로 환산해도 되나요?</summary>
+        <div class="faq-body">
+          <p>공식 성적증명서에는 본교 기본 체계(4.3)로만 기재됩니다. 제출처가 4.5 만점을 요구한다면, 제출처에 "본교는 4.3 만점 체계 사용"임을 명시하고 공식 환산표(건국대 표 등)를 첨부해 설명하는 것이 정석입니다. 임의 환산 수치를 성적증명서에 기재하는 것은 위조에 해당할 수 있습니다.</p>
+        </div>
+      </details>
+      <details class="faq-row">
+        <summary>4.3 만점 3.8과 4.5 만점 3.8 중 어느 쪽이 더 좋은 성적인가요?</summary>
+        <div class="faq-body">
+          <p>4.3 만점 3.8이 더 높습니다. 4.3 만점 3.8 ≈ 4.5 만점 3.98 (건국대 환산표 기준)에 해당합니다. 만점 기준이 다르면 같은 숫자라도 실제 성적 수준이 다릅니다.</p>
+        </div>
+      </details>
+      <details class="faq-row">
+        <summary>해외 대학원 지원 시 GPA를 어떻게 기재해야 하나요?</summary>
+        <div class="faq-body">
+          <p>원본 성적증명서의 만점 기준(예: 4.3/4.3)을 그대로 기재하고, 괄호 안에 환산치(예: 3.85/4.3 ≈ 3.98/4.5)를 표기하세요. WES 등 공인 평가기관에 의뢰하면 공식 환산 리포트를 발급받을 수 있습니다.</p>
+        </div>
+      </details>
+      <details class="faq-row">
+        <summary>건국대처럼 4.3/4.5 환산표를 제공하는 다른 대학도 있나요?</summary>
+        <div class="faq-body">
+          <p>대부분의 대학은 단일 체계만 운영하며 공식 환산표를 제공하지 않습니다. 건국대는 특이하게 두 체계를 공식 병행합니다. 타 대학 학생이 환산이 필요하면 건국대 표를 참고용으로 활용하거나, WES/한국학술진흥재단 등 공인 기관의 환산 기준을 따르는 것이 안전합니다.</p>
+        </div>
+      </details>
+    </section>
+
+    <section class="prose">
+      <h2>참고 자료</h2>
+      <ul>
+        <li><a href="https://oga.snu.ac.kr/credit-grade" target="_blank" rel="noopener" class="underline">서울대학교 OGA — Credit & Grade (4.3 만점 공식 페이지)</a></li>
+        <li><a href="https://www.kaist.ac.kr/en/html/edu/03100308.html" target="_blank" rel="noopener" class="underline">KAIST — Grades (4.3 만점 공식 페이지)</a></li>
+        <li><a href="https://registrar.korea.edu/eduinfo_en/info/grade_overview.do" target="_blank" rel="noopener" class="underline">고려대학교 — Grade Overview (4.5 만점 공식 페이지)</a></li>
+        <li><a href="https://old.konkuk.ac.kr/eng/jsp/Academics/academics_2_7_2.jsp" target="_blank" rel="noopener" class="underline">건국대학교 — Examinations / Grades (4.5/4.3 환산표 공식 제공)</a></li>
+        <li><a href="/ko/대학-학점계산기" class="underline">대학별 학점계산기 — 7개 대학 체계 한눈에 비교</a></li>
+      </ul>
+    </section>
+  </main>
+</Layout>

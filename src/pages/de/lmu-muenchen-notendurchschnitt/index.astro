@@ -1,0 +1,252 @@
+---
+import Layout from '../../../layouts/Layout.astro';
+import { getUniversityByKey } from '../../../data/universities-global';
+
+const univ = getUniversityByKey('de-lmu')!;
+const pageTitle = `${univ.name} Notendurchschnitt | ${univ.system} Skala`;
+const description = `${univ.name} (LMU München) Notendurchschnitt Rechner. Skala 1,0–4,0 (PSO Informatik 2022, BayHSchG). 1,0=sehr gut, 4,0=ausreichend. Modifizierte Bayerische Formel (BayHSchG). Modulnote 2 Dezimalstellen, Gesamtnote 1 Dezimalstelle. Jura: 18-Punkte-Skala.`;
+const canonical = `https://globalcgpa.in/de/${univ.slug}`;
+const ogImage = '/og-image-de.png';
+const lang = 'de';
+const alternates = [
+  { hreflang: 'en', href: 'https://globalcgpa.in/university/lmu' },
+  { hreflang: 'de', href: `https://globalcgpa.in/de/${univ.slug}` },
+];
+---
+
+<Layout title={pageTitle} description={description} canonical={canonical} ogImage={ogImage} lang={lang} alternates={alternates}>
+  <main class="max-w-[780px] mx-auto px-6 py-14" style="flex:1;">
+    <nav class="crumbs mb-6" aria-label="Breadcrumb">
+      <a href="/de/">Notenrechner</a>
+      <span class="sep">/</span>
+      <a href="/de/universities">Universitäten</a>
+      <span class="sep">/</span>
+      <span class="current">{univ.name}</span>
+    </nav>
+
+    <div class="text-xs font-bold uppercase tracking-wider text-emerald-500 mb-2">{univ.name} ({univ.nameEn})</div>
+    <h1 class="text-3xl sm:text-4xl font-extrabold tracking-tight mb-3">{univ.name} Notendurchschnitt</h1>
+    <p class="text-slate-500 dark:text-zinc-400 text-base mb-8">
+      {univ.name} offizielle Notenskala 1,0–4,0 (PSO Informatik 1569/2022, BayHSchG).
+      Noten in 0,3-Schritten. 0,7, 4,3, 4,7, 5,3 ausgeschlossen.
+      Modulnote: 2 Dezimalstellen (kein Runden). Gesamtnote: 1 Dezimalstelle (kein Runden).
+      Jura-Studium: 18-Punkte-Skala (18=beste, 0=schlechteste).
+    </p>
+
+    <div class="calc-shell space-y-6" id="univ-gpa-calculator">
+      <div class="flex items-center gap-3">
+        <span class="px-3 py-1 bg-emerald-100 dark:bg-emerald-900/30 text-emerald-700 dark:text-emerald-300 text-xs font-bold rounded-full">
+          {univ.system}
+        </span>
+        <span class="text-sm text-slate-500 dark:text-zinc-400">Noten: 1,0–1,5 sehr gut | 1,6–2,5 gut | 2,6–3,5 befriedigend | 3,6–4,0 ausreichend</span>
+      </div>
+
+      <div class="grid gap-4 sm:grid-cols-2">
+        <div>
+          <label class="calc-label" for="course-count">Anzahl Module</label>
+          <input type="number" id="course-count" class="calc-input" min="1" max="30" value="6" aria-label="Anzahl Module" />
+        </div>
+        <div>
+          <label class="calc-label" for="semester">Semester (Optional)</label>
+          <select id="semester" class="calc-select" aria-label="Semester">
+            <option value="">Alle Semester (Gesamtnote)</option>
+            <option value="1">1. Semester</option>
+            <option value="2">2. Semester</option>
+            <option value="3">3. Semester</option>
+            <option value="4">4. Semester</option>
+          </select>
+        </div>
+      </div>
+
+      <div id="courses" class="space-y-3" role="list" aria-label="Modulliste"></div>
+
+      <button type="button" class="w-full sm:w-auto px-6 py-3 bg-emerald-500 hover:bg-emerald-600 text-slate-900 font-bold text-sm rounded-xl transition-colors" id="calculate-btn">
+        Notendurchschnitt Berechnen
+      </button>
+
+      <div class="calc-output" aria-live="polite" aria-label="Ergebnis">
+        <div class="calc-out-val" id="result">1.00</div>
+        <div class="calc-out-lbl">Gesamtnote (1,0–4,0)</div>
+        <div class="calc-out-lbl" style="margin-top:8px; font-size:0.68rem;" id="detail">Gesamt ECTS: 0 | Gewichtete Summe: 0.00</div>
+      </div>
+
+      <div class="formula-block">
+        <div class="f-label">Berechnungsformel (PSO §10, BayHSchG)</div>
+        <div class="f-text">Gesamtnote = Σ(ECTS × Note) ÷ ΣECTS (1. Dezimalstelle, ohne Rundung)</div>
+        <div class="f-example" id="formula-example">Beispiel: 6 ECTS × 1,3 + 6 ECTS × 2,0 = 19,8 ÷ 12 = 1,6 (gut)</div>
+      </div>
+    </div>
+
+    <section class="mt-12" aria-labelledby="regulation-heading">
+      <h2 id="regulation-heading" class="text-2xl font-extrabold tracking-tight mb-6">PSO & BayHSchG LMU München</h2>
+      <div class="prose">
+        <h3>Notenskala ({univ.system})</h3>
+        <div class="table-scroll">
+          <table>
+            <thead>
+              <tr>
+                <th>Note</th>
+                <th class="text-center">Beurteilung</th>
+                <th>Beschreibung</th>
+              </tr>
+            </thead>
+            <tbody>
+              {Object.entries(univ.gradeMapping).map(([grade, point]) => (
+                <tr>
+                  <td><strong>{grade}</strong></td>
+                  <td class="text-center">
+                    {grade <= '1,5' ? 'sehr gut' :
+                     grade <= '2,5' ? 'gut' :
+                     grade <= '3,5' ? 'befriedigend' :
+                     grade <= '4,0' ? 'ausreichend' :
+                     'nicht ausreichend'}
+                  </td>
+                  <td>
+                    {grade <= '1,5' ? 'hervorragende Leistung' :
+                     grade <= '2,5' ? 'deutlich über Durchschnitt' :
+                     grade <= '3,5' ? 'durchschnittliche Anforderungen' :
+                     grade <= '4,0' ? 'trotz Mängel genügend' :
+                     'erhebliche Mängel'}
+                  </td>
+                </tr>
+              ))}
+            </tbody>
+          </table>
+        </div>
+
+        <h3 class="mt-6">Gesamtnote Bachelor/Master (PSO §10 Abs. 5)</h3>
+        <div class="table-scroll">
+          <table>
+            <thead>
+              <tr>
+                <th>Gesamtnote</th>
+                <th class="text-center">Prädikat</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr><td class="font-mono font-bold">≤ 1,50</td><td class="text-center">sehr gut</td></tr>
+              <tr><td class="font-mono font-bold">1,51 – 2,50</td><td class="text-center">gut</td></tr>
+              <tr><td class="font-mono font-bold">2,51 – 3,50</td><td class="text-center">befriedigend</td></tr>
+              <tr><td class="font-mono font-bold">3,51 – 4,00</td><td class="text-center">ausreichend</td></tr>
+            </tbody>
+          </table>
+        </div>
+
+        <h3 class="mt-6">Besonderheiten LMU</h3>
+        <ul>
+          <li><strong>Modulnote:</strong> 2 Dezimalstellen genau, nicht gerundet (PSO §10 Abs. 3)</li>
+          <li><strong>Gesamtnote:</strong> 1 Dezimalstelle, nicht gerundet (PSO §10 Abs. 5)</li>
+          <li><strong>Jura (Staatsexamen):</strong> 18-Punkte-Skala (18–16 sehr gut, 15–13 gut, 12–10 vollbefriedigend, 9–7 befriedigend, 6–4 ausreichend, 3–1 mangelhaft, 0 ungenügend)</li>
+          <li><strong>Prädikat "gut mit Auszeichnung":</strong> Gesamtnote ≤ 1,20 (BWL)</li>
+          <li><strong>Bestandene Module:</strong> Note ≥ 4,0 (ausreichend). ECTS nur für bestandene Module.</li>
+          <li><strong>Nebenfach 60 ECTS:</strong> Separat gewichtet in Gesamtnote (PSO §6)</li>
+        </ul>
+
+        <h3 class="mt-6">Wichtige Regeln</h3>
+        <ul>
+          <li><strong>Modulnote:</strong> Arithmetisches Mittel der Modulteilprüfungen, gewichtet nach ECTS (2 Dezimalstellen)</li>
+          <li><strong>Gesamtnote:</strong> Gewichtet nach 180 ECTS aller Module + Bachelorarbeit (1 Dezimalstelle)</li>
+          <li><strong>Auslandsumrechnung:</strong> Modifizierte Bayerische Formel (BayHSchG)</li>
+          <li><strong>ECTS-Grades:</strong> A-E für bestandene Prüfungen (Top 10%, 25%, 30%, 25%, 10%)</li>
+          <li><strong>Wiederholung:</strong> Max. 2 Versuche pro Modulteilprüfung; 3. Versuch nur bei Härtefall</li>
+        </ul>
+
+        <h3 class="mt-6">Quelle</h3>
+        <p><strong>{univ.source}</strong></p>
+        <p><a href={univ.sourceUrl} target="_blank" rel="noopener" class="underline hover:text-emerald-500">{univ.sourceUrl}</a></p>
+        {univ.note && <p class="text-sm text-slate-500 dark:text-zinc-400"><strong>Hinweis:</strong> {univ.note}</p>}
+      </div>
+    </section>
+
+    <section class="mt-12" aria-labelledby="related-heading">
+      <h2 id="related-heading" class="text-2xl font-extrabold tracking-tight mb-6">Andere Universitäten</h2>
+      <div class="grid gap-3 sm:grid-cols-2 lg:grid-cols-3">
+        <a href="/de/tu-muenchen-notendurchschnitt" class="calc-shell p-4 hover:border-emerald-500 transition-all text-center">TUM — 1-6</a>
+        <a href="/de/universitaet-heidelberg-notendurchschnitt" class="calc-shell p-4 hover:border-emerald-500 transition-all text-center">Heidelberg — 1-6</a>
+        <a href="/de/humboldt-universitaet-berlin-notendurchschnitt" class="calc-shell p-4 hover:border-emerald-500 transition-all text-center">HU Berlin — 1-6</a>
+        <a href="/de/kit-karlsruhe-notendurchschnitt" class="calc-shell p-4 hover:border-emerald-500 transition-all text-center">KIT — 1-6</a>
+        <a href="/de/rwth-aachen-notendurchschnitt" class="calc-shell p-4 hover:border-emerald-500 transition-all text-center">RWTH — 1-6</a>
+      </div>
+    </section>
+  </main>
+</Layout>
+
+<script is:inline>
+  const GRADES = ['1,0', '1,3', '1,7', '2,0', '2,3', '2,7', '3,0', '3,3', '3,7', '4,0', '5,0'];
+  const POINTS = { '1,0': 1.0, '1,3': 1.3, '1,7': 1.7, '2,0': 2.0, '2,3': 2.3, '2,7': 2.7, '3,0': 3.0, '3,3': 3.3, '3,7': 3.7, '4,0': 4.0, '5,0': 5.0 };
+
+  function createCourseRow(index) {
+    const row = document.createElement('div');
+    row.className = 'grid gap-3 sm:grid-cols-[1fr_80px_100px] items-end';
+    row.setAttribute('role', 'listitem');
+    row.innerHTML = `
+      <div>
+        <label class="calc-label" for="grade-${index}">Modul ${index + 1} Note</label>
+        <select id="grade-${index}" class="calc-select grade-select" aria-label="Modul ${index + 1} Note">
+          ${GRADES.map(g => `<option value="${g}">${g} ${g <= '4,0' ? '(bestanden)' : '(nicht bestanden)'}</option>`).join('')}
+        </select>
+      </div>
+      <div>
+        <label class="calc-label" for="credit-${index}">ECTS</label>
+        <input type="number" id="credit-${index}" class="calc-input credit-input" value="6" min="1" max="30" step="1" aria-label="Modul ${index + 1} ECTS" />
+      </div>
+      <div>
+        <label class="calc-label" for="course-name-${index}">Name (Optional)</label>
+        <input type="text" id="course-name-${index}" class="calc-input" placeholder="z.B. BWL" aria-label="Modul ${index + 1} Name" />
+      </div>
+    `;
+    return row;
+  }
+
+  function renderCourses(count) {
+    const container = document.getElementById('courses');
+    container.innerHTML = '';
+    for (let i = 0; i < count; i++) {
+      container.appendChild(createCourseRow(i));
+    }
+  }
+
+  function calculateGPA() {
+    const gradeSelects = document.querySelectorAll('#courses .grade-select');
+    const creditInputs = document.querySelectorAll('#courses .credit-input');
+
+    let totalCredits = 0;
+    let totalPoints = 0;
+
+    gradeSelects.forEach((select, i) => {
+      const grade = select.value;
+      const credit = parseFloat(creditInputs[i].value) || 0;
+      const point = POINTS[grade] || 0;
+
+      totalCredits += credit;
+      totalPoints += credit * point;
+    });
+
+    const gpa = totalCredits > 0 ? totalPoints / totalCredits : 0;
+    document.getElementById('result').textContent = gpa.toFixed(2).replace('.', ',');
+    document.getElementById('detail').textContent = `Gesamt ECTS: ${totalCredits} | Gewichtete Summe: ${totalPoints.toFixed(2)}`;
+  }
+
+  const countInput = document.getElementById('course-count');
+  const calculateBtn = document.getElementById('calculate-btn');
+  let currentCount = parseInt(countInput.value) || 6;
+
+  renderCourses(currentCount);
+  calculateGPA();
+
+  countInput.addEventListener('input', () => {
+    let newCount = parseInt(countInput.value) || 1;
+    newCount = Math.max(1, Math.min(30, newCount));
+    currentCount = newCount;
+    renderCourses(newCount);
+    calculateGPA();
+  });
+
+  calculateBtn.addEventListener('click', calculateGPA);
+
+  document.getElementById('courses').addEventListener('change', e => {
+    if (e.target.matches('.grade-select, .credit-input')) {
+      calculateGPA();
+    }
+  });
+</script>

@@ -1,0 +1,239 @@
+---
+import Layout from '../../../layouts/Layout.astro';
+import { getUniversityByKey } from '../../../data/universities-global';
+
+const univ = getUniversityByKey('fr-sciencespo')!;
+const pageTitle = `${univ.name} Moyenne | ${univ.system} Échelle`;
+const description = `${univ.name} calculateur de moyenne pondérée ECTS. Échelle 0–20, validation 10/20. Règlement: ${univ.source}`;
+const canonical = `https://globalcgpa.in/fr/${univ.slug}`;
+const ogImage = '/og-image-fr.png';
+const lang = 'fr';
+const alternates = [
+  { hreflang: 'en', href: 'https://globalcgpa.in/university/sciencespo' },
+  { hreflang: 'fr', href: `https://globalcgpa.in/fr/${univ.slug}` },
+];
+---
+
+<Layout title={pageTitle} description={description} canonical={canonical} ogImage={ogImage} lang={lang} alternates={alternates}>
+  <main class="max-w-[780px] mx-auto px-6 py-14" style="flex:1;">
+    <nav class="crumbs mb-6" aria-label="Fil d'Ariane">
+      <a href="/fr/">Calculateur de Moyenne</a>
+      <span class="sep">/</span>
+      <a href="/fr/universites-comparaison">Universités</a>
+      <span class="sep">/</span>
+      <span class="current">{univ.name}</span>
+    </nav>
+
+    <div class="text-xs font-bold uppercase tracking-wider text-emerald-500 mb-2">{univ.name} ({univ.nameEn})</div>
+    <h1 class="text-3xl sm:text-4xl font-extrabold tracking-tight mb-3">{univ.name} Calculateur de Moyenne</h1>
+    <p class="text-slate-500 dark:text-zinc-400 text-base mb-8">
+      Calculateur de {univ.name} avec l'échelle 0–20 et crédits ECTS.
+      Moyenne pondérée: Σ(ECTS × Note) ÷ ΣECTS. Validation à 10/20.
+    </p>
+
+    <div class="calc-shell space-y-6" id="univ-moyenne-calculator">
+      <div class="flex items-center gap-3">
+        <span class="px-3 py-1 bg-emerald-100 dark:bg-emerald-900/30 text-emerald-700 dark:text-emerald-300 text-xs font-bold rounded-full">
+          {univ.system}
+        </span>
+        <span class="text-sm text-slate-500 dark:text-zinc-400">ECTS standard | Validation: 10/20 | Mentions: Passable → Excellent</span>
+      </div>
+
+      <div class="grid gap-4 sm:grid-cols-2">
+        <div>
+          <label class="calc-label" for="course-count">Nombre d'UE</label>
+          <input type="number" id="course-count" class="calc-input" min="1" max="30" value="6" aria-label="Nombre d'unités d'enseignement" />
+        </div>
+        <div>
+          <label class="calc-label" for="semester">Semestre (optionnel)</label>
+          <select id="semester" class="calc-select" aria-label="Semestre">
+            <option value="">Tous les semestres</option>
+            <option value="S1">Semestre 1</option>
+            <option value="S2">Semestre 2</option>
+            <option value="S3">Semestre 3</option>
+            <option value="S4">Semestre 4</option>
+            <option value="S5">Semestre 5</option>
+            <option value="S6">Semestre 6</option>
+          </select>
+        </div>
+      </div>
+
+      <div id="courses" class="space-y-3" role="list" aria-label="Liste des UE"></div>
+
+      <button type="button" class="w-full sm:w-auto px-6 py-3 bg-emerald-500 hover:bg-emerald-600 text-slate-900 font-bold text-sm rounded-xl transition-colors" id="calculate-btn">
+        Calculer la Moyenne
+      </button>
+
+      <div class="calc-output" aria-live="polite" aria-label="Résultat de la moyenne">
+        <div class="calc-out-val" id="result">0.00</div>
+        <div class="calc-out-lbl">Moyenne Générale /20</div>
+        <div class="calc-out-lbl" style="margin-top:8px; font-size:0.68rem;" id="detail">Total ECTS: 0 | Somme pondérée: 0.00</div>
+        <div class="calc-out-lbl" style="margin-top:8px; font-size:0.68rem;" id="mention"></div>
+        <div class="calc-out-lbl" style="margin-top:8px; font-size:0.68rem;" id="status"></div>
+      </div>
+
+      <div class="formula-block">
+        <div class="f-label">Formule Sciences Po (LMD)</div>
+        <div class="f-text">Moyenne = Σ(ECTS × Note) ÷ ΣECTS</div>
+        <div class="f-example" id="formula-example">Ex: 6 ECTS × 14.5 + 4 ECTS × 12.0 = (87+48)÷10 = 13.50</div>
+      </div>
+    </div>
+
+    <section class="mt-12" aria-labelledby="regulation-heading">
+      <h2 id="regulation-heading" class="text-2xl font-extrabold tracking-tight mb-6">Règlement Officiel Sciences Po</h2>
+      <div class="prose">
+        <h3>Barème des Mentions</h3>
+        <div class="table-scroll">
+          <table>
+            <thead>
+              <tr>
+                <th>Moyenne /20</th>
+                <th class="text-center">Mention</th>
+                <th class="text-center">ECTS Grade</th>
+              </tr>
+            </thead>
+            <tbody>
+              {Object.entries(univ.gradeMapping).map(([grade, point]) => (
+                <tr>
+                  <td class="text-center font-mono">{point.toFixed(1)}</td>
+                  <td class="text-center">
+                    {grade === 'A' ? '<span class="text-purple-600 font-bold">Excellent</span>' :
+                     grade === 'B' ? '<span class="text-blue-600 font-bold">Très Bien</span>' :
+                     grade === 'C' ? '<span class="text-green-600 font-bold">Bien</span>' :
+                     grade === 'D' ? '<span class="text-amber-600 font-bold">Assez Bien</span>' :
+                     grade === 'E' ? '<span class="text-slate-600 font-bold">Passable</span>' :
+                     '<span class="text-red-600 font-bold">Non validé</span>'}
+                  </td>
+                  <td class="text-center">{grade}</td>
+                </tr>
+              ))}
+            </tbody>
+          </table>
+        </div>
+
+        <h3 class="mt-6">Principales Règles Académiques (Règlement Scolarité Art. 12)</h3>
+        <ul>
+          <li><strong>Moyenne pondérée ECTS:</strong> Σ(ECTS × Note) ÷ ΣECTS</li>
+          <li><strong>Validation UE:</strong> Note ≥ 10/20 (compensation possible entre UE du même semestre)</li>
+          <li><strong>Mentions:</strong> 16+ Très Bien, 14-16 Bien, 12-14 Assez Bien, 10-12 Passable</li>
+          <li><strong>Compensation:</strong> Possible si moyenne semestrielle ≥ 10 et aucune note < 8</li>
+          <li><strong>Capitalisation:</strong> Crédits acquis définitivement (ECTS)</li>
+          <li><strong>Redoublement:</strong> Autorisé sous conditions, max 1 an par cycle</li>
+          <li><strong>Diploma Supplement:</strong> ECTS grades A–E + mentions</li>
+        </ul>
+
+        <h3 class="mt-6">Source</h3>
+        <p><strong>{univ.source}</strong></p>
+        <p><a href={univ.sourceUrl} target="_blank" rel="noopener" class="underline hover:text-emerald-500">{univ.sourceUrl}</a></p>
+        {univ.note && <p class="text-sm text-slate-500 dark:text-zinc-400"><strong>Note:</strong> {univ.note}</p>}
+      </div>
+    </section>
+
+    <section class="mt-12" aria-labelledby="related-heading">
+      <h2 id="related-heading" class="text-2xl font-extrabold tracking-tight mb-6">Autres Établissements</h2>
+      <div class="grid gap-3 sm:grid-cols-2 lg:grid-cols-3">
+        <a href="/fr/sorbonne" class="calc-shell p-4 hover:border-emerald-500 transition-all text-center">Sorbonne — 0–20 (ECTS)</a>
+        <a href="/fr/polytechnique" class="calc-shell p-4 hover:border-emerald-500 transition-all text-center">Polytechnique — 0–20 (Coefficients)</a>
+        <a href="/fr/centrale" class="calc-shell p-4 hover:border-emerald-500 transition-all text-center">CentraleSupélec — 0–20 (ECTS)</a>
+        <a href="/fr/universites-comparaison" class="calc-shell p-4 hover:border-emerald-500 transition-all text-center">Comparaison complète</a>
+      </div>
+    </section>
+  </main>
+</Layout>
+
+<script is:inline>
+  function getMention(moyenne) {
+    if (moyenne >= 18) return { label: 'Excellent', color: '#7c3aed' };
+    if (moyenne >= 16) return { label: 'Très Bien', color: '#2563eb' };
+    if (moyenne >= 14) return { label: 'Bien', color: '#059669' };
+    if (moyenne >= 12) return { label: 'Assez Bien', color: '#d97706' };
+    if (moyenne >= 10) return { label: 'Passable', color: '#64748b' };
+    return { label: 'Non validé', color: '#dc2626' };
+  }
+
+  function createCourseRow(index) {
+    const row = document.createElement('div');
+    row.className = 'grid gap-3 sm:grid-cols-[1fr_80px_100px] items-end';
+    row.setAttribute('role', 'listitem');
+    row.innerHTML = `
+      <div>
+        <label class="calc-label" for="grade-${index}">UE ${index + 1} — Note /20</label>
+        <input type="number" id="grade-${index}" class="calc-input grade-input" value="12.0" min="0" max="20" step="0.1" aria-label="UE ${index + 1} note sur 20" />
+      </div>
+      <div>
+        <label class="calc-label" for="credit-${index}">ECTS</label>
+        <input type="number" id="credit-${index}" class="calc-input credit-input" value="6" min="1" max="30" step="1" aria-label="UE ${index + 1} crédits ECTS" />
+      </div>
+      <div>
+        <label class="calc-label" for="course-name-${index}">Nom (optionnel)</label>
+        <input type="text" id="course-name-${index}" class="calc-input" placeholder="Ex: Économie politique" aria-label="UE ${index + 1} nom" />
+      </div>
+    `;
+    return row;
+  }
+
+  function renderCourses(count) {
+    const container = document.getElementById('courses');
+    container.innerHTML = '';
+    for (let i = 0; i < count; i++) {
+      container.appendChild(createCourseRow(i));
+    }
+  }
+
+  function calculateMoyenne() {
+    const gradeInputs = document.querySelectorAll('#courses .grade-input');
+    const creditInputs = document.querySelectorAll('#courses .credit-input');
+
+    let totalECTS = 0;
+    let totalPoints = 0;
+
+    gradeInputs.forEach((input, i) => {
+      const grade = parseFloat(input.value) || 0;
+      const ects = parseFloat(creditInputs[i].value) || 0;
+
+      totalECTS += ects;
+      totalPoints += ects * grade;
+    });
+
+    const moyenne = totalECTS > 0 ? totalPoints / totalECTS : 0;
+    document.getElementById('result').textContent = moyenne.toFixed(2);
+    document.getElementById('detail').textContent = `Total ECTS: ${totalECTS} | Somme pondérée: ${totalPoints.toFixed(2)}`;
+
+    const mention = getMention(moyenne);
+    const mentionEl = document.getElementById('mention');
+    mentionEl.textContent = `Mention: ${mention.label}`;
+    mentionEl.style.color = mention.color;
+
+    const statusEl = document.getElementById('status');
+    if (moyenne >= 10) {
+      statusEl.textContent = '✓ Validé (moyenne ≥ 10/20)';
+      statusEl.style.color = '#059669';
+    } else {
+      statusEl.textContent = '✗ Non validé (moyenne < 10/20)';
+      statusEl.style.color = '#dc2626';
+    }
+  }
+
+  const countInput = document.getElementById('course-count');
+  const calculateBtn = document.getElementById('calculate-btn');
+  let currentCount = parseInt(countInput.value) || 6;
+
+  renderCourses(currentCount);
+  calculateMoyenne();
+
+  countInput.addEventListener('input', () => {
+    let newCount = parseInt(countInput.value) || 1;
+    newCount = Math.max(1, Math.min(30, newCount));
+    currentCount = newCount;
+    renderCourses(newCount);
+    calculateMoyenne();
+  });
+
+  calculateBtn.addEventListener('click', calculateMoyenne);
+
+  document.getElementById('courses').addEventListener('input', e => {
+    if (e.target.matches('.grade-input, .credit-input')) {
+      calculateMoyenne();
+    }
+  });
+</script>

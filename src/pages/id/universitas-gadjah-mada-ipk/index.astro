@@ -1,0 +1,216 @@
+---
+import Layout from '../../../layouts/Layout.astro';
+import { getUniversityByKey } from '../../../data/universities-global';
+
+const univ = getUniversityByKey('id-ugm')!;
+const pageTitle = `${univ.name} IPK Kalkulator | ${univ.system} Skala (14 Tingkat)`;
+const description = `${univ.name} (UGM) IPK Kalkulator. ${univ.system} skala 14 tingkat (A s/d E). Masukkan nilai dan SKS untuk IPK/IPS akurat. Regulasi: ${univ.source}`;
+const canonical = `https://globalcgpa.in/id/${univ.slug}`;
+const ogImage = '/og-image-id.png';
+const lang = 'id';
+const alternates = [
+  { hreflang: 'en', href: 'https://globalcgpa.in/university/ugm' },
+  { hreflang: 'id', href: `https://globalcgpa.in/id/${univ.slug}` },
+];
+---
+
+<Layout title={pageTitle} description={description} canonical={canonical} ogImage={ogImage} lang={lang} alternates={alternates}>
+  <main class="max-w-[780px] mx-auto px-6 py-14" style="flex:1;">
+    <nav class="crumbs mb-6" aria-label="Breadcrumb">
+      <a href="/id/">Kalkulator IPK</a>
+      <span class="sep">/</span>
+      <a href="/id/universities">Universitas</a>
+      <span class="sep">/</span>
+      <span class="current">{univ.name}</span>
+    </nav>
+
+    <div class="text-xs font-bold uppercase tracking-wider text-emerald-500 mb-2">{univ.name} ({univ.nameEn})</div>
+    <h1 class="text-3xl sm:text-4xl font-extrabold tracking-tight mb-3">{univ.name} IPK Kalkulator</h1>
+    <p class="text-slate-500 dark:text-zinc-400 text-base mb-8">
+      {univ.name} resmi {univ.system} skala 14 tingkat (A, A-, A/B, B+, B, B-, B/C, C+, C, C-, C/D, D+, D, E).
+      Masukkan nilai huruf dan SKS per mata kuliah untuk menghitung IPK presisi.
+    </p>
+
+    <div class="calc-shell space-y-6" id="univ-gpa-calculator">
+      <div class="flex items-center gap-3">
+        <span class="px-3 py-1 bg-emerald-100 dark:bg-emerald-900/30 text-emerald-700 dark:text-emerald-300 text-xs font-bold rounded-full">
+          {univ.system}
+        </span>
+        <span class="text-sm text-slate-500 dark:text-zinc-400">14 Tingkat: A, A-, A/B, B+, B, B-, B/C, C+, C, C-, C/D, D+, D, E</span>
+      </div>
+
+      <div class="grid gap-4 sm:grid-cols-2">
+        <div>
+          <label class="calc-label" for="course-count">Jumlah Mata Kuliah</label>
+          <input type="number" id="course-count" class="calc-input" min="1" max="30" value="6" aria-label="Jumlah mata kuliah" />
+        </div>
+        <div>
+          <label class="calc-label" for="semester">Semester (Opsional)</label>
+          <select id="semester" class="calc-select" aria-label="Semester">
+            <option value="">Semua Semester (IPK)</option>
+            <option value="1">Semester 1 (IPS)</option>
+            <option value="2">Semester 2 (IPS)</option>
+            <option value="3">Semester 3 (IPS)</option>
+            <option value="4">Semester 4 (IPS)</option>
+          </select>
+        </div>
+      </div>
+
+      <div id="courses" class="space-y-3" role="list" aria-label="Daftar mata kuliah"></div>
+
+      <button type="button" class="w-full sm:w-auto px-6 py-3 bg-emerald-500 hover:bg-emerald-600 text-slate-900 font-bold text-sm rounded-xl transition-colors" id="calculate-btn">
+        Hitung IPK
+      </button>
+
+      <div class="calc-output" aria-live="polite" aria-label="Hasil perhitungan">
+        <div class="calc-out-val" id="result">0.00</div>
+        <div class="calc-out-lbl">Indeks Prestasi Kumulatif (IPK)</div>
+        <div class="calc-out-lbl" style="margin-top:8px; font-size:0.68rem;" id="detail">Total SKS: 0 | Total Bobot: 0.00</div>
+      </div>
+
+      <div class="formula-block">
+        <div class="f-label">Rumus Perhitungan</div>
+        <div class="f-text">IPK = Σ(SKS × Bobot Nilai) ÷ ΣSKS</div>
+        <div class="f-example" id="formula-example">Contoh: 3 SKS A(4.0) + 3 SKS B(3.0) = (12+9)÷6 = 3.50</div>
+      </div>
+    </div>
+
+    <section class="mt-12" aria-labelledby="regulation-heading">
+      <h2 id="regulation-heading" class="text-2xl font-extrabold tracking-tight mb-6">Regulasi Resmi</h2>
+      <div class="prose">
+        <h3>Skala Nilai ({univ.system}) — 14 Tingkat</h3>
+        <div class="table-scroll">
+          <table>
+            <thead>
+              <tr>
+                <th>Nilai Huruf</th>
+                <th class="text-center">Bobot</th>
+                <th class="text-center">Persentase (%)</th>
+              </tr>
+            </thead>
+            <tbody>
+              {Object.entries(univ.gradeMapping).map(([grade, point]) => (
+                <tr>
+                  <td><strong>{grade}</strong></td>
+                  <td class="text-center font-mono">{point.toFixed(2)}</td>
+                  <td class="text-center">
+                    {univ.percentageMapping && univ.percentageMapping[grade]
+                      ? `${univ.percentageMapping[grade][0]}~${univ.percentageMapping[grade][1]}%`
+                      : '—'}
+                  </td>
+                </tr>
+              ))}
+            </tbody>
+          </table>
+        </div>
+
+        <h3 class="mt-6">Ketentuan Akademik Penting</h3>
+        <ul>
+          <li><strong>IPK/IPS:</strong> Σ(SKS × Bobot) ÷ ΣSKS (skala 0-4, 14 tingkat)</li>
+          <li><strong>Kelulusan Sarjana:</strong> IPK ≥ 2.50 (bisa 2.00 dengan pertimbangan dekan), tidak ada E, max 25% D</li>
+          <li><strong>Predikat:</strong> 3.91-4.00 Summa Cum Laude, 3.71-3.90 Magna, 3.51-3.70 Cum Laude</li>
+          <li><strong>Masa Studi Cum Laude:</strong> Maksimal 5 tahun, tanpa mengulang mata kuliah</li>
+          <li><strong>Evaluasi Dini:</strong> Semester 4: min 30 SKS, IPK ≥ 2.00 (lainnya DO)</li>
+        </ul>
+
+        <h3 class="mt-6">Sumber Resmi</h3>
+        <p><strong>{univ.source}</strong></p>
+        <p><a href={univ.sourceUrl} target="_blank" rel="noopener" class="underline hover:text-emerald-500">{univ.sourceUrl}</a></p>
+        {univ.note && <p class="text-sm text-slate-500 dark:text-zinc-400"><strong>Catatan:</strong> {univ.note}</p>}
+      </div>
+    </section>
+
+    <section class="mt-12" aria-labelledby="related-heading">
+      <h2 id="related-heading" class="text-2xl font-extrabold tracking-tight mb-6">Universitas Lainnya</h2>
+      <div class="grid gap-3 sm:grid-cols-2 lg:grid-cols-3">
+        <a href="/id/universitas-indonesia-ipk" class="calc-shell p-4 hover:border-emerald-500 transition-all text-center">UI — 4.0</a>
+        <a href="/id/institut-teknologi-bandung-ipk" class="calc-shell p-4 hover:border-emerald-500 transition-all text-center">ITB — 4.0</a>
+        <a href="/id/universitas-airlangga-ipk" class="calc-shell p-4 hover:border-emerald-500 transition-all text-center">UNAIR — 4.0</a>
+        <a href="/id/ipb-university-ipk" class="calc-shell p-4 hover:border-emerald-500 transition-all text-center">IPB — 4.0</a>
+        <a href="/id/universitas-padjadjaran-ipk" class="calc-shell p-4 hover:border-emerald-500 transition-all text-center">Unpad — 4.0</a>
+        <a href="/id/institut-teknologi-sepuluh-nopember-ipk" class="calc-shell p-4 hover:border-emerald-500 transition-all text-center">ITS — 4.0</a>
+      </div>
+    </section>
+  </main>
+</Layout>
+
+<script is:inline>
+  const GRADES = ['A', 'A-', 'A/B', 'B+', 'B', 'B-', 'B/C', 'C+', 'C', 'C-', 'C/D', 'D+', 'D', 'E'];
+  const POINTS = { 'A': 4.0, 'A-': 3.75, 'A/B': 3.5, 'B+': 3.25, 'B': 3.0, 'B-': 2.75, 'B/C': 2.5, 'C+': 2.25, 'C': 2.0, 'C-': 1.75, 'C/D': 1.5, 'D+': 1.25, 'D': 1.0, 'E': 0.0 };
+  const PERCENTAGES = { 'A': [90, 100], 'A-': [85, 89], 'A/B': [80, 84], 'B+': [75, 79], 'B': [70, 74], 'B-': [65, 69], 'B/C': [60, 64], 'C+': [55, 59], 'C': [50, 54], 'C-': [45, 49], 'C/D': [40, 44], 'D+': [35, 39], 'D': [30, 34], 'E': [0, 29] };
+
+  function createCourseRow(index) {
+    const row = document.createElement('div');
+    row.className = 'grid gap-3 sm:grid-cols-[1fr_80px_100px] items-end';
+    row.setAttribute('role', 'listitem');
+    row.innerHTML = `
+      <div>
+        <label class="calc-label" for="grade-${index}">MK ${index + 1} Nilai</label>
+        <select id="grade-${index}" class="calc-select grade-select" aria-label="Mata kuliah ${index + 1} nilai">
+          ${GRADES.map(g => `<option value="${g}">${g} (${POINTS[g]}) ↔ ${PERCENTAGES[g][0]}~${PERCENTAGES[g][1]}%</option>`).join('')}
+        </select>
+      </div>
+      <div>
+        <label class="calc-label" for="credit-${index}">SKS</label>
+        <input type="number" id="credit-${index}" class="calc-input credit-input" value="3" min="1" max="6" step="1" aria-label="Mata kuliah ${index + 1} SKS" />
+      </div>
+      <div>
+        <label class="calc-label" for="course-name-${index}">Nama MK (Opsional)</label>
+        <input type="text" id="course-name-${index}" class="calc-input" placeholder="Contoh: Kimia" aria-label="Mata kuliah ${index + 1} nama" />
+      </div>
+    `;
+    return row;
+  }
+
+  function renderCourses(count) {
+    const container = document.getElementById('courses');
+    container.innerHTML = '';
+    for (let i = 0; i < count; i++) {
+      container.appendChild(createCourseRow(i));
+    }
+  }
+
+  function calculateGPA() {
+    const gradeSelects = document.querySelectorAll('#courses .grade-select');
+    const creditInputs = document.querySelectorAll('#courses .credit-input');
+
+    let totalCredits = 0;
+    let totalPoints = 0;
+
+    gradeSelects.forEach((select, i) => {
+      const grade = select.value;
+      const credit = parseFloat(creditInputs[i].value) || 0;
+      const point = POINTS[grade] || 0;
+
+      totalCredits += credit;
+      totalPoints += credit * point;
+    });
+
+    const gpa = totalCredits > 0 ? totalPoints / totalCredits : 0;
+    document.getElementById('result').textContent = gpa.toFixed(2);
+    document.getElementById('detail').textContent = `Total SKS: ${totalCredits} | Total Bobot: ${totalPoints.toFixed(2)}`;
+  }
+
+  const countInput = document.getElementById('course-count');
+  const calculateBtn = document.getElementById('calculate-btn');
+  let currentCount = parseInt(countInput.value) || 6;
+
+  renderCourses(currentCount);
+  calculateGPA();
+
+  countInput.addEventListener('input', () => {
+    let newCount = parseInt(countInput.value) || 1;
+    newCount = Math.max(1, Math.min(30, newCount));
+    currentCount = newCount;
+    renderCourses(newCount);
+    calculateGPA();
+  });
+
+  calculateBtn.addEventListener('click', calculateGPA);
+
+  document.getElementById('courses').addEventListener('change', e => {
+    if (e.target.matches('.grade-select, .credit-input')) {
+      calculateGPA();
+    }
+  });
+</script>

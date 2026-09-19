@@ -1,0 +1,275 @@
+---
+import Layout from '../../layouts/Layout.astro';
+import { getUniversitiesByCountry } from '../../data/universities-global';
+
+const universities = getUniversitiesByCountry('ID');
+const systems = [...new Set(universities.map(u => u.system))].sort((a, b) => parseFloat(b) - parseFloat(a));
+
+const pageTitle = 'Kalkulator IPK | Hitung Indeks Prestasi Kumulatif Indonesia';
+const description = 'Kalkulator IPK untuk universitas Indonesia. Skala 4.0 (UI, ITB, UGM, UNAIR, IPB, Unpad, ITS). Masukkan nilai huruf dan SKS untuk menghitung IPK/IPS akurat sesuai regulasi resmi.';
+const canonical = 'https://globalcgpa.in/id/';
+const ogImage = '/og-image-id.png';
+const lang = 'id';
+const alternates = [
+  { hreflang: 'en', href: 'https://globalcgpa.in/' },
+  { hreflang: 'id', href: 'https://globalcgpa.in/id/' },
+];
+---
+
+<Layout title={pageTitle} description={description} canonical={canonical} ogImage={ogImage} lang={lang} alternates={alternates}>
+  <main class="max-w-[780px] mx-auto px-6 py-14" style="flex:1;">
+    <div class="text-xs font-bold uppercase tracking-wider text-emerald-500 mb-2">Kalkulator IPK Indonesia</div>
+    <h1 class="text-3xl sm:text-4xl font-extrabold tracking-tight mb-3">Kalkulator Indeks Prestasi Kumulatif (IPK)</h1>
+    <p class="text-slate-500 dark:text-zinc-400 text-base mb-8">
+      Mendukung skala 4.0 untuk universitas Indonesia: UI, ITB, UGM, UNAIR, IPB, Unpad, ITS.
+      Masukkan nilai huruf (A, AB, B, BC, C, D, E) dan SKS per mata kuliah untuk menghitung IPK/IPS presisi.
+    </p>
+
+    <div class="calc-shell space-y-6" id="gpa-calculator">
+      <div class="flex gap-2" role="tablist" aria-label="Pilih skala penilaian">
+        {systems.map((sys, idx) => (
+          <button
+            role="tab"
+            aria-selected={idx === 0}
+            aria-controls={`panel-${sys}`}
+            id={`tab-${sys}`}
+            class={`calc-tab flex-1 ${idx === 0 ? 'active' : ''}`}
+            data-system={sys}
+          >
+            Skala {sys}
+          </button>
+        ))}
+      </div>
+
+      {systems.map((sys, idx) => (
+        <div
+          role="tabpanel"
+          id={`panel-${sys}`}
+          aria-labelledby={`tab-${sys}`}
+          class={`space-y-4 ${idx === 0 ? '' : 'hidden'}`}
+          data-system={sys}
+        >
+          <div class="grid gap-4 sm:grid-cols-2">
+            <div>
+              <label class="calc-label" for={`system-select-${sys}`}>Sistem Penilaian</label>
+              <select
+                id={`system-select-${sys}`}
+                class="calc-select"
+                data-system={sys}
+                aria-label={`Pilih sistem penilaian ${sys}`}
+              >
+                {universities.filter(u => u.system === sys).map(u => (
+                  <option value={u.key}>{u.name} ({u.system})</option>
+                ))}
+                <option value="custom" selected>Input Manual (Standar {sys})</option>
+              </select>
+            </div>
+            <div>
+              <label class="calc-label" for={`course-count-${sys}`}>Jumlah Mata Kuliah</label>
+              <input
+                type="number"
+                id={`course-count-${sys}`}
+                class="calc-input"
+                min="1"
+                max="30"
+                value="6"
+                aria-label="Jumlah mata kuliah"
+              />
+            </div>
+          </div>
+
+          <div id={`courses-${sys}`} class="space-y-3" role="list" aria-label={`Daftar mata kuliah ${sys}`}></div>
+
+          <button
+            type="button"
+            class="w-full sm:w-auto px-6 py-3 bg-emerald-500 hover:bg-emerald-600 text-slate-900 font-bold text-sm rounded-xl transition-colors"
+            id={`calculate-${sys}`}
+            data-system={sys}
+          >
+            Hitung IPK
+          </button>
+
+          <div class="calc-output" aria-live="polite" aria-label={`Hasil perhitungan ${sys}`}>
+            <div class="calc-out-val" id={`result-${sys}`}>0.00</div>
+            <div class="calc-out-lbl">Indeks Prestasi Kumulatif (IPK)</div>
+            <div class="calc-out-lbl" style="margin-top:8px; font-size:0.68rem;" id={`detail-${sys}`}>
+              Total SKS: 0 | Total Bobot: 0.00
+            </div>
+          </div>
+
+          <div class="formula-block" id={`formula-${sys}`}>
+            <div class="f-label">Rumus Perhitungan</div>
+            <div class="f-text" id={`formula-text-${sys}`}>IPK = Σ(SKS × Bobot Nilai) ÷ ΣSKS</div>
+            <div class="f-example" id={`formula-example-${sys}`}>Contoh: 3 SKS A(4.0) + 3 SKS B(3.0) = (12+9)÷6 = 3.50</div>
+          </div>
+        </div>
+      ))}
+    </div>
+
+    <section class="mt-16" aria-labelledby="univ-list-heading">
+      <h2 id="univ-list-heading" class="text-2xl font-extrabold tracking-tight mb-6">Universitas Utama</h2>
+      <div class="grid gap-4 sm:grid-cols-2 lg:grid-cols-3">
+        {universities.map(u => (
+          <a
+            href={`/id/${u.slug}`}
+            class="calc-shell p-5 hover:border-emerald-500 hover:shadow-lg transition-all text-center"
+          >
+            <div class="text-3xl font-extrabold text-emerald-500 mb-1">{u.system}</div>
+            <div class="font-bold text-lg text-slate-900 dark:text-white">{u.name}</div>
+            <div class="text-sm text-slate-500 dark:text-zinc-400 mt-1">{u.nameEn}</div>
+          </a>
+        ))}
+      </div>
+    </section>
+
+    <section class="mt-16" aria-labelledby="guides-heading">
+      <h2 id="guides-heading" class="text-2xl font-extrabold tracking-tight mb-6">Panduan IPK & IPS</h2>
+      <div class="grid gap-4 sm:grid-cols-2">
+        <a href="/id/guides/ipk-vs-ips" class="calc-shell p-5 hover:border-emerald-500 transition-all">
+          <h3 class="font-bold text-lg text-slate-900 dark:text-white mb-2">Perbedaan IPK dan IPS</h3>
+          <p class="text-sm text-slate-500 dark:text-zinc-400">Definisi, fungsi, dan cara perhitungan Indeks Prestasi Kumulatif vs Semester</p>
+        </a>
+        <a href="/id/guides/skala-4-0-indonesia" class="calc-shell p-5 hover:border-emerald-500 transition-all">
+          <h3 class="font-bold text-lg text-slate-900 dark:text-white mb-2">Skala 4.0 di Indonesia</h3>
+          <p class="text-sm text-slate-500 dark:text-zinc-400">Standar nilai huruf A-E, bobot angka, dan batas kelulusan minimum C (2.00)</p>
+        </a>
+        <a href="/id/guides/predikat-kelulusan" class="calc-shell p-5 hover:border-emerald-500 transition-all">
+          <h3 class="font-bold text-lg text-slate-900 dark:text-white mb-2">Predikat Kelulusan (Cum Laude)</h3>
+          <p class="text-sm text-slate-500 dark:text-zinc-400">Kriteria IPK untuk Memuaskan, Sangat Memuaskan, dan Cum Laude per universitas</p>
+        </a>
+        <a href="/id/guides/konversi-nilai" class="calc-shell p-5 hover:border-emerald-500 transition-all">
+          <h3 class="font-bold text-lg text-slate-900 dark:text-white mb-2">Konversi Nilai Angka ke Huruf</h3>
+          <p class="text-sm text-slate-500 dark:text-zinc-400">Tabel persentase ke nilai huruf dan bobot untuk UI, ITB, UGM, UNAIR, IPB, Unpad, ITS</p>
+        </a>
+        <a href="/id/guides/transfer-kredit" class="calc-shell p-5 hover:border-emerald-500 transition-all">
+          <h3 class="font-bold text-lg text-slate-900 dark:text-white mb-2">Transfer Kredit & Pengakuan Nilai</h3>
+          <p class="text-sm text-slate-500 dark:text-zinc-400">Syarat pengakuan mata kuliah antar universitas dan perhitungan IPK transfer</p>
+        </a>
+        <a href="/id/guides/akademik-warning" class="calc-shell p-5 hover:border-emerald-500 transition-all">
+          <h3 class="font-bold text-lg text-slate-900 dark:text-white mb-2">Peringatan Akademik & DO</h3>
+          <p class="text-sm text-slate-500 dark:text-zinc-400">Batas IPK minimum, peringatan akademik, dan kriteria drop out (DO) per universitas</p>
+        </a>
+      </div>
+    </section>
+  </main>
+</Layout>
+
+<script is:inline>
+  const GRADE_SYSTEMS = {
+    '4.0': {
+      grades: ['A', 'A-', 'B+', 'B', 'B-', 'C+', 'C', 'C-', 'D', 'E'],
+      points: { 'A': 4.0, 'A-': 3.7, 'B+': 3.3, 'B': 3.0, 'B-': 2.7, 'C+': 2.3, 'C': 2.0, 'C-': 1.7, 'D': 1.0, 'E': 0.0 },
+      percentages: { 'A': [90, 100], 'A-': [85, 89], 'B+': [80, 84], 'B': [75, 79], 'B-': [70, 74], 'C+': [65, 69], 'C': [60, 64], 'C-': [55, 59], 'D': [50, 54], 'E': [0, 49] }
+    }
+  };
+
+  function createCourseRow(system, index) {
+    const sys = GRADE_SYSTEMS[system];
+    const grades = sys.grades;
+    const points = sys.points;
+    const percentages = sys.percentages;
+
+    const row = document.createElement('div');
+    row.className = 'grid gap-3 sm:grid-cols-[1fr_80px_100px] items-end';
+    row.setAttribute('role', 'listitem');
+    row.innerHTML = `
+      <div>
+        <label class="calc-label" for="grade-${system}-${index}">Mata Kuliah ${index + 1} Nilai</label>
+        <select id="grade-${system}-${index}" class="calc-select grade-select" aria-label="Mata kuliah ${index + 1} nilai">
+          ${grades.map(g => `<option value="${g}">${g} (${points[g]}) ${percentages[g] ? `↔ ${percentages[g][0]}~${percentages[g][1]}%` : ''}</option>`).join('')}
+        </select>
+      </div>
+      <div>
+        <label class="calc-label" for="credit-${system}-${index}">SKS</label>
+        <input type="number" id="credit-${system}-${index}" class="calc-input credit-input" value="3" min="1" max="6" step="1" aria-label="Mata kuliah ${index + 1} SKS" />
+      </div>
+      <div>
+        <label class="calc-label" for="course-name-${system}-${index}">Nama MK (Opsional)</label>
+        <input type="text" id="course-name-${system}-${index}" class="calc-input" placeholder="Contoh: Kalkulus" aria-label="Mata kuliah ${index + 1} nama" />
+      </div>
+    `;
+    return row;
+  }
+
+  function renderCourses(system, count) {
+    const container = document.getElementById(`courses-${system}`);
+    container.innerHTML = '';
+    for (let i = 0; i < count; i++) {
+      container.appendChild(createCourseRow(system, i));
+    }
+  }
+
+  function calculateGPA(system) {
+    const sys = GRADE_SYSTEMS[system];
+    const points = sys.points;
+    const gradeSelects = document.querySelectorAll(`#courses-${system} .grade-select`);
+    const creditInputs = document.querySelectorAll(`#courses-${system} .credit-input`);
+
+    let totalCredits = 0;
+    let totalPoints = 0;
+
+    gradeSelects.forEach((select, i) => {
+      const grade = select.value;
+      const credit = parseFloat(creditInputs[i].value) || 0;
+      const point = points[grade] || 0;
+
+      totalCredits += credit;
+      totalPoints += credit * point;
+    });
+
+    const gpa = totalCredits > 0 ? totalPoints / totalCredits : 0;
+    document.getElementById(`result-${system}`).textContent = gpa.toFixed(2);
+    document.getElementById(`detail-${system}`).textContent = `Total SKS: ${totalCredits} | Total Bobot: ${totalPoints.toFixed(2)}`;
+  }
+
+  function initSystem(system) {
+    const countInput = document.getElementById(`course-count-${system}`);
+    const calculateBtn = document.getElementById(`calculate-${sys}`);
+    const systemSelect = document.getElementById(`system-select-${system}`);
+
+    let currentCount = parseInt(countInput.value) || 6;
+    renderCourses(system, currentCount);
+    calculateGPA(system);
+
+    countInput.addEventListener('input', () => {
+      let newCount = parseInt(countInput.value) || 1;
+      newCount = Math.max(1, Math.min(30, newCount));
+      currentCount = newCount;
+      renderCourses(system, newCount);
+      calculateGPA(system);
+    });
+
+    calculateBtn.addEventListener('click', () => calculateGPA(system));
+
+    const container = document.getElementById(`courses-${system}`);
+    container.addEventListener('change', e => {
+      if (e.target.matches('.grade-select, .credit-input')) {
+        calculateGPA(system);
+      }
+    });
+
+    systemSelect.addEventListener('change', () => {
+      if (systemSelect.value === 'custom') return;
+    });
+  }
+
+  function switchTab(system) {
+    document.querySelectorAll('[role="tab"]').forEach(btn => {
+      btn.classList.remove('active');
+      btn.setAttribute('aria-selected', 'false');
+    });
+    document.querySelectorAll('[role="tabpanel"]').forEach(panel => panel.classList.add('hidden'));
+
+    const activeTab = document.getElementById(`tab-${system}`);
+    const activePanel = document.querySelector(`[role="tabpanel"][data-system="${system}"]`);
+    activeTab.classList.add('active');
+    activeTab.setAttribute('aria-selected', 'true');
+    activePanel.classList.remove('hidden');
+  }
+
+  document.querySelectorAll('[role="tab"]').forEach(btn => {
+    btn.addEventListener('click', () => switchTab(btn.dataset.system));
+  });
+
+  systems.forEach(sys => initSystem(sys));
+</script>

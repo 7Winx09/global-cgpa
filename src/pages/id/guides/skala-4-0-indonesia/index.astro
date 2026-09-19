@@ -1,0 +1,157 @@
+---
+import Layout from '../../../../layouts/Layout.astro';
+
+const pageTitle = 'Skala 4.0 Indonesia | Standar Nilai Huruf A-E & Bobot Angka';
+const description = 'Standar skala 4.0 Indonesia: nilai huruf A, AB, B, BC, C, D, E dengan bobot angka 4.0â€“0.0. Persentase acuan (PAP), batas kelulusan minimum C (2.00), perbedaan antar PT.';
+const canonical = 'https://globalcgpa.in/id/guides/skala-4-0-indonesia';
+const ogImage = '/og-image-id.png';
+const lang = 'id';
+const alternates = [
+  { hreflang: 'en', href: 'https://globalcgpa.in/guides/4-point-scale' },
+  { hreflang: 'id', href: 'https://globalcgpa.in/id/guides/skala-4-0-indonesia' },
+];
+---
+
+<Layout title={pageTitle} description={description} canonical={canonical} ogImage={ogImage} lang={lang} alternates={alternates}>
+  <main class="max-w-[780px] mx-auto px-6 py-14" style="flex:1;">
+    <nav class="crumbs mb-6" aria-label="Breadcrumb">
+      <a href="/id/">Kalkulator IPK</a>
+      <span class="sep">/</span>
+      <a href="/id/guides">Panduan</a>
+      <span class="sep">/</span>
+      <span class="current">Skala 4.0 Indonesia</span>
+    </nav>
+
+    <div class="text-xs font-bold uppercase tracking-wider text-emerald-500 mb-2">Panduan Akademik</div>
+    <h1 class="text-3xl sm:text-4xl font-extrabold tracking-tight mb-3">Skala 4.0 di Indonesia</h1>
+    <p class="text-slate-500 dark:text-zinc-400 text-base mb-10">
+      Semua perguruan tinggi Indonesia menggunakan skala 4.0 sebagai standar nasional (Kemdikbud).
+      Detail bobot angka dan rentang persentase (PAP) bervariasi per universitas.
+    </p>
+
+    <section class="prose mb-12">
+      <h2>Standar Dasar (Referensi Nasional)</h2>
+      <div class="table-scroll">
+        <table>
+          <thead>
+            <tr>
+              <th>Nilai Huruf</th>
+              <th class="text-center">Bobot Angka</th>
+              <th class="text-center">Keterangan</th>
+              <th class="text-center">Persentase Umum (PAP)</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr><td><strong>A</strong></td><td class="text-center font-mono">4.00</td><td class="text-center">Istimewa / Excellent</td><td class="text-center">80â€“100% / 85â€“100%</td></tr>
+            <tr><td><strong>AB</strong></td><td class="text-center font-mono">3.50</td><td class="text-center">Sangat Baik / Very Good</td><td class="text-center">75â€“79% / 80â€“84%</td></tr>
+            <tr><td><strong>B</strong></td><td class="text-center font-mono">3.00</td><td class="text-center">Baik / Good</td><td class="text-center">70â€“74% / 65â€“79%</td></tr>
+            <tr><td><strong>BC</strong></td><td class="text-center font-mono">2.50</td><td class="text-center">Cukup Baik / Fairly Good</td><td class="text-center">65â€“69% / 60â€“64%</td></tr>
+            <tr><td><strong>C</strong></td><td class="text-center font-mono">2.00</td><td class="text-center">Cukup / Fair <span class="text-emerald-500">(Minimum Lulus)</span></td><td class="text-center">55â€“64% / 55â€“59%</td></tr>
+            <tr><td><strong>D</strong></td><td class="text-center font-mono">1.00</td><td class="text-center">Kurang / Poor</td><td class="text-center">45â€“54% / 40â€“54%</td></tr>
+            <tr><td><strong>E</strong></td><td class="text-center font-mono">0.00</td><td class="text-center">Gagal / Fail</td><td class="text-center">< 45% / < 40%</td></tr>
+          </tbody>
+        </table>
+      </div>
+      <p class="text-sm text-slate-500 dark:text-zinc-400 mt-3">
+        â€» Rentang persentase bervariasi per PT. Kolom kiri: ITB/IPB/ITS/Unpad/UI (skala 7 tingkat). Kolom kanan: UGM (skala 14 tingkat).
+      </p>
+    </section>
+
+    <section class="prose mb-12">
+      <h2>Perbandingan 7 Universitas Terkemuka</h2>
+      <div class="table-scroll">
+        <table>
+          <thead>
+            <tr>
+              <th>Universitas</th>
+              <th class="text-center">A</th>
+              <th class="text-center">AB/A-</th>
+              <th class="text-center">B+/B</th>
+              <th class="text-center">BC/B-</th>
+              <th class="text-center">C+/C</th>
+              <th class="text-center">C-/D</th>
+              <th class="text-center">E</th>
+              <th>Jumlah Tingkat</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr><td><strong>UI</strong></td><td class="text-center">4.00</td><td class="text-center">A-: 3.7</td><td class="text-center">B+: 3.3, B: 3.0</td><td class="text-center">B-: 2.7</td><td class="text-center">C+: 2.3, C: 2.0</td><td class="text-center">C-: 1.7, D: 1.0</td><td class="text-center">0.0</td><td>10</td></tr>
+            <tr><td><strong>ITB</strong></td><td class="text-center">4.00</td><td class="text-center">AB: 3.5</td><td class="text-center">B: 3.0</td><td class="text-center">BC: 2.5</td><td class="text-center">C: 2.0</td><td class="text-center">D: 1.0</td><td class="text-center">0.0</td><td>7</td></tr>
+            <tr><td><strong>UGM</strong></td><td class="text-center">4.00</td><td class="text-center">A-: 3.75, A/B: 3.5</td><td class="text-center">B+: 3.25, B: 3.0, B-: 2.75</td><td class="text-center">B/C: 2.5</td><td class="text-center">C+: 2.25, C: 2.0, C-: 1.75</td><td class="text-center">C/D: 1.5, D+: 1.25, D: 1.0</td><td class="text-center">0.0</td><td>14</td></tr>
+            <tr><td><strong>UNAIR</strong></td><td class="text-center">4.00</td><td class="text-center">AB: 3.5</td><td class="text-center">B: 3.0</td><td class="text-center">BC: 2.5</td><td class="text-center">C: 2.0</td><td class="text-center">D: 1.0</td><td class="text-center">0.0</td><td>7</td></tr>
+            <tr><td><strong>IPB</strong></td><td class="text-center">4.00</td><td class="text-center">AB: 3.5</td><td class="text-center">B: 3.0</td><td class="text-center">BC: 2.5</td><td class="text-center">C: 2.0</td><td class="text-center">D: 1.0</td><td class="text-center">0.0</td><td>7</td></tr>
+            <tr><td><strong>Unpad</strong></td><td class="text-center">4.00</td><td class="text-center">A-: 3.66</td><td class="text-center">B+: 3.33, B: 3.0</td><td class="text-center">B-: 2.66</td><td class="text-center">C+: 2.33, C: 2.0</td><td class="text-center">D: 1.0</td><td class="text-center">0.0</td><td>9</td></tr>
+            <tr><td><strong>ITS</strong></td><td class="text-center">4.00</td><td class="text-center">AB: 3.5</td><td class="text-center">B: 3.0</td><td class="text-center">BC: 2.5</td><td class="text-center">C: 2.0</td><td class="text-center">D: 1.0</td><td class="text-center">0.0</td><td>7</td></tr>
+          </tbody>
+        </table>
+      </div>
+    </section>
+
+    <section class="prose mb-12">
+      <h2>Batas Kelulusan & Ketentuan Penting</h2>
+      <div class="bg-slate-50 dark:bg-zinc-900 border border-slate-200 dark:border-zinc-800 rounded-xl p-6">
+        <h3 class="font-bold mb-3">Ketentuan Nasional (Umum)</h3>
+        <ul class="list-disc list-inside space-y-2">
+          <li><strong>Minimum Lulus Mata Kuliah:</strong> C (bobot 2.00) â€” di bawah C (D/E) = tidak lulus</li>
+          <li><strong>Minimum IPK Kelulusan Sarjana:</strong> 2.00 (beberapa PT: 2.50, misal UGM)</li>
+          <li><strong>Maksimum Nilai D:</strong> 20% dari total SKS kumulatif (UMUM)</li>
+          <li><strong>Tidak Boleh Ada Nilai E:</strong> Untuk kelulusan sarjana</li>
+          <li><strong>Masa Studi Maksimum:</strong> 14 semester (7 tahun) untuk S1</li>
+        </ul>
+      </div>
+
+      <h3 class="mt-6">Variasi Per Universitas</h3>
+      <ul class="list-disc list-inside space-y-1">
+        <li><strong>UGM:</strong> IPK minimum 2.50 (bisa 2.00 dengan pertimbangan Dekan), max 25% nilai D</li>
+        <li><strong>UI:</strong> IPK â‰¥ 2.00, tidak ada E, max 20% D</li>
+        <li><strong>ITB:</strong> IPK â‰¥ 2.00, tidak ada E, tanpa D untuk sarjana</li>
+        <li><strong>UNAIR:</strong> IPK â‰¥ 2.00, tidak ada E, max 20% D</li>
+        <li><strong>IPB:</strong> IPK > 2.00 tanpa E</li>
+        <li><strong>Unpad:</strong> IPK â‰¥ 2.00, max 20% D</li>
+        <li><strong>ITS:</strong> IPK â‰¥ 2.00, tidak ada E</li>
+      </ul>
+    </section>
+
+    <section class="prose mb-12">
+      <h2>PAP vs PAN â€” Sistem Penilaian</h2>
+      <div class="table-scroll">
+        <table>
+          <thead>
+            <tr>
+              <th>Sistem</th>
+              <th>Penilaian Acuan Patokan (PAP)</th>
+              <th>Penilaian Acuan Normal (PAN)</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr><td><strong>Dasar</strong></td><td>Standar absolut (kriteria tetap)</td><td>Relatif terhadap kelompok (kurva normal)</td></tr>
+            <tr><td><strong>Rentang %</strong></td><td>Fix: A â‰¥80%, B 70-79%, dst</td><td>Fleksibel: bergantung distribusi nilai kelas</td></tr>
+            <tr><td><strong>Kelebihan</strong></td><td>Konsisten, transparan, adil</td><td>Mengakomodasi kesulitan soal bervariasi</td></tr>
+            <tr><td><strong>Kekurangan</strong></td><td>Soal terlalu mudah/sulit distorsi</td><td>Kompetitif, tidak mutlak</td></tr>
+            <tr><td><strong>Penerapan</strong></td><td>Umum di PT Indonesia (standar)</td><td>Khusus mata kuliah tertentu/fakultas</td></tr>
+          </tbody>
+        </table>
+      </div>
+      <p class="mt-3">Banyak PT menggunakan <strong>kombinasi PAP+PAN</strong>: tetapkan batas kelulusan minimum (PAP), lalu bandingkan relatif (PAN) untuk penilaian diferensial.</p>
+    </section>
+
+    <section class="prose mb-12">
+      <h2>Konversi ke Skala Lain</h2>
+      <div class="formula-block mb-4">
+        <div class="f-label">IPK 4.0 â†’ Persentase (Estimasi)</div>
+        <div class="f-text">Persentase â‰ˆ (IPK Ã· 4.0) Ã— 100%</div>
+        <div class="f-example">IPK 3.50 â‰ˆ 87.5% | IPK 3.00 â‰ˆ 75% | IPK 2.50 â‰ˆ 62.5%</div>
+      </div>
+      <p>Untuk konversi resmi ke GPA 4.0 (US) / Persentase / Skala lain: gunakan kalkulator konversi di halaman masing-masing universitas atau layanan WES/LAKIP.</p>
+    </section>
+
+    <section class="prose">
+      <h2>Referensi</h2>
+      <ul>
+        <li>Permendiknas No. 232/U/2000 â€” Penilaian Hasil Belajar Mahasiswa</li>
+        <li>Permenristekdikti No. 44/2015 â€” Standar Nasional Pendidikan Tinggi (SN-Dikti)</li>
+        <li>Buku Pedoman Akademik: UI, ITB, UGM, UNAIR, IPB, Unpad, ITS</li>
+      </ul>
+    </section>
+  </main>
+</Layout>

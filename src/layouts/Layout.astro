@@ -22,6 +22,7 @@ const {
 } = Astro.props;
 
 import '../styles/global.css';
+import CookieConsent from '../components/CookieConsent.astro';
 
 const defaultSchema = {
   "@context": "https://schema.org",
@@ -142,31 +143,9 @@ const pageKeywords = 'cgpa to percentage, cgpa to percentage calculator, cgpa ca
     <script type="application/ld+json" set:html={structuredData} />
     <script type="application/ld+json" set:html={structuredDataOrg} />
     <script type="application/ld+json" set:html={structuredDataWebsite} />
-
-    <!-- Google Analytics -->
-    <script async src="https://www.googletagmanager.com/gtag/js?id=G-5TB706E56P"></script>
-    <script is:inline>
-      window.dataLayer = window.dataLayer || [];
-      function gtag(){dataLayer.push(arguments);}
-      gtag('js', new Date());
-      gtag('config', 'G-5TB706E56P');
-    </script>
-
-    <!-- AdSense -->
-    <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-1016421061571791" crossorigin="anonymous"></script>
-    <style is:global>
-      body {
-        min-height: 100vh;
-        display: flex;
-        flex-direction: column;
-      }
-      main {
-        flex: 1;
-        width: 100%;
-      }
-    </style>
   </head>
   <body>
     <slot />
+    <CookieConsent />
   </body>
 </html>

@@ -1,0 +1,174 @@
+---
+import Layout from '../../layouts/Layout.astro';
+import { getUniversitiesByCountry } from '../../data/universities-global';
+
+const universities = getUniversitiesByCountry('KR');
+
+const pageTitle = '대학별 학점계산기 | 한국 주요 대학 평점 체계 비교';
+const description = '한국 주요 7개 대학(서울대, 카이스트, 연세대, 고려대, 이화여대, 성균관대, 건국대)의 학점 체계를 한눈에 비교. 4.3 만점 vs 4.5 만점, 등급별 평점, 백분율 환산표 제공.';
+const canonical = 'https://globalcgpa.in/ko/대학-학점계산기';
+const ogImage = '/og-image-ko.png';
+const lang = 'ko';
+const alternates = [
+  { hreflang: 'en', href: 'https://globalcgpa.in/universities' },
+  { hreflang: 'ko', href: 'https://globalcgpa.in/ko/대학-학점계산기' },
+];
+---
+
+<Layout title={pageTitle} description={description} canonical={canonical} ogImage={ogImage} lang={lang} alternates={alternates}>
+  <main class="max-w-[1160px] mx-auto px-6 py-14" style="flex:1;">
+    <div class="text-xs font-bold uppercase tracking-wider text-emerald-500 mb-2">대학별 학점 체계 비교</div>
+    <h1 class="text-3xl sm:text-4xl font-extrabold tracking-tight mb-3">주요 대학 평점 체계 한눈에 보기</h1>
+    <p class="text-slate-500 dark:text-zinc-400 text-base mb-10">
+      한국 대학은 4.3 만점(서울대, 카이스트, 연세대, 이화여대)과 4.5 만점(고려대, 성균관대, 건국대) 두 체계로 나뉩니다.
+      아래 표에서 각 대학의 등급별 평점과 백분율 환산 기준을 확인하세요.
+    </p>
+
+    <section class="mb-16" aria-labelledby="comparison-heading">
+      <h2 id="comparison-heading" class="text-2xl font-extrabold tracking-tight mb-6">등급별 평점 비교표</h2>
+      <div class="table-scroll">
+        <table>
+          <thead>
+            <tr>
+              <th>등급</th>
+              {universities.map(u => (
+                <th scope="col" class="text-center">{u.name}<br><span class="text-xs font-normal text-slate-400 dark:text-zinc-500">{u.system} 만점</span></th>
+              ))}
+            </tr>
+          </thead>
+          <tbody>
+            {(() => {
+              const allGrades = new Set<string>();
+              universities.forEach(u => Object.keys(u.gradeMapping).forEach(g => allGrades.add(g)));
+              const gradeOrder = ['A+', 'A0', 'A', 'A-', 'B+', 'B0', 'B', 'B-', 'C+', 'C0', 'C', 'C-', 'D+', 'D0', 'D', 'D-', 'F'];
+              return gradeOrder.filter(g => allGrades.has(g));
+            })().map(grade => (
+              <tr>
+                <td><strong>{grade}</strong></td>
+                {universities.map(u => (
+                  <td class="text-center font-mono text-lg">
+                    {u.gradeMapping[grade] !== undefined ? u.gradeMapping[grade].toFixed(2) : '—'}
+                  </td>
+                ))}
+              </tr>
+            ))}
+          </tbody>
+        </table>
+      </div>
+      <p class="text-xs text-slate-500 dark:text-zinc-400 mt-3 text-center">
+        ※ A0/A/A- 표기 차이는 대학별 표기 관행 차이입니다. 실질적 평점은 위 표를 참고하세요.
+      </p>
+    </section>
+
+    <section class="mb-16" aria-labelledby="percentage-heading">
+      <h2 id="percentage-heading" class="text-2xl font-extrabold tracking-tight mb-6">백분율(%) 환산 비교표</h2>
+      <div class="table-scroll">
+        <table>
+          <thead>
+            <tr>
+              <th>등급</th>
+              {universities.map(u => (
+                <th scope="col" class="text-center">{u.name}<br><span class="text-xs font-normal text-slate-400 dark:text-zinc-500">{u.system} 만점</span></th>
+              ))}
+            </tr>
+          </thead>
+          <tbody>
+            {(() => {
+              const allGrades = new Set<string>();
+              universities.forEach(u => Object.keys(u.percentageMapping || {}).forEach(g => allGrades.add(g)));
+              const gradeOrder = ['A+', 'A0', 'A', 'A-', 'B+', 'B0', 'B', 'B-', 'C+', 'C0', 'C', 'C-', 'D+', 'D0', 'D', 'D-', 'F'];
+              return gradeOrder.filter(g => allGrades.has(g));
+            })().map(grade => (
+              <tr>
+                <td><strong>{grade}</strong></td>
+                {universities.map(u => (
+                  <td class="text-center">
+                    {u.percentageMapping && u.percentageMapping[grade]
+                      ? `${u.percentageMapping[grade][0]}~${u.percentageMapping[grade][1]}%`
+                      : '—'}
+                  </td>
+                ))}
+              </tr>
+            ))}
+          </tbody>
+        </table>
+      </div>
+      <p class="text-xs text-slate-500 dark:text-zinc-400 mt-3 text-center">
+        ※ 백분율 구간은 대학별 공통 기준(절대평가 시)입니다. 상대평가 운영 시 실제 분포와 다를 수 있습니다.
+      </p>
+    </section>
+
+    <section class="mb-16" aria-labelledby="univ-detail-heading">
+      <h2 id="univ-detail-heading" class="text-2xl font-extrabold tracking-tight mb-6">대학별 상세 정보</h2>
+      <div class="grid gap-6">
+        {universities.map(u => (
+          <article class="calc-shell p-6">
+            <div class="flex flex-wrap items-baseline gap-3 mb-4">
+              <h3 class="text-xl font-extrabold text-slate-900 dark:text-white">{u.name}</h3>
+              <span class="px-3 py-1 bg-emerald-100 dark:bg-emerald-900/30 text-emerald-700 dark:text-emerald-300 text-xs font-bold rounded-full">
+                {u.system} 만점
+              </span>
+              <span class="text-sm text-slate-500 dark:text-zinc-400">{u.nameEn}</span>
+            </div>
+
+            <div class="prose mb-4">
+              <p>{u.formulaText}</p>
+              <p><strong>출처:</strong> <a href={u.sourceUrl} target="_blank" rel="noopener">{u.source}</a></p>
+              {u.note && <p><strong>비고:</strong> {u.note}</p>}
+            </div>
+
+            <div class="flex flex-wrap gap-3">
+              <a href={`/ko/${u.slug}`} class="calc-tab active">이 대학 계산기 열기</a>
+              <a href={u.sourceUrl} target="_blank" rel="noopener" class="calc-tab">공식 규정 보기</a>
+            </div>
+          </article>
+        ))}
+      </div>
+    </section>
+
+    <section aria-labelledby="conversion-heading">
+      <h2 id="conversion-heading" class="text-2xl font-extrabold tracking-tight mb-6">4.3 ↔ 4.5 만점 환산 참고</h2>
+      <div class="calc-shell p-6">
+        <p class="text-sm text-slate-600 dark:text-zinc-400 mb-4">
+          건국대학교에서 공식 제공하는 환산표를 기준으로 정리했습니다. 실제 성적증명서 발급 시 대학에서 선택한 체계(4.3 또는 4.5)로 발급됩니다.
+        </p>
+        <div class="table-scroll">
+          <table>
+            <thead>
+              <tr>
+                <th>4.5 만점 평점</th>
+                <th>4.3 만점 환산</th>
+                <th>백분율(%)</th>
+                <th>등급(4.5)</th>
+                <th>등급(4.3)</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr><td class="font-mono">4.50</td><td class="font-mono">4.30</td><td>95~100</td><td>A+</td><td>A+</td></tr>
+              <tr><td class="font-mono">4.45</td><td class="font-mono">4.25</td><td>94</td><td>A+</td><td>A+</td></tr>
+              <tr><td class="font-mono">4.40</td><td class="font-mono">4.20</td><td>93</td><td>A+</td><td>A+</td></tr>
+              <tr><td class="font-mono">4.30</td><td class="font-mono">4.10</td><td>92</td><td>A+</td><td>A+</td></tr>
+              <tr><td class="font-mono">4.20</td><td class="font-mono">4.00</td><td>91</td><td>A+</td><td>A0</td></tr>
+              <tr><td class="font-mono">4.10</td><td class="font-mono">3.90</td><td>90</td><td>A+</td><td>A0</td></tr>
+              <tr><td class="font-mono">4.00</td><td class="font-mono">3.80</td><td>89</td><td>A</td><td>A0</td></tr>
+              <tr><td class="font-mono">3.90</td><td class="font-mono">3.70</td><td>88</td><td>A</td><td>A-</td></tr>
+              <tr><td class="font-mono">3.80</td><td class="font-mono">3.60</td><td>87</td><td>A</td><td>A-</td></tr>
+              <tr><td class="font-mono">3.70</td><td class="font-mono">3.50</td><td>86</td><td>A</td><td>A-</td></tr>
+              <tr><td class="font-mono">3.60</td><td class="font-mono">3.40</td><td>85</td><td>A</td><td>A-</td></tr>
+              <tr><td class="font-mono">3.50</td><td class="font-mono">3.30</td><td>84</td><td>B+</td><td>B+</td></tr>
+              <tr><td class="font-mono">3.00</td><td class="font-mono">3.00</td><td>80</td><td>B</td><td>B0</td></tr>
+              <tr><td class="font-mono">2.50</td><td class="font-mono">2.30</td><td>75</td><td>C+</td><td>C+</td></tr>
+              <tr><td class="font-mono">2.00</td><td class="font-mono">2.00</td><td>70</td><td>C</td><td>C0</td></tr>
+              <tr><td class="font-mono">1.50</td><td class="font-mono">1.30</td><td>65</td><td>D+</td><td>D+</td></tr>
+              <tr><td class="font-mono">1.00</td><td class="font-mono">1.00</td><td>60</td><td>D</td><td>D0</td></tr>
+              <tr><td class="font-mono">0.00</td><td class="font-mono">0.00</td><td>0~59</td><td>F</td><td>F</td></tr>
+            </tbody>
+          </table>
+        </div>
+        <p class="text-xs text-slate-500 dark:text-zinc-400 mt-3 text-center">
+          출처: 건국대학교 영문 학사안내 — <a href="https://old.konkuk.ac.kr/eng/jsp/Academics/academics_2_7_2.jsp" target="_blank" rel="noopener" class="underline">Examinations / Grades</a>
+        </p>
+      </div>
+    </section>
+  </main>
+</Layout>

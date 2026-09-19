@@ -1,0 +1,169 @@
+---
+import Layout from '../../../../layouts/Layout.astro';
+
+const pageTitle = 'Deutsche Notenskala 1,0–4,0 | Sehr gut bis Ausreichend';
+const description = 'Deutsche Notenskala an Universitäten: 1,0–1,5 sehr gut, 1,6–2,5 gut, 2,6–3,5 befriedigend, 3,6–4,0 ausreichend. Notenschritte 0,3, ausgeschlossene Noten 0,7/4,3/4,7/5,3.';
+const canonical = 'https://globalcgpa.in/de/guides/notenskala-1-6';
+const ogImage = '/og-image-de.png';
+const lang = 'de';
+const alternates = [
+  { hreflang: 'en', href: 'https://globalcgpa.in/guides/german-grade-scale' },
+  { hreflang: 'de', href: 'https://globalcgpa.in/de/guides/notenskala-1-6' },
+];
+---
+
+<Layout title={pageTitle} description={description} canonical={canonical} ogImage={ogImage} lang={lang} alternates={alternates}>
+  <main class="max-w-[780px] mx-auto px-6 py-14" style="flex:1;">
+    <nav class="crumbs mb-6" aria-label="Breadcrumb">
+      <a href="/de/">Notenrechner</a>
+      <span class="sep">/</span>
+      <a href="/de/guides">Guides</a>
+      <span class="sep">/</span>
+      <span class="current">Notenskala 1–6</span>
+    </nav>
+
+    <div class="text-xs font-bold uppercase tracking-wider text-emerald-500 mb-2">Akademischer Guide</div>
+    <h1 class="text-3xl sm:text-4xl font-extrabold tracking-tight mb-3">Deutsche Notenskala 1,0–4,0</h1>
+    <p class="text-slate-500 dark:text-zinc-400 text-base mb-10">
+      Standardisierte Skala an allen deutschen Universitäten (TUM, Heidelberg, HU Berlin, KIT, RWTH, LMU).
+      Noten in 0,3-Schritten. 1,0 = sehr gut (bestmöglich), 4,0 = ausreichend (knapp bestanden), >4,0 = nicht ausreichend.
+    </p>
+
+    <section class="prose mb-12">
+      <h2>Notenskala & Qualitative Beurteilung</h2>
+      <div class="table-scroll">
+        <table>
+          <thead>
+            <tr>
+              <th>Note</th>
+              <th class="text-center">Prädikat</th>
+              <th>Beschreibung</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr><td class="font-mono font-bold">1,0</td><td class="text-center">sehr gut</td><td>hervorragende Leistung</td></tr>
+            <tr><td class="font-mono font-bold">1,3</td><td class="text-center">sehr gut</td><td>hervorragende Leistung</td></tr>
+            <tr><td class="font-mono font-bold">1,7</td><td class="text-center">gut</td><td>Leistung weit über dem Durchschnitt</td></tr>
+            <tr><td class="font-mono font-bold">2,0</td><td class="text-center">gut</td><td>Leistung weit über dem Durchschnitt</td></tr>
+            <tr><td class="font-mono font-bold">2,3</td><td class="text-center">gut</td><td>Leistung weit über dem Durchschnitt</td></tr>
+            <tr><td class="font-mono font-bold">2,7</td><td class="text-center">befriedigend</td><td>durchschnittliche Anforderungen</td></tr>
+            <tr><td class="font-mono font-bold">3,0</td><td class="text-center">befriedigend</td><td>durchschnittliche Anforderungen</td></tr>
+            <tr><td class="font-mono font-bold">3,3</td><td class="text-center">befriedigend</td><td>durchschnittliche Anforderungen</td></tr>
+            <tr><td class="font-mono font-bold">3,7</td><td class="text-center">ausreichend</td><td>trotz Mängel noch genügend</td></tr>
+            <tr><td class="font-mono font-bold">4,0</td><td class="text-center">ausreichend</td><td>trotz Mängel noch genügend</td></tr>
+            <tr><td class="font-mono font-bold">5,0</td><td class="text-center">nicht ausreichend</td><td>erhebliche Mängel, nicht bestanden</td></tr>
+          </tbody>
+        </table>
+      </div>
+    </section>
+
+    <section class="prose mb-12">
+      <h2>Gesamtnote (Bachelor/Master) — Prädikate</h2>
+      <div class="table-scroll">
+        <table>
+          <thead>
+            <tr>
+              <th>Gesamtnote</th>
+              <th class="text-center">Prädikat</th>
+              <th>Bedeutung</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr><td class="font-mono font-bold">≤ 1,5</td><td class="text-center">sehr gut</td><td>hervorragende Leistung</td></tr>
+            <tr><td class="font-mono font-bold">1,6 – 2,5</td><td class="text-center">gut</td><td>deutlich über Durchschnitt</td></tr>
+            <tr><td class="font-mono font-bold">2,6 – 3,5</td><td class="text-center">befriedigend</td><td>durchschnittlich</td></tr>
+            <tr><td class="font-mono font-bold">3,6 – 4,0</td><td class="text-center">ausreichend</td><td>trotz Mängel bestanden</td></tr>
+          </tbody>
+        </table>
+      </div>
+    </section>
+
+    <section class="prose mb-12">
+      <h2>Besondere Prädikate (Promotions-relevant)</h2>
+      <div class="bg-emerald-50 dark:bg-emerald-900/20 border border-emerald-200 dark:border-emerald-800 rounded-xl p-6">
+        <h3 class="font-bold mb-3">Bachelor/Master (APSO/ÜPO/ZSP-HU)</h3>
+        <ul class="list-disc list-inside space-y-1">
+          <li><strong>Mit Auszeichnung bestanden:</strong> ≤ 1,2 (TUM, RWTH: + Abschlussarbeit 1,0)</li>
+          <li><strong>Sehr gut bestanden:</strong> 1,3 – 1,5</li>
+          <li><strong>Gut bestanden:</strong> 1,6 – 2,5</li>
+          <li><strong>Befriedigend bestanden:</strong> 2,6 – 3,5</li>
+          <li><strong>Bestanden:</strong> 3,6 – 4,0</li>
+        </ul>
+        <h3 class="font-bold mt-4 mb-2">Promotion (Dr.)</h3>
+        <ul class="list-disc list-inside space-y-1">
+          <li><strong>summa cum laude:</strong> < 1,5 (teilweise < 1,0 + einstimmig)</li>
+          <li><strong>magna cum laude:</strong> 1,5 – 2,5</li>
+          <li><strong>cum laude:</strong> 2,5 – 3,0 (teilweise 2,5–3,5)</li>
+          <li><strong>rite:</strong> 3,0 – 4,0 (bestanden)</li>
+          <li><strong>non sufficit:</strong> > 4,0 (nicht bestanden)</li>
+        </ul>
+      </div>
+    </section>
+
+    <section class="prose mb-12">
+      <h2>Wichtige Regeln (Einheitlich an 6 Top-Unis)</h2>
+      <div class="table-scroll">
+        <table>
+          <thead><tr><th>Regel</th><th>Wert</th><th>Anwendung</th></tr></thead>
+          <tbody>
+            <tr><td><strong>Notenschritte</strong></td><td>0,3</td><td>1,0, 1,3, 1,7, 2,0, 2,3, 2,7, 3,0, 3,3, 3,7, 4,0</td></tr>
+            <tr><td><strong>Ausgeschlossene Noten</strong></td><td>0,7; 4,3; 4,7; 5,3</td><td>Darf nicht vergeben werden</td></tr>
+            <tr><td><strong>Dezimalstellen Modulnote</strong></td><td>1 (TUM, Heidelberg, HU, KIT, RWTH) / 2 (LMU)</td><td>Keine Rundung, Abschneiden</td></tr>
+            <tr><td><strong>Dezimalstellen Gesamtnote</strong></td><td>1</td><td>Keine Rundung, Abschneiden</td></tr>
+            <tr><td><strong>Bestandene Note</strong></td><td>≥ 4,0</td><td>< 4,0 = nicht bestanden</td></tr>
+            <tr><td><strong>Gewichtung</strong></td><td>ECTS/LP/Credits</td><td>Modulnote & Gesamtnote gewichtet</td></tr>
+          </tbody>
+        </table>
+      </div>
+    </section>
+
+    <section class="prose mb-12">
+      <h2>Jurastudium (Staatsexamen) — 18-Punkte-Skala</h2>
+      <p>Nur für Rechtswissenschaften (LMU, Heidelberg, HU Berlin, etc.):</p>
+      <div class="table-scroll">
+        <table>
+          <thead><tr><th>Punkte</th><th class="text-center">Prädikat</th><th>Entspricht Note</th></tr></thead>
+          <tbody>
+            <tr><td class="font-mono">18 – 16</td><td class="text-center">sehr gut</td><td>≈ 1,0 – 1,3</td></tr>
+            <tr><td class="font-mono">15 – 13</td><td class="text-center">gut</td><td>≈ 1,7 – 2,3</td></tr>
+            <tr><td class="font-mono">12 – 10</td><td class="text-center">vollbefriedigend</td><td>≈ 2,7 – 3,0</td></tr>
+            <tr><td class="font-mono">9 – 7</td><td class="text-center">befriedigend</td><td>≈ 3,3 – 3,7</td></tr>
+            <tr><td class="font-mono">6 – 4</td><td class="text-center">ausreichend</td><td>≈ 4,0</td></tr>
+            <tr><td class="font-mono">3 – 1</td><td class="text-center">mangelhaft</td><td>> 4,0</td></tr>
+            <tr><td class="font-mono">0</td><td class="text-center">ungenügend</td><td>> 4,0</td></tr>
+          </tbody>
+        </table>
+      </div>
+    </section>
+
+    <section class="prose mb-12">
+      <h2>ECTS-Grades A–E (Relativ, Percentile)</h2>
+      <p>Zusätzlich zur deutschen Note im Suplemento Europeo / Diploma Supplement:</p>
+      <div class="table-scroll">
+        <table>
+          <thead><tr><th>ECTS Grade</th><th class="text-center">Percentil</th><th class="text-center">Anteil</th><th>Beschreibung</th></tr></thead>
+          <tbody>
+            <tr><td class="font-mono font-bold">A</td><td class="text-center">Top 10%</td><td class="text-center">10%</td><td>Excellent</td></tr>
+            <tr><td class="font-mono font-bold">B</td><td class="text-center">nächste 25%</td><td class="text-center">25%</td><td>Very Good</td></tr>
+            <tr><td class="font-mono font-bold">C</td><td class="text-center">nächste 30%</td><td class="text-center">30%</td><td>Good</td></tr>
+            <tr><td class="font-mono font-bold">D</td><td class="text-center">nächste 25%</td><td class="text-center">25%</td><td>Satisfactory</td></tr>
+            <tr><td class="font-mono font-bold">E</td><td class="text-center">letzte 10%</td><td class="text-center">10%</td><td>Sufficient</td></tr>
+          </tbody>
+        </table>
+      </div>
+      <p class="mt-2">Basis: Kohorte bestandener Prüfungen der letzten 2-3 Studienjahre. Seit 2015 nicht mehr empfohlen, aber weiter nutzbar (HU Berlin ZSP-HU).</p>
+    </section>
+
+    <section class="prose">
+      <h2>Referenzen</h2>
+      <ul>
+        <li>TUM: APSO §17 (Fassung 12. Änderung 16.12.2025)</li>
+        <li>Heidelberg: Prüfungsordnungen + Anerkennungssatzung 02.03.2023</li>
+        <li>HU Berlin: ZSP-HU (Stand 05.05.2025) §112</li>
+        <li>KIT: SPO Bachelor Informatik (AB 056/2026) §7</li>
+        <li>RWTH: ÜPO 10. Änderung (06.01.2021) §10</li>
+        <li>LMU: PSO Informatik (1569/2022) §10 + BayHSchG</li>
+      </ul>
+    </section>
+  </main>
+</Layout>

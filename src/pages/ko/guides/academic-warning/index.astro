@@ -1,0 +1,200 @@
+---
+import Layout from '../../../../layouts/Layout.astro';
+
+const pageTitle = '학사경고·제적 기준 | 한국 대학 학사경고 제도 총정리';
+const description = '한국 주요 대학의 학사경고 평점 기준, 경고 횟수별 조치, 제적 조건, 복학 후 재경고 규정, 이의신청 절차 종합 안내.';
+const canonical = 'https://globalcgpa.in/ko/guides/academic-warning';
+const ogImage = '/og-image-ko.png';
+const lang = 'ko';
+const alternates = [
+  { hreflang: 'en', href: 'https://globalcgpa.in/guides/academic-warning' },
+  { hreflang: 'ko', href: 'https://globalcgpa.in/ko/guides/academic-warning' },
+];
+---
+
+<Layout title={pageTitle} description={description} canonical={canonical} ogImage={ogImage} lang={lang} alternates={alternates}>
+  <main class="max-w-[780px] mx-auto px-6 py-14" style="flex:1;">
+    <nav class="crumbs mb-6" aria-label="브레드크럼">
+      <a href="/ko/">학점계산기</a>
+      <span class="sep">/</span>
+      <a href="/ko/guides">가이드</a>
+      <span class="sep">/</span>
+      <span class="current">학사경고·제적 기준</span>
+    </nav>
+
+    <div class="text-xs font-bold uppercase tracking-wider text-emerald-500 mb-2">가이드</div>
+    <h1 class="text-3xl sm:text-4xl font-extrabold tracking-tight mb-3">학사경고·제적 기준 — 대학별 제도 완벽 비교</h1>
+    <p class="text-slate-500 dark:text-zinc-400 text-base mb-10">
+      평점평균이 일정 기준 미만일 때 주어지는 학사경고. 누적 횟수에 따라 제적(퇴학)될 수 있습니다.
+      대학별 기준 평점, 경고 횟수, 복학 후 규정 차이를 정확히 이해하세요.
+    </p>
+
+    <section class="prose mb-12">
+      <h2>대학별 학사경고 기준 비교표 (학부)</h2>
+      <div class="table-scroll">
+        <table>
+          <thead>
+            <tr>
+              <th>대학</th>
+              <th class="text-center">체계</th>
+              <th class="text-center">경고 기준<br>(직전학기 평점)</th>
+              <th class="text-center">제적 기준<br>(누적 경고 횟수)</th>
+              <th class="text-center">복학 후<br>재경고 시</th>
+              <th class="text-center">대학원 기준</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr><td><strong>서울대(SNU)</strong></td><td class="text-center">4.3</td><td class="text-center">2.0/4.3 미만</td><td class="text-center">3회</td><td class="text-center">즉시 제적</td><td class="text-center">누적 2.5/4.3 미만</td></tr>
+            <tr><td><strong>카이스트(KAIST)</strong></td><td class="text-center">4.3</td><td class="text-center">2.0/4.3 미만</td><td class="text:center">3회</td><td class="text:center">즉시 제적</td><td class="text:center">누적 2.5/4.3 미만</td></tr>
+            <tr><td><strong>연세대학교</strong></td><td class="text-center">4.3</td><td class="text-center">1.75/4.3 미만</td><td class="text:center">3회 (비연속도 계산)</td><td class="text:center">1회만 더 받아도 제적</td><td class="text:center">누적 2.0/4.3 미만 → 2회 시 제적</td></tr>
+            <tr><td><strong>고려대학교</strong></td><td class="text-center">4.5</td><td class="text-center">전체 평점 1.75/4.5 미만</td><td class="text:center">연속 3회</td><td class="text:center">복학 후 1회 경고 시 제적</td><td class="text:center">누적 3.0/4.5 미만</td></tr>
+            <tr><td><strong>이화여대</strong></td><td class="text-center">4.3</td><td class="text-center">1.75/4.3 미만</td><td class="text:center">3회</td><td class="text:center">복학 후 경고 시 제적</td><td class="text:center">누적 3.0/4.3 미만</td></tr>
+            <tr><td><strong>성균관대(SKK)</strong></td><td class="text:center">4.5</td><td class="text:center">2.0/4.5 미만</td><td class="text:center">3회</td><td class="text:center">복학 후 경고 시 제적</td><td class="text:center">누적 3.0/4.5 미만</td></tr>
+            <tr><td><strong>건국대학교</strong></td><td class="text:center">4.5</td><td class="text-center">2.0/4.5 미만</td><td class="text:center">3회</td><td class="text:center">복학 후 경고 시 제적</td><td class="text:center">누적 3.0/4.5 미만</td></tr>
+          </tbody>
+        </table>
+      </div>
+      <p class="text-sm text-slate-500 dark:text-zinc-400 mt-3">
+        ※ '직전학기 평점' = 해당 학기 평점평균(SGPA). '누적 평점' = 전체 평점평균(CGPA). 대학원 기준은 학과별 상이할 수 있음.
+      </p>
+    </section>
+
+    <section class="prose mb-12">
+      <h2>경고 단계별 조치 사항 (일반적 프로세스)</h2>
+      <div class="space-y-4">
+        <div class="bg-blue-50 dark:bg-blue-900/20 border border-blue-200 dark:border-blue-800 rounded-xl p-5">
+          <h3 class="font-bold text-blue-800 dark:text-blue-200 mb-2">1차 경고 (주의)</h3>
+          <ul class="list-disc list-inside space-y-1">
+            <li>학과장/지도교수 면담 필수</li>
+            <li>상담 확인서 제출 후 수강신청 가능</li>
+            <li>다음 학기 수강학점 제한(일부 대학 15~18학점 → 12~15학점)</li>
+          </ul>
+        </div>
+        <div class="bg-amber-50 dark:bg-amber-900/20 border border-amber-200 dark:border-amber-800 rounded-xl p-5">
+          <h3 class="font-bold text-amber-800 dark:text-amber-200 mb-2">2차 경고 (경고)</h3>
+          <ul class="list-disc list-inside space-y-1">
+            <li>학생상담센터 전문 상담 의무 이수</li>
+            <li>수강신청 전 상담 완료 증명서 제출</li>
+            <li>학사경고자 특별 관리 프로그램 참여 권장</li>
+          </ul>
+        </div>
+        <div class="bg-red-50 dark:bg-red-900/20 border border-red-200 dark:border-red-800 rounded-xl p-5">
+          <h3 class="font-bold text-red-800 dark:text-red-200 mb-2">3차 경고 (제적)</h3>
+          <ul class="list-disc list-inside space-y-1">
+            <li>즉시 제적(퇴학) 처리</li>
+            <li>제적일로부터 일정 기간(보통 1~2년) 후 재입학 신청 가능</li>
+            <li>재입학 후 다시 경고 받으면 영구 제적(대부분 대학)</li>
+          </ul>
+        </div>
+      </div>
+    </section>
+
+    <section class="prose mb-12">
+      <h2>대학별 특이사항</h2>
+      <details class="faq-row">
+        <summary>서울대학교 (SNU)</summary>
+        <div class="faq-body">
+          <p><strong>학부:</strong> 직전학기 평점평균 2.0/4.3 미만 → 경고. 3회 누적 → 제적. <strong>복학 후:</strong> 재입학 후 첫 학기 경고 시 즉시 제적. <strong>대학원:</strong> 누적 평점 2.5/4.3 미만 또는 논문연구 U → 경고. 3회 연속(파트타임 3회) → 제적. <strong>출처:</strong> SNU OGA 학사안내.</p>
+        </div>
+      </details>
+      <details class="faq-row">
+        <summary>카이스트 (KAIST)</summary>
+        <div class="faq-body">
+          <p><strong>학부:</strong> 직전학기 평점평균 2.0/4.3 미만 → 경고. 3회 누적 → 제적. 재입학 후 경고 시 제적. <strong>대학원:</strong> 누적 평점 2.5/4.3 미만(12학점 미만 이수자 제외) 또는 논문연구 U → 경고. 3회 연속(파트타임 3회) → 제적. <strong>출처:</strong> KAIST 학사정책 — Grades.</p>
+        </div>
+      </details>
+      <details class="faq-row">
+        <summary>연세대학교</summary>
+        <div class="faq-body">
+          <p><strong>학부:</strong> 평점평균 1.75/4.3 미만 → 경고. 3회(비연속 포함) → 제적. <strong>1차:</strong> 지도교수/학과장 상담 필수. <strong>2차:</strong> 연세상담센터 상담 필수. <strong>복학 후:</strong> 재입학 후 1회 경고 시 제적. <strong>대학원:</strong> 전체 평점 2.00/4.3 미만 → 경고. 2회 경고 시 제적. <strong>출처:</strong> 연세대 UIC 학사안내 / 대학원 학사안내.</p>
+        </div>
+      </details>
+      <details class="faq-row">
+        <summary>고려대학교</summary>
+        <div class="faq-body">
+          <p><strong>학부:</strong> 전체 평점평균 1.75/4.5 미만 → 경고. <strong>연속</strong> 3회 경고 시 제적(비연속은 계산 안 함). <strong>복학 후:</strong> 재입학 후 경고 1회 시 제적. <strong>대학원:</strong> 누적 평점 3.0/4.5 미만 → 경고. <strong>출처:</strong> 고려대 교무처 학사안내.</p>
+        </div>
+      </details>
+      <details class="faq-row">
+        <summary>이화여자대학교</summary>
+        <div class="faq-body">
+          <p><strong>학부:</strong> 평점평균 1.75/4.3 미만 → 경고. 3회 누적 → 제적. <strong>복학 후:</strong> 재입학 후 경고 시 제적. <strong>대학원:</strong> 누적 평점 3.0/4.3 미만 → 경고. 2회 경고 시 제적. <strong>출처:</strong> 이화여대 학사안내 FAQ.</p>
+        </div>
+      </details>
+      <details class="faq-row">
+        <summary>성균관대학교 (SKK)</summary>
+        <div class="faq-body">
+          <p><strong>학부:</strong> 평점평균 2.0/4.5 미만 → 경고. 3회 누적 → 제적. <strong>복학 후:</strong> 재입학 후 경고 시 제적. <strong>대학원:</strong> 누적 평점 3.0/4.5 미만 → 경고. <strong>출처:</strong> 성균관대 성적증명서 가이드.</p>
+        </div>
+      </details>
+      <details class="faq-row">
+        <summary>건국대학교</summary>
+        <div class="faq-body">
+          <p><strong>학부:</strong> 평점평균 2.0/4.5 미만 → 경고. 3회 누적 → 제적. <strong>복학 후:</strong> 재입학 후 경고 시 제적. <strong>대학원:</strong> 누적 평점 3.0/4.5 미만 → 경고. <strong>출처:</strong> 건국대 영문 학사안내.</p>
+        </div>
+      </details>
+    </section>
+
+    <section class="prose mb-12">
+      <h2>학사경고 받았을 때 즉시 해야 할 일</h2>
+      <ol class="list-decimal list-inside space-y-3">
+        <li><strong>공식 통지 확인:</strong> 학교 포털/이메일로 발송된 학사경고 통지서 출력 및 내용 숙지</li>
+        <li><strong>상담 예약:</strong> 1차 → 학과장/지도교수, 2차 → 학생상담센터 (기한 엄수)</li>
+        <li><strong>수강계획 재수립:</strong> 재수강 대상 과목(C+ 이하) 우선 배치, 신규 과목 난이도 하향 조정</li>
+        <li><strong>수강학점 제한 확인:</strong> 경고자 수강신청 가능 학점(보통 12~15학점) 준수</li>
+        <li><strong>장학금 영향 확인:</strong> 국가장학금/교내장학금 수혜 자격 상실 여부 확인 (보통 직전학기 12학점 이상 + 평점 2.0+ 필요)</li>
+        <li><strong>학자금대출 영향 확인:</strong> 학자금대출 성적 기준(직전학기 70점/2.0+ 또는 누적 2.0+) 미달 시 다음 학기 대출 제한 가능</li>
+      </ol>
+    </section>
+
+    <section class="prose mb-12">
+      <h2>자주 묻는 질문 (FAQ)</h2>
+      <details class="faq-row">
+        <summary>학사경고가 장학금/대출에 영향 주나요?</summary>
+        <div class="faq-body">
+          <p>네. 국가장학금은 직전학기 12학점 이상 이수 + 평점평균 2.0/4.5(또는 4.3) 이상이 기본 요건입니다. 학사경고(평점 미달) 시 다음 학기 국가장학금 탈락 가능. 학자금대출도 성적 기준(직전학기 70점/2.0+ 또는 누적 2.0+) 미달 시 제한. 교내장학금은 대학별 자체 기준 적용.</p>
+        </div>
+      </details>
+      <details class="faq-row">
+        <summary>휴학하면 학사경고가 초기화되나요?</summary>
+        <div class="faq-body">
+          <p>아니요. 휴학 중에도 경고 횟수는 유지됩니다. 복학 후 첫 학기에 다시 평점 미달이면 다음 차수 경고(2차 또는 3차)로 이어집니다. 단, 군휴학 등 일부 예외는 대학별 확인 필요.</p>
+        </div>
+      </details>
+      <details class="faq-row">
+        <summary>제적 후 재입학하려면 어떻게 해야 하나요?</summary>
+        <div class="faq-body">
+          <p>보통 제적일로부터 1~2년 경과 후 재입학 모집 공고 기간에 신청. 서류: 재입학원서, 성적증명서, 학업계획서, 지도교수 추천서 등. 심사 후 허가. 재입학 후 첫 학기 평점 미달 시 영구 제적(대부분 대학). 정원은 결원 범위 내.</p>
+        </div>
+      </details>
+      <details class="faq-row">
+        <summary>이의신청 가능한가요?</summary>
+        <div class="faq-body">
+          <p>평점 계산 오류(성적 정정, 누락 과목 등)인 경우에만 정정 기간(보통 종강 후 1주일) 내 이의신청 가능. 단순 '성적이 낮아서 억울하다'는 사유는 불가. 성적 정정 신청은 담당 교수 → 학과장 → 교무처 순으로 진행.</p>
+        </div>
+      </details>
+    </section>
+
+    <section class="prose mb-12">
+      <h2>학사경고 탈출 실전 전략</h2>
+      <ul class="list-disc list-inside space-y-2">
+        <li><a href="/ko/" class="underline hover:text-emerald-500"><strong>메인 계산기</strong></a>에서 현재 평점으로 다음 학기 목표 평점 시뮬레이션</li>
+        <li>재수강 가능 과목(C+ 이하) 모두 재수강 신청 — 상한선(A0/A, B+/B) 고려해 기대 평점 계산</li>
+        <li>신규 과목은 '절대평가' 위주, 팀플/발표 비중 높은 과목, 기초 교양으로 구성</li>
+        <li>수강학점 최소화(12~15학점) → 과목당 집중도 높이기</li>
+        <li>출석 100% 목표 — 결석 1/3 초과 시 자동 F(대부분 대학)</li>
+        <li>중간고사 전 조교/교수 면담 → 평가 기준, 출제 경향 파악</li>
+        <li>스터디 그룹/튜터링 적극 활용 — 동기/선배 도움 받기</li>
+      </ul>
+    </section>
+
+    <section class="prose">
+      <h2>관련 링크</h2>
+      <ul>
+        <li><a href="/ko/" class="underline">학점계산기 — 다음 학기 목표 GPA 시뮬레이션</a></li>
+        <li><a href="/ko/guides/retake-policy" class="underline">재수강 성적 반영 규정 — 재수강으로 평점 올리기</a></li>
+        <li><a href="/ko/guides/absolute-relative" class="underline">절대평가 vs 상대평가 — 평가 방식 알고 대비하기</a></li>
+      </ul>
+    </section>
+  </main>
+</Layout>

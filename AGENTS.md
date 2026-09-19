@@ -8,6 +8,10 @@ astro dev --background
 
 Manage the background server with `astro dev stop`, `astro dev status`, and `astro dev logs`.
 
+## Design System
+
+**Mandatory reference:** `./design-system.md` — all new pages and components must follow the tokens, type scale, spacing scale, component patterns, accessibility floor, and "do not" list documented there. Audit existing pages against it; do not fix violations in this pass, only report.
+
 ## Documentation
 
 Full documentation: https://docs.astro.build

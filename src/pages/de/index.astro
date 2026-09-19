@@ -1,0 +1,275 @@
+---
+import Layout from '../../layouts/Layout.astro';
+import { getUniversitiesByCountry } from '../../data/universities-global';
+
+const universities = getUniversitiesByCountry('DE');
+const systems = [...new Set(universities.map(u => u.system))].sort((a, b) => parseFloat(b) - parseFloat(a));
+
+const pageTitle = 'Notendurchschnitt Rechner | GPA Calculator Deutschland';
+const description = 'Notendurchschnitt Rechner für deutsche Universitäten. Skala 1-6 (1,0=sehr gut, 4,0=ausreichend). TUM, Heidelberg, HU Berlin, KIT, RWTH, LMU. Modifizierte Bayerische Formel für Umrechnung.';
+const canonical = 'https://globalcgpa.in/de/';
+const ogImage = '/og-image-de.png';
+const lang = 'de';
+const alternates = [
+  { hreflang: 'en', href: 'https://globalcgpa.in/' },
+  { hreflang: 'de', href: 'https://globalcgpa.in/de/' },
+];
+---
+
+<Layout title={pageTitle} description={description} canonical={canonical} ogImage={ogImage} lang={lang} alternates={alternates}>
+  <main class="max-w-[780px] mx-auto px-6 py-14" style="flex:1;">
+    <div class="text-xs font-bold uppercase tracking-wider text-emerald-500 mb-2">Notendurchschnitt Rechner Deutschland</div>
+    <h1 class="text-3xl sm:text-4xl font-extrabold tracking-tight mb-3">Notendurchschnitt Berechnen</h1>
+    <p class="text-slate-500 dark:text-zinc-400 text-base mb-8">
+      Deutsche Notenskala 1,0–4,0 (1,0=sehr gut, 4,0=ausreichend, >4,0=nicht ausreichend).
+      Universitäten: TUM, Heidelberg, HU Berlin, KIT, RWTH, LMU. Gewichtung nach ECTS/LP.
+      Modifizierte Bayerische Formel (KMK) für ausländische Noten.
+    </p>
+
+    <div class="calc-shell space-y-6" id="gpa-calculator">
+      <div class="flex gap-2" role="tablist" aria-label="Notenskala wählen">
+        {systems.map((sys, idx) => (
+          <button
+            role="tab"
+            aria-selected={idx === 0}
+            aria-controls={`panel-${sys}`}
+            id={`tab-${sys}`}
+            class={`calc-tab flex-1 ${idx === 0 ? 'active' : ''}`}
+            data-system={sys}
+          >
+            Skala 1-6
+          </button>
+        ))}
+      </div>
+
+      {systems.map((sys, idx) => (
+        <div
+          role="tabpanel"
+          id={`panel-${sys}`}
+          aria-labelledby={`tab-${sys}`}
+          class={`space-y-4 ${idx === 0 ? '' : 'hidden'}`}
+          data-system={sys}
+        >
+          <div class="grid gap-4 sm:grid-cols-2">
+            <div>
+              <label class="calc-label" for={`system-select-${sys}`}>Universität / Prüfungsordnung</label>
+              <select
+                id={`system-select-${sys}`}
+                class="calc-select"
+                data-system={sys}
+                aria-label={`Universität wählen ${sys}`}
+              >
+                {universities.filter(u => u.system === sys).map(u => (
+                  <option value={u.key}>{u.name}</option>
+                ))}
+                <option value="custom" selected>Manuelle Eingabe (Standard 1-6)</option>
+              </select>
+            </div>
+            <div>
+              <label class="calc-label" for={`course-count-${sys}`}>Anzahl Module</label>
+              <input
+                type="number"
+                id={`course-count-${sys}`}
+                class="calc-input"
+                min="1"
+                max="30"
+                value="6"
+                aria-label="Anzahl Module"
+              />
+            </div>
+          </div>
+
+          <div id={`courses-${sys}`} class="space-y-3" role="list" aria-label={`Modulliste ${sys}`}></div>
+
+          <button
+            type="button"
+            class="w-full sm:w-auto px-6 py-3 bg-emerald-500 hover:bg-emerald-600 text-slate-900 font-bold text-sm rounded-xl transition-colors"
+            id={`calculate-${sys}`}
+            data-system={sys}
+          >
+            Notendurchschnitt Berechnen
+          </button>
+
+          <div class="calc-output" aria-live="polite" aria-label={`Ergebnis ${sys}`}>
+            <div class="calc-out-val" id={`result-${sys}`}>1.00</div>
+            <div class="calc-out-lbl">Gesamtnote (1,0–4,0)</div>
+            <div class="calc-out-lbl" style="margin-top:8px; font-size:0.68rem;" id={`detail-${sys}`}>
+              Gesamt LP: 0 | Gewichtete Summe: 0.00
+            </div>
+          </div>
+
+          <div class="formula-block" id={`formula-${sys}`}>
+            <div class="f-label">Berechnungsformel</div>
+            <div class="f-text" id={`formula-text-${sys}`}>Gesamtnote = Σ(LP × Note) ÷ ΣLP (1. Dezimalstelle, ohne Rundung)</div>
+            <div class="f-example" id={`formula-example-${sys}`}>Beispiel: 6 LP × 1,3 + 6 LP × 2,0 = 19,8 ÷ 12 = 1,6 (gut)</div>
+          </div>
+        </div>
+      ))}
+    </div>
+
+    <section class="mt-16" aria-labelledby="univ-list-heading">
+      <h2 id="univ-list-heading" class="text-2xl font-extrabold tracking-tight mb-6">Hauptuniversitäten</h2>
+      <div class="grid gap-4 sm:grid-cols-2 lg:grid-cols-3">
+        {universities.map(u => (
+          <a
+            href={`/de/${u.slug}`}
+            class="calc-shell p-5 hover:border-emerald-500 hover:shadow-lg transition-all text-center"
+          >
+            <div class="text-3xl font-extrabold text-emerald-500 mb-1">1–6</div>
+            <div class="font-bold text-lg text-slate-900 dark:text-white">{u.name}</div>
+            <div class="text-sm text-slate-500 dark:text-zinc-400 mt-1">{u.nameEn}</div>
+          </a>
+        ))}
+      </div>
+    </section>
+
+    <section class="mt-16" aria-labelledby="guides-heading">
+      <h2 id="guides-heading" class="text-2xl font-extrabold tracking-tight mb-6">Noten & Umrechnung</h2>
+      <div class="grid gap-4 sm:grid-cols-2">
+        <a href="/de/guides/notenskala-1-6" class="calc-shell p-5 hover:border-emerald-500 transition-all">
+          <h3 class="font-bold text-lg text-slate-900 dark:text-white mb-2">Deutsche Notenskala 1,0–4,0</h3>
+          <p class="text-sm text-slate-500 dark:text-zinc-400">Sehr gut (1,0–1,5), Gut (1,6–2,5), Befriedigend (2,6–3,5), Ausreichend (3,6–4,0)</p>
+        </a>
+        <a href="/de/guides/bayerische-formel" class="calc-shell p-5 hover:border-emerald-500 transition-all">
+          <h3 class="font-bold text-lg text-slate-900 dark:text-white mb-2">Modifizierte Bayerische Formel</h3>
+          <p class="text-sm text-slate-500 dark:text-zinc-400">KMK-Empfehlung: x = 1 + 3 × (Nmax - Nd) ÷ (Nmax - Nmin) für Auslandsumrechnung</p>
+        </a>
+        <a href="/de/guides/ects-grades" class="calc-shell p-5 hover:border-emerald-500 transition-all">
+          <h3 class="font-bold text-lg text-slate-900 dark:text-white mb-2">ECTS-Grades A–E</h3>
+          <p class="text-sm text-slate-500 dark:text-zinc-400">Relative Notenvergabe: A (Top 10%), B (nächste 25%), C (30%), D (25%), E (10%)</p>
+        </a>
+        <a href="/de/guides/gesamtnoten-berechnung" class="calc-shell p-5 hover:border-emerald-500 transition-all">
+          <h3 class="font-bold text-lg text-slate-900 dark:text-white mb-2">Gesamtnote Bachelor/Master</h3>
+          <p class="text-sm text-slate-500 dark:text-zinc-400">Gewichtung nach LP/ECTS, 1. Dezimalstelle ohne Rundung, Prädikate (mit Auszeichnung, sehr gut, gut)</p>
+        </a>
+        <a href="/de/guides/anerkennung-auslaendisch" class="calc-shell p-5 hover:border-emerald-500 transition-all">
+          <h3 class="font-bold text-lg text-slate-900 dark:text-white mb-2">Anerkennung Ausländischer Noten</h3>
+          <p class="text-sm text-slate-500 dark:text-zinc-400">Länderspezifische Tabellen, Bayerische Formel, NUS+ Tool (HU Berlin), Prüfungsausschuss</p>
+        </a>
+        <a href="/de/guides/doctorate-grades" class="calc-shell p-5 hover:border-emerald-500 transition-all">
+          <h3 class="font-bold text-lg text-slate-900 dark:text-white mb-2">Promotionsnoten (Dr. / PhD)</h3>
+          <p class="text-sm text-slate-500 dark:text-zinc-400">Summa/Magna/Cum Laude, Rite, Nicht ausreichend. Gewichtung Dissertation 2:1 Kolloquium</p>
+        </a>
+      </div>
+    </section>
+  </main>
+</Layout>
+
+<script is:inline>
+  const GRADE_SYSTEMS = {
+    '1-6': {
+      grades: ['1,0', '1,3', '1,7', '2,0', '2,3', '2,7', '3,0', '3,3', '3,7', '4,0', '5,0'],
+      points: { '1,0': 1.0, '1,3': 1.3, '1,7': 1.7, '2,0': 2.0, '2,3': 2.3, '2,7': 2.7, '3,0': 3.0, '3,3': 3.3, '3,7': 3.7, '4,0': 4.0, '5,0': 5.0 },
+      percentages: {}
+    }
+  };
+
+  function createCourseRow(system, index) {
+    const sys = GRADE_SYSTEMS[system];
+    const grades = sys.grades;
+    const points = sys.points;
+
+    const row = document.createElement('div');
+    row.className = 'grid gap-3 sm:grid-cols-[1fr_80px_100px] items-end';
+    row.setAttribute('role', 'listitem');
+    row.innerHTML = `
+      <div>
+        <label class="calc-label" for="grade-${system}-${index}">Modul ${index + 1} Note</label>
+        <select id="grade-${system}-${index}" class="calc-select grade-select" aria-label="Modul ${index + 1} Note">
+          ${grades.map(g => `<option value="${g}">${g} ${g <= '4,0' ? '(bestanden)' : '(nicht bestanden)'}</option>`).join('')}
+        </select>
+      </div>
+      <div>
+        <label class="calc-label" for="credit-${system}-${index}">LP/ECTS</label>
+        <input type="number" id="credit-${system}-${index}" class="calc-input credit-input" value="6" min="1" max="30" step="1" aria-label="Modul ${index + 1} LP" />
+      </div>
+      <div>
+        <label class="calc-label" for="course-name-${system}-${index}">Name (Optional)</label>
+        <input type="text" id="course-name-${system}-${index}" class="calc-input" placeholder="z.B. Analysis" aria-label="Modul ${index + 1} Name" />
+      </div>
+    `;
+    return row;
+  }
+
+  function renderCourses(system, count) {
+    const container = document.getElementById(`courses-${system}`);
+    container.innerHTML = '';
+    for (let i = 0; i < count; i++) {
+      container.appendChild(createCourseRow(system, i));
+    }
+  }
+
+  function calculateGPA(system) {
+    const sys = GRADE_SYSTEMS[system];
+    const points = sys.points;
+    const gradeSelects = document.querySelectorAll(`#courses-${system} .grade-select`);
+    const creditInputs = document.querySelectorAll(`#courses-${system} .credit-input`);
+
+    let totalCredits = 0;
+    let totalPoints = 0;
+
+    gradeSelects.forEach((select, i) => {
+      const grade = select.value;
+      const credit = parseFloat(creditInputs[i].value) || 0;
+      const point = points[grade] || 0;
+
+      totalCredits += credit;
+      totalPoints += credit * point;
+    });
+
+    const gpa = totalCredits > 0 ? totalPoints / totalCredits : 0;
+    document.getElementById(`result-${system}`).textContent = gpa.toFixed(2).replace('.', ',');
+    document.getElementById(`detail-${system}`).textContent = `Gesamt LP: ${totalCredits} | Gewichtete Summe: ${totalPoints.toFixed(2)}`;
+  }
+
+  function initSystem(system) {
+    const countInput = document.getElementById(`course-count-${system}`);
+    const calculateBtn = document.getElementById(`calculate-${system}`);
+    const systemSelect = document.getElementById(`system-select-${system}`);
+
+    let currentCount = parseInt(countInput.value) || 6;
+    renderCourses(system, currentCount);
+    calculateGPA(system);
+
+    countInput.addEventListener('input', () => {
+      let newCount = parseInt(countInput.value) || 1;
+      newCount = Math.max(1, Math.min(30, newCount));
+      currentCount = newCount;
+      renderCourses(system, newCount);
+      calculateGPA(system);
+    });
+
+    calculateBtn.addEventListener('click', () => calculateGPA(system));
+
+    const container = document.getElementById(`courses-${system}`);
+    container.addEventListener('change', e => {
+      if (e.target.matches('.grade-select, .credit-input')) {
+        calculateGPA(system);
+      }
+    });
+
+    systemSelect.addEventListener('change', () => {
+      if (systemSelect.value === 'custom') return;
+    });
+  }
+
+  function switchTab(system) {
+    document.querySelectorAll('[role="tab"]').forEach(btn => {
+      btn.classList.remove('active');
+      btn.setAttribute('aria-selected', 'false');
+    });
+    document.querySelectorAll('[role="tabpanel"]').forEach(panel => panel.classList.add('hidden'));
+
+    const activeTab = document.getElementById(`tab-${system}`);
+    const activePanel = document.querySelector(`[role="tabpanel"][data-system="${system}"]`);
+    activeTab.classList.add('active');
+    activeTab.setAttribute('aria-selected', 'true');
+    activePanel.classList.remove('hidden');
+  }
+
+  document.querySelectorAll('[role="tab"]').forEach(btn => {
+    btn.addEventListener('click', () => switchTab(btn.dataset.system));
+  });
+
+  systems.forEach(sys => initSystem(sys));
+</script>

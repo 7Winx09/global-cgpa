@@ -1,0 +1,232 @@
+---
+import Layout from '../../layouts/Layout.astro';
+
+const pageTitle = '평점계산기 | 과목별 평점·학점 계산';
+const description = '과목별 등급과 학점을 입력해 평점(Grade Point)을 계산합니다. 4.3 만점, 4.5 만점 체계 지원. 한국 대학 성적표 확인용.';
+const canonical = 'https://globalcgpa.in/ko/평점계산기';
+const ogImage = '/og-image-ko.png';
+const lang = 'ko';
+const alternates = [
+  { hreflang: 'en', href: 'https://globalcgpa.in/grade-calculator' },
+  { hreflang: 'ko', href: 'https://globalcgpa.in/ko/평점계산기' },
+];
+---
+
+<Layout title={pageTitle} description={description} canonical={canonical} ogImage={ogImage} lang={lang} alternates={alternates}>
+  <main class="max-w-[780px] mx-auto px-6 py-14" style="flex:1;">
+    <div class="text-xs font-bold uppercase tracking-wider text-emerald-500 mb-2">과목별 평점 계산기</div>
+    <h1 class="text-3xl sm:text-4xl font-extrabold tracking-tight mb-3">평점(Grade Point) 계산기</h1>
+    <p class="text-slate-500 dark:text-zinc-400 text-base mb-8">
+      개별 과목의 등급과 학점을 입력하면 해당 과목의 평점을 바로 확인할 수 있습니다.
+      4.3 만점과 4.5 만점 체계를 탭으로 전환하며 비교 가능합니다.
+    </p>
+
+    <div class="calc-shell space-y-6">
+      <div class="flex gap-2" role="tablist" aria-label="만점 기준 선택">
+        <button role="tab" aria-selected="true" aria-controls="panel-gp-43" id="tab-gp-43" class="calc-tab active" data-system="4.3">4.3 만점</button>
+        <button role="tab" aria-selected="false" aria-controls="panel-gp-45" id="tab-gp-45" class="calc-tab" data-system="4.5">4.5 만점</button>
+      </div>
+
+      <div role="tabpanel" id="panel-gp-43" aria-labelledby="tab-gp-43" class="space-y-4" data-system="4.3">
+        <div class="grid gap-4 sm:grid-cols-3">
+          <div>
+            <label class="calc-label" for="gp-grade-43">등급 선택</label>
+            <select id="gp-grade-43" class="calc-select" aria-label="4.3 만점 등급 선택">
+              <option value="A+" selected>A+ (4.30) ↔ 95~100%</option>
+              <option value="A0">A0 (4.00) ↔ 90~94%</option>
+              <option value="A-">A- (3.70) ↔ 85~89%</option>
+              <option value="B+">B+ (3.30) ↔ 80~84%</option>
+              <option value="B0">B0 (3.00) ↔ 75~79%</option>
+              <option value="B-">B- (2.70) ↔ 70~74%</option>
+              <option value="C+">C+ (2.30) ↔ 65~69%</option>
+              <option value="C0">C0 (2.00) ↔ 60~64%</option>
+              <option value="C-">C- (1.70) ↔ 55~59%</option>
+              <option value="D+">D+ (1.30) ↔ 50~54%</option>
+              <option value="D0">D0 (1.00) ↔ 45~49%</option>
+              <option value="D-">D- (0.70) ↔ 40~44%</option>
+              <option value="F">F (0.00) ↔ 0~39%</option>
+            </select>
+          </div>
+          <div>
+            <label class="calc-label" for="gp-credit-43">학점</label>
+            <input type="number" id="gp-credit-43" class="calc-input" value="3" min="1" max="6" step="1" aria-label="학점 입력" />
+          </div>
+          <div class="sm:col-span-3">
+            <label class="calc-label" for="gp-course-name-43">과목명 (선택)</label>
+            <input type="text" id="gp-course-name-43" class="calc-input" placeholder="예: 일반물리학" aria-label="과목명 입력" />
+          </div>
+        </div>
+
+        <div class="calc-output" aria-live="polite" aria-label="4.3 만점 평점 계산 결과">
+          <div class="calc-out-val" id="gp-result-43">4.30</div>
+          <div class="calc-out-lbl">과목 평점 (Grade Point)</div>
+          <div class="calc-out-lbl" style="margin-top:8px; font-size:0.68rem;" id="gp-detail-43">학점: 3 | 획득 평점: 12.90</div>
+        </div>
+
+        <div class="formula-block">
+          <div class="f-label">산출 내역</div>
+          <div class="f-text" id="gp-formula-43">평점 = 등급 평점 × 학점 = 4.30 × 3 = 12.90</div>
+          <div class="f-example">이 평점은 전체 GPA 계산 시 Σ(학점 × 평점)의 구성 요소가 됩니다.</div>
+        </div>
+      </div>
+
+      <div role="tabpanel" id="panel-gp-45" aria-labelledby="tab-gp-45" class="space-y-4 hidden" data-system="4.5">
+        <div class="grid gap-4 sm:grid-cols-3">
+          <div>
+            <label class="calc-label" for="gp-grade-45">등급 선택</label>
+            <select id="gp-grade-45" class="calc-select" aria-label="4.5 만점 등급 선택">
+              <option value="A+" selected>A+ (4.50) ↔ 95~100%</option>
+              <option value="A">A (4.00) ↔ 90~94%</option>
+              <option value="B+">B+ (3.50) ↔ 85~89%</option>
+              <option value="B">B (3.00) ↔ 80~84%</option>
+              <option value="C+">C+ (2.50) ↔ 75~79%</option>
+              <option value="C">C (2.00) ↔ 70~74%</option>
+              <option value="D+">D+ (1.50) ↔ 65~69%</option>
+              <option value="D">D (1.00) ↔ 60~64%</option>
+              <option value="F">F (0.00) ↔ 0~59%</option>
+            </select>
+          </div>
+          <div>
+            <label class="calc-label" for="gp-credit-45">학점</label>
+            <input type="number" id="gp-credit-45" class="calc-input" value="3" min="1" max="6" step="1" aria-label="학점 입력" />
+          </div>
+          <div class="sm:col-span-3">
+            <label class="calc-label" for="gp-course-name-45">과목명 (선택)</label>
+            <input type="text" id="gp-course-name-45" class="calc-input" placeholder="예: 일반물리학" aria-label="과목명 입력" />
+          </div>
+        </div>
+
+        <div class="calc-output" aria-live="polite" aria-label="4.5 만점 평점 계산 결과">
+          <div class="calc-out-val" id="gp-result-45">4.50</div>
+          <div class="calc-out-lbl">과목 평점 (Grade Point)</div>
+          <div class="calc-out-lbl" style="margin-top:8px; font-size:0.68rem;" id="gp-detail-45">학점: 3 | 획득 평점: 13.50</div>
+        </div>
+
+        <div class="formula-block">
+          <div class="f-label">산출 내역</div>
+          <div class="f-text" id="gp-formula-45">평점 = 등급 평점 × 학점 = 4.50 × 3 = 13.50</div>
+          <div class="f-example">이 평점은 전체 GPA 계산 시 Σ(학점 × 평점)의 구성 요소가 됩니다.</div>
+        </div>
+      </div>
+
+      <div class="border-t border-slate-200 dark:border-zinc-800 pt-6 space-y-3 text-sm text-slate-600 dark:text-zinc-400">
+        <h3 class="font-bold text-slate-900 dark:text-white">사용 안내</h3>
+        <ul class="list-disc list-inside space-y-1">
+          <li>등급별 평점은 대학별 체계(4.3/4.5)에 따라 다릅니다.</li>
+          <li>백분율(%) 구간은 절대평가 적용 시 일반적인 기준입니다.</li>
+          <li>P/F, S/U 과목은 평점이 부여되지 않아 GPA 산출에서 제외됩니다.</li>
+          <li>여러 과목을 합산해 전체 GPA를 구하려면 <a href="/ko/" class="underline hover:text-emerald-500">메인 학점계산기</a>를 사용하세요.</li>
+        </ul>
+      </div>
+    </div>
+
+    <section class="mt-16" aria-labelledby="quick-ref-heading">
+      <h2 id="quick-ref-heading" class="text-2xl font-extrabold tracking-tight mb-6">빠른 참조: 등급별 평점표</h2>
+      <div class="grid gap-6">
+        <div class="calc-shell p-6">
+          <h3 class="font-bold text-lg text-slate-900 dark:text-white mb-4">4.3 만점 체계 (서울대, 카이스트, 연세대, 이화여대 등)</h3>
+          <div class="table-scroll">
+            <table>
+              <thead>
+                <tr>
+                  <th>등급</th>
+                  <th class="text-center">평점</th>
+                  <th class="text-center">백분율(%)</th>
+                </tr>
+              </thead>
+              <tbody>
+                <tr><td><strong>A+</strong></td><td class="text-center font-mono">4.30</td><td class="text-center">95~100</td></tr>
+                <tr><td><strong>A0</strong></td><td class="text-center font-mono">4.00</td><td class="text-center">90~94</td></tr>
+                <tr><td><strong>A-</strong></td><td class="text-center font-mono">3.70</td><td class="text-center">85~89</td></tr>
+                <tr><td><strong>B+</strong></td><td class="text-center font-mono">3.30</td><td class="text-center">80~84</td></tr>
+                <tr><td><strong>B0</strong></td><td class="text-center font-mono">3.00</td><td class="text-center">75~79</td></tr>
+                <tr><td><strong>B-</strong></td><td class="text-center font-mono">2.70</td><td class="text-center">70~74</td></tr>
+                <tr><td><strong>C+</strong></td><td class="text-center font-mono">2.30</td><td class="text-center">65~69</td></tr>
+                <tr><td><strong>C0</strong></td><td class="text-center font-mono">2.00</td><td class="text-center">60~64</td></tr>
+                <tr><td><strong>C-</strong></td><td class="text-center font-mono">1.70</td><td class="text-center">55~59</td></tr>
+                <tr><td><strong>D+</strong></td><td class="text-center font-mono">1.30</td><td class="text-center">50~54</td></tr>
+                <tr><td><strong>D0</strong></td><td class="text-center font-mono">1.00</td><td class="text-center">45~49</td></tr>
+                <tr><td><strong>D-</strong></td><td class="text-center font-mono">0.70</td><td class="text-center">40~44</td></tr>
+                <tr><td><strong>F</strong></td><td class="text-center font-mono">0.00</td><td class="text-center">0~39</td></tr>
+              </tbody>
+            </table>
+          </div>
+        </div>
+
+        <div class="calc-shell p-6">
+          <h3 class="font-bold text-lg text-slate-900 dark:text-white mb-4">4.5 만점 체계 (고려대, 성균관대, 건국대 등)</h3>
+          <div class="table-scroll">
+            <table>
+              <thead>
+                <tr>
+                  <th>등급</th>
+                  <th class="text-center">평점</th>
+                  <th class="text-center">백분율(%)</th>
+                </tr>
+              </thead>
+              <tbody>
+                <tr><td><strong>A+</strong></td><td class="text-center font-mono">4.50</td><td class="text-center">95~100</td></tr>
+                <tr><td><strong>A</strong></td><td class="text-center font-mono">4.00</td><td class="text-center">90~94</td></tr>
+                <tr><td><strong>B+</strong></td><td class="text-center font-mono">3.50</td><td class="text-center">85~89</td></tr>
+                <tr><td><strong>B</strong></td><td class="text-center font-mono">3.00</td><td class="text-center">80~84</td></tr>
+                <tr><td><strong>C+</strong></td><td class="text-center font-mono">2.50</td><td class="text-center">75~79</td></tr>
+                <tr><td><strong>C</strong></td><td class="text-center font-mono">2.00</td><td class="text-center">70~74</td></tr>
+                <tr><td><strong>D+</strong></td><td class="text-center font-mono">1.50</td><td class="text-center">65~69</td></tr>
+                <tr><td><strong>D</strong></td><td class="text-center font-mono">1.00</td><td class="text-center">60~64</td></tr>
+                <tr><td><strong>F</strong></td><td class="text-center font-mono">0.00</td><td class="text-center">0~59</td></tr>
+              </tbody>
+            </table>
+          </div>
+        </div>
+      </div>
+    </section>
+  </main>
+</Layout>
+
+<script is:inline>
+  const POINTS_43 = { 'A+': 4.3, 'A0': 4.0, 'A-': 3.7, 'B+': 3.3, 'B0': 3.0, 'B-': 2.7, 'C+': 2.3, 'C0': 2.0, 'C-': 1.7, 'D+': 1.3, 'D0': 1.0, 'D-': 0.7, 'F': 0.0 };
+  const POINTS_45 = { 'A+': 4.5, 'A': 4.0, 'B+': 3.5, 'B': 3.0, 'C+': 2.5, 'C': 2.0, 'D+': 1.5, 'D': 1.0, 'F': 0.0 };
+
+  function updateGP(system) {
+    const points = system === '4.3' ? POINTS_43 : POINTS_45;
+    const gradeSelect = document.getElementById(`gp-grade-${system === '4.3' ? '43' : '45'}`);
+    const creditInput = document.getElementById(`gp-credit-${system === '4.3' ? '43' : '45'}`);
+    const resultEl = document.getElementById(`gp-result-${system === '4.3' ? '43' : '45'}`);
+    const detailEl = document.getElementById(`gp-detail-${system === '4.3' ? '43' : '45'}`);
+    const formulaEl = document.getElementById(`gp-formula-${system === '4.3' ? '43' : '45'}`);
+
+    const grade = gradeSelect.value;
+    const credit = parseFloat(creditInput.value) || 0;
+    const point = points[grade] || 0;
+    const earned = point * credit;
+
+    resultEl.textContent = point.toFixed(2);
+    detailEl.textContent = `학점: ${credit} | 획득 평점: ${earned.toFixed(2)}`;
+    formulaEl.textContent = `평점 = 등급 평점 × 학점 = ${point.toFixed(2)} × ${credit} = ${earned.toFixed(2)}`;
+  }
+
+  ['43', '45'].forEach(suffix => {
+    const system = suffix === '43' ? '4.3' : '4.5';
+    const gradeSelect = document.getElementById(`gp-grade-${suffix}`);
+    const creditInput = document.getElementById(`gp-credit-${suffix}`);
+    gradeSelect.addEventListener('change', () => updateGP(system));
+    creditInput.addEventListener('input', () => updateGP(system));
+  });
+
+  document.querySelectorAll('[role="tab"][data-system]').forEach(btn => {
+    btn.addEventListener('click', () => {
+      document.querySelectorAll('[role="tab"][data-system]').forEach(b => {
+        b.classList.remove('active');
+        b.setAttribute('aria-selected', 'false');
+      });
+      document.querySelectorAll('[role="tabpanel"][data-system]').forEach(p => p.classList.add('hidden'));
+
+      btn.classList.add('active');
+      btn.setAttribute('aria-selected', 'true');
+      document.querySelector(`[role="tabpanel"][data-system="${btn.dataset.system}"]`).classList.remove('hidden');
+    });
+  });
+
+  updateGP('4.3');
+  updateGP('4.5');
+</script>

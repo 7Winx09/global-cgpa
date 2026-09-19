@@ -1,0 +1,188 @@
+---
+import Layout from '../../../../layouts/Layout.astro';
+
+const pageTitle = 'Menções Honrosas e Formatura com Louvor | Critérios Brasil';
+const description = 'Critérios para menção honrosa, diploma com louvor, formatura magna/summa cum laude nas universidades brasileiras. CR mínimo, tempo regulamentar, sem reprovações. USP, UNICAMP, UFRJ, UFMG, UFBA.';
+const canonical = 'https://globalcgpa.in/pt/guides/mencoes-honrosas';
+const ogImage = '/og-image-pt.png';
+const lang = 'pt';
+const alternates = [
+  { hreflang: 'en', href: 'https://globalcgpa.in/guides/honors-brazil' },
+  { hreflang: 'pt', href: 'https://globalcgpa.in/pt/guides/mencoes-honrosas' },
+];
+---
+
+<Layout title={pageTitle} description={description} canonical={canonical} ogImage={ogImage} lang={lang} alternates={alternates}>
+  <main class="max-w-[780px] mx-auto px-6 py-14" style="flex:1;">
+    <nav class="crumbs mb-6" aria-label="Breadcrumb">
+      <a href="/pt/">Calculadora de Média</a>
+      <span class="sep">/</span>
+      <a href="/pt/guides">Guias</a>
+      <span class="sep">/</span>
+      <span class="current">Menções Honrosas</span>
+    </nav>
+
+    <div class="text-xs font-bold uppercase tracking-wider text-emerald-500 mb-2">Guia Acadêmico</div>
+    <h1 class="text-3xl sm:text-4xl font-extrabold tracking-tight mb-3">Menções Honrosas e Formatura com Louvor</h1>
+    <p class="text-slate-500 dark:text-zinc-400 text-base mb-10">
+      Reconhecimento acadêmico para alunos com desempenho excepcional. Concede menção no diploma e no histórico escolar.
+      Critérios variam por universidade e, às vezes, por unidade/faculdade.
+    </p>
+
+    <section class="prose mb-12">
+      <h2>Resumo por Universidade</h2>
+      <div class="table-scroll">
+        <table>
+          <thead>
+            <tr>
+              <th>Universidade</th>
+              <th class="text-center">CR/IR Mínimo</th>
+              <th class="text-center">Tempo Regulamentar</th>
+              <th class="text-center">Sem Reprovações</th>
+              <th>Observação</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr><td><strong>USP</strong></td><td class="text-center">≥ 8.5 (por unidade)</td><td class="text-center">Sim</td><td class="text-center">Sim</td><td>Critérios definidos por cada unidade (Faculdade/Instituto)</td></tr>
+            <tr><td><strong>UNICAMP</strong></td><td class="text-center">IR ≥ 8.5</td><td class="text-center">Sim</td><td class="text-center">Sim</td><td>Automática se critérios atendidos (Resolução GR-025/2020)</td></tr>
+            <tr><td><strong>UFRJ</strong></td><td class="text-center">CR ≥ 8.0</td><td class="text-center">Sim</td><td class="text-center">Sim</td><td>Aprovação mínima 6.0 em todas; sem RF</td></tr>
+            <tr><td><strong>UFMG</strong></td><td class="text-center">CR ≥ 8.5</td><td class="text-center">Sim</td><td class="text-center">Sim</td><td>Integralização completa; sem dependências</td></tr>
+            <tr><td><strong>UFBA</strong></td><td class="text-center">CR ≥ 8.5</td><td class="text-center">Sim</td><td class="text-center">Sim</td><td>Integralização curricular; tempo regulamentar</td></tr>
+          </tbody>
+        </table>
+      </div>
+    </section>
+
+    <section class="prose mb-12">
+      <h2>Critérios Gerais (Comuns a Todas)</h2>
+      <div class="bg-green-50 dark:bg-green-900/20 border border-green-200 dark:border-green-800 rounded-xl p-6">
+        <h3 class="font-bold mb-3">✅ Requisitos Obrigatórios</h3>
+        <ul class="list-disc list-inside space-y-2">
+          <li><strong>Coeficiente de Rendimento alto:</strong> CR/IR ≥ 8.0–8.5 conforme universidade</li>
+          <li><strong>Tempo regulamentar:</strong> Formatura no prazo previsto no projeto pedagógico do curso (sem prorrogação)</li>
+          <li><strong>Zero reprovações:</strong> Nenhuma disciplina com conceito F, FF, RF (reprovação por frequência)</li>
+          <li><strong>Zero dependências:</strong> Todas as disciplinas obrigatórias e eletivas aprovadas</li>
+          <li><strong>Integralização curricular:</strong> Todos os créditos exigidos (obrigatórios + eletivos + estágio + TCC) cumpridos</li>
+        </ul>
+      </div>
+    </section>
+
+    <section class="prose mb-12">
+      <h2>Detalhes por Universidade</h2>
+
+      <h3>USP — Menção Honrosa (por Unidade)</h3>
+      <ul>
+        <li>CR ≥ 8.5 (pode variar: algumas unidades exigem 8.7 ou 9.0)</li>
+        <li>Definido pela Congregação de cada Faculdade/Instituto</li>
+        <li>Tempo regulamentar + sem reprovações + integralização</li>
+        <li>Const no diploma: "Menção Honrosa" e no histórico</li>
+      </ul>
+
+      <h3 class="mt-6">UNICAMP — Menção Honrosa</h3>
+      <ul>
+        <li>IR ≥ 8.5 (Regulamento de Graduação Art. 37)</li>
+        <li>Tempo regulamentar (sem prorrogação de prazo)</li>
+        <li>Sem reprovações por nota ou frequência</li>
+        <li>Concedida automaticamente no ato da colação de grau</li>
+        <li>Registro no diploma e no histórico escolar</li>
+      </ul>
+
+      <h3 class="mt-6">UFRJ — Diploma com Louvor</h3>
+      <ul>
+        <li>CR ≥ 8.0 (mais acessível que demais)</li>
+        <li>Tempo regulamentar</li>
+        <li>Sem reprovações (nota ou frequência — mínimo 6.0 em todas)</li>
+        <li>Integralização curricular completa</li>
+        <li>Termo "Louvor" no diploma</li>
+      </ul>
+
+      <h3 class="mt-6">UFMG — Menção Honrosa</h3>
+      <ul>
+        <li>CR ≥ 8.5 (Regimento Geral Art. 105)</li>
+        <li>Tempo regulamentar do curso</li>
+        <li>Sem reprovações e sem dependências</li>
+        <li>Integralização de todos os créditos</li>
+        <li>Pode haver critérios adicionais por unidade acadêmica</li>
+      </ul>
+
+      <h3 class="mt-6">UFBA — Menção Honrosa</h3>
+      <ul>
+        <li>CR ≥ 8.5 (Regulamento de Graduação Art. 48)</li>
+        <li>Tempo regulamentar</li>
+        <li>Sem reprovações por nota ou frequência</li>
+        <li>Integralização curricular completa</li>
+        <li>Registro no diploma e histórico</li>
+      </ul>
+    </section>
+
+    <section class="prose mb-12">
+      <h2>O que NÃO conta como reprovação para menção honrosa</h2>
+      <ul>
+        <li>✅ Trancamento de disciplina (cancelamento antes do prazo)</li>
+        <li>✅ Disciplina cursada como aluno especial/isolado (não conta no CR)</li>
+        <li>✅ Adaptação curricular (equivalência de disciplinas de outra universidade)</li>
+        <li>❌ Reprovação por nota (conceito F)</li>
+        <li>❌ Reprovação por frequência (RF/FF — < 75% presença)</li>
+        <li>❌ Dependência (disciplina não cursada/no prazo)</li>
+      </ul>
+    </section>
+
+    <section class="prose mb-12">
+      <h2>Impacto no Histórico e Diploma</h2>
+      <div class="table-scroll">
+        <table>
+          <thead>
+            <tr>
+              <th>Documento</th>
+              <th>Registro da Menção</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr><td>Diploma</td><td>"Menção Honrosa" / "Com Louvor" / "Magna Cum Laude" (conforme universidade)</td></tr>
+            <tr><td>Histórico Escolar</td><td>Campo específico "Menção Honrosa: Sim" + CR/IR final</td></tr>
+            <tr><td>Certidão de Conclusão</td><td>Inclui a menção se emitida após colação</td></tr>
+          </tbody>
+        </table>
+      </div>
+    </section>
+
+    <section class="prose mb-12">
+      <h2>Perguntas Frequentes</h2>
+      <details class="faq-row">
+        <summary>Se eu trancar uma disciplina, perco a menção honrosa?</summary>
+        <div class="faq-body">
+          <p>Não. Trancamento (cancelamento oficial dentro do prazo) não é reprovação. A disciplina não entra no CR e não conta como reprovação. Mas verifique se o trancamento não atrasa sua formatura além do tempo regulamentar.</p>
+        </div>
+      </details>
+      <details class="faq-row">
+        <summary>Repeti uma disciplina e tirei nota alta na segunda vez. Perco a menção?</summary>
+        <div class="faq-body">
+          <p>Sim, na maioria das universidades. A reprovação na primeira tentativa (conceito F) permanece no histórico e conta como reprovação, mesmo que a nota da repetição substitua no CR. Verifique o regimento da sua universidade.</p>
+        </div>
+      </details>
+      <details class="faq-row">
+        <summary>A menção honrosa ajuda no mestrado/doutorado?</summary>
+        <div class="faq-body">
+          <p>Sim. É um diferencial no currículo Lattes, em editais de bolsa (CAPES/CNPq), em seleções de pós-graduação e em concursos públicos que pontuam titulação acadêmica.</p>
+        </div>
+      </details>
+      <details class="faq-row">
+        <summary>Posso recorrer se não me concederem a menção honrosa?</summary>
+        <div class="faq-body">
+          <p>Sim, via recurso administrativo à Congregação/Conselho da unidade (prazo geralmente 10–30 dias após colação). Fundamentos: erro de cálculo do CR, não consideração de trancamento, equivalência de disciplina não computada.</p>
+        </div>
+      </details>
+    </section>
+
+    <section class="prose">
+      <h2>Referências</h2>
+      <ul>
+        <li>USP Regulamento Geral Art. 88 — Menção Honrosa</li>
+        <li>UNICAMP Regulamento de Graduação Art. 37</li>
+        <li>UFRJ Resolução CEG — Diploma com Louvor</li>
+        <li>UFMG Regimento Geral Art. 105</li>
+        <li>UFBA Regulamento de Graduação Art. 48</li>
+      </ul>
+    </section>
+  </main>
+</Layout>

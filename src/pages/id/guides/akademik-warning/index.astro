@@ -1,0 +1,213 @@
+---
+import Layout from '../../../../layouts/Layout.astro';
+
+const pageTitle = 'Peringatan Akademik & Drop Out (DO) | Aturan 7 Universitas Indonesia';
+const description = 'Aturan peringatan akademik (PA) dan Drop Out (DO) di UI, ITB, UGM, UNAIR, IPB, Unpad, ITS: batas IPK minimum, evaluasi berkala, sanksi, dan cara menghindari DO.';
+const canonical = 'https://globalcgpa.in/id/guides/akademik-warning';
+const ogImage = '/og-image-id.png';
+const lang = 'id';
+const alternates = [
+  { hreflang: 'en', href: 'https://globalcgpa.in/guides/academic-warning' },
+  { hreflang: 'id', href: 'https://globalcgpa.in/id/guides/akademik-warning' },
+];
+---
+
+<Layout title={pageTitle} description={description} canonical={canonical} ogImage={ogImage} lang={lang} alternates={alternates}>
+  <main class="max-w-[780px] mx-auto px-6 py-14" style="flex:1;">
+    <nav class="crumbs mb-6" aria-label="Breadcrumb">
+      <a href="/id/">Kalkulator IPK</a>
+      <span class="sep">/</span>
+      <a href="/id/guides">Panduan</a>
+      <span class="sep">/</span>
+      <span class="current">Peringatan Akademik & DO</span>
+    </nav>
+
+    <div class="text-xs font-bold uppercase tracking-wider text-emerald-500 mb-2">Panduan Akademik</div>
+    <h1 class="text-3xl sm:text-4xl font-extrabold tracking-tight mb-3">Peringatan Akademik & Drop Out (DO)</h1>
+    <p class="text-slate-500 dark:text-zinc-400 text-base mb-10">
+      Setiap PT memiliki evaluasi berkala (semester 2, 4, 6, 8) untuk memantau prestasi mahasiswa.
+      IPK di bawah ambang batas &rarr; Peringatan Akademik (PA) &rarr; Drop Out (DO) jika tidak membaik.
+    </p>
+
+    <section class="prose mb-12">
+      <h2>Ringkasan Per Universitas</h2>
+      <div class="table-scroll">
+        <table>
+          <thead>
+            <tr>
+              <th>Universitas</th>
+              <th class="text-center">Evaluasi</th>
+              <th class="text-center">IPK Min (Lulus)</th>
+              <th class="text-center">Peringatan (PA)</th>
+              <th class="text-center">Drop Out (DO)</th>
+              <th>Catatan Khusus</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr>
+              <td><strong>UI</strong></td>
+              <td class="text-center">Sem 2,4,6,8</td>
+              <td class="text-center">2.00</td>
+              <td class="text-center">IPK < 2.00</td>
+              <td class="text-center">IPK < 2.00 berkelanjutan</td>
+              <td>PA 1: bimbingan, PA 2: batas SKS, PA 3: DO</td>
+            </tr>
+            <tr>
+              <td><strong>ITB</strong></td>
+              <td class="text-center">Tiap semester</td>
+              <td class="text-center">2.00</td>
+              <td class="text-center">IPK 2.00&ndash;2.75</td>
+              <td class="text-center">IPK < 2.00 (2x berturut)</td>
+              <td>GOP (Tahun 1): IPK < 2.00 = DO langsung</td>
+            </tr>
+            <tr>
+              <td><strong>UGM</strong></td>
+              <td class="text-center">Sem 4, 8, dst</td>
+              <td class="text-center">2.50 (2.00*)</td>
+              <td class="text-center">IPK < 2.50</td>
+              <td class="text-center">Sem 4: <30 SKS/IPK<2.00 &rarr; DO</td>
+              <td>*IPK 2.00 dpt pertimbangan Dekan. Sem 4 kritis</td>
+            </tr>
+            <tr>
+              <td><strong>UNAIR</strong></td>
+              <td class="text-center">Sem 2,4,6,8</td>
+              <td class="text-center">2.00</td>
+              <td class="text-center">IPK < 2.00</td>
+              <td class="text-center">IPK < 2.00 (2x) atau SKS < min</td>
+              <td>Sem 2: min 20 SKS, Sem 4: min 40 SKS & IPK&ge;2.0</td>
+            </tr>
+            <tr>
+              <td><strong>IPB</strong></td>
+              <td class="text-center">Tiap tahun</td>
+              <td class="text-center">2.00</td>
+              <td class="text-center">IPK 1.51&ndash;2.00</td>
+              <td class="text-center">IPK &le; 1.50</td>
+              <td>Tahun 1: IPK<2.00=ulang, &le;1.50=DO. Tahun 2+: evaluasi IPK+IPS</td>
+            </tr>
+            <tr>
+              <td><strong>Unpad</strong></td>
+              <td class="text-center">Tiap semester</td>
+              <td class="text-center">2.00</td>
+              <td class="text-center">IPK < 2.00</td>
+              <td class="text-center">IPK < 2.00 berkelanjutan</td>
+              <td>Status: Tanpa Syarat &rarr; Peringatan &rarr; Peringatan Keras &rarr; DO</td>
+            </tr>
+            <tr>
+              <td><strong>ITS</strong></td>
+              <td class="text-center">Tiap semester</td>
+              <td class="text-center">2.00</td>
+<td class="text-center">IPK < 2.50 (sem 1-2)</td>
+<td class="text-center">IPK < 2.00 atau SKS < min</td>
+<td>Sem 1-2: IPK < 2.50=peringatan, IPK < 2.00=DO</td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+    </section>
+
+    <section class="prose mb-12">
+      <h2>Tahapan Peringatan Akademik (Umum)</h2>
+      <div class="bg-amber-50 dark:bg-amber-900/20 border border-amber-200 dark:border-amber-800 rounded-xl p-6">
+        <h3 class="font-bold mb-3">Progresi Sanksi (Contoh Umum)</h3>
+        <ol class="list-decimal list-inside space-y-3">
+          <li><strong>Peringatan I (PA I):</strong> IPK < 2.00 pertama kali &rarr; Surat peringatan, wajib bimbingan dosen wali, batas SKS reduziert (mis. max 15&ndash;18 SKS)</li>
+          <li><strong>Peringatan II (PA II):</strong> IPK < 2.00 semester kedua berturut &rarr; Surat peringatan keras, batas SKS lebih ketat (max 12&ndash;15 SKS), wajib konseling akademik</li>
+          <li><strong>Drop Out (DO):</strong> IPK < 2.00 semester ketiga berturut, ATAU tidak memenuhi SKS minimum evaluasi (mis. <30 SKS di sem 4) &rarr; Pemutusan status mahasiswa</li>
+        </ol>
+      </div>
+    </section>
+
+    <section class="prose mb-12">
+      <h2>Evaluasi Khusus Tahun Pertama (GOP / TPB)</h2>
+      <p>Banyak PT memiliki evaluasi ketat di tahun 1 (Tahap Persiapan Bersama / GOP):</p>
+      <div class="table-scroll">
+        <table>
+          <thead><tr><th>PT</th><th>Program</th><th>Kriteria DO Tahun 1</th></tr></thead>
+          <tbody>
+            <tr><td>ITB</td><td>TPB (Tahun 1)</td><td>IPK < 2.00 di akhir semester 1 atau 2 &rarr; DO (kecuali IPK 1.50&ndash;2.00 bisa remedial)</td></tr>
+            <tr><td>IPB</td><td>DPKU (Tahun 1)</td><td>IPK &le; 1.50 &rarr; DO. IPK 1.51&ndash;2.00 &rarr; Ulang Tahun 1 (Remedial)</td></tr>
+            <tr><td>UGM</td><td>Semester 1-4</td><td>Sem 4: <30 SKS ATAU IPK < 2.00 &rarr; DO</td></tr>
+            <tr><td>ITS</td><td>Semester 1-2</td><td>IPK < 2.50 &rarr; Peringatan. IPK < 2.00 &rarr; DO</td></tr>
+            <tr><td>Unpad</td><td>Semester 1-2</td><td>Status Peringatan &rarr; Peringatan Keras &rarr; DO (berdasarkan IPK & IPS)</td></tr>
+          </tbody>
+        </table>
+      </div>
+    </section>
+
+    <section class="prose mb-12">
+      <h2>Cara Menghindari DO (Strategi Praktis)</h2>
+      <div class="grid gap-4 sm:grid-cols-2">
+        <div class="calc-shell p-4">
+          <h3 class="font-bold mb-2">?? Pemantauan Rutin</h3>
+          <ul class="list-disc list-inside text-sm space-y-1">
+            <li>Hitung IPK prediktif tiap semester (pakai kalkulator kami)</li>
+            <li>Targetkan IPS &ge; 2.50 tiap semester untuk aman</li>
+            <li>Cek KHS tiap akhir semester, jangan tunggu PA</li>
+          </ul>
+        </div>
+        <div class="calc-shell p-4">
+          <h3 class="font-bold mb-2">?? Manajemen Mata Kuliah</h3>
+          <ul class="list-disc list-inside text-sm space-y-1">
+            <li>Prioritaskan MK prasyarat (prasyarat chain)</li>
+            <li>Hindari ambil MK terlalu banyak jika IPK < 2.50</li>
+            <li>Manfaatkan pengulangan (nilai terbaik masuk IPK)</li>
+          </ul>
+        </div>
+        <div class="calc-shell p-4">
+          <h3 class="font-bold mb-2">?? Komunikasi Dosen Wali</h3>
+          <ul class="list-disc list-inside text-sm space-y-1">
+            <li>Konsultasi rencana studi (KRS) setiap semester</li>
+            <li>Lapor kendala belajar dini (sakit, keluarga, dll)</li>
+            <li>Minta surat rekomendasi remedial jika butuh</li>
+          </ul>
+        </div>
+        <div class="calc-shell p-4">
+          <h3 class="font-bold mb-2">?? Hak Mahasiswa</h3>
+          <ul class="list-disc list-inside text-sm space-y-1">
+            <li>Hak bimbingan akademik (Ps. 72 UU 12/2012)</li>
+            <li>Hak banding keputusan DO (ke Rektor/PT)</li>
+            <li>Hak cuti akademik (max 2 semester berturut)</li>
+          </ul>
+        </div>
+      </div>
+    </section>
+
+    <section class="prose mb-12">
+      <h2>Bandar Banding Keputusan DO</h2>
+      <details class="faq-row">
+        <summary>Prosedur banding keputusan DO</summary>
+        <div class="faq-body">
+          <ol class="list-decimal list-inside space-y-1">
+            <li>Ajukan keberatan tertulis ke Rektor maks. 14 hari setelah SK DO diterbitkan</li>
+            <li>Rektor membentuk Tim Banding (Ka. Biro Hukum, Ka. Biro Kemahasiswaan, Ka. Prodi)</li>
+            <li>Tim memeriksa: prosedur evaluasi, perhitungan IPK/SKS, pertimbangan kemanusiaan</li>
+            <li>Keputusan Rektor final & mengikat (biasanya 30&ndash;60 hari proses)</li>
+          </ol>
+          <p class="mt-2"><strong>Catatan:</strong> Banding tidak menghentikan eksekusi DO. Jika banding diterima &rarr; status dikembalikan.</p>
+        </div>
+      </details>
+      <details class="faq-row">
+        <summary>Apakah bisa daftar ulang setelah DO?</summary>
+        <div class="faq-body">
+          <p>Umumnya <strong>tidak bisa</strong> daftar ulang di PT yang sama untuk program yg sama. Opsi: (1) Mutasi ke PT lain (butuh IPK min 2.50+), (2) Masuk ulang via seleksi masuk (SBMPTN/UTBK/Mandiri), (3) Program non-reguler (kelas karyawan, jarak jauh).</p>
+        </div>
+      </details>
+    </section>
+
+    <section class="prose">
+      <h2>Referensi Regulasi Per PT</h2>
+      <ul>
+        <li>UI: Peraturan Rektor No. 1/2024 Ps. 52&ndash;54 (Evaluasi Hasil Belajar)</li>
+        <li>ITB: Peraturan Rektor No. 29/2025 Ps. 40&ndash;43 (IPK & Evaluasi)</li>
+        <li>UGM: Peraturan Rektor No. 23/2024 Ps. 35&ndash;38 (Evaluasi & DO)</li>
+        <li>UNAIR: Pedoman Pendidikan PR 22/2021 (Evaluasi Sem 2,4,6,8)</li>
+        <li>IPB: Panduan Akademik (Evaluasi Akhir Tahun Akademik)</li>
+        <li>Unpad: Peraturan Rektor No. 19/2023 (Kemajuan Studi Ps. 42&ndash;44)</li>
+        <li>ITS: Peraturan Rektor No. 32/2019 (Evaluasi Prestasi Akademik)</li>
+      </ul>
+    </section>
+  </main>
+</Layout>
+
+
+

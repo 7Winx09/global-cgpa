@@ -1,0 +1,173 @@
+---
+import Layout from '../../../../layouts/Layout.astro';
+
+const pageTitle = 'ECTS-Grades A–E | Relative Notenvergabe, Percentile, Diploma Supplement';
+const description = 'ECTS-Grades an deutschen Universitäten: A (Top 10%), B (25%), C (30%), D (25%), E (10%). Berechnung, Kohorte, Diploma Supplement, Unterschied zur deutschen Note.';
+const canonical = 'https://globalcgpa.in/de/guides/ects-grades';
+const ogImage = '/og-image-de.png';
+const lang = 'de';
+const alternates = [
+  { hreflang: 'en', href: 'https://globalcgpa.in/guides/ects-grades' },
+  { hreflang: 'de', href: 'https://globalcgpa.in/de/guides/ects-grades' },
+];
+---
+
+<Layout title={pageTitle} description={description} canonical={canonical} ogImage={ogImage} lang={lang} alternates={alternates}>
+  <main class="max-w-[780px] mx-auto px-6 py-14" style="flex:1;">
+    <nav class="crumbs mb-6" aria-label="Breadcrumb">
+      <a href="/de/">Notenrechner</a>
+      <span class="sep">/</span>
+      <a href="/de/guides">Guides</a>
+      <span class="sep">/</span>
+      <span class="current">ECTS Grades A–E</span>
+    </nav>
+
+    <div class="text-xs font-bold uppercase tracking-wider text-emerald-500 mb-2">Akademischer Guide</div>
+    <h1 class="text-3xl sm:text-4xl font-extrabold tracking-tight mb-3">ECTS-Grades A–E</h1>
+    <p class="text-slate-500 dark:text-zinc-400 text-base mb-10">
+      Relative Notenvergabe nach Percentilen (KMK / ECTS Users' Guide 2015).
+      Ergänzung zur deutschen Note im Diploma Supplement / Suplemento Europeo.
+      Seit 2015 nicht mehr empfohlen, aber weiter nutzbar (HU Berlin ZSP-HU).
+    </p>
+
+    <section class="prose mb-12">
+      <h2>ECTS Grade Verteilung</h2>
+      <div class="table-scroll">
+        <table>
+          <thead>
+            <tr>
+              <th>ECTS Grade</th>
+              <th class="text-center">Percentil</th>
+              <th class="text-center">Anteil</th>
+              <th>Definition (KMK)</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr><td class="font-mono font-bold text-lg">A</td><td class="text-center">Top 10%</td><td class="text-center">10%</td><td>Excellent — hervorragende Leistung</td></tr>
+            <tr><td class="font-mono font-bold text-lg">B</td><td class="text-center">nächste 25%</td><td class="text-center">25%</td><td>Very Good — sehr gute Leistung</td></tr>
+            <tr><td class="font-mono font-bold text-lg">C</td><td class="text-center">nächste 30%</td><td class="text-center">30%</td><td>Good — gute Leistung</td></tr>
+            <tr><td class="font-mono font-bold text-lg">D</td><td class="text-center">nächste 25%</td><td class="text-center">25%</td><td>Satisfactory — befriedigende Leistung</td></tr>
+            <tr><td class="font-mono font-bold text-lg">E</td><td class="text-center">letzte 10%</td><td class="text-center">10%</td><td>Sufficient — ausreichende Leistung</td></tr>
+            <tr><td class="font-mono font-bold text-lg">FX / F</td><td class="text-center">—</td><td class="text-center">—</td><td>Fail — nicht bestanden (kein ECTS Grade)</td></tr>
+          </tbody>
+        </table>
+      </div>
+    </section>
+
+    <section class="prose mb-12">
+      <h2>Berechnung & Kohorte</h2>
+      <div class="bg-blue-50 dark:bg-blue-900/20 border border-blue-200 dark:border-blue-800 rounded-xl p-6">
+        <h3 class="font-bold mb-3">Methodik (ECTS Users' Guide 2015)</h3>
+        <ul class="list-disc list-inside space-y-2">
+          <li><strong>Nur bestandene Prüfungen:</strong> Nicht bestandene (5,0 / FX) erhalten keinen ECTS Grade</li>
+          <li><strong>Kohorte:</strong> Alle bestandenen Prüfungen eines Moduls / einer Abschlussnote der letzten 2–3 Studienjahre</li>
+          <li><strong>Mindestgröße:</strong> ≥ 30 Studierende für statistisch verlässliche Percentile</li>
+          <li><strong>Rangfolge:</strong> Noten aufsteigend sortieren → Percentile bilden</li>
+          <li><strong>Grenzen:</strong> Exakte 10%/25%/30%/25%/10% Schnittstellen (bei Rundung: nächste Note)</li>
+        </ul>
+      </div>
+    </section>
+
+    <section class="prose mb-12">
+      <h2>Beispiel: Modul mit 120 bestandenen Prüfungen</h2>
+      <div class="table-scroll">
+        <table>
+          <thead><tr><th>ECTS Grade</th><th class="text-center">Anzahl</th><th class="text-center">Rang-Positionen</th><th>Deutsche Note (Beispiel)</th></tr></thead>
+          <tbody>
+            <tr><td class="font-mono font-bold">A</td><td class="text-center">12</td><td class="text-center">1 – 12</td><td>1,0 – 1,5</td></tr>
+            <tr><td class="font-mono font-bold">B</td><td class="text-center">30</td><td class="text-center">13 – 42</td><td>1,6 – 2,0</td></tr>
+            <tr><td class="font-mono font-bold">C</td><td class="text-center">36</td><td class="text-center">43 – 78</td><td>2,3 – 2,7</td></tr>
+            <tr><td class="font-mono font-bold">D</td><td class="text-center">30</td><td class="text-center">79 – 108</td><td>3,0 – 3,5</td></tr>
+            <tr><td class="font-mono font-bold">E</td><td class="text-center">12</td><td class="text-center">109 – 120</td><td>3,7 – 4,0</td></tr>
+          </tbody>
+        </table>
+      </div>
+      <p class="mt-2 text-sm text-slate-500">※ Deutsche Noten sind beispielhaft. ECTS Grade hängt rein von der relativen Position in der Kohorte ab.</p>
+    </section>
+
+    <section class="prose mb-12">
+      <h2>Im Diploma Supplement / Suplemento Europeo</h2>
+      <p>Jede bestandene Modulprüfung und die Gesamtnote zeigen <strong>beide</strong> Systeme:</p>
+      <div class="table-scroll">
+        <table>
+          <thead><tr><th>Modul / Abschluss</th><th class="text-center">ECTS</th><th class="text-center">Deutsche Note</th><th class="text-center">ECTS Grade</th></tr></thead>
+          <tbody>
+            <tr><td>Analysis I</td><td class="text-center">6</td><td class="text-center">1,7</td><td class="text-center">B</td></tr>
+            <tr><td>Lineare Algebra</td><td class="text-center">6</td><td class="text-center">2,3</td><td class="text-center">C</td></tr>
+            <tr><td>Bachelorarbeit</td><td class="text-center">12</td><td class="text-center">1,3</td><td class="text-center">A</td></tr>
+            <tr><td class="font-bold">Gesamtnote (Bachelor)</td><td class="text-center">180</td><td class="text-center">1,9</td><td class="text-center">B</td></tr>
+          </tbody>
+        </table>
+      </div>
+    </section>
+
+    <section class="prose mb-12">
+      <h2>Status an den 6 Universitäten</h2>
+      <div class="table-scroll">
+        <table>
+          <thead><tr><th>Universität</th><th>ECTS Grades</th><th>Status</th><th>Besonderheit</th></tr></thead>
+          <tbody>
+            <tr><td><strong>TUM</strong></td><td>Pflichtig</td><td>APSO §17 Abs. 7: ECTS Grading Table für jedes Modul & Gesamtnote</td><td>Kohorte = letzte 2 Studienjahre</td></tr>
+            <tr><td><strong>Heidelberg</strong></td><td>Pflichtig</td><td>Prüfungsordnungen: A–E für bestandene Prüfungen; Basis: Kohorte + 2 Vorjahre</td><td>Für Gesamtnote verpflichtend</td></tr>
+            <tr><td><strong>HU Berlin</strong></td><td>Optional (weiter nutzbar)</td><td>ZSP-HU §114 Abs. 6: seit 2015 nicht empfohlen, aber nutzbar bis Änderung</td><td>NUS+ Tool für Ausland</td></tr>
+            <tr><td><strong>KIT</strong></td><td>Pflichtig</td><td>SPO: ECTS Grades für bestandene Modulprüfungen + Abschluss</td><td>Diploma Supplement Standard</td></tr>
+            <tr><td><strong>RWTH</strong></td><td>Pflichtig</td><td>ÜPO §10: ECTS Grades A–E für bestandene Prüfungen</td><td>Kohorte = 2–3 Jahre</td></tr>
+            <tr><td><strong>LMU</strong></td><td>Pflichtig</td><td>PSO: ECTS Grades für bestandene Prüfungen; Diploma Supplement</td><td>Jura: eigene Skala</td></tr>
+          </tbody>
+        </table>
+      </div>
+    </section>
+
+    <section class="prose mb-12">
+      <h2>ECTS Grade vs. Deutsche Note — Keine 1:1 Umrechnung</h2>
+      <p><strong>Wichtig:</strong> ECTS Grade ist <strong>relativ</strong> (Position in Kohorte), deutsche Note ist <strong>absolut</strong> (Leistungsniveau).</p>
+      <div class="table-scroll">
+        <table>
+          <thead><tr><th>Situation</th><th>Deutsche Note</th><th class="text-center">ECTS Grade</th><th>Grund</th></tr></thead>
+          <tbody>
+            <tr><td>Sehr starker Jahrgang</td><td>2,0</td><td class="text-center">C / D</td><td>Viele gute Noten → 2,0 nur Mittelfeld</td></tr>
+            <tr><td>Schwacher Jahrgang</td><td>2,0</td><td class="text-center">A / B</td><td>Wenige gute Noten → 2,0 ist Top</td></tr>
+            <tr><td>Strenger Prüfer</td><td>3,0</td><td class="text-center">B</td><td>Alle Noten schlecht → 3,0 relativ gut</td></tr>
+            <tr><td>Lockere Benotung</td><td>1,7</td><td class="text-center">D / E</td><td>Viele 1,x → 1,7 nur unteres Drittel</td></tr>
+          </tbody>
+        </table>
+      </div>
+    </section>
+
+    <section class="prose mb-12">
+      <h2>Internationale Anerkennung</h2>
+      <div class="grid gap-4 sm:grid-cols-2">
+        <div class="calc-shell p-4">
+          <h3 class="font-bold mb-2">🇪🇺 EEES (49 Länder)</h3>
+          <ul class="list-disc list-inside text-sm space-y-1">
+            <li>Standard im Diploma Supplement</li>
+            <li>Verstanden von ENIC-NARIC Centern</li>
+            <li>Erasmus+ / Joint Degrees: Pflicht</li>
+            <li>WES / NARIC: Nutzt ECTS Grade für Kontext</li>
+          </ul>
+        </div>
+        <div class="calc-shell p-4">
+          <h3 class="font-bold mb-2">🌍 Nicht-EU</h3>
+          <ul class="list-disc list-inside text-sm space-y-1">
+            <li>USA: WES bewertet ECTS Grade + deutsche Note</li>
+            <li>UK: NARIC nutzt Percentile für Class-Degree</li>
+            <li>Australien/CA: Prozentil-basierte Einstufung</li>
+            <li>Keine direkte 1:1 Umrechnung möglich</li>
+          </ul>
+        </div>
+      </div>
+    </section>
+
+    <section class="prose">
+      <h2>Referenzen</h2>
+      <ul>
+        <li>ECTS Users' Guide 2015 (EU Kommission) — Grading Tables</li>
+        <li>KMK: "ECTS-Grades in deutschen Hochschulen"</li>
+        <li>TUM: APSO §17 Abs. 7 (ECTS Grading Table)</li>
+        <li>Heidelberg: Prüfungsordnungen §11 (ECTS)</li>
+        <li>HU Berlin: ZSP-HU §114 Abs. 6 (seit 2015 nicht empfohlen)</li>
+        <li>DAAD: "ECTS und deutsche Noten"</li>
+      </ul>
+    </section>
+  </main>
+</Layout>

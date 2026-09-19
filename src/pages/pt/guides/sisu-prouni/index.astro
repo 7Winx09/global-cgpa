@@ -1,0 +1,184 @@
+---
+import Layout from '../../../../layouts/Layout.astro';
+
+const pageTitle = 'SISU, ProUni e Notas de Corte | Relação com Média Universitária';
+const description = 'Como a nota do ENEM/SISU/ProUni se relaciona com a média universitária (CR/IR). Conversão, notas de corte, bolsas, financiamento. Diferença entre média do ENEM e média da faculdade.';
+const canonical = 'https://globalcgpa.in/pt/guides/sisu-prouni';
+const ogImage = '/og-image-pt.png';
+const lang = 'pt';
+const alternates = [
+  { hreflang: 'en', href: 'https://globalcgpa.in/guides/sisu-prouni-brazil' },
+  { hreflang: 'pt', href: 'https://globalcgpa.in/pt/guides/sisu-prouni' },
+];
+---
+
+<Layout title={pageTitle} description={description} canonical={canonical} ogImage={ogImage} lang={lang} alternates={alternates}>
+  <main class="max-w-[780px] mx-auto px-6 py-14" style="flex:1;">
+    <nav class="crumbs mb-6" aria-label="Breadcrumb">
+      <a href="/pt/">Calculadora de Média</a>
+      <span class="sep">/</span>
+      <a href="/pt/guides">Guias</a>
+      <span class="sep">/</span>
+      <span class="current">SISU, ProUni e Notas de Corte</span>
+    </nav>
+
+    <div class="text-xs font-bold uppercase tracking-wider text-emerald-500 mb-2">Guia Acadêmico</div>
+    <h1 class="text-3xl sm:text-4xl font-extrabold tracking-tight mb-3">SISU, ProUni, FIES e Notas de Corte</h1>
+    <p class="text-slate-500 dark:text-zinc-400 text-base mb-10">
+      Entenda a diferença entre a <strong>média do ENEM/SISU</strong> (para ingresso) e a <strong>média universitária CR/IR</strong> (durante o curso).
+      São escalas e finalidades diferentes, mas ambas impactam sua vida acadêmica.
+    </p>
+
+    <section class="prose mb-12">
+      <h2>ENEM/SISU vs. Média Universitária — Diferenças Fundamentais</h2>
+      <div class="table-scroll">
+        <table>
+          <thead>
+            <tr>
+              <th>Aspecto</th>
+              <th>Média ENEM / SISU</th>
+              <th>Média Universitária (CR/IR)</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr><td><strong>Finalidade</strong></td><td>Seleção para ingresso (vestibular unificado)</td><td>Acompanhamento do desempenho no curso</td></tr>
+            <tr><td><strong>Escala</strong></td><td>0–1000 (cada área) → média simples 0–1000</td><td>0–10 (ponderada por créditos)</td></tr>
+            <tr><td><strong>Cálculo</strong></td><td>Média aritmética das 5 notas do ENEM</td><td>Média ponderada: Σ(Créditos × Nota) ÷ ΣCréditos</td></tr>
+            <tr><td><strong>Uso</strong></td><td>SISU, ProUni, FIES, bolsas, intercâmbio</td><td>Formatura, menção honrosa, monitoria, pós-graduação</td></tr>
+            <tr><td><strong>Validade</strong></td><td>ENEM do ano (ou anos anteriores conforme edital)</td><td>Acumulada durante todo o curso</td></tr>
+          </tbody>
+        </table>
+      </div>
+    </section>
+
+    <section class="prose mb-12">
+      <h2>SISU — Sistema de Seleção Unificada</h2>
+      <h3>Como Funciona a Nota de Corte</h3>
+      <ul>
+        <li>Nota de corte = menor nota do último classificado na chamada regular</li>
+        <li>Atualizada diariamente durante inscrições (baseada na nota de inscrição dos candidatos)</li>
+        <li>Não é fixa — varia a cada edição, curso, universidade, turno, cota</li>
+        <li>Sua nota ENEM = média simples das 5 áreas (LC, CH, CN, MT, Redação)</li>
+      </ul>
+
+      <h3>Exemplos de Notas de Corte (Referência 2024)</h3>
+      <div class="table-scroll">
+        <table>
+          <thead>
+            <tr>
+              <th>Curso / Universidade</th>
+              <th class="text-center">Ampla Concorrência</th>
+              <th class="text-center">Cotas (LB_PPI)</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr><td>Medicina USP</td><td class="text-center">~820–850</td><td class="text-center">~780–810</td></tr>
+            <tr><td>Engenharia UNICAMP</td><td class="text-center">~780–810</td><td class="text-center">~740–770</td></tr>
+            <tr><td>Direito UFRJ</td><td class="text-center">~750–780</td><td class="text-center">~710–740</td></tr>
+            <tr><td>Psicologia UFMG</td><td class="text-center">~720–750</td><td class="text-center">~680–710</td></tr>
+            <tr><td>Administração UFBA</td><td class="text-center">~680–710</td><td class="text-center">~640–670</td></tr>
+          </tbody>
+        </table>
+      </div>
+      <p class="text-sm text-slate-500 dark:text-zinc-400 mt-2">Valores aproximados — consultar sisu.mec.gov.br na edição vigente.</p>
+    </section>
+
+    <section class="prose mb-12">
+      <h2>ProUni — Programa Universidade para Todos</h2>
+      <h3>Requisitos de Nota ENEM</h3>
+      <ul>
+        <li><strong>Média mínima:</strong> 450 pontos na média das 5 áreas</li>
+        <li><strong>Redação:</strong> > 0 (não pode zerar)</li>
+        <li><strong>Bolsa 100%:</strong> Renda familiar per capita ≤ 1,5 salário-mínimo</li>
+        <li><strong>Bolsa 50%:</strong> Renda familiar per capita ≤ 3 salários-mínimos</li>
+      </ul>
+
+      <h3>Notas de Corte ProUni (Referência)</h3>
+      <p>Geralmente <strong>50–100 pontos abaixo</strong> das notas de corte do SISU para o mesmo curso/universidade, pois a concorrência é restrita a candidatos com renda dentro do perfil.</p>
+    </section>
+
+    <section class="prose mb-12">
+      <h2>FIES — Fundo de Financiamento Estudantil</h2>
+      <ul>
+        <li><strong>Média ENEM mínima:</strong> 450 pontos + redação > 0</li>
+        <li><strong>Renda familiar:</strong> Per capita ≤ 3 salários-mínimos</li>
+        <li><strong>Financia:</strong> 50% a 100% da mensalidade (conforme renda e curso)</li>
+        <li><strong>Carência:</strong> 18 meses após formatura para começar a pagar</li>
+        <li><strong>Juros:</strong> Zero a baixos (conforme renda e modalidade)</li>
+      </ul>
+    </section>
+
+    <section class="prose mb-12">
+      <h2>A Média Universitária (CR/IR) Durante o Curso</h2>
+      <p>Uma vez matriculado, sua <strong>média do ENEM não importa mais</strong> para a vida acadêmica (exceto para bolsas de permanência, intercâmbio, alguns editais). O que vale é o CR/IR.</p>
+
+      <h3>Onde o CR/IR é Exigido</h3>
+      <div class="table-scroll">
+        <table>
+          <thead>
+            <tr>
+              <th>Situação</th>
+              <th>CR/IR Mínimo Típico</th>
+              <th>Observação</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr><td>Monitoria / Bolsa Iniciação Científica (PIBIC/CNPq)</td><td class="text-center">≥ 7.0</td><td>Varia por edital/departamento</td></tr>
+            <tr><td>Intercâmbio (Ciência sem Fronteiras, convênios)</td><td class="text-center">≥ 7.0–8.0</td><td>Exige histórico com CR alto</td></tr>
+            <tr><td>Bolsa Permanência (MEC/universidade)</td><td class="text-center">≥ 6.0–7.0</td><td>Para alunos em vulnerabilidade socioeconômica</td></tr>
+            <tr><td>Pós-graduação (mestrado/doutorado)</td><td class="text-center">≥ 7.0–8.0</td><td>Critério de corte em muitas PPGs</td></tr>
+            <tr><td>Menção Honrosa / Formatura com Louvor</td><td class="text-center">≥ 8.0–8.5</td><td>Ver guia específico</td></tr>
+            <tr><td>Formatura (mínimo)</td><td class="text-center">≥ 5.0 (UFRJ: 6.0)</td><td>Requisito obrigatório para diploma</td></tr>
+          </tbody>
+        </table>
+      </div>
+    </section>
+
+    <section class="prose mb-12">
+      <h2>Conversão Aproximada ENEM → Escala 0–10</h2>
+      <p>Não existe conversão oficial, mas algumas universidades usam para estágios/bolsas:</p>
+      <div class="formula-block">
+        <div class="f-label">Estimativa Linear</div>
+        <div class="f-text">Nota 0–10 ≈ Média ENEM (0–1000) ÷ 100</div>
+        <div class="f-example">ENEM 750 → ≈ 7.5 na escala universitária | ENEM 620 → ≈ 6.2</div>
+      </div>
+      <p class="text-sm text-slate-500 dark:text-zinc-400">
+        <strong>Atenção:</strong> Esta é apenas uma estimativa grosseira. O ENEM mede competências do ensino médio; a média universitária mede desempenho no ensino superior. Não use para documentos oficiais.
+      </p>
+    </section>
+
+    <section class="prose mb-12">
+      <h2>Dicas Práticas</h2>
+      <div class="grid gap-4 sm:grid-cols-2">
+        <div class="calc-shell p-4">
+          <h3 class="font-bold mb-2">🎯 Para Ingresso (SISU/ProUni)</h3>
+          <ul class="list-disc list-inside text-sm space-y-1">
+            <li>Foque na redação — peso alto e elimina se zerar</li>
+            <li>Simule notas de corte no sisu.mec.gov.br</li>
+            <li>Use as 2 opções de curso estrategicamente</li>
+            <li>Cotas: verifique qual modalidade se encaixa (LB, PPI, EP, etc.)</li>
+          </ul>
+        </div>
+        <div class="calc-shell p-4">
+          <h3 class="font-bold mb-2">📚 Durante a Faculdade (CR/IR)</h3>
+          <ul class="list-disc list-inside text-sm space-y-1">
+            <li>Mantenha CR ≥ 7.0 para bolsas/monitoria/intercâmbio</li>
+            <li>Evite reprovações por frequência (RF = 0.0 no CR)</li>
+            <li>Repetição: melhor nota substitui, mas reprovação fica no histórico</li>
+            <li>Planeje eletivas/estágio/TCC para não atrasar formatura</li>
+          </ul>
+        </div>
+      </div>
+    </section>
+
+    <section class="prose">
+      <h2>Links Úteis</h2>
+      <ul>
+        <li><a href="https://sisu.mec.gov.br" target="_blank" rel="noopener" class="underline">SISU — Site Oficial</a></li>
+        <li><a href="https://prouniportal.mec.gov.br" target="_blank" rel="noopener" class="underline">ProUni — Portal Oficial</a></li>
+        <li><a href="https://fiesportal.mec.gov.br" target="_blank" rel="noopener" class="underline">FIES — Portal Oficial</a></li>
+        <li><a href="https://www.gov.br/inep/pt-br/areas-de-atuacao/avaliacao-e-exames-educacionais/enem" target="_blank" rel="noopener" class="underline">ENEM — INEP</a></li>
+      </ul>
+    </section>
+  </main>
+</Layout>

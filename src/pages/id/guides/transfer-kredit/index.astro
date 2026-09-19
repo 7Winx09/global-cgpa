@@ -1,0 +1,142 @@
+---
+import Layout from '../../../../layouts/Layout.astro';
+
+const pageTitle = 'Transfer Kredit & Pengakuan Nilai | Syarat Antar Universitas Indonesia';
+const description = 'Syarat transfer kredit antar PT Indonesia: minimum IPK, SKS yang diakui, persetujuan dosen pembimbing, dokumen yang diperlukan. Regulasi Kemendikbud & per PT.';
+const canonical = 'https://globalcgpa.in/id/guides/transfer-kredit';
+const ogImage = '/og-image-id.png';
+const lang = 'id';
+const alternates = [
+  { hreflang: 'en', href: 'https://globalcgpa.in/guides/transfer-credit' },
+  { hreflang: 'id', href: 'https://globalcgpa.in/id/guides/transfer-kredit' },
+];
+---
+
+<Layout title={pageTitle} description={description} canonical={canonical} ogImage={ogImage} lang={lang} alternates={alternates}>
+  <main class="max-w-[780px] mx-auto px-6 py-14" style="flex:1;">
+    <nav class="crumbs mb-6" aria-label="Breadcrumb">
+      <a href="/id/">Kalkulator IPK</a>
+      <span class="sep">/</span>
+      <a href="/id/guides">Panduan</a>
+      <span class="sep">/</span>
+      <span class="current">Transfer Kredit</span>
+    </nav>
+
+    <div class="text-xs font-bold uppercase tracking-wider text-emerald-500 mb-2">Panduan Akademik</div>
+    <h1 class="text-3xl sm:text-4xl font-extrabold tracking-tight mb-3">Transfer Kredit & Pengakuan Nilai</h1>
+    <p class="text-slate-500 dark:text-zinc-400 text-base mb-10">
+      Panduan pengakuan mata kuliah antar perguruan tinggi Indonesia (mutasi, pertukaran mahasiswa, MBKM, kuliah kerja nyata).
+    </p>
+
+    <section class="prose mb-12">
+      <h2>Dasar Hukum Nasional</h2>
+      <ul>
+        <li><strong>UU No. 12/2012 Ps. 66:</strong> Pengakuan kredit antar PT</li>
+        <li><strong>Permendikbudristek No. 3/2020:</strong> SN-Dikti â€” Standar pengakuan pembelajaran</li>
+        <li><strong>Permendikbudristek No. 5/2020:</strong> KKNI â€” Kesepadanan capaian pembelajaran</li>
+        <li><strong>MBKM (Merdeka Belajar Kampus Merdeka):</strong> Kebijakan 3 semester di luar PT (studi independen, magang, pertukaran)</li>
+      </ul>
+    </section>
+
+    <section class="prose mb-12">
+      <h2>Syarat Umum Transfer Kredit (Mutasi/Pertukaran)</h2>
+      <div class="table-scroll">
+        <table>
+          <thead><tr><th>Kriteria</th><th>Syarat Umum</th><th>Catatan</th></tr></thead>
+          <tbody>
+            <tr><td><strong>IPK Minimum</strong></td><td>2.50 â€“ 3.00</td><td>UI: 3.00, ITB: 3.00, UGM: 2.75â€“3.00, UNAIR: 2.50, IPB: 2.75, Unpad: 2.50, ITS: 2.75</td></tr>
+            <tr><td><strong>SKS Minimum Diambil</strong></td><td>40â€“60 SKS (2â€“4 semester)</td><td>Mutasi S1: biasanya min 4 semester (60+ SKS). Pertukaran 1-2 semester: 20â€“30 SKS</td></tr>
+            <tr><td><strong>Kesepadanan MK</strong></td><td>â‰¥ 80% bobot & capaian pembelajaran</td><td>Dibandingkan RPS (Rencana Pembelajaran Semester) MK asal vs MK tujuan</td></tr>
+            <tr><td><strong>Nilai Minimum MK</strong></td><td>C (2.00) atau sesuai kebijakan PT tujuan</td><td>Beberapa PT butuh B (3.00) untuk MK prasyarat/inti</td></tr>
+            <tr><td><strong>Maksimum SKS Diakui</strong></td><td>50â€“75% total SKS kurikulum</td><td>Sisa minimal 25â€“50% diambil di PT tujuan (residensi)</td></tr>
+            <tr><td><strong>Waktu Proses</strong></td><td>2â€“8 minggu</td><td>Butuh persetujuan: Ka. Prodi â†’ Wakil Dekan â†’ Dekan â†’ Biro Akademik</td></tr>
+          </tbody>
+        </table>
+      </div>
+    </section>
+
+    <section class="prose mb-12">
+      <h2>Perbedaan: Mutasi vs Pertukaran vs MBKM</h2>
+      <div class="table-scroll">
+        <table>
+          <thead><tr><th>Jenis</th><th>Definisi</th><th>IPK Min</th><th>SKS Diakui</th><th>Perhitungan IPK</th></tr></thead>
+          <tbody>
+            <tr><td><strong>Mutasi (Pindah PT)</strong></td><td>Pindah permanen ke PT lain</td><td>2.50â€“3.00</td><td>Max 50â€“75% SKS</td><td>Nilai masuk IPK PT baru (bobot PT baru)</td></tr>
+            <tr><td><strong>Pertukaran Mahasiswa (1-2 sem)</strong></td><td>Sementara ke PT mitra (domestik/ln)</td><td>2.75â€“3.00</td><td>20â€“30 SKS/sem</td><td>Nilai dikonversi ke skala PT asal</td></tr>
+            <tr><td><strong>MBKM (3 Semester)</strong></td><td>Studi independen/magang/pertukaran</td><td>2.00â€“2.50</td><td>Max 20 SKS/sem (tot 60)</td><td>Konversi nilai, masuk transkrip</td></tr>
+            <tr><td><strong>KKN/Kuliah Kerja Nyata</strong></td><td>Wajib S1 (biasanya 3â€“6 SKS)</td><td>2.00</td><td>3â€“6 SKS</td><td>Nilai huruf, masuk IPK</td></tr>
+          </tbody>
+        </table>
+      </div>
+    </section>
+
+    <section class="prose mb-12">
+      <h2>Dokumen yang Diperlukan</h2>
+      <div class="bg-slate-50 dark:bg-zinc-900 border border-slate-200 dark:border-zinc-800 rounded-xl p-6">
+        <ul class="list-disc list-inside space-y-2">
+          <li><strong>Surat Permohonan</strong> (ditetapkan Ka. Prodi PT asal & tujuan)</li>
+          <li><strong>Transkrip Nilai Sementara</strong> (legalisir Biro Akademik PT asal)</li>
+          <li><strong>RPS / Silabus MK</strong> yang diajukan untuk dikonversi (dari PT asal)</li>
+          <li><strong>Tabel Kesepadanan</strong> (perbandingan CPMK, bobot SKS, bahan kajian)</li>
+          <li><strong>Surat Persetujuan Dosen Pembimbing Akademik</strong> (PT asal & tujuan)</li>
+          <li><strong>Surat Rekomendasi Ka. Prodi</strong> (PT asal & tujuan)</li>
+          <li><strong>Surat Keputusan Dekan</strong> pengakuan kredit (PT tujuan)</li>
+          <li><strong>KHS Semester Terakhir</strong> (bukti status aktif & IPK)</li>
+        </ul>
+      </div>
+    </section>
+
+    <section class="prose mb-12">
+      <h2>Khusus: MBKM (Merdeka Belajar Kampus Merdeka)</h2>
+      <ul>
+        <li><strong>Program:</strong> Magang, Bangkit, Studi Independen, Pertukaran Mahasiswa Merdeka, KKN Tematik, Wirausaha, Proyek Kemanusiaan</li>
+        <li><strong>SKS Maksimum:</strong> 20 SKS per semester, total 60 SKS (3 semester)</li>
+        <li><strong>Konversi Nilai:</strong> Menggunakan tabel konversi PT mitra â†’ skala PT asal (biasanya 4.0)</li>
+        <li><strong>IPK Minimum:</strong> Umum 2.00â€“2.50 (tergantung program)</li>
+        <li><strong>Platform:</strong> SIMASTER / EMAS / AKSARA (Kemdikbudristek)</li>
+      </ul>
+    </section>
+
+    <section class="prose mb-12">
+      <h2>Contoh Proses di 3 PT</h2>
+      <details class="faq-row">
+        <summary>UI: Mutasi Masuk (Transfer Eksternal)</summary>
+        <div class="faq-body">
+          <p>Syarat: Min 4 semester (48 SKS) di PT asal, IPK â‰¥ 3.00. Seleksi: Administrasi â†’ Tes Potensi Akademik â†’ Wawancara. Maks 50% SKS diakui. Nilai masuk IPK UI.</p>
+        </div>
+      </details>
+      <details class="faq-row">
+        <summary>UGM: Pertukaran Mahasiswa (Inbound/Outbound)</summary>
+        <div class="faq-body">
+          <p>Skema: 1â€“2 semester. IPK â‰¥ 2.75. MK diakui jika CPMK â‰¥ 80% sama. Nilai dikonversi ke skala UGM (14 tingkat). Butuh MoU antar PT.</p>
+        </div>
+      </details>
+      <details class="faq-row">
+        <summary>ITB: MBKM & Pertukaran</summary>
+        <div class="faq-body">
+          <p>IPK â‰¥ 3.00 untuk pertukaran. MK wajib dikonversi via "Tabel Kesepadanan MK". Nilai masuk IPK ITB. Maks 20 SKS/sem untuk MBKM.</p>
+        </div>
+      </details>
+    </section>
+
+    <section class="prose mb-12">
+      <h2>Perhitungan IPK Pasca-Transfer</h2>
+      <div class="formula-block mb-4">
+        <div class="f-label">Formula Umum</div>
+        <div class="f-text">IPK Baru = (Î£(SKS_PTBaru Ã— Bobot_PTBaru) + Î£(SKS_Transfer Ã— Bobot_Konversi)) Ã· Î£Total SKS</div>
+        <div class="f-example">Catatan: Bobot_Konversi = nilai huruf PT asal dikonversi ke skala bobot PT tujuan</div>
+      </div>
+      <p>Beberapa PT (UI, UGM) menghitung IPK transfer <strong>terpisah</strong> di transkrip, lalu digabung saat yudisium.</p>
+    </section>
+
+    <section class="prose">
+      <h2>Referensi</h2>
+      <ul>
+        <li>Permendikbudristek No. 3/2020 â€” SN-Dikti (Ps. 18â€“20: Pengakuan Pembelajaran)</li>
+        <li>Permendikbudristek No. 5/2020 â€” KKNI</li>
+        <li>Buku Pedoman Akademik: UI, ITB, UGM, UNAIR, IPB, Unpad, ITS (Bagian Transfer Kredit)</li>
+        <li>Panduan MBKM Kemdikbudristek (Tahun 2021â€“2024)</li>
+      </ul>
+    </section>
+  </main>
+</Layout>

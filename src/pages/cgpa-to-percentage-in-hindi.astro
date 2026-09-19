@@ -5,6 +5,9 @@ import SiteFooter from '../components/Footer.astro';
 import Breadcrumbs from '../components/Breadcrumbs.astro';
 import FaqAccordion from '../components/FaqAccordion.astro';
 import { universities } from '../data/universities';
+import { getUniversitiesByCountry } from '../data/universities-global';
+
+const hiUniversities = getUniversitiesByCountry('IN');
 
 const cgpaValues = [10, 9.5, 9, 8.5, 8, 7.5, 7, 6.5, 6];
 
@@ -102,6 +105,9 @@ const schema = {
             {universities.map((u) => (
               <option value={u.key}>{u.short} — {u.formulaLabel}</option>
             ))}
+            {hiUniversities.map((u) => (
+              <option value={u.key}>{u.name} — {u.formulaLabel}</option>
+            ))}
           </select>
 
           <div class="calc-output">
@@ -160,6 +166,27 @@ const schema = {
         <li><strong>9.0+ CGPA (85.5%+)</strong> — PSU shortlists और scholarships के लिए मज़बूत</li>
       </ul>
       <p>अंग्रेज़ी में पूरी guide — <a href="/">CGPA to Percentage Calculator</a>, <a href="/sgpa-to-cgpa">SGPA to CGPA</a>, <a href="/guides/how-to-improve-cgpa">CGPA सुधारने के तरीके</a>।</p>
+
+      <h2>हिंदी क्षेत्र के प्रमुख विश्वविद्यालय — अपने फॉर्मूले के साथ</h2>
+      <p>ये 5 विश्वविद्यालय/समूह अपने आधिकारिक हिंदी/अंग्रेजी अध्यादेशों में अलग CGPA-से-प्रतिशत फॉर्मूला प्रकाशित करते हैं:</p>
+      <div class="table-scroll">
+        <table>
+          <thead><tr><th>विश्वविद्यालय</th><th>फॉर्मूला</th><th>उदाहरण (8.0 CGPA)</th><th>स्रोत</th></tr></thead>
+          <tbody>
+            {hiUniversities.map((u) => (
+              <tr>
+                <td><a href={`/${u.slug}`} class="underline hover:text-emerald-500">{u.name}</a></td>
+                <td>{u.formulaLabel}</td>
+                <td>{u.formulaLabel.includes('×9.5') ? '76%' : '80%'}</td>
+                <td><a href={u.sourceUrl} target="_blank" rel="noopener" class="text-xs underline">आधिकारिक</a></td>
+              </tr>
+            ))}
+          </tbody>
+        </table>
+      </div>
+      <p class="text-sm text-slate-500 dark:text-zinc-400 mt-2">
+        प्रत्येक विश्वविद्यालय का अपना आधिकारिक अध्यादेश (हिंदी/अंग्रेजी में) है। हमेशा अपने कॉलेज के परीक्षा प्रकोष्ठ या Controller of Examinations से आधिकारिक conversion certificate लें।
+      </p>
     </section>
 
     <section class="prose tool-faq">
@@ -210,6 +237,11 @@ const schema = {
     // Build formulas from universities.ts data
     const formulas: Record<string, { fn: (x: number) => number; label: string }> = {
       cbse: { fn: (x) => x * 9.5, label: 'CBSE/UGC formula' },
+      'in-du': { fn: (x) => Math.min(100, x * 9.5), label: 'DU (दिल्ली विश्वविद्यालय) ×9.5' },
+      'in-dtu': { fn: (x) => Math.min(100, x * 10), label: 'DTU (दिल्ली प्रौद्योगिकी विश्वविद्यालय) ×10' },
+      'in-jnu': { fn: (x) => Math.min(100, x * 10), label: 'JNU (जवाहरलाल नेहरू विश्वविद्यालय) ×10' },
+      'in-bhu': { fn: (x) => Math.min(100, x * 10), label: 'BHU (काशी हिंदू विश्वविद्यालय) ×10' },
+      'in-iit-civilian': { fn: (x) => Math.min(100, x * 10), label: 'IIT-संबद्ध कॉलेज ×10 (मानक)' },
     };
     
     {universities.map((u) => `

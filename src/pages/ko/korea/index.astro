@@ -1,0 +1,218 @@
+---
+import Layout from '../../../layouts/Layout.astro';
+import { getUniversityByKey } from '../../../data/universities-global';
+
+const univ = getUniversityByKey('kr-korea')!;
+const pageTitle = `${univ.name} 학점계산기 | ${univ.system} 만점 평점 평균 계산`;
+const description = `고려대학교 전용 학점계산기. ${univ.system} 만점 체계 반영. 과목별 등급과 학점 입력으로 정확한 GPA 산출. 공식 규정: ${univ.source}`;
+const canonical = `https://globalcgpa.in/ko/korea`;
+const ogImage = '/og-image-ko.png';
+const lang = 'ko';
+const alternates = [
+  { hreflang: 'en', href: 'https://globalcgpa.in/university/korea' },
+  { hreflang: 'ko', href: 'https://globalcgpa.in/ko/korea' },
+];
+---
+
+<Layout title={pageTitle} description={description} canonical={canonical} ogImage={ogImage} lang={lang} alternates={alternates}>
+  <main class="max-w-[780px] mx-auto px-6 py-14" style="flex:1;">
+    <nav class="crumbs mb-6" aria-label="브레드크럼">
+      <a href="/ko/">학점계산기</a>
+      <span class="sep">/</span>
+      <a href="/ko/대학-학점계산기">대학별</a>
+      <span class="sep">/</span>
+      <span class="current">{univ.name}</span>
+    </nav>
+
+    <div class="text-xs font-bold uppercase tracking-wider text-emerald-500 mb-2">{univ.name} ({univ.nameEn})</div>
+    <h1 class="text-3xl sm:text-4xl font-extrabold tracking-tight mb-3">{univ.name} 학점계산기</h1>
+    <p class="text-slate-500 dark:text-zinc-400 text-base mb-8">
+      {univ.name}의 공식 {univ.system} 만점 체계를 반영한 전용 계산기입니다.
+      과목별 등급과 학점을 입력하면 정확한 평점 평균(GPA)을 산출합니다.
+    </p>
+
+    <div class="calc-shell space-y-6" id="univ-gpa-calculator">
+      <div class="flex items-center gap-3">
+        <span class="px-3 py-1 bg-emerald-100 dark:bg-emerald-900/30 text-emerald-700 dark:text-emerald-300 text-xs font-bold rounded-full">
+          {univ.system} 만점
+        </span>
+        <span class="text-sm text-slate-500 dark:text-zinc-400">등급: A+, A, B+, B, C+, C, D+, D, F</span>
+      </div>
+
+      <div class="grid gap-4 sm:grid-cols-2">
+        <div>
+          <label class="calc-label" for="course-count">과목 수</label>
+          <input type="number" id="course-count" class="calc-input" min="1" max="30" value="6" aria-label="과목 수 입력" />
+        </div>
+        <div>
+          <label class="calc-label" for="semester">학기 구분 (선택)</label>
+          <select id="semester" class="calc-select" aria-label="학기 구분 선택">
+            <option value="">전체 학기 합산</option>
+            <option value="1">1학기</option>
+            <option value="2">2학기</option>
+            <option value="summer">하계학기</option>
+            <option value="winter">동계학기</option>
+          </select>
+        </div>
+      </div>
+
+      <div id="courses" class="space-y-3" role="list" aria-label="과목 목록"></div>
+
+      <button type="button" class="w-full sm:w-auto px-6 py-3 bg-emerald-500 hover:bg-emerald-600 text-slate-900 font-bold text-sm rounded-xl transition-colors" id="calculate-btn">
+        평점 평균 계산
+      </button>
+
+      <div class="calc-output" aria-live="polite" aria-label="계산 결과">
+        <div class="calc-out-val" id="result">0.00</div>
+        <div class="calc-out-lbl">평점 평균 (GPA)</div>
+        <div class="calc-out-lbl" style="margin-top:8px; font-size:0.68rem;" id="detail">총 학점: 0 | 총 평점: 0.00</div>
+      </div>
+
+      <div class="formula-block">
+        <div class="f-label">계산 공식</div>
+        <div class="f-text">GPA = Σ(학점 × 평점) ÷ Σ학점</div>
+        <div class="f-example" id="formula-example">예: 3학점 A+(4.5) + 3학점 B+(3.5) = (13.5+10.5)÷6 = 4.00</div>
+      </div>
+    </div>
+
+    <section class="mt-12" aria-labelledby="regulation-heading">
+      <h2 id="regulation-heading" class="text-2xl font-extrabold tracking-tight mb-6">공식 성적 규정</h2>
+      <div class="prose">
+        <h3>평점 체계 ({univ.system} 만점)</h3>
+        <div class="table-scroll">
+          <table>
+            <thead>
+              <tr>
+                <th>등급</th>
+                <th class="text-center">평점</th>
+                <th class="text-center">백분율(%)</th>
+              </tr>
+            </thead>
+            <tbody>
+              {Object.entries(univ.gradeMapping).map(([grade, point]) => (
+                <tr>
+                  <td><strong>{grade}</strong></td>
+                  <td class="text-center font-mono">{point.toFixed(2)}</td>
+                  <td class="text-center">
+                    {univ.percentageMapping && univ.percentageMapping[grade]
+                      ? `${univ.percentageMapping[grade][0]}~${univ.percentageMapping[grade][1]}%`
+                      : '—'}
+                  </td>
+                </tr>
+              ))}
+            </tbody>
+          </table>
+        </div>
+
+        <h3 class="mt-6">주요 학사 규정</h3>
+        <ul>
+          <li><strong>평점 평균 산출:</strong> Σ(과목별 학점 × 등급 평점) ÷ 총 이수 학점 (P, S, I 제외)</li>
+          <li><strong>등급 체계:</strong> A+/A, B+/B, C+/C, D+/D, F (A0/A-/B0/B- 등 세부 등급 없음)</li>
+          <li><strong>학사경고:</strong> 전체 평점평균 1.75 미만 시 경고, 연속 3회 시 제적</li>
+          <li><strong>졸업 요건:</strong> 전체 평점평균 1.75 이상, 전공/교양/일반 최소 이수 학점 충족</li>
+          <li><strong>외국어 졸업요건:</strong> 공인영어성적(TOEFL, TOEIC, TEPS, IELTS 등) 필수 제출</li>
+          <li><strong>한자 졸업요건:</strong> 한자능력시험 합격 또는 한문 강의 이수 필수</li>
+          <li><strong>재수강:</strong> C+ 이하 과목 재수강 가능, 재수강 시 A(4.0) 상한, 2회 재수강 시 B+(3.5) 상한</li>
+        </ul>
+
+        <h3 class="mt-6">출처</h3>
+        <p><strong>{univ.source}</strong></p>
+        <p><a href={univ.sourceUrl} target="_blank" rel="noopener" class="underline hover:text-emerald-500">{univ.sourceUrl}</a></p>
+        {univ.note && <p class="text-sm text-slate-500 dark:text-zinc-400"><strong>비고:</strong> {univ.note}</p>}
+      </div>
+    </section>
+
+    <section class="mt-12" aria-labelledby="related-heading">
+      <h2 id="related-heading" class="text-2xl font-extrabold tracking-tight mb-6">다른 대학 계산기</h2>
+      <div class="grid gap-3 sm:grid-cols-2 lg:grid-cols-3">
+        <a href="/ko/snu" class="calc-shell p-4 hover:border-emerald-500 transition-all text-center">서울대학교 — 4.3 만점</a>
+        <a href="/ko/kaist" class="calc-shell p-4 hover:border-emerald-500 transition-all text-center">카이스트 — 4.3 만점</a>
+        <a href="/ko/yonsei" class="calc-shell p-4 hover:border-emerald-500 transition-all text-center">연세대학교 — 4.3 만점</a>
+        <a href="/ko/ewha" class="calc-shell p-4 hover:border-emerald-500 transition-all text-center">이화여자대학교 — 4.3 만점</a>
+        <a href="/ko/skk" class="calc-shell p-4 hover:border-emerald-500 transition-all text-center">성균관대학교 — 4.5 만점</a>
+        <a href="/ko/konkuk" class="calc-shell p-4 hover:border-emerald-500 transition-all text-center">건국대학교 — 4.5/4.3 환산</a>
+      </div>
+    </section>
+  </main>
+</Layout>
+
+<script is:inline>
+  const GRADES = ['A+', 'A', 'B+', 'B', 'C+', 'C', 'D+', 'D', 'F'];
+  const POINTS = { 'A+': 4.5, 'A': 4.0, 'B+': 3.5, 'B': 3.0, 'C+': 2.5, 'C': 2.0, 'D+': 1.5, 'D': 1.0, 'F': 0.0 };
+  const PERCENTAGES = { 'A+': [95, 100], 'A': [90, 94], 'B+': [85, 89], 'B': [80, 84], 'C+': [75, 79], 'C': [70, 74], 'D+': [65, 69], 'D': [60, 64], 'F': [0, 59] };
+
+  function createCourseRow(index) {
+    const row = document.createElement('div');
+    row.className = 'grid gap-3 sm:grid-cols-[1fr_80px_100px] items-end';
+    row.setAttribute('role', 'listitem');
+    row.innerHTML = `
+      <div>
+        <label class="calc-label" for="grade-${index}">과목 ${index + 1} 등급</label>
+        <select id="grade-${index}" class="calc-select grade-select" aria-label="과목 ${index + 1} 등급">
+          ${GRADES.map(g => `<option value="${g}">${g} (${POINTS[g]}) ↔ ${PERCENTAGES[g][0]}~${PERCENTAGES[g][1]}%</option>`).join('')}
+        </select>
+      </div>
+      <div>
+        <label class="calc-label" for="credit-${index}">학점</label>
+        <input type="number" id="credit-${index}" class="calc-input credit-input" value="3" min="1" max="6" step="1" aria-label="과목 ${index + 1} 학점" />
+      </div>
+      <div>
+        <label class="calc-label" for="course-name-${index}">과목명 (선택)</label>
+        <input type="text" id="course-name-${index}" class="calc-input" placeholder="예: 미분적분학" aria-label="과목 ${index + 1} 이름" />
+      </div>
+    `;
+    return row;
+  }
+
+  function renderCourses(count) {
+    const container = document.getElementById('courses');
+    container.innerHTML = '';
+    for (let i = 0; i < count; i++) {
+      container.appendChild(createCourseRow(i));
+    }
+  }
+
+  function calculateGPA() {
+    const gradeSelects = document.querySelectorAll('#courses .grade-select');
+    const creditInputs = document.querySelectorAll('#courses .credit-input');
+
+    let totalCredits = 0;
+    let totalPoints = 0;
+
+    gradeSelects.forEach((select, i) => {
+      const grade = select.value;
+      const credit = parseFloat(creditInputs[i].value) || 0;
+      const point = POINTS[grade] || 0;
+
+      totalCredits += credit;
+      totalPoints += credit * point;
+    });
+
+    const gpa = totalCredits > 0 ? totalPoints / totalCredits : 0;
+    document.getElementById('result').textContent = gpa.toFixed(2);
+    document.getElementById('detail').textContent = `총 학점: ${totalCredits} | 총 평점: ${totalPoints.toFixed(2)}`;
+  }
+
+  const countInput = document.getElementById('course-count');
+  const calculateBtn = document.getElementById('calculate-btn');
+  let currentCount = parseInt(countInput.value) || 6;
+
+  renderCourses(currentCount);
+  calculateGPA();
+
+  countInput.addEventListener('input', () => {
+    let newCount = parseInt(countInput.value) || 1;
+    newCount = Math.max(1, Math.min(30, newCount));
+    currentCount = newCount;
+    renderCourses(newCount);
+    calculateGPA();
+  });
+
+  calculateBtn.addEventListener('click', calculateGPA);
+
+  document.getElementById('courses').addEventListener('change', e => {
+    if (e.target.matches('.grade-select, .credit-input')) {
+      calculateGPA();
+    }
+  });
+</script>

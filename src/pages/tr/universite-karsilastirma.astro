@@ -1,0 +1,145 @@
+---
+import Layout from '../../layouts/Layout.astro';
+import { getUniversitiesByCountry } from '../../data/universities-global';
+
+const universities = getUniversitiesByCountry('TR');
+
+const pageTitle = 'Üniversite GANO Karşılaştırma | Türkiye 4 Ana Üni';
+const description = 'Türkiye 4 büyük üniversitesinin (Boğaziçi, METU, İTÜ, Ankara) GANO sistemleri karşılaştırması. 4.0 ölçek, AA–FF harf notları, AKTS, geçme notu CC=2.00, şartlı geçme DC/DD, onur listesi kriterleri.';
+const canonical = 'https://globalcgpa.in/tr/universite-karsilastirma';
+const ogImage = '/og-image-tr.png';
+const lang = 'tr';
+const alternates = [
+  { hreflang: 'en', href: 'https://globalcgpa.in/universities' },
+  { hreflang: 'tr', href: 'https://globalcgpa.in/tr/universite-karsilastirma' },
+];
+---
+
+<Layout title={pageTitle} description={description} canonical={canonical} ogImage={ogImage} lang={lang} alternates={alternates}>
+  <main class="max-w-[1160px] mx-auto px-6 py-14" style="flex:1;">
+    <div class="text-xs font-bold uppercase tracking-wider text-emerald-500 mb-2">Üniversite Karşılaştırma</div>
+    <h1 class="text-3xl sm:text-4xl font-extrabold tracking-tight mb-3">Türkiye Ana Üniversiteleri GANO Sistemi Karşılaştırma</h1>
+    <p class="text-slate-500 dark:text-zinc-400 text-base mb-10">
+      Türkiye'de devlet üniversiteleri YÖK standartlarına uygun 4.0 ölçekli GANO sistemi kullanır.
+      Harf notları (AA–FF) ve katsayıları (4.0–0.0) ortaktır; uygulama detayları (şartlı geçme, onur listesi, yüksek lisans başvuru) üniversiteye göre değişir.
+    </p>
+
+    <section class="mb-16" aria-labelledby="comparison-heading">
+      <h2 id="comparison-heading" class="text-2xl font-extrabold tracking-tight mb-6">Genel Karşılaştırma Tablosu</h2>
+      <div class="table-scroll">
+        <table>
+          <thead>
+            <tr>
+              <th>Üniversite</th>
+              <th class="text-center">Ölçek</th>
+              <th class="text-center">Geçme Notu</th>
+              <th class="text-center">Şartlı Geçme</th>
+              <th class="text-center">Onur Listesi</th>
+              <th class="text-center">Yüksek Lisans Min.</th>
+              <th>Yönetmelik Dili</th>
+            </tr>
+          </thead>
+          <tbody>
+            {universities.map(u => (
+              <tr>
+                <td><strong>{u.name}</strong></td>
+                <td class="text-center">{u.system}</td>
+                <td class="text-center">CC (2.00)</td>
+                <td class="text-center">DC/DD (GANO ≥ 2.00)</td>
+                <td class="text-center">GANO ≥ 3.00 / 3.50</td>
+                <td class="text-center">2.50 – 3.00</td>
+                <td>{u.note}</td>
+              </tr>
+            ))}
+          </tbody>
+        </table>
+      </div>
+    </section>
+
+    <section class="mb-16" aria-labelledby="harf-heading">
+      <h2 id="harf-heading" class="text-2xl font-extrabold tracking-tight mb-6">Ortak Harf Notu & Katsayı Tablosu (YÖK Standardı)</h2>
+      <div class="table-scroll">
+        <table>
+          <thead>
+            <tr>
+              <th>Harf Notu</th>
+              <th class="text-center">Katsayı</th>
+              <th class="text-center">Yüzde Aralığı</th>
+              <th class="text-center">Durum</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr><td><strong>AA</strong></td><td class="text-center font-mono">4.00</td><td class="text-center">90–100%</td><td class="text-center text-green-600">Mükemmel</td></tr>
+            <tr><td><strong>BA</strong></td><td class="text-center font-mono">3.50</td><td class="text-center">85–89%</td><td class="text-center text-blue-600">Çok İyi</td></tr>
+            <tr><td><strong>BB</strong></td><td class="text-center font-mono">3.00</td><td class="text-center">80–84%</td><td class="text-center text-green-600">İyi</td></tr>
+            <tr><td><strong>CB</strong></td><td class="text-center font-mono">2.50</td><td class="text-center">75–79%</td><td class="text-center text-amber-600">Orta-İyi</td></tr>
+            <tr><td><strong>CC</strong></td><td class="text-center font-mono">2.00</td><td class="text-center">70–74%</td><td class="text-center text-green-600">Geçer (Minimum)</td></tr>
+            <tr><td><strong>DC</strong></td><td class="text-center font-mono">1.50</td><td class="text-center">65–69%</td><td class="text-center text-orange-600">Şartlı Geçer*</td></tr>
+            <tr><td><strong>DD</strong></td><td class="text-center font-mono">1.00</td><td class="text-center">60–64%</td><td class="text-center text-orange-600">Şartlı Geçer*</td></tr>
+            <tr><td><strong>FD</strong></td><td class="text-center font-mono">0.50</td><td class="text-center">50–59%</td><td class="text-center text-red-600">Kalır (Tekrar)</td></tr>
+            <tr><td><strong>FF</strong></td><td class="text-center font-mono">0.00</td><td class="text-center">0–49%</td><td class="text-center text-red-600">Kalır (Tekrar)</td></tr>
+          </tbody>
+        </table>
+      </div>
+      <p class="text-xs text-slate-500 dark:text-zinc-400 mt-3 text-center">
+        * DC/DD: GANO ≥ 2.00 şartıyla "şartlı geçer" sayılır. GANO < 2.00 ise FF sayılır ve dersten kalınır.
+      </p>
+    </section>
+
+    <section class="mb-16" aria-labelledby="univ-detail-heading">
+      <h2 id="univ-detail-heading" class="text-2xl font-extrabold tracking-tight mb-6">Üniversite Detayları</h2>
+      <div class="grid gap-6">
+        {universities.map(u => (
+          <article class="calc-shell p-6">
+            <div class="flex flex-wrap items-baseline gap-3 mb-4">
+              <h3 class="text-xl font-extrabold text-slate-900 dark:text-white">{u.name}</h3>
+              <span class="px-3 py-1 bg-emerald-100 dark:bg-emerald-900/30 text-emerald-700 dark:text-emerald-300 text-xs font-bold rounded-full">
+                {u.system}
+              </span>
+              <span class="text-sm text-slate-500 dark:text-zinc-400">{u.nameEn}</span>
+            </div>
+
+            <div class="prose mb-4">
+              <p>{u.formulaText}</p>
+              <p><strong>Kaynak:</strong> <a href={u.sourceUrl} target="_blank" rel="noopener">{u.source}</a></p>
+              {u.note && <p><strong>Not:</strong> {u.note}</p>}
+            </div>
+
+            <div class="flex flex-wrap gap-3">
+              <a href={`/tr/${u.slug}`} class="calc-tab active">Bu üniversite hesaplayıcı</a>
+              <a href={u.sourceUrl} target="_blank" rel="noopener" class="calc-tab">Resmi yönetmelik</a>
+            </div>
+          </article>
+        ))}
+      </div>
+    </section>
+
+    <section aria-labelledby="yukseklisans-heading">
+      <h2 id="yukseklisans-heading" class="text-2xl font-extrabold tracking-tight mb-6">Yüksek Lisans / Doktora Başvuru GANO Alt Sınırları</h2>
+      <div class="calc-shell p-6">
+        <p class="text-sm text-slate-600 dark:text-zinc-400 mb-4">
+          Aşağıdaki değerler genel kılavuzdır; her ANABİLİM DALI (bölüm) kendi kontenjan ve GANO alt sınırını ilan eder.
+          ALES puanı da şarttır (genelde ≥ 55–70). YÖK "Yüksek Lisans/Doktora Başvuru Kılavuzu" her yıl güncellenir.
+        </p>
+        <div class="table-scroll">
+          <table>
+            <thead>
+              <tr>
+                <th>Program Türü</th>
+                <th class="text-center">Tezi Olan Yüksek Lisans</th>
+                <th class="text-center">Tezsiz Yüksek Lisans</th>
+                <th class="text-center">Doktora</th>
+                <th>Ek Şartlar</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr><td><strong>Boğaziçi / METU / İTÜ</strong></td><td class="text-center">≥ 2.50 – 3.00</td><td class="text-center">≥ 2.75 – 3.00</td><td class="text-center">≥ 3.00 – 3.50</td><td>ALES ≥ 70, referans, mülakat</td></tr>
+              <tr><td><strong>Ankara Üni / Diğer Devleti</strong></td><td class="text-center">≥ 2.50</td><td class="text-center">≥ 2.50 – 2.75</td><td class="text-center">≥ 3.00</td><td>ALES ≥ 55–70, yabancı dil</td></tr>
+              <tr><td><strong>Özel / Vakıf Üni.</strong></td><td class="text-center">≥ 2.00 – 2.50</td><td class="text-center">≥ 2.25 – 2.50</td><td class="text-center">≥ 2.75 – 3.00</td><td>Kendi kriterleri (daha esnek)</td></tr>
+            </tbody>
+          </table>
+        </div>
+      </div>
+    </section>
+  </main>
+</Layout>

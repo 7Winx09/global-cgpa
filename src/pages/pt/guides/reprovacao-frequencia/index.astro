@@ -1,0 +1,189 @@
+---
+import Layout from '../../../../layouts/Layout.astro';
+
+const pageTitle = 'Reprovação por Frequência (< 75%) | Conceito F Automático';
+const description = 'Regra das 75% de frequência mínima nas universidades brasileiras. Conceito F automático, impacto no CR/IR, diferenças entre USP, UNICAMP, UFRJ, UFMG, UFBA. Como evitar e recorrer.';
+const canonical = 'https://globalcgpa.in/pt/guides/reprovacao-frequencia';
+const ogImage = '/og-image-pt.png';
+const lang = 'pt';
+const alternates = [
+  { hreflang: 'en', href: 'https://globalcgpa.in/guides/attendance-failure-brazil' },
+  { hreflang: 'pt', href: 'https://globalcgpa.in/pt/guides/reprovacao-frequencia' },
+];
+---
+
+<Layout title={pageTitle} description={description} canonical={canonical} ogImage={ogImage} lang={lang} alternates={alternates}>
+  <main class="max-w-[780px] mx-auto px-6 py-14" style="flex:1;">
+    <nav class="crumbs mb-6" aria-label="Breadcrumb">
+      <a href="/pt/">Calculadora de Média</a>
+      <span class="sep">/</span>
+      <a href="/pt/guides">Guias</a>
+      <span class="sep">/</span>
+      <span class="current">Reprovação por Frequência</span>
+    </nav>
+
+    <div class="text-xs font-bold uppercase tracking-wider text-emerald-500 mb-2">Guia Acadêmico</div>
+    <h1 class="text-3xl sm:text-4xl font-extrabold tracking-tight mb-3">Reprovação por Frequência — Regra dos 75%</h1>
+    <p class="text-slate-500 dark:text-zinc-400 text-base mb-10">
+      Em todas as universidades brasileiras, o aluno com frequência inferior a 75% da carga horária da disciplina
+      é <strong>automaticamente reprovado por frequência</strong>, recebendo conceito F (nota 0.0), independentemente
+      das notas obtidas em provas e trabalhos.
+    </p>
+
+    <section class="prose mb-12">
+      <h2>Regra Geral (Todas as Universidades)</h2>
+      <div class="bg-red-50 dark:bg-red-900/20 border border-red-200 dark:border-red-800 rounded-xl p-6">
+        <h3 class="font-bold text-red-700 dark:text-red-300 mb-3">⚠ Frequência < 75% = Conceito F (nota 0.0)</h3>
+        <ul class="list-disc list-inside space-y-2">
+          <li>Vale para <strong>todas</strong> as universidades federais e estaduais</li>
+          <li>É <strong>automático</strong> — não depende de decisão do professor</li>
+          <li>Nota final da disciplina = <strong>0.0 (F)</strong>, mesmo com nota 10 nas provas</li>
+          <li>Conta no <strong>CR/IR/IRG</strong> como nota 0.0, puxando a média para baixo</li>
+          <li>Aparece no histórico escolar com menção de "Reprovado por Frequência" ou código RF</li>
+        </ul>
+      </div>
+    </section>
+
+    <section class="prose mb-12">
+      <h2>Como Calcular a Frequência Mínima</h2>
+      <div class="formula-block">
+        <div class="f-label">Cálculo das 75%</div>
+        <div class="f-text">Aulas mínimas = Carga horária total × 0,75</div>
+        <div class="f-example">Ex: Disciplina de 60h → mínimo 45h de presença (pode faltar até 15h)</div>
+      </div>
+      <div class="table-scroll">
+        <table>
+          <thead>
+            <tr>
+              <th>Carga Horária</th>
+              <th class="text-center">Mínimo de Presença (75%)</th>
+              <th class="text-center">Máximo de Faltas Permitidas</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr><td class="text-center">30h</td><td class="text-center">22,5h</td><td class="text-center">7,5h</td></tr>
+            <tr><td class="text-center">45h</td><td class="text-center">33,75h</td><td class="text-center">11,25h</td></tr>
+            <tr><td class="text-center">60h</td><td class="text-center">45h</td><td class="text-center">15h</td></tr>
+            <tr><td class="text-center">75h</td><td class="text-center">56,25h</td><td class="text-center">18,75h</td></tr>
+            <tr><td class="text-center">90h</td><td class="text-center">67,5h</td><td class="text-center">22,5h</td></tr>
+          </tbody>
+        </table>
+      </div>
+    </section>
+
+    <section class="prose mb-12">
+      <h2>Impacto no Coeficiente de Rendimento (CR/IR)</h2>
+      <p>Uma reprovação por frequência tem impacto severo no CR:</p>
+      <div class="formula-block">
+        <div class="f-label">Exemplo de Impacto</div>
+        <div class="f-text">Aluno com CR 8.0 em 100 créditos cursa disciplina de 4 créditos e reprova por frequência</div>
+        <div class="f-text">Novo CR = (8.0 × 100 + 0.0 × 4) ÷ 104 = 800 ÷ 104 = <strong>7.69</strong></div>
+        <div class="f-example">Queda de 0.31 pontos no CR por uma única reprovação por frequência</div>
+      </div>
+    </section>
+
+    <section class="prose mb-12">
+      <h2>Diferenças entre Universidades</h2>
+      <div class="table-scroll">
+        <table>
+          <thead>
+            <tr>
+              <th>Universidade</th>
+              <th class="text-center">Código no Histórico</th>
+              <th class="text-center">Repetição Conta no CR?</th>
+              <th>Observação</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr><td>USP</td><td class="text-center">RF</td><td class="text-center">Melhor nota</td><td>Regulamento Art. 86 — repetição substitui nota no CR</td></tr>
+            <tr><td>UNICAMP</td><td class="text-center">RF</td><td class="text-center">Melhor nota</td><td>Regulamento Art. 35 — melhor nota nas repetições</td></tr>
+            <tr><td>UFRJ</td><td class="text-center">RF / FF</td><td class="text-center">Melhor nota</td><td>Resolução CEG — nota mais alta prevalece</td></tr>
+            <tr><td>UFMG</td><td class="text-center">RF</td><td class="text-center">Melhor nota</td><td>Regimento Art. 102 — aproveitamento da melhor nota</td></tr>
+            <tr><td>UFBA</td><td class="text-center">RF</td><td class="text-center">Melhor nota</td><td>Regulamento Art. 45 — nota mais alta na repetição</td></tr>
+          </tbody>
+        </table>
+      </div>
+    </section>
+
+    <section class="prose mb-12">
+      <h2>Como Evitar a Reprovação por Frequência</h2>
+      <div class="grid gap-4 sm:grid-cols-2">
+        <div class="calc-shell p-4">
+          <h3 class="font-bold mb-2">📅 Acompanhamento Semanal</h3>
+          <ul class="list-disc list-inside text-sm space-y-1">
+            <li>Marque presença em todos os sistemas (SIGA, Júpiter, SIGAA, etc.)</li>
+            <li>Confira o relatório de frequência mensalmente</li>
+            <li>Guarde comprovantes de justificativas médicas</li>
+          </ul>
+        </div>
+        <div class="calc-shell p-4">
+          <h3 class="font-bold mb-2">🏥 Justificativas Aceitas</h3>
+          <ul class="list-disc list-inside text-sm space-y-1">
+            <li>Atestado médico (entregar no prazo — geralmente 5 dias úteis)</li>
+            <li>Licença maternidade/paternidade</li>
+            <li>Serviço militar obrigatório</li>
+            <li>Representação universitária oficial (esportes, eventos)</li>
+          </ul>
+        </div>
+        <div class="calc-shell p-4">
+          <h3 class="font-bold mb-2">⚖ Recurso Administrativo</h3>
+          <ul class="list-disc list-inside text-sm space-y-1">
+            <li>Prazo: geralmente 10–30 dias após divulgação da nota</li>
+            <li>Endereçado à Congregação/Conselho do Departamento</li>
+            <li>Exige prova de erro de lançamento ou força maior</li>
+            <li>Não cabe recurso por "esquecimento" de assinar lista</li>
+          </ul>
+        </div>
+        <div class="calc-shell p-4">
+          <h3 class="font-bold mb-2">🔁 Repetição da Disciplina</h3>
+          <ul class="list-disc list-inside text-sm space-y-1">
+            <li>Na maioria: melhor nota substitui a anterior no CR</li>
+            <li>A disciplina reprovada permanece no histórico com código RF</li>
+            <li>Pode impactar tempo de formatura e menções honrosas</li>
+            <li>Verifique limite de repetições por disciplina (geralmente 2–3x)</li>
+          </ul>
+        </div>
+      </div>
+    </section>
+
+    <section class="prose mb-12">
+      <h2>Perguntas Frequentes</h2>
+      <details class="faq-row">
+        <summary>Se eu tirar 10 na prova mas faltar > 25%, qual minha nota final?</summary>
+        <div class="faq-body">
+          <p><strong>0.0 (F)</strong>. A reprovação por frequência é automática e prevalece sobre qualquer nota de avaliação. O conceito F é atribuído independentemente do desempenho acadêmico.</p>
+        </div>
+      </details>
+      <details class="faq-row">
+        <summary>A reprovação por frequência conta como reprovação para fins de trancamento de curso?</summary>
+        <div class="faq-body">
+          <p>Sim. Conta como reprovação (conceito F) para todos os efeitos: CR, limite de reprovações para trancamento, menções honrosas, tempo de integralização.</p>
+        </div>
+      </details>
+      <details class="faq-row">
+        <summary>Posso trancar a disciplina para evitar o RF?</summary>
+        <div class="faq-body">
+          <p>Sim, se feito <strong>antes</strong> de atingir 25% de faltas. O trancamento (cancelamento) remove a disciplina do semestre sem nota, não conta no CR. Verifique prazos no calendário acadêmico da sua universidade.</p>
+        </div>
+      </details>
+      <details class="faq-row">
+        <summary>Atividade complementar ou monitoria conta como presença?</summary>
+        <div class="faq-body">
+          <p>Depende da universidade e do departamento. Algumas aceitam atividades de monitoria, iniciação científica ou representação discente como presença, mas exige <strong>autorização prévia</strong> do coordenador do curso.</p>
+        </div>
+      </details>
+    </section>
+
+    <section class="prose">
+      <h2>Base Legal</h2>
+      <ul>
+        <li>Lei de Diretrizes e Bases da Educação Nacional (LDB) — Art. 47: frequência mínima 75%</li>
+        <li>USP Regulamento Geral Art. 86 §2º</li>
+        <li>UNICAMP Regulamento de Graduação Art. 35 §3º</li>
+        <li>UFRJ Resolução CEG — Frequência Mínima</li>
+        <li>UFMG Regimento Geral Art. 102 §2º</li>
+        <li>UFBA Regulamento de Graduação Art. 45 §1º</li>
+      </ul>
+    </section>
+  </main>
+</Layout>

@@ -1,0 +1,172 @@
+---
+import Layout from '../../../../layouts/Layout.astro';
+
+const pageTitle = 'Perbedaan IPK dan IPS | Panduan Lengkap Sistem Nilai Indonesia';
+const description = 'Perbedaan IPK (Indeks Prestasi Kumulatif) dan IPS (Indeks Prestasi Semester): definisi, rumus, fungsi, dan cara perhitungan sesuai regulasi DIKTI.';
+const canonical = 'https://globalcgpa.in/id/guides/ipk-vs-ips';
+const ogImage = '/og-image-id.png';
+const lang = 'id';
+const alternates = [
+  { hreflang: 'en', href: 'https://globalcgpa.in/guides/ipk-vs-ips' },
+  { hreflang: 'id', href: 'https://globalcgpa.in/id/guides/ipk-vs-ips' },
+];
+---
+
+<Layout title={pageTitle} description={description} canonical={canonical} ogImage={ogImage} lang={lang} alternates={alternates}>
+  <main class="max-w-[780px] mx-auto px-6 py-14" style="flex:1;">
+    <nav class="crumbs mb-6" aria-label="Breadcrumb">
+      <a href="/id/">Kalkulator IPK</a>
+      <span class="sep">/</span>
+      <a href="/id/guides">Panduan</a>
+      <span class="sep">/</span>
+      <span class="current">IPK vs IPS</span>
+    </nav>
+
+    <div class="text-xs font-bold uppercase tracking-wider text-emerald-500 mb-2">Panduan Akademik</div>
+    <h1 class="text-3xl sm:text-4xl font-extrabold tracking-tight mb-3">Perbedaan IPK dan IPS</h1>
+    <p class="text-slate-500 dark:text-zinc-400 text-base mb-10">
+      Memahami perbedaan Indeks Prestasi Kumulatif (IPK) dan Indeks Prestasi Semester (IPS)
+      penting untuk perencanaan studi dan evaluasi akademik di perguruan tinggi Indonesia.
+    </p>
+
+    <section class="prose mb-12">
+      <h2>Definisi & Fungsi</h2>
+      <div class="table-scroll">
+        <table>
+          <thead>
+            <tr>
+              <th>Aspek</th>
+              <th class="text-center">IPS (Indeks Prestasi Semester)</th>
+              <th class="text-center">IPK (Indeks Prestasi Kumulatif)</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr><td><strong>Definisi</strong></td><td class="text-center">Ukuran prestasi 1 semester</td><td class="text-center">Ukuran prestasi kumulatif seluruh semester</td></tr>
+            <tr><td><strong>Rentang Waktu</strong></td><td class="text-center">1 semester</td><td class="text-center">Semester 1 s.d. semester terakhir</td></tr>
+            <tr><td><strong>Fungsi Utama</strong></td><td class="text-center">Evaluasi beban studi semester berikutnya</td><td class="text-center">Kelulusan, predikat, mutasi, beasiswa</td></tr>
+            <tr><td><strong>Publikasi</strong></td><td class="text-center">KHS (Kartu Hasil Studi) per semester</td><td class="text-center">Transkrip Nilai & SKPI</td></tr>
+            <tr><td><strong>Rumus</strong></td><td class="text-center">Î£(SKS Ã— Bobot) Ã· Î£SKS (1 semester)</td><td class="text-center">Î£(SKS Ã— Bobot) Ã· Î£SKS (semua semester)</td></tr>
+          </tbody>
+        </table>
+      </div>
+    </section>
+
+    <section class="prose mb-12">
+      <h2>Rumus Perhitungan</h2>
+      <div class="formula-block mb-4">
+        <div class="f-label">Rumus Umum</div>
+        <div class="f-text">IP = Î£(SKSáµ¢ Ã— Bobotáµ¢) Ã· Î£SKSáµ¢</div>
+        <div class="f-example">i = mata kuliah yang diambil; Bobot: A=4.0, AB=3.5, B=3.0, BC=2.5, C=2.0, D=1.0, E=0.0</div>
+      </div>
+      <p>Perbedaan hanya pada <strong>cakupan data</strong>:</p>
+      <ul>
+        <li><strong>IPS:</strong> Hanya mata kuliah semester berjalan (termasuk yang tidak lulus/E)</li>
+        <li><strong>IPK:</strong> Semua mata kuliah yang pernah diambil (nilai terbaik untuk yang diulang, E tetap dihitung)</li>
+      </ul>
+    </section>
+
+    <section class="prose mb-12">
+      <h2>Contoh Perhitungan</h2>
+      <h3>Semester 1 (IPS)</h3>
+      <div class="table-scroll">
+        <table>
+          <thead><tr><th>Mata Kuliah</th><th class="text-center">SKS</th><th class="text-center">Nilai</th><th class="text-center">Bobot</th><th class="text-center">SKSÃ—Bobot</th></tr></thead>
+          <tbody>
+            <tr><td>Kalkulus I</td><td class="text-center">3</td><td class="text-center">A</td><td class="text-center">4.0</td><td class="text-center">12.0</td></tr>
+            <tr><td>Fisika Dasar</td><td class="text-center">3</td><td class="text-center">B</td><td class="text-center">3.0</td><td class="text-center">9.0</td></tr>
+            <tr><td>Kimia Umum</td><td class="text-center">2</td><td class="text-center">C</td><td class="text-center">2.0</td><td class="text-center">4.0</td></tr>
+            <tr><td>Bahasa Indonesia</td><td class="text-center">2</td><td class="text-center">A</td><td class="text-center">4.0</td><td class="text-center">8.0</td></tr>
+          </tbody>
+        </table>
+      </div>
+      <p class="mt-2"><strong>IPS = (12+9+4+8) Ã· (3+3+2+2) = 33 Ã· 10 = 3.30</strong></p>
+
+      <h3 class="mt-6">Semester 2 (IPS) - dengan pengulangan</h3>
+      <div class="table-scroll">
+        <table>
+          <thead><tr><th>Mata Kuliah</th><th class="text-center">SKS</th><th class="text-center">Nilai</th><th class="text-center">Bobot</th><th class="text-center">SKSÃ—Bobot</th></tr></thead>
+          <tbody>
+            <tr><td>Kalkulus II</td><td class="text-center">3</td><td class="text-center">B</td><td class="text-center">3.0</td><td class="text-center">9.0</td></tr>
+            <tr><td>Aljabar Linier</td><td class="text-center">3</td><td class="text-center">C</td><td class="text-center">2.0</td><td class="text-center">6.0</td></tr>
+            <tr><td>Kimia Umum (Ulang)</td><td class="text-center">2</td><td class="text-center">B</td><td class="text-center">3.0</td><td class="text-center">6.0</td></tr>
+            <tr><td>Pancasila</td><td class="text-center">2</td><td class="text-center">A</td><td class="text-center">4.0</td><td class="text-center">8.0</td></tr>
+          </tbody>
+        </table>
+      </div>
+      <p class="mt-2"><strong>IPS Sem 2 = (9+6+6+8) Ã· 10 = 29 Ã· 10 = 2.90</strong></p>
+
+      <h3 class="mt-6">IPK Akhir Semester 2</h3>
+      <p>Kimia Umum diambil nilai terbaik (B = 3.0), nilai C (2.0) semester 1 tidak dihitung di IPK:</p>
+      <div class="table-scroll">
+        <table>
+          <thead><tr><th>Mata Kuliah</th><th class="text-center">SKS</th><th class="text-center">Nilai Terbaik</th><th class="text-center">Bobot</th><th class="text-center">SKSÃ—Bobot</th></tr></thead>
+          <tbody>
+            <tr><td>Kalkulus I</td><td class="text-center">3</td><td class="text-center">A</td><td class="text-center">4.0</td><td class="text-center">12.0</td></tr>
+            <tr><td>Fisika Dasar</td><td class="text-center">3</td><td class="text-center">B</td><td class="text-center">3.0</td><td class="text-center">9.0</td></tr>
+            <tr><td>Kimia Umum</td><td class="text-center">2</td><td class="text-center">B (terbaik)</td><td class="text-center">3.0</td><td class="text-center">6.0</td></tr>
+            <tr><td>Bahasa Indonesia</td><td class="text-center">2</td><td class="text-center">A</td><td class="text-center">4.0</td><td class="text-center">8.0</td></tr>
+            <tr><td>Kalkulus II</td><td class="text-center">3</td><td class="text-center">B</td><td class="text-center">3.0</td><td class="text-center">9.0</td></tr>
+            <tr><td>Aljabar Linier</td><td class="text-center">3</td><td class="text-center">C</td><td class="text-center">2.0</td><td class="text-center">6.0</td></tr>
+            <tr><td>Pancasila</td><td class="text-center">2</td><td class="text-center">A</td><td class="text-center">4.0</td><td class="text-center">8.0</td></tr>
+          </tbody>
+        </table>
+      </div>
+      <p class="mt-2"><strong>IPK = (12+9+6+8+9+6+8) Ã· (3+3+2+2+3+3+2) = 58 Ã· 18 = 3.22</strong></p>
+    </section>
+
+    <section class="prose mb-12">
+      <h2>Dampak pada Beban Studi (SKS Maksimum)</h2>
+      <p>IPS semester lalu menentukan beban studi maksimum semester berikutnya (contoh umum):</p>
+      <div class="table-scroll">
+        <table>
+          <thead><tr><th>IPS/IPK</th><th class="text-center">SKS Maksimum</th></tr></thead>
+          <tbody>
+            <tr><td>> 3.50</td><td class="text-center">24 SKS</td></tr>
+            <tr><td>3.00 â€“ 3.49</td><td class="text-center">21â€“22 SKS</td></tr>
+            <tr><td>2.50 â€“ 2.99</td><td class="text-center">18â€“20 SKS</td></tr>
+            <tr><td>2.00 â€“ 2.49</td><td class="text-center">15â€“18 SKS</td></tr>
+            <tr><td>< 2.00</td><td class="text-center">12â€“15 SKS (Peringatan Akademik)</td></tr>
+          </tbody>
+        </table>
+      </div>
+      <p class="text-sm text-slate-500 dark:text-zinc-400 mt-3">â€» Kebijakan pasti bervariasi per universitas (lihat panduan masing-masing PT).</p>
+    </section>
+
+    <section class="prose mb-12">
+      <h2>Peran dalam Evaluasi Akademik</h2>
+      <details class="faq-row">
+        <summary>Kapan mahasiswa kena Peringatan Akademik (PA)?</summary>
+        <div class="faq-body">
+          <p>Biasanya: IPK < 2.00 pada evaluasi berkala (semester 2, 4, 6, dst). Beberapa PT menggunakan IPS < 2.00 untuk PA semesteran. Cek Buku Pedoman Akademik PT masing-masing.</p>
+        </div>
+      </details>
+      <details class="faq-row">
+        <summary>Apakah nilai E dihitung di IPK?</summary>
+        <div class="faq-body">
+          <p><strong>Ya.</strong> Nilai E (bobot 0) tetap masuk perhitungan IPK dan menurunkan rata-rata. Berbeda dengan IPS di mana E juga dihitung. Untuk kelulusan: tidak boleh ada nilai E (kecuali PT yang memperbolehkan dengan syarat).</p>
+        </div>
+      </details>
+      <details class="faq-row">
+        <summary>Bagaimana mata kuliah diulang mempengaruhi IPK vs IPS?</summary>
+        <div class="faq-body">
+          <p><strong>IPS:</strong> Nilai pengulangan masuk perhitungan IPS semester pengulangan. <strong>IPK:</strong> Hanya nilai terbaik (pengulangan) yang dihitung; nilai lama (termasuk E) tidak masuk IPK tapi tetap tercantum di transkrip.</p>
+        </div>
+      </details>
+      <details class="faq-row">
+        <summary>IPK bisa naik setelah lulus?</summary>
+        <div class="faq-body">
+          <p>Tidak. IPK final ditetapkan pada yudisium/sidang kelulusan. Pasca-lulus, IPK tidak berubah. Perbaikan IPK hanya bisa saat masih status mahasiswa aktif.</p>
+        </div>
+      </details>
+    </section>
+
+    <section class="prose">
+      <h2>Referensi Regulasi</h2>
+      <ul>
+        <li>Peraturan Menteri Pendidikan Nasional No. 232/U/2000 â€” Pedoman Penilaian Hasil Belajar</li>
+        <li>Peraturan Menteri Riset, Teknologi, dan Pendidikan Tinggi No. 44/2015 â€” SN-Dikti</li>
+        <li>Peraturan Rektor masing-masing PT (UI, ITB, UGM, UNAIR, IPB, Unpad, ITS)</li>
+      </ul>
+    </section>
+  </main>
+</Layout>

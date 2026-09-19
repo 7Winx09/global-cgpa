@@ -1,0 +1,138 @@
+---
+import Layout from '../../../../layouts/Layout.astro';
+
+const pageTitle = 'Predikat Kelulusan Indonesia | Cum Laude, Sangat Memuaskan, Memuaskan';
+const description = 'Kriteria predikat kelulusan sarjana Indonesia: Cum Laude (3.51-4.00), Sangat Memuaskan (3.01-3.50), Memuaskan (2.76-3.00). Syarat tambahan: masa studi, tanpa nilai D/E, tidak mengulang.';
+const canonical = 'https://globalcgpa.in/id/guides/predikat-kelulusan';
+const ogImage = '/og-image-id.png';
+const lang = 'id';
+const alternates = [
+  { hreflang: 'en', href: 'https://globalcgpa.in/guides/graduation-honors' },
+  { hreflang: 'id', href: 'https://globalcgpa.in/id/guides/predikat-kelulusan' },
+];
+---
+
+<Layout title={pageTitle} description={description} canonical={canonical} ogImage={ogImage} lang={lang} alternates={alternates}>
+  <main class="max-w-[780px] mx-auto px-6 py-14" style="flex:1;">
+    <nav class="crumbs mb-6" aria-label="Breadcrumb">
+      <a href="/id/">Kalkulator IPK</a>
+      <span class="sep">/</span>
+      <a href="/id/guides">Panduan</a>
+      <span class="sep">/</span>
+      <span class="current">Predikat Kelulusan</span>
+    </nav>
+
+    <div class="text-xs font-bold uppercase tracking-wider text-emerald-500 mb-2">Panduan Akademik</div>
+    <h1 class="text-3xl sm:text-4xl font-extrabold tracking-tight mb-3">Predikat Kelulusan Sarjana (S1)</h1>
+    <p class="text-slate-500 dark:text-zinc-400 text-base mb-10">
+      Predikat kelulusan tercantum di Ijazah dan Transkrip Nilai. Kriteria bervariasi per PT namun mengacu standar nasional.
+    </p>
+
+    <section class="prose mb-12">
+      <h2>Standar Umum (Berdasarkan Permendiknas 232/U/2000)</h2>
+      <div class="table-scroll">
+        <table>
+          <thead>
+            <tr>
+              <th>Predikat</th>
+              <th class="text-center">Rentang IPK</th>
+              <th>Keterangan</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr><td><strong>Cum Laude</strong> <span class="text-emerald-500">(Dengan Pujian)</span></td><td class="text-center">3.51 â€“ 4.00</td><td>Prestasi sangat memuaskan, masa studi â‰¤ 4-5 tahun</td></tr>
+            <tr><td><strong>Sangat Memuaskan</strong></td><td class="text-center">3.01 â€“ 3.50</td><td>Prestasi di atas rata-rata</td></tr>
+            <tr><td><strong>Memuaskan</strong></td><td class="text-center">2.76 â€“ 3.00</td><td>Memenuhi standar dengan baik</td></tr>
+            <tr><td>Lulus (Tanpa Predikat)</td><td class="text-center">2.00 â€“ 2.75</td><td>Memenuhi minimum kelulusan</td></tr>
+          </tbody>
+        </table>
+      </div>
+    </section>
+
+    <section class="prose mb-12">
+      <h2>Detail Per Universitas</h2>
+      <div class="table-scroll">
+        <table>
+          <thead>
+            <tr>
+              <th>Universitas</th>
+              <th class="text-center">Cum Laude</th>
+              <th class="text-center">Sangat Memuaskan</th>
+              <th class="text-center">Memuaskan</th>
+              <th>Syarat Tambahan Khusus</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr><td><strong>UI</strong></td><td class="text-center">3.51â€“4.00</td><td class="text-center">3.01â€“3.50</td><td class="text-center">2.76â€“3.00</td><td>Masa studi â‰¤ 5 thn, tanpa D/E, tidak mengulang</td></tr>
+            <tr><td><strong>ITB</strong></td><td class="text-center">â‰¥3.51</td><td class="text-center">3.01â€“3.50</td><td class="text-center">2.76â€“3.00</td><td>Masa studi â‰¤ 4 thn, tanpa D, tidak mengulang</td></tr>
+            <tr><td><strong>UGM</strong></td><td class="text-center">3.51â€“3.70 (Cum Laude)<br>3.71â€“3.90 (Magna)<br>3.91â€“4.00 (Summa)</td><td class="text-center">3.01â€“3.50</td><td class="text-center">2.76â€“3.00</td><td>Masa studi â‰¤ 5 thn, tanpa mengulang, SKPI</td></tr>
+            <tr><td><strong>UNAIR</strong></td><td class="text-center">3.51â€“4.00</td><td class="text-center">3.01â€“3.50</td><td class="text-center">2.76â€“3.00</td><td>Masa studi â‰¤ 4 thn, tanpa D/E, TOEFL 450+</td></tr>
+            <tr><td><strong>IPB</strong></td><td class="text-center">â‰¥3.51</td><td class="text-center">3.01â€“3.50</td><td class="text-center">2.76â€“3.00</td><td>Masa studi â‰¤ 10 sem, tanpa D, tidak mengulang</td></tr>
+            <tr><td><strong>Unpad</strong></td><td class="text-center">>3.50 (Pujian)</td><td class="text-center">3.01â€“3.50</td><td class="text-center">2.76â€“3.00</td><td>Masa studi â‰¤ 5 thn, tanpa mengulang</td></tr>
+            <tr><td><strong>ITS</strong></td><td class="text-center">>3.50</td><td class="text-center">3.01â€“3.50</td><td class="text-center">2.76â€“3.00</td><td>Masa studi <4 thn, tidak mengulang</td></tr>
+          </tbody>
+        </table>
+      </div>
+    </section>
+
+    <section class="prose mb-12">
+      <h2>Syarat Umum Cum Laude (Konsensus Nasional)</h2>
+      <div class="bg-emerald-50 dark:bg-emerald-900/20 border border-emerald-200 dark:border-emerald-800 rounded-xl p-6">
+        <ul class="list-disc list-inside space-y-2">
+          <li><strong>IPK:</strong> â‰¥ 3.51 (beberapa PT: â‰¥ 3.75 untuk Summa/Magna)</li>
+          <li><strong>Masa Studi:</strong> â‰¤ 4â€“5 tahun (8â€“10 semester), tepat waktu</li>
+          <li><strong>Tanpa Nilai D/E:</strong> Selama seluruh masa studi</li>
+          <li><strong>Tidak Pernah Mengulang:</strong> Termasuk remedial/semester antara</li>
+          <li><strong>Tidak Ada Sanksi Akademik:</strong> Peringatan, DO, atau pelanggaran tata tertib</li>
+          <li><strong>Tugas Akhir/Skripsi:</strong> Nilai minimum A atau A- (bervariasi)</li>
+          <li><strong>Bahasa Asing:</strong> TOEFL/IELTS minimum sesuai ketentuan PT</li>
+        </ul>
+      </div>
+    </section>
+
+    <section class="prose mb-12">
+      <h2>Variasi Predikat Detail (UGM Contoh)</h2>
+      <p>UGM membagi Cum Laude menjadi 3 tingkat:</p>
+      <div class="table-scroll">
+        <table>
+          <thead><tr><th>Predikat</th><th class="text-center">IPK</th><th>Masa Studi Max</th></tr></thead>
+          <tbody>
+            <tr><td><strong>Summa Cum Laude</strong></td><td class="text-center">3.91 â€“ 4.00</td><td>5 tahun</td></tr>
+            <tr><td><strong>Magna Cum Laude</strong></td><td class="text-center">3.71 â€“ 3.90</td><td>5 tahun</td></tr>
+            <tr><td><strong>Cum Laude</strong></td><td class="text-center">3.51 â€“ 3.70</td><td>5 tahun</td></tr>
+          </tbody>
+        </table>
+      </div>
+      <p class="mt-3">PT lain (ITB, IPB) umumnya hanya 1 tingkat "Cum Laude" atau "Dengan Pujian".</p>
+    </section>
+
+    <section class="prose mb-12">
+      <h2>FAQ</h2>
+      <details class="faq-row">
+        <summary>Bisa dapat Cum Laude kalau ada 1 nilai D?</summary>
+        <div class="faq-body"><p><strong>Tidak.</strong> Hampir semua PT mensyaratkan "tanpa nilai D/E" untuk Cum Laude. Nilai D maksimal 20% SKS hanya untuk kelulusan biasa (tanpa predikat).</p></div>
+      </details>
+      <details class="faq-row">
+        <summary>Bagaimana kalau IPK 3.50 persis (bukan 3.51)?</summary>
+        <div class="faq-body"><p>Masuk kategori <strong>Sangat Memuaskan</strong>. Batas Cum Laude ketat: <strong>> 3.50</strong> atau â‰¥ 3.51. Tidak ada pembulatan ke atas.</p></div>
+      </details>
+      <details class="faq-row">
+        <summary>Apakah pengulangan mata kuliah (remedial) menghilangkan peluang Cum Laude?</summary>
+        <div class="faq-body"><p><strong>Ya.</strong> "Tidak pernah mengulang" termasuk remedial, semester antara, dan perbaikan nilai. Cek definisi "mengulang" di Pedoman Akademik PT masing-masing.</p></div>
+      </details>
+      <details class="faq-row">
+        <summary>Predikat tercantum di mana?</summary>
+        <div class="faq-body"><p>Di <strong>Ijazah</strong> (misal: "Sarjana Hukum dengan Pujian"), <strong>Transkrip Nilai</strong>, dan <strong>SKPI</strong> (Surat Keterangan Pendamping Ijazah).</p></div>
+      </details>
+    </section>
+
+    <section class="prose">
+      <h2>Referensi</h2>
+      <ul>
+        <li>Permendiknas No. 232/U/2000 â€” Pedoman Penyusunan Kurikulum & Penilaian</li>
+        <li>Peraturan Rektor masing-masing PT (Pedoman Akademik Terbaru)</li>
+        <li>SKPI (Surat Keterangan Pendamping Ijazah) â€” Format Nasional</li>
+      </ul>
+    </section>
+  </main>
+</Layout>

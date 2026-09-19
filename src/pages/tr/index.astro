@@ -1,0 +1,209 @@
+---
+import Layout from '../../layouts/Layout.astro';
+import { getUniversitiesByCountry } from '../../data/universities-global';
+
+const universities = getUniversitiesByCountry('TR');
+
+const pageTitle = 'GANO Hesaplama | Türkiye Üni. Ortalama Hesaplayıcı';
+const description = 'Türkiye üniversiteleri GANO hesaplayıcı. 4.0 ölçek, AA/BA/BB/CB/CC/DC/DD/FD/FF harf notları, AKTS (ECTS) kredileri. Boğaziçi, METU, İTÜ, Ankara Üniversitesi resmi yönetmeliklerine göre.';
+const canonical = 'https://globalcgpa.in/tr/';
+const ogImage = '/og-image-tr.png';
+const lang = 'tr';
+const alternates = [
+  { hreflang: 'en', href: 'https://globalcgpa.in/' },
+  { hreflang: 'tr', href: 'https://globalcgpa.in/tr/' },
+];
+---
+
+<Layout title={pageTitle} description={description} canonical={canonical} ogImage={ogImage} lang={lang} alternates={alternates}>
+  <main class="max-w-[780px] mx-auto px-6 py-14" style="flex:1;">
+    <div class="text-xs font-bold uppercase tracking-wider text-emerald-500 mb-2">Türkiye GANO Hesaplayıcı</div>
+    <h1 class="text-3xl sm:text-4xl font-extrabold tracking-tight mb-3">Genel Akademik Not Ortalaması (GANO) Hesaplayıcı</h1>
+    <p class="text-slate-500 dark:text-zinc-400 text-base mb-8">
+      Türkiye üniversitelerinin resmi 4.0 ölçek sistemi: AA=4.0, BA=3.5, BB=3.0, CB=2.5, CC=2.0, DC=1.5, DD=1.0, FD=0.5, FF=0.0.
+      AKTS (ECTS) kredileriyle ağırlıklı ortalama. Geçme notu: CC (2.00). Şartlı geçme: DC/DD (GANO ≥ 2.00 şartıyla).
+    </p>
+
+    <div class="calc-shell space-y-6" id="gano-calculator">
+      <div class="grid gap-4 sm:grid-cols-2">
+        <div>
+          <label class="calc-label" for="course-count">Ders sayısı</label>
+          <input type="number" id="course-count" class="calc-input" min="1" max="30" value="6" aria-label="Ders sayısı" />
+        </div>
+        <div>
+          <label class="calc-label" for="pass-threshold">Geçme notu</label>
+          <select id="pass-threshold" class="calc-select" aria-label="Geçme notu">
+            <option value="2.0" selected>CC = 2.00 (Standart)</option>
+            <option value="custom">Özel</option>
+          </select>
+        </div>
+      </div>
+
+      <div id="courses" class="space-y-3" role="list" aria-label="Ders listesi"></div>
+
+      <button type="button" class="w-full sm:w-auto px-6 py-3 bg-emerald-500 hover:bg-emerald-600 text-slate-900 font-bold text-sm rounded-xl transition-colors" id="calculate-btn">
+        GANO Hesapla
+      </button>
+
+      <div class="calc-output" aria-live="polite" aria-label="GANO sonucu">
+        <div class="calc-out-val" id="result">0.00</div>
+        <div class="calc-out-lbl">GANO (4.0 Ölçek)</div>
+        <div class="calc-out-lbl" style="margin-top:8px; font-size:0.68rem;" id="detail">Toplam AKTS: 0 | Ağırlıklı toplam: 0.00</div>
+        <div class="calc-out-lbl" style="margin-top:8px; font-size:0.68rem;" id="standing"></div>
+        <div class="calc-out-lbl" style="margin-top:8px; font-size:0.68rem;" id="status"></div>
+      </div>
+
+      <div class="formula-block">
+        <div class="f-label">Formül</div>
+        <div class="f-text">GANO = Σ(AKTS × Harf Notu Katsayısı) ÷ ΣAKTS</div>
+        <div class="f-example" id="formula-example">Örn: 6 AKTS × 3.0 (BB) + 4 AKTS × 2.5 (CB) = (18+10)÷10 = 2.80</div>
+      </div>
+    </div>
+
+    <section class="mt-16" aria-labelledby="univ-list-heading">
+      <h2 id="univ-list-heading" class="text-2xl font-extrabold tracking-tight mb-6">Ana Üniversitesi Hesaplayıcıları</h2>
+      <div class="grid gap-4 sm:grid-cols-2 lg:grid-cols-3">
+        {universities.map(u => (
+          <a href={`/tr/${u.slug}`} class="calc-shell p-5 hover:border-emerald-500 hover:shadow-lg transition-all text-center">
+            <div class="text-3xl font-extrabold text-emerald-500 mb-1">{u.system}</div>
+            <div class="font-bold text-lg text-slate-900 dark:text-white">{u.name}</div>
+            <div class="text-sm text-slate-500 dark:text-zinc-400 mt-1">{u.nameEn}</div>
+          </a>
+        ))}
+      </div>
+    </section>
+
+    <section class="mt-16" aria-labelledby="guides-heading">
+      <h2 id="guides-heading" class="text-2xl font-extrabold tracking-tight mb-6">Akademik Rehberler</h2>
+      <div class="grid gap-4 sm:grid-cols-2">
+        <a href="/tr/guides/harf-notlari" class="calc-shell p-5 hover:border-emerald-500 transition-all">
+          <h3 class="font-bold text-lg text-slate-900 dark:text-white mb-2">Harf Notları & Katsayılar</h3>
+          <p class="text-sm text-slate-500 dark:text-zinc-400">AA–FF tablosu, katsayılar, yüzde karşılıkları, geçme/kalma kuralları</p>
+        </a>
+        <a href="/tr/guides/sartli-gecme" class="calc-shell p-5 hover:border-emerald-500 transition-all">
+          <h3 class="font-bold text-lg text-slate-900 dark:text-white mb-2">Şartlı Geçme (DC/DD/FD)</h3>
+          <p class="text-sm text-slate-500 dark:text-zinc-400">GANO ≥ 2.00 koşuluyla DC/DD geçme, FD/FF kalma, ders tekrarı</p>
+        </a>
+        <a href="/tr/guides/onur-listesi" class="calc-shell p-5 hover:border-emerald-500 transition-all">
+          <h3 class="font-bold text-lg text-slate-900 dark:text-white mb-2">Onur & Yüksek Onur Listesi</h3>
+          <p class="text-sm text-slate-500 dark:text-zinc-400">GANO ≥ 3.00 / 3.50 kriterleri, derece onuru, mezuniyet töreni</p>
+        </a>
+        <a href="/tr/guides/yukseklisans-basvuru" class="calc-shell p-5 hover:border-emerald-500 transition-all">
+          <h3 class="font-bold text-lg text-slate-900 dark:text-white mb-2">Yüksek Lisans Başvuru GANO</h3>
+          <p class="text-sm text-slate-500 dark:text-zinc-400">ALES, GANO ≥ 2.50/3.00, referans, ANABİLİM DALI kotaları</p>
+        </a>
+        <a href="/tr/guides/erasmus-akts" class="calc-shell p-5 hover:border-emerald-500 transition-all">
+          <h3 class="font-bold text-lg text-slate-900 dark:text-white mb-2">Erasmus+ & AKTS Dönüşümü</h3>
+          <p class="text-sm text-slate-500 dark:text-zinc-400">Yabancı notların 4.0 ölçeğe çevrildiği, Learning Agreement, transcript</p>
+        </a>
+        <a href="/tr/guides/dikey-gecis" class="calc-shell p-5 hover:border-emerald-500 transition-all">
+          <h3 class="font-bold text-lg text-slate-900 dark:text-white mb-2">Dikey Geçiş (DGS) & Çift Anadal</h3>
+          <p class="text-sm text-slate-500 dark:text-zinc-400">DGS sınavı, GANO etkisi, çift anadal/yan dal GANO hesaplaması</p>
+        </a>
+      </div>
+    </section>
+  </main>
+</Layout>
+
+<script is:inline>
+  const HARFLER = ['AA', 'BA', 'BB', 'CB', 'CC', 'DC', 'DD', 'FD', 'FF'];
+  const KATSAYILAR = { 'AA': 4.0, 'BA': 3.5, 'BB': 3.0, 'CB': 2.5, 'CC': 2.0, 'DC': 1.5, 'DD': 1.0, 'FD': 0.5, 'FF': 0.0 };
+  const YUZDELER = { 'AA': [90, 100], 'BA': [85, 89], 'BB': [80, 84], 'CB': [75, 79], 'CC': [70, 74], 'DC': [65, 69], 'DD': [60, 64], 'FD': [50, 59], 'FF': [0, 49] };
+
+  function getDurum(gano) {
+    if (gano >= 3.5) return { label: 'Yüksek Onur (Derece Onuru)', color: '#7c3aed' };
+    if (gano >= 3.0) return { label: 'Onur Listesi', color: '#2563eb' };
+    if (gano >= 2.5) return { label: 'İyi', color: '#059669' };
+    if (gano >= 2.0) return { label: 'Normal', color: '#64748b' };
+    return { label: 'Düşük (Akademik Uyarı Riski)', color: '#dc2626' };
+  }
+
+  function createCourseRow(index) {
+    const row = document.createElement('div');
+    row.className = 'grid gap-3 sm:grid-cols-[1fr_80px_100px] items-end';
+    row.setAttribute('role', 'listitem');
+    row.innerHTML = `
+      <div>
+        <label class="calc-label" for="grade-${index}">Ders ${index + 1} — Harf Notu</label>
+        <select id="grade-${index}" class="calc-select grade-select" aria-label="Ders ${index + 1} harf notu">
+          ${HARFLER.map(h => `<option value="${h}">${h} (${KATSAYILAR[h]}) ↔ ${YUZDELER[h][0]}~${YUZDELER[h][1]}%</option>`).join('')}
+        </select>
+      </div>
+      <div>
+        <label class="calc-label" for="credit-${index}">AKTS</label>
+        <input type="number" id="credit-${index}" class="calc-input credit-input" value="6" min="1" max="30" step="1" aria-label="Ders ${index + 1} AKTS kredisi" />
+      </div>
+      <div>
+        <label class="calc-label" for="course-name-${index}">Ders Adı (isteğe bağlı)</label>
+        <input type="text" id="course-name-${index}" class="calc-input" placeholder="Örn: Matematik I" aria-label="Ders ${index + 1} adı" />
+      </div>
+    `;
+    return row;
+  }
+
+  function renderCourses(count) {
+    const container = document.getElementById('courses');
+    container.innerHTML = '';
+    for (let i = 0; i < count; i++) {
+      container.appendChild(createCourseRow(i));
+    }
+  }
+
+  function calculateGANO() {
+    const gradeSelects = document.querySelectorAll('#courses .grade-select');
+    const creditInputs = document.querySelectorAll('#courses .credit-input');
+
+    let totalAKTS = 0;
+    let totalPoints = 0;
+
+    gradeSelects.forEach((select, i) => {
+      const grade = select.value;
+      const akts = parseFloat(creditInputs[i].value) || 0;
+      const point = KATSAYILAR[grade] || 0;
+
+      totalAKTS += akts;
+      totalPoints += akts * point;
+    });
+
+    const gano = totalAKTS > 0 ? totalPoints / totalAKTS : 0;
+    document.getElementById('result').textContent = gano.toFixed(2);
+    document.getElementById('detail').textContent = `Toplam AKTS: ${totalAKTS} | Ağırlıklı toplam: ${totalPoints.toFixed(2)}`;
+
+    const durum = getDurum(gano);
+    const standingEl = document.getElementById('standing');
+    standingEl.textContent = `Durum: ${durum.label}`;
+    standingEl.style.color = durum.color;
+
+    const statusEl = document.getElementById('status');
+    if (gano >= 2.0) {
+      statusEl.textContent = '✓ Geçer (GANO ≥ 2.00)';
+      statusEl.style.color = '#059669';
+    } else {
+      statusEl.textContent = '✗ Düşük (GANO < 2.00 — Akademik uyarı riski)';
+      statusEl.style.color = '#dc2626';
+    }
+  }
+
+  const countInput = document.getElementById('course-count');
+  const calculateBtn = document.getElementById('calculate-btn');
+  let currentCount = parseInt(countInput.value) || 6;
+
+  renderCourses(currentCount);
+  calculateGANO();
+
+  countInput.addEventListener('input', () => {
+    let newCount = parseInt(countInput.value) || 1;
+    newCount = Math.max(1, Math.min(30, newCount));
+    currentCount = newCount;
+    renderCourses(newCount);
+    calculateGANO();
+  });
+
+  calculateBtn.addEventListener('click', calculateGANO);
+
+  document.getElementById('courses').addEventListener('change', e => {
+    if (e.target.matches('.grade-select, .credit-input')) {
+      calculateGANO();
+    }
+  });
+</script>

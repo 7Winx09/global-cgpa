@@ -1,0 +1,191 @@
+---
+import Layout from '../../../../layouts/Layout.astro';
+
+const pageTitle = 'Anerkennung Ausländischer Noten | Ländertabellen, Bayerische Formel, NUS+ Tool';
+const description = 'Anerkennung ausländischer Studienleistungen an deutschen Unis: Länderspezifische Tabellen (Heidelberg), Modifizierte Bayerische Formel (KMK), NUS+ Tool (HU Berlin AGNES), Prüfungsausschuss-Entscheidung.';
+const canonical = 'https://globalcgpa.in/de/guides/anerkennung-auslaendisch';
+const ogImage = '/og-image-de.png';
+const lang = 'de';
+const alternates = [
+  { hreflang: 'en', href: 'https://globalcgpa.in/guides/foreign-grade-recognition' },
+  { hreflang: 'de', href: 'https://globalcgpa.in/de/guides/anerkennung-auslaendisch' },
+];
+---
+
+<Layout title={pageTitle} description={description} canonical={canonical} ogImage={ogImage} lang={lang} alternates={alternates}>
+  <main class="max-w-[780px] mx-auto px-6 py-14" style="flex:1;">
+    <nav class="crumbs mb-6" aria-label="Breadcrumb">
+      <a href="/de/">Notenrechner</a>
+      <span class="sep">/</span>
+      <a href="/de/guides">Guides</a>
+      <span class="sep">/</span>
+      <span class="current">Anerkennung Ausländisch</span>
+    </nav>
+
+    <div class="text-xs font-bold uppercase tracking-wider text-emerald-500 mb-2">Akademischer Guide</div>
+    <h1 class="text-3xl sm:text-4xl font-extrabold tracking-tight mb-3">Anerkennung Ausländischer Noten</h1>
+    <p class="text-slate-500 dark:text-zinc-400 text-base mb-10">
+      Verfahren für Erasmus+, Doppelabschlüsse, Auslandsstudium, Zulassung zu Master/Promotion.
+      3 Methoden: Ländertabellen (Heidelberg), Bayerische Formel (KMK), NUS+ Tool (HU Berlin).
+      Endgültig entscheidet Prüfungsausschuss.
+    </p>
+
+    <section class="prose mb-12">
+      <h2>Drei Anerkennungsmethoden (Heidelberg Vorbild)</h2>
+      <div class="table-scroll">
+        <table>
+          <thead><tr><th>Methode</th><th>Anwendung</th><th>Voraussetzung</th><th>Beispiel Unis</th></tr></thead>
+          <tbody>
+            <tr><td><strong>1. Länderspezifische Tabellen</strong></td><td>Erfahrungswerte Dezernat Int. Beziehungen</td><td>Tabelle für Land existiert</td><td>Heidelberg (Standard)</td></tr>
+            <tr><td><strong>2. Modifizierte Bayerische Formel</strong></td><td>KMK-Empfehlung (mathematisch)</td><td>N<sub>max</sub>, N<sub>min</sub>, N<sub>d</sub> bekannt</td><td>TUM, KIT, RWTH, LMU, Heidelberg (Fallback)</td></tr>
+            <tr><td><strong>3. NUS+ Tool (AGNES)</strong></td><td>Integriertes Tool nutzt Bayerische Formel</td><td>HU Berlin Immatrikulation</td><td>HU Berlin</td></tr>
+          </tbody>
+        </table>
+      </div>
+    </section>
+
+    <section class="prose mb-12">
+      <h2>1. Länderspezifische Tabellen (Heidelberg)</h2>
+      <p>Mathematische Standardumrechnung via Bayerischer Formel, N<sub>max</sub> teils angepasst (Erfahrungswerte).</p>
+      <div class="table-scroll">
+        <table>
+          <thead><tr><th>Land / System</th><th class="text-center">Deutsche 1,0</th><th class="text-center">1,3</th><th class="text-center">1,7</th><th class="text-center">2,0</th><th class="text-center">2,3</th><th class="text-center">2,7</th><th class="text-center">3,0</th><th class="text-center">3,3</th><th class="text-center">3,7</th><th class="text-center">4,0</th><th>Hinweis</th></tr></thead>
+          <tbody>
+            <tr><td><strong>USA GPA 4.0</strong></td><td class="text-center">4.0</td><td class="text-center">3.7</td><td class="text-center">3.3</td><td class="text-center">3.0</td><td class="text-center">2.7</td><td class="text-center">2.3</td><td class="text-center">2.0</td><td class="text-center">1.7</td><td class="text-center">1.3</td><td class="text-center">1.0</td><td>Standard</td></tr>
+            <tr><td><strong>UK % (100-40)</strong></td><td class="text-center">85</td><td class="text-center">80</td><td class="text-center">75</td><td class="text-center">70</td><td class="text-center">65</td><td class="text-center">60</td><td class="text-center">55</td><td class="text-center">50</td><td class="text-center">45</td><td class="text-center">40</td><td>GB1-System</td></tr>
+            <tr><td><strong>Frankreich 20</strong></td><td class="text-center">17*</td><td class="text-center">16</td><td class="text-center">15</td><td class="text-center">14</td><td class="text-center">13</td><td class="text-center">12</td><td class="text-center">11</td><td class="text-center">10,5</td><td class="text-center">10</td><td class="text-center"><10</td><td>*Nmax=17 angepasst</td></tr>
+            <tr><td><strong>Italien 30</strong></td><td class="text-center">29</td><td class="text-center">28</td><td class="text-center">27</td><td class="text-center">26</td><td class="text-center">25</td><td class="text-center">24</td><td class="text-center">23</td><td class="text-center">22</td><td class="text-center">20</td><td class="text-center">18</td><td><18</td></tr>
+            <tr><td><strong>Spanien 10</strong></td><td class="text-center">10</td><td class="text-center">9,5</td><td class="text-center">9</td><td class="text-center">8,5</td><td class="text-center">8</td><td class="text-center">7,5</td><td class="text-center">7</td><td class="text-center">6,5</td><td class="text-center">6</td><td class="text-center">5,5</td><td class="text-center">5</td><td><5</td></tr>
+            <tr><td><strong>Österreich 1–5</strong></td><td class="text-center">1</td><td class="text-center">1,3</td><td class="text-center">1,7</td><td class="text-center">2</td><td class="text-center">2,3</td><td class="text-center">2,7</td><td class="text-center">3</td><td class="text-center">3,3</td><td class="text-center">3,7</td><td class="text-center">4</td><td class="text-center">5</td><td>1=sehr gut</td></tr>
+            <tr><td><strong>Niederlande 10</strong></td><td class="text-center">10</td><td class="text-center">9</td><td class="text-center">8</td><td class="text:center">7</td><td class="text-center">6,5</td><td class="text-center">6</td><td class="text-center">5,5</td><td class="text-center">5</td><td class="text-center">—</td><td class="text-center">—</td><td class="text-center"><5,5</td></tr>
+          </tbody>
+        </table>
+      </div>
+      <p class="mt-2 text-sm text-slate-500">Quelle: Heidelberg "Handreichung Anerkennung ausländischer Studienleistungen" (Dezernat Int. Beziehungen). Volltabelle: 40+ Länder.</p>
+    </section>
+
+    <section class="prose mb-12">
+      <h2>2. Modifizierte Bayerische Formel (KMK) — Direkte Berechnung</h2>
+      <div class="formula-block mb-4">
+        <div class="f-label">Formel</div>
+        <div class="f-text">x = 1 + 3 × (N<sub>max</sub> − N<sub>d</sub>) ÷ (N<sub>max</sub> − N<sub>min</sub>)</div>
+        <div class="f-example">N<sub>max</sub> = Bestnote Ausland | N<sub>min</sub> = Bestehensnote | N<sub>d</sub> = erzielte Note</div>
+      </div>
+      <p>Anwendung wenn: Keine Ländertabelle existiert ODER Formel explizit gefordert (TUM APSO §16, RWTH ÜPO, KIT, LMU BayHSchG).</p>
+    </section>
+
+    <section class="prose mb-12">
+      <h2>3. NUS+ Tool (HU Berlin / AGNES)</h2>
+      <div class="calc-shell p-4">
+        <h3 class="font-bold mb-2">🔧 Integriertes Tool in AGNES</h3>
+        <ul class="list-disc list-inside text-sm space-y-1">
+          <li>Datenbank ausländischer Notensysteme mit Eckwerten</li>
+          <li>Automatische Berechnung via Bayerische Formel</li>
+          <li>Für: Erasmus+, Direktzulassung Master, Promotion</li>
+          <li>Ergebnis: Empfehlung für Prüfungsausschuss</li>
+          <li><strong>Endgültige Entscheidung:</strong> Prüfungsausschuss (§110 ZSP-HU)</li>
+        </ul>
+      </div>
+    </section>
+
+    <section class="prose mb-12">
+      <h2>Prozess an den 6 Universitäten</h2>
+      <div class="table-scroll">
+        <table>
+          <thead><tr><th>Schritt</th><th>TUM</th><th>Heidelberg</th><th>HU Berlin</th><th>KIT</th><th>RWTH</th><th>LMU</th></tr></thead>
+          <tbody>
+            <tr><td><strong>Antrag</strong></td><td>Prüfungsamt + Transcript + Notensystem</td><td>Dezernat Int. Bez. + Tabelle/Formel</td><td>AGNES NUS+ Tool + Unterlagen</td><td>Prüfungsausschuss + Formel</td><td>Prüfungsamt + KMK-Formel</td><td>Prüfungsamt + BayHSchG</td></tr>
+            <tr><td><strong>Prüfung</strong></td><td>Äquivalenz CPMK + Notensystem</td><td>Tabelle → sonst Formel → sonst PA</td><td>NUS+ Tool → PA Entscheidung</td><td>KMK-Formel + Fachgutachten</td><td>KMK-Formel + Fachgutachten</td><td>BayHSchG + Formel + Fachgutachten</td></tr>
+            <tr><td><strong>Entscheidung</strong></td><td>Prüfungsausschuss (APSO §16)</td><td>Prüfungsausschuss (Anerkennungssatzung)</td><td>Prüfungsausschuss (§110 ZSP-HU)</td><td>Prüfungsausschuss</td><td>Prüfungsausschuss (ÜPO §13)</td><td>Prüfungsausschuss (BayHSchG)</td></tr>
+          </tbody>
+        </table>
+      </div>
+    </section>
+
+    <section class="prose mb-12">
+      <h2>Wichtige Dokumente für Antrag</h2>
+      <div class="bg-slate-50 dark:bg-zinc-900 border border-slate-200 dark:border-zinc-800 rounded-xl p-6">
+        <ul class="list-disc list-inside space-y-2">
+          <li><strong>Transcript of Records</strong> (Original + beglaubigte Übersetzung DE/EN)</li>
+          <li><strong>Offizielles Notensystem der Auslandshs:</strong> Bestnote, Bestehensnote, Skala, Beschreibung</li>
+          <li><strong>Modulbeschreibungen / Syllabi:</strong> Für Fachliche Äquivalenz (CPMK-Vergleich)</li>
+          <li><strong>Learning Agreement:</strong> Bei Erasmus+ (vorher unterschrieben)</li>
+          <li><strong>Diploma Supplement / SET:</strong> Falls bereits vorhanden (zeigt ECTS Grades)</li>
+          <li><strong>Antragsformular:</strong> Universitätsspezifisch (Prüfungsamt / International Office)</li>
+        </ul>
+      </div>
+    </section>
+
+    <section class="prose mb-12">
+      <h2>Besonderheiten nach Aufenthaltsart</h2>
+      <details class="faq-row">
+        <summary>Erasmus+ (1–2 Semester)</summary>
+        <div class="faq-body">
+          <ul class="list-disc list-inside space-y-1">
+            <li>Learning Agreement (LA) vorher: Modulwahl + Notenumrechnung vereinbart</li>
+            <li>Nach Rückkehr: Transcript of Records → automatische Anerkennung laut LA</li>
+            <li>Note: Originalnote (lokal) → Konvertierung per Tabelle/Formel → deutsche Note</li>
+            <li>ECTS Grade im Transcript hilft bei Percentil-Einordnung</li>
+          </ul>
+        </div>
+      </details>
+      <details class="faq-row">
+        <summary>Doppelabschluss / Joint Degree</summary>
+        <div class="faq-body">
+          <ul class="list-disc list-inside space-y-1">
+            <li>Vertragliche Regelung zwischen Partnerunis (Notenumrechnung festgelegt)</li>
+            <li>HU Berlin Open Design: HU + UBA Buenos Aires, 4 Semester, Double Degree</li>
+            <li>Jede Uni benotet nach eigenem System → Konvertierung per Abkommen</li>
+            <li>Gesamtnote: Gewichtung laut Abkommen (oft 50:50 oder Credit-basiert)</li>
+          </ul>
+        </div>
+      </details>
+      <details class="faq-row">
+        <summary>Master-Zulassung mit ausländischem Bachelor</summary>
+        <div class="faq-body">
+          <ul class="list-disc list-inside space-y-1">
+            <li>Gesamtnote Konvertierung → deutsches System für NC / Eignungsfeststellung</li>
+            <li>TUM: APSO §16 + Fachprüfungsausschuss (z.B. Informatik: Notendurchschnitt 120 LP)</li>
+            <li>KIT: Bayerische Formel für Durchschnittsnote (120 LP / 2/3 Prüfungen)</li>
+            <li>RWTH: KMK-Formel + fachspezifische Eignungsprüfung</li>
+          </ul>
+        </div>
+      </details>
+      <details class="faq-row">
+        <summary>Promotion mit ausländischem Master</summary>
+        <div class="faq-body">
+          <ul class="list-disc list-inside space-y-1">
+            <li>Gesamtnote Master konvertieren → deutsches System (Promotionsordnung)</li>
+            <li>Heidelberg: Ländertabelle → deutsche Note für "magna/cum laude/rite" Einstufung</li>
+            <li>LMU: BayHSchG + Bayerische Formel</li>
+            <li>Oft: Mindestnote "gut" (2,5) oder "sehr gut" (1,5) für Zulassung</li>
+          </ul>
+        </div>
+      </details>
+    </section>
+
+    <section class="prose mb-12">
+      <h2>Kein Rechtsanspruch auf deutsche Note</h2>
+      <div class="bg-amber-50 dark:bg-amber-900/20 border border-amber-200 dark:border-amber-800 rounded-xl p-6">
+        <p class="font-bold mb-2">Lissabon-Konvention (1997) Art. VII:</p>
+        <ul class="list-disc list-inside space-y-1">
+          <li>Anerkennung der <strong>Leistung</strong> (Credits, Qualifikation) = Pflicht</li>
+          <li>Festsetzung einer <strong>deutschen Äquivalenznote</strong> = <strong>Kein Rechtsanspruch</strong></li>
+          <li>Alternative: Anerkennung als "bestanden" ohne Note (Vermerk im Zeugnis)</li>
+        </ul>
+      </div>
+    </section>
+
+    <section class="prose">
+      <h2>Referenzen</h2>
+      <ul>
+        <li>Heidelberg: Handreichung Anerkennung ausländischer Studienleistungen (Dezernat Int. Bez.)</li>
+        <li>KMK: Modifizierte Bayerische Formel (Beschluss)</li>
+        <li>TUM: APSO §16 Abs. 6 (Grade Conversion)</li>
+        <li>HU Berlin: ZSP-HU §110 + NUS+ Tool (AGNES)</li>
+        <li>DAAD: "Notenumrechnung" Länderprofile + Datenbank anabin</li>
+        <li>ZAB: Zentralstelle für ausländisches Bildungswesen (Länderdatenbank)</li>
+      </ul>
+    </section>
+  </main>
+</Layout>
