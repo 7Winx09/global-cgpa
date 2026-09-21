@@ -1,0 +1,219 @@
+---
+import Layout from '@/layouts/Layout.astro';
+
+const pageTitle = 'الوضع الأكاديمي في الجامعات العربية | الإنذار، الفصل، مرتبة الشرف، التخرج';
+const description = 'دليل شامل للوضع الأكاديمي في الجامعات العربية: شروط الإنذار الأكاديمي، الفصل، مراتب الشرف، متطلبات التخرج للجامعات المصرية، الأردنية، السعودية، الإماراتية، اللبنانية.';
+const canonical = 'https://globalcgpa.in/ar/guides/academic-standing';
+const ogImage = '/og-image-ar.png';
+const lang = 'ar';
+const alternates = [
+  { hreflang: 'en', href: 'https://globalcgpa.in/guides/academic-standing' },
+  { hreflang: 'ar', href: 'https://globalcgpa.in/ar/guides/academic-standing' },
+];
+---
+
+<Layout title={pageTitle} description={description} canonical={canonical} ogImage={ogImage} lang={lang} alternates={alternates}>
+  <main class="max-w-[780px] mx-auto px-6 py-14" style="flex:1;">
+    <nav class="crumbs mb-6" aria-label="Breadcrumb">
+      <a href="/ar/">حاسبة GPA العربية</a>
+      <span class="sep">/</span>
+      <a href="/ar/guides">الأدلة</a>
+      <span class="sep">/</span>
+      <span class="current">الوضع الأكاديمي</span>
+    </nav>
+
+    <div class="text-xs font-bold uppercase tracking-wider text-emerald-500 mb-2">دليل الوضع الأكاديمي</div>
+    <h1 class="text-3xl sm:text-4xl font-extrabold tracking-tight mb-3">الوضع الأكاديمي: الإنذار، الفصل، مراتب الشرف، التخرج</h1>
+    <p class="text-slate-500 dark:text-zinc-400 text-base mb-10">
+      كل جامعة عربية لها لوائحها الخاصة للوضع الأكاديمي. هذا الدليل يلخص القواعد المشتركة والاختلافات الرئيسية بين 13 جامعة في 5 دول عربية.
+    </p>
+
+    <section class="prose mb-12">
+      <h2>القواعد المشتركة (غالبية الجامعات)</h2>
+      <div class="table-scroll">
+        <table>
+          <thead>
+            <tr>
+              <th>الحالة</th>
+              <th class="text-center">مقياس 4.0</th>
+              <th class="text-center">مقياس 5.0</th>
+              <th class="text-center">مقياس 20.0</th>
+              <th>الإجراء</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr class="bg-emerald-50 dark:bg-emerald-900/20"><td><strong>مرتبة الشرف / التميز</strong></td><td class="text-center">≥ 3.50</td><td class="text-center">≥ 4.50 (أولى)، ≥ 3.75 (ثانية)</td><td class="text-center">≥ 16 (Très Bien)</td><td>Dean's List، شهادة تميز، أولوية البعثات</td></tr>
+            <tr><td><strong>جيد جداً</strong></td><td class="text-center">3.00 - 3.49</td><td class="text-center">3.50 - 4.49</td><td class="text-center">14 - 15.9 (Bien)</td><td>وضع طبيعي، مؤهل لمعظم الفرص</td></tr>
+            <tr class="bg-amber-50 dark:bg-amber-900/20"><td><strong>مقبول / عادي</strong></td><td class="text-center">2.00 - 2.99</td><td class="text-center">2.50 - 3.49</td><td class="text-center">10 - 13.9 (Passable/Assez Bien)</td><td>وضع طبيعي، متابعة عادية</td></tr>
+            <tr class="bg-red-50 dark:bg-red-900/20"><td><strong>إنذار أكاديمي (Probation)</strong></td><td class="text-center">< 2.00 (فصلي)</td><td class="text-center">< 2.00 (فصلي)</td><td class="text-center">< 10 (فصلي)</td><td>إنذار رسمي، تقليل ساعات، خطة تحسين، مراجعة مستشار</td></tr>
+            <tr class="bg-red-50 dark:bg-red-900/20"><td><strong>فصل أكاديمي (Dismissal)</strong></td><td class="text-center">3 إنذارات أو تراكمي < 1.0</td><td class="text-center">3 إنذارات أو تراكمي < 1.0</td><td class="text-center">3 إنذارات</td><td>فصل نهائي، إعادة قبول مشروط</td></tr>
+          </tbody>
+        </table>
+      </div>
+    </section>
+
+    <section class="prose mb-12">
+      <h2>التفصيل حسب الدولة / الجامعة</h2>
+
+      <h3>🇪🇬 مصر</h3>
+      <div class="space-y-3 mb-6">
+        <div class="border-l-4 border-blue-500 pl-4 bg-blue-50 dark:bg-blue-900/20 p-3 rounded-r-lg">
+          <h4 class="font-bold">الجامعة الأمريكية بالقاهرة (AUC)</h4>
+          <ul class="list-disc list-inside text-sm mt-1 space-y-1">
+            <li>إنذار: GPA فصلي < 2.0</li>
+            <li>فصل: 3 إنذارات متتالية أو GPA تراكمي < 1.0</li>
+            <li>تخرج: GPA تراكمي ≥ 2.0، 120 ساعة معتمدة</li>
+            <li>Dean's List: GPA فصلي ≥ 3.5 (12 ساعة على الأقل)</li>
+            <li>Provost's List: GPA فصلي ≥ 3.7</li>
+          </ul>
+        </div>
+        <div class="border-l-4 border-amber-500 pl-4 bg-amber-50 dark:bg-amber-900/20 p-3 rounded-r-lg">
+          <h4 class="font-bold">جامعة القاهرة (نظام 100% / 4.0 داخلي)</h4>
+          <ul class="list-disc list-inside text-sm mt-1 space-y-1">
+            <li>إنذار: معدل فصلي < 2.0/4.0 أو < 60%</li>
+            <li>فصل: 3 إنذارات أو معدل تراكمي < 1.5</li>
+            <li>تخرج: معدل تراكمي ≥ 2.0/4.0 (≥ 60%)، إكمال الساعات</li>
+            <li>مرتبة الشرف: ≥ 85% (أ)، ≥ 75% (ب+)</li>
+            <li>الحد الأقصى: 14 فصل (7 سنوات)</li>
+          </ul>
+        </div>
+      </div>
+
+      <h3>🇯🇴 الأردن</h3>
+      <div class="space-y-3 mb-6">
+        <div class="border-l-4 border-blue-500 pl-4 bg-blue-50 dark:bg-blue-900/20 p-3 rounded-r-lg">
+          <h4 class="font-bold">الجامعة الأردنية (11 درجة على 4.0)</h4>
+          <ul class="list-disc list-inside text-sm mt-1 space-y-1">
+            <li>إنذار: معدل فصلي < 2.0</li>
+            <li>فصل: 3 إنذارات متتالية</li>
+            <li>تخرج: معدل تراكمي ≥ 2.0، لا مواد راسبة</li>
+            <li>مرتبة الشرف الأولى: ≥ 3.75، ثانية: ≥ 3.25</li>
+            <li>الحد الأقصى: 14 فصل (7 سنوات)</li>
+          </ul>
+        </div>
+        <div class="border-l-4 border-amber-500 pl-4 bg-amber-50 dark:bg-amber-900/20 p-3 rounded-r-lg">
+          <h4 class="font-bold">الجامعة الألمانية الأردنية (GJU)</h4>
+          <ul class="list-disc list-inside text-sm mt-1 space-y-1">
+            <li>إنذار: GPA فصلي < 2.0</li>
+            <li>فصل: GPA تراكمي < 1.0 أو 3 إنذارات</li>
+            <li>تخرج: GPA ≥ 2.0، إكمال البرنامج + السنة الألمانية</li>
+            <li>Dean's List: GPA فصلي ≥ 3.5</li>
+          </ul>
+        </div>
+      </div>
+
+      <h3>🇸🇦 السعودية</h3>
+      <div class="space-y-3 mb-6">
+        <div class="border-l-4 border-blue-500 pl-4 bg-blue-50 dark:bg-blue-900/20 p-3 rounded-r-lg">
+          <h4 class="font-bold">جامعة الملك سعود (5.0)</h4>
+          <ul class="list-disc list-inside text-sm mt-1 space-y-1">
+            <li>إنذار: معدل فصلي < 2.0/5.0</li>
+            <li>فصل: 3 إنذارات أو معدل تراكمي < 1.0/5.0</li>
+            <li>تخرج: معدل تراكمي ≥ 2.0/5.0</li>
+            <li>مرتبة الشرف الأولى: ≥ 4.75/5.0</li>
+            <li>مرتبة الشرف الثانية: ≥ 3.75/5.0</li>
+          </ul>
+        </div>
+        <div class="border-l-4 border-amber-500 pl-4 bg-amber-50 dark:bg-amber-900/20 p-3 rounded-r-lg">
+          <h4 class="font-bold">KAUST (4.0 - دراسات عليا)</h4>
+          <ul class="list-disc list-inside text-sm mt-1 space-y-1">
+            <li>ماجستير: النجاح B- (2.7)، تخرج GPA ≥ 3.0</li>
+            <li>دكتوراه: النجاح B (3.0)، تخرج GPA ≥ 3.0</li>
+            <li>لا يوجد تقدير D في الدراسات العليا</li>
+            <li>إنذار: GPA فصلي < 3.0</li>
+          </ul>
+        </div>
+        <div class="border-l-4 border-purple-500 pl-4 bg-purple-50 dark:bg-purple-900/20 p-3 rounded-r-lg">
+          <h4 class="font-bold">KFUPM (4.0 - 10 درجات)</h4>
+          <ul class="list-disc list-inside text-sm mt-1 space-y-1">
+            <li>إنذار: GPA فصلي < 2.0</li>
+            <li>فصل: 3 إنذارات أو GPA تراكمي < 1.0</li>
+            <li>تخرج: GPA ≥ 2.0</li>
+            <li>مرتبة الشرف: GPA ≥ 3.5</li>
+          </ul>
+        </div>
+      </div>
+
+      <h3>🇦🇪 الإمارات</h3>
+      <div class="space-y-3 mb-6">
+        <div class="border-l-4 border-blue-500 pl-4 bg-blue-50 dark:bg-blue-900/20 p-3 rounded-r-lg">
+          <h4 class="font-bold">جامعة الإمارات (UAEU) / خليفة / AUS</h4>
+          <ul class="list-disc list-inside text-sm mt-1 space-y-1">
+            <li>إنذار: GPA فصلي < 2.0</li>
+            <li>فصل: 3 إنذارات أو GPA تراكمي < 1.0</li>
+            <li>تخرج: GPA ≥ 2.0</li>
+            <li>Dean's List: GPA فصلي ≥ 3.5 (AUS: ≥ 3.5)</li>
+            <li>AUS معتمدة أمريكياً (SACS/ABET) — معايير صارمة</li>
+          </ul>
+        </div>
+      </div>
+
+      <h3>🇱🇧 لبنان</h3>
+      <div class="space-y-3 mb-6">
+        <div class="border-l-4 border-blue-500 pl-4 bg-blue-50 dark:bg-blue-900/20 p-3 rounded-r-lg">
+          <h4 class="font-bold">AUB / LAU (4.0 أمريكي)</h4>
+          <ul class="list-disc list-inside text-sm mt-1 space-y-1">
+            <li>إنذار: GPA < 2.0</li>
+            <li>فصل: GPA تراكمي < 1.0 أو 3 إنذارات</li>
+            <li>تخرج: GPA ≥ 2.0</li>
+            <li>AUB: Distinction ≥ 3.5، High Distinction ≥ 3.2</li>
+            <li>LAU: Dean's List ≥ 3.5 (NECHE accredited)</li>
+          </ul>
+        </div>
+        <div class="border-l-4 border-purple-500 pl-4 bg-purple-50 dark:bg-purple-900/20 p-3 rounded-r-lg">
+          <h4 class="font-bold">USJ (20.0 فرنسي)</h4>
+          <ul class="list-disc list-inside text-sm mt-1 space-y-1">
+            <li>نجاح: ≥ 10/20</li>
+            <li>تخرج: معدل ≥ 10/20</li>
+            <li>Assez Bien: ≥ 12/20</li>
+            <li>Bien: ≥ 14/20</li>
+            <li>Très Bien: ≥ 16/20</li>
+            <li>إنذار: معدل فصلي < 10/20</li>
+          </ul>
+        </div>
+      </div>
+    </section>
+
+    <section class="prose mb-12">
+      <h2>متطلبات التخرج المشتركة</h2>
+      <div class="bg-slate-50 dark:bg-zinc-900 border border-slate-200 dark:border-zinc-800 rounded-xl p-6">
+        <h3 class="font-bold mb-4">قائمة تحقق التخرج (جميع الجامعات)</h3>
+        <ul class="list-disc list-inside space-y-2">
+          <li>☑ المعدل التراكمي ≥ الحد الأدنى (2.0/4.0، 2.0/5.0، 10/20)</li>
+          <li>☑ إكمال جميع الساعات المعتمدة المطلوبة (120-150 ساعة للبكالوريوس)</li>
+          <li>☑ لا توجد مواد راسبة (F) غير مجتازة</li>
+          <li>☑ إكمال المشروع/الرسالة/التدريب العملي حسب البرنامج</li>
+          <li>☑ عدم تجاوز الحد الأقصى للدراسة (عادة 12-14 فصل / 6-7 سنوات)</li>
+          <li>☑ سداد الرسوم والمتطلبات الإدارية</li>
+        </ul>
+      </div>
+    </section>
+
+    <section class="prose mb-12">
+      <h2>كيفية تجنب الإنذار والفصل</h2>
+      <ol class="list-decimal list-inside space-y-3">
+        <li><strong>راقب GPA بعد كل فصل:</strong> استخدم <a href="/ar/" class="underline hover:text-emerald-500">حاسبة GPA</a> لمعرفة وضعك فور صدور الدرجات.</li>
+        <li><strong>سارع بإعادة المواد الراسبة (F/D):</strong> معظم الجامعات تحسب الدرجة الأعلى وتحذف الأدنى، والساعات تحتسب مرة واحدة.</li>
+        <li><strong>قلل الحمل الدراسي عند الإنذار:</strong> سجل 12-15 ساعة بدلاً من 18-21 للتركيز على التحسين.</li>
+        <li><strong>راجع المستشار الأكاديمي فوراً:</strong> إلزامي عند الإنذار الأول — يساعد في خطة التحسين.</li>
+        <li><strong>تجنب الانسحاب المتأخر (W):</strong> لا يحسب في GPA لكن يؤخر التخرج ويؤثر على المنح.</li>
+        <li><strong>استهدف معدل آمن:</strong> اهدف لـ 2.5+ (4.0) / 3.0+ (5.0) / 12+ (20.0) كهامش أمان.</li>
+      </ol>
+    </section>
+
+    <section class="prose">
+      <h2>روابط حاسبات GPA للمتابعة</h2>
+      <div class="grid gap-2 sm:grid-cols-2 lg:grid-cols-3">
+        <a href="/ar/american-university-cairo-gpa" class="calc-shell p-3 hover:border-emerald-500">AUC — 4.0</a>
+        <a href="/ar/cairo-university-gpa" class="calc-shell p-3 hover:border-emerald-500">جامعة القاهرة — 4.0</a>
+        <a href="/ar/university-of-jordan-gpa" class="calc-shell p-3 hover:border-emerald-500">الجامعة الأردنية — 4.0</a>
+        <a href="/ar/king-saud-university-gpa" class="calc-shell p-3 hover:border-emerald-500">الملك سعود — 5.0</a>
+        <a href="/ar/kaust-gpa" class="calc-shell p-3 hover:border-emerald-500">KAUST — 4.0</a>
+        <a href="/ar/kfupm-gpa" class="calc-shell p-3 hover:border-emerald-500">KFUPM — 4.0</a>
+        <a href="/ar/uae-university-gpa" class="calc-shell p-3 hover:border-emerald-500">UAEU — 4.0</a>
+        <a href="/ar/american-university-beirut-gpa" class="calc-shell p-3 hover:border-emerald-500">AUB — 4.0</a>
+        <a href="/ar/saint-joseph-university-gpa" class="calc-shell p-3 hover:border-emerald-500">USJ — 20.0</a>
+      </div>
+    </section>
+  </main>
+</Layout>

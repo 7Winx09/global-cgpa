@@ -1,0 +1,149 @@
+---
+import Layout from '@/layouts/Layout.astro';
+
+const pageTitle = 'Khác Biệt GPA và CPA Việt Nam | Định Nghĩa & Cách Tính';
+const description = 'Hiểu rõ khác biệt giữa GPA học kỳ và CPA tích lũy tại các trường ĐH Việt Nam. Công thức, ví dụ minh họa, và ý nghĩa đối với học bổng, tốt nghiệp, cảnh báo học tập.';
+const canonical = 'https://globalcgpa.in/vn/guides/gpa-vs-cpa';
+const ogImage = '/og-image-vn.png';
+const lang = 'vn';
+const alternates = [
+  { hreflang: 'en', href: 'https://globalcgpa.in/guides/gpa-vs-cgpa' },
+  { hreflang: 'vn', href: 'https://globalcgpa.in/vn/guides/gpa-vs-cpa' },
+];
+---
+
+<Layout title={pageTitle} description={description} canonical={canonical} ogImage={ogImage} lang={lang} alternates={alternates}>
+  <main class="max-w-[780px] mx-auto px-6 py-14" style="flex:1;">
+    <nav class="crumbs mb-6" aria-label="Breadcrumb">
+      <a href="/vn/">Khoan Tính GPA</a>
+      <span class="sep">/</span>
+      <a href="/vn/guides">Hướng Dẫn</a>
+      <span class="sep">/</span>
+      <span class="current">GPA vs CPA</span>
+    </nav>
+
+    <article class="prose">
+      <h1>Khác Biệt Giữa GPA Học Kỳ và CPA Tích Lũy</h1>
+      <p class="lead">Tại các trường đại học Việt Nam áp dụng chế độ tín chỉ (ĐHQG TP.HCM, ĐHQG Hà Nội, Bách Khoa Hà Nội, Bách Khoa TP.HCM, Kinh tế Quốc dân...), có 2 chỉ số điểm trung bình cốt lõi: <strong>GPA</strong> (điểm trung bình học kỳ) và <strong>CPA</strong> (điểm trung bình tích lũy). Việc hiểu đúng hai khái niệm này quyết định đến học bổng, xếp loại tốt nghiệp, và cảnh báo học tập.</p>
+
+      <h2>1. Định Nghĩa</h2>
+      <table>
+        <thead>
+          <tr>
+            <th>Chỉ Số</th>
+            <th>Tên Gọi</th>
+            <th>Phạm Vi</th>
+            <th>Công Thức</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr>
+            <td><strong>GPA</strong></td>
+            <td>Grade Point Average — Điểm trung bình học kỳ</td>
+            <td>Một học kỳ cụ thể</td>
+            <td>GPA = Σ(TC<sub>i</sub> × Điểm<sub>i</sub>) ÷ ΣTC<sub>i</sub> (chỉ môn học kỳ đó)</td>
+          </tr>
+          <tr>
+            <td><strong>CPA</strong></td>
+            <td>Cumulative Point Average — Điểm trung bình tích lũy</td>
+            <td>Từ đầu khóa đến hiện tại</td>
+            <td>CPA = Σ(TC<sub>i</sub> × Điểm<sub>i</sub>) ÷ ΣTC<sub>i</sub> (tất cả môn đã học)</td>
+          </tr>
+        </tbody>
+      </table>
+
+      <h2>2. Ví Dụ Minh Họa</h2>
+      <p>Sinh viên năm thứ nhất, học 2 học kỳ:</p>
+      <h3>Học Kỳ 1 (6 môn)</h3>
+      <table>
+        <thead>
+          <tr><th>Môn</th><th>TC</th><th>Điểm Chữ</th><th>Điểm 4.0</th><th>TC × Điểm</th></tr>
+        </thead>
+        <tbody>
+          <tr><td>Giải Tích 1</td><td class="text-center">3</td><td class="text-center">A</td><td class="text-center">4.0</td><td class="text-center">12.0</td></tr>
+          <tr><td>Vật Lý 1</td><td class="text-center">3</td><td class="text-center">B+</td><td class="text-center">3.5</td><td class="text-center">10.5</td></tr>
+          <tr><td>Hóa Học</td><td class="text-center">3</td><td class="text-center">B</td><td class="text-center">3.0</td><td class="text-center">9.0</td></tr>
+          <tr><td>Tin Học</td><td class="text-center">2</td><td class="text-center">A</td><td class="text-center">4.0</td><td class="text-center">8.0</td></tr>
+          <tr><td>Anh Văn 1</td><td class="text-center">2</td><td class="text-center">B</td><td class="text-center">3.0</td><td class="text-center">6.0</td></tr>
+          <tr><td>GDTC</td><td class="text-center">2</td><td class="text-center">C+</td><td class="text-center">2.5</td><td class="text-center">5.0</td></tr>
+        </tbody>
+      </table>
+      <p class="font-bold mt-2">GPA Kỳ 1 = (12+10.5+9+8+6+5) ÷ (3+3+3+2+2+2) = 50.5 ÷ 15 = <strong>3.37</strong></p>
+
+      <h3>Học Kỳ 2 (6 môn)</h3>
+      <table>
+        <thead>
+          <tr><th>Môn</th><th>TC</th><th>Điểm Chữ</th><th>Điểm 4.0</th><th>TC × Điểm</th></tr>
+        </thead>
+        <tbody>
+          <tr><td>Giải Tích 2</td><td class="text-center">3</td><td class="text-center">A</td><td class="text-center">4.0</td><td class="text-center">12.0</td></tr>
+          <tr><td>Vật Lý 2</td><td class="text-center">3</td><td class="text-center">A</td><td class="text-center">4.0</td><td class="text-center">12.0</td></tr>
+          <tr><td>Lập Trình</td><td class="text-center">3</td><td class="text-center">B+</td><td class="text-center">3.5</td><td class="text-center">10.5</td></tr>
+          <tr><td>Kinh Tế</td><td class="text-center">2</td><td class="text-center">C+</td><td class="text-center">2.5</td><td class="text-center">5.0</td></tr>
+          <tr><td>Anh Văn 2</td><td class="text-center">2</td><td class="text-center">B</td><td class="text-center">3.0</td><td class="text-center">6.0</td></tr>
+          <tr><td>QHQT</td><td class="text-center">2</td><td class="text-center">C</td><td class="text-center">2.0</td><td class="text-center">4.0</td></tr>
+        </tbody>
+      </table>
+      <p class="font-bold mt-2">GPA Kỳ 2 = (12+12+10.5+5+6+4) ÷ 15 = 49.5 ÷ 15 = <strong>3.30</strong></p>
+
+      <h3>CPA Sau 2 Học Kỳ</h3>
+      <p class="font-bold">CPA = Tổng (TC × Điểm) 2 kỳ ÷ Tổng TC 2 kỳ = (50.5 + 49.5) ÷ 30 = 100 ÷ 30 = <strong>3.33</strong></p>
+      <p><em>Lưu ý: CPA không phải là trung bình cộng của 2 GPA (3.37 + 3.30) ÷ 2 = 3.335. CPA tính trọng số tín chỉ thực tế.</em></p>
+
+      <h2>3. Ý Nghĩa Thực Tế</h2>
+      <table>
+        <thead>
+          <tr><th>Mục Đích</th><th>Dùng GPA</th><th>Dùng CPA</th></tr>
+        </thead>
+        <tbody>
+          <tr><td><strong>Học bổng khuyến khích</strong></td><td>GPA kỳ ≥ 3.2, không môn F</td><td>CPA ≥ 3.6 (học bổng ĐHQG cấp)</td></tr>
+          <tr><td><strong>Cảnh báo học tập</strong></td><td>GPA kỳ < ngưỡng (năm 1: 1.2, năm 2: 1.4, năm 3+: 1.6)</td><td>CPA < 2.0 có rủi ro buộc thôi học</td></tr>
+          <tr><td><strong>Xếp loại tốt nghiệp</strong></td><td>—</td><td>Xuất sắc ≥ 3.6, Giỏi 3.2–3.59, Khá 2.5–3.19, TB 2.0–2.49</td></tr>
+          <tr><td><strong>Xét tuyển thạc sĩ/du học</strong></td><td>GPA các kỳ gần đây</td><td>CPA toàn khóa (yêu cầu thường ≥ 2.5–3.0)</td></tr>
+          <tr><td><strong>Chuyển ngành/chương trình</strong></td><td>GPA kỳ hiện tại</td><td>CPA tối thiểu (thường ≥ 2.0–2.5)</td></tr>
+        </tbody>
+      </table>
+
+      <h2>4. Xử Lý Môn Trượt (F) & Học Lại</h2>
+      <ul>
+        <li><strong>Môn F (0 điểm):</strong> Vẫn tính vào CPA với điểm 0, tín chỉ vẫn cộng vào mẫu số → kéo giảm CPA mạnh.</li>
+        <li><strong>Học lại môn F:</strong> Điểm mới ghi đè điểm cũ (nhiều trường), hoặc lấy điểm cao hơn. TC chỉ tính 1 lần.</li>
+        <li><strong>Môn rút (W):</strong> Không tính vào GPA/CPA, không tính tín chỉ.</li>
+        <li><strong>Môn S/P (Đạt/Không tính điểm):</strong> Không tính vào GPA/CPA.</li>
+      </ul>
+
+      <h2>5. CPA & Xếp Loại Tốt Nghiệp (Chuẩn Bộ GD&ĐT)</h2>
+      <table>
+        <thead>
+          <tr><th>Xếp Loại</th><th>CPA</th><th>Ghi Chú</th></tr>
+        </thead>
+        <tbody>
+          <tr><td><strong>Xuất Sắc</strong></td><td class="text-center">≥ 3.60</td><td>Được cấp bằng loại Xuất sắc, ưu tiên tuyển dụng, du học</td></tr>
+          <tr><td><strong>Giỏi</strong></td><td class="text-center">3.20 – 3.59</td><td>Được cấp bằng loại Giỏi</td></tr>
+          <tr><td><strong>Khá</strong></td><td class="text-center">2.50 – 3.19</td><td>Được cấp bằng loại Khá</td></tr>
+          <tr><td><strong>Trung Bình</strong></td><td class="text-center">2.00 – 2.49</td><td>Được cấp bằng loại Trung bình</td></tr>
+          <tr><td><strong>Yếu / Không Đạt</strong></td><td class="text-center">< 2.00</td><td>Không được cấp bằng, phải học thêm để nâng CPA</td></tr>
+        </tbody>
+      </table>
+
+      <h2>6. Mẹo Theo Dõi GPA/CPA</h2>
+      <ol>
+        <li><strong>Cập nhật sau mỗi kỳ:</strong> Dùng khoan tính GPA trên trang này để kiểm tra ngay khi có bảng điểm.</li>
+        <li><strong>Dự báo CPA:</strong> Trước kỳ cuối, tính điểm cần đạt để CPA đạt ngưỡng mong muốn (Xuất sắc/Giỏi).</li>
+        <li><strong>Ưu tiên môn nhiều TC:</strong> Môn 3-4 TC ảnh hưởng lớn hơn môn 1-2 TC.</li>
+        <li><strong>Tránh môn F:</strong> Một môn F 3 TC kéo CPA giảm ~0.2–0.3 tùy tổng TC.</li>
+        <li><strong>Kiểm tra quy chế trường:</strong> Mỗi trường có ngưỡng cảnh báo khác nhau (xem trang <a href="/vn/guides/canh-bao-hoc-tap">Cảnh Báo Học Tập</a>).</li>
+      </ol>
+
+      <h2>7. Tóm Tắt Nhanh</h2>
+      <div class="calc-shell p-4 mt-4">
+        <ul class="space-y-2">
+          <li>🔵 <strong>GPA</strong> = điểm một học kỳ → dùng cho học bổng kỳ, cảnh báo học tập</li>
+          <li>🟢 <strong>CPA</strong> = điểm tích lũy toàn khóa → dùng cho tốt nghiệp, xếp loại, du học, thạc sĩ</li>
+          <li>🟡 <strong>Công thức cùng dạng</strong>: Σ(TC × Điểm) ÷ ΣTC — khác nhau ở <em>phạm vi môn học</em></li>
+          <li>🔴 <strong>Môn F</strong> tính 0 điểm vào CPA → rất hại điểm tích lũy</li>
+        </ul>
+      </div>
+    </article>
+  </main>
+</Layout>

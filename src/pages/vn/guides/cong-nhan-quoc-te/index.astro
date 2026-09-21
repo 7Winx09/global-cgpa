@@ -1,0 +1,217 @@
+---
+import Layout from '@/layouts/Layout.astro';
+
+const pageTitle = 'Công Nhận Quốc Tế GPA Việt Nam | Quy Đổi Sang 4.0 Mỹ, 4.5 Hàn, 4.3 Nhật, 1-6 Đức, 0-20 Pháp';
+const description = 'Hướng dẫn quy đổi GPA Việt Nam (thang 4.0) sang các hệ thống quốc tế: GPA 4.0 Mỹ, 4.5 Hàn Quốc, 4.3 Nhật Bản, 1-6 Đức, 0-20 Pháp. Bảng tham khảo WES, DAAD, JASSO, Campus France.';
+const canonical = 'https://globalcgpa.in/vn/guides/cong-nhan-quoc-te';
+const ogImage = '/og-image-vn.png';
+const lang = 'vn';
+const alternates = [
+  { hreflang: 'en', href: 'https://globalcgpa.in/guides/international-gpa-conversion' },
+  { hreflang: 'vn', href: 'https://globalcgpa.in/vn/guides/cong-nhan-quoc-te' },
+];
+---
+
+<Layout title={pageTitle} description={description} canonical={canonical} ogImage={ogImage} lang={lang} alternates={alternates}>
+  <main class="max-w-[780px] mx-auto px-6 py-14" style="flex:1;">
+    <nav class="crumbs mb-6" aria-label="Breadcrumb">
+      <a href="/vn/">Khoan Tính GPA</a>
+      <span class="sep">/</span>
+      <a href="/vn/guides">Hướng Dẫn</a>
+      <span class="sep">/</span>
+      <span class="current">Công Nhận Quốc Tế</span>
+    </nav>
+
+    <div class="text-xs font-bold uppercase tracking-wider text-emerald-500 mb-2">Du Học & Đi Làm Nước Ngoài</div>
+    <h1 class="text-3xl sm:text-4xl font-extrabold tracking-tight mb-3">Công Nhận Quốc Tế Của GPA Việt Nam</h1>
+    <p class="text-slate-500 dark:text-zinc-400 text-base mb-10">
+      Khi nộp hồ sơ du học, xin visa, hoặc ứng tuyển việc làm quốc tế, GPA Việt Nam (thang 4.0) cần quy đổi sang hệ thống của quốc gia đích. Trang này tổng hợp bảng quy đổi tham khảo từ WES (Mỹ), DAAD (Đức), JASSO (Nhật), KIU (Hàn), Campus France (Pháp).
+    </p>
+
+    <section class="prose mb-12">
+      <h2>Bảng Quy Đổi Tham Khảo Nhanh</h2>
+      <div class="table-scroll">
+        <table>
+          <thead>
+            <tr>
+              <th>Xếp Loại VN</th>
+              <th class="text-center">CPA VN (4.0)</th>
+              <th class="text-center">GPA 4.0 (US/WES)</th>
+              <th class="text-center">GPA 4.3 (Nhật/JASSO)</th>
+              <th class="text-center">GPA 4.5 (Hàn/KIU)</th>
+              <th class="text-center">1-6 (Đức/DAAD)</th>
+              <th class="text-center">0-20 (Pháp)</th>
+              <th class="text-center">% (UK/Úc)</th>
+              <th class="text-center">Xếp Loại UK</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr class="bg-emerald-50 dark:bg-emerald-900/20"><td><strong>Xuất Sắc</strong></td><td class="text-center font-bold">3.60 – 4.00</td><td class="text-center">3.60 – 4.00</td><td class="text-center">3.87 – 4.30</td><td class="text-center">4.05 – 4.50</td><td class="text-center">1.00 – 1.50</td><td class="text-center">16 – 20</td><td class="text-center">70 – 100%</td><td class="text-center">First Class</td></tr>
+            <tr><td><strong>Giỏi</strong></td><td class="text-center font-bold">3.20 – 3.59</td><td class="text-center">3.20 – 3.59</td><td class="text-center">3.44 – 3.86</td><td class="text-center">3.60 – 4.04</td><td class="text-center">1.60 – 2.50</td><td class="text-center">14 – 15.9</td><td class="text-center">60 – 69%</td><td class="text-center">Upper Second (2:1)</td></tr>
+            <tr><td><strong>Khá</strong></td><td class="text-center font-bold">2.50 – 3.19</td><td class="text-center">2.50 – 3.19</td><td class="text-center">2.69 – 3.43</td><td class="text-center">2.81 – 3.59</td><td class="text-center">2.60 – 3.50</td><td class="text-center">12 – 13.9</td><td class="text-center">50 – 59%</td><td class="text-center">Lower Second (2:2)</td></tr>
+            <tr><td><strong>Trung Bình</strong></td><td class="text-center font-bold">2.00 – 2.49</td><td class="text-center">2.00 – 2.49</td><td class="text-center">2.15 – 2.68</td><td class="text-center">2.25 – 2.80</td><td class="text-center">3.60 – 4.00</td><td class="text-center">10 – 11.9</td><td class="text-center">40 – 49%</td><td class="text-center">Third Class</td></tr>
+            <tr class="bg-red-50 dark:bg-red-900/20"><td><strong>Yếu</strong></td><td class="text-center font-bold">< 2.00</td><td class="text-center">< 2.00</td><td class="text-center">< 2.15</td><td class="text-center">< 2.25</td><td class="text-center">> 4.00</td><td class="text-center">< 10</td><td class="text-center">< 40%</td><td class="text-center">Fail</td></tr>
+          </tbody>
+        </table>
+      </div>
+      <p class="text-sm text-slate-500 dark:text-zinc-400 mt-3"><em>⚠️ Bảng tham khảo. Mỗi trường/quốc gia có bảng quy đổi riêng. Luôn kiểm tra yêu cầu cụ thể của cơ quan nhận hồ sơ.</em></p>
+    </section>
+
+    <section class="prose mb-12">
+      <h2>Chi Tiết Theo Quốc Gia / Hệ Thống</h2>
+
+      <h3>🇺🇸 Hoa Kỳ — GPA 4.0 (WES / NACES)</h3>
+      <div class="bg-blue-50 dark:bg-blue-900/20 border border-blue-200 dark:border-blue-800 rounded-xl p-6 mb-6">
+        <p class="font-bold mb-2">Cơ quan đánh giá: WES (World Education Services), ECE, SpanTran, IERF</p>
+        <div class="table-scroll">
+          <table>
+            <thead><tr><th>CPA VN</th><th class="text-center">GPA 4.0 (WES)</th><th>Ghi Chú</th></tr></thead>
+            <tbody>
+              <tr><td class="font-mono">4.00</td><td class="text-center font-mono">4.00</td><td>A/A+</td></tr>
+              <tr><td class="font-mono">3.75</td><td class="text-center font-mono">3.75</td><td>A-</td></tr>
+              <tr><td class="font-mono">3.50</td><td class="text-center font-mono">3.50</td><td>B+</td></tr>
+              <tr><td class="font-mono">3.00</td><td class="text-center font-mono">3.00</td><td>B</td></tr>
+              <tr><td class="font-mono">2.50</td><td class="text-center font-mono">2.50</td><td>C+</td></tr>
+              <tr><td class="font-mono">2.00</td><td class="text-center font-mono">2.00</td><td>C (Pass)</td></tr>
+            </tbody>
+          </table>
+        </div>
+        <p class="mt-3 text-sm">WES thường quy đổi 1:1 cho thang 4.0 → 4.0. Yêu cầu: bản sao bảng điểm gốc, bản dịch công chứng, degree certificate. Phí ~$200-250, thời gian 7-10 ngày.</p>
+      </div>
+
+      <h3>🇩🇪 Đức — Hệ 1-6 (DAAD / Anabin / KMK)</h3>
+      <div class="bg-yellow-50 dark:bg-yellow-900/20 border border-yellow-200 dark:border-yellow-800 rounded-xl p-6 mb-6">
+        <p class="font-bold mb-2">Cơ quan: DAAD, Anabin, KMK (Bayerische Formel). <strong>Lưu ý: Đảo ngược — 1.0 là tốt nhất, 4.0 là đủ, >4.0 trượt.</strong></p>
+        <div class="formula-block mb-4">
+          <div class="f-label">Modified Bavarian Formula (KMK)</div>
+          <div class="f-text">x = 1 + 3 × (Nmax − Nd) ÷ (Nmax − Nmin)</div>
+          <div class="f-example">Nmax=4.0, Nmin=2.0 (điểm đạt min). VD: CPA 3.5 → x = 1 + 3×(4-3.5)/(4-2) = 1.75</div>
+        </div>
+        <div class="table-scroll">
+          <table>
+            <thead><tr><th>CPA VN</th><th class="text-center">Note Đức (Ước tính)</th><th>Xếp Loại</th></tr></thead>
+            <tbody>
+              <tr><td class="font-mono">3.6-4.0</td><td class="text-center">1.0 – 1.5</td><td>Sehr gut (Rất tốt)</td></tr>
+              <tr><td class="font-mono">3.2-3.59</td><td class="text-center">1.6 – 2.5</td><td>Gut (Tốt)</td></tr>
+              <tr><td class="font-mono">2.5-3.19</td><td class="text-center">2.6 – 3.5</td><td>Befriedigend (Đạt)</td></tr>
+              <tr><td class="font-mono">2.0-2.49</td><td class="text-center">3.6 – 4.0</td><td>Ausreichend (Đủ)</td></tr>
+            </tbody>
+          </table>
+        </div>
+        <p class="mt-3 text-sm">DAAD yêu cầu CPA ≥ 2.5 (≈ Note 3.0) cho hầu hết học bổng. Anabin kiểm tra trường có trong danh sách H+ không. Cần: bảng điểm gốc, bản dịch tiếng Đức/tiếng Anh công chứng, degree.</p>
+      </div>
+
+      <h3>🇯🇵 Nhật Bản — GPA 4.3 (JASSO / MEXT)</h3>
+      <div class="bg-red-50 dark:bg-red-900/20 border border-red-200 dark:border-red-800 rounded-xl p-6 mb-6">
+        <p class="font-bold mb-2">Cơ quan: JASSO (Japan Student Services Organization), MEXT Scholarship. Thang 4.3: A+=4.3, A=4.0, A-=3.7, B+=3.3, B=3.0...</p>
+        <div class="formula-block mb-4">
+          <div class="f-label">Quy Đổi Tham Khảo (Linear)</div>
+          <div class="f-text">GPA 4.3 = CPA VN × (4.3 ÷ 4.0) = CPA VN × 1.075</div>
+          <div class="f-example">CPA 3.6 → 3.87/4.3 | CPA 3.0 → 3.23/4.3 | CPA 2.5 → 2.69/4.3</div>
+        </div>
+        <p class="mt-3 text-sm">MEXT Scholarship thường yêu cầu GPA ≥ 2.30/3.0 (tương đương CPA VN ~2.8-3.0). JASSO dùng cho visa du học. Cần bảng điểm gốc + bản dịch tiếng Nhật/tiếng Anh.</p>
+      </div>
+
+      <h3>🇰🇷 Hàn Quốc — GPA 4.5 (KIU / GKS / TOPIK)</h3>
+      <div class="bg-purple-50 dark:bg-purple-900/20 border border-purple-200 dark:border-purple-800 rounded-xl p-6 mb-6">
+        <p class="font-bold mb-2">Cơ quan: KIU (Korean Institute for Curriculum Evaluation), GKS (Global Korea Scholarship). Thang 4.5: A+=4.5, A=4.0, B+=3.5, B=3.0...</p>
+        <div class="formula-block mb-4">
+          <div class="f-label">Quy Đổi Tham Khảo</div>
+          <div class="f-text">GPA 4.5 = CPA VN × (4.5 ÷ 4.0) = CPA VN × 1.125</div>
+          <div class="f-example">CPA 3.6 → 4.05/4.5 | CPA 3.0 → 3.38/4.5 | CPA 2.5 → 2.81/4.5</div>
+        </div>
+        <p class="mt-3 text-sm">GKS Graduate yêu cầu GPA ≥ 3.0/4.5 (≈ CPA VN 2.67) hoặc top 20% lớp. TOPIK level 3+ thường bắt buộc. Một số trường Hàn (SKY) tự quy đổi theo thang 4.3 hoặc 4.0.</p>
+      </div>
+
+      <h3>🇫🇷 Pháp — 0-20 (Campus France / France Éducation International)</h3>
+      <div class="bg-indigo-50 dark:bg-indigo-900/20 border border-indigo-200 dark:border-indigo-800 rounded-xl p-6 mb-6">
+        <p class="font-bold mb-2">Cơ quan: Campus France, France Éducation International. Thang 0-20, đạt ≥ 10/20.</p>
+        <div class="formula-block mb-4">
+          <div class="f-label">Quy Đổi Tham Khảo</div>
+          <div class="f-text">Điểm Pháp = (CPA VN ÷ 4.0) × 20 = CPA VN × 5</div>
+          <div class="f-example">CPA 3.6 → 18/20 (Très Bien) | CPA 3.0 → 15/20 (Bien) | CPA 2.5 → 12.5/20 (Assez Bien)</div>
+        </div>
+        <div class="table-scroll">
+          <table>
+            <thead><tr><th>Điểm Pháp</th><th>Mention</th><th>CPA VN Tương Đương</th></tr></thead>
+            <tbody>
+              <tr><td class="text-center">16-20</td><td>Très Bien (Xuất sắc)</td><td class="text-center">3.2 – 4.0</td></tr>
+              <tr><td class="text-center">14-15.9</td><td>Bien (Giỏi)</td><td class="text-center">2.8 – 3.19</td></tr>
+              <tr><td class="text-center">12-13.9</td><td>Assez Bien (Khá)</td><td class="text-center">2.4 – 2.79</td></tr>
+              <tr><td class="text-center">10-11.9</td><td>Passable (Trung bình)</td><td class="text-center">2.0 – 2.39</td></tr>
+              <tr><td class="text-center">< 10</td><td>Ajourné (Trượt)</td><td class="text-center">< 2.0</td></tr>
+            </tbody>
+          </table>
+        </div>
+        <p class="mt-3 text-sm">Campus France dùng cho visa du học (Études en France). Cần: bảng điểm gốc, bản dịch tiếng Pháp công chứng, attestation de réussite, diplôme.</p>
+      </div>
+
+      <h3>🇬🇧 Anh / 🇦🇺 Úc / 🇨🇦 Canada — Phần Trăm (%) & Xếp Loại Honours</h3>
+      <div class="bg-slate-50 dark:bg-zinc-900 border border-slate-200 dark:border-zinc-800 rounded-xl p-6 mb-6">
+        <div class="formula-block mb-4">
+          <div class="f-label">Ước Tính Phần Trăm</div>
+          <div class="f-text">% ≈ (CPA VN ÷ 4.0) × 100</div>
+          <div class="f-example">CPA 3.6 → 90% | CPA 3.0 → 75% | CPA 2.5 → 62.5% | CPA 2.0 → 50%</div>
+        </div>
+        <div class="table-scroll">
+          <table>
+            <thead><tr><th>% Ước Tính</th><th>UK Honours</th><th>Úc GPA (7.0)</th><th>Canada (4.0/4.33)</th></tr></thead>
+            <tbody>
+              <tr><td class="text-center">70-100%</td><td>First Class</td><td class="text-center">6.0-7.0</td><td class="text-center">3.7-4.0</td></tr>
+              <tr><td class="text-center">60-69%</td><td>Upper Second (2:1)</td><td class="text-center">5.0-5.99</td><td class="text-center">3.3-3.69</td></tr>
+              <tr><td class="text-center">50-59%</td><td>Lower Second (2:2)</td><td class="text-center">4.0-4.99</td><td class="text-center">2.7-3.29</td></tr>
+              <tr><td class="text-center">40-49%</td><td>Third Class</td><td class="text-center">3.0-3.99</td><td class="text-center">2.0-2.69</td></tr>
+            </tbody>
+          </table>
+        </div>
+        <p class="mt-3 text-sm">UK NARIC (Ecctis) đánh giá bằng Việt Nam. Hầu hết trường UK yêu cầu 2:1 (60-69%) ≈ CPA VN 3.0+. Úc dùng GPA 7.0 scale. Canada dùng 4.0 hoặc 4.33.</p>
+      </div>
+    </section>
+
+    <section class="prose mb-12">
+      <h2>Hồ Sơ Cần Chuẩn Bị Cho Đánh Giá Quốc Tế</h2>
+      <div class="bg-slate-50 dark:bg-zinc-900 border border-slate-200 dark:border-zinc-800 rounded-xl p-6">
+        <h3 class="font-bold mb-4">Checklist Hồ Sơ Chuẩn</h3>
+        <ul class="list-disc list-inside space-y-2">
+          <li>✅ Bảng điểm gốc (Transcript) — full semesters, có dấu mộc đỏ, ký hiệu hiệu trưởng</li>
+          <li>✅ Bằng tốt nghiệp (Degree Certificate) — bản gốc + bản sao</li>
+          <li>✅ Bản dịch công chứng (Notarized Translation) — tiếng Anh hoặc tiếng quốc gia đích</li>
+          <li>✅ Course descriptions / Syllabus — mô tả môn học (credit, nội dung) — cho WES/DAAD</li>
+          <li>✅ Grading system explanation — giải thích thang 4.0 Việt Nam (có thể in trang web trường hoặc Thông tư 08)</li>
+          <li>✅ Passport / CMND / CCCD</li>
+          <li>✅ Form yêu cầu của cơ quan đánh giá (WES Application, DAAD Form, Campus France Dossier...)</li>
+        </ul>
+      </div>
+    </section>
+
+    <section class="prose mb-12">
+      <h2>Liên Hệ & Tra Cứu Trực Tuyến</h2>
+      <div class="table-scroll">
+        <table>
+          <thead><tr><th>Quốc Gia</th><th>Cơ Quan</th><th>Trang Web Tra Cứu / Nộp Hồ Sơ</th></tr></thead>
+          <tbody>
+            <tr><td>🇺🇸 Mỹ</td><td>WES</td><td><a href="https://www.wes.org" target="_blank" rel="noopener" class="underline hover:text-emerald-500">wes.org</a> — Degree Equivalency Tool</td></tr>
+            <tr><td>🇩🇪 Đức</td><td>DAAD / Anabin</td><td><a href="https://anabin.kmk.org" target="_blank" rel="noopener" class="underline hover:text-emerald-500">anabin.kmk.org</a> — Kiểm tra trường H+</td></tr>
+            <tr><td>🇯🇵 Nhật</td><td>JASSO</td><td><a href="https://www.jasso.go.jp" target="_blank" rel="noopener" class="underline hover:text-emerald-500">jasso.go.jp</a> — GPA Conversion</td></tr>
+            <tr><td>🇰🇷 Hàn</td><td>KIU / NIIED</td><td><a href="https://www.studyinkorea.go.kr" target="_blank" rel="noopener" class="underline hover:text-emerald-500">studyinkorea.go.kr</a> — GKS Guidelines</td></tr>
+            <tr><td>🇫🇷 Pháp</td><td>Campus France</td><td><a href="https://www.campusfrance.org" target="_blank" rel="noopener" class="underline hover:text-emerald-500">campusfrance.org</a> — Études en France</td></tr>
+            <tr><td>🇬🇧 Anh</td><td>UK ENIC (Ecctis)</td><td><a href="https://www.ecctis.com" target="_blank" rel="noopener" class="underline hover:text-emerald-500">ecctis.com</a> — Statement of Comparability</td></tr>
+            <tr><td>🇦🇺 Úc</td><td>VETASSESS / AEI</td><td><a href="https://www.vetassess.com.au" target="_blank" rel="noopener" class="underline hover:text-emerald-500">vetassess.com.au</a></td></tr>
+            <tr><td>🇨🇦 Canada</td><td>WES Canada / ICAS</td><td><a href="https://www.wes.org/ca" target="_blank" rel="noopener" class="underline hover:text-emerald-500">wes.org/ca</a></td></tr>
+          </tbody>
+        </table>
+      </div>
+    </section>
+
+    <section class="prose">
+      <h2>Mẹo Quan Trọng</h2>
+      <ol class="list-decimal list-inside space-y-2">
+        <li><strong>Yêu cầu bảng điểm tiếng Anh từ trường:</strong> ĐHQG, HUST, HCMUT, NEU đều cấp bản tiếng Anh chính thức (miễn phí/đóng phí nhỏ).</li>
+        <li><strong>In kèm Thông tư 08/2021:</strong> Đính kèm bản dịch Thông tư 08/2021/TT-BGDĐT làm bằng chứng thang điểm quốc gia.</li>
+        <li><strong>Không tự tính GPA cho cơ quan đánh giá:</strong> WES/DAAD/JASSO tự quy đổi theo công thức của họ. Bạn chỉ cung cấp dữ liệu gốc.</li>
+        <li><strong>Kiểm tra Anabin (Đức) TRƯỚC khi nộp:</strong> Nếu trường không có trong danh sách H+ → hồ sơ bị từ chối.</li>
+        <li><strong>Giữ gốc + scan cao chất lượng:</strong> Màu sắc, dấu mộc, chữ ký phải rõ nét cho bản scan.</li>
+      </ol>
+    </section>
+  </main>
+</Layout>

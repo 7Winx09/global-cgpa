@@ -8,6 +8,7 @@ import ConversionTable from '../components/ConversionTable.astro';
 import FaqAccordion from '../components/FaqAccordion.astro';
 import type { University } from '../data/universities';
 import { universities } from '../data/universities';
+import { hasUniversityPage } from '../data/university-pages';
 
 interface Props {
   uni: University;
@@ -17,7 +18,7 @@ interface Props {
 }
 
 const { uni, title, description, intro } = Astro.props;
-const others = universities.filter((u) => u.key !== uni.key);
+const others = universities.filter((u) => u.key !== uni.key && hasUniversityPage(u.key));
 
 const schema = {
   '@context': 'https://schema.org',

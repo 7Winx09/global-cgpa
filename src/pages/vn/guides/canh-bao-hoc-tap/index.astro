@@ -1,0 +1,183 @@
+---
+import Layout from '@/layouts/Layout.astro';
+
+const pageTitle = 'Cảnh Báo Học Tập & Buộc Thôi Học Việt Nam | Ngưỡng GPA Theo Năm & Quy Chế ĐHQG';
+const description = 'Ngưỡng cảnh báo học tập và buộc thôi học (DO) tại ĐHQG TP.HCM, ĐHQG HN, HUST, HCMUT, NEU. GPA < 1.2 (năm 1), < 1.4 (năm 2), < 1.6 (năm 3+). Cách khắc phục và học lại.';
+const canonical = 'https://globalcgpa.in/vn/guides/canh-bao-hoc-tap';
+const ogImage = '/og-image-vn.png';
+const lang = 'vn';
+const alternates = [
+  { hreflang: 'en', href: 'https://globalcgpa.in/guides/academic-warning' },
+  { hreflang: 'vn', href: 'https://globalcgpa.in/vn/guides/canh-bao-hoc-tap' },
+];
+---
+
+<Layout title={pageTitle} description={description} canonical={canonical} ogImage={ogImage} lang={lang} alternates={alternates}>
+  <main class="max-w-[780px] mx-auto px-6 py-14" style="flex:1;">
+    <nav class="crumbs mb-6" aria-label="Breadcrumb">
+      <a href="/vn/">Khoan Tính GPA</a>
+      <span class="sep">/</span>
+      <a href="/vn/guides">Hướng Dẫn</a>
+      <span class="sep">/</span>
+      <span class="current">Cảnh Báo Học Tập</span>
+    </nav>
+
+    <div class="text-xs font-bold uppercase tracking-wider text-red-500 mb-2">Cảnh Báo & Buộc Thôi Học</div>
+    <h1 class="text-3xl sm:text-4xl font-extrabold tracking-tight mb-3">Cảnh Báo Học Tập & Buộc Thôi Học (DO) Tại Việt Nam</h1>
+    <p class="text-slate-500 dark:text-zinc-400 text-base mb-10">
+      Theo Thông tư 08/2021/TT-BGDĐT và quy chế đào tạo các trường ĐHQG, sinh viên có GPA học kỳ thấp sẽ bị cảnh báo, học lại, thậm chí buộc thôi học (DO - Drop Out). Hiểu rõ ngưỡng giúp bạn chủ động phòng tránh.
+    </p>
+
+    <section class="prose mb-12">
+      <h2>Ngưỡng Cảnh Báo Chuẩn Quốc Gia (Theo Năm Học)</h2>
+      <div class="bg-red-50 dark:bg-red-900/20 border border-red-200 dark:border-red-800 rounded-xl p-6 mb-6">
+        <h3 class="font-bold text-red-700 dark:text-red-300 mb-4">⚠️ Ngưỡng GPA Học Kỳ Bị Cảnh Báo</h3>
+        <div class="table-scroll">
+          <table>
+            <thead>
+              <tr>
+                <th>Năm Học</th>
+                <th class="text-center">GPA Kỳ < Ngưỡng</th>
+                <th>Hậu Quả</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr><td class="font-bold">Năm 1 (Khóa)</td><td class="text-center font-mono text-red-600">< 1.20</td><td>Cảnh báo học tập 1</td></tr>
+              <tr><td class="font-bold">Năm 2</td><td class="text-center font-mono text-red-600">< 1.40</td><td>Cảnh báo học tập 1</td></tr>
+              <tr><td class="font-bold">Năm 3 trở lên</td><td class="text-center font-mono text-red-600">< 1.60</td><td>Cảnh báo học tập 1</td></tr>
+            </tbody>
+          </table>
+        </div>
+      </div>
+      <p class="text-sm text-slate-500 dark:text-zinc-400">GPA học kỳ = Σ(TC × Điểm 4.0) ÷ ΣTC của các môn học KỲ ĐÓ (không tính tích lũy).</p>
+    </section>
+
+    <section class="prose mb-12">
+      <h2>Quy Trình Cảnh Báo & Buộc Thôi Học (3 Lần)</h2>
+      <div class="space-y-4">
+        <div class="border-l-4 border-amber-500 pl-4 bg-amber-50 dark:bg-amber-900/20 p-4 rounded-r-xl">
+          <h3 class="font-bold text-amber-700 dark:text-amber-300">Lần 1: Cảnh Báo Học Tập (CB1)</h3>
+          <p>GPA kỳ dưới ngưỡng năm học. Hiệu trưởng ký quyết định cảnh báo. Sinh viên:</p>
+          <ul class="list-disc list-inside mt-2 space-y-1">
+            <li>Bắt buộc gặp cố vấn học tập (Cố vấn hướng dẫn) trong 2 tuần</li>
+            <li>Lập kế hoạch học lại môn yếu, đăng ký TC giảm tải (tối đa 15-18 TC/kỳ)</li>
+            <li>Không được đăng ký học phần tiên quyết của môn chưa qua</li>
+          </ul>
+        </div>
+        <div class="border-l-4 border-orange-500 pl-4 bg-orange-50 dark:bg-orange-900/20 p-4 rounded-r-xl">
+          <h3 class="font-bold text-orange-700 dark:text-orange-300">Lần 2: Cảnh Báo Học Tập (CB2)</h3>
+          <p>Tiếp tục GPA kỳ dưới ngưỡng (lần 2 liên tiếp hoặc không liên tiếp). Hiệu trưởng ký quyết định cảnh báo lần 2. Sinh viên:</p>
+          <ul class="list-disc list-inside mt-2 space-y-1">
+            <li>Bắt buộc học lại tất cả môn F, D+, D của các kỳ trước</li>
+            <li>Giảm tải TC tối đa 12-15 TC/kỳ</li>
+            <li>Phải có cam kết bằng viết của phụ huynh/người bảo chứng</li>
+            <li>Không được tham gia ngoại khóa, hội sinh viên, đoàn thể</li>
+          </ul>
+        </div>
+        <div class="border-l-4 border-red-500 pl-4 bg-red-50 dark:bg-red-900/20 p-4 rounded-r-xl">
+          <h3 class="font-bold text-red-700 dark:text-red-300">Lần 3: Buộc Thôi Học (DO - Drop Out)</h3>
+          <p>GPA kỳ dưới ngưỡng LẦN 3. Hiệu trưởng ký quyết định buộc thôi học. Sinh viên:</p>
+          <ul class="list-disc list-inside mt-2 space-y-1">
+            <li>Mất tư cách sinh viên chính quy</li>
+            <li>Không được tiếp tục học tại trường (trừ xin bảo lưu/nghỉ học có thời hạn)</li>
+            <li>Có thể xét tuyển lại (xét tuyển riêng) sau 1-2 năm tùy quy chế trường</li>
+            <li>Các TC đã đạt có thể công nhận nếu xét tuyển lại (xem quy chế từng trường)</li>
+          </ul>
+        </div>
+      </div>
+    </section>
+
+    <section class="prose mb-12">
+      <h2>Chi Tiết Theo Từng Trường ĐHQG</h2>
+      <div class="table-scroll">
+        <table>
+          <thead>
+            <tr>
+              <th>Trường</th>
+              <th class="text-center">Năm 1</th>
+              <th class="text-center">Năm 2</th>
+              <th class="text-center">Năm 3+</th>
+              <th class="text-center">CB1 → CB2 → DO</th>
+              <th>Đặc Điểm</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr><td><strong>ĐHQG TP.HCM</strong></td><td class="text-center">< 1.2</td><td class="text-center">< 1.4</td><td class="text-center">< 1.6</td><td class="text-center">3 lần</td><td>CB1: giảm 18 TC; CB2: giảm 15 TC + cam kết PK; DO: 3 lần</td></tr>
+            <tr><td><strong>ĐHQG Hà Nội</strong></td><td class="text-center">< 1.2</td><td class="text-center">< 1.4</td><td class="text-center">< 1.6</td><td class="text-center">3 lần</td><td>Trường thành viên (UET, UEB, USSH, UED, ULIS, UMP, HUS) thống nhất</td></tr>
+            <tr><td><strong>HUST</strong></td><td class="text-center">< 1.2</td><td class="text-center">< 1.4</td><td class="text-center">< 1.6</td><td class="text-center">3 lần</td><td>CB1: gặp Cố vấn, kế hoạch; CB2: cam kết PK, giảm TC; DO: 3 lần</td></tr>
+            <tr><td><strong>HCMUT</strong></td><td class="text-center">< 1.2</td><td class="text-center">< 1.4</td><td class="text-center">< 1.6</td><td class="text-center">3 lần</td><td>Hệ tín chỉ; CB1: ≤18 TC; CB2: ≤15 TC; DO: 3 lần liên tiếp/không liên tiếp</td></tr>
+            <tr><td><strong>NEU</strong></td><td class="text-center">< 1.2</td><td class="text-center">< 1.4</td><td class="text-center">< 1.6</td><td class="text-center">3 lần</td><td>Cảnh báo: GPA<1.2/1.4/1.6; DO: 3 lần. Ưu tiên hỗ trợ học lại môn yếu</td></tr>
+          </tbody>
+        </table>
+      </div>
+    </section>
+
+    <section class="prose mb-12">
+      <h2>CPA & Rủi Ro Buộc Thôi Học</h2>
+      <p>Ngoài GPA kỳ, CPA tích lũy cũng quyết định:</p>
+      <div class="bg-slate-50 dark:bg-zinc-900 border border-slate-200 dark:border-zinc-800 rounded-xl p-6">
+        <ul class="list-disc list-inside space-y-2">
+          <li><strong>CPA < 2.0 sau 2 năm học:</strong> Xét buộc thôi học (một số trường)</li>
+          <li><strong>CPA < 1.0 bất kỳ lúc nào:</strong> Xét buộc thôi học ngay (rất hiếm)</li>
+          <li><strong>Quá thời gian tối đa (12 kỳ / 6 năm):</strong> Buộc thôi học nếu chưa tốt nghiệp</li>
+          <li><strong>Tích lũy 3 lần cảnh báo:</strong> Buộc thôi học (DO) — không phân biệt năm học</li>
+        </ul>
+      </div>
+    </section>
+
+    <section class="prose mb-12">
+      <h2>Cách Khắc Phục & Học Lại</h2>
+      <ol class="list-decimal list-inside space-y-3">
+        <li>
+          <strong>Nhận diện sớm:</strong> Sau khi có bảng điểm, dùng <a href="/vn/" class="underline hover:text-emerald-500">Khoan Tính GPA</a> tính GPA kỳ. Nếu < ngưỡng → chủ động liên hệ Cố vấn.
+        </li>
+        <li>
+          <strong>Đăng ký học lại (Retake):</strong> Ưu tiên môn F (0 điểm), sau đó D+, D. Đa số trường lấy điểm CAO HƠN giữa lần cũ và mới. TC chỉ tính 1 lần.
+        </li>
+        <li>
+          <strong>Giảm tải tín chỉ:</strong> Đăng ký 12-15 TC/kỳ thay vì 18-21 TC để tập trung nâng điểm.
+        </li>
+        <li>
+          <strong>Không bỏ qua môn tiên quyết:</strong> Môn F không thể đăng ký môn tiên quyết → chậm tiến độ toàn khóa.
+        </li>
+        <li>
+          <strong>Xin bảo lưu (nếu cần):</strong> Bệnh tật, hoàn cảnh gia đình khó khăn → xin bảo lưu 1-2 kỳ để tránh tính lần cảnh báo.
+        </li>
+      </ol>
+    </section>
+
+    <section class="prose mb-12">
+      <h2>Ví Dụ Minh Họa</h2>
+      <p>Sinh viên năm 1 (ngưỡng 1.2), học 6 môn (18 TC):</p>
+      <div class="table-scroll">
+        <table>
+          <thead><tr><th>Môn</th><th class="text-center">TC</th><th class="text-center">Điểm</th><th class="text-center">4.0</th><th class="text-center">TC×Điểm</th></tr></thead>
+          <tbody>
+            <tr><td>Giải Tích</td><td class="text-center">3</td><td class="text-center">F</td><td class="text-center">0.0</td><td class="text-center">0.0</td></tr>
+            <tr><td>Vật Lý</td><td class="text-center">3</td><td class="text-center">D</td><td class="text-center">1.0</td><td class="text-center">3.0</td></tr>
+            <tr><td>Hóa Học</td><td class="text-center">3</td><td class="text-center">C</td><td class="text-center">2.0</td><td class="text-center">6.0</td></tr>
+            <tr><td>Tin Học</td><td class="text-center">2</td><td class="text-center">B</td><td class="text-center">3.0</td><td class="text-center">6.0</td></tr>
+            <tr><td>Anh Văn</td><td class="text-center">2</td><td class="text-center">C+</td><td class="text-center">2.5</td><td class="text-center">5.0</td></tr>
+            <tr><td>GDTC</td><td class="text-center">2</td><td class="text-center">B+</td><td class="text-center">3.5</td><td class="text-center">7.0</td></tr>
+          </tbody>
+        </table>
+      </div>
+      <p class="font-bold mt-2">GPA = (0+3+6+6+5+7) ÷ 18 = 27 ÷ 18 = <span class="text-red-600">1.50</span> → <strong>KHÔNG bị cảnh báo</strong> (trên 1.2)</p>
+      <p class="mt-2">Nếu Vật Lý cũng F (0 điểm): Tổng = 24 ÷ 18 = <span class="text-red-600">1.33</span> → CẢNH BÁO (dưới 1.2? Không, 1.33 > 1.2. Vẫn an toàn).</p>
+      <p class="mt-2">Nếu Tin Học cũng F: Tổng = 18 ÷ 18 = <span class="text-red-600">1.00</span> → <strong>BỊ CẢNH BÁO LẦN 1</strong> (1.00 < 1.2).</p>
+    </section>
+
+    <section class="prose">
+      <h2>Tóm Tắt Nhanh</h2>
+      <div class="calc-shell p-4 mt-4">
+        <ul class="space-y-2">
+          <li>🔴 <strong>GPA kỳ < 1.2 (năm 1) / < 1.4 (năm 2) / < 1.6 (năm 3+)</strong> = Cảnh báo 1</li>
+          <li>🟠 <strong>Lần 2 dưới ngưỡng</strong> = Cảnh báo 2 + cam kết phụ huynh + giảm TC</li>
+          <li>🔴 <strong>Lần 3 dưới ngưỡng</strong> = Buộc thôi học (DO) — mất tư cách sinh viên</li>
+          <li>🟢 <strong>Giải pháp:</strong> Học lại môn F/D/D+ ngay, giảm tải TC, gặp Cố vấn sớm</li>
+          <li>🔵 <strong>Công cụ:</strong> Dùng <a href="/vn/" class="underline hover:text-emerald-500">Khoan Tính GPA</a> theo dõi sau mỗi kỳ</li>
+        </ul>
+      </div>
+    </section>
+  </main>
+</Layout>

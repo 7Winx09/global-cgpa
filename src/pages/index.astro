@@ -1,5 +1,5 @@
 ---
-import Layout from '../layouts/Layout.astro';
+import Layout from '@/layouts/Layout.astro';
 import SiteHeader from '../components/Nav.astro';
 import SiteFooter from '../components/Footer.astro';
 import MultiToolNav from '../components/MultiToolNav.astro';
@@ -7,8 +7,9 @@ import UniversityQuickToggle from '../components/UniversityQuickToggle.astro';
 import SubjectGradeCalculator from '../components/SubjectGradeCalculator.astro';
 import CalculationHistory from '../components/CalculationHistory.astro';
 import { universities } from '../data/universities';
+import { hasUniversityPage } from '@/data/university-pages';
 
-const howToSchema = {
+  const howToSchema = {
   '@context': 'https://schema.org',
   '@type': 'HowTo',
   'name': 'How to Convert CGPA to Percentage',
@@ -342,7 +343,7 @@ select:focus, input[type="number"]:focus { outline: none; border-color: var(--pr
 <section class="bottom-belt-section" id="universities" style="border-top:none; padding-top:0;">
   <div class="belt-title">University-Specific Calculators</div>
   <div class="belt-grid uni-belt">
-    {universities.map((u) => (
+    {universities.filter((u) => hasUniversityPage(u.key)).map((u) => (
       <a class="belt-card uni-card" href={`/${u.slug}`}>
         <span class="uni-card-name">{u.short}</span>
         <span class="uni-card-formula">{u.formulaLabel}</span>
@@ -672,3 +673,4 @@ function toggleFaq(btn) {
 // ── Theme Toggle ──────────────────────────────────────
 </script>
 </Layout>
+

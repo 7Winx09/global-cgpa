@@ -1,0 +1,183 @@
+---
+import Layout from '@/layouts/Layout.astro';
+
+const pageTitle = 'Bảng Quy Đổi Điểm Số Việt Nam | Thang 10, Thang 4, Điểm Chữ Cho ĐHQG, HUST, HCMUT, NEU';
+const description = 'Bảng quy đổi điểm đầy đủ: thang 10 (0-10) ↔ thang 4.0 ↔ điểm chữ (A-F) cho 5 trường ĐH hàng đầu Việt Nam. Theo Thông tư 08/2021/TT-BGDĐT và quy chế từng trường.';
+const canonical = 'https://globalcgpa.in/vn/guides/quy-doi-diem';
+const ogImage = '/og-image-vn.png';
+const lang = 'vn';
+const alternates = [
+  { hreflang: 'en', href: 'https://globalcgpa.in/guides/grade-conversion' },
+  { hreflang: 'vn', href: 'https://globalcgpa.in/vn/guides/quy-doi-diem' },
+];
+---
+
+<Layout title={pageTitle} description={description} canonical={canonical} ogImage={ogImage} lang={lang} alternates={alternates}>
+  <main class="max-w-[780px] mx-auto px-6 py-14" style="flex:1;">
+    <nav class="crumbs mb-6" aria-label="Breadcrumb">
+      <a href="/vn/">Khoan Tính GPA</a>
+      <span class="sep">/</span>
+      <a href="/vn/guides">Hướng Dẫn</a>
+      <span class="sep">/</span>
+      <span class="current">Bảng Quy Đổi Điểm</span>
+    </nav>
+
+    <div class="text-xs font-bold uppercase tracking-wider text-emerald-500 mb-2">Bảng Tra Cứu</div>
+    <h1 class="text-3xl sm:text-4xl font-extrabold tracking-tight mb-3">Bảng Quy Đổi Điểm Số — Thang 10, 4.0, Điểm Chữ</h1>
+    <p class="text-slate-500 dark:text-zinc-400 text-base mb-10">
+      Tra cứu nhanh điểm số thang 10 tương ứng điểm chữ và điểm 4.0 theo chuẩn Bộ GD&ĐT (Thông tư 08/2021) áp dụng cho ĐHQG TP.HCM, ĐHQG HN, Bách Khoa Hà Nội, Bách Khoa TP.HCM, Kinh tế Quốc dân.
+    </p>
+
+    <section class="prose mb-12">
+      <h2>Bảng Quy Đổi Chuẩn (Thông tư 08/2021/TT-BGDĐT)</h2>
+      <div class="table-scroll">
+        <table>
+          <thead>
+            <tr>
+              <th>Điểm Số (Thang 10)</th>
+              <th class="text-center">Điểm Chữ</th>
+              <th class="text-center">Điểm 4.0</th>
+              <th class="text-center">Mô Tả</th>
+              <th class="text-center">Trạng Thái</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr><td class="font-mono font-bold">9.5 – 10.0</td><td class="text-center"><strong>A+</strong></td><td class="text-center font-mono">4.0</td><td class="text-center">Xuất sắc nhất</td><td class="text-center text-emerald-600 dark:text-emerald-400 font-bold">ĐẠT</td></tr>
+            <tr><td class="font-mono font-bold">8.5 – 9.4</td><td class="text-center"><strong>A</strong></td><td class="text-center font-mono">4.0</td><td class="text-center">Xuất sắc</td><td class="text-center text-emerald-600 dark:text-emerald-400 font-bold">ĐẠT</td></tr>
+            <tr><td class="font-mono font-bold">8.0 – 8.4</td><td class="text-center"><strong>B+</strong></td><td class="text-center font-mono">3.5</td><td class="text-center">Giỏi</td><td class="text-center text-emerald-600 dark:text-emerald-400 font-bold">ĐẠT</td></tr>
+            <tr><td class="font-mono font-bold">7.0 – 7.9</td><td class="text-center"><strong>B</strong></td><td class="text-center font-mono">3.0</td><td class="text-center">Khá</td><td class="text-center text-emerald-600 dark:text-emerald-400 font-bold">ĐẠT</td></tr>
+            <tr><td class="font-mono font-bold">6.5 – 6.9</td><td class="text-center"><strong>C+</strong></td><td class="text-center font-mono">2.5</td><td class="text-center">Trung bình khá</td><td class="text-center text-emerald-600 dark:text-emerald-400 font-bold">ĐẠT</td></tr>
+            <tr><td class="font-mono font-bold">5.5 – 6.4</td><td class="text-center"><strong>C</strong></td><td class="text-center font-mono">2.0</td><td class="text-center">Trung bình (Ngưỡng ĐẠT)</td><td class="text-center text-amber-600 dark:text-amber-400 font-bold">ĐẠT</td></tr>
+            <tr><td class="font-mono font-bold">5.0 – 5.4</td><td class="text-center"><strong>D+</strong></td><td class="text-center font-mono">1.5</td><td class="text-center">Yếu (Điều kiện)</td><td class="text-center text-amber-600 dark:text-amber-400 font-bold">ĐIỀU KIỆN</td></tr>
+            <tr><td class="font-mono font-bold">4.0 – 4.9</td><td class="text-center"><strong>D</strong></td><td class="text-center font-mono">1.0</td><td class="text-center">Yếu (Điều kiện)</td><td class="text-center text-amber-600 dark:text-amber-400 font-bold">ĐIỀU KIỆN</td></tr>
+            <tr><td class="font-mono font-bold">< 4.0</td><td class="text-center"><strong>F</strong></td><td class="text-center font-mono">0.0</td><td class="text-center">Không đạt</td><td class="text-center text-red-600 dark:text-red-400 font-bold">KHÔNG ĐẠT</td></tr>
+          </tbody>
+        </table>
+      </div>
+      <p class="text-sm text-slate-500 dark:text-zinc-400 mt-3">
+        <strong>Lưu ý:</strong> A+ (9.5-10) và A (8.5-9.4) đều quy đổi ra 4.0. Phân biệt A+/A chỉ để ghi nhận mức độ xuất sắc trên bảng điểm, không ảnh hưởng GPA.
+      </p>
+    </section>
+
+    <section class="prose mb-12">
+      <h2>So Sánh Ngưỡng Phân Chia % Theo Từng Trường</h2>
+      <p>Mặc dù cùng dùng thang 4.0, các trường có thể khác nhau ở ngưỡng chia % chi tiết:</p>
+      <div class="table-scroll">
+        <table>
+          <thead>
+            <tr>
+              <th>Điểm Chữ</th>
+              <th class="text-center">Điểm 4.0</th>
+              <th class="text-center">ĐHQG TP.HCM</th>
+              <th class="text-center">ĐHQG Hà Nội</th>
+              <th class="text-center">HUST</th>
+              <th class="text-center">HCMUT</th>
+              <th class="text-center">NEU</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr><td><strong>A+</strong></td><td class="text-center">4.0</td><td class="text-center">9.5-10</td><td class="text-center">9.5-10</td><td class="text-center">9.5-10</td><td class="text-center">9.5-10</td><td class="text-center">9.5-10</td></tr>
+            <tr><td><strong>A</strong></td><td class="text-center">4.0</td><td class="text-center">8.5-9.4</td><td class="text-center">8.5-9.4</td><td class="text-center">8.5-9.4</td><td class="text-center">8.5-9.4</td><td class="text-center">8.5-9.4</td></tr>
+            <tr><td><strong>B+</strong></td><td class="text-center">3.5</td><td class="text-center">8.0-8.4</td><td class="text-center">8.0-8.4</td><td class="text-center">8.0-8.4</td><td class="text-center">8.0-8.4</td><td class="text-center">8.0-8.4</td></tr>
+            <tr><td><strong>B</strong></td><td class="text-center">3.0</td><td class="text-center">7.0-7.9</td><td class="text-center">7.0-7.9</td><td class="text-center">7.0-7.9</td><td class="text-center">7.0-7.9</td><td class="text-center">7.0-7.9</td></tr>
+            <tr><td><strong>C+</strong></td><td class="text-center">2.5</td><td class="text-center">6.5-6.9</td><td class="text-center">6.5-6.9</td><td class="text-center">6.5-6.9</td><td class="text-center">6.5-6.9</td><td class="text-center">6.5-6.9</td></tr>
+            <tr><td><strong>C</strong></td><td class="text-center">2.0</td><td class="text-center">5.5-6.4</td><td class="text-center">5.5-6.4</td><td class="text-center">5.5-6.4</td><td class="text-center">5.5-6.4</td><td class="text-center">5.5-6.4</td></tr>
+            <tr><td><strong>D+</strong></td><td class="text-center">1.5</td><td class="text-center">5.0-5.4</td><td class="text-center">5.0-5.4</td><td class="text-center">5.0-5.4</td><td class="text-center">5.0-5.4</td><td class="text-center">5.0-5.4</td></tr>
+            <tr><td><strong>D</strong></td><td class="text-center">1.0</td><td class="text-center">4.0-4.9</td><td class="text-center">4.0-4.9</td><td class="text-center">4.0-4.9</td><td class="text-center">4.0-4.9</td><td class="text-center">4.0-4.9</td></tr>
+            <tr><td><strong>F</strong></td><td class="text-center">0</td><td class="text-center"><4.0</td><td class="text-center"><4.0</td><td class="text-center"><4.0</td><td class="text-center"><4.0</td><td class="text-center"><4.0</td></tr>
+          </tbody>
+        </table>
+      </div>
+      <p class="mt-3 text-sm text-slate-500 dark:text-zinc-400">5 trường lớn này thống nhất ngưỡng theo Thông tư 08. Các trường khác (ĐH Sư phạm, ĐH Y, ĐH Ngoại ngữ...) cũng tham chiếu chuẩn này.</p>
+    </section>
+
+    <section class="prose mb-12">
+      <h2>Tra Cứu Nhanh: Điểm Số → Điểm Chữ → Điểm 4.0</h2>
+      <div class="table-scroll">
+        <table>
+          <thead>
+            <tr>
+              <th>Điểm 10</th><th>Điểm Chữ</th><th>Điểm 4.0</th>
+              <th>Điểm 10</th><th>Điểm Chữ</th><th>Điểm 4.0</th>
+              <th>Điểm 10</th><th>Điểm Chữ</th><th>Điểm 4.0</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr><td class="font-mono">10.0</td><td class="text-center">A+</td><td class="text-center font-mono">4.0</td><td class="font-mono">7.5</td><td class="text-center">B</td><td class="text-center font-mono">3.0</td><td class="font-mono">5.0</td><td class="text-center">D+</td><td class="text-center font-mono">1.5</td></tr>
+            <tr><td class="font-mono">9.8</td><td class="text-center">A+</td><td class="text-center font-mono">4.0</td><td class="font-mono">7.3</td><td class="text-center">B</td><td class="text-center font-mono">3.0</td><td class="font-mono">4.8</td><td class="text-center">D</td><td class="text-center font-mono">1.0</td></tr>
+            <tr><td class="font-mono">9.5</td><td class="text-center">A+</td><td class="text-center font-mono">4.0</td><td class="font-mono">7.0</td><td class="text-center">B</td><td class="text-center font-mono">3.0</td><td class="font-mono">4.5</td><td class="text-center">D</td><td class="text-center font-mono">1.0</td></tr>
+            <tr><td class="font-mono">9.2</td><td class="text-center">A</td><td class="text-center font-mono">4.0</td><td class="font-mono">6.8</td><td class="text-center">C+</td><td class="text-center font-mono">2.5</td><td class="font-mono">4.0</td><td class="text-center">D</td><td class="text-center font-mono">1.0</td></tr>
+            <tr><td class="font-mono">9.0</td><td class="text-center">A</td><td class="text-center font-mono">4.0</td><td class="font-mono">6.5</td><td class="text-center">C+</td><td class="text-center font-mono">2.5</td><td class="font-mono">3.5</td><td class="text-center">F</td><td class="text-center font-mono">0.0</td></tr>
+            <tr><td class="font-mono">8.7</td><td class="text-center">A</td><td class="text-center font-mono">4.0</td><td class="font-mono">6.2</td><td class="text-center">C</td><td class="text-center font-mono">2.0</td><td class="font-mono">3.0</td><td class="text-center">F</td><td class="text-center font-mono">0.0</td></tr>
+            <tr><td class="font-mono">8.5</td><td class="text-center">A</td><td class="text-center font-mono">4.0</td><td class="font-mono">6.0</td><td class="text-center">C</td><td class="text-center font-mono">2.0</td><td class="font-mono">2.0</td><td class="text-center">F</td><td class="text-center font-mono">0.0</td></tr>
+            <tr><td class="font-mono">8.2</td><td class="text-center">B+</td><td class="text-center font-mono">3.5</td><td class="font-mono">5.8</td><td class="text-center">C</td><td class="text-center font-mono">2.0</td><td class="font-mono">1.0</td><td class="text-center">F</td><td class="text-center font-mono">0.0</td></tr>
+            <tr><td class="font-mono">8.0</td><td class="text-center">B+</td><td class="text-center font-mono">3.5</td><td class="font-mono">5.5</td><td class="text-center">C</td><td class="text-center font-mono">2.0</td><td class="font-mono">0.0</td><td class="text-center">F</td><td class="text-center font-mono">0.0</td></tr>
+          </tbody>
+        </table>
+      </div>
+    </section>
+
+    <section class="prose mb-12">
+      <h2>Quy Đổi Ngược: Điểm 4.0 → Điểm 10 (Ước Tính)</h2>
+      <p>Dùng khi cần báo cáo điểm cho đơn xin việc/du học yêu cầu thang 10:</p>
+      <div class="formula-block mb-4">
+        <div class="f-label">Công Thức Ước Tính</div>
+        <div class="f-text">Điểm 10 ≈ (Điểm 4.0 ÷ 4.0) × 10</div>
+        <div class="f-example">GPA 3.75/4.0 ≈ 9.38/10 | CPA 3.2/4.0 ≈ 8.0/10</div>
+      </div>
+      <div class="table-scroll">
+        <table>
+          <thead>
+            <tr><th>Điểm 4.0</th><th>Ước Tính Thang 10</th><th>Khoảng Tham Chiếu</th></tr>
+          </thead>
+          <tbody>
+            <tr><td class="text-center font-mono">4.00</td><td class="text-center">9.75</td><td class="text-center">9.5 – 10.0</td></tr>
+            <tr><td class="text-center font-mono">3.75</td><td class="text-center">9.12</td><td class="text-center">8.5 – 9.4</td></tr>
+            <tr><td class="text-center font-mono">3.50</td><td class="text-center">8.25</td><td class="text-center">8.0 – 8.4</td></tr>
+            <tr><td class="text-center font-mono">3.25</td><td class="text-center">7.87</td><td class="text-center">7.5 – 7.9</td></tr>
+            <tr><td class="text-center font-mono">3.00</td><td class="text-center">7.25</td><td class="text-center">7.0 – 7.4</td></tr>
+            <tr><td class="text-center font-mono">2.75</td><td class="text-center">6.87</td><td class="text-center">6.5 – 6.9</td></tr>
+            <tr><td class="text-center font-mono">2.50</td><td class="text-center">6.25</td><td class="text-center">6.0 – 6.4</td></tr>
+            <tr><td class="text-center font-mono">2.25</td><td class="text-center">5.75</td><td class="text-center">5.5 – 5.9</td></tr>
+            <tr><td class="text-center font-mono">2.00</td><td class="text-center">5.25</td><td class="text-center">5.0 – 5.4</td></tr>
+            <tr><td class="text-center font-mono">1.50</td><td class="text-center">4.75</td><td class="text-center">4.5 – 4.9</td></tr>
+            <tr><td class="text-center font-mono">1.00</td><td class="text-center">4.25</td><td class="text-center">4.0 – 4.4</td></tr>
+          </tbody>
+        </table>
+      </div>
+      <p class="mt-3 text-sm text-slate-500 dark:text-zinc-400"><em>Ước tính tham khảo. Quy đổi chính thức cần dùng bảng điểm gốc thang 10 của từng môn học.</em></p>
+    </section>
+
+    <section class="prose mb-12">
+      <h2>Quy Đổi Sang Hệ Thống Khác (Tham Khảo)</h2>
+      <div class="table-scroll">
+        <table>
+          <thead>
+            <tr><th>Hệ Thống</th><th>Xuất Sắc (3.6+)</th><th>Giỏi (3.2-3.59)</th><th>Khá (2.5-3.19)</th><th>TB (2.0-2.49)</th></tr>
+          </thead>
+          <tbody>
+            <tr><td><strong>GPA 4.0 (US)</strong></td><td class="text-center">3.6 – 4.0</td><td class="text-center">3.2 – 3.6</td><td class="text-center">2.5 – 3.2</td><td class="text-center">2.0 – 2.5</td></tr>
+            <tr><td><strong>GPA 4.3 (Hàn)</strong></td><td class="text-center">3.87 – 4.3</td><td class="text-center">3.44 – 3.87</td><td class="text-center">2.69 – 3.44</td><td class="text-center">2.15 – 2.69</td></tr>
+            <tr><td><strong>GPA 4.5 (Hàn/KR)</strong></td><td class="text-center">4.05 – 4.5</td><td class="text-center">3.6 – 4.05</td><td class="text-center">2.81 – 3.6</td><td class="text-center">2.25 – 2.81</td></tr>
+            <tr><td><strong>1-6 (Đức)</strong></td><td class="text-center">1.0 – 1.5</td><td class="text-center">1.6 – 2.5</td><td class="text-center">2.6 – 3.5</td><td class="text-center">3.6 – 4.0</td></tr>
+            <tr><td><strong>0-20 (Pháp)</strong></td><td class="text-center">16 – 20</td><td class="text-center">14 – 16</td><td class="text-center">12 – 14</td><td class="text-center">10 – 12</td></tr>
+            <tr><td><strong>First Class (UK)</strong></td><td class="text-center">≥ 70%</td><td class="text-center">60-69% (2:1)</td><td class="text-center">50-59% (2:2)</td><td class="text-center">40-49% (3rd)</td></tr>
+          </tbody>
+        </table>
+      </div>
+      <p class="mt-3 text-sm text-slate-500 dark:text-zinc-400"><em>Xem chi tiết: <a href="/vn/guides/cong-nhan-quoc-te" class="underline hover:text-emerald-500">Hướng dẫn công nhận quốc tế</a></em></p>
+    </section>
+
+    <section class="prose">
+      <h2>Công Cụ Hỗ Trợ</h2>
+      <ul class="list-disc list-inside space-y-2">
+        <li><a href="/vn/" class="underline hover:text-emerald-500">Khoan Tính GPA Việt Nam</a> — Nhập điểm chữ/điểm số, tự động quy đổi và tính GPA/CPA</li>
+        <li><a href="/vn/dai-hoc-quoc-gia-tp-hcm-gpa" class="underline hover:text-emerald-500">Trang riêng ĐHQG TP.HCM</a></li>
+        <li><a href="/vn/dai-hoc-quoc-gia-ha-noi-gpa" class="underline hover:text-emerald-500">Trang riêng ĐHQG Hà Nội</a></li>
+        <li><a href="/vn/dai-hoc-bach-khoa-ha-noi-gpa" class="underline hover:text-emerald-500">Trang riêng HUST</a></li>
+        <li><a href="/vn/dai-hoc-bach-khoa-tp-hcm-gpa" class="underline hover:text-emerald-500">Trang riêng HCMUT</a></li>
+        <li><a href="/vn/dai-hoc-kinh-te-quoc-dan-gpa" class="underline hover:text-emerald-500">Trang riêng NEU</a></li>
+      </ul>
+    </section>
+  </main>
+</Layout>

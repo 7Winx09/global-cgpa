@@ -1,0 +1,181 @@
+---
+import Layout from '@/layouts/Layout.astro';
+
+const pageTitle = 'تحويل الدرجات بين الأنظمة العربية | جداول 4.0 ↔ 5.0 ↔ 20.0 ↔ نسبة مئوية';
+const description = 'جداول تحويل شاملة بين أنظمة التقدير العربية: الأمريكي 4.0، الخليجي 5.0، الفرنسي 20.0، المئوي المصري. صيغ رياضية وأمثلة عملية.';
+const canonical = 'https://globalcgpa.in/ar/guides/grading-conversion';
+const ogImage = '/og-image-ar.png';
+const lang = 'ar';
+const alternates = [
+  { hreflang: 'en', href: 'https://globalcgpa.in/guides/grade-conversion' },
+  { hreflang: 'ar', href: 'https://globalcgpa.in/ar/guides/grading-conversion' },
+];
+---
+
+<Layout title={pageTitle} description={description} canonical={canonical} ogImage={ogImage} lang={lang} alternates={alternates}>
+  <main class="max-w-[780px] mx-auto px-6 py-14" style="flex:1;">
+    <nav class="crumbs mb-6" aria-label="Breadcrumb">
+      <a href="/ar/">حاسبة GPA العربية</a>
+      <span class="sep">/</span>
+      <a href="/ar/guides">الأدلة</a>
+      <span class="sep">/</span>
+      <span class="current">تحويل الدرجات</span>
+    </nav>
+
+    <div class="text-xs font-bold uppercase tracking-wider text-emerald-500 mb-2">جداول التحويل</div>
+    <h1 class="text-3xl sm:text-4xl font-extrabold tracking-tight mb-3">تحويل الدرجات بين الأنظمة العربية</h1>
+    <p class="text-slate-500 dark:text-zinc-400 text-base mb-10">
+      جداول تحويل دقيقة بين الأنظمة الأربعة الرئيسية في الجامعات العربية. الصيغ الرياضية وأمثلة عملية لكل تحويل.
+    </p>
+
+    <section class="prose mb-12">
+      <h2>الصيغ الرياضية للتحويل</h2>
+      <div class="space-y-4">
+        <div class="formula-block">
+          <div class="f-label">5.0 خليجي → 4.0 أمريكي</div>
+          <div class="f-text">GPA₄ = GPA₅ × (4.0 ÷ 5.0) = GPA₅ × 0.8</div>
+          <div class="f-example">مثال: 4.5/5.0 × 0.8 = 3.6/4.0 | 3.75/5.0 × 0.8 = 3.0/4.0</div>
+        </div>
+        <div class="formula-block">
+          <div class="f-label">4.0 أمريكي → 5.0 خليجي</div>
+          <div class="f-text">GPA₅ = GPA₄ × (5.0 ÷ 4.0) = GPA₄ × 1.25</div>
+          <div class="f-example">مثال: 3.6/4.0 × 1.25 = 4.5/5.0 | 3.0/4.0 × 1.25 = 3.75/5.0</div>
+        </div>
+        <div class="formula-block">
+          <div class="f-label">20.0 فرنسي → 4.0 أمريكي</div>
+          <div class="f-text">GPA₄ = المعدل₂₀ × (4.0 ÷ 20) = المعدل₂₀ × 0.2</div>
+          <div class="f-example">مثال: 16/20 × 0.2 = 3.2/4.0 | 14/20 × 0.2 = 2.8/4.0</div>
+        </div>
+        <div class="formula-block">
+          <div class="f-label">20.0 فرنسي → 5.0 خليجي</div>
+          <div class="f-text">GPA₅ = المعدل₂₀ × (5.0 ÷ 20) = المعدل₂₀ × 0.25</div>
+          <div class="f-example">مثال: 16/20 × 0.25 = 4.0/5.0 | 14/20 × 0.25 = 3.5/5.0</div>
+        </div>
+        <div class="formula-block">
+          <div class="f-label">نسبة مئوية → 4.0 أمريكي</div>
+          <div class="f-text">GPA₄ = (النسبة ÷ 100) × 4.0</div>
+          <div class="f-example">مثال: 85% × 0.04 = 3.4/4.0 | 75% × 0.04 = 3.0/4.0</div>
+        </div>
+      </div>
+    </section>
+
+    <section class="prose mb-12">
+      <h2>جدول تحويل شامل: المعدل التراكمي</h2>
+      <div class="table-scroll">
+        <table>
+          <thead>
+            <tr>
+              <th>الأداء</th>
+              <th class="text-center">4.0 أمريكي</th>
+              <th class="text-center">5.0 خليجي</th>
+              <th class="text-center">20.0 فرنسي</th>
+              <th class="text-center">100% نسبة</th>
+              <th class="text-center">التقدير الحرفي (4.0)</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr class="bg-emerald-50 dark:bg-emerald-900/20"><td><strong>ممتاز / امتياز</strong></td><td class="text-center">4.00</td><td class="text-center">5.00</td><td class="text-center">20.0</td><td class="text-center">100%</td><td class="text-center">A+</td></tr>
+            <tr class="bg-emerald-50 dark:bg-emerald-900/20"><td></td><td class="text-center">3.90</td><td class="text-center">4.88</td><td class="text-center">19.5</td><td class="text-center">97.5%</td><td class="text-center">A+</td></tr>
+            <tr class="bg-emerald-50 dark:bg-emerald-900/20"><td></td><td class="text-center">3.80</td><td class="text-center">4.75</td><td class="text-center">19.0</td><td class="text-center">95%</td><td class="text-center">A</td></tr>
+            <tr class="bg-emerald-50 dark:bg-emerald-900/20"><td></td><td class="text-center">3.70</td><td class="text-center">4.63</td><td class="text-center">18.5</td><td class="text-center">92.5%</td><td class="text-center">A-</td></tr>
+            <tr class="bg-blue-50 dark:bg-blue-900/20"><td><strong>جيد جداً</strong></td><td class="text-center">3.60</td><td class="text-center">4.50</td><td class="text-center">18.0</td><td class="text-center">90%</td><td class="text-center">A-</td></tr>
+            <tr class="bg-blue-50 dark:bg-blue-900/20"><td></td><td class="text-center">3.50</td><td class="text-center">4.38</td><td class="text-center">17.5</td><td class="text-center">87.5%</td><td class="text-center">B+</td></tr>
+            <tr class="bg-blue-50 dark:bg-blue-900/20"><td></td><td class="text-center">3.40</td><td class="text-center">4.25</td><td class="text-center">17.0</td><td class="text-center">85%</td><td class="text-center">B+</td></tr>
+            <tr class="bg-blue-50 dark:bg-blue-900/20"><td></td><td class="text-center">3.30</td><td class="text-center">4.13</td><td class="text-center">16.5</td><td class="text-center">82.5%</td><td class="text-center">B+</td></tr>
+            <tr class="bg-blue-50 dark:bg-blue-900/20"><td></td><td class="text-center">3.20</td><td class="text-center">4.00</td><td class="text-center">16.0</td><td class="text-center">80%</td><td class="text-center">B</td></tr>
+            <tr class="bg-blue-50 dark:bg-blue-900/20"><td></td><td class="text-center">3.10</td><td class="text-center">3.88</td><td class="text-center">15.5</td><td class="text-center">77.5%</td><td class="text-center">B</td></tr>
+            <tr class="bg-blue-50 dark:bg-blue-900/20"><td></td><td class="text-center">3.00</td><td class="text-center">3.75</td><td class="text-center">15.0</td><td class="text-center">75%</td><td class="text-center">B</td></tr>
+            <tr class="bg-amber-50 dark:bg-amber-900/20"><td><strong>جيد / متوسط</strong></td><td class="text-center">2.90</td><td class="text-center">3.63</td><td class="text-center">14.5</td><td class="text-center">72.5%</td><td class="text-center">B-</td></tr>
+            <tr class="bg-amber-50 dark:bg-amber-900/20"><td></td><td class="text-center">2.80</td><td class="text-center">3.50</td><td class="text-center">14.0</td><td class="text-center">70%</td><td class="text-center">B-</td></tr>
+            <tr class="bg-amber-50 dark:bg-amber-900/20"><td></td><td class="text-center">2.70</td><td class="text-center">3.38</td><td class="text-center">13.5</td><td class="text-center">67.5%</td><td class="text-center">C+</td></tr>
+            <tr class="bg-amber-50 dark:bg-amber-900/20"><td></td><td class="text-center">2.60</td><td class="text-center">3.25</td><td class="text-center">13.0</td><td class="text-center">65%</td><td class="text-center">C+</td></tr>
+            <tr class="bg-amber-50 dark:bg-amber-900/20"><td></td><td class="text-center">2.50</td><td class="text-center">3.13</td><td class="text-center">12.5</td><td class="text-center">62.5%</td><td class="text-center">C</td></tr>
+            <tr class="bg-amber-50 dark:bg-amber-900/20"><td></td><td class="text-center">2.40</td><td class="text-center">3.00</td><td class="text-center">12.0</td><td class="text-center">60%</td><td class="text-center">C</td></tr>
+            <tr class="bg-red-50 dark:bg-red-900/20"><td><strong>حد النجاح</strong></td><td class="text-center">2.30</td><td class="text-center">2.88</td><td class="text-center">11.5</td><td class="text-center">57.5%</td><td class="text-center">C-</td></tr>
+            <tr class="bg-red-50 dark:bg-red-900/20"><td></td><td class="text-center">2.20</td><td class="text-center">2.75</td><td class="text-center">11.0</td><td class="text-center">55%</td><td class="text-center">C-</td></tr>
+            <tr class="bg-red-50 dark:bg-red-900/20"><td></td><td class="text-center">2.10</td><td class="text-center">2.63</td><td class="text-center">10.5</td><td class="text-center">52.5%</td><td class="text-center">D</td></tr>
+            <tr class="bg-red-50 dark:bg-red-900/20"><td><strong>النجاح الأدنى</strong></td><td class="text-center">2.00</td><td class="text-center">2.50</td><td class="text-center">10.0</td><td class="text-center">50%</td><td class="text-center">D</td></tr>
+          </tbody>
+        </table>
+      </div>
+    </section>
+
+    <section class="prose mb-12">
+      <h2>تحويل التقديرات الحرفية (مادة بمادة)</h2>
+      <p>عند تحويل كشف درجات مادة بمادة (للمعادلات أو التحويل):</p>
+      <div class="table-scroll">
+        <table>
+          <thead>
+            <tr>
+              <th>4.0 أمريكي</th>
+              <th class="text-center">5.0 خليجي</th>
+              <th class="text-center">20.0 فرنسي</th>
+              <th class="text-center">100% مصري</th>
+              <th class="text-center">النسبة %</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr><td>A+</td><td class="text-center">أ+</td><td class="text-center">أ (18-20)</td><td class="text-center">أ (95-100)</td><td class="text-center">95-100%</td></tr>
+            <tr><td>A</td><td class="text-center">أ</td><td class="text-center">أ (18-20)</td><td class="text-center">أ (90-94)</td><td class="text-center">90-94%</td></tr>
+            <tr><td>A-</td><td class="text-center">—</td><td class="text-center">ب (16-17)</td><td class="text-center">—</td><td class="text-center">85-89%</td></tr>
+            <tr><td>B+</td><td class="text-center">ب+</td><td class="text-center">ب (16-17)</td><td class="text-center">ب+ (85-89)</td><td class="text-center">80-84%</td></tr>
+            <tr><td>B</td><td class="text-center">ب</td><td class="text-center">ب (16-17)</td><td class="text-center">ب (80-84)</td><td class="text-center">75-79%</td></tr>
+            <tr><td>B-</td><td class="text-center">—</td><td class="text-center">ج (14-15)</td><td class="text-center">—</td><td class="text-center">70-74%</td></tr>
+            <tr><td>C+</td><td class="text-center">ج+</td><td class="text-center">ج (14-15)</td><td class="text-center">ج+ (75-79)</td><td class="text-center">65-69%</td></tr>
+            <tr><td>C</td><td class="text-center">ج</td><td class="text-center">ج (14-15)</td><td class="text-center">ج (70-74)</td><td class="text-center">60-64%</td></tr>
+            <tr><td>C-</td><td class="text-center">—</td><td class="text-center">د (12-13)</td><td class="text-center">—</td><td class="text-center">55-59%</td></tr>
+            <tr><td>D</td><td class="text-center">د+</td><td class="text-center">د (12-13)</td><td class="text-center">د (60-64)</td><td class="text-center">50-54%</td></tr>
+            <tr><td>F</td><td class="text-center">ر</td><td class="text-center">و (0-9)</td><td class="text-center">ر (0-39)</td><td class="text-center">0-49%</td></tr>
+          </tbody>
+        </table>
+      </div>
+    </section>
+
+    <section class="prose mb-12">
+      <h2>أمثلة عملية</h2>
+      <div class="space-y-6">
+        <div class="bg-slate-50 dark:bg-zinc-900 border border-slate-200 dark:border-zinc-800 rounded-xl p-6">
+          <h3 class="font-bold mb-3">مثال 1: طالب جامعة الملك سعود (5.0) يتقدم لـ AUC (4.0)</h3>
+          <p>المعدل التراكمي: 4.2/5.0</p>
+          <p class="font-mono text-lg">التحويل: 4.2 × 0.8 = <strong>3.36/4.0</strong></p>
+          <p class="text-sm text-slate-500 mt-2">النتيجة: جيد جداً (B+ range) — مقبول للدراسات العليا في AUC</p>
+        </div>
+        <div class="bg-slate-50 dark:bg-zinc-900 border border-slate-200 dark:border-zinc-800 rounded-xl p-6">
+          <h3 class="font-bold mb-3">مثال 2: طالب USJ (20.0) يتقدم لجامعة ألمانية (DAAD)</h3>
+          <p>المعدل: 15.5/20</p>
+          <p class="font-mono text-lg">للنظام الألماني (Bavarian Formula): Nmax=20, Nmin=10, Nd=15.5 → 1 + 3×(20-15.5)/(20-10) = <strong>2.35</strong></p>
+          <p class="font-mono text-lg">للمقارنة بـ 4.0: 15.5 × 0.2 = <strong>3.1/4.0</strong></p>
+          <p class="text-sm text-sale-500 mt-2">DAAD يستخدم Modified Bavarian Formula، ليس التحويل الخطي البسيط</p>
+        </div>
+        <div class="bg-slate-50 dark:bg-zinc-900 border border-slate-200 dark:border-zinc-800 rounded-xl p-6">
+          <h3 class="font-bold mb-3">مثال 3: طالب جامعة القاهرة (100%) يريد معرفة GPA 4.0</h3>
+          <p>المعدل المئوي: 78%</p>
+          <p class="font-mono text-lg">التحويل الخطي: 78 × 0.04 = <strong>3.12/4.0</strong></p>
+          <p class="font-mono text-lg">التحويل عبر الجدول الرسمي: 78% = ب = <strong>3.0/4.0</strong></p>
+          <p class="text-sm text-slate-500 mt-2">الفرق بسيط (0.12) — الجدول الرسمي أدق لأن الفئات غير خطية</p>
+        </div>
+      </div>
+    </section>
+
+    <section class="prose mb-12">
+      <h2>حاسبات تحويل سريعة (أونلاين)</h2>
+      <ul class="list-disc list-inside space-y-2">
+        <li><a href="/ar/" class="underline hover:text-emerald-500">حاسبة GPA العربية الرئيسية</a> — اختر النظام وادخل الدرجات</li>
+        <li><a href="/ar/american-university-cairo-gpa" class="underline hover:text-emerald-500">AUC GPA Calculator</a> — نظام 4.0 أمريكي</li>
+        <li><a href="/ar/king-saud-university-gpa" class="underline hover:text-emerald-500">KSU GPA Calculator</a> — نظام 5.0 خليجي</li>
+        <li><a href="/ar/saint-joseph-university-gpa" class="underline hover:text-emerald-500">USJ Moyenne Calculator</a> — نظام 20.0 فرنسي</li>
+      </ul>
+    </section>
+
+    <section class="prose">
+      <h2>تحذيرات مهمة</h2>
+      <ul class="list-disc list-inside space-y-2">
+        <li>⚠️ <strong>التحويل الخطي تقريبي:</strong> الفئات غير موزعة بالتساوي. استخدم الجداول الرسمية لكل جامعة.</li>
+        <li>⚠️ <strong>WES/DAAD/Campus France:</strong> لديهم صيغهم الخاصة (مثل Modified Bavarian Formula لألمانيا). لا تحسب بنفسك — قدم الكشوف الأصلية.</li>
+        <li>⚠️ <strong>الجامعة الأردنية (11 درجة):</strong> أ+ = 4.0، أ = 3.75... التحويل يختلف عن 4.0 القياسي.</li>
+        <li>⚠️ <strong>KAUST/KFUPM:</strong> تستخدمان 4.0 أمريكي رغم وجودهما في السعودية.</li>
+        <li>⚠️ <strong>للعمل/الهجرة:</strong> جهات التقييم (WES, IQAS, Ecctis) تطلب الكشوف الأصلية + ترجمة معتمدة وتطبق معاييرها.</li>
+      </ul>
+    </section>
+  </main>
+</Layout>

@@ -1,6 +1,6 @@
 ---
-import Layout from '../../../layouts/Layout.astro';
-import { getUniversityByKey } from '../../../data/universities-global';
+import Layout from '@/layouts/Layout.astro';
+import { getUniversityByKey } from '@/data/universities-global';
 
 const univ = getUniversityByKey('tr-metun')!;
 const pageTitle = `${univ.name} GANO | ${univ.system} Ölçek`;

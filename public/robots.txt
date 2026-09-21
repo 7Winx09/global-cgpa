@@ -1,4 +1,20 @@
+# GlobalCGPA Robots.txt
+# Allow all crawlers access to the site
 User-agent: *
 Allow: /
 
-Sitemap: https://globalcgpa.in/sitemap.xml
+# Disallow utility and admin paths
+Disallow: /404
+Disallow: /500
+Disallow: /_astro/
+Disallow: /api/
+
+# Crawl-delay for respectful crawling (adjust based on server capacity)
+Crawl-delay: 10
+
+# Sitemap location
+Sitemap: https://globalcgpa.in/sitemap-index.xml
+Sitemap: https://globalcgpa.in/sitemap-0.xml
+
+# Host directive for preferred domain
+Host: https://globalcgpa.in

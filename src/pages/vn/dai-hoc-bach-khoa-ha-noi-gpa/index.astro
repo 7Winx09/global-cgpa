@@ -1,0 +1,215 @@
+---
+import Layout from '@/layouts/Layout.astro';
+import { getUniversityByKey } from '@/data/universities-global';
+
+const univ = getUniversityByKey('vn-hust')!;
+const pageTitle = `${univ.name} GPA Khoan Tính | ${univ.system} Chuẩn Bộ GD&ĐT`;
+const description = `${univ.name} (HUST) GPA Khoan Tính. ${univ.system} thang điểm chuẩn Bộ GD&ĐT. Nhập điểm chữ và tín chỉ để tính GPA/CPA chính xác theo Quy chế đào tạo HUST 2025.`;
+const canonical = `https://globalcgpa.in/vn/${univ.slug}`;
+const ogImage = '/og-image-vn.png';
+const lang = 'vn';
+const alternates = [
+  { hreflang: 'en', href: 'https://globalcgpa.in/university/vietnam' },
+  { hreflang: 'vn', href: `https://globalcgpa.in/vn/${univ.slug}` },
+];
+---
+
+<Layout title={pageTitle} description={description} canonical={canonical} ogImage={ogImage} lang={lang} alternates={alternates}>
+  <main class="max-w-[780px] mx-auto px-6 py-14" style="flex:1;">
+    <nav class="crumbs mb-6" aria-label="Breadcrumb">
+      <a href="/vn/">Khoan Tính GPA</a>
+      <span class="sep">/</span>
+      <a href="/vn/universities">Các Trường ĐH</a>
+      <span class="sep">/</span>
+      <span class="current">{univ.name}</span>
+    </nav>
+
+    <div class="text-xs font-bold uppercase tracking-wider text-emerald-500 mb-2">{univ.name} ({univ.nameEn})</div>
+    <h1 class="text-3xl sm:text-4xl font-extrabold tracking-tight mb-3">{univ.name} GPA Khoan Tính</h1>
+    <p class="text-slate-500 dark:text-zinc-400 text-base mb-8">
+      {univ.name} chính thức {univ.system} thang điểm chuẩn Bộ GD&ĐT. Nhập điểm chữ và tín chỉ mỗi môn để tính GPA học kỳ / CPA tích lũy chính xác.
+    </p>
+
+    <div class="calc-shell space-y-6" id="univ-gpa-calculator">
+      <div class="flex items-center gap-3">
+        <span class="px-3 py-1 bg-emerald-100 dark:bg-emerald-900/30 text-emerald-700 dark:text-emerald-300 text-xs font-bold rounded-full">
+          {univ.system}
+        </span>
+        <span class="text-sm text-slate-500 dark:text-zinc-400">Điểm: A+, A, B+, B, C+, C, D+, D, F</span>
+      </div>
+
+      <div class="grid gap-4 sm:grid-cols-2">
+        <div>
+          <label class="calc-label" for="course-count">Số Môn Học</label>
+          <input type="number" id="course-count" class="calc-input" min="1" max="30" value="6" aria-label="Số môn học" />
+        </div>
+        <div>
+          <label class="calc-label" for="semester">Học Kỳ (Tùy Chọn)</label>
+          <select id="semester" class="calc-select" aria-label="Học kỳ">
+            <option value="">Tất Cả (CPA)</option>
+            <option value="1">Học Kỳ 1 (GPA)</option>
+            <option value="2">Học Kỳ 2 (GPA)</option>
+            <option value="3">Học Kỳ 3 (GPA)</option>
+            <option value="4">Học Kỳ 4 (GPA)</option>
+          </select>
+        </div>
+      </div>
+
+      <div id="courses" class="space-y-3" role="list" aria-label="Danh sách môn học"></div>
+
+      <button type="button" class="w-full sm:w-auto px-6 py-3 bg-emerald-500 hover:bg-emerald-600 text-slate-900 font-bold text-sm rounded-xl transition-colors" id="calculate-btn">
+        Tính GPA / CPA
+      </button>
+
+      <div class="calc-output" aria-live="polite" aria-label="Kết quả tính toán">
+        <div class="calc-out-val" id="result">0.00</div>
+        <div class="calc-out-lbl">Điểm Trung Bình (GPA / CPA)</div>
+        <div class="calc-out-lbl" style="margin-top:8px; font-size:0.68rem;" id="detail">Tổng Tín Chỉ: 0 | Tổng Điểm: 0.00</div>
+      </div>
+
+      <div class="formula-block">
+        <div class="f-label">Công Thức Tính Toán</div>
+        <div class="f-text">GPA = Σ(Tín chỉ × Điểm quy đổi) ÷ ΣTín chỉ</div>
+        <div class="f-example" id="formula-example">Ví dụ: 3 TC A(4.0) + 3 TC B+(3.5) = (12+10.5)÷6 = 3.75</div>
+      </div>
+    </div>
+
+    <section class="mt-12" aria-labelledby="regulation-heading">
+      <h2 id="regulation-heading" class="text-2xl font-extrabold tracking-tight mb-6">Quy Chế Resmi</h2>
+      <div class="prose">
+        <h3>Bảng Điểm ({univ.system})</h3>
+        <div class="table-scroll">
+          <table>
+            <thead>
+              <tr>
+                <th>Điểm Chữ</th>
+                <th class="text-center">Điểm 4.0</th>
+                <th class="text-center">Thang 10 (%)</th>
+              </tr>
+            </thead>
+            <tbody>
+              {Object.entries(univ.gradeMapping).map(([grade, point]) => (
+                <tr>
+                  <td><strong>{grade}</strong></td>
+                  <td class="text-center font-mono">{point.toFixed(1)}</td>
+                  <td class="text-center">
+                    {univ.percentageMapping && univ.percentageMapping[grade]
+                      ? `${univ.percentageMapping[grade][0]}~${univ.percentageMapping[grade][1]}%`
+                      : '—'}
+                  </td>
+                </tr>
+              ))}
+            </tbody>
+          </table>
+        </div>
+
+        <h3 class="mt-6">Quy Định Học Tập Quan Trọng</h3>
+        <ul>
+          <li><strong>GPA / CPA:</strong> Σ(TC × Điểm quy đổi) ÷ ΣTC (môn F tính 0 điểm, môn trượt tính vào CPA)</li>
+          <li><strong>Tốt Nghiệp:</strong> CPA ≥ 2.0, hoàn thành CTĐT, không nợ môn, tổng TC ≥ yêu cầu chương trình</li>
+          <li><strong>Xếp Loại:</strong> Xuất sắc ≥ 3.6 | Giỏi 3.2-3.59 | Khá 2.5-3.19 | TB 2.0-2.49 | Yếu < 2.0</li>
+          <li><strong>Cảnh Báo:</strong> GPA kỳ < 1.2 (năm 1), < 1.4 (năm 2), < 1.6 (năm 3+) → cảnh báo, học lại, buộc thôi</li>
+          <li><strong>Điểm Tuyệt Đối:</strong> 2 sinh viên đầu tiên đạt CPA 4.0/4.0 khóa 2024 (Khoa học dữ liệu & Kỹ thuật ĐTVT)</li>
+          <li><strong>Thời Gian Tối Đa:</strong> 12 học kỳ (6 năm) kể từ khóa nhập học</li>
+          <li><strong>Chương Trình Tiên Tiến:</strong> PFIEV, Chất lượng cao, Tài năng — cùng quy chế, điểm chuẩn cao hơn</li>
+        </ul>
+
+        <h3 class="mt-6">Số Nghiêm Thức</h3>
+        <p><strong>{univ.source}</strong></p>
+        <p><a href={univ.sourceUrl} target="_blank" rel="noopener" class="underline hover:text-emerald-500">{univ.sourceUrl}</a></p>
+        {univ.note && <p class="text-sm text-slate-500 dark:text-zinc-400"><strong>Ghi Chú:</strong> {univ.note}</p>}
+      </div>
+    </section>
+
+    <section class="mt-12" aria-labelledby="related-heading">
+      <h2 id="related-heading" class="text-2xl font-extrabold tracking-tight mb-6">Các Trường Khác</h2>
+      <div class="grid gap-3 sm:grid-cols-2 lg:grid-cols-3">
+        <a href="/vn/dai-hoc-quoc-gia-tp-hcm-gpa" class="calc-shell p-4 hover:border-emerald-500 transition-all text-center">ĐHQG TP.HCM — 4.0</a>
+        <a href="/vn/dai-hoc-quoc-gia-ha-noi-gpa" class="calc-shell p-4 hover:border-emerald-500 transition-all text-center">ĐHQG Hà Nội — 4.0</a>
+        <a href="/vn/dai-hoc-bach-khoa-tp-hcm-gpa" class="calc-shell p-4 hover:border-emerald-500 transition-all text-center">Bách Khoa TP.HCM — 4.0</a>
+        <a href="/vn/dai-hoc-kinh-te-quoc-dan-gpa" class="calc-shell p-4 hover:border-emerald-500 transition-all text-center">Kinh tế Quốc dân — 4.0</a>
+      </div>
+    </section>
+  </main>
+</Layout>
+
+<script is:inline>
+  const GRADES = ['A+', 'A', 'B+', 'B', 'C+', 'C', 'D+', 'D', 'F'];
+  const POINTS = { 'A+': 4.0, 'A': 4.0, 'B+': 3.5, 'B': 3.0, 'C+': 2.5, 'C': 2.0, 'D+': 1.5, 'D': 1.0, 'F': 0.0 };
+  const PERCENTAGES = { 'A+': [95, 100], 'A': [85, 94], 'B+': [80, 84], 'B': [70, 79], 'C+': [65, 69], 'C': [55, 64], 'D+': [50, 54], 'D': [40, 49], 'F': [0, 39] };
+
+  function createCourseRow(index) {
+    const row = document.createElement('div');
+    row.className = 'grid gap-3 sm:grid-cols-[1fr_80px_100px] items-end';
+    row.setAttribute('role', 'listitem');
+    row.innerHTML = `
+      <div>
+        <label class="calc-label" for="grade-${index}">Môn ${index + 1} Điểm</label>
+        <select id="grade-${index}" class="calc-select grade-select" aria-label="Môn ${index + 1} điểm">
+          ${GRADES.map(g => `<option value="${g}">${g} (${POINTS[g]}) ↔ ${PERCENTAGES[g][0]}~${PERCENTAGES[g][1]}%</option>`).join('')}
+        </select>
+      </div>
+      <div>
+        <label class="calc-label" for="credit-${index}">TC</label>
+        <input type="number" id="credit-${index}" class="calc-input credit-input" value="3" min="1" max="6" step="1" aria-label="Môn ${index + 1} tín chỉ" />
+      </div>
+      <div>
+        <label class="calc-label" for="course-name-${index}">Tên Môn (Tùy Chọn)</label>
+        <input type="text" id="course-name-${index}" class="calc-input" placeholder="Ví dụ: Giải Tích" aria-label="Môn ${index + 1} tên" />
+      </div>
+    `;
+    return row;
+  }
+
+  function renderCourses(count) {
+    const container = document.getElementById('courses');
+    container.innerHTML = '';
+    for (let i = 0; i < count; i++) {
+      container.appendChild(createCourseRow(i));
+    }
+  }
+
+  function calculateGPA() {
+    const gradeSelects = document.querySelectorAll('#courses .grade-select');
+    const creditInputs = document.querySelectorAll('#courses .credit-input');
+
+    let totalCredits = 0;
+    let totalPoints = 0;
+
+    gradeSelects.forEach((select, i) => {
+      const grade = select.value;
+      const credit = parseFloat(creditInputs[i].value) || 0;
+      const point = POINTS[grade] || 0;
+
+      totalCredits += credit;
+      totalPoints += credit * point;
+    });
+
+    const gpa = totalCredits > 0 ? totalPoints / totalCredits : 0;
+    document.getElementById('result').textContent = gpa.toFixed(2);
+    document.getElementById('detail').textContent = `Tổng Tín Chỉ: ${totalCredits} | Tổng Điểm: ${totalPoints.toFixed(2)}`;
+  }
+
+  const countInput = document.getElementById('course-count');
+  const calculateBtn = document.getElementById('calculate-btn');
+  let currentCount = parseInt(countInput.value) || 6;
+
+  renderCourses(currentCount);
+  calculateGPA();
+
+  countInput.addEventListener('input', () => {
+    let newCount = parseInt(countInput.value) || 1;
+    newCount = Math.max(1, Math.min(30, newCount));
+    currentCount = newCount;
+    renderCourses(newCount);
+    calculateGPA();
+  });
+
+  calculateBtn.addEventListener('click', calculateGPA);
+
+  document.getElementById('courses').addEventListener('change', e => {
+    if (e.target.matches('.grade-select, .credit-input')) {
+      calculateGPA();
+    }
+  });
+</script>

@@ -1,11 +1,12 @@
 ---
-import Layout from '../layouts/Layout.astro';
+import Layout from '@/layouts/Layout.astro';
 import SiteHeader from '../components/Nav.astro';
 import SiteFooter from '../components/Footer.astro';
 import Breadcrumbs from '../components/Breadcrumbs.astro';
 import FaqAccordion from '../components/FaqAccordion.astro';
 import { universities } from '../data/universities';
-import { getUniversitiesByCountry } from '../data/universities-global';
+import { getUniversitiesByCountry } from '@/data/universities-global';
+import { hasUniversityPage } from '@/data/university-pages';
 
 const hiUniversities = getUniversitiesByCountry('IN');
 
@@ -39,7 +40,7 @@ const getExample = (u: typeof universities[0]) => {
 
 const uniRows = [
   { name: 'CBSE / Generic', href: '/', formula: 'CGPA × 9.5', example: '76%' },
-  ...universities.map((u) => ({
+  ...universities.filter((u) => hasUniversityPage(u.key)).map((u) => ({
     name: u.name + (u.key === 'mumbai' ? ' (2026 से पहले)' : ''),
     href: `/${u.slug}`,
     formula: u.formulaLabel,
@@ -100,9 +101,9 @@ const schema = {
           <input type="number" id="hi-cgpa" min="0" max="10" step="0.01" placeholder="जैसे 8.25" inputmode="decimal" />
 
           <label class="sp-label" for="hi-formula">फॉर्मूला चुनें</label>
-          <select id="hi-formula">
+<select id="hi-formula">
             <option value="cbse" selected>मानक / CBSE — CGPA × 9.5</option>
-            {universities.map((u) => (
+            {universities.filter((u) => hasUniversityPage(u.key)).map((u) => (
               <option value={u.key}>{u.short} — {u.formulaLabel}</option>
             ))}
             {hiUniversities.map((u) => (
@@ -294,3 +295,4 @@ const schema = {
     });
   </script>
 </Layout>
+

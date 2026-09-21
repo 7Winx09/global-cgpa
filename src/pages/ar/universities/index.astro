@@ -1,0 +1,162 @@
+---
+import Layout from '@/layouts/Layout.astro';
+import { getUniversitiesByCountry } from '@/data/universities-global';
+
+const egUniversities = getUniversitiesByCountry('EG');
+const joUniversities = getUniversitiesByCountry('JO');
+const saUniversities = getUniversitiesByCountry('SA');
+const aeUniversities = getUniversitiesByCountry('AE');
+const lbUniversities = getUniversitiesByCountry('LB');
+
+const allUniversities = [...egUniversities, ...joUniversities, ...saUniversities, ...aeUniversities, ...lbUniversities];
+
+const pageTitle = 'مقارنة الجامعات العربية | أنظمة التقدير: 4.0 أمريكي، 5.0 خليجي، 20.0 فرنسي';
+const description = 'مقارنة أنظمة التقدير في الجامعات العربية: مصر (4.0)، الأردن (4.0)، السعودية (5.0/4.0)، الإمارات (4.0)، لبنان (4.0/20.0). جدول موحد للدرجات والنسب المئوية.';
+const canonical = 'https://globalcgpa.in/ar/universities';
+const ogImage = '/og-image-ar.png';
+const lang = 'ar';
+const alternates = [
+  { hreflang: 'en', href: 'https://globalcgpa.in/universities' },
+  { hreflang: 'ar', href: 'https://globalcgpa.in/ar/universities' },
+];
+---
+
+<Layout title={pageTitle} description={description} canonical={canonical} ogImage={ogImage} lang={lang} alternates={alternates}>
+  <main class="max-w-[780px] mx-auto px-6 py-14" style="flex:1;">
+    <nav class="crumbs mb-6" aria-label="Breadcrumb">
+      <a href="/ar/">حاسبة GPA العربية</a>
+      <span class="sep">/</span>
+      <span class="current">مقارنة الجامعات</span>
+    </nav>
+
+    <div class="text-xs font-bold uppercase tracking-wider text-emerald-500 mb-2">مقارنة أنظمة التقدير</div>
+    <h1 class="text-3xl sm:text-4xl font-extrabold tracking-tight mb-3">مقارنة الجامعات العربية</h1>
+    <p class="text-slate-500 dark:text-zinc-400 text-base mb-8">
+      مقارنة شاملة لأنظمة التقدير في 5 دول عربية و 13 جامعة رائدة. ثلاثة أنظمة رئيسية: 4.0 أمريكي (مصر، الأردن، الإمارات، لبنان)، 5.0 خليجي (السعودية - جامعة الملك سعود)، 20.0 فرنسي (لبنان - جامعة القديس يوسف).
+    </p>
+
+    <section class="prose mb-12">
+      <h2>ملخص الأنظمة حسب الدولة</h2>
+      <div class="table-scroll">
+        <table>
+          <thead>
+            <tr>
+              <th>الدولة</th>
+              <th class="text-center">النظام</th>
+              <th class="text-center">عدد الجامعات</th>
+              <th>الجامعات</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr><td>🇪🇬 مصر</td><td class="text-center">4.0 أمريكي</td><td class="text-center">2</td><td>الجامعة الأمريكية بالقاهرة، جامعة القاهرة</td></tr>
+            <tr><td>🇯🇴 الأردن</td><td class="text-center">4.0 (11 درجة للأردنية)</td><td class="text-center">2</td><td>الجامعة الأردنية، الجامعة الألمانية الأردنية</td></tr>
+            <tr><td>🇸🇦 السعودية</td><td class="text-center">5.0 (الملك سعود)، 4.0 (باقي)</td><td class="text-center">3</td><td>جامعة الملك سعود، KAUST، KFUPM</td></tr>
+            <tr><td>🇦🇪 الإمارات</td><td class="text-center">4.0 أمريكي</td><td class="text-center">3</td><td>جامعة الإمارات، جامعة خليفة، الجامعة الأمريكية بالشارقة</td></tr>
+            <tr><td>🇱🇧 لبنان</td><td class="text-center">4.0 أمريكي، 20.0 فرنسي</td><td class="text-center">3</td><td>الجامعة الأمريكية في بيروت، الجامعة اللبنانية الأمريكية، جامعة القديس يوسف</td></tr>
+          </tbody>
+        </table>
+      </div>
+    </section>
+
+    <section class="prose mb-12">
+      <h2>جدول مقارنة التقديرات (مقياس 4.0)</h2>
+      <p class="mb-4">الجامعات التي تستخدم مقياس 4.0 (النظام الأمريكي): AUC، جامعة القاهرة، الجامعة الأردنية، GJU، KAUST، KFUPM، UAEU، جامعة خليفة، AUS، AUB، LAU</p>
+      <div class="table-scroll">
+        <table>
+          <thead>
+            <tr>
+              <th>التقدير</th>
+              <th class="text-center">نقاط 4.0 (قياسي)</th>
+              <th class="text-center">AUC / AUS / AUB / LAU</th>
+              <th class="text-center">جامعة القاهرة</th>
+              <th class="text-center">الجامعة الأردنية (11 درجة)</th>
+              <th class="text-center">KAUST</th>
+              <th class="text-center">KFUPM (10 درجات)</th>
+              <th class="text-center">UAEU / خليفة</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr><td><strong>A+</strong></td><td class="text-center">4.0</td><td class="text-center">4.0 (95-100%)</td><td class="text-center">—</td><td class="text-center">4.0 (95-100%)</td><td class="text-center">4.0 (97-100%)</td><td class="text-center">4.0 (95-100%)</td><td class="text-center">4.0 (95-100%)</td></tr>
+            <tr><td><strong>A</strong></td><td class="text-center">4.0</td><td class="text-center">4.0 (90-94%)</td><td class="text-center">4.0 (85-100%)</td><td class="text-center">3.75 (90-94%)</td><td class="text-center">4.0 (93-96%)</td><td class="text-center">3.75 (90-94%)</td><td class="text-center">4.0 (90-94%)</td></tr>
+            <tr><td><strong>A-</strong></td><td class="text-center">3.7</td><td class="text-center">3.7 (85-89%)</td><td class="text-center">—</td><td class="text-center">3.5 (85-89%)</td><td class="text-center">3.7 (90-92%)</td><td class="text-center">3.5 (85-89%)</td><td class="text-center">3.7 (85-89%)</td></tr>
+            <tr><td><strong>B+</strong></td><td class="text-center">3.3</td><td class="text-center">3.3 (80-84%)</td><td class="text-center">3.5 (75-84%)</td><td class="text-center">3.25 (80-84%)</td><td class="text-center">3.3 (87-89%)</td><td class="text-center">3.25 (80-84%)</td><td class="text-center">3.3 (80-84%)</td></tr>
+            <tr><td><strong>B</strong></td><td class="text-center">3.0</td><td class="text-center">3.0 (75-79%)</td><td class="text-center">3.0 (65-74%)</td><td class="text-center">3.0 (75-79%)</td><td class="text-center">3.0 (83-86%)</td><td class="text-center">3.0 (75-79%)</td><td class="text-center">3.0 (75-79%)</td></tr>
+            <tr><td><strong>B-</strong></td><td class="text-center">2.7</td><td class="text-center">2.7 (70-74%)</td><td class="text-center">—</td><td class="text-center">2.75 (70-74%)</td><td class="text-center">2.7 (80-82%)</td><td class="text-center">2.75 (70-74%)</td><td class="text-center">2.7 (70-74%)</td></tr>
+            <tr><td><strong>C+</strong></td><td class="text-center">2.3</td><td class="text-center">2.3 (65-69%)</td><td class="text-center">2.5 (60-64%)</td><td class="text-center">2.5 (65-69%)</td><td class="text-center">2.3 (77-79%)</td><td class="text-center">2.5 (65-69%)</td><td class="text-center">2.3 (65-69%)</td></tr>
+            <tr><td><strong>C</strong></td><td class="text-center">2.0</td><td class="text-center">2.0 (60-64%)</td><td class="text-center">2.0 (50-59%)</td><td class="text-center">2.25 (60-64%)</td><td class="text-center">2.0 (73-76%)</td><td class="text-center">2.25 (60-64%)</td><td class="text-center">2.0 (60-64%)</td></tr>
+            <tr><td><strong>C-</strong></td><td class="text-center">1.7</td><td class="text-center">1.7 (55-59%)</td><td class="text-center">—</td><td class="text-center">2.0 (55-59%)</td><td class="text-center">1.7 (70-72%)</td><td class="text-center">2.0 (55-59%)</td><td class="text-center">1.7 (55-59%)</td></tr>
+            <tr><td><strong>D</strong></td><td class="text-center">1.0</td><td class="text-center">1.0 (50-54%)</td><td class="text-center">1.5 (40-49%)</td><td class="text-center">1.0 (50-54%)</td><td class="text-center">1.0 (60-69%)</td><td class="text-center">1.0 (50-54%)</td><td class="text-center">1.0 (50-54%)</td></tr>
+            <tr><td><strong>F</strong></td><td class="text-center">0.0</td><td class="text-center">0.0 (<60%)</td><td class="text-center">0.0 (<40%)</td><td class="text-center">0.0 (<50%)</td><td class="text-center">0.0 (<60%)</td><td class="text-center">0.0 (<50%)</td><td class="text-center">0.0 (<50%)</td></tr>
+          </tbody>
+        </table>
+      </div>
+    </section>
+
+    <section class="prose mb-12">
+      <h2>جدول مقارنة النظام السعودي (5.0) والنظام الفرنسي (20.0)</h2>
+      <div class="table-scroll">
+        <table>
+          <thead>
+            <tr>
+              <th>التقدير</th>
+              <th class="text-center">الملك سعود (5.0)</th>
+              <th class="text-center">USJ (20.0 فرنسي)</th>
+              <th class="text-center">التحويل لـ 4.0</th>
+              <th class="text-center">النسبة المئوية</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr><td><strong>A+ / أ</strong></td><td class="text-center">5.0 (95-100%)</td><td class="text-center">18.0 (18-20/20)</td><td class="text-center">4.0</td><td class="text-center">95-100%</td></tr>
+            <tr><td><strong>A / ب</strong></td><td class="text-center">4.75 (90-94%)</td><td class="text-center">16.0 (16-17/20)</td><td class="text-center">3.8</td><td class="text-center">90-94%</td></tr>
+            <tr><td><strong>B+ / ج</strong></td><td class="text-center">4.5 (85-89%)</td><td class="text-center">14.0 (14-15/20)</td><td class="text-center">3.6</td><td class="text-center">85-89%</td></tr>
+            <tr><td><strong>B / د</strong></td><td class="text-center">4.0 (80-84%)</td><td class="text-center">12.0 (12-13/20)</td><td class="text-center">3.2</td><td class="text-center">80-84%</td></tr>
+            <tr><td><strong>C+ / ه</strong></td><td class="text-center">3.5 (75-79%)</td><td class="text-center">10.0 (10-11/20)</td><td class="text-center">2.8</td><td class="text-center">75-79%</td></tr>
+            <tr><td><strong>C / و</strong></td><td class="text-center">3.0 (70-74%)</td><td class="text-center">8.0 (0-9/20) — راسب</td><td class="text-center">2.4</td><td class="text-center">70-74%</td></tr>
+            <tr><td><strong>D+</strong></td><td class="text-center">2.5 (65-69%)</td><td class="text-center">—</td><td class="text-center">2.0</td><td class="text-center">65-69%</td></tr>
+            <tr><td><strong>D</strong></td><td class="text-center">2.0 (60-64%)</td><td class="text-center">—</td><td class="text-center">1.6</td><td class="text-center">60-64%</td></tr>
+            <tr><td><strong>F / راسب</strong></td><td class="text-center">1.0 (0-59%)</td><td class="text-center">—</td><td class="text-center">0.0</td><td class="text-center">0-59%</td></tr>
+          </tbody>
+        </table>
+      </div>
+      <p class="mt-3 text-sm text-slate-500 dark:text-zinc-400"><em>ملاحظة: في النظام الفرنسي (USJ)، النجاح = 10/20 (تقدير ه). التقدير و (0-9) راسب. التحويل لـ 4.0: القسمة على 5.</em></p>
+    </section>
+
+    <section class="prose mb-12">
+      <h2>روابط حاسبات GPA للجامعات</h2>
+      <div class="space-y-4">
+        <h3 class="text-xl font-bold mb-3">🇪🇬 مصر</h3>
+        <div class="grid gap-2 sm:grid-cols-2">
+          <a href="/ar/american-university-cairo-gpa" class="calc-shell p-3 hover:border-emerald-500 transition-all">الجامعة الأمريكية بالقاهرة — 4.0</a>
+          <a href="/ar/cairo-university-gpa" class="calc-shell p-3 hover:border-emerald-500 transition-all">جامعة القاهرة — 4.0</a>
+        </div>
+
+        <h3 class="text-xl font-bold mt-6 mb-3">🇯🇴 الأردن</h3>
+        <div class="grid gap-2 sm:grid-cols-2">
+          <a href="/ar/university-of-jordan-gpa" class="calc-shell p-3 hover:border-emerald-500 transition-all">الجامعة الأردنية — 4.0 (11 درجة)</a>
+          <a href="/ar/german-jordanian-university-gpa" class="calc-shell p-3 hover:border-emerald-500 transition-all">الجامعة الألمانية الأردنية — 4.0</a>
+        </div>
+
+        <h3 class="text-xl font-bold mt-6 mb-3">🇸🇦 السعودية</h3>
+        <div class="grid gap-2 sm:grid-cols-3">
+          <a href="/ar/king-saud-university-gpa" class="calc-shell p-3 hover:border-emerald-500 transition-all">جامعة الملك سعود — 5.0</a>
+          <a href="/ar/kaust-gpa" class="calc-shell p-3 hover:border-emerald-500 transition-all">KAUST — 4.0</a>
+          <a href="/ar/kfupm-gpa" class="calc-shell p-3 hover:border-emerald-500 transition-all">جامعة الملك فهد — 4.0</a>
+        </div>
+
+        <h3 class="text-xl font-bold mt-6 mb-3">🇦🇪 الإمارات</h3>
+        <div class="grid gap-2 sm:grid-cols-3">
+          <a href="/ar/uae-university-gpa" class="calc-shell p-3 hover:border-emerald-500 transition-all">جامعة الإمارات — 4.0</a>
+          <a href="/ar/khalifa-university-gpa" class="calc-shell p-3 hover:border-emerald-500 transition-all">جامعة خليفة — 4.0</a>
+          <a href="/ar/american-university-sharjah-gpa" class="calc-shell p-3 hover:border-emerald-500 transition-all">الجامعة الأمريكية بالشارقة — 4.0</a>
+        </div>
+
+        <h3 class="text-xl font-bold mt-6 mb-3">🇱🇧 لبنان</h3>
+        <div class="grid gap-2 sm:grid-cols-3">
+          <a href="/ar/american-university-beirut-gpa" class="calc-shell p-3 hover:border-emerald-500 transition-all">الجامعة الأمريكية في بيروت — 4.0</a>
+          <a href="/ar/lebanese-american-university-gpa" class="calc-shell p-3 hover:border-emerald-500 transition-all">الجامعة اللبنانية الأمريكية — 4.0</a>
+          <a href="/ar/saint-joseph-university-gpa" class="calc-shell p-3 hover:border-emerald-500 transition-all">جامعة القديس يوسف — 20.0</a>
+        </div>
+      </div>
+    </section>
+  </main>
+</Layout>

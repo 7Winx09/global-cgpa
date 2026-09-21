@@ -1,0 +1,114 @@
+---
+import Layout from '@/layouts/Layout.astro';
+import { getUniversitiesByCountry } from '@/data/universities-global';
+
+const universities = getUniversitiesByCountry('VN');
+
+const pageTitle = 'So Sánh GPA Các Trường ĐH Việt Nam | Bảng Tóm Tắt Chuẩn Quốc Gia';
+const description = 'So sánh quy chế GPA 5 trường ĐH hàng đầu Việt Nam: ĐHQG TP.HCM, ĐHQG HN, Bách Khoa Hà Nội, Bách Khoa TP.HCM, ĐH Kinh tế Quốc dân. Thang 4.0, xếp loại, điều kiện tốt nghiệp.';
+const canonical = 'https://globalcgpa.in/vn/universities';
+const ogImage = '/og-image-vn.png';
+const lang = 'vn';
+const alternates = [
+  { hreflang: 'en', href: 'https://globalcgpa.in/university/vietnam' },
+  { hreflang: 'vn', href: 'https://globalcgpa.in/vn/universities' },
+];
+---
+
+<Layout title={pageTitle} description={description} canonical={canonical} ogImage={ogImage} lang={lang} alternates={alternates}>
+  <main class="max-w-[780px] mx-auto px-6 py-14" style="flex:1;">
+    <nav class="crumbs mb-6" aria-label="Breadcrumb">
+      <a href="/vn/">Khoan Tính GPA</a>
+      <span class="sep">/</span>
+      <span class="current">So Sánh Trường Đại Học</span>
+    </nav>
+
+    <div class="text-xs font-bold uppercase tracking-wider text-emerald-500 mb-2">So Sánh Quy Chế GPA</div>
+    <h1 class="text-3xl sm:text-4xl font-extrabold tracking-tight mb-3">So Sánh 5 Trường Đại Học Hàng Đầu Việt Nam</h1>
+    <p class="text-slate-500 dark:text-zinc-400 text-base mb-8">
+      Tất cả áp dụng thang 4.0 chuẩn Bộ GD&ĐT (Thông tư 08/2021/TT-BGDĐT). Khác biệt nằm ở quy chế cảnh báo, điều kiện tốt nghiệp, và xếp loại học lực.
+    </p>
+
+    <div class="table-scroll">
+      <table>
+        <thead>
+          <tr>
+            <th>Trường</th>
+            <th class="text-center">Thang</th>
+            <th class="text-center">Điểm Chữ</th>
+            <th class="text-center">Điểm 4.0</th>
+            <th class="text-center">Tương Đương %</th>
+            <th class="text-center">Xếp Loại Tốt Nghiệp</th>
+            <th class="text-center">Điều Kiện Tốt Nghiệp</th>
+          </tr>
+        </thead>
+        <tbody>
+          {universities.map(u => (
+            <tr>
+              <td>
+                <a href={`/vn/${u.slug}`} class="font-bold underline hover:text-emerald-500">{u.name}</a>
+                <br /><span class="text-sm text-slate-500 dark:text-zinc-400">{u.nameEn}</span>
+              </td>
+              <td class="text-center font-mono">{u.system}</td>
+              <td class="text-center font-mono text-sm">A+, A, B+, B, C+, C, D+, D, F</td>
+              <td class="text-center font-mono">4.0 / 3.5 / 3.0 / 2.5 / 2.0 / 1.5 / 1.0 / 0</td>
+              <td class="text-center text-sm">85-100 / 70-84 / 55-69 / 40-54 / <40</td>
+              <td class="text-center">
+                <div class="text-xs">Xuất sắc ≥ 3.6</div>
+                <div class="text-xs">Giỏi 3.2-3.59</div>
+                <div class="text-xs">Khá 2.5-3.19</div>
+                <div class="text-xs">TB 2.0-2.49</div>
+              </td>
+              <td class="text-center text-sm">CPA ≥ 2.0, không nợ môn</td>
+            </tr>
+          ))}
+        </tbody>
+      </table>
+    </div>
+
+    <section class="mt-12" aria-labelledby="details-heading">
+      <h2 id="details-heading" class="text-2xl font-extrabold tracking-tight mb-6">Chi Tiết Mỗi Trường</h2>
+      <div class="space-y-6">
+        {universities.map(u => (
+          <article class="calc-shell p-6">
+            <div class="flex flex-col sm:flex-row sm:items-center sm:justify-between gap-4 mb-4">
+              <div>
+                <h3 class="text-xl font-extrabold text-slate-900 dark:text-white">{u.name}</h3>
+                <p class="text-sm text-slate-500 dark:text-zinc-400 mt-1">{u.nameEn}</p>
+              </div>
+              <a href={`/vn/${u.slug}`} class="px-4 py-2 bg-emerald-500 hover:bg-emerald-600 text-slate-900 font-bold text-sm rounded-xl transition-colors text-center">
+                Xem Khoan Tính
+              </a>
+            </div>
+
+            <div class="prose">
+              <h4 class="font-bold text-slate-900 dark:text-white mb-2">Công Thức</h4>
+              <p class="font-mono text-sm bg-emerald-50 dark:bg-emerald-900/20 p-3 rounded-md">{u.formulaText}</p>
+
+              <h4 class="font-bold text-slate-900 dark:text-white mt-4 mb-2">Đặc Điểm Nổi Bật</h4>
+              <p class="text-sm text-slate-500 dark:text-zinc-400">{u.note}</p>
+
+              <h4 class="font-bold text-slate-900 dark:text-white mt-4 mb-2">Nguồn Resmi</h4>
+              <p class="text-sm"><strong>{u.source}</strong></p>
+              <p class="text-sm"><a href={u.sourceUrl} target="_blank" rel="noopener" class="underline hover:text-emerald-500">{u.sourceUrl}</a></p>
+            </div>
+          </article>
+        ))}
+      </div>
+    </section>
+
+    <section class="mt-12" aria-labelledby="common-heading">
+      <h2 id="common-heading" class="text-2xl font-extrabold tracking-tight mb-6">Điểm Chung Của 5 Trường</h2>
+      <div class="prose">
+        <ul>
+          <li><strong>Thang điểm:</strong> 4.0 chuẩn Bộ GD&ĐT (A/A+ = 4.0, B+ = 3.5, B = 3.0, C+ = 2.5, C = 2.0, D+ = 1.5, D = 1.0, F = 0)</li>
+          <li><strong>Quy đổi thang 10:</strong> 8.5-10 → A/A+, 7.0-8.4 → B+, 5.5-6.9 → C, 4.0-5.4 → D, <4.0 → F</li>
+          <li><strong>Xếp loại tốt nghiệp:</strong> Xuất sắc (≥3.6), Giỏi (3.2-3.59), Khá (2.5-3.19), Trung bình (2.0-2.49)</li>
+          <li><strong>Điều kiện tốt nghiệp:</strong> CPA tích lũy ≥ 2.0, hoàn thành chương trình đào tạo, không nợ môn học</li>
+          <li><strong>Cảnh báo học tập:</strong> Dựa trên GPA học kỳ theo năm (năm 1: <1.2, năm 2: <1.4, năm 3+: <1.6)</li>
+          <li><strong>Hệ đào tạo:</strong> Hệ tín chỉ (credit-based), GPA học kỳ, CPA tích lũy</li>
+        </ul>
+      </div>
+    </section>
+  </main>
+</Layout>

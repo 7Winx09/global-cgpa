@@ -1,0 +1,128 @@
+---
+import Layout from '@/layouts/Layout.astro';
+import { getUniversityByKey } from '@/data/universities-global';
+
+const univ = getUniversityByKey('in-bhu')!;
+const pageTitle = `${univ.name} | CGPA से प्रतिशत कैलकुलेटर (×10 फॉर्मूला — BHU अध्यादेश)`;
+const description = `${univ.name} (BHU) के लिए CGPA से प्रतिशत रूपांतरण। आधिकारिक ×10 फॉर्मूला (BHU अध्यादेश 2020)। CGPA 6.5 = 65%, CGPA 7.5 = 75%।`;
+const canonical = `https://globalcgpa.in/${univ.slug}`;
+const ogImage = '/og-image-hi.png';
+const lang = 'hi';
+const alternates = [
+  { hreflang: 'hi', href: `https://globalcgpa.in/${univ.slug}` },
+  { hreflang: 'en', href: 'https://globalcgpa.in/bhu-cgpa-to-percentage' },
+];
+---
+
+<Layout title={pageTitle} description={description} canonical={canonical} ogImage={ogImage} lang={lang} alternates={alternates}>
+  <main class="max-w-[780px] mx-auto px-6 py-14" style="flex:1;">
+    <nav class="crumbs mb-6" aria-label="Breadcrumb">
+      <a href="/cgpa-to-percentage-in-hindi">CGPA से प्रतिशत (हिंदी)</a>
+      <span class="sep">/</span>
+      <span class="current">{univ.name}</span>
+    </nav>
+
+    <div class="text-xs font-bold uppercase tracking-wider text-emerald-500 mb-2">{univ.name} ({univ.nameEn})</div>
+    <h1 class="text-3xl sm:text-4xl font-extrabold tracking-tight mb-3">{univ.name} — CGPA से प्रतिशत</h1>
+    <p class="text-slate-500 dark:text-zinc-400 text-base mb-8">
+      {univ.name} 10-बिंदु स्केल पर ×10 फॉर्मूला का उपयोग करता है। CGPA 6.5 = 65%, CGPA 7.5 = 75%।
+    </p>
+
+    <div class="calc-shell space-y-6" id="univ-cgpa-calculator">
+      <div class="flex items-center gap-3">
+        <span class="px-3 py-1 bg-emerald-100 dark:bg-emerald-900/30 text-emerald-700 dark:text-emerald-300 text-xs font-bold rounded-full">
+          {univ.system}
+        </span>
+        <span class="text-sm text-slate-500 dark:text-zinc-400">फॉर्मूला: {univ.formulaLabel}</span>
+      </div>
+
+      <div class="grid gap-4 sm:grid-cols-2">
+        <div>
+          <label class="calc-label" for="cgpa-input">अपना CGPA दर्ज करें</label>
+          <input type="number" id="cgpa-input" class="calc-input" min="0" max="10" step="0.01" placeholder="उदाहरण: 8.25" aria-label="CGPA दर्ज करें" />
+        </div>
+      </div>
+
+      <button type="button" class="w-full sm:w-auto px-6 py-3 bg-emerald-500 hover:bg-emerald-600 text-slate-900 font-bold text-sm rounded-xl transition-colors" id="calculate-btn">
+        प्रतिशत निकालें
+      </button>
+
+      <div class="calc-output" aria-live="polite" aria-label="परिणाम">
+        <div class="calc-out-val" id="result">—</div>
+        <div class="calc-out-lbl">प्रतिशत (Percentage)</div>
+        <div class="calc-out-lbl" style="margin-top:8px; font-size:0.68rem;" id="detail">फॉर्मूला: CGPA × 10</div>
+      </div>
+
+      <div class="formula-block">
+        <div class="f-label">आधिकारिक फॉर्मूला</div>
+        <div class="f-text">प्रतिशत = CGPA × 10</div>
+        <div class="f-example" id="formula-example">उदाहरण: 8.25 × 10 = 82.5%</div>
+      </div>
+    </div>
+
+    <section class="mt-12" aria-labelledby="regulation-heading">
+      <h2 id="regulation-heading" class="text-2xl font-extrabold tracking-tight mb-6">आधिकारिक स्रोत</h2>
+      <div class="prose">
+        <h3>BHU अध्यादेश 2020 — शैक्षणिक विनियम खंड 8</h3>
+        <p><strong>{univ.source}</strong></p>
+        <p><a href={univ.sourceUrl} target="_blank" rel="noopener" class="underline hover:text-emerald-500">{univ.sourceUrl}</a></p>
+        {univ.note && <p class="text-sm text-slate-500 dark:text-zinc-400"><strong>नोट:</strong> {univ.note}</p>}
+
+        <h3 class="mt-6">महत्वपूर्ण बिंदु</h3>
+        <ul>
+          <li><strong>×10 फॉर्मूला</strong> BHU अध्यादेश 2020 में प्रकाशित</li>
+          <li><strong>सीधा रूपांतरण:</strong> CGPA 6.5 = 65%, 7.5 = 75%, 8.0 = 80%</li>
+          <li><strong>अधिकतम:</strong> 100% (CGPA 10.0 पर)</li>
+          <li><strong>सभी पाठ्यक्रमों</strong> के लिए समान फॉर्मूला</li>
+        </ul>
+
+        <h3 class="mt-6">त्वरित संदर्भ तालिका</h3>
+        <div class="table-scroll">
+          <table>
+            <thead><tr><th>CGPA</th><th class="text-center">प्रतिशत</th><th>CGPA</th><th class="text-center">प्रतिशत</th></tr></thead>
+            <tbody>
+              <tr><td>10.0</td><td class="text-center">100%</td><td>7.0</td><td class="text-center">70%</td></tr>
+              <tr><td>9.5</td><td class="text-center">95%</td><td>6.5</td><td class="text-center">65%</td></tr>
+              <tr><td>9.0</td><td class="text-center">90%</td><td>6.0</td><td class="text-center">60%</td></tr>
+              <tr><td>8.5</td><td class="text-center">85%</td><td>5.5</td><td class="text-center">55%</td></tr>
+              <tr><td>8.0</td><td class="text-center">80%</td><td>5.0</td><td class="text-center">50%</td></tr>
+              <tr><td>7.5</td><td class="text-center">75%</td><td>4.5</td><td class="text-center">45%</td></tr>
+            </tbody>
+          </table>
+        </div>
+      </div>
+    </section>
+
+    <section class="mt-12" aria-labelledby="related-heading">
+      <h2 id="related-heading" class="text-2xl font-extrabold tracking-tight mb-6">अन्य भारतीय विश्वविद्यालय</h2>
+      <div class="grid gap-3 sm:grid-cols-2 lg:grid-cols-3">
+<a href="/delhi-vishwavidyalaya-cgpa" class="calc-shell p-4 hover:border-emerald-500 transition-all text-center">DU — ×9.5</a>
+        <a href="/delhi-prodyogiki-vishwavidyalaya-cgpa" class="calc-shell p-4 hover:border-emerald-500 transition-all text-center">DTU — ×10</a>
+        <a href="/jawaharlal-nehru-vishwavidyalaya-cgpa" class="calc-shell p-4 hover:border-emerald-500 transition-all text-center">JNU — ×10</a>
+        <a href="/cgpa-to-percentage-in-hindi" class="calc-shell p-4 hover:border-emerald-500 transition-all text-center">सभी विश्वविद्यालय देखें</a>
+      </div>
+    </section>
+  </main>
+</Layout>
+
+<script is:inline>
+  const cgpaInput = document.getElementById('cgpa-input') as HTMLInputElement;
+  const result = document.getElementById('result')!;
+  const detail = document.getElementById('detail')!;
+  const calculateBtn = document.getElementById('calculate-btn')!;
+
+  function calculate() {
+    const v = parseFloat(cgpaInput.value);
+    if (isNaN(v) || v < 0 || v > 10) {
+      result.textContent = '—';
+      detail.textContent = isNaN(v) ? '' : 'CGPA 0 से 10 के बीच होना चाहिए';
+      return;
+    }
+    const percentage = Math.min(100, v * 10);
+    result.textContent = percentage.toFixed(1) + '%';
+    detail.textContent = `फॉर्मूला: ${v} × 10 = ${percentage.toFixed(1)}%`;
+  }
+
+  cgpaInput.addEventListener('input', calculate);
+  calculateBtn.addEventListener('click', calculate);
+</script>

@@ -1,0 +1,166 @@
+---
+import Layout from '@/layouts/Layout.astro';
+
+const pageTitle = 'Xếp Loại Tốt Nghiệp Việt Nam | Xuất Sắc, Giỏi, Khá, Trung Bình Theo Quy Chế ĐHQG';
+const description = 'Tiêu chí xếp loại tốt nghiệp đại học Việt Nam: Xuất sắc (CPA ≥ 3.6), Giỏi (3.2-3.59), Khá (2.5-3.19), Trung bình (2.0-2.49). Điều kiện thời gian, học bổng, công nhận quốc tế.';
+const canonical = 'https://globalcgpa.in/vn/guides/xep-loai-tot-nghiep';
+const ogImage = '/og-image-vn.png';
+const lang = 'vn';
+const alternates = [
+  { hreflang: 'en', href: 'https://globalcgpa.in/guides/graduation-honors' },
+  { hreflang: 'vn', href: 'https://globalcgpa.in/vn/guides/xep-loai-tot-nghiep' },
+];
+---
+
+<Layout title={pageTitle} description={description} canonical={canonical} ogImage={ogImage} lang={lang} alternates={alternates}>
+  <main class="max-w-[780px] mx-auto px-6 py-14" style="flex:1;">
+    <nav class="crumbs mb-6" aria-label="Breadcrumb">
+      <a href="/vn/">Khoan Tính GPA</a>
+      <span class="sep">/</span>
+      <a href="/vn/guides">Hướng Dẫn</a>
+      <span class="sep">/</span>
+      <span class="current">Xếp Loại Tốt Nghiệp</span>
+    </nav>
+
+    <div class="text-xs font-bold uppercase tracking-wider text-emerald-500 mb-2">Panduan Tốt Nghiệp</div>
+    <h1 class="text-3xl sm:text-4xl font-extrabold tracking-tight mb-3">Xếp Loại Tốt Nghiệp Đại Học Việt Nam</h1>
+    <p class="text-slate-500 dark:text-zinc-400 text-base mb-10">
+      Theo Thông tư 08/2021/TT-BGDĐT và quy chế đào tạo các trường ĐHQG, xếp loại bằng tốt nghiệp dựa trên CPA (điểm trung bình tích lũy) và các điều kiện đi kèm.
+    </p>
+
+    <section class="prose mb-12">
+      <h2>Bảng Xếp Loại Chuẩn Quốc Gia</h2>
+      <div class="table-scroll">
+        <table>
+          <thead>
+            <tr>
+              <th>Xếp Loại</th>
+              <th class="text-center">CPA</th>
+              <th>Điều Kiện Bổ Sung</th>
+              <th>Ý Nghĩa</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr class="bg-emerald-50 dark:bg-emerald-900/20">
+              <td><strong>Xuất Sắc</strong></td>
+              <td class="text-center font-bold text-emerald-600 dark:text-emerald-400">≥ 3.60</td>
+              <td>Không môn F, không nợ môn, thời gian ≤ 4 năm (hoặc 4.5 năm tùy CTĐT)</td>
+              <td>Ưu tiên tuyển dụng, du học, học bổng chính phủ, cấp bằng loại Xuất sắc</td>
+            </tr>
+            <tr>
+              <td><strong>Giỏi</strong></td>
+              <td class="text-center font-bold">3.20 – 3.59</td>
+              <td>Không môn F, không nợ môn, thời gian ≤ 5 năm</td>
+              <td>Cấp bằng loại Giỏi, competitive cho việc làm/du học</td>
+            </tr>
+            <tr>
+              <td><strong>Khá</strong></td>
+              <td class="text-center font-bold">2.50 – 3.19</td>
+              <td>Không nợ môn, thời gian ≤ 6 năm</td>
+              <td>Cấp bằng loại Khá, đạt chuẩn đầu ra cơ bản</td>
+            </tr>
+            <tr>
+              <td><strong>Trung Bình</strong></td>
+              <td class="text-center font-bold">2.00 – 2.49</td>
+              <td>Không nợ môn, thời gian ≤ 6 năm (tối đa 7 năm)</td>
+              <td>Cấp bằng loại Trung bình, cần cải thiện cho du học/thạc sĩ</td>
+            </tr>
+            <tr class="bg-red-50 dark:bg-red-900/20">
+              <td><strong>Yếu / Không Đạt</strong></td>
+              <td class="text-center font-bold text-red-600 dark:text-red-400">< 2.00</td>
+              <td>CPA < 2.0 hoặc quá thời gian quy định</td>
+              <td>Không được cấp bằng, phải học thêm/nâng CPA</td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+    </section>
+
+    <section class="prose mb-12">
+      <h2>Điều Kiện Tốt Nghiệp Toàn Diện</h2>
+      <div class="bg-slate-50 dark:bg-zinc-900 border border-slate-200 dark:border-zinc-800 rounded-xl p-6">
+        <h3 class="font-bold mb-4">Điều Kiện Bắt Buộc (Tất Cả Xếp Loại)</h3>
+        <ul class="list-disc list-inside space-y-2">
+          <li><strong>CPA ≥ 2.00</strong> (điều kiện tối thiểu để được xét tốt nghiệp)</li>
+          <li><strong>Hoàn thành Chương trình đào tạo (CTĐT):</strong> đủ tín chỉ yêu cầu (thường 130-150 TC cho S1)</li>
+          <li><strong>Không nợ môn:</strong> không có môn học nào chưa đạt (F) chưa học lại</li>
+          <li><strong>Tối đa 20% tín chỉ đạt điểm D/D+</strong> (tính trên tổng TC CTĐT)</li>
+          <li><strong>Thời gian học ≤ 12 học kỳ (6 năm)</strong> kể từ khóa nhập học</li>
+          <li><strong>Hoàn thành thực tập/khóa luận/đồ án tốt nghiệp</strong> theo quy định ngành</li>
+        </ul>
+      </div>
+    </section>
+
+    <section class="prose mb-12">
+      <h2>Đặc Biệt Theo Từng Trường</h2>
+      <div class="table-scroll">
+        <table>
+          <thead>
+            <tr>
+              <th>Trường</th>
+              <th class="text-center">Xuất Sắc</th>
+              <th class="text-center">Giỏi</th>
+              <th class="text-center">Khá</th>
+              <th class="text-center">Thời Gian Tối Đa</th>
+              <th>Đặc Điểm</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr><td><strong>ĐHQG TP.HCM</strong></td><td class="text-center">≥ 3.6</td><td class="text-center">3.2-3.59</td><td class="text-center">2.5-3.19</td><td class="text-center">6 năm</td><td>Cảnh báo: GPA<1.2 (năm 1), <1.4 (năm 2), <1.6 (năm 3+)</td></tr>
+            <tr><td><strong>ĐHQG Hà Nội</strong></td><td class="text-center">≥ 3.6</td><td class="text-center">3.2-3.59</td><td class="text-center">2.5-3.19</td><td class="text-center">6 năm</td><td>Trường thành viên (UET, UEB, USSH...) dùng chung quy chế</td></tr>
+            <tr><td><strong>HUST</strong></td><td class="text-center">≥ 3.6</td><td class="text-center">3.2-3.59</td><td class="text-center">2.5-3.19</td><td class="text-center">6 năm</td><td>CPA ≥ 2.0 tốt nghiệp; 17 SV đạt 4.0 khóa 2024</td></tr>
+            <tr><td><strong>HCMUT</strong></td><td class="text-center">≥ 3.6</td><td class="text-center">3.2-3.59</td><td class="text-center">2.5-3.19</td><td class="text-center">6 năm</td><td>Hệ tín chỉ; CPA ≥ 2.0, hoàn thành CTĐT</td></tr>
+            <tr><td><strong>NEU</strong></td><td class="text-center">≥ 3.6</td><td class="text-center">3.2-3.59</td><td class="text-center">2.5-3.19</td><td class="text-center">6 năm</td><td>>50% sinh viên loại Xuất sắc/Giỏi khóa 2024</td></tr>
+          </tbody>
+        </table>
+      </div>
+    </section>
+
+    <section class="prose mb-12">
+      <h2>Học Bổng & Ưu Đãi Theo Xếp Loại</h2>
+      <div class="table-scroll">
+        <table>
+          <thead>
+            <tr><th>Xếp Loại</th><th>Học Bổng Khuyến Khích</th><th>Học Bổng ĐHQG/Chính Phủ</th><th>Ưu Đãi Khác</th></tr>
+          </thead>
+          <tbody>
+            <tr><td><strong>Xuất Sắc</strong></td><td>GPA kỳ ≥ 3.2, không F</td><td>Học bổng ĐHQG cấp, chính phủ, Vingroup, VinUni</td><td>Xét duy nhất thạc sĩ, du học full scholarship, visa tư nhân</td></tr>
+            <tr><td><strong>Giỏi</strong></td><td>GPA kỳ ≥ 3.2, không F</td><td>Học bổng khuyến khích cấp trường/ĐHQG</td><td>Ưu tiên tuyển dụng, xét thạc sĩ không thi</td></tr>
+            <tr><td><strong>Khá</strong></td><td>GPA kỳ ≥ 2.5, không F</td><td>Học bổng khuyến khích (nếu đủ điều kiện)</td><td>Đáp ứng điều kiện tốt nghiệp cơ bản</td></tr>
+            <tr><td><strong>Trung Bình</strong></td><td>GPA kỳ ≥ 2.0, không F</td><td>Hiếm</td><td>Cần cải thiện CPA cho du học/thạc sĩ</td></tr>
+          </tbody>
+        </table>
+      </div>
+    </section>
+
+    <section class="prose mb-12">
+      <h2>Công Nhận Quốc Tế Của Xếp Loại Việt Nam</h2>
+      <div class="formula-block mb-4">
+        <div class="f-label">Xuất Sắc (CPA ≥ 3.6/4.0)</div>
+        <div class="f-text">≈ GPA 3.6-4.0/4.0 (US) | ≈ 85-100% | ≈ First Class Honours (UK) | ≈ 1.0-1.5 (Đức)</div>
+      </div>
+      <div class="formula-block mb-4">
+        <div class="f-label">Giỏi (CPA 3.2-3.59/4.0)</div>
+        <div class="f-text">≈ GPA 3.2-3.6/4.0 (US) | ≈ 80-85% | ≈ Upper Second (2:1) UK | ≈ 1.6-2.5 (Đức)</div>
+      </div>
+      <div class="formula-block">
+        <div class="f-label">Khá (CPA 2.5-3.19/4.0)</div>
+        <div class="f-text">≈ GPA 2.5-3.2/4.0 (US) | ≈ 70-80% | ≈ Lower Second (2:2) UK | ≈ 2.6-3.5 (Đức)</div>
+      </div>
+      <p class="mt-3 text-sm text-slate-500 dark:text-zinc-400">
+        <em>Lưu ý: Quy đổi tham khảo. Mỗi quốc gia/trường có bảng quy đổi riêng. Xem <a href="/vn/guides/cong-nhan-quoc-te" class="underline hover:text-emerald-500">Hướng dẫn công nhận quốc tế</a>.</em>
+      </p>
+    </section>
+
+    <section class="prose">
+      <h2>Mẹo Đạt Xếp Loại Cao</h2>
+      <ol class="list-decimal list-inside space-y-2">
+        <li><strong>Năm 1-2:</strong> Nhắm GPA ≥ 3.2 để đệm cho các kỳ sau (khó nâng CPA khi đã tích lũy nhiều TC)</li>
+        <li><strong>Ưu tiên môn nhiều TC:</strong> Môn 3-4 TC ảnh hưởng CPA lớn hơn môn 1-2 TC</li>
+        <li><strong>Tránh tuyệt đối môn F:</strong> 1 môn F 3 TC kéo CPA giảm ~0.15-0.25 tùy tổng TC</li>
+        <li><strong>Học lại sớm:</strong> Môn D/D+ có thể học lại nâng điểm (đa số trường lấy điểm cao hơn)</li>
+        <li><strong>Theo dõi CPA dự báo:</strong> Dùng khoan tính GPA trang chủ để tính điểm cần đạt kỳ cuối</li>
+      </ol>
+    </section>
+  </main>
+</Layout>

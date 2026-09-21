@@ -1,0 +1,174 @@
+---
+import Layout from '@/layouts/Layout.astro';
+
+const pageTitle = 'أنظمة التقدير في المنطقة العربية | 4.0 أمريكي، 5.0 خليجي، 20.0 فرنسي، 100% مصري';
+const description = 'مقارنة أنظمة التقدير في الجامعات العربية: النظام الأمريكي 4.0 (مصر، الأردن، الإمارات، لبنان)، النظام الخليجي 5.0 (السعودية)، النظام الفرنسي 20.0 (لبنان - USJ)، النظام المئوي المصري.';
+const canonical = 'https://globalcgpa.in/ar/guides/gpa-systems-mena';
+const ogImage = '/og-image-ar.png';
+const lang = 'ar';
+const alternates = [
+  { hreflang: 'en', href: 'https://globalcgpa.in/guides/gpa-systems' },
+  { hreflang: 'ar', href: 'https://globalcgpa.in/ar/guides/gpa-systems-mena' },
+];
+---
+
+<Layout title={pageTitle} description={description} canonical={canonical} ogImage={ogImage} lang={lang} alternates={alternates}>
+  <main class="max-w-[780px] mx-auto px-6 py-14" style="flex:1;">
+    <nav class="crumbs mb-6" aria-label="Breadcrumb">
+      <a href="/ar/">حاسبة GPA العربية</a>
+      <span class="sep">/</span>
+      <a href="/ar/guides">الأدلة</a>
+      <span class="sep">/</span>
+      <span class="current">أنظمة التقدير</span>
+    </nav>
+
+    <div class="text-xs font-bold uppercase tracking-wider text-emerald-500 mb-2">دليل أنظمة التقدير</div>
+    <h1 class="text-3xl sm:text-4xl font-extrabold tracking-tight mb-3">أنظمة التقدير في الجامعات العربية</h1>
+    <p class="text-slate-500 dark:text-zinc-400 text-base mb-10">
+      توجد 4 أنظمة رئيسية للتقدير في الجامعات العربية. فهم الاختلافات ضروري للتحويل بين الجامعات، للدراسة بالخارج، وللعمل الدولي.
+    </p>
+
+    <section class="prose mb-12">
+      <h2>الأنظمة الأربعة الرئيسية</h2>
+      <div class="table-scroll">
+        <table>
+          <thead>
+            <tr>
+              <th>النظام</th>
+              <th class="text{center">المقياس</th>
+              <th class="text-center">النجاح</th>
+              <th class="text-center">التميز</th>
+              <th>الدول / الجامعات</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr class="bg-blue-50 dark:bg-blue-900/20"><td><strong>الأمريكي</strong></td><td class="text-center">4.0</td><td class="text-center">2.0 (C)</td><td class="text-center">3.5+ (Dean's List)</td><td>مصر (AUC، القاهرة)، الأردن (الأردنية، GJU)، الإمارات (UAEU، خليفة، AUS)، لبنان (AUB، LAU)</td></tr>
+            <tr><td><strong>الخليجي</strong></td><td class="text-center">5.0</td><td class="text-center">2.0 (د)</td><td class="text-center">4.75+ (شرف أولى)</td><td>السعودية (جامعة الملك سعود)، الكويت، البحرين، قطر، عمان (بعض الجامعات)</td></tr>
+            <tr class="bg-purple-50 dark:bg-purple-900/20"><td><strong>الفرنسي</strong></td><td class="text-center">20.0</td><td class="text-center">10/20 (ه)</td><td class="text-center">16+/20 (Très Bien)</td><td>لبنان (USJ)، المغرب، تونس، الجزائر (الجامعات الفرنكوفونية)</td></tr>
+            <tr class="bg-amber-50 dark:bg-amber-900/20"><td><strong>المئوي المصري</strong></td><td class="text-center">100%</td><td class="text-center">50% (ج)</td><td class="text-center">85%+ (أ)</td><td>مصر (جامعة القاهرة - رسمي)، بعض الجامعات الحكومية</td></tr>
+          </tbody>
+        </table>
+      </div>
+    </section>
+
+    <section class="prose mb-12">
+      <h2>تفصيل النظام الأمريكي 4.0 (الأكثر انتشاراً)</h2>
+      <p>يستخدم في 10 من أصل 13 جامعة في قائمتنا. يعتمد على التقديرات الحرفية مع نقاط:</p>
+      <div class="table-scroll">
+        <table>
+          <thead><tr><th>التقدير</th><th class="text-center">النقاط</th><th class="text-center">النسبة %</th><th>الوصف</th></tr></thead>
+          <tbody>
+            <tr><td><strong>A+</strong></td><td class="text-center">4.0</td><td class="text-center">95-100%</td><td>امتياز عالي</td></tr>
+            <tr><td><strong>A</strong></td><td class="text-center">4.0</td><td class="text-center">90-94%</td><td>امتياز</td></tr>
+            <tr><td><strong>A-</strong></td><td class="text-center">3.7</td><td class="text-center">85-89%</td><td>امتياز منخفض</td></tr>
+            <tr><td><strong>B+</strong></td><td class="text-center">3.3</td><td class="text-center">80-84%</td><td>جيد جداً عالي</td></tr>
+            <tr><td><strong>B</strong></td><td class="text-center">3.0</td><td class="text-center">75-79%</td><td>جيد جداً</td></tr>
+            <tr><td><strong>B-</strong></td><td class="text-center">2.7</td><td class="text-center">70-74%</td><td>جيد</td></tr>
+            <tr><td><strong>C+</strong></td><td class="text-center">2.3</td><td class="text-center">65-69%</td><td>مقبول عالي</td></tr>
+            <tr><td><strong>C</strong></td><td class="text-center">2.0</td><td class="text-center">60-64%</td><td>مقبول <span class="text-emerald-500">(حد النجاح)</span></td></tr>
+            <tr><td><strong>C-</strong></td><td class="text-center">1.7</td><td class="text-center">55-59%</td><td>ضعيف مقبول</td></tr>
+            <tr><td><strong>D</strong></td><td class="text-center">1.0</td><td class="text-center">50-54%</td><td>ضعيف مشروط</td></tr>
+            <tr><td><strong>F</strong></td><td class="text-center">0.0</td><td class="text-center">< 50%</td><td>راسب</td></tr>
+          </tbody>
+        </table>
+      </div>
+      <p class="mt-3"><strong>الصيغة:</strong> GPA = Σ(ساعات معتمدة × نقاط التقدير) ÷ Σساعات معتمدة</p>
+    </section>
+
+    <section class="prose mb-12">
+      <h2>النظام الخليجي 5.0 (جامعة الملك سعود)</h2>
+      <p>سائد في السعودية وغالبية جامعات الخليج. نفس فلسفة 4.0 لكن المقياس 5.0:</p>
+      <div class="table-scroll">
+        <table>
+          <thead><tr><th>التقدير</th><th class="text-center">النقاط</th><th class="text-center">النسبة %</th><th>التحويل لـ 4.0</th></tr></thead>
+          <tbody>
+            <tr><td><strong>أ+</strong></td><td class="text-center">5.0</td><td class="text-center">95-100%</td><td class="text-center">4.0</td></tr>
+            <tr><td><strong>أ</strong></td><td class="text-center">4.75</td><td class="text-center">90-94%</td><td class="text-center">3.8</td></tr>
+            <tr><td><strong>ب+</strong></td><td class="text-center">4.5</td><td class="text-center">85-89%</td><td class="text-center">3.6</td></tr>
+            <tr><td><strong>ب</strong></td><td class="text-center">4.0</td><td class="text-center">80-84%</td><td class="text-center">3.2</td></tr>
+            <tr><td><strong>ج+</strong></td><td class="text-center">3.5</td><td class="text-center">75-79%</td><td class="text-center">2.8</td></tr>
+            <tr><td><strong>ج</strong></td><td class="text-center">3.0</td><td class="text-center">70-74%</td><td class="text-center">2.4</td></tr>
+            <tr><td><strong>د+</strong></td><td class="text-center">2.5</td><td class="text-center">65-69%</td><td class="text-center">2.0</td></tr>
+            <tr><td><strong>د</strong></td><td class="text-center">2.0</td><td class="text-center">60-64%</td><td class="text-center">1.6 <span class="text-emerald-500">(حد النجاح)</span></td></tr>
+            <tr><td><strong>ر</strong></td><td class="text-center">1.0</td><td class="text-center">0-59%</td><td class="text-center">0.0</td></tr>
+          </tbody>
+        </table>
+      </div>
+      <p class="mt-3"><strong>التحويل:</strong> GPA 4.0 = GPA 5.0 × (4.0 ÷ 5.0) = GPA 5.0 × 0.8</p>
+    </section>
+
+    <section class="prose mb-12">
+      <h2>النظام الفرنسي 20.0 (جامعة القديس يوسف - USJ)</h2>
+      <p>نظام فرنسي تقليدي. المعدل = Σ(معامل × درجة) ÷ Σمعامل</p>
+      <div class="table-scroll">
+        <table>
+          <thead><tr><th>التقدير</th><th class="text-center">الدرجة /20</th><th class="text-center">النسبة %</th><th class="text-center">التحويل لـ 4.0</th><th>الذكر</th></tr></thead>
+          <tbody>
+            <tr><td><strong>أ (Très Bien)</strong></td><td class="text-center">18-20</td><td class="text-center">90-100%</td><td class="text-center">3.6-4.0</td><td>ممتاز</td></tr>
+            <tr><td><strong>ب (Bien)</strong></td><td class="text-center">16-17</td><td class="text-center">80-85%</td><td class="text-center">3.2-3.4</td><td>جيد جداً</td></tr>
+            <tr><td><strong>ج (Assez Bien)</strong></td><td class="text-center">14-15</td><td class="text-center">70-75%</td><td class="text-center">2.8-3.0</td><td>جيد</td></tr>
+            <tr><td><strong>د (Passable)</strong></td><td class="text-center">12-13</td><td class="text-center">60-65%</td><td class="text-center">2.4-2.6</td><td>مقبول</td></tr>
+            <tr><td><strong>ه (Passable - حد النجاح)</strong></td><td class="text-center">10-11</td><td class="text-center">50-55%</td><td class="text-center">2.0-2.2</td><td>ناجح <span class="text-emerald-500">(حد النجاح)</span></td></tr>
+            <tr><td><strong>و (Ajourné - راسب)</strong></td><td class="text-center">0-9</td><td class="text-center">0-45%</td><td class="text-center">0.0-1.8</td><td>راسب</td></tr>
+          </tbody>
+        </table>
+      </div>
+      <p class="mt-3"><strong>التحويل:</strong> GPA 4.0 = المعدل / 20 × 4.0 = المعدل × 0.2</p>
+    </section>
+
+    <section class="prose mb-12">
+      <h2>النظام المئوي المصري (جامعة القاهرة - رسمي)</h2>
+      <p>تستخدم جامعة القاهرة النسب المئوية رسمياً، مع تحويل داخلي لـ 4.0:</p>
+      <div class="table-scroll">
+        <table>
+          <thead><tr><th>النسبة %</th><th class="text-center">التقدير</th><th class="text-center">نقاط 4.0</th><th>ملاحظات</th></tr></thead>
+          <tbody>
+            <tr><td class="text-center">85-100%</td><td class="text-center">أ (امتياز)</td><td class="text-center">4.0</td><td>امتياز</td></tr>
+            <tr><td class="text-center">75-84%</td><td class="text-center">ب+ (جيد جداً)</td><td class="text-center">3.5</td><td></td></tr>
+            <tr><td class="text-center">65-74%</td><td class="text-center">ب (جيد)</td><td class="text-center">3.0</td><td></td></tr>
+            <tr><td class="text-center">60-64%</td><td class="text-center">ج+ (مقبول)</td><td class="text-center">2.5</td><td></td></tr>
+            <tr><td class="text-center">50-59%</td><td class="text-center">ج (مقبول)</td><td class="text-center">2.0 <span class="text-emerald-500">(حد النجاح)</span></td><td></td></tr>
+            <tr><td class="text-center">40-49%</td><td class="text-center">د (ضعيف)</td><td class="text-center">1.5</td><td>مشروط</td></tr>
+            <tr><td class="text-center">0-39%</td><td class="text-center">ر (راسب)</td><td class="text-center">0.0</td><td>راسب</td></tr>
+          </tbody>
+        </table>
+      </div>
+    </section>
+
+    <section class="prose mb-12">
+      <h2>جدول تحويل سريع بين الأنظمة</h2>
+      <div class="table-scroll">
+        <table>
+          <thead>
+            <tr>
+              <th>مستوى الأداء</th>
+              <th class="text-center">4.0 أمريكي</th>
+              <th class="text-center">5.0 خليجي</th>
+              <th class="text-center">20.0 فرنسي</th>
+              <th class="text-center">100% مصري</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr><td><strong>ممتاز / امتياز</strong></td><td class="text-center">3.6 - 4.0</td><td class="text-center">4.5 - 5.0</td><td class="text-center">16 - 20</td><td class="text-center">85 - 100%</td></tr>
+            <tr><td><strong>جيد جداً</strong></td><td class="text-center">3.0 - 3.59</td><td class="text-center">3.75 - 4.49</td><td class="text-center">14 - 15.9</td><td class="text-center">75 - 84%</td></tr>
+            <tr><td><strong>جيد / مقبول عالي</strong></td><td class="text-center">2.5 - 2.99</td><td class="text-center">3.125 - 3.74</td><td class="text-center">12 - 13.9</td><td class="text-center">65 - 74%</td></tr>
+            <tr><td><strong>مقبول / حد النجاح</strong></td><td class="text-center">2.0 - 2.49</td><td class="text-center">2.5 - 3.12</td><td class="text-center">10 - 11.9</td><td class="text-center">50 - 64%</td></tr>
+            <tr><td><strong>ضعيف / مشروط</strong></td><td class="text-center">1.0 - 1.99</td><td class="text-center">1.25 - 2.49</td><td class="text-center">6 - 9.9</td><td class="text-center">40 - 49%</td></tr>
+            <tr><td><strong>راسب</strong></td><td class="text-center">0.0 - 0.99</td><td class="text-center">0.0 - 1.24</td><td class="text-center">0 - 5.9</td><td class="text-center">0 - 39%</td></tr>
+          </tbody>
+        </table>
+      </div>
+    </section>
+
+    <section class="prose">
+      <h2>نصائح مهمة</h2>
+      <ul class="list-disc list-inside space-y-2">
+        <li><strong>عند التحويل بين جامعات عربية:</strong> استخدم دائماً المعدل الأصلي (GPA 4.0 أو 5.0 أو 20.0) ولا تحوله مسبقاً — دع الجهة المستقبلة تقوم بالتحويل الرسمي.</li>
+        <li><strong>للتقديم للخارج (WES، DAAD، Campus France):</strong> قدم كشف الدرجات الأصلي باللغة الرسمية + ترجمة معتمدة. الجهة المقيّمة تطبق صيغتها الخاصة.</li>
+        <li><strong>النظام المئوي المصري:</strong> خاص بجامعة القاهرة والجامعات الحكومية المصرية. AUC تستخدم 4.0 أمريكي مباشرة.</li>
+        <li><strong>الجامعة الأردنية:</strong> تستخدم 11 درجة حرفية (أ+ إلى ر) على مقياس 4.0 — أدق من النظام القياسي.</li>
+        <li><strong>KAUST و KFUPM:</strong> تستخدمان 4.0 أمريكي رغم وجودهما في السعودية (حيث 5.0 سائد).</li>
+      </ul>
+    </section>
+  </main>
+</Layout>

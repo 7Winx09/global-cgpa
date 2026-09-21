@@ -1,12 +1,13 @@
 ---
-import Layout from '../layouts/Layout.astro';
+import Layout from '@/layouts/Layout.astro';
 import SiteHeader from '../components/Nav.astro';
 import SiteFooter from '../components/Footer.astro';
 import Breadcrumbs from '../components/Breadcrumbs.astro';
 import FaqAccordion from '../components/FaqAccordion.astro';
 import { universities } from '../data/universities';
+import { hasUniversityPage } from '@/data/university-pages';
 
-const engUnis = universities.filter((u) => u.key !== 'du');
+const engUnis = universities.filter((u) => u.key !== 'du' && hasUniversityPage(u.key));
 const cgpaValues = [10, 9, 8.5, 8, 7.5, 7, 6.5, 6];
 const pct = (fn: (c: number) => number, c: number) => Math.min(100, Math.max(0, fn(c))).toFixed(1);
 
@@ -178,3 +179,4 @@ const schema = {
     .uni-state { font-weight: 400; font-size: 0.82em; color: var(--text-mute); }
   </style>
 </Layout>
+

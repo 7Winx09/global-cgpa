@@ -1,0 +1,124 @@
+---
+import Layout from '@/layouts/Layout.astro';
+
+const pageTitle = 'Thang 4.0 Chuẩn Quốc Gia Việt Nam | Quy Đổi Điểm Theo Thông Tư 08/2021';
+const description = 'Thang điểm 4.0 chuẩn Bộ GD&ĐT theo Thông tư 08/2021/TT-BGDĐT. Bảng quy đổi điểm số thang 10 sang điểm chữ A-F và điểm 4.0 cho ĐHQG, HUST, HCMUT, NEU.';
+const canonical = 'https://globalcgpa.in/vn/guides/thang-4-quoc-gia';
+const ogImage = '/og-image-vn.png';
+const lang = 'vn';
+const alternates = [
+  { hreflang: 'en', href: 'https://globalcgpa.in/guides/4-point-scale' },
+  { hreflang: 'vn', href: 'https://globalcgpa.in/vn/guides/thang-4-quoc-gia' },
+];
+---
+
+<Layout title={pageTitle} description={description} canonical={canonical} ogImage={ogImage} lang={lang} alternates={alternates}>
+  <main class="max-w-[780px] mx-auto px-6 py-14" style="flex:1;">
+    <nav class="crumbs mb-6" aria-label="Breadcrumb">
+      <a href="/vn/">Khoan Tính GPA</a>
+      <span class="sep">/</span>
+      <a href="/vn/guides">Hướng Dẫn</a>
+      <span class="sep">/</span>
+      <span class="current">Thang 4.0 Quốc Gia</span>
+    </nav>
+
+    <div class="text-xs font-bold uppercase tracking-wider text-emerald-500 mb-2">Panduan Hệ Thống Chấm Điểm</div>
+    <h1 class="text-3xl sm:text-4xl font-extrabold tracking-tight mb-3">Thang 4.0 Chuẩn Quốc Gia (Quyết định 08/2021/TT-BGDĐT)</h1>
+    <p class="text-slate-500 dark:text-zinc-400 text-base mb-10">
+      Thông tư 08/2021/TT-BGDĐT quy định thống nhất thang điểm 4.0 cho các trường đại học, cao đẳng Việt Nam. 5 trường ĐHQG TP.HCM, ĐHQG HN, Bách Khoa Hà Nội, Bách Khoa TP.HCM, Kinh tế Quốc dân đều áp dụng chuẩn này.
+    </p>
+
+    <section class="prose mb-12">
+      <h2>Bảng Quy Đổi Chuẩn Bộ GD&ĐT (Thông tư 08/2021)</h2>
+      <div class="table-scroll">
+        <table>
+          <thead>
+            <tr>
+              <th>Điểm Số (Thang 10)</th>
+              <th class="text-center">Điểm Chữ</th>
+              <th class="text-center">Điểm 4.0</th>
+              <th class="text-center">Xếp Loại</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr><td class="font-bold">8.5 – 10.0</td><td class="text-center"><strong>A / A+</strong></td><td class="text-center font-mono">4.0</td><td class="text-center">Xuất sắc</td></tr>
+            <tr><td class="font-bold">8.0 – 8.4</td><td class="text-center"><strong>B+</strong></td><td class="text-center font-mono">3.5</td><td class="text-center">Giỏi</td></tr>
+            <tr><td class="font-bold">7.0 – 7.9</td><td class="text-center"><strong>B</strong></td><td class="text-center font-mono">3.0</td><td class="text-center">Khá</td></tr>
+            <tr><td class="font-bold">6.5 – 6.9</td><td class="text-center"><strong>C+</strong></td><td class="text-center font-mono">2.5</td><td class="text-center">Trung bình khá</td></tr>
+            <tr><td class="font-bold">5.5 – 6.4</td><td class="text-center"><strong>C</strong></td><td class="text-center font-mono">2.0</td><td class="text-center">Trung bình <span class="text-emerald-500">(Đạt)</span></td></tr>
+            <tr><td class="font-bold">5.0 – 5.4</td><td class="text-center"><strong>D+</strong></td><td class="text-center font-mono">1.5</td><td class="text-center">Yếu (Điều kiện)</td></tr>
+            <tr><td class="font-bold">4.0 – 4.9</td><td class="text-center"><strong>D</strong></td><td class="text-center font-mono">1.0</td><td class="text-center">Yếu (Điều kiện)</td></tr>
+            <tr><td class="font-bold">< 4.0</td><td class="text-center"><strong>F</strong></td><td class="text-center font-mono">0.0</td><td class="text-center">Không đạt</td></tr>
+          </tbody>
+        </table>
+      </div>
+      <p class="text-sm text-slate-500 dark:text-zinc-400 mt-3">
+        Áp dụng cho: ĐHQG TP.HCM, ĐHQG Hà Nội, HUST, HCMUT, NEU và các trường thành viên. Một số trường có thể mở rộng A+ (9.5-10) tách biệt khỏi A (8.5-9.4).
+      </p>
+    </section>
+
+    <section class="prose mb-12">
+      <h2>So Sánh 5 Trường ĐH Hàng Đầu</h2>
+      <div class="table-scroll">
+        <table>
+          <thead>
+            <tr>
+              <th>Trường</th>
+              <th class="text-center">A/A+</th>
+              <th class="text-center">B+</th>
+              <th class="text-center">B</th>
+              <th class="text-center">C+</th>
+              <th class="text-center">C</th>
+              <th class="text-center">D+/D</th>
+              <th class="text-center">F</th>
+              <th>Ghi Chú</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr><td><strong>ĐHQG TP.HCM</strong></td><td class="text-center">4.0</td><td class="text-center">3.5</td><td class="text-center">3.0</td><td class="text-center">2.5</td><td class="text-center">2.0</td><td class="text-center">1.5/1.0</td><td class="text-center">0</td><td>Quyết định 5115/QĐ</td></tr>
+            <tr><td><strong>ĐHQG Hà Nội</strong></td><td class="text-center">4.0</td><td class="text-center">3.5</td><td class="text-center">3.0</td><td class="text-center">2.5</td><td class="text-center">2.0</td><td class="text-center">1.5/1.0</td><td class="text-center">0</td><td>Quyết định 3626/QĐ</td></tr>
+            <tr><td><strong>Bách Khoa HN (HUST)</strong></td><td class="text-center">4.0</td><td class="text-center">3.5</td><td class="text-center">3.0</td><td class="text-center">2.5</td><td class="text-center">2.0</td><td class="text-center">1.5/1.0</td><td class="text-center">0</td><td>Quyết định 4456/QĐ</td></tr>
+            <tr><td><strong>Bách Khoa HCM (HCMUT)</strong></td><td class="text-center">4.0</td><td class="text-center">3.5</td><td class="text-center">3.0</td><td class="text-center">2.5</td><td class="text-center">2.0</td><td class="text-center">1.5/1.0</td><td class="text-center">0</td><td>Quy chế ĐHQG-HCM</td></tr>
+            <tr><td><strong>Kinh tế QD (NEU)</strong></td><td class="text-center">4.0</td><td class="text-center">3.5</td><td class="text-center">3.0</td><td class="text-center">2.5</td><td class="text-center">2.0</td><td class="text-center">1.5/1.0</td><td class="text-center">0</td><td>>50% xuất sắc khóa 2024</td></tr>
+          </tbody>
+        </table>
+      </div>
+      <p class="mt-3 text-sm text-slate-500 dark:text-zinc-400">Tất cả 5 trường dùng thang 8 điểm (A, B+, B, C+, C, D+, D, F) với trọng số 4.0, 3.5, 3.0, 2.5, 2.0, 1.5, 1.0, 0. Chỉ khác biệt ở ngưỡng phân chia % và quy định cảnh báo/tốt nghiệp.</p>
+    </section>
+
+    <section class="prose mb-12">
+      <h2>Công Thức Quy Đổi</h2>
+      <div class="formula-block mb-4">
+        <div class="f-label">Điểm 10 → Điểm 4.0</div>
+        <div class="f-text">Điểm 4.0 = f(Điểm 10) theo bảng phân đoạn Thông tư 08</div>
+        <div class="f-example">Điểm 8.7 → B+ (3.5) | Điểm 7.2 → B (3.0) | Điểm 5.8 → C (2.0)</div>
+      </div>
+      <div class="formula-block">
+        <div class="f-label">GPA / CPA</div>
+        <div class="f-text">GPA = Σ(Tín chỉ × Điểm 4.0) ÷ ΣTín chỉ</div>
+        <div class="f-example">3 TC A(4.0) + 3 TC B+(3.5) = (12+10.5)÷6 = 3.75</div>
+      </div>
+    </section>
+
+    <section class="prose mb-12">
+      <h2>Điểm Quan Trọng Cần Nhớ</h2>
+      <ul class="list-disc list-inside space-y-2">
+        <li><strong>Điểm C (2.0) là ngưỡng ĐẠT</strong> — dưới C (D+, D, F) = không đạt môn học</li>
+        <li><strong>A+ và A cùng 4.0</strong> — tách biệt chỉ để ghi nhận xuất sắc hơn trên bảng điểm</li>
+        <li><strong>D+, D tính vào CPA</strong> — kéo giảm điểm tích lũy, tối đa 20% tín chỉ D</li>
+        <li><strong>Môn F (0 điểm)</strong> — vẫn tính tín chỉ vào mẫu số CPA, ảnh hưởng rất lớn</li>
+        <li><strong>Học lại môn F</strong> — điểm mới ghi đè điểm cũ (đa số trường), TC chỉ tính 1 lần</li>
+      </ul>
+    </section>
+
+    <section class="prose">
+      <h2>Cơ Sở Pháp Lý</h2>
+      <ul class="list-disc list-inside space-y-1">
+        <li>Thông tư 08/2021/TT-BGDĐT — Quy chế đào tạo trình độ đại học, cao đẳng chính quy</li>
+        <li>Quyết định 5115/QĐ-ĐHQGHN — Quy chế đào tạo ĐHQG TP.HCM</li>
+        <li>Quyết định 3626/QĐ-ĐHQGHN — Quy chế đào tạo ĐHQG Hà Nội</li>
+        <li>Quyết định 4456/QĐ-ĐHBKHN — Quy chế đào tạo HUST 2025</li>
+      </ul>
+    </section>
+  </main>
+</Layout>

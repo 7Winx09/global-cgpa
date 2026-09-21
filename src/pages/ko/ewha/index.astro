@@ -1,6 +1,6 @@
 ---
-import Layout from '../../../layouts/Layout.astro';
-import { getUniversityByKey } from '../../../data/universities-global';
+import Layout from '@/layouts/Layout.astro';
+import { getUniversityByKey } from '@/data/universities-global';
 
 const univ = getUniversityByKey('kr-ewha')!;
 const pageTitle = `${univ.name} 학점계산기 | ${univ.system} 만점 평점 평균 계산`;

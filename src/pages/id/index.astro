@@ -1,6 +1,6 @@
 ---
-import Layout from '../../layouts/Layout.astro';
-import { getUniversitiesByCountry } from '../../data/universities-global';
+import Layout from '@/layouts/Layout.astro';
+import { getUniversitiesByCountry } from '@/data/universities-global';
 
 const universities = getUniversitiesByCountry('ID');
 const systems = [...new Set(universities.map(u => u.system))].sort((a, b) => parseFloat(b) - parseFloat(a));

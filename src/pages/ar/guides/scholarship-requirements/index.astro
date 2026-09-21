@@ -1,0 +1,239 @@
+---
+import Layout from '@/layouts/Layout.astro';
+
+const pageTitle = 'متطلبات المنح الدراسية الدولية | GPA المطلوب لفولبرايت، تشيفنينغ، DAAD، MEXT، GKS، إراسموس';
+const description = 'دليل متطلبات GPA للمنح الدراسية العالمية الرئيسية: فولبرايت (أمريكا)، تشيفنينغ (بريطانيا)، DAAD (ألمانيا)، MEXT (اليابان)، GKS (كوريا)، إراسموس (أوروبا)، تشيفنينغ، أستراليا أواردز. حد أدنى GPA، مستندات، مواعيد.';
+const canonical = 'https://globalcgpa.in/ar/guides/scholarship-requirements';
+const ogImage = '/og-image-ar.png';
+const lang = 'ar';
+const alternates = [
+  { hreflang: 'en', href: 'https://globalcgpa.in/guides/scholarships-gpa-requirements' },
+  { hreflang: 'ar', href: 'https://globalcgpa.in/ar/guides/scholarship-requirements' },
+];
+---
+
+<Layout title={pageTitle} description={description} canonical={canonical} ogImage={ogImage} lang={lang} alternates={alternates}>
+  <main class="max-w-[780px] mx-auto px-6 py-14" style="flex:1;">
+    <nav class="crumbs mb-6" aria-label="Breadcrumb">
+      <a href="/ar/">حاسبة GPA العربية</a>
+      <span class="sep">/</span>
+      <a href="/ar/guides">الأدلة</a>
+      <span class="sep">/</span>
+      <span class="current">متطلبات المنح</span>
+    </nav>
+
+    <div class="text-xs font-bold uppercase tracking-wider text-emerald-500 mb-2">منح دراسية عالمية</div>
+    <h1 class="text-3xl sm:text-4xl font-extrabold tracking-tight mb-3">متطلبات GPA للمنح الدراسية الدولية الرئيسية</h1>
+    <p class="text-slate-500 dark:text-zinc-400 text-base mb-10">
+      كل منحة عالمية لها حد أدنى لمعدل GPA. هذا الدليل يجمع متطلبات 8 منح رئيسية للطلاب العرب، مع تحويل المعدلات العربية (4.0، 5.0، 20.0) للمقاييس المطلوبة.
+    </p>
+
+    <section class="prose mb-12">
+      <h2>جدول ملخص: متطلبات GPA للمنح الرئيسية</h2>
+      <div class="table-scroll">
+        <table>
+          <thead>
+            <tr>
+              <th>المنحة</th>
+              <th class="text-center">الدولة</th>
+              <th class="text-center">الحد الأدنى GPA (4.0)</th>
+              <th class="text-center">الحد الأدنى GPA (5.0)</th>
+              <th class="text-center">الحد الأدنى (20.0)</th>
+              <th class="text-center">المستوى</th>
+              <th>ملاحظات مهمة</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr class="bg-blue-50 dark:bg-blue-900/20"><td><strong>فولبرايت (Fullbright)</strong></td><td class="text-center">🇺🇸 أمريكا</td><td class="text-center">3.0+ (تنافسي 3.5+)</td><td class="text-center">3.75+ (4.69+ تنافسي)</td><td class="text-center">15+ (16.87+ تنافسي)</td><td class="text-center">ماجستير/دكتوراه</td><td>يتطلب تقييم WES. تصريح TOEFL/GRE. مقابلة شخصية.</td></tr>
+            <tr class="bg-red-50 dark:bg-red-900/20"><td><strong>تشيفنينغ (Chevening)</strong></td><td class="text-center">🇬🇧 بريطانيا</td><td class="text-center">3.5+ (Upper 2:1 ≈ 65%+)</td><td class="text-center">4.375+</td><td class="text-center">16.25+</td><td class="text-center">ماجستير (سنة)</td><td>يتطلب 3 خطابات تزكية. IELTS 6.5+. خبرة عمل سنتين.</td></tr>
+            <tr class="bg-yellow-50 dark:bg-yellow-900/20"><td><strong>DAAD</strong></td><td class="text-center">🇩🇪 ألمانيا</td><td class="text-center">2.5+ (تنافسي 2.0-2.5)</td><td class="text-center">3.125+</td><td class="text-center">12.5+</td><td class="text-center">ماجستير/دكتوراه</td><td>يستخدم Modified Bavarian Formula. جامعة H+ إلزامية. لغة ألمانية/إنجليزية.</td></tr>
+            <tr class="bg-pink-50 dark:bg-pink-900/20"><td><strong>MEXT (اليابان)</strong></td><td class="text-center">🇯🇵 اليابان</td><td class="text-center">2.30/3.00 (≈ 3.07/4.0)</td><td class="text-center">2.875/3.75</td><td class="text-center">11.5/15</td><td class="text-center">ماجستير/دكتوراه</td><td>GPA 2.30 من 3.00. يتطلب TOPIK أو لغة يابانية. سفارة ترشح.</td></tr>
+            <tr class="bg-orange-50 dark:bg-orange-900/20"><td><strong>GKS (كوريا)</strong></td><td class="text-center">🇰🇷 كوريا</td><td class="text-center">2.67+ (3.0/4.5)</td><td class="text-center">3.33+</td><td class="text-center">13.33+</td><td class="text-center">ماجستير/دكتوراه</td><td>GPA 3.0/4.5 أو أعلى 20%. TOPIK 3+ أو الإنجليزية. NIIED تدير.</td></tr>
+            <tr class="bg-purple-50 dark:bg-purple-900/20"><td><strong>إراسموس موندوس (Erasmus Mundus)</strong></td><td class="text-center">🇪🇺 أوروبا</td><td class="text-center">3.0+ (تختلف بالبرنامج)</td><td class="text-center">3.75+</td><td class="text-center">15+</td><td class="text-center">ماجستير مشترك</td><td>برامج محددة. IELTS 6.5-7.0. درجتين من جامعتين أوروبيتين.</td></tr>
+            <tr class="bg-green-50 dark:bg-green-900/20"><td><strong>أستراليا أواردز (Australia Awards)</strong></td><td class="text-center">🇦🇺 أستراليا</td><td class="text-center">3.0+ (≈ 5.25/7.0)</td><td class="text-center">3.75+</td><td class="text-center">15+</td><td class="text-center">ماجستير/دكتوراه</td><td>للمناطق النامية. IELTS 6.5+. التزام العودة للوطن.</td></tr>
+            <tr class="bg-indigo-50 dark:bg-indigo-900/20"><td><strong>فولبرايت FLTA / Humphrey</strong></td><td class="text-center">🇺🇸 أمريكا</td><td class="text-center">3.0+</td><td class="text-center">3.75+</td><td class="text-center">15+</td><td class="text-center">معلمين/مهنيين</td><td>برامج غير درجة. خبرة تدريس/عمل. J-1 Visa.</td></tr>
+          </tbody>
+        </table>
+      </div>
+    </section>
+
+    <section class="prose mb-12">
+      <h2>تفصيل كل منحة</h2>
+
+      <h3>🇺🇸 برنامج فولبرايت (Fullbright Foreign Student Program)</h3>
+      <div class="bg-blue-50 dark:bg-blue-900/20 border border-blue-200 dark:border-blue-800 rounded-xl p-6 mb-6">
+        <ul class="list-disc list-inside space-y-2">
+          <li><strong>GPA الأدنى:</strong> 3.0/4.0 (لكن التنافسي الحقيقي 3.5+)</li>
+          <li><strong>لحاملي 5.0:</strong> 3.75/5.0 أدنى، 4.375+ تنافسي</li>
+          <li><strong>لحاملي 20.0:</strong> 15/20 أدنى، 16.87+ تنافسي</li>
+          <li><strong>التقييم:</strong> إلزامي <a href="https://www.wes.org" target="_blank" class="underline">WES Course-by-Course Evaluation</a></li>
+          <li><strong>الاختبارات:</strong> TOEFL iBT 90+ / IELTS 7.0+، GRE مطلوب لمعظم البرامج</li>
+          <li><strong>المستندات:</strong> 3 خطابات تزكية، بيان شخصي، خطة دراسية، صحتك</li>
+          <li><strong>الموعد:</strong> فبراير - أبريل (يختلف بالبلد) — عبر السفارة/اللجنة المحلية</li>
+          <li><strong>ملاحظة:</strong> المنحة تغطي الرسوم كاملة + راتب شهري + تأمين + تذاكر</li>
+        </ul>
+      </div>
+
+      <h3>🇬🇧 تشيفنينغ (Chevening Scholarships)</h3>
+      <div class="bg-red-50 dark:bg-red-900/20 border border-red-200 dark:border-red-800 rounded-xl p-6 mb-6">
+        <ul class="list-disc list-inside space-y-2">
+          <li><strong>المتطلب الأكاديمي:</strong> درجة بكالوريوس تعادل Upper Second Class (2:1) بريطاني</li>
+          <li><strong>التحويل:</strong> GPA 3.5+/4.0 ≈ 65-69% ≈ Upper 2:1</li>
+          <li><strong>لـ 5.0:</strong> 4.375+/5.0 | <strong>لـ 20.0:</strong> 16.25+/20</li>
+          <li><strong>الخبرة:</strong> سنتان عمل (2800 ساعة) — عمل، تطوع، تدريب</li>
+          <li><strong>اللغة:</strong> IELTS 6.5 إجمالاً (6.0 في كل مهارة) أو معادل</li>
+          <li><strong>خطابات التزكية:</strong> 3 (أكاديمية/مهنية)</li>
+          <li><strong>الموعد:</strong> أغسطس - نوفمبر سنوياً — <a href="https://www.chevening.org" target="_blank" class="underline">chevening.org</a></li>
+          <li><strong>تغطي:</strong> رسوم كاملة + راتب + تذاكر ذهاب/عودة + تأشيرة</li>
+        </ul>
+      </div>
+
+      <h3>🇩🇪 DAAD (برامج المنح الدراسية للدراسات العليا)</h3>
+      <div class="bg-yellow-50 dark:bg-yellow-900/20 border border-yellow-200 dark:border-yellow-800 rounded-xl p-6 mb-6">
+        <ul class="list-disc list-inside space-y-2">
+          <li><strong>GPA الأدنى:</strong> 2.5/4.0 (بافاري فورمولا ≤ 2.5) — لكن التنافسي 2.0-2.5</li>
+          <li><strong>لـ 5.0:</strong> 3.125+/5.0 | <strong>لـ 20.0:</strong> 12.5+/20</li>
+          <li><strong>شرط حاسم:</strong> الجامعة في <a href="https://anabin.kmk.org" target="_blank" class="underline">Anabin</a> مصنفة H+</li>
+          <li><strong>اللغة:</strong> ألمانية (DSH/TestDaF) أو إنجليزية (IELTS 6.5+) حسب البرنامج</li>
+          <li><strong>البرامج:</strong> EPOS (تنمية)، منح بحثية، منح فنية، دراسة لغة</li>
+          <li><strong>الموعد:</strong> يختلف بالبرنامج (أغسطس - أكتوبر لمعظم EPOS) — <a href="https://www.daad.de" target="_blank" class="underline">daad.de</a></li>
+          <li><strong>تغطي:</strong> راتب 934€/شهر ماجستير، 1200€/شهر دكتوراه + تأمين + تذاكر</li>
+        </ul>
+      </div>
+
+      <h3>🇯🇵 MEXT (منحة وزارة التعليم اليابانية)</h3>
+      <div class="bg-pink-50 dark:bg-pink-900/20 border border-pink-200 dark:border-pink-800 rounded-xl p-6 mb-6">
+        <ul class="list-disc list-inside space-y-2">
+          <li><strong>المتطلب:</strong> GPA 2.30 من 3.00 على الأقل (≈ 76.7% أو 3.07/4.0)</li>
+          <li><strong>لـ 5.0:</strong> 3.83/5.0 (2.30×5/3) | <strong>لـ 20.0:</strong> 15.33/20</li>
+          <li><strong>المساران:</strong> سفارة (Embassy Recommendation) أو جامعة (University Recommendation)</li>
+          <li><strong>اللغة:</strong> يابانية (للدراسة باليابانية) أو إنجليزية (للبرامج الدولية) — TOPIK غير مطلوب</li>
+          <li><strong>الاختبارات:</strong> قد تتطلب اختبارات كتابية (رياضيات، إنجليزية، تخصص)</li>
+          <li><strong>العمر:</strong> تحت 35 للماجستير، تحت 40 للدكتوراه (أبريل 2025)</li>
+          <li><strong>الموعد:</strong> أبريل - مايو (مسار السفارة) — عبر السفارة اليابانية ببلدك</li>
+          <li><strong>تغطي:</strong> رسوم كاملة + راتب 144,000-145,000¥/شهر + تذاكر</li>
+        </ul>
+      </div>
+
+      <h3>🇰🇷 GKS (Global Korea Scholarship - سابقاً KGSP)</h3>
+      <div class="bg-orange-50 dark:bg-orange-900/20 border border-orange-200 dark:border-orange-800 rounded-xl p-6 mb-6">
+        <ul class="list-disc list-inside space-y-2">
+          <li><strong>GPA الأدنى:</strong> 3.0/4.5 (≈ 2.67/4.0) أو أعلى 20% من الدفعة</li>
+          <li><strong>لـ 5.0:</strong> 3.75/5.0 | <strong>لـ 20.0:</strong> 15/20</li>
+          <li><strong>المساران:</strong> سفارة (Embassy Track) أو جامعة (University Track)</li>
+          <li><strong>اللغة:</strong> TOPIK Level 3+ (كوري) أو إنجليزية (للبرامج الدولية)</li>
+          <li><strong>العمر:</strong> تحت 40 سنة</li>
+          <li><strong>المستندات:</strong> شهادة طبية، خطة دراسية، خطابات تزكية، جواز سفر</li>
+          <li><strong>الموعد:</strong> فبراير - مارس (سفارة)، سبتمبر - أكتوبر (جامعة) — <a href="https://www.studyinkorea.go.kr" target="_blank" class="underline">studyinkorea.go.kr</a></li>
+          <li><strong>تغطي:</strong> رسوم كاملة + راتب 900,000-1,000,000₩/شهر + تذاكر + لغة كورية سنة</li>
+        </ul>
+      </div>
+
+      <h3>🇪🇺 إراسموس موندوس (Erasmus Mundus Joint Master Degrees)</h3>
+      <div class="bg-purple-50 dark:bg-purple-900/20 border border-purple-200 dark:border-purple-800 rounded-xl p-6 mb-6">
+        <ul class="list-disc list-inside space-y-2">
+          <li><strong>GPA:</strong> يختلف بالبرنامج (عادة 3.0+/4.0 أو ما يعادل)</li>
+          <li><strong>الشرط:</strong> القبول في برنامج EMJMD محدد (قائمة سنوية)</li>
+          <li><strong>اللغة:</strong> IELTS 6.5-7.0 (أكاديمي) — إلزامي</li>
+          <li><strong>الميزة:</strong> تدرس في جامعتين أوروبيتين مختلفتين على الأقل</li>
+          <li><strong>التغطية:</strong> رسوم كاملة + راتب 1400€/شهر + تأمين + سفر</li>
+          <li><strong>التقديم:</strong> مباشرة للبرنامج (وليس لإراسموس المركزي) — <a href="https://www.eacea.ec.europa.eu/erasmus-plus/actions/erasmus-mundus-joint-master-degrees_en" target="_blank" class="underline">قائمة البرامج</a></li>
+        </ul>
+      </div>
+
+      <h3>🇦🇺 أستراليا أواردز (Australia Awards Scholarships)</h3>
+      <div class="bg-green-50 dark:bg-green-900/20 border border-green-200 dark:border-green-800 rounded-xl p-6 mb-6">
+        <ul class="list-disc list-inside space-y-2">
+          <li><strong>GPA:</strong> ما يعادل Distinction أسترالي (GPA 5.5+/7.0 ≈ 3.14/4.0)</li>
+          <li><strong>لـ 5.0:</strong> 3.9+/5.0 | <strong>لـ 20.0:</strong> 15.6+/20</li>
+          <li><strong>البلدان المؤهلة:</strong> دول نامية محددة (تحقق من قائمة بلدك)</li>
+          <li><strong>الالتزام:</strong> العودة للوطن سنتين بعد التخرج</li>
+          <li><strong>اللغة:</strong> IELTS 6.5 (6.0 كل مهارة) أو TOEFL 84+</li>
+          <li><strong>الموعد:</strong> فبراير - أبريل — <a href="https://www.australiaawards.gov.au" target="_blank" class="underline">australiaawards.gov.au</a></li>
+        </ul>
+      </div>
+    </section>
+
+    <section class="prose mb-12">
+      <h2>جدول تحويل سريع لمتطلبات المنح</h2>
+      <div class="table-scroll">
+        <table>
+          <thead>
+            <tr>
+              <th>المنحة</th>
+              <th class="text-center">GPA 4.0</th>
+              <th class="text-center">GPA 5.0</th>
+              <th class="text-center">20.0 فرنسي</th>
+              <th class="text-center">% مصري</th>
+              <th class="text-center">UK Class</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr><td>فولبرايت (تنافسي)</td><td class="text-center">3.5+</td><td class="text-center">4.375+</td><td class="text-center">17.5+</td><td class="text-center">87.5%+</td><td class="text-center">First / High 2:1</td></tr>
+            <tr><td>فولبرايت (أدنى)</td><td class="text-center">3.0</td><td class="text-center">3.75</td><td class="text-center">15.0</td><td class="text-center">75%</td><td class="text-center">2:1</td></tr>
+            <tr><td>تشيفنينغ</td><td class="text-center">3.5</td><td class="text-center">4.375</td><td class="text-center">16.25</td><td class="text-center">81.25%</td><td class="text-center">Upper 2:1</td></tr>
+            <tr><td>DAAD (تنافسي)</td><td class="text-center">2.5 (Bavarian ≤2.5)</td><td class="text-center">3.125</td><td class="text-center">12.5</td><td class="text-center">62.5%</td><td class="text-center">2:2 / 2:1</td></tr>
+            <tr><td>MEXT</td><td class="text-center">3.07 (2.30/3.00)</td><td class="text-center">3.83</td><td class="text-center">15.33</td><td class="text-center">76.7%</td><td class="text-center">2:1</td></tr>
+            <tr><td>GKS</td><td class="text-center">2.67 (3.0/4.5)</td><td class="text-center">3.33</td><td class="text-center">13.33</td><td class="text-center">66.7%</td><td class="text-center">2:2</td></tr>
+            <tr><td>إراسموس موندوس</td><td class="text-center">3.0+</td><td class="text-center">3.75+</td><td class="text-center">15+</td><td class="text-center">75%+</td><td class="text-center">2:1</td></tr>
+            <tr><td>Australia Awards</td><td class="text-center">3.14 (5.5/7.0)</td><td class="text-center">3.93</td><td class="text-center">15.7</td><td class="text-center">78.5%</td><td class="text-center">2:1</td></tr>
+          </tbody>
+        </table>
+      </div>
+    </section>
+
+    <section class="prose mb-12">
+      <h2>استراتيجية التقديم: كيف تحسب فرصك؟</h2>
+      <ol class="list-decimal list-inside space-y-3">
+        <li><strong>احسب GPA الحقيقي:</strong> استخدم <a href="/ar/" class="underline hover:text-emerald-500">حاسبة GPA</a> بدقة — لا تقرب.</li>
+        <li><strong>حوّل للمقياس المطلوب:</strong> استخدم جداول التحويل أعلاه.</li>
+        <li><strong>قارن بالحد الأدنى + التنافسي:</strong> الحد الأدنى = أهلية، التنافسي = فرصة حقيقية.</li>
+        <li><strong>جهّز WES/Anabin مبكراً:</strong> للفولبرايت/DAAD — يستغرقان أسابيع.</li>
+        <li><strong>قوّي الملف:</strong> إذا GPA قريب من الحد، قوّي: خبرة عمل، أبحاث، خطابات تزكية قوية، درجات لغات عالية.</li>
+        <li><strong>قدّم لأكثر من منحة:</strong> لا تراهن على واحدة. مواعيد تختلف — خطّط تقويم سنوي.</li>
+      </ol>
+    </section>
+
+    <section class="prose mb-12">
+      <h2>حالات خاصة: GPA منخفض لكن ملف قوي</h2>
+      <div class="space-y-4">
+        <div class="bg-slate-50 dark:bg-zinc-900 border border-slate-200 dark:border-zinc-800 rounded-xl p-6">
+          <h3 class="font-bold mb-2">إذا كان GPA 2.8-3.0/4.0 (فوق الحد الأدنى، تحت التنافسي)</h3>
+          <ul class="list-disc list-inside space-y-1">
+            <li>استهدف DAAD (يقدر الخبرة والتحفيز)، GKS (يقدر الترتيب النسبي)</li>
+            <li>اكتب بيان شخصي استثنائي يشرح تطور الأداء</li>
+            <li>احصل على خطاب تزكية من أستاذ يعرف تحسنك</li>
+            <li>سجل درجات لغات عالية (IELTS 7.5+, TOEFL 100+، GRE 320+)</li>
+          </ul>
+        </div>
+        <div class="bg-slate-50 dark:bg-zinc-900 border border-slate-200 dark:border-zinc-800 rounded-xl p-6">
+          <h3 class="font-bold mb-2">إذا كان GPA 2.5-2.8/4.0 (على حافة الحد الأدنى)</h3>
+          <ul class="list-disc list-inside space-y-1">
+            <li>DAAD بعض البرامج تقبل 2.5 Bavarian Formula</li>
+            <li>MEXT يتطلب 2.30/3.00 فقط (أسهل تحويلاً)</li>
+            <li>فكر في ماجستير ممول ذاتياً في جامعة قوية، ثم منحة دكتوراه</li>
+            <li>بعض منح السفارات المحلية (ليست عالمية) لها معايير أوسع</li>
+          </ul>
+        </div>
+      </div>
+    </section>
+
+    <section class="prose">
+      <h2>روابط التقديم الرسمية</h2>
+      <div class="table-scroll">
+        <table>
+          <thead><tr><th>المنحة</th><th>رابط التقديم</th><th>الموعد التقريبي</th></tr></thead>
+          <tbody>
+            <tr><td>فولبرايت</td><td><a href="https://fulbright.state.gov" target="_blank" class="underline hover:text-emerald-500">fulbright.state.gov</a></td><td>فبراير-أبريل (حسب البلد)</td></tr>
+            <tr><td>تشيفنينغ</td><td><a href="https://www.chevening.org" target="_blank" class="underline hover:text-emerald-500">chevening.org</a></td><td>أغسطس-نوفمبر</td></tr>
+            <tr><td>DAAD</td><td><a href="https://www.daad.de" target="_blank" class="underline hover:text-emerald-500">daad.de/scholarships</a></td><td>يختلف (أغسطس-أكتوبر EPOS)</td></tr>
+            <tr><td>MEXT</td><td><a href="https://www.studyinjapan.go.jp" target="_blank" class="underline hover:text-emerald-500">studyinjapan.go.jp</a></td><td>أبريل-مايو (سفارة)</td></tr>
+            <tr><td>GKS</td><td><a href="https://www.studyinkorea.go.kr" target="_blank" class="underline hover:text-emerald-500">studyinkorea.go.kr</a></td><td>فبراير-مارس / سبتمبر-أكتوبر</td></tr>
+            <tr><td>إراسموس موندوس</td><td><a href="https://www.eacea.ec.europa.eu/erasmus-plus/actions/erasmus-mundus-joint-master-degrees_en" target="_blank" class="underline hover:text-emerald-500">قائمة البرامج</a></td><td>أكتوبر-يناير (حسب البرنامج)</td></tr>
+            <tr><td>Australia Awards</td><td><a href="https://www.australiaawards.gov.au" target="_blank" class="underline hover:text-emerald-500">australiaawards.gov.au</a></td><td>فبراير-أبريل</td></tr>
+          </tbody>
+        </table>
+      </div>
+    </section>
+  </main>
+</Layout>

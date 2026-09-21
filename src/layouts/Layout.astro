@@ -8,6 +8,7 @@ interface Props {
   lang?: string;
   alternates?: { hreflang: string; href: string }[];
   noIndex?: boolean;
+  noFollow?: boolean;
 }
 
 const {
@@ -19,6 +20,7 @@ const {
   lang = 'en',
   alternates,
   noIndex = false,
+  noFollow = false,
 } = Astro.props;
 
 import '../styles/global.css';
@@ -75,6 +77,15 @@ const ogLocale = lang === 'hi' ? 'hi_IN' : 'en_IN';
 const canonicalUrl = canonical.startsWith('http') ? canonical : `https://globalcgpa.in${canonical}`;
 const fullOgImage = ogImage.startsWith('http') ? ogImage : `https://globalcgpa.in${ogImage}`;
 
+// Auto-generate hreflang alternates for all supported locales
+const supportedLocales = ['en', 'hi', 'ar', 'vn', 'de', 'es', 'fr', 'pt', 'tr', 'id', 'ko', 'ja'];
+const basePath = canonicalUrl.replace('https://globalcgpa.in', '');
+const allAlternates = [
+  { hreflang: 'x-default', href: 'https://globalcgpa.in/' },
+  ...supportedLocales.map(l => ({ hreflang: l, href: `https://globalcgpa.in/${l}${basePath === '/' ? '' : basePath}` })),
+  ...(alternates || [])
+];
+
 const pageKeywords = 'cgpa to percentage, cgpa to percentage calculator, cgpa calculator, gpa calculator, sgpa to cgpa, percentage converter, sppu cgpa, vtu cgpa, anna university cgpa, mumbai university cgpa, aktu cgpa, gtu cgpa, ktu cgpa, du cgpa, cgpa to gpa 4.0, percentage to cgpa, marks to cgpa, sgpa to percentage, cgpa conversion chart, cbse cgpa to percentage, engineering cgpa calculator, university cgpa calculator, cgpa equivalence certificate, cgpa full form, cgpa meaning, how to convert cgpa to percentage, cgpa grade conversion, sgpa cgpa difference, first class cgpa, distinction cgpa, pass cgpa, gpa 計算方法, gpa 計算, gpa計算, gpa計算方法, gpa 計算方法 5段階, gpa計算サイト, gpa 計算 4段階, 日本 gpa 計算, 日本の大学 gpa 計算';
 ---
 
@@ -83,7 +94,7 @@ const pageKeywords = 'cgpa to percentage, cgpa to percentage calculator, cgpa ca
   <head>
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <meta name="robots" content={noIndex ? 'noindex, nofollow' : 'index, follow'} />
+    <meta name="robots" content={noIndex ? (noFollow ? 'noindex, nofollow' : 'noindex, follow') : 'index, follow'} />
 
     <!-- Theme Initialization (Anti-FOUC) -->
     <script is:inline>
@@ -106,7 +117,7 @@ const pageKeywords = 'cgpa to percentage, cgpa to percentage calculator, cgpa ca
     <title>{title}</title>
     <meta name="description" content={description} />
     <link rel="canonical" href={canonicalUrl} />
-    {alternates?.map((a) => <link rel="alternate" hreflang={a.hreflang} href={a.href} />)}
+    {allAlternates.map((a) => <link rel="alternate" hreflang={a.hreflang} href={a.href} />)}
     <meta name="keywords" content={pageKeywords} />
 
     <!-- Open Graph -->

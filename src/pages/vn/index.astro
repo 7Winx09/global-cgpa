@@ -1,0 +1,275 @@
+---
+import Layout from '@/layouts/Layout.astro';
+import { getUniversitiesByCountry } from '@/data/universities-global';
+
+const universities = getUniversitiesByCountry('VN');
+const systems = [...new Set(universities.map(u => u.system))].sort((a, b) => parseFloat(b) - parseFloat(a));
+
+const pageTitle = 'Khoan Tính GPA | Công cụ Tính Điểm Trung Bình Học Tập Việt Nam';
+const description = 'Khoan tính GPA cho các trường đại học Việt Nam: ĐHQG TP.HCM, ĐHQG HN, Bách Khoa Hà Nội, Bách Khoa TP.HCM, ĐH Kinh tế Quốc dân. Thang 4.0 chuẩn Bộ GD&ĐT (A, B+, B, C+, C, D+, D, F). Nhập điểm chữ và tín chỉ để tính GPA chính xác.';
+const canonical = 'https://globalcgpa.in/vn/';
+const ogImage = '/og-image-vn.png';
+const lang = 'vn';
+const alternates = [
+  { hreflang: 'en', href: 'https://globalcgpa.in/' },
+  { hreflang: 'vn', href: 'https://globalcgpa.in/vn/' },
+];
+---
+
+<Layout title={pageTitle} description={description} canonical={canonical} ogImage={ogImage} lang={lang} alternates={alternates}>
+  <main class="max-w-[780px] mx-auto px-6 py-14" style="flex:1;">
+    <div class="text-xs font-bold uppercase tracking-wider text-emerald-500 mb-2">Khoan Tính GPA Việt Nam</div>
+    <h1 class="text-3xl sm:text-4xl font-extrabold tracking-tight mb-3">Khoan Tính Điểm Trung Bình (GPA)</h1>
+    <p class="text-slate-500 dark:text-zinc-400 text-base mb-8">
+      Hỗ trợ thang 4.0 chuẩn Bộ GD&ĐT cho các trường: ĐHQG TP.HCM, ĐHQG HN, Bách Khoa Hà Nội, Bách Khoa TP.HCM, ĐH Kinh tế Quốc dân.
+      Nhập điểm chữ (A, B+, B, C+, C, D+, D, F) và số tín chỉ để tính GPA học kỳ / CPA tích lũy chính xác.
+    </p>
+
+    <div class="calc-shell space-y-6" id="gpa-calculator">
+      <div class="flex gap-2" role="tablist" aria-label="Chọn thang điểm">
+        {systems.map((sys, idx) => (
+          <button
+            role="tab"
+            aria-selected={idx === 0}
+            aria-controls={`panel-${sys}`}
+            id={`tab-${sys}`}
+            class={`calc-tab flex-1 ${idx === 0 ? 'active' : ''}`}
+            data-system={sys}
+          >
+            Thang {sys}
+          </button>
+        ))}
+      </div>
+
+      {systems.map((sys, idx) => (
+        <div
+          role="tabpanel"
+          id={`panel-${sys}`}
+          aria-labelledby={`tab-${sys}`}
+          class={`space-y-4 ${idx === 0 ? '' : 'hidden'}`}
+          data-system={sys}
+        >
+          <div class="grid gap-4 sm:grid-cols-2">
+            <div>
+              <label class="calc-label" for={`system-select-${sys}`}>Hệ Thống Chấm Điểm</label>
+              <select
+                id={`system-select-${sys}`}
+                class="calc-select"
+                data-system={sys}
+                aria-label={`Chọn hệ thống chấm điểm ${sys}`}
+              >
+                {universities.filter(u => u.system === sys).map(u => (
+                  <option value={u.key}>{u.name} ({u.system})</option>
+                ))}
+                <option value="custom" selected>Nhập Thủ Công (Chuẩn {sys})</option>
+              </select>
+            </div>
+            <div>
+              <label class="calc-label" for={`course-count-${sys}`}>Số Môn Học</label>
+              <input
+                type="number"
+                id={`course-count-${sys}`}
+                class="calc-input"
+                min="1"
+                max="30"
+                value="6"
+                aria-label="Số môn học"
+              />
+            </div>
+          </div>
+
+          <div id={`courses-${sys}`} class="space-y-3" role="list" aria-label={`Danh sách môn học ${sys}`}></div>
+
+          <button
+            type="button"
+            class="w-full sm:w-auto px-6 py-3 bg-emerald-500 hover:bg-emerald-600 text-slate-900 font-bold text-sm rounded-xl transition-colors"
+            id={`calculate-${sys}`}
+            data-system={sys}
+          >
+            Tính GPA
+          </button>
+
+          <div class="calc-output" aria-live="polite" aria-label={`Kết quả tính toán ${sys}`}>
+            <div class="calc-out-val" id={`result-${sys}`}>0.00</div>
+            <div class="calc-out-lbl">Điểm Trung Bình (GPA / CPA)</div>
+            <div class="calc-out-lbl" style="margin-top:8px; font-size:0.68rem;" id={`detail-${sys}`}>
+              Tổng Tín Chỉ: 0 | Tổng Điểm: 0.00
+            </div>
+          </div>
+
+          <div class="formula-block" id={`formula-${sys}`}>
+            <div class="f-label">Công Thức Tính Toán</div>
+            <div class="f-text" id={`formula-text-${sys}`}>GPA = Σ(Tín chỉ × Điểm quy đổi) ÷ ΣTín chỉ</div>
+            <div class="f-example" id={`formula-example-${sys}`}>Ví dụ: 3 TC A(4.0) + 3 TC B+(3.5) = (12+10.5)÷6 = 3.75</div>
+          </div>
+        </div>
+      ))}
+    </div>
+
+    <section class="mt-16" aria-labelledby="univ-list-heading">
+      <h2 id="univ-list-heading" class="text-2xl font-extrabold tracking-tight mb-6">Các Trường Đại Học Chính</h2>
+      <div class="grid gap-4 sm:grid-cols-2 lg:grid-cols-3">
+        {universities.map(u => (
+          <a
+            href={`/vn/${u.slug}`}
+            class="calc-shell p-5 hover:border-emerald-500 hover:shadow-lg transition-all text-center"
+          >
+            <div class="text-3xl font-extrabold text-emerald-500 mb-1">{u.system}</div>
+            <div class="font-bold text-lg text-slate-900 dark:text-white">{u.name}</div>
+            <div class="text-sm text-slate-500 dark:text-zinc-400 mt-1">{u.nameEn}</div>
+          </a>
+        ))}
+      </div>
+    </section>
+
+    <section class="mt-16" aria-labelledby="guides-heading">
+      <h2 id="guides-heading" class="text-2xl font-extrabold tracking-tight mb-6">Hướng Dẫn GPA & CPA</h2>
+      <div class="grid gap-4 sm:grid-cols-2">
+        <a href="/vn/guides/gpa-vs-cpa" class="calc-shell p-5 hover:border-emerald-500 transition-all">
+          <h3 class="font-bold text-lg text-slate-900 dark:text-white mb-2">Khác Biệt GPA và CPA</h3>
+          <p class="text-sm text-slate-500 dark:text-zinc-400">Định nghĩa, chức năng và cách tính GPA học kỳ vs CPA tích lũy</p>
+        </a>
+        <a href="/vn/guides/thang-4-quoc-gia" class="calc-shell p-5 hover:border-emerald-500 transition-all">
+          <h3 class="font-bold text-lg text-slate-900 dark:text-white mb-2">Thang 4.0 Chuẩn Quốc Gia</h3>
+          <p class="text-sm text-slate-500 dark:text-zinc-400">Quy đổi điểm số 10 sang điểm chữ A-F và điểm 4.0 theo Thông tư 08/2021</p>
+        </a>
+        <a href="/vn/guides/xep-loai-tot-nghiep" class="calc-shell p-5 hover:border-emerald-500 transition-all">
+          <h3 class="font-bold text-lg text-slate-900 dark:text-white mb-2">Xếp Loại Tốt Nghiệp</h3>
+          <p class="text-sm text-slate-500 dark:text-zinc-400">Tiêu chí Xuất sắc (≥3.6), Giỏi, Khá, Trung bình theo quy chế ĐHQG</p>
+        </a>
+        <a href="/vn/guides/quy-doi-diem" class="calc-shell p-5 hover:border-emerald-500 transition-all">
+          <h3 class="font-bold text-lg text-slate-900 dark:text-white mb-2">Bảng Quy Đổi Điểm Số</h3>
+          <p class="text-sm text-slate-500 dark:text-zinc-400">Tương ứng thang 10, thang 4, điểm chữ cho ĐHQG, HUST, HCMUT, NEU</p>
+        </a>
+        <a href="/vn/guides/canh-bao-hoc-tap" class="calc-shell p-5 hover:border-emerald-500 transition-all">
+          <h3 class="font-bold text-lg text-slate-900 dark:text-white mb-2">Cảnh Báo Học Tập & Buộc Thôi Học</h3>
+          <p class="text-sm text-slate-500 dark:text-zinc-400">Ngưỡng GPA theo năm học, điều kiện buộc thôi học (DO) các trường</p>
+        </a>
+        <a href="/vn/guides/cong-nhan-quoc-te" class="calc-shell p-5 hover:border-emerald-500 transition-all">
+          <h3 class="font-bold text-lg text-slate-900 dark:text-white mb-2">Công Nhận Quốc Tế</h3>
+          <p class="text-sm text-slate-500 dark:text-zinc-400">Quy đổi GPA Việt Nam sang 4.0 Mỹ, 4.5 Hàn, 4.3 Nhật, 1-6 Đức</p>
+        </a>
+      </div>
+    </section>
+  </main>
+</Layout>
+
+<script is:inline>
+  const GRADE_SYSTEMS = {
+    '4.0': {
+      grades: ['A+', 'A', 'B+', 'B', 'C+', 'C', 'D+', 'D', 'F'],
+      points: { 'A+': 4.0, 'A': 4.0, 'B+': 3.5, 'B': 3.0, 'C+': 2.5, 'C': 2.0, 'D+': 1.5, 'D': 1.0, 'F': 0.0 },
+      percentages: { 'A+': [95, 100], 'A': [85, 94], 'B+': [80, 84], 'B': [70, 79], 'C+': [65, 69], 'C': [55, 64], 'D+': [50, 54], 'D': [40, 49], 'F': [0, 39] }
+    }
+  };
+
+  function createCourseRow(system, index) {
+    const sys = GRADE_SYSTEMS[system];
+    const grades = sys.grades;
+    const points = sys.points;
+    const percentages = sys.percentages;
+
+    const row = document.createElement('div');
+    row.className = 'grid gap-3 sm:grid-cols-[1fr_80px_100px] items-end';
+    row.setAttribute('role', 'listitem');
+    row.innerHTML = `
+      <div>
+        <label class="calc-label" for="grade-${system}-${index}">Môn ${index + 1} Điểm</label>
+        <select id="grade-${system}-${index}" class="calc-select grade-select" aria-label="Môn ${index + 1} điểm">
+          ${grades.map(g => `<option value="${g}">${g} (${points[g]}) ${percentages[g] ? `↔ ${percentages[g][0]}~${percentages[g][1]}%` : ''}</option>`).join('')}
+        </select>
+      </div>
+      <div>
+        <label class="calc-label" for="credit-${system}-${index}">TC</label>
+        <input type="number" id="credit-${system}-${index}" class="calc-input credit-input" value="3" min="1" max="6" step="1" aria-label="Môn ${index + 1} tín chỉ" />
+      </div>
+      <div>
+        <label class="calc-label" for="course-name-${system}-${index}">Tên Môn (Tùy Chọn)</label>
+        <input type="text" id="course-name-${system}-${index}" class="calc-input" placeholder="Ví dụ: Giải Tích" aria-label="Môn ${index + 1} tên" />
+      </div>
+    `;
+    return row;
+  }
+
+  function renderCourses(system, count) {
+    const container = document.getElementById(`courses-${system}`);
+    container.innerHTML = '';
+    for (let i = 0; i < count; i++) {
+      container.appendChild(createCourseRow(system, i));
+    }
+  }
+
+  function calculateGPA(system) {
+    const sys = GRADE_SYSTEMS[system];
+    const points = sys.points;
+    const gradeSelects = document.querySelectorAll(`#courses-${system} .grade-select`);
+    const creditInputs = document.querySelectorAll(`#courses-${system} .credit-input`);
+
+    let totalCredits = 0;
+    let totalPoints = 0;
+
+    gradeSelects.forEach((select, i) => {
+      const grade = select.value;
+      const credit = parseFloat(creditInputs[i].value) || 0;
+      const point = points[grade] || 0;
+
+      totalCredits += credit;
+      totalPoints += credit * point;
+    });
+
+    const gpa = totalCredits > 0 ? totalPoints / totalCredits : 0;
+    document.getElementById(`result-${system}`).textContent = gpa.toFixed(2);
+    document.getElementById(`detail-${system}`).textContent = `Tổng Tín Chỉ: ${totalCredits} | Tổng Điểm: ${totalPoints.toFixed(2)}`;
+  }
+
+  function initSystem(system) {
+    const countInput = document.getElementById(`course-count-${system}`);
+    const calculateBtn = document.getElementById(`calculate-${system}`);
+    const systemSelect = document.getElementById(`system-select-${system}`);
+
+    let currentCount = parseInt(countInput.value) || 6;
+    renderCourses(system, currentCount);
+    calculateGPA(system);
+
+    countInput.addEventListener('input', () => {
+      let newCount = parseInt(countInput.value) || 1;
+      newCount = Math.max(1, Math.min(30, newCount));
+      currentCount = newCount;
+      renderCourses(system, newCount);
+      calculateGPA(system);
+    });
+
+    calculateBtn.addEventListener('click', () => calculateGPA(system));
+
+    const container = document.getElementById(`courses-${system}`);
+    container.addEventListener('change', e => {
+      if (e.target.matches('.grade-select, .credit-input')) {
+        calculateGPA(system);
+      }
+    });
+
+    systemSelect.addEventListener('change', () => {
+      if (systemSelect.value === 'custom') return;
+    });
+  }
+
+  function switchTab(system) {
+    document.querySelectorAll('[role="tab"]').forEach(btn => {
+      btn.classList.remove('active');
+      btn.setAttribute('aria-selected', 'false');
+    });
+    document.querySelectorAll('[role="tabpanel"]').forEach(panel => panel.classList.add('hidden'));
+
+    const activeTab = document.getElementById(`tab-${system}`);
+    const activePanel = document.querySelector(`[role="tabpanel"][data-system="${system}"]`);
+    activeTab.classList.add('active');
+    activeTab.setAttribute('aria-selected', 'true');
+    activePanel.classList.remove('hidden');
+  }
+
+  document.querySelectorAll('[role="tab"]').forEach(btn => {
+    btn.addEventListener('click', () => switchTab(btn.dataset.system));
+  });
+
+  systems.forEach(sys => initSystem(sys));
+</script>

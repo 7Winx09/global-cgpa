@@ -1,10 +1,11 @@
 ---
-import Layout from '../layouts/Layout.astro';
+import Layout from '@/layouts/Layout.astro';
 import SiteHeader from '../components/Nav.astro';
 import SiteFooter from '../components/Footer.astro';
 import Breadcrumbs from '../components/Breadcrumbs.astro';
 import FaqAccordion from '../components/FaqAccordion.astro';
 import { universities } from '../data/universities';
+import { hasUniversityPage } from '@/data/university-pages';
 
 const sgpaValues = [10, 9.5, 9, 8.5, 8, 7.5, 7, 6.5, 6];
 const pct = (fn: (c: number) => number, c: number) => Math.min(100, Math.max(0, fn(c))).toFixed(1);
@@ -51,9 +52,9 @@ const schema = {
           <input type="number" id="sp-sgpa" min="0" max="10" step="0.01" placeholder="e.g. 8.35" inputmode="decimal" />
 
           <label class="sp-label" for="sp-formula">Conversion Formula</label>
-          <select id="sp-formula">
+<select id="sp-formula">
             <option value="cbse" selected>Standard / CBSE — SGPA × 9.5</option>
-            {universities.map((u) => (
+            {universities.filter((u) => hasUniversityPage(u.key)).map((u) => (
               <option value={u.key}>{u.short} — {u.formulaLabel}</option>
             ))}
           </select>
@@ -85,9 +86,9 @@ const schema = {
       <div class="table-scroll">
         <table>
           <thead><tr><th>University</th><th>Official Formula</th><th>Example (8.0 SGPA)</th></tr></thead>
-          <tbody>
+<tbody>
             <tr><td>CBSE / UGC generic</td><td>SGPA × 9.5</td><td>76.0%</td></tr>
-            {universities.map((u) => (
+            {universities.filter((u) => hasUniversityPage(u.key)).map((u) => (
               <tr><td><a href={`/${u.slug}`}>{u.short}</a></td><td>{u.formulaText.replace('CGPA', 'SGPA')}</td><td>{pct(u.forward, 8)}%</td></tr>
             ))}
           </tbody>
@@ -218,3 +219,4 @@ const schema = {
     });
   </script>
 </Layout>
+
