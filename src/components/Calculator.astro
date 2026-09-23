@@ -127,6 +127,18 @@ const selectOptionsJson = JSON.stringify(selectOptions);
               </button>
             </div>
           </div>
+          <!-- Circular Progress + Grade Badge -->
+          <div class="result-visual" id="result-visual" style="display:none;">
+            <div class="circular-progress" role="img" aria-label="Grade progress">
+              <svg width="80" height="80" viewBox="0 0 80 80">
+                <circle cx="40" cy="40" r="36" fill="none" stroke="var(--border)" stroke-width="6"/>
+                <circle class="progress-ring" cx="40" cy="40" r="36" fill="none" stroke="var(--primary)" stroke-width="6" stroke-dasharray="226" stroke-dashoffset="226" transform="rotate(-90 40 40)" style="transition: stroke-dashoffset 0.5s ease;"/>
+              </svg>
+              <div class="progress-center">
+                <span class="grade-badge-large" id="grade-badge-large">—</span>
+              </div>
+            </div>
+          </div>
           <!-- Formula shown below result -->
           <div class="result-formula" id="result-formula"></div>
         </div>
@@ -684,6 +696,35 @@ const selectOptionsJson = JSON.stringify(selectOptions);
     display: block;
   }
 
+  /* Circular Progress Visual */
+  .result-visual {
+    display: flex;
+    justify-content: center;
+    margin: 16px 0 8px;
+  }
+  .circular-progress {
+    position: relative;
+    width: 80px;
+    height: 80px;
+  }
+  .progress-center {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    text-align: center;
+  }
+  .grade-badge-large {
+    font-size: 11px;
+    font-weight: 700;
+    padding: 3px 10px;
+    border-radius: 9999px;
+    background: var(--bg-card);
+    border: 1px solid var(--border);
+    color: var(--text-body);
+    white-space: nowrap;
+  }
+
   /* Sub-calc grid */
   .sub-calc-grid {
     display: grid;
@@ -762,6 +803,48 @@ const selectOptionsJson = JSON.stringify(selectOptions);
     padding: 24px;
     z-index: 200;
     animation: fadeIn 0.15s ease;
+  }
+
+  /* Bottom-sheet modals on mobile */
+  @media (max-width: 640px) {
+    .modal-overlay {
+      align-items: flex-end;
+      padding: 0;
+      background: rgba(0, 0, 0, 0.5);
+    }
+    .modal-card {
+      max-width: 100%;
+      max-height: 85vh;
+      border-radius: 20px 20px 0 0;
+      margin: 0;
+      transform: translateY(100%);
+      animation: slideUpBottom 0.3s cubic-bezier(0.16, 1, 0.3, 1) forwards;
+    }
+    .modal-overlay.closing .modal-card {
+      animation: slideDownBottom 0.2s ease-in forwards;
+    }
+    @keyframes slideUpBottom {
+      from { transform: translateY(100%); opacity: 0; }
+      to { transform: translateY(0); opacity: 1; }
+    }
+    @keyframes slideDownBottom {
+      from { transform: translateY(0); opacity: 1; }
+      to { transform: translateY(100%); opacity: 0; }
+    }
+    .modal-header {
+      border-bottom: 1px solid var(--border);
+      padding-bottom: 16px;
+      margin-bottom: 16px;
+    }
+    /* Drag handle */
+    .modal-card::before {
+      content: '';
+      display: block;
+      width: 36px; height: 4px;
+      background: var(--border);
+      border-radius: 2px;
+      margin: 8px auto 16px;
+    }
   }
 
   @keyframes fadeIn {
@@ -1344,6 +1427,7 @@ const selectOptionsJson = JSON.stringify(selectOptions);
       resultFormula.classList.remove("visible");
       gradeBadge.style.display = "none";
       resultBox.classList.remove("has-result");
+      document.getElementById("result-visual").style.display = "none";
       return;
     }
 
@@ -1395,6 +1479,24 @@ const selectOptionsJson = JSON.stringify(selectOptions);
       gradeBadge.style.color = grade.color;
       gradeBadge.style.borderColor = grade.color + "44";
       gradeBadge.style.background = grade.color + "12";
+
+      // Circular progress
+      const resultVisual = document.getElementById("result-visual");
+      const progressRing = document.querySelector(".progress-ring");
+      const gradeBadgeLarge = document.getElementById("grade-badge-large");
+      if (resultVisual && progressRing && gradeBadgeLarge) {
+        resultVisual.style.display = "flex";
+        const circumference = 2 * Math.PI * 36;
+        const offset = circumference - (percentForGrade / 100) * circumference;
+        progressRing.style.strokeDashoffset = offset;
+        progressRing.style.stroke = grade.color;
+        gradeBadgeLarge.textContent = grade.label;
+        gradeBadgeLarge.style.color = grade.color;
+        gradeBadgeLarge.style.borderColor = grade.color + "44";
+        gradeBadgeLarge.style.background = grade.color + "12";
+      }
+    } else {
+      document.getElementById("result-visual").style.display = "none";
     }
   }
 
@@ -1438,8 +1540,18 @@ const selectOptionsJson = JSON.stringify(selectOptions);
   function closeModal(id) {
     const el = document.getElementById(id);
     if (el) {
-      el.style.display = "none";
-      document.body.style.overflow = "";
+      // Add closing animation for mobile bottom-sheet
+      if (window.innerWidth <= 640) {
+        el.classList.add('closing');
+        setTimeout(() => {
+          el.style.display = "none";
+          el.classList.remove('closing');
+          document.body.style.overflow = "";
+        }, 200);
+      } else {
+        el.style.display = "none";
+        document.body.style.overflow = "";
+      }
     }
   }
 
@@ -1471,6 +1583,32 @@ const selectOptionsJson = JSON.stringify(selectOptions);
       document.querySelectorAll(".modal-overlay").forEach((o) => {
         if (o.style.display !== "none") closeModal(o.id);
       });
+  });
+
+  // Swipe to close on mobile
+  let touchStartY = 0;
+  document.querySelectorAll(".modal-overlay").forEach((overlay) => {
+    overlay.addEventListener("touchstart", (e) => {
+      touchStartY = e.touches[0].clientY;
+    }, { passive: true });
+    overlay.addEventListener("touchmove", (e) => {
+      if (window.innerWidth > 640) return;
+      const deltaY = e.touches[0].clientY - touchStartY;
+      if (deltaY > 50) {
+        // Swipe down to close
+        const card = overlay.querySelector(".modal-card");
+        if (card) card.style.transform = `translateY(${deltaY}px)`;
+      }
+    }, { passive: true });
+    overlay.addEventListener("touchend", (e) => {
+      if (window.innerWidth > 640) return;
+      const deltaY = e.changedTouches[0].clientY - touchStartY;
+      const card = overlay.querySelector(".modal-card");
+      if (card) {
+        card.style.transform = "";
+        if (deltaY > 100) closeModal(overlay.id);
+      }
+    }, { passive: true });
   });
 
   // ═══════════════════════════════════════════════════════

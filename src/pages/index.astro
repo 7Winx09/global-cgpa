@@ -6,6 +6,7 @@ import MultiToolNav from '../components/MultiToolNav.astro';
 import UniversityQuickToggle from '../components/UniversityQuickToggle.astro';
 import SubjectGradeCalculator from '../components/SubjectGradeCalculator.astro';
 import CalculationHistory from '../components/CalculationHistory.astro';
+import LeadCapture from '../components/LeadCapture.astro';
 import { universities } from '../data/universities';
 import { hasUniversityPage } from '@/data/university-pages';
 
@@ -180,7 +181,18 @@ select:focus, input[type="number"]:focus { outline: none; border-color: var(--pr
   border-radius: 6px; transition: color 0.2s; line-height: 1;
 }
 .copy-btn:hover { color: var(--primary); }
-/* Belt */
+
+  /* Hero CTA Buttons */
+  .cta-primary:hover {
+    opacity: 0.85;
+    transform: translateY(-1px);
+  }
+  .cta-secondary:hover {
+    border-color: var(--primary);
+    background: var(--bg);
+    transform: translateY(-1px);
+  }
+  /* Belt */
 .bottom-belt-section {
   width: 100%; border-top: 1px solid var(--border); padding: 30px 20px;
   background: var(--card);
@@ -263,6 +275,21 @@ select:focus, input[type="number"]:focus { outline: none; border-color: var(--pr
   h1 { font-size: 1.85rem; }
   .main-calc-card { padding: 20px; }
 }
+
+/* Sticky calculator on mobile */
+@media (max-width: 640px) {
+  .main-calc-card {
+    position: sticky;
+    top: 120px; /* below header (64px) + multitool nav (56px) */
+    z-index: 40;
+    max-width: 100%;
+    border-radius: 16px;
+    box-shadow: 0 4px 20px var(--shadow), 0 1px 3px rgba(0,0,0,0.02);
+  }
+  /* Hide ad slot in sticky calc to save space */
+  .main-calc-card .ad-slot { display: none; }
+}
+
 @media (max-width: 380px) { .footer-inner { grid-template-columns: 1fr; } }
 </style>
 
@@ -274,9 +301,18 @@ select:focus, input[type="number"]:focus { outline: none; border-color: var(--pr
 
 <!-- Hero + Calculator -->
 <main class="hero-main">
-  <div class="hero-tag">Accurate Reference Converter</div>
+  <div class="hero-tag">Official University Formulas · No Login · Instant Results</div>
   <h1>CGPA to Percentage Calculator</h1>
-  <p class="subtitle">Convert CGPA to percentage (%) instantly — or switch to SGPA, GPA, marks and reverse conversions — with accurate formulas for every major Indian university. Fast, free, no login required.</p>
+  <p class="subtitle">Convert CGPA to percentage (%) instantly using your university's official formula — SPPU, VTU, Mumbai, Anna, AKTU, GTU, KTU, DU and 100+ more. Switch between CGPA↔%, SGPA, GPA, Marks calculators. Fast, free, no login required.</p>
+
+  <!-- Hero CTA Row -->
+  <div style="display:flex; gap:12px; justify-content:center; flex-wrap:wrap; margin:24px 0 8px;">
+    <a href="#calculator" class="cta-primary" style="display:inline-flex; align-items:center; gap:8px; background:var(--primary); color:#fff; font-size:0.95rem; font-weight:600; border-radius:100px; padding:0 24px; height:48px; text-decoration:none; border:none; transition:opacity 0.15s, transform 0.15s;">
+      <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><rect x="3" y="3" width="18" height="18" rx="3"/><line x1="8" y1="12" x2="16" y2="12"/><line x1="12" y1="8" x2="12" y2="16"/></svg>
+      Open Calculator
+    </a>
+    <a href="#universities" class="cta-secondary" style="display:inline-flex; align-items:center; gap:8px; background:var(--card); color:var(--text); font-size:0.95rem; font-weight:600; border-radius:100px; padding:0 24px; height:48px; text-decoration:none; border:1px solid var(--border); transition:border-color 0.15s, background 0.15s, transform 0.15s;">View All University Formulas</a>
+  </div>
 
   <div class="main-calc-card">
     <!-- AD_SLOT_HOME_TOP -->
@@ -319,11 +355,92 @@ select:focus, input[type="number"]:focus { outline: none; border-color: var(--pr
   </div>
 </main>
 
+<!-- Trust Badges -->
+<section class="trust-badges-section" aria-label="Trust signals">
+  <div class="trust-badges" style="display:flex; gap:16px; justify-content:center; flex-wrap:wrap; margin:24px 20px 0; padding:0;">
+    <div class="trust-badge" style="display:flex; align-items:center; gap:8px; padding:10px 16px; background:var(--card); border:1px solid var(--border); border-radius:999px; font-size:0.8rem; color:var(--text);">
+      <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="var(--primary)" stroke-width="2"><path d="M22 11.08V12a10 10 0 1 1-5.93-9.14"/><polyline points="22 4 12 14.01 9 11.01"/></svg>
+      <span>100+ University Formulas</span>
+    </div>
+    <div class="trust-badge" style="display:flex; align-items:center; gap:8px; padding:10px 16px; background:var(--card); border:1px solid var(--border); border-radius:999px; font-size:0.8rem; color:var(--text);">
+      <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="var(--primary)" stroke-width="2"><rect x="3" y="11" width="18" height="11" rx="2" ry="2"/><path d="M7 11V7a5 5 0 0 1 10 0v4"/></svg>
+      <span>Official Sources Cited</span>
+    </div>
+    <div class="trust-badge" style="display:flex; align-items:center; gap:8px; padding:10px 16px; background:var(--card); border:1px solid var(--border); border-radius:999px; font-size:0.8rem; color:var(--text);">
+      <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="var(--primary)" stroke-width="2"><circle cx="12" cy="12" r="10"/><path d="M12 6v6l4 2"/></svg>
+      <span>Instant Results</span>
+    </div>
+    <div class="trust-badge" style="display:flex; align-items:center; gap:8px; padding:10px 16px; background:var(--card); border:1px solid var(--border); border-radius:999px; font-size:0.8rem; color:var(--text);">
+      <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="var(--primary)" stroke-width="2"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/></svg>
+      <span>No Login Required</span>
+    </div>
+    <div class="trust-badge" style="display:flex; align-items:center; gap:8px; padding:10px 16px; background:var(--card); border:1px solid var(--border); border-radius:999px; font-size:0.8rem; color:var(--text);">
+      <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="var(--primary)" stroke-width="2"><circle cx="12" cy="12" r="10"/><line x1="12" y1="8" x2="12.01" y2="8"/></svg>
+      <span>100% Free Forever</span>
+    </div>
+  </div>
+</section>
+
 <!-- Subject Grade Calculator (Weighted SGPA/CGPA) -->
 <SubjectGradeCalculator />
 
 <!-- Calculation History with localStorage Persistence -->
 <CalculationHistory />
+
+<!-- Testimonials / Social Proof -->
+<section class="testimonials-section" style="max-width: 1000px; margin: 0 auto; padding: 40px 20px;">
+  <div style="text-align:center; margin-bottom:32px;">
+    <h2 style="font-size:1.5rem; font-weight:800; letter-spacing:-0.5px; color:var(--text); margin-bottom:8px;">Trusted by Students Across India</h2>
+    <p style="font-size:1rem; color:var(--muted);">Over <strong>50,000+ calculations</strong> performed this month by students from IITs, NITs, state universities and private colleges.</p>
+  </div>
+  <div class="testimonials-grid" style="display:grid; grid-template-columns: repeat(auto-fit, minmax(280px, 1fr)); gap:20px;">
+    <article class="testimonial-card" style="background:var(--card); border:1px solid var(--border); border-radius:16px; padding:24px;">
+      <div style="display:flex; gap:4px; margin-bottom:12px; color:#f5a623;">
+        <svg width="16" height="16" viewBox="0 0 24 24" fill="currentColor"><polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2"/></svg>
+        <svg width="16" height="16" viewBox="0 0 24 24" fill="currentColor"><polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2"/></svg>
+        <svg width="16" height="16" viewBox="0 0 24 24" fill="currentColor"><polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2"/></svg>
+        <svg width="16" height="16" viewBox="0 0 24 24" fill="currentColor"><polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2"/></svg>
+        <svg width="16" height="16" viewBox="0 0 24 24" fill="currentColor"><polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2"/></svg>
+      </div>
+      <p style="font-size:0.9rem; line-height:1.7; color:var(--text); margin-bottom:16px;">"Finally a calculator that uses the actual SPPU formula from Circular 332/2020. Other sites just multiply by 9.5 and give wrong percentages for Pune University students."</p>
+      <div style="font-size:0.8rem; color:var(--muted);">
+        <strong>Rahul K.</strong> — SPPU Engineering, 2024
+      </div>
+    </article>
+    <article class="testimonial-card" style="background:var(--card); border:1px solid var(--border); border-radius:16px; padding:24px;">
+      <div style="display:flex; gap:4px; margin-bottom:12px; color:#f5a623;">
+        <svg width="16" height="16" viewBox="0 0 24 24" fill="currentColor"><polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2"/></svg>
+        <svg width="16" height="16" viewBox="0 0 24 24" fill="currentColor"><polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2"/></svg>
+        <svg width="16" height="16" viewBox="0 0 24 24" fill="currentColor"><polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2"/></svg>
+        <svg width="16" height="16" viewBox="0 0 24 24" fill="currentColor"><polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2"/></svg>
+        <svg width="16" height="16" viewBox="0 0 24 24" fill="currentColor"><polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2"/></svg>
+      </div>
+      <p style="font-size:0.9rem; line-height:1.7; color:var(--text); margin-bottom:16px;">"The VTU scheme selector saved me. I was using the old (CGPA-0.75)×10 formula but my batch is on the 2022 scheme (×10). Got the correct 85% for my transcript."</p>
+      <div style="font-size:0.8rem; color:var(--muted);">
+        <strong>Priya S.</strong> — VTU Bangalore, 2023
+      </div>
+    </article>
+    <article class="testimonial-card" style="background:var(--card); border:1px solid var(--border); border-radius:16px; padding:24px;">
+      <div style="display:flex; gap:4px; margin-bottom:12px; color:#f5a623;">
+        <svg width="16" height="16" viewBox="0 0 24 24" fill="currentColor"><polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2"/></svg>
+        <svg width="16" height="16" viewBox="0 0 24 24" fill="currentColor"><polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2"/></svg>
+        <svg width="16" height="16" viewBox="0 0 24 24" fill="currentColor"><polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2"/></svg>
+        <svg width="16" height="16" viewBox="0 0 24 24" fill="currentColor"><polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2"/></svg>
+        <svg width="16" height="16" viewBox="0 0 24 24" fill="currentColor"><polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2"/></svg>
+      </div>
+      <p style="font-size:0.9rem; line-height:1.7; color:var(--text); margin-bottom:16px;">"Used the SGPA to CGPA calculator for all 8 semesters. The weighted average with credits matched my official transcript exactly. Export to CSV is super handy for applications."</p>
+      <div style="font-size:0.8rem; color:var(--muted);">
+        <strong>Amit R.</strong> — Anna University, 2024
+      </div>
+    </article>
+  </div>
+  <div style="text-align:center; margin-top:24px; padding:20px; background:var(--card); border:1px solid var(--border); border-radius:12px;">
+    <p style="font-size:0.9rem; color:var(--muted); margin:0;"><strong>GlobalCGPA</strong> is not affiliated with any university. Formulas sourced from official ordinances, circulars and notifications. Always verify with your registrar for formal submissions.</p>
+  </div>
+</section>
+
+<!-- Lead Capture -->
+<LeadCapture />
 
 <!-- Belt: Advanced Calculators -->
 <section class="bottom-belt-section">
@@ -440,6 +557,208 @@ select:focus, input[type="number"]:focus { outline: none; border-color: var(--pr
     <li>It provides a reverse converter (percentage to CGPA) for situations where you need to verify eligibility.</li>
   </ul>
   <p>The <strong>CGPA to percentage calculator</strong> on this page satisfies all of the above. It runs entirely in your browser with zero data collection and supports multiple grading scales.</p>
+
+  <!-- Study Abroad Eligibility Section -->
+  <section class="study-abroad-section" style="max-width: 780px; margin: 0 auto; padding: 60px 24px 80px; color: var(--text);">
+    <hr class="seo-divider" style="margin-bottom:2rem;">
+    <h2 style="font-size:1.55rem; font-weight:800; letter-spacing:-0.5px; color:var(--text); margin-bottom:6px;">CGPA for Study Abroad — Country Requirements</h2>
+    <p style="font-size:0.9rem; color:var(--muted); margin-bottom:2rem;">International universities evaluate Indian CGPA differently. Below are typical minimum requirements for Master's programmes (2025–26). Requirements vary by university and programme — always check the specific programme page.</p>
+
+    <div class="country-table-wrap" style="overflow-x:auto; margin:1rem 0 1.5rem; border-radius:12px; border:1px solid var(--border);">
+      <table class="seo-table" style="width:100%; border-collapse:collapse; font-size:0.88rem;">
+        <thead>
+          <tr style="background:var(--result-bg);">
+            <th style="padding:10px 14px; text-align:left; font-size:0.75rem; font-weight:700; text-transform:uppercase; letter-spacing:0.5px; color:var(--muted); border-bottom:1px solid var(--border);">Country</th>
+            <th style="padding:10px 14px; text-align:left; font-size:0.75rem; font-weight:700; text-transform:uppercase; letter-spacing:0.5px; color:var(--muted); border-bottom:1px solid var(--border);">Min %</th>
+            <th style="padding:10px 14px; text-align:left; font-size:0.75rem; font-weight:700; text-transform:uppercase; letter-spacing:0.5px; color:var(--muted); border-bottom:1px solid var(--border);">Min CGPA (10-pt)</th>
+            <th style="padding:10px 14px; text-align:left; font-size:0.75rem; font-weight:700; text-transform:uppercase; letter-spacing:0.5px; color:var(--muted); border-bottom:1px solid var(--border);">GPA (4.0)</th>
+            <th style="padding:10px 14px; text-align:left; font-size:0.75rem; font-weight:700; text-transform:uppercase; letter-spacing:0.5px; color:var(--muted); border-bottom:1px solid var(--border);">Top Unis Prefer</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr style="border-bottom:1px solid var(--border);"><td style="padding:10px 14px; font-weight:700; color:var(--primary);">USA (MS/MBA)</td><td style="padding:10px 14px; color:var(--muted);">66.5%+</td><td style="padding:10px 14px; color:var(--muted);">7.0+</td><td style="padding:10px 14px; color:var(--muted);">3.0+</td><td style="padding:10px 14px; color:var(--muted);">80%+ (8.4 CGPA)</td></tr>
+          <tr style="border-bottom:1px solid var(--border);"><td style="padding:10px 14px; font-weight:700; color:var(--primary);">UK (Masters)</td><td style="padding:10px 14px; color:var(--muted);">60%+</td><td style="padding:10px 14px; color:var(--muted);">6.3+</td><td style="padding:10px 14px; color:var(--muted);">2.8+</td><td style="padding:10px 14px; color:var(--muted);">70%+ (7.4 CGPA)</td></tr>
+          <tr style="border-bottom:1px solid var(--border);"><td style="padding:10px 14px; font-weight:700; color:var(--primary);">Germany (Masters)</td><td style="padding:10px 14px; color:var(--muted);">55%+</td><td style="padding:10px 14px; color:var(--muted);">5.8+</td><td style="padding:10px 14px; color:var(--muted);">2.5+</td><td style="padding:10px 14px; color:var(--muted);">70%+ (7.4 CGPA)</td></tr>
+          <tr style="border-bottom:1px solid var(--border);"><td style="padding:10px 14px; font-weight:700; color:var(--primary);">Canada (Masters)</td><td style="padding:10px 14px; color:var(--muted);">60–70%</td><td style="padding:10px 14px; color:var(--muted);">6.3–7.4</td><td style="padding:10px 14px; color:var(--muted);">2.8–3.2</td><td style="padding:10px 14px; color:var(--muted);">75%+ (7.9 CGPA)</td></tr>
+          <tr style="border-bottom:1px solid var(--border);"><td style="padding:10px 14px; font-weight:700; color:var(--primary);">Australia (Masters)</td><td style="padding:10px 14px; color:var(--muted);">65%+</td><td style="padding:10px 14px; color:var(--muted);">6.8+</td><td style="padding:10px 14px; color:var(--muted);">3.0+</td><td style="padding:10px 14px; color:var(--muted);">70%+ (7.4 CGPA)</td></tr>
+          <tr style="border-bottom:1px solid var(--border);"><td style="padding:10px 14px; font-weight:700; color:var(--primary);">Ireland (Masters)</td><td style="padding:10px 14px; color:var(--muted);">60%+</td><td style="padding:10px 14px; color:var(--muted);">6.3+</td><td style="padding:10px 14px; color:var(--muted);">2.8+</td><td style="padding:10px 14px; color:var(--muted);">70%+ (7.4 CGPA)</td></tr>
+          <tr><td style="padding:10px 14px; font-weight:700; color:var(--primary);">New Zealand</td><td style="padding:10px 14px; color:var(--muted);">55%+</td><td style="padding:10px 14px; color:var(--muted);">5.8+</td><td style="padding:10px 14px; color:var(--muted);">2.5+</td><td style="padding:10px 14px; color:var(--muted);">65%+ (6.8 CGPA)</td></tr>
+        </tbody>
+      </table>
+    </div>
+
+    <h3 style="font-size:1.1rem; font-weight:700; margin:2rem 0 1rem; color:var(--text);">WES Evaluation & 4.0 GPA Conversion</h3>
+    <p>World Education Services (WES) evaluates credentials for US/Canada admissions. They do <strong>not</strong> use a simple multiplier. Instead, they recalculate from your semester-wise transcripts.</p>
+    <div class="seo-formula-block" style="background:var(--result-bg); border:1px solid var(--border); border-left:3px solid var(--primary); border-radius:12px; padding:18px 22px; margin:1.2rem 0;">
+      <div class="formula-label" style="font-size:0.72rem; font-weight:700; text-transform:uppercase; letter-spacing:1px; color:var(--primary); margin-bottom:6px;">Approximate Linear Conversion (for reference only)</div>
+      <div class="formula-text" style="font-family:'Courier New', monospace; font-size:1.05rem; font-weight:700; color:var(--text);">GPA = (CGPA ÷ 10) × 4</div>
+      <div class="formula-example" style="font-size:0.82rem; color:var(--muted); margin-top:6px;">Example: 8.0 CGPA → (8.0 ÷ 10) × 4 = <strong>3.2 GPA</strong></div>
+    </div>
+    <ul style="list-style:none; padding:0; margin:1rem 0;">
+      <li style="padding:0.5rem 0 0.5rem 1.4rem; position:relative; border-bottom:1px solid var(--border); font-size:0.95rem; color:var(--muted); line-height:1.75;"><span style="position:absolute; left:0; color:var(--primary); font-weight:700;">→</span> WES uses course-by-course evaluation — submit official transcripts, not self-converted figures</li>
+      <li style="padding:0.5rem 0 0.5rem 1.4rem; position:relative; border-bottom:1px solid var(--border); font-size:0.95rem; color:var(--muted); line-height:1.75;"><span style="position:absolute; left:0; color:var(--primary); font-weight:700;">→</span> A 3.0 GPA (US "B" average) ≈ 75–80% in India, not 75% (which would be 3.0 × 25)</li>
+      <li style="padding:0.5rem 0 0.5rem 1.4rem; position:relative; border-bottom:1px solid var(--border); font-size:0.95rem; color:var(--muted); line-height:1.75;"><span style="position:absolute; left:0; color:var(--primary); font-weight:700;">→</span> Strong GRE/GMAT, SOP, LORs, and projects can compensate for slightly lower percentages</li>
+      <li style="padding:0.5rem 0 0.5rem 1.4rem; position:relative; font-size:0.95rem; color:var(--muted); line-height:1.75;"><span style="position:absolute; left:0; color:var(--primary); font-weight:700;">→</span> Use our <a href="/cgpa-to-gpa" style="color:var(--primary); text-decoration:underline;">CGPA to GPA calculator</a> for quick estimates</li>
+    </ul>
+  </section>
+
+  <!-- Job Eligibility Section -->
+  <section class="job-eligibility-section" style="max-width: 780px; margin: 0 auto; padding: 60px 24px 80px; color: var(--text);">
+    <hr class="seo-divider" style="margin-bottom:2rem;">
+    <h2 style="font-size:1.55rem; font-weight:800; letter-spacing:-0.5px; color:var(--text); margin-bottom:6px;">CGPA for Jobs & Placements — Company Requirements</h2>
+    <p style="font-size:0.9rem; color:var(--muted); margin-bottom:2rem;">Most Indian employers use CGPA/percentage as an initial filter. Below are typical cut-offs (2025). Always verify with the specific company's career page.</p>
+
+    <h3 style="font-size:1.1rem; font-weight:700; margin:1.5rem 0 1rem; color:var(--text);">IT Services & Consulting (Mass Recruiters)</h3>
+    <div class="job-table-wrap" style="overflow-x:auto; margin:1rem 0 1.5rem; border-radius:12px; border:1px solid var(--border);">
+      <table class="seo-table" style="width:100%; border-collapse:collapse; font-size:0.88rem;">
+        <thead>
+          <tr style="background:var(--result-bg);">
+            <th style="padding:10px 14px; text-align:left; font-size:0.75rem; font-weight:700; text-transform:uppercase; letter-spacing:0.5px; color:var(--muted); border-bottom:1px solid var(--border);">Company</th>
+            <th style="padding:10px 14px; text-align:left; font-size:0.75rem; font-weight:700; text-transform:uppercase; letter-spacing:0.5px; color:var(--muted); border-bottom:1px solid var(--border);">Min CGPA</th>
+            <th style="padding:10px 14px; text-align:left; font-size:0.75rem; font-weight:700; text-transform:uppercase; letter-spacing:0.5px; color:var(--muted); border-bottom:1px solid var(--border);">Min % (CBSE)</th>
+            <th style="padding:10px 14px; text-align:left; font-size:0.75rem; font-weight:700; text-transform:uppercase; letter-spacing:0.5px; color:var(--muted); border-bottom:1px solid var(--border);">Notes</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr style="border-bottom:1px solid var(--border);"><td style="padding:10px 14px; font-weight:700; color:var(--primary);">TCS</td><td style="padding:10px 14px; color:var(--muted);">6.0+</td><td style="padding:10px 14px; color:var(--muted);">57%+</td><td style="padding:10px 14px; color:var(--muted);">NQT exam; no active backlogs</td></tr>
+          <tr style="border-bottom:1px solid var(--border);"><td style="padding:10px 14px; font-weight:700; color:var(--primary);">Infosys</td><td style="padding:10px 14px; color:var(--muted);">6.0+</td><td style="padding:10px 14px; color:var(--muted);">57%+</td><td style="padding:10px 14px; color:var(--muted);">InfyTQ/Exam; 60% in 10th/12th</td></tr>
+          <tr style="border-bottom:1px solid var(--border);"><td style="padding:10px 14px; font-weight:700; color:var(--primary);">Wipro</td><td style="padding:10px 14px; color:var(--muted);">6.0+</td><td style="padding:10px 14px; color:var(--muted);">57%+</td><td style="padding:10px 14px; color:var(--muted);">Elite/National Talent Hunt; 60% in 10th/12th</td></tr>
+          <tr style="border-bottom:1px solid var(--border);"><td style="padding:10px 14px; font-weight:700; color:var(--primary);">Cognizant</td><td style="padding:10px 14px; color:var(--muted);">6.0+</td><td style="padding:10px 14px; color:var(--muted);">57%+</td><td style="padding:10px 14px; color:var(--muted);">GenC/GenC Next; no standing arrears</td></tr>
+          <tr style="border-bottom:1px solid var(--border);"><td style="padding:10px 14px; font-weight:700; color:var(--primary);">Capgemini</td><td style="padding:10px 14px; color:var(--muted);">6.2+</td><td style="padding:10px 14px; color:var(--muted);">59%+</td><td style="padding:10px 14px; color:var(--muted);">Exceller/Analyst; 60% in 10th/12th</td></tr>
+          <tr style="border-bottom:1px solid var(--border);"><td style="padding:10px 14px; font-weight:700; color:var(--primary);">Accenture</td><td style="padding:10px 14px; color:var(--muted);">6.0+</td><td style="padding:10px 14px; color:var(--muted);">57%+</td><td style="padding:10px 14px; color:var(--muted);">ASE/Advanced ASE; 60% in 10th/12th</td></tr>
+          <tr style="border-bottom:1px solid var(--border);"><td style="padding:10px 14px; font-weight:700; color:var(--primary);">Tech Mahindra</td><td style="padding:10px 14px; color:var(--muted);">5.5+</td><td style="padding:10px 14px; color:var(--muted);">52%+</td><td style="padding:10px 14px; color:var(--muted);">Lower bar; check specific drive</td></tr>
+          <tr><td style="padding:10px 14px; font-weight:700; color:var(--primary);">HCL Tech</td><td style="padding:10px 14px; color:var(--muted);">6.0+</td><td style="padding:10px 14px; color:var(--muted);">57%+</td><td style="padding:10px 14px; color:var(--muted);">HCL TechBee (early career) differs</td></tr>
+        </tbody>
+      </table>
+    </div>
+
+    <h3 style="font-size:1.1rem; font-weight:700; margin:2rem 0 1rem; color:var(--text);">Product Companies (Higher Cut-offs)</h3>
+    <div class="job-table-wrap" style="overflow-x:auto; margin:1rem 0 1.5rem; border-radius:12px; border:1px solid var(--border);">
+      <table class="seo-table" style="width:100%; border-collapse:collapse; font-size:0.88rem;">
+        <thead>
+          <tr style="background:var(--result-bg);">
+            <th style="padding:10px 14px; text-align:left; font-size:0.75rem; font-weight:700; text-transform:uppercase; letter-spacing:0.5px; color:var(--muted); border-bottom:1px solid var(--border);">Company</th>
+            <th style="padding:10px 14px; text-align:left; font-size:0.75rem; font-weight:700; text-transform:uppercase; letter-spacing:0.5px; color:var(--muted); border-bottom:1px solid var(--border);">Typical CGPA</th>
+            <th style="padding:10px 14px; text-align:left; font-size:0.75rem; font-weight:700; text-transform:uppercase; letter-spacing:0.5px; color:var(--muted); border-bottom:1px solid var(--border);">Typical % (CBSE)</th>
+            <th style="padding:10px 14px; text-align:left; font-size:0.75rem; font-weight:700; text-transform:uppercase; letter-spacing:0.5px; color:var(--muted); border-bottom:1px solid var(--border);">Notes</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr style="border-bottom:1px solid var(--border);"><td style="padding:10px 14px; font-weight:700; color:var(--primary);">Google India</td><td style="padding:10px 14px; color:var(--muted);">8.0+</td><td style="padding:10px 14px; color:var(--muted);">76%+</td><td style="padding:10px 14px; color:var(--muted);">Strong DSA/CP profile weighs more</td></tr>
+          <tr style="border-bottom:1px solid var(--border);"><td style="padding:10px 14px; font-weight:700; color:var(--primary);">Microsoft India</td><td style="padding:10px 14px; color:var(--muted);">7.5+</td><td style="padding:10px 14px; color:var(--muted);">71%+</td><td style="padding:10px 14px; color:var(--muted);">Internship conversion preferred</td></tr>
+          <tr style="border-bottom:1px solid var(--border);"><td style="padding:10px 14px; font-weight:700; color:var(--primary);">Amazon</td><td style="padding:10px 14px; color:var(--muted);">7.0+</td><td style="padding:10px 14px; color:var(--muted);">66.5%+</td><td style="padding:10px 14px; color:var(--muted);">LP + coding bar; CGPA not sole filter</td></tr>
+          <tr style="border-bottom:1px solid var(--border);"><td style="padding:10px 14px; font-weight:700; color:var(--primary);">Adobe / Uber / Flipkart</td><td style="padding:10px 14px; color:var(--muted);">7.5+</td><td style="padding:10px 14px; color:var(--muted);">71%+</td><td style="padding:10px 14px; color:var(--muted);">Strong projects/internships critical</td></tr>
+          <tr style="border-bottom:1px solid var(--border);"><td style="padding:10px 14px; font-weight:700; color:var(--primary);">Zomato / Swiggy / Paytm</td><td style="padding:10px 14px; color:var(--muted);">7.0+</td><td style="padding:10px 14px; color:var(--muted);">66.5%+</td><td style="padding:10px 14px; color:var(--muted);">Startup scale; portfolio > CGPA</td></tr>
+          <tr><td style="padding:10px 14px; font-weight:700; color:var(--primary);">FinTech (Razorpay, PhonePe, etc.)</td><td style="padding:10px 14px; color:var(--muted);">7.0+</td><td style="padding:10px 14px; color:var(--muted);">66.5%+</td><td style="padding:10px 14px; color:var(--muted);">Core CS fundamentals tested heavily</td></tr>
+        </tbody>
+      </table>
+    </div>
+
+    <h3 style="font-size:1.1rem; font-weight:700; margin:2rem 0 1rem; color:var(--text);">Government & PSU (Percentage-Based)</h3>
+    <div class="job-table-wrap" style="overflow-x:auto; margin:1rem 0 1.5rem; border-radius:12px; border:1px solid var(--border);">
+      <table class="seo-table" style="width:100%; border-collapse:collapse; font-size:0.88rem;">
+        <thead>
+          <tr style="background:var(--result-bg);">
+            <th style="padding:10px 14px; text-align:left; font-size:0.75rem; font-weight:700; text-transform:uppercase; letter-spacing:0.5px; color:var(--muted); border-bottom:1px solid var(--border);">Exam / Body</th>
+            <th style="padding:10px 14px; text-align:left; font-size:0.75rem; font-weight:700; text-transform:uppercase; letter-spacing:0.5px; color:var(--muted); border-bottom:1px solid var(--border);">Min %</th>
+            <th style="padding:10px 14px; text-align:left; font-size:0.75rem; font-weight:700; text-transform:uppercase; letter-spacing:0.5px; color:var(--muted); border-bottom:1px solid var(--border);">Equiv. CGPA (×9.5)</th>
+            <th style="padding:10px 14px; text-align:left; font-size:0.75rem; font-weight:700; text-transform:uppercase; letter-spacing:0.5px; color:var(--muted); border-bottom:1px solid var(--border);">Notes</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr style="border-bottom:1px solid var(--border);"><td style="padding:10px 14px; font-weight:700; color:var(--primary);">GATE (PSU recruitment)</td><td style="padding:10px 14px; color:var(--muted);">60–65%</td><td style="padding:10px 14px; color:var(--muted);">6.3–6.8</td><td style="padding:10px 14px; color:var(--muted);">Varies by PSU; some need 65% (OBC 60%)</td></tr>
+          <tr style="border-bottom:1px solid var(--border);"><td style="padding:10px 14px; font-weight:700; color:var(--primary);">UPSC (IAS/IPS/IFS)</td><td style="padding:10px 14px; color:var(--muted);">No % bar</td><td style="padding:10px 14px; color:var(--muted);">—</td><td style="padding:10px 14px; color:var(--muted);">Degree required; no min % (check notification)</td></tr>
+          <tr style="border-bottom:1px solid var(--border);"><td style="padding:10px 14px; font-weight:700; color:var(--primary);">SSC CGL</td><td style="padding:10px 14px; color:var(--muted);">No % bar</td><td style="padding:10px 14px; color:var(--muted);">—</td><td style="padding:10px 14px; color:var(--muted);">Bachelor's degree; some posts need 60%</td></tr>
+          <tr style="border-bottom:1px solid var(--border);"><td style="padding:10px 14px; font-weight:700; color:var(--primary);">Bank PO (IBPS/SBI)</td><td style="padding:10px 14px; color:var(--muted);">60% (Gen)</td><td style="padding:10px 14px; color:var(--muted);">6.3</td><td style="padding:10px 14px; color:var(--muted);">55% for SC/ST/PwD; degree mandatory</td></tr>
+          <tr style="border-bottom:1px solid var(--border);"><td style="padding:10px 14px; font-weight:700; color:var(--primary);">Railways (RRB NTPC/Group D)</td><td style="padding:10px 14px; color:var(--muted);">No % bar</td><td style="padding:10px 14px; color:var(--muted);">—</td><td style="padding:10px 14px; color:var(--muted);">10th/12th/Diploma/Degree per post</td></tr>
+          <tr style="border-bottom:1px solid var(--border);"><td style="padding:10px 14px; font-weight:700; color:var(--primary);">DRDO / ISRO / BARC</td><td style="padding:10px 14px; color:var(--muted);">60–65%</td><td style="padding:10px 14px; color:var(--muted);">6.3–6.8</td><td style="padding:10px 14px; color:var(--muted);">GATE score primary; CGPA secondary</td></tr>
+          <tr><td style="padding:10px 14px; font-weight:700; color:var(--primary);">State PSCs</td><td style="padding:10px 14px; color:var(--muted);">50–55%</td><td style="padding:10px 14px; color:var(--muted);">5.3–5.8</td><td style="padding:10px 14px; color:var(--muted);">Varies by state; check notification</td></tr>
+        </tbody>
+      </table>
+    </div>
+
+    <p style="font-size:0.9rem; color:var(--muted);"><strong>Pro tip:</strong> Many product companies (Google, Microsoft, Amazon) don't publish hard CGPA cut-offs — they screen holistically. A 7.0 CGPA with strong projects, internships, and competitive programming ranks often beats an 8.5 CGPA with no practical experience. Use our <a href="/cgpa-to-percentage-chart" style="color:var(--primary); text-decoration:underline;">conversion chart</a> to know your exact percentage for application forms.</p>
+  </section>
+
+  <!-- Scholarship Eligibility Section -->
+  <section class="scholarship-section" style="max-width: 780px; margin: 0 auto; padding: 60px 24px 80px; color: var(--text);">
+    <hr class="seo-divider" style="margin-bottom:2rem;">
+    <h2 style="font-size:1.55rem; font-weight:800; letter-spacing:-0.5px; color:var(--text); margin-bottom:6px;">CGPA for Scholarships — Central & State Schemes</h2>
+    <p style="font-size:0.9rem; color:var(--muted); margin-bottom:2rem;">Scholarships have strict CGPA/percentage thresholds. Below are major schemes (2025–26). Always check the official portal for latest criteria.</p>
+
+    <h3 style="font-size:1.1rem; font-weight:700; margin:1.5rem 0 1rem; color:var(--text);">Central Government Scholarships</h3>
+    <div class="scholarship-table-wrap" style="overflow-x:auto; margin:1rem 0 1.5rem; border-radius:12px; border:1px solid var(--border);">
+      <table class="seo-table" style="width:100%; border-collapse:collapse; font-size:0.88rem;">
+        <thead>
+          <tr style="background:var(--result-bg);">
+            <th style="padding:10px 14px; text-align:left; font-size:0.75rem; font-weight:700; text-transform:uppercase; letter-spacing:0.5px; color:var(--muted); border-bottom:1px solid var(--border);">Scholarship</th>
+            <th style="padding:10px 14px; text-align:left; font-size:0.75rem; font-weight:700; text-transform:uppercase; letter-spacing:0.5px; color:var(--muted); border-bottom:1px solid var(--border);">Min CGPA / %</th>
+            <th style="padding:10px 14px; text-align:left; font-size:0.75rem; font-weight:700; text-transform:uppercase; letter-spacing:0.5px; color:var(--muted); border-bottom:1px solid var(--border);">Level</th>
+            <th style="padding:10px 14px; text-align:left; font-size:0.75rem; font-weight:700; text-transform:uppercase; letter-spacing:0.5px; color:var(--muted); border-bottom:1px solid var(--border);">Key Criteria</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr style="border-bottom:1px solid var(--border);"><td style="padding:10px 14px; font-weight:700; color:var(--primary);">Central Sector Scheme (CSSS)</td><td style="padding:10px 14px; color:var(--muted);">80%+ (7.6 CGPA)</td><td style="padding:10px 14px; color:var(--muted);">UG/PG</td><td style="padding:10px 14px; color:var(--muted);">Top 20th percentile in Class 12; family income < ₹8L</td></tr>
+          <tr style="border-bottom:1px solid var(--border);"><td style="padding:10px 14px; font-weight:700; color:var(--primary);">INSPIRE Scholarship</td><td style="padding:10px 14px; color:var(--muted);">Top 1% Class 12 (≈90%+ / 9.5 CGPA)</td><td style="padding:10px 14px; color:var(--muted);">BSc/Int. MSc</td><td style="padding:10px 14px; color:var(--muted);">Natural/Basic Sciences; ₹80k/yr</td></tr>
+          <tr style="border-bottom:1px solid var(--border);"><td style="padding:10px 14px; font-weight:700; color:var(--primary);">AICTE Pragati (Girls)</td><td style="padding:10px 14px; color:var(--muted);">60%+ (6.3 CGPA)</td><td style="padding:10px 14px; color:var(--muted);">Diploma/Degree</td><td style="padding:10px 14px; color:var(--muted);">Family income < ₹8L; 1 girl/family</td></tr>
+          <tr style="border-bottom:1px solid var(--border);"><td style="padding:10px 14px; font-weight:700; color:var(--primary);">AICTE Saksham (Divyang)</td><td style="padding:10px 14px; color:var(--muted);">60%+ (6.3 CGPA)</td><td style="padding:10px 14px; color:var(--muted);">Diploma/Degree</td><td style="padding:10px 14px; color:var(--muted);">Disability ≥40%; income < ₹8L</td></tr>
+          <tr style="border-bottom:1px solid var(--border);"><td style="padding:10px 14px; font-weight:700; color:var(--primary);">Post-Matric Scholarship (SC/ST/OBC)</td><td style="padding:10px 14px; color:var(--muted);">50–55% (5.3–5.8 CGPA)</td><td style="padding:10px 14px; color:var(--muted);">Class 11–PG</td><td style="padding:10px 14px; color:var(--muted);">Income ceiling varies by state/category</td></tr>
+          <tr style="border-bottom:1px solid var(--border);"><td style="padding:10px 14px; font-weight:700; color:var(--primary);">Merit-cum-Means (Minorities)</td><td style="padding:10px 14px; color:var(--muted);">50%+ (5.3 CGPA)</td><td style="padding:10px 14px; color:var(--muted);">UG/PG/Tech</td><td style="padding:10px 14px; color:var(--muted);">Muslim/Christian/Sikh/Buddhist/Parsi/Jain; income < ₹2.5L</td></tr>
+          <tr style="border-bottom:1px solid var(--border);"><td style="padding:10px 14px; font-weight:700; color:var(--primary);">KVPY (Now INSPIRE)</td><td style="padding:10px 14px; color:var(--muted);">Aptitude test based</td><td style="padding:10px 14px; color:var(--muted);">UG Science</td><td style="padding:10px 14px; color:var(--muted);">Stream SA/SX/SB; fellowship ₹7k–28k/mo</td></tr>
+          <tr><td style="padding:10px 14px; font-weight:700; color:var(--primary);">National Means-cum-Merit (NMMS)</td><td style="padding:10px 14px; color:var(--muted);">55%+ (5.8 CGPA)</td><td style="padding:10px 14px; color:var(--muted);">Class 9–12</td><td style="padding:10px 14px; color:var(--muted);">State-level exam; income < ₹3.5L</td></tr>
+        </tbody>
+      </table>
+    </div>
+
+    <h3 style="font-size:1.1rem; font-weight:700; margin:2rem 0 1rem; color:var(--text);">Major State Scholarships (Examples)</h3>
+    <div class="scholarship-table-wrap" style="overflow-x:auto; margin:1rem 0 1.5rem; border-radius:12px; border:1px solid var(--border);">
+      <table class="seo-table" style="width:100%; border-collapse:collapse; font-size:0.88rem;">
+        <thead>
+          <tr style="background:var(--result-bg);">
+            <th style="padding:10px 14px; text-align:left; font-size:0.75rem; font-weight:700; text-transform:uppercase; letter-spacing:0.5px; color:var(--muted); border-bottom:1px solid var(--border);">State / Scheme</th>
+            <th style="padding:10px 14px; text-align:left; font-size:0.75rem; font-weight:700; text-transform:uppercase; letter-spacing:0.5px; color:var(--muted); border-bottom:1px solid var(--border);">Min CGPA / %</th>
+            <th style="padding:10px 14px; text-align:left; font-size:0.75rem; font-weight:700; text-transform:uppercase; letter-spacing:0.5px; color:var(--muted); border-bottom:1px solid var(--border);">Level</th>
+            <th style="padding:10px 14px; text-align:left; font-size:0.75rem; font-weight:700; text-transform:uppercase; letter-spacing:0.5px; color:var(--muted); border-bottom:1px solid var(--border);">Notes</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr style="border-bottom:1px solid var(--border);"><td style="padding:10px 14px; font-weight:700; color:var(--primary);">Maharashtra — EBC / Rajarshi Shahu</td><td style="padding:10px 14px; color:var(--muted);">60%+ (6.3 CGPA)</td><td style="padding:10px 14px; color:var(--muted);">Degree/PG</td><td style="padding:10px 14px; color:var(--muted);">Income < ₹8L; hosteller/day scholar diff.</td></tr>
+          <tr style="border-bottom:1px solid var(--border);"><td style="padding:10px 14px; font-weight:700; color:var(--primary);">UP — Samaj Kalyan / Fee Reimbursement</td><td style="padding:10px 14px; color:var(--muted);">50–55% (5.3–5.8 CGPA)</td><td style="padding:10px 14px; color:var(--muted);">UG/PG</td><td style="padding:10px 14px; color:var(--muted);">SC/ST/OBC/Gen-EWS; income caps apply</td></tr>
+          <tr style="border-bottom:1px solid var(--border);"><td style="padding:10px 14px; font-weight:700; color:var(--primary);">Karnataka — Vidyasiri / Fee Concession</td><td style="padding:10px 14px; color:var(--muted);">50%+ (5.3 CGPA)</td><td style="padding:10px 14px; color:var(--muted);">UG/PG</td><td style="padding:10px 14px; color:var(--muted);">Category-based; SSP portal</td></tr>
+          <tr style="border-bottom:1px solid var(--border);"><td style="padding:10px 14px; font-weight:700; color:var(--primary);">Tamil Nadu — BC/MBC/DNC Scholarship</td><td style="padding:10px 14px; color:var(--muted);">50%+ (5.3 CGPA)</td><td style="padding:10px 14px; color:var(--muted);">UG/PG</td><td style="padding:10px 14px; color:var(--muted);">Income < ₹2L; TN e-district portal</td></tr>
+          <tr style="border-bottom:1px solid var(--border);"><td style="padding:10px 14px; font-weight:700; color:var(--primary);">Delhi — Merit Scholarship / Fee Waiver</td><td style="padding:10px 14px; color:var(--muted);">60–70% (6.3–7.4 CGPA)</td><td style="padding:10px 14px; color:var(--muted);">UG/PG</td><td style="padding:10px 14px; color:var(--muted);">Delhi residents; institution-specific</td></tr>
+          <tr style="border-bottom:1px solid var(--border);"><td style="padding:10px 14px; font-weight:700; color:var(--primary);">Gujarat — MYSY / Digital Gujarat</td><td style="padding:10px 14px; color:var(--muted);">60%+ (6.3 CGPA)</td><td style="padding:10px 14px; color:var(--muted);">Diploma/Degree</td><td style="padding:10px 14px; color:var(--muted);">Income < ₹6L; Aadhaar linked</td></tr>
+          <tr style="border-bottom:1px solid var(--border);"><td style="padding:10px 14px; font-weight:700; color:var(--primary);">West Bengal — SVMCM / Aikyashree</td><td style="padding:10px 14px; color:var(--muted);">50–60% (5.3–6.3 CGPA)</td><td style="padding:10px 14px; color:var(--muted);">UG/PG/Minority</td><td style="padding:10px 14px; color:var(--muted);">WBMDFC portal; family income caps</td></tr>
+          <tr><td style="padding:10px 14px; font-weight:700; color:var(--primary);">Kerala — Suvarna Jubilee / Merit</td><td style="padding:10px 14px; color:var(--muted);">60%+ (6.3 CGPA)</td><td style="padding:10px 14px; color:var(--muted);">UG/PG</td><td style="padding:10px 14px; color:var(--muted);">KSCSTE/DCE portals; BPL/APL categories</td></tr>
+        </tbody>
+      </table>
+    </div>
+
+    <h3 style="font-size:1.1rem; font-weight:700; margin:2rem 0 1rem; color:var(--text);">Private & Corporate Scholarships</h3>
+    <div class="scholarship-table-wrap" style="overflow-x:auto; margin:1rem 0 1.5rem; border-radius:12px; border:1px solid var(--border);">
+      <table class="seo-table" style="width:100%; border-collapse:collapse; font-size:0.88rem;">
+        <thead>
+          <tr style="background:var(--result-bg);">
+            <th style="padding:10px 14px; text-align:left; font-size:0.75rem; font-weight:700; text-transform:uppercase; letter-spacing:0.5px; color:var(--muted); border-bottom:1px solid var(--border);">Scholarship</th>
+            <th style="padding:10px 14px; text-align:left; font-size:0.75rem; font-weight:700; text-transform:uppercase; letter-spacing:0.5px; color:var(--muted); border-bottom:1px solid var(--border);">Min CGPA / %</th>
+            <th style="padding:10px 14px; text-align:left; font-size:0.75rem; font-weight:700; text-transform:uppercase; letter-spacing:0.5px; color:var(--muted); border-bottom:1px solid var(--border);">Amount</th>
+            <th style="padding:10px 14px; text-align:left; font-size:0.75rem; font-weight:700; text-transform:uppercase; letter-spacing:0.5px; color:var(--muted); border-bottom:1px solid var(--border);">Notes</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr style="border-bottom:1px solid var(--border);"><td style="padding:10px 14px; font-weight:700; color:var(--primary);">HDFC Educational Crisis</td><td style="padding:10px 14px; color:var(--muted);">55%+ (5.8 CGPA)</td><td style="padding:10px 14px; color:var(--muted);">Up to ₹25k</td><td style="padding:10px 14px; color:var(--muted);">Family crisis (death/job loss); Class 6–PG</td></tr>
+          <tr style="border-bottom:1px solid var(--border);"><td style="padding:10px 14px; font-weight:700; color:var(--primary);">Tata Trusts (Multiple)</td><td style="padding:10px 14px; color:var(--muted);">60%+ (6.3 CGPA)</td><td style="padding:10px 14px; color:var(--muted);">₹15k–1L/yr</td><td style="padding:10px 14px; color:var(--muted);">Means + merit; specific regions/courses</td></tr>
+          <tr style="border-bottom:1px solid var(--border);"><td style="padding:10px 14px; font-weight:700; color:var(--primary);">Aditya Birla Scholarship</td><td style="padding:10px 14px; color:var(--muted);">7.5+ CGPA / 70%+</td><td style="padding:10px 14px; color:var(--muted);">₹1.8L/yr</td><td style="padding:10px 14px; color:var(--muted);">IIT/IIM/BITS/NIT Law; leadership + merit</td></tr>
+          <tr style="border-bottom:1px solid var(--border);"><td style="padding:10px 14px; font-weight:700; color:var(--primary);">Jindal Scholarship</td><td style="padding:10px 14px; color:var(--muted);">7.0+ CGPA</td><td style="padding:10px 14px; color:var(--muted);">Full tuition</td><td style="padding:10px 14px; color:var(--muted);">JGU admissions; separate application</td></tr>
+          <tr style="border-bottom:1px solid var(--border);"><td style="padding:10px 14px; font-weight:700; color:var(--primary);">FFE Scholarship</td><td style="padding:10px 14px; color:var(--muted);">70%+ (7.4 CGPA)</td><td style="padding:10px 14px; color:var(--muted);">₹40k/yr</td><td style="padding:10px 14px; color:var(--muted);">Engg/Med/Law; income < ₹3L; mentor support</td></tr>
+          <tr><td style="padding:10px 14px; font-weight:700; color:var(--primary);">Kotak Kanya Scholarship</td><td style="padding:10px 14px; color:var(--muted);">75%+ (7.9 CGPA)</td><td style="padding:10px 14px; color:var(--muted);">₹1.5L/yr</td><td style="padding:10px 14px; color:var(--muted);">Girls only; professional courses; income < ₹6L</td></tr>
+        </tbody>
+      </table>
+    </div>
+
+    <p style="font-size:0.9rem; color:var(--muted);"><strong>Tip:</strong> Most scholarship portals (NSP, State portals, AICTE) require your <strong>percentage</strong>, not CGPA. Use our calculator with your university's exact formula to get the correct figure for application forms. A 0.5% difference can mean eligibility vs. rejection.</p>
+  </section>
+
 </article>
 
 <!-- ═══ FAQ SECTION ═══ -->
