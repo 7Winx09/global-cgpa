@@ -35,8 +35,6 @@ export default defineConfig({
       filter: (page) => {
         // Exclude 404, 500, and other utility pages
         if (page.includes('/404') || page.includes('/500')) return false;
-        // Exclude noindex CGPA value pages (e.g., /7.5-cgpa-to-percentage/)
-        if (page.match(/\/\d+(\.\d+)?-cgpa-to-percentage\//)) return false;
         return true;
       },
     }),
