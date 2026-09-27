@@ -1,16 +1,18 @@
-# GlobalCGPA Robots.txt
-# Allow all crawlers access to the site
+# GlobalCGPA Robots.txt - Maintenance Mode
+# Site is temporarily under maintenance
 User-agent: *
-Allow: /
+Disallow: /
 
-# Disallow utility and admin paths
-Disallow: /404
-Disallow: /500
-Disallow: /_astro/
-Disallow: /api/
+# Allow crawlers to access maintenance page and sitemap
+Allow: /$
+Allow: /sitemap.xml
+Allow: /sitemap-index.xml
+Allow: /sitemap-0.xml
+Allow: /404.html
+Allow: /robots.txt
 
-# Crawl-delay for respectful crawling (adjust based on server capacity)
-Crawl-delay: 10
+# Crawl-delay for respectful crawling
+Crawl-delay: 30
 
 # Sitemap location
 Sitemap: https://globalcgpa.in/sitemap.xml
