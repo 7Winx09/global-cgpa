@@ -57,9 +57,9 @@ const sourceLinkSchema = uni.sourceUrl ? {
         </div>
 
         <div class="formula-block uni-formula">
-          <div class="f-label">Official {uni.short} formula</div>
-          <div class="f-text">{uni.formulaText}</div>
-          <div class="f-example">Example: {uni.exampleCgpa} CGPA → {Math.min(100, Math.max(0, uni.forward(uni.exampleCgpa))).toFixed(1)}%</div>
+          <div class="f-label" data-uni-formula-label>Official {uni.short} formula</div>
+          <div class="f-text" data-uni-formula-text>{uni.formulaText}</div>
+          <div class="f-example" data-uni-formula-example>Example: {uni.exampleCgpa} CGPA → {Math.min(100, Math.max(0, uni.forward(uni.exampleCgpa))).toFixed(1)}%</div>
           {uni.sourceUrl && (
             <div class="source-link">
               <a href={uni.sourceUrl} target="_blank" rel="noopener">View official source →</a>
@@ -156,6 +156,9 @@ const sourceLinkSchema = uni.sourceUrl ? {
   }
   .uni-formula {
     margin-bottom: 0;
+  }
+  .uni-formula [data-uni-formula-text] {
+    white-space: pre-line;
   }
   .uni-article, .uni-tables, .uni-faq, .uni-related {
     padding: 0 20px;
