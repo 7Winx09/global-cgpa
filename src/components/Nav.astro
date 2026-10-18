@@ -16,9 +16,9 @@
     <!-- Desktop nav links -->
     <nav class="nav-links" aria-label="Main navigation">
       <a href="/" class="nav-link">Calculator</a>
-      <a href="/cgpa-to-percentage-chart" class="nav-link">Chart</a>
       <a href="/guides" class="nav-link">Guides</a>
       <a href="/about" class="nav-link">About</a>
+      <a href="/contact" class="nav-link">Contact</a>
     </nav>
 
     <!-- Right cluster -->
@@ -50,8 +50,7 @@
   <!-- Mobile menu overlay -->
   <div id="mobile-menu" class="mobile-menu" aria-hidden="true">
     <nav class="mobile-nav-links" aria-label="Mobile navigation">
-      <a href="/" class="mobile-nav-link">CGPA Calculator</a>
-      <a href="/cgpa-to-percentage-chart" class="mobile-nav-link">Conversion Chart</a>
+      <a href="/" class="mobile-nav-link">Calculator</a>
       <a href="/guides" class="mobile-nav-link">Guides</a>
       <a href="/about" class="mobile-nav-link">About</a>
       <a href="/contact" class="mobile-nav-link">Contact</a>
@@ -105,11 +104,14 @@
   }
 
   .nav-link {
+    display: inline-flex;
+    align-items: center;
+    min-height: 44px;
     font-size: 14px;
     font-weight: 400;
     color: var(--text-body);
     text-decoration: none;
-    padding: 6px 10px;
+    padding: 0 14px;
     border-radius: 9999px;
     transition: color 0.15s, background 0.15s;
     letter-spacing: -0.01em;
@@ -131,8 +133,8 @@
     display: flex;
     align-items: center;
     justify-content: center;
-    width: 32px;
-    height: 32px;
+    width: 44px;
+    height: 44px;
     background: none;
     border: 1px solid var(--border);
     border-radius: 9999px;
