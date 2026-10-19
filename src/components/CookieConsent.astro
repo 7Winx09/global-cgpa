@@ -6,9 +6,15 @@
     <div class="cookie-content">
       <h3 id="cookie-title" class="cookie-title">We value your privacy</h3>
       <p id="cookie-desc" class="cookie-desc">
-        We use cookies to enhance your experience, analyze site traffic, and serve personalized ads.
-        By clicking "Accept", you consent to our use of cookies for analytics and advertising.
-        <a href="/privacy-policy" class="cookie-policy-link">Read our Privacy Policy</a> to learn more.
+        <span class="cookie-desc-long">
+          We use cookies to enhance your experience, analyze site traffic, and serve personalized ads.
+          By clicking "Accept", you consent to our use of cookies for analytics and advertising.{' '}
+          <a href="/privacy-policy" class="cookie-policy-link">Read our Privacy Policy</a> to learn more.
+        </span>
+        <span class="cookie-desc-short">
+          We use cookies for analytics and ads.{' '}
+          <a href="/privacy-policy" class="cookie-policy-link">Read privacy policy</a>
+        </span>
       </p>
     </div>
     <div class="cookie-actions">
@@ -79,6 +85,10 @@
     line-height: 1.6;
     margin: 0;
     overflow-wrap: break-word;
+  }
+
+  .cookie-desc-short {
+    display: none;
   }
 
   .cookie-policy-link {
@@ -169,11 +179,26 @@
 
   @media (max-width: 640px) {
     .cookie-consent {
-      padding: 20px 16px;
+      padding: 12px 16px;
+      max-height: 25vh;
+      max-height: 25dvh;
+      overflow-y: auto;
+      overscroll-behavior: contain;
     }
     .cookie-consent-inner {
       flex-direction: column;
-      gap: 14px;
+      gap: 10px;
+    }
+    .cookie-title,
+    .cookie-desc {
+      font-size: 14px;
+      line-height: 1.4;
+    }
+    .cookie-desc-long {
+      display: none;
+    }
+    .cookie-desc-short {
+      display: inline;
     }
     .cookie-actions {
       width: 100%;
@@ -181,9 +206,15 @@
       flex-wrap: nowrap;
     }
     .cookie-btn {
-      flex: 1;
+      flex: 1 1 0;
+      width: 50%;
       min-width: 0;
+      height: 40px;
+      padding: 0 12px;
       text-align: center;
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
     }
     .cookie-floating {
       bottom: 12px;
