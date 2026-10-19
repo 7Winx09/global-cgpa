@@ -44,8 +44,8 @@ const universityOptions = [
 ---
 
 <Layout
-  title="CGPA to Percentage Calculator – Convert CGPA to % | Fast Reference Converter"
-  description="Free CGPA to percentage calculator. Pick your university — SPPU, VTU, Mumbai University, Anna University, AKTU, GTU, KTU, DU or CBSE/UGC — type your CGPA and see your percentage instantly using official university formulas."
+  title="CGPA to Percentage Calculator – Convert CGPA Instantly"
+  description="Use this free CGPA to Percentage calculator to select your university, enter your CGPA out of 10, and get the equivalent percentage using the official formula."
   canonical="https://globalcgpa.in"
   alternates={[
     { hreflang: 'en', href: 'https://globalcgpa.in/' },
@@ -147,6 +147,15 @@ h1 {
 .result-hint a { color: var(--text-ink); }
 
 /* ── Under the card ── */
+.uni-line {
+  width: 100%; max-width: 520px; margin-top: 16px;
+  font-size: 14px; line-height: 1.5; color: var(--text-body);
+  text-align: left;
+}
+.uni-line a {
+  color: var(--text-ink); text-decoration: underline; text-underline-offset: 3px;
+}
+.uni-line a:hover { opacity: 0.75; }
 .trust-line { font-size: 14px; line-height: 1.5; color: var(--text-body); margin-top: 16px; }
 .tools-link {
   display: inline-flex; align-items: center; min-height: 44px;
@@ -163,6 +172,18 @@ h1 {
   font-size: 1.25rem; font-weight: 800; letter-spacing: -0.4px;
   color: var(--text-ink); margin-bottom: 16px;
 }
+
+/* ── What is CGPA to percentage ── */
+.what-is { width: 100%; max-width: 520px; margin-top: 48px; text-align: left; }
+.what-is h2 {
+  font-size: 1.25rem; font-weight: 800; letter-spacing: -0.4px;
+  color: var(--text-ink); margin-bottom: 16px;
+}
+.what-is p {
+  font-size: 16px; line-height: 1.6; color: var(--text-body);
+  margin-bottom: 12px;
+}
+.what-is p:last-child { margin-bottom: 0; }
 .how-steps { list-style: none; display: flex; flex-direction: column; gap: 16px; }
 .how-step {
   display: flex; align-items: flex-start; gap: 12px;
@@ -267,6 +288,15 @@ h1 {
       </div>
     </div>
   </div>
+
+  <p class="uni-line">Popular choices: <a href="/sppu-cgpa-to-percentage">SPPU</a>, <a href="/vtu-cgpa-to-percentage">VTU</a>, or <a href="/mumbai-university-cgpa-to-percentage">Mumbai University</a>. Your university not listed? Use the Other option or see the <a href="/cgpa-to-percentage-chart">full formula table</a>.</p>
+
+  <section class="what-is" aria-labelledby="what-is-heading">
+    <h2 id="what-is-heading">What is CGPA to percentage?</h2>
+    <p>CGPA is your overall grade point average, usually marked out of 10. Percentage is the same performance expressed out of 100.</p>
+    <p>There is no single national formula for converting CGPA to percentage. Each university publishes its own rule, so two students with the same CGPA can end up with different percentages.</p>
+    <p>Use the formula printed on your marksheet or in your university's ordinance. If you cannot find it there, ask your college exam cell before writing a percentage on an application.</p>
+  </section>
 
   <p class="trust-line">Free · No login · Formulas from official university circulars.</p>
 
