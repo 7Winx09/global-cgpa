@@ -1,23 +1,4 @@
-# GlobalCGPA Robots.txt - Maintenance Mode
-# Site is temporarily under maintenance
 User-agent: *
-Disallow: /
+Allow: /
 
-# Allow crawlers to access maintenance page and sitemap
-Allow: /$
-Allow: /sitemap.xml
-Allow: /sitemap-index.xml
-Allow: /sitemap-0.xml
-Allow: /404.html
-Allow: /robots.txt
-
-# Crawl-delay for respectful crawling
-Crawl-delay: 30
-
-# Sitemap location
-Sitemap: https://globalcgpa.in/sitemap.xml
 Sitemap: https://globalcgpa.in/sitemap-index.xml
-Sitemap: https://globalcgpa.in/sitemap-0.xml
-
-# Host directive for preferred domain
-Host: https://globalcgpa.in
