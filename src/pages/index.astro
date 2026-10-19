@@ -3,17 +3,32 @@ import Layout from '@/layouts/Layout.astro';
 import SiteHeader from '../components/Nav.astro';
 import SiteFooter from '../components/Footer.astro';
 import { universities } from '../data/universities';
+import { getUniversitySelectOptions } from '../data/university-formulas';
 
-const HOME_UNIVERSITY_KEYS = ['sppu', 'vtu', 'mumbai', 'anna', 'aktu', 'gtu', 'ktu', 'du'];
-const homeUniversities = HOME_UNIVERSITY_KEYS
-  .map((key) => universities.find((u) => u.key === key))
-  .filter((u) => u !== undefined);
+const selectOptions = getUniversitySelectOptions();
+const universityByKey = new Map(universities.map((u) => [u.key, u]));
+const genericOptionValues = new Set(['cbse', 'scale5', 'scale4']);
+const optionsByState = new Map<string, { value: string; label: string }[]>();
 
-const universityOptions = [
-  ...homeUniversities.map((u) => ({ value: u.key, label: u.short })),
-  { value: 'cbse', label: 'CBSE / UGC' },
-  { value: 'other', label: 'Other' },
-];
+for (const option of selectOptions) {
+  if (genericOptionValues.has(option.value)) continue;
+
+  const universityKey = option.value === 'vtu-old' ? 'vtu' : option.value;
+  const university = universityByKey.get(universityKey);
+  if (!university) continue;
+
+  const label = option.label.startsWith(university.short)
+    ? `${university.name}${option.label.slice(university.short.length)}`
+    : `${university.name} — ${university.formulaLabel}`;
+
+  const stateOptions = optionsByState.get(university.state) ?? [];
+  stateOptions.push({ value: option.value, label });
+  optionsByState.set(university.state, stateOptions);
+}
+
+const universityGroups = [...optionsByState.entries()]
+  .sort(([stateA], [stateB]) => stateA.localeCompare(stateB));
+const genericOptions = selectOptions.filter((option) => genericOptionValues.has(option.value));
 
   const howToSchema = {
   '@context': 'https://schema.org',
@@ -257,7 +272,15 @@ h1 {
       <label class="field-label" for="uni-select">1. Your university</label>
       <select id="uni-select" class="calc-select">
         <option value="">Select your university</option>
-        {universityOptions.map((option) => <option value={option.value}>{option.label}</option>)}
+        {universityGroups.map(([state, options]) => (
+          <optgroup label={state}>
+            {options.map((option) => <option value={option.value}>{option.label}</option>)}
+          </optgroup>
+        ))}
+        <optgroup label="General">
+          {genericOptions.map((option) => <option value={option.value}>{option.label}</option>)}
+          <option value="other">Other</option>
+        </optgroup>
       </select>
     </div>
 
@@ -728,6 +751,13 @@ h1 {
   import { getUniversityFormulas } from '../data/university-formulas';
 
   const formulas = getUniversityFormulas();
+  formulas['vtu-old'] = {
+    label: 'VTU (2015/2017/2018 schemes)',
+    forward: (c) => Math.min((c - 0.75) * 10, 100),
+    inverse: (p) => p / 10 + 0.75,
+    formula: (c) => `(${c} − 0.75) × 10`,
+    note: 'VTU 2015/2017/2018 schemes',
+  };
 
   const select = document.getElementById('uni-select');
   const input = document.getElementById('cgpa-input');
